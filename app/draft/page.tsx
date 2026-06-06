@@ -162,10 +162,22 @@ function DraftInner() {
     setPickerSlotIdx(idx); setCurrentPosIdx(idx); setShowPicker(true)
   }, [])
 
+  // Pre-compute which slots have available players
+  const slotAvailability = useMemo(() => {
+    if (!currentSquad) return f.positions.map(() => 0)
+    return f.positions.map((pos: any) => getPlayersForSlot(currentSquad, allP, pos.pos).length)
+  }, [currentSquad, allP, f])
+
   const pickerPlayers = useMemo(() => {
     if (!currentSquad) return []
     const slotPos = f.positions[pickerSlotIdx]?.pos || 'CM'
-    return getPlayersForSlot(currentSquad, allP, slotPos)
+    let pool = getPlayersForSlot(currentSquad, allP, slotPos)
+    // Fallback: if current slot has 0 players, show ALL squad players
+    // so the user can see what's available and click a different slot
+    if (pool.length === 0) {
+      pool = allP.filter(p => currentSquad.playerIds.includes(p.id))
+    }
+    return pool
       .filter(p => {
         if (search && !p.name.toLowerCase().includes(search.toLowerCase())) return false
         if (filter !== "all" && p.position !== filter) return false
@@ -322,7 +334,14 @@ function DraftInner() {
               <input type="text" placeholder="Buscar jugador..." value={search} onChange={e => setSearch(e.target.value)}
                 className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white placeholder-slate-500 focus:border-[#75AADB] focus:outline-none w-full mb-3" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[30vh] overflow-y-auto pr-1">
-                {pickerPlayers.length === 0 && <p className="text-slate-500 text-sm text-center col-span-2 py-4">No hay jugadores disponibles. Cambia de equipo o ano.</p>}
+                {pickerPlayers.length === 0 && slotAvailability.every((n: number) => n === 0) && (
+                  <p className="text-slate-500 text-sm text-center col-span-2 py-4">Este plantel no tiene jugadores para ninguna posicion. Cambia de equipo.</p>
+                )}
+                {pickerPlayers.length === 0 && !slotAvailability.every((n: number) => n === 0) && (
+                  <p className="text-amber-400/80 text-xs text-center col-span-2 py-3">
+                    Sin jugadores para {POS_LABELS[currentPos?.pos] || currentPos?.pos}. Toca otra posicion en la cancha o cambia de equipo.
+                  </p>
+                )}
                 {pickerPlayers.slice(0, 20).map(player => (
                   <PlayerCard key={player.id} player={player} mode={mode} onSelect={() => pickPlayer(player)} slotPos={currentPos?.pos || 'CM'} />
                 ))}
