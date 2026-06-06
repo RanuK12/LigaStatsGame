@@ -88,36 +88,6 @@
     "nickname": "El Rojo"
   },
   {
-    "id": "racing",
-    "name": "Racing Club",
-    "shortName": "Racing",
-    "founded": 1903,
-    "stadium": "Presidente Perón",
-    "city": "Avellaneda",
-    "colors": [
-      "#87CEEB",
-      "#FFFFFF"
-    ],
-    "titles": 18,
-    "Libertadores": 0,
-    "era": [
-      "1900s",
-      "1910s",
-      "1920s",
-      "1930s",
-      "1940s",
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s",
-      "2020s"
-    ],
-    "nickname": "La Academia"
-  },
-  {
     "id": "san-lorenzo",
     "name": "San Lorenzo",
     "shortName": "San Lorenzo",
@@ -449,88 +419,6 @@
     "nickname": "Lobo"
   },
   {
-    "id": "godeoy-cruz",
-    "name": "Godoy Cruz",
-    "shortName": "Godoy Cruz",
-    "founded": 1921,
-    "stadium": "Malvinas Argentinas",
-    "city": "Mendoza",
-    "colors": [
-      "#003DA5",
-      "#FF0000"
-    ],
-    "titles": 1,
-    "Libertadores": 0,
-    "era": [
-      "1920s",
-      "1930s",
-      "1940s",
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s",
-      "2020s"
-    ],
-    "nickname": "Tomba"
-  },
-  {
-    "id": "colon",
-    "name": "Colón de Santa Fe",
-    "shortName": "Colón",
-    "founded": 1905,
-    "stadium": "Brigadier Estanislao López",
-    "city": "Santa Fe",
-    "colors": [
-      "#000000",
-      "#FF0000"
-    ],
-    "titles": 1,
-    "Libertadores": 0,
-    "era": [
-      "1900s",
-      "1910s",
-      "1920s",
-      "1930s",
-      "1940s",
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s",
-      "2020s"
-    ],
-    "nickname": "Sabalero"
-  },
-  {
-    "id": "arsenal",
-    "name": "Arsenal de Sarandí",
-    "shortName": "Arsenal",
-    "founded": 1957,
-    "stadium": "Julio Humberto Grondona",
-    "city": "Sarandí",
-    "colors": [
-      "#FFD700",
-      "#003DA5"
-    ],
-    "titles": 2,
-    "Libertadores": 0,
-    "era": [
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s"
-    ],
-    "nickname": "El Viaducto"
-  },
-  {
     "id": "tigre",
     "name": "Club Atlético Tigre",
     "shortName": "Tigre",
@@ -650,36 +538,6 @@
     "nickname": "Tatengue"
   },
   {
-    "id": "central-cba",
-    "name": "Central Córdoba de Santiago del Estero",
-    "shortName": "Central Córdoba",
-    "founded": 1906,
-    "stadium": "Madre de Ciudades",
-    "city": "Santiago del Estero",
-    "colors": [
-      "#003DA5",
-      "#FFFFFF"
-    ],
-    "titles": 0,
-    "Libertadores": 0,
-    "era": [
-      "1900s",
-      "1910s",
-      "1920s",
-      "1930s",
-      "1940s",
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s",
-      "2020s"
-    ],
-    "nickname": "Ferroviario"
-  },
-  {
     "id": "platense",
     "name": "Platense",
     "shortName": "Platense",
@@ -739,36 +597,6 @@
     "nickname": "Verde"
   },
   {
-    "id": "barracas-central",
-    "name": "Barracas Central",
-    "shortName": "Barracas",
-    "founded": 1907,
-    "stadium": "Claudio Tapia",
-    "city": "Buenos Aires",
-    "colors": [
-      "#FF0000",
-      "#000000"
-    ],
-    "titles": 0,
-    "Libertadores": 0,
-    "era": [
-      "1900s",
-      "1910s",
-      "1920s",
-      "1930s",
-      "1940s",
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s",
-      "2020s"
-    ],
-    "nickname": "Guapo"
-  },
-  {
     "id": "defensa-y-justicia",
     "name": "Defensa y Justicia",
     "shortName": "Defensa",
@@ -796,62 +624,6 @@
     "nickname": "Halcón"
   },
   {
-    "id": "riestra",
-    "name": "Deportivo Riestra",
-    "shortName": "Riestra",
-    "founded": 1931,
-    "stadium": "Mariano kafka",
-    "city": "Buenos Aires",
-    "colors": [
-      "#FFFFFF",
-      "#000000"
-    ],
-    "titles": 0,
-    "Libertadores": 0,
-    "era": [
-      "1930s",
-      "1940s",
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s",
-      "2020s"
-    ],
-    "nickname": "Bombero"
-  },
-  {
-    "id": "patronato",
-    "name": "Patronato de Paraná",
-    "shortName": "Patronato",
-    "founded": 1914,
-    "stadium": "Presbítero Bartolomé Grella",
-    "city": "Paraná",
-    "colors": [
-      "#FF0000",
-      "#000000"
-    ],
-    "titles": 0,
-    "Libertadores": 0,
-    "era": [
-      "1910s",
-      "1920s",
-      "1930s",
-      "1940s",
-      "1950s",
-      "1960s",
-      "1970s",
-      "1980s",
-      "1990s",
-      "2000s",
-      "2010s",
-      "2020s"
-    ],
-    "nickname": "Patron"
-  },
-  {
     "id": "argentina",
     "name": "Argentina",
     "shortName": "Argentina",
@@ -873,5 +645,169 @@
       "2020s"
     ],
     "nickname": "La Albiceleste"
+  },
+  {
+    "id": "racing-club",
+    "name": "Racing Club",
+    "shortName": "Racing",
+    "founded": 1903,
+    "stadium": "Presidente Perón",
+    "city": "Avellaneda",
+    "colors": [
+      "#87CEEB",
+      "#FFFFFF"
+    ],
+    "titles": 18,
+    "Libertadores": 0,
+    "era": [
+      "1900s",
+      "1910s",
+      "1920s",
+      "1930s",
+      "1940s",
+      "1950s",
+      "1960s",
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s",
+      "2010s",
+      "2020s"
+    ],
+    "nickname": "La Academia"
+  },
+  {
+    "id": "godoy-cruz",
+    "name": "Godoy Cruz",
+    "shortName": "Godoy Cruz",
+    "founded": 1921,
+    "stadium": "Malvinas Argentinas",
+    "city": "Mendoza",
+    "colors": [
+      "#003DA5",
+      "#FF0000"
+    ],
+    "titles": 1,
+    "Libertadores": 0,
+    "era": [
+      "1920s",
+      "1930s",
+      "1940s",
+      "1950s",
+      "1960s",
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s",
+      "2010s",
+      "2020s"
+    ],
+    "nickname": "Tomba"
+  },
+  {
+    "id": "quilmes",
+    "name": "Quilmes",
+    "shortName": "Quilmes",
+    "founded": 1897,
+    "stadium": "Estadio Centenario Dr. Luis Malabrán",
+    "city": "Quilmes",
+    "colors": [
+      "#FFFFFF",
+      "#003DA5"
+    ],
+    "titles": 2,
+    "Libertadores": 0,
+    "era": [
+      "1900s",
+      "1910s",
+      "1920s",
+      "1930s",
+      "1940s",
+      "1950s",
+      "1960s",
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s"
+    ],
+    "nickname": "El Cervecero"
+  },
+  {
+    "id": "ferro",
+    "name": "Ferro Carril Oeste",
+    "shortName": "Ferro",
+    "founded": 1904,
+    "stadium": "Armando Mario Pavlovich",
+    "city": "Buenos Aires",
+    "colors": [
+      "#006633",
+      "#FFFFFF"
+    ],
+    "titles": 2,
+    "Libertadores": 0,
+    "era": [
+      "1900s",
+      "1910s",
+      "1920s",
+      "1930s",
+      "1940s",
+      "1950s",
+      "1960s",
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s"
+    ],
+    "nickname": "Verde"
+  },
+  {
+    "id": "chacarita",
+    "name": "Chacarita Juniors",
+    "shortName": "Chacarita",
+    "founded": 1906,
+    "stadium": "Estadio Chacarita Juniors",
+    "city": "Buenos Aires",
+    "colors": [
+      "#FF0000",
+      "#000000"
+    ],
+    "titles": 1,
+    "Libertadores": 0,
+    "era": [
+      "1900s",
+      "1910s",
+      "1920s",
+      "1930s",
+      "1940s",
+      "1950s",
+      "1960s",
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s"
+    ],
+    "nickname": "Funebreros"
+  },
+  {
+    "id": "atl-tucuman",
+    "name": "Atlético Tucumán",
+    "shortName": "Atl. Tucumán",
+    "founded": 1902,
+    "stadium": "Monumental José Fierro",
+    "city": "San Miguel de Tucumán",
+    "colors": [
+      "#003DA5",
+      "#FFFFFF"
+    ],
+    "titles": 0,
+    "Libertadores": 0,
+    "era": [
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s",
+      "2010s"
+    ],
+    "nickname": "Decano"
   }
 ]

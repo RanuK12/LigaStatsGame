@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100" height="120">
   <defs>
-    <linearGradient id="bg_racing-club" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+    <linearGradient id="bg_godoy-cruz" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003DA5;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
     </linearGradient>
-    <filter id="shadow_racing-club">
+    <filter id="shadow_godoy-cruz">
       <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
     </filter>
   </defs>
   <!-- Shield shape -->
   <path d="M50 5 L90 20 L90 55 Q90 90 50 115 Q10 90 10 55 L10 20 Z" 
-        fill="url(#bg_racing-club)" stroke="#FFFFFF" stroke-width="2.5" filter="url(#shadow_racing-club)"/>
+        fill="url(#bg_godoy-cruz)" stroke="#FFFFFF" stroke-width="2.5" filter="url(#shadow_godoy-cruz)"/>
   <!-- Inner border -->
   <path d="M50 12 L84 25 L84 55 Q84 85 50 108 Q16 85 16 55 L16 25 Z" 
         fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.4"/>
   <!-- Initials -->
-  <text x="50" y="62" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="#1a5276">RAC</text>
+  <text x="50" y="62" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="#003DA5">GDC</text>
   <!-- Club name small -->
-  <text x="50" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#1a5276" opacity="0.8">RACING-CLUB</text>
+  <text x="50" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#003DA5" opacity="0.8">GODOY-CRUZ</text>
 </svg>
