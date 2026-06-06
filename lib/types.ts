@@ -1,4 +1,4 @@
-// LigaStatsGame - Tipos TypeScript
+// LigaStatsGame - Tipos TypeScript v2 (Squad-by-year model)
 
 // ═══════════════════════════════════════════════════════════════
 // CLUB
@@ -18,9 +18,21 @@ export interface Club {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// SQUAD (plantel por año — el corazón del juego)
+// ═══════════════════════════════════════════════════════════════
+export interface Squad {
+  id: string;           // e.g. "river-plate-2025" or "argentina-1986"
+  clubId: string;       // e.g. "river-plate" or "argentina"
+  season: string;       // e.g. "2025" or "1986"
+  competition: string;  // "Liga Profesional", "Copa del Mundo", etc.
+  label: string;        // "River Plate 2025", "Argentina Mundial 1986"
+  playerIds: string[];  // IDs de players que forman parte del plantel
+}
+
+// ═══════════════════════════════════════════════════════════════
 // JUGADOR
 // ═══════════════════════════════════════════════════════════════
-export type Position = 'GK' | 'CB' | 'LB' | 'RB' | 'CM' | 'CDM' | 'CAM' | 'LW' | 'RW' | 'ST' | 'CF';
+export type Position = 'GK' | 'CB' | 'LB' | 'RB' | 'CDM' | 'CM' | 'CAM' | 'LW' | 'RW' | 'ST' | 'CF' | 'LM' | 'RM' | 'LWB' | 'RWB';
 
 export interface Player {
   id: string;
@@ -32,7 +44,7 @@ export interface Player {
   nationality: string;
   height: number;
   weight: number;
-  preferredFoot: 'Izquierdo' | 'Derecho' | 'Ambidiestro';
+  preferredFoot: string;
   clubs: PlayerClub[];
   capsNationalTeam: number;
   goalsNationalTeam: number;
@@ -41,11 +53,11 @@ export interface Player {
   assistsClub: number;
   trophies: Trophy[];
   image: string;
-  marketValue: string; // en millones de euros
+  marketValue: string;
   activeYears: string;
-  decade: string; // década principal: '1980s', '1990s', etc.
-  rating: number; // 0-100, calculado por el sistema
-  legendary: boolean; // leyenda del fútbol argentino
+  decade: string;
+  rating: number;
+  legendary: boolean;
 }
 
 export interface PlayerClub {
@@ -63,59 +75,42 @@ export interface Trophy {
 // ═══════════════════════════════════════════════════════════════
 // FORMACIÓN
 // ═══════════════════════════════════════════════════════════════
-export type Formation = '4-3-3' | '4-4-2' | '4-2-3-1' | '3-5-2' | '5-3-2' | '4-2-4' | '3-4-3' | '4-5-1' | '5-3-2' | '4-2-4' | '3-4-3' | '4-5-1';
+export type Formation = '4-3-3' | '4-4-2' | '4-2-3-1' | '3-5-2' | '4-2-4';
 
 export interface FormationConfig {
   id: Formation;
   name: string;
-  positions: { pos: Position; x: number; y: number }[];
-  requirements: Record<Position, number>;
+  positions: { pos: Position; x: number; y: number; label: string }[];
+  requirements: Record<string, number>;
 }
 
 // ═══════════════════════════════════════════════════════════════
-// PARTIDA
+// GAME MODES
+// ═══════════════════════════════════════════════════════════════
+export type GameMode = 'clasico' | 'almanaque' | 'liga' | 'reto-dia' | 'ruleta';
+
+export interface GameModeConfig {
+  id: GameMode;
+  name: string;
+  description: string;
+  icon: string;
+  ratingsVisible: boolean;
+  rerollsAllowed: number;
+  shareable: boolean;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GAME SESSION
 // ═══════════════════════════════════════════════════════════════
 export interface GameSession {
   id: string;
-  club: Club;
-  decade: string;
+  mode: GameMode;
+  squad: Squad;
   formation: Formation;
-  players: (Player | null)[]; // 11 posiciones, null = vacía
+  players: (Player | null)[];
   score: number;
-  matchesPlayed: number;
-  wins: number;
-  draws: number;
-  losses: number;
-  goalsFor: number;
-  goalsAgainst: number;
   startedAt: string;
   finishedAt?: string;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// QUIZ
-// ═══════════════════════════════════════════════════════════════
-export type QuizType = 'whois' | 'memory' | 'decade' | 'stats' | 'record';
-
-export interface Quiz {
-  id: string;
-  type: QuizType;
-  question: string;
-  image?: string;
-  options: QuizOption[];
-  difficulty: 'easy' | 'medium' | 'hard';
-  decade: string;
-  tags: string[];
-}
-
-export interface QuizOption {
-  name: string;
-  correct: boolean;
-  points?: number;
-  stats?: {
-    caps: number;
-    goals: number;
-  };
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -125,23 +120,20 @@ export interface LeaderboardEntry {
   id: string;
   playerName: string;
   score: number;
-  club: Club['id'];
-  decade: string;
+  squadLabel: string;
   formation: Formation;
+  mode: GameMode;
   date: string;
 }
 
 // ═══════════════════════════════════════════════════════════════
-// GAME RESULT
+// SEASON SIM
 // ═══════════════════════════════════════════════════════════════
 export interface MatchResult {
-  homeTeam: string;
-  awayTeam: string;
-  homeScore: number;
-  awayScore: number;
-  homeScorers: string[];
-  awayScorers: string[];
-  matchday: number;
+  opponent: string;
+  goalsFor: number;
+  goalsAgainst: number;
+  result: 'W' | 'D' | 'L';
 }
 
 export interface SeasonResult {
@@ -153,44 +145,5 @@ export interface SeasonResult {
   losses: number;
   goalsFor: number;
   goalsAgainst: number;
-  goalDifference: number;
-  matchResults: MatchResult[];
-}
-
-// ═══════════════════════════════════════════════════════════════
-// GAME MODES
-// ═══════════════════════════════════════════════════════════════
-export type GameMode = 'legend-draft' | 'memory' | 'records' | 'decade' | 'career';
-
-export interface GameModeConfig {
-  id: GameMode;
-  name: string;
-  description: string;
-  icon: string;
-  statsVisible: boolean;
-  maxPlayers: number;
-  timeLimit?: number; // en segundos
-}
-
-// ═══════════════════════════════════════════════════════════════
-// USUARIO
-// ═══════════════════════════════════════════════════════════════
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-  totalScore: number;
-  gamesPlayed: number;
-  gamesWon: number;
-  bestScore: number;
-  badges: Badge[];
-}
-
-export interface Badge {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  unlockedAt?: string;
+  results: MatchResult[];
 }

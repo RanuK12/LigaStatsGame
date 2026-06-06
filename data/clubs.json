@@ -850,5 +850,28 @@
       "2020s"
     ],
     "nickname": "Patron"
+  },
+  {
+    "id": "argentina",
+    "name": "Argentina",
+    "shortName": "Argentina",
+    "founded": 1893,
+    "stadium": "Estadio Monumental",
+    "city": "Buenos Aires",
+    "colors": [
+      "#75AADB",
+      "#FFFFFF"
+    ],
+    "titles": 3,
+    "Libertadores": 0,
+    "era": [
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s",
+      "2010s",
+      "2020s"
+    ],
+    "nickname": "La Albiceleste"
   }
 ]

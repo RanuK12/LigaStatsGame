@@ -1,309 +1,243 @@
 /**
- * LigaStatsGame - Game Engine
- * Lógica central para el modo Leyendas Draft
+ * LigaStatsGame v2 - Game Engine
+ * Squad-by-year model: spin → get a plantel → pick 11 from THAT squad
  */
+import { Player, Squad, Club, Formation, FormationConfig, Position, SeasonResult, MatchResult, GameMode } from './types';
 
 // ═══════════════════════════════════════════════════════════════
-// FORMACIONES DISPONIBLES
+// FORMACIONES
 // ═══════════════════════════════════════════════════════════════
-export const formations = {
+export const formations: Record<string, FormationConfig> = {
   '4-3-3': {
-    name: '4-3-3',
+    id: '4-3-3', name: '4-3-3',
     positions: [
       { pos: 'GK', x: 50, y: 90, label: 'Arquero' },
-      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izquierdo' },
+      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izq.' },
       { pos: 'CB', x: 35, y: 70, label: 'Zaguero Central' },
       { pos: 'CB', x: 65, y: 70, label: 'Zaguero Central' },
-      { pos: 'RB', x: 90, y: 70, label: 'Lateral Derecho' },
-      { pos: 'CDM', x: 20, y: 45, label: 'Centrocampista Defensivo' },
+      { pos: 'RB', x: 90, y: 70, label: 'Lateral Der.' },
+      { pos: 'CDM', x: 20, y: 45, label: 'Centro Def.' },
       { pos: 'CM', x: 50, y: 45, label: 'Centrocampista' },
-      { pos: 'CAM', x: 80, y: 45, label: 'Centrocampista Ofensivo' },
-      { pos: 'LW', x: 15, y: 20, label: 'Extremo Izquierdo' },
-      { pos: 'ST', x: 50, y: 15, label: 'Delantero Centro' },
-      { pos: 'RW', x: 85, y: 20, label: 'Extremo Derecho' },
+      { pos: 'CAM', x: 80, y: 45, label: 'Centro Of.' },
+      { pos: 'LW', x: 15, y: 20, label: 'Extremo Izq.' },
+      { pos: 'ST', x: 50, y: 15, label: 'Delantero' },
+      { pos: 'RW', x: 85, y: 20, label: 'Extremo Der.' },
     ],
     requirements: { GK: 1, CB: 2, LB: 1, RB: 1, CDM: 1, CM: 1, CAM: 1, LW: 1, ST: 1, RW: 1 },
   },
   '4-4-2': {
-    name: '4-4-2',
+    id: '4-4-2', name: '4-4-2',
     positions: [
       { pos: 'GK', x: 50, y: 90, label: 'Arquero' },
-      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izquierdo' },
+      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izq.' },
       { pos: 'CB', x: 35, y: 70, label: 'Zaguero Central' },
       { pos: 'CB', x: 65, y: 70, label: 'Zaguero Central' },
-      { pos: 'RB', x: 90, y: 70, label: 'Lateral Derecho' },
-      { pos: 'LM', x: 15, y: 45, label: 'Mediocampista Izquierdo' },
-      { pos: 'CM', x: 38, y: 45, label: 'Centrocampista' },
-      { pos: 'CM', x: 62, y: 45, label: 'Centrocampista' },
-      { pos: 'RM', x: 85, y: 45, label: 'Mediocampista Derecho' },
-      { pos: 'ST', x: 35, y: 15, label: 'Delantero Centro' },
-      { pos: 'ST', x: 65, y: 15, label: 'Delantero Centro' },
+      { pos: 'RB', x: 90, y: 70, label: 'Lateral Der.' },
+      { pos: 'CM', x: 25, y: 45, label: 'Centro Izq.' },
+      { pos: 'CM', x: 45, y: 45, label: 'Centrocampista' },
+      { pos: 'CM', x: 55, y: 45, label: 'Centrocampista' },
+      { pos: 'CM', x: 75, y: 45, label: 'Centro Der.' },
+      { pos: 'ST', x: 35, y: 15, label: 'Delantero' },
+      { pos: 'ST', x: 65, y: 15, label: 'Delantero' },
     ],
-    requirements: { GK: 1, CB: 2, LB: 1, RB: 1, LM: 1, CM: 2, RM: 1, ST: 2 },
+    requirements: { GK: 1, CB: 2, LB: 1, RB: 1, CM: 4, ST: 2 },
   },
   '4-2-3-1': {
-    name: '4-2-3-1',
+    id: '4-2-3-1', name: '4-2-3-1',
     positions: [
       { pos: 'GK', x: 50, y: 90, label: 'Arquero' },
-      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izquierdo' },
+      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izq.' },
       { pos: 'CB', x: 35, y: 70, label: 'Zaguero Central' },
       { pos: 'CB', x: 65, y: 70, label: 'Zaguero Central' },
-      { pos: 'RB', x: 90, y: 70, label: 'Lateral Derecho' },
-      { pos: 'CDM', x: 35, y: 50, label: 'Centrocampista Defensivo' },
-      { pos: 'CDM', x: 65, y: 50, label: 'Centrocampista Defensivo' },
-      { pos: 'LW', x: 15, y: 30, label: 'Extremo Izquierdo' },
-      { pos: 'CAM', x: 50, y: 30, label: 'Centrocampista Ofensivo' },
-      { pos: 'RW', x: 85, y: 30, label: 'Extremo Derecho' },
-      { pos: 'ST', x: 50, y: 10, label: 'Delantero Centro' },
+      { pos: 'RB', x: 90, y: 70, label: 'Lateral Der.' },
+      { pos: 'CDM', x: 35, y: 45, label: 'Centro Def.' },
+      { pos: 'CDM', x: 65, y: 45, label: 'Centro Def.' },
+      { pos: 'LW', x: 15, y: 25, label: 'Extremo Izq.' },
+      { pos: 'CAM', x: 50, y: 25, label: 'Enganche' },
+      { pos: 'RW', x: 85, y: 25, label: 'Extremo Der.' },
+      { pos: 'ST', x: 50, y: 10, label: 'Delantero' },
     ],
     requirements: { GK: 1, CB: 2, LB: 1, RB: 1, CDM: 2, LW: 1, CAM: 1, RW: 1, ST: 1 },
   },
   '3-5-2': {
-    name: '3-5-2',
+    id: '3-5-2', name: '3-5-2',
     positions: [
       { pos: 'GK', x: 50, y: 90, label: 'Arquero' },
-      { pos: 'CB', x: 25, y: 70, label: 'Zaguero Central' },
-      { pos: 'CB', x: 50, y: 70, label: 'Zaguero Central' },
-      { pos: 'CB', x: 75, y: 70, label: 'Zaguero Central' },
-      { pos: 'LWB', x: 5, y: 50, label: 'Wingback Izquierdo' },
-      { pos: 'CDM', x: 30, y: 45, label: 'Centrocampista Defensivo' },
-      { pos: 'CM', x: 50, y: 45, label: 'Centrocampista' },
-      { pos: 'CDM', x: 70, y: 45, label: 'Centrocampista Defensivo' },
-      { pos: 'RWB', x: 95, y: 50, label: 'Wingback Derecho' },
-      { pos: 'ST', x: 35, y: 15, label: 'Delantero Centro' },
-      { pos: 'ST', x: 65, y: 15, label: 'Delantero Centro' },
+      { pos: 'CB', x: 25, y: 70, label: 'Zaguero' },
+      { pos: 'CB', x: 50, y: 70, label: 'Zaguero' },
+      { pos: 'CB', x: 75, y: 70, label: 'Zaguero' },
+      { pos: 'CM', x: 5, y: 50, label: 'Carrilero Izq.' },
+      { pos: 'CM', x: 30, y: 45, label: 'Centrocampista' },
+      { pos: 'CDM', x: 50, y: 45, label: 'Centro Def.' },
+      { pos: 'CM', x: 70, y: 45, label: 'Centrocampista' },
+      { pos: 'CM', x: 95, y: 50, label: 'Carrilero Der.' },
+      { pos: 'ST', x: 35, y: 15, label: 'Delantero' },
+      { pos: 'ST', x: 65, y: 15, label: 'Delantero' },
     ],
-    requirements: { GK: 1, CB: 3, LWB: 1, CDM: 2, CM: 1, RWB: 1, ST: 2 },
+    requirements: { GK: 1, CB: 3, CM: 4, CDM: 1, ST: 2 },
   },
   '4-2-4': {
-    name: '4-2-4',
+    id: '4-2-4', name: '4-2-4',
     positions: [
       { pos: 'GK', x: 50, y: 90, label: 'Arquero' },
-      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izquierdo' },
+      { pos: 'LB', x: 10, y: 70, label: 'Lateral Izq.' },
       { pos: 'CB', x: 35, y: 70, label: 'Zaguero Central' },
       { pos: 'CB', x: 65, y: 70, label: 'Zaguero Central' },
-      { pos: 'RB', x: 90, y: 70, label: 'Lateral Derecho' },
+      { pos: 'RB', x: 90, y: 70, label: 'Lateral Der.' },
       { pos: 'CM', x: 35, y: 45, label: 'Centrocampista' },
       { pos: 'CM', x: 65, y: 45, label: 'Centrocampista' },
-      { pos: 'LW', x: 10, y: 20, label: 'Extremo Izquierdo' },
-      { pos: 'ST', x: 35, y: 15, label: 'Delantero Centro' },
-      { pos: 'ST', x: 65, y: 15, label: 'Delantero Centro' },
-      { pos: 'RW', x: 90, y: 20, label: 'Extremo Derecho' },
+      { pos: 'LW', x: 10, y: 20, label: 'Extremo Izq.' },
+      { pos: 'ST', x: 35, y: 15, label: 'Delantero' },
+      { pos: 'ST', x: 65, y: 15, label: 'Delantero' },
+      { pos: 'RW', x: 90, y: 20, label: 'Extremo Der.' },
     ],
     requirements: { GK: 1, CB: 2, LB: 1, RB: 1, CM: 2, LW: 1, ST: 2, RW: 1 },
   },
 };
 
 // ═══════════════════════════════════════════════════════════════
-// POSICIONES COMPATIBLES
+// POSITION COMPATIBILITY
 // ═══════════════════════════════════════════════════════════════
-export const positionGroups: Record<string, string[]> = {
-  GK: ['GK'],
-  DEF: ['CB', 'LB', 'RB', 'LWB', 'RWB'],
-  MID: ['CM', 'CDM', 'CAM', 'LM', 'RM'],
-  FWD: ['ST', 'CF', 'LW', 'RW'],
-};
-
-// Mapa completo de compatibilidad de posiciones
 export const positionCompatibility: Record<string, string[]> = {
-  GK: ['GK'],
-  CB: ['CB'],
-  LB: ['LB', 'CB', 'LWB'],
-  RB: ['RB', 'CB', 'RWB'],
-  LWB: ['LWB', 'LB'],
-  RWB: ['RWB', 'RB'],
-  CM: ['CM', 'CDM', 'CAM', 'LM', 'RM'],
-  CDM: ['CDM', 'CM', 'CB'],
-  CAM: ['CAM', 'CM', 'CDM', 'CF'],
-  LM: ['LM', 'LW', 'LB'],
-  RM: ['RM', 'RW', 'RB'],
-  LW: ['LW', 'LM', 'ST'],
-  RW: ['RW', 'RM', 'ST'],
-  ST: ['ST', 'CF', 'LW', 'RW'],
-  CF: ['CF', 'ST', 'CAM'],
+  GK: ['GK'], CB: ['CB'], LB: ['LB','CB'], RB: ['RB','CB'],
+  CM: ['CM','CDM','CAM','LM','RM'], CDM: ['CDM','CM','CB'],
+  CAM: ['CAM','CM','CF'], LW: ['LW','LM','ST'], RW: ['RW','RM','ST'],
+  ST: ['ST','CF','LW','RW'], CF: ['CF','ST','CAM'],
+  LWB: ['LWB','LB'], RWB: ['RWB','RB'], LM: ['LM','LW'], RM: ['RM','RW'],
 };
 
 // ═══════════════════════════════════════════════════════════════
-// CÁLCULO DE RATING
+// GAME MODES
 // ═══════════════════════════════════════════════════════════════
-export function calculatePlayerRating(player: {
-  capsClub: number;
-  goalsClub: number;
-  assistsClub?: number;
-  capsNationalTeam: number;
-  goalsNationalTeam: number;
-  trophies: { competition: string }[];
-  marketValue: string;
-  position: string;
-  decade: string;
-}, targetPosition: string): number {
-  let rating = 50; // Base
+export const GAME_MODES: Record<GameMode, { id: GameMode; name: string; desc: string; icon: string; ratingsVisible: boolean; rerolls: number }> = {
+  clasico: { id: 'clasico', name: 'Clásico', desc: 'Ratings visibles, armá el 11 ideal', icon: '⚽', ratingsVisible: true, rerolls: 1 },
+  almanaque: { id: 'almanaque', name: 'El Almanaque', desc: 'Ratings ocultos, gana la memoria', icon: '🧠', ratingsVisible: false, rerolls: 0 },
+  'reto-dia': { id: 'reto-dia', name: 'Reto del Día', desc: 'Combinación fija, sin reroll', icon: '🎯', ratingsVisible: true, rerolls: 0 },
+  liga: { id: 'liga', name: 'Liga', desc: 'Tu 11 juega 38 fechas', icon: '🏆', ratingsVisible: true, rerolls: 1 },
+  ruleta: { id: 'ruleta', name: 'Ruleta', desc: 'Girá y descubrí una leyenda', icon: '🎰', ratingsVisible: true, rerolls: 0 },
+};
 
-  // + Por partidos jugados (experiencia)
-  rating += Math.min(20, player.capsClub / 30);
-
-  // + Por goles (más para delanteros)
-  const goalBonus = player.position.startsWith('ST') || player.position === 'CF' ? 0.4 : 0.2;
-  rating += Math.min(15, player.goalsClub * goalBonus);
-
-  // + Por asistencias
-  rating += Math.min(5, (player.assistsClub || 0) * 0.1);
-
-  // + Por partidos en selección (élite)
-  rating += Math.min(10, player.capsNationalTeam / 10);
-
-  // + Por goles en selección
-  rating += Math.min(5, player.goalsNationalTeam * 0.3);
-
-  // + Por títulos
-  rating += Math.min(10, player.trophies.length * 1.5);
-
-  // + Por valor de mercado
-  const mv = parseFloat(player.marketValue) || 0;
-  rating += Math.min(5, mv * 0.5);
-
-  // + Bonificación por posición natural
-  if (positionCompatibility[targetPosition]?.includes(player.position)) {
-    rating += 3; // Jugando en su posición natural
-  } else {
-    rating -= 5; // Fuera de posición
-  }
-
-  // Redondear a entero
-  return Math.round(Math.max(0, Math.min(100, rating)));
+// ═══════════════════════════════════════════════════════════════
+// SPIN: elegir un squad aleatorio
+// ═══════════════════════════════════════════════════════════════
+export function spinSquad(squads: Squad[], filter?: { clubId?: string; competition?: string }): Squad {
+  let pool = squads;
+  if (filter?.clubId) pool = pool.filter(s => s.clubId === filter.clubId);
+  if (filter?.competition) pool = pool.filter(s => s.competition === filter.competition);
+  // Prefer squads with at least 15 players
+  const good = pool.filter(s => s.playerIds.length >= 15);
+  const use = good.length > 0 ? good : pool;
+  return use[Math.floor(Math.random() * use.length)];
 }
 
 // ═══════════════════════════════════════════════════════════════
-// SIMULACIÓN DE PARTIDO
+// GET SQUAD PLAYERS: players from a specific squad
 // ═══════════════════════════════════════════════════════════════
-export function simulateMatch(
-  team1Players: { rating: number }[],
-  team2Players: { rating: number }
-): { team1Goals: number; team2Goals: number } {
-  const team1Avg = team1Players.reduce((a, b) => a + b.rating, 0) / team1Players.length;
-  const team2Avg = team2Players.rating;
-
-  // Probabilidad basada en diferencia de rating
-  const diff = team1Avg - team2Avg;
-  const team1Prob = 1 / (1 + Math.exp(-diff / 20));
-
-  // Simular goles (90 minutos, ~2.5 goles por partido en promedio)
-  const team1Goals = Math.floor(Math.random() * 4 * team1Prob);
-  const team2Goals = Math.floor(Math.random() * 4 * (1 - team1Prob));
-
-  return { team1Goals, team2Goals };
+export function getSquadPlayers(squad: Squad, allPlayers: Player[]): Player[] {
+  const byId = new Map(allPlayers.map(p => [p.id, p]));
+  return squad.playerIds.map(id => byId.get(id)).filter((p): p is Player => !!p);
 }
 
 // ═══════════════════════════════════════════════════════════════
-// SIMULACIÓN DE TEMPORADA
+// SCORE CALCULATION
 // ═══════════════════════════════════════════════════════════════
-export function simulateSeason(
-  teamPlayers: { rating: number }[],
-  opponentRatings: { name: string; avgRating: number }[]
-): {
-  position: number;
-  points: number;
-  matchesPlayed: number;
-  wins: number;
-  draws: number;
-  losses: number;
-  goalsFor: number;
-  goalsAgainst: number;
-  results: { opponent: string; goalsFor: number; goalsAgainst: number; result: 'W' | 'D' | 'L' }[];
-} {
-  const teamAvg = teamPlayers.reduce((a, b) => a + b.rating, 0) / teamPlayers.length;
-
-  let points = 0;
-  let wins = 0;
-  let draws = 0;
-  let losses = 0;
-  let goalsFor = 0;
-  let goalsAgainst = 0;
-  const results: { opponent: string; goalsFor: number; goalsAgainst: number; result: 'W' | 'D' | 'L' }[] = [];
-
-  for (const opp of opponentRatings) {
-    const diff = teamAvg - opp.avgRating;
-    const teamProb = 1 / (1 + Math.exp(-diff / 20));
-
-    // Simular goles
-    const gf = Math.floor(Math.random() * 4 * teamProb);
-    const ga = Math.floor(Math.random() * 4 * (1 - teamProb));
-
-    goalsFor += gf;
-    goalsAgainst += ga;
-
-    if (gf > ga) {
-      wins++;
-      points += 3;
-      results.push({ opponent: opp.name, goalsFor: gf, goalsAgainst: ga, result: 'W' });
-    } else if (gf === ga) {
-      draws++;
-      points += 1;
-      results.push({ opponent: opp.name, goalsFor: gf, goalsAgainst: ga, result: 'D' });
-    } else {
-      losses++;
-      results.push({ opponent: opp.name, goalsFor: gf, goalsAgainst: ga, result: 'L' });
+export function calculateTeamScore(players: (Player | null)[], formation: FormationConfig): number {
+  const filled = players.filter(Boolean) as Player[];
+  if (filled.length === 0) return 0;
+  
+  let score = 0;
+  const totalSlots = formation.positions.length;
+  
+  // Base: average rating * fill percentage
+  const avgRating = filled.reduce((s, p) => s + p.rating, 0) / filled.length;
+  const fillBonus = (filled.length / totalSlots);
+  score = avgRating * fillBonus;
+  
+  // Position fit bonus
+  let positionMatches = 0;
+  formation.positions.forEach((fp, i) => {
+    const player = players[i];
+    if (player && positionCompatibility[fp.pos]?.includes(player.position)) {
+      positionMatches++;
+      score += 2;
     }
+  });
+  
+  // Legendary bonus
+  const legends = filled.filter(p => p.legendary).length;
+  score += legends * 3;
+  
+  // Perfect XI bonus
+  if (filled.length === totalSlots) score += 10;
+  
+  return Math.round(Math.min(100, Math.max(0, score)));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SEASON SIMULATION
+// ═══════════════════════════════════════════════════════════════
+export function simulateSeason(teamPlayers: Player[], opponentPool: Player[][]): SeasonResult {
+  const teamAvg = teamPlayers.reduce((a, p) => a + p.rating, 0) / teamPlayers.length;
+  
+  let points = 0, wins = 0, draws = 0, losses = 0, gf = 0, ga = 0;
+  const results: MatchResult[] = [];
+  
+  const opponents = opponentPool.slice(0, 38);
+  
+  for (const opp of opponents) {
+    const oppAvg = opp.reduce((a, p) => a + p.rating, 0) / Math.max(1, opp.length);
+    const diff = teamAvg - oppAvg;
+    const teamProb = 1 / (1 + Math.exp(-diff / 15));
+    
+    const goalsFor = Math.floor(Math.random() * 5 * teamProb);
+    const goalsAgainst = Math.floor(Math.random() * 5 * (1 - teamProb));
+    
+    gf += goalsFor;
+    ga += goalsAgainst;
+    
+    if (goalsFor > goalsAgainst) { wins++; points += 3; results.push({ opponent: '', goalsFor, goalsAgainst, result: 'W' }); }
+    else if (goalsFor === goalsAgainst) { draws++; points += 1; results.push({ opponent: '', goalsFor, goalsAgainst, result: 'D' }); }
+    else { losses++; results.push({ opponent: '', goalsFor, goalsAgainst, result: 'L' }); }
   }
-
-  // Calcular posición basada en puntos
-  const position = Math.floor(Math.random() * 4) + 1; // Simplificado
-
-  return {
-    position,
-    points,
-    matchesPlayed: opponentRatings.length,
-    wins,
-    draws,
-    losses,
-    goalsFor,
-    goalsAgainst,
-    results,
-  };
+  
+  // Position based on points
+  const maxPts = 38 * 3;
+  const pct = points / maxPts;
+  const position = Math.max(1, Math.round(28 * (1 - pct) + (Math.random() * 3 - 1)));
+  
+  return { position, points, matchesPlayed: opponents.length, wins, draws, losses, goalsFor: gf, goalsAgainst: ga, results };
 }
 
 // ═══════════════════════════════════════════════════════════════
-// RULETA - ASIGNACIÓN DE CLUB + DÉCADA
+// DAILY CHALLENGE (seeded random by date)
 // ═══════════════════════════════════════════════════════════════
-export function spinWheel(clubs: any[], decades: string[]): { club: any; decade: string } {
-  const randomClub = clubs[Math.floor(Math.random() * clubs.length)];
-  const randomDecade = decades[Math.floor(Math.random() * decades.length)];
-  return { club: randomClub, decade: randomDecade };
+export function getDailyChallenge(squads: Squad[]): Squad {
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  const idx = seed % squads.length;
+  const good = squads.filter(s => s.playerIds.length >= 11);
+  return good[idx % good.length];
 }
 
 // ═══════════════════════════════════════════════════════════════
-// UTILIDADES
+// UTILS
 // ═══════════════════════════════════════════════════════════════
-export function shuffle<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
+export function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return shuffled;
-}
-
-export function generateId(): string {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  return a;
 }
 
 export function formatScore(score: number): string {
   if (score >= 90) return '⭐ Excelente';
   if (score >= 70) return '🔥 Muy Bueno';
   if (score >= 50) return '👍 Bueno';
-  if (score >= 30) return '🤷 Regular';
-  return '😐 Pobre';
+  return '🤷 Regular';
 }
 
-export function getDecadeLabel(decade: string): string {
-  const labels: Record<string, string> = {
-    '1960s': 'Los 60',
-    '1970s': 'Los 70',
-    '1980s': 'Los 80',
-    '1990s': 'Los 90',
-    '2000s': 'Los 2000',
-    '2010s': 'Los 2010',
-    '2020s': 'Los 2020',
-  };
-  return labels[decade] || decade;
+export function generateShareText(squad: Squad, score: number, formation: string): string {
+  return `⚽ ${squad.label}\n📐 ${formation}\n🏆 Score: ${score}/100\n\nLigaStatsGame - El Draft del Fútbol Argentino 🇦🇷`;
 }

@@ -1,0 +1,331 @@
+# LigaStatsGame - Raw squad data
+# Format: CLUB_ID|SEASON|COMPETITION|LABEL
+#         Name|Position|Rating
+# Position: GK,CB,LB,RB,CDM,CM,CAM,LW,RW,ST,CF
+# Blank line between squads
+
+river-plate|2025|Liga Profesional|River Plate 2025
+Franco Armani|GK|78
+David Martinez|CB|71
+Paulo Diaz|CB|76
+Hector Martinez|CB|72
+Milton Casco|LB|72
+Fabricio Bustos|RB|75
+Enzo Perez|CDM|74
+Rodrigo Aliendro|CM|72
+Ezequiel Barco|CAM|74
+Pablo Solari|RW|73
+Miguel Borja|ST|77
+Marcos Acuna|LB|76
+Kevin Castano|CM|69
+Santiago Simon|CM|68
+Leandro Diaz|ST|72
+Facundo Colidio|ST|70
+Nacho Fernandez|CM|73
+Agustin Palavecino|CAM|69
+Adrian Martinez|GK|70
+Lucas Beltran|ST|71
+
+boca-juniors|2025|Liga Profesional|Boca Juniors 2025
+Sergio Romero|GK|76
+Marcos Rojo|CB|74
+Nicolas Figal|CB|73
+Luis Advincula|RB|75
+Marcelo Saracchi|LB|72
+Nahuel Molina|RB|77
+Pol Fernandez|CDM|74
+Guillermo Fernandez|CM|73
+Jorman Campuzano|CDM|70
+Edinson Cavani|ST|78
+Miguel Merentiel|ST|73
+Dario Benedetto|ST|75
+Lucas Janson|LW|70
+Kevin Zenon|LW|71
+Eduardo Salvio|RW|71
+Nicolas Valentini|CB|69
+Mauricio Benitez|CM|67
+Leandro Brey|GK|66
+Alexis Mac Allister|CAM|70
+Jorge Figal|CB|68
+
+independiente|2025|Liga Profesional|Independiente 2025
+Rodrigo Rey|GK|74
+Joaquin Laso|CB|72
+Ivan Marcone|CDM|73
+Ailton|LB|70
+Dante Hidalgo|CB|68
+Mauricio Isla|RB|75
+Lucas Gonzalez|CM|71
+Alexis Canelo|CAM|72
+Andres Roa|CAM|70
+Gabriel Avalos|ST|72
+Lebrijeiro|ST|71
+Fabian Bordagaray|RW|69
+Raul Lencina|GK|69
+Lucas Barrientos|CM|68
+Santiago Hidalgo|ST|69
+Fernando Ametrano|ST|66
+Joaquin Pereyra|CM|67
+Nicolas Blanco|LW|67
+Bautista Menna|LB|64
+Miguel Angel Russo|CB|65
+
+racing-club|2025|Liga Profesional|Racing Club 2025
+Gabriel Arias|GK|76
+Marco Di Cesare|CB|73
+Facundo Mura|RB|71
+Leonardo Godoy|RB|70
+Emilio Martinez|LB|69
+Bruno Zuculini|CDM|73
+Roger Martinez|CM|72
+Carlos Alcaraz|CM|71
+Ignacio Aliseda|CAM|73
+Maximiliano Salas|LW|72
+Adolfo Gaich|ST|74
+Gaston Martirena|RW|68
+Santiago Sosa|CDM|70
+Roberto de la Rosa|ST|71
+Ivan Pillud|RB|72
+Juan Nardoni|CM|69
+Tomas Chancalay|ST|68
+Matias Laba|CDM|70
+Andres Ayala|CB|67
+Nery Dominguez|GK|65
+
+san-lorenzo|2025|Liga Profesional|San Lorenzo 2025
+Oscar Ustari|GK|74
+German Conti|CB|72
+Emanuel Cecchini|CDM|71
+Alejandro Molina|LB|68
+Agustin Giay|RB|67
+Federico Gattoni|CB|70
+Ramiro Gonzalez|CB|69
+Elias Baez|CM|68
+Juan Ramirez|CAM|71
+Ezequiel Cerutti|LW|71
+Nicolas Blandi|ST|72
+Gabriel Rojas|LB|70
+Diego Perea|ST|67
+Lucas Vegas|CM|69
+Fabian Cubero|CDM|68
+Nazareno Colombo|CB|66
+Santiago Rolon|RB|66
+Agustin Bayo|RW|65
+Tomas Martinez|CAM|67
+Lautaro Lopez|GK|63
+
+estudiantes-lp|2025|Liga Profesional|Estudiantes LP 2025
+Mariano Andujar|GK|73
+Roman Colombia|CB|71
+David Ayala|CDM|72
+Lucas Rodriguez|LB|69
+Fausto Espindola|RB|68
+Zaid Romero|CB|67
+Mateo Retegui|ST|76
+Jose Sosa|CM|74
+Mauro Boselli|ST|74
+Juan Iglesias|RB|67
+Agustin Rogel|CB|66
+Benjamin Rollheiser|CAM|68
+Leandro Diaz|CAM|69
+Eduardo Domingo|LW|66
+Lucas Gonzalez|CM|65
+Santiago Nunez|CB|63
+Francisco Apaolaza|ST|65
+Matias Godoy|GK|64
+Nahuel Bustos|ST|67
+Tomas Ojeda|CM|63
+
+gimnasia-lp|2025|Liga Profesional|Gimnasia LP 2025
+Agustin Indjet|GK|71
+Leonel Moral|CB|69
+Hugo Lopes|CDM|70
+Santiago Mineiro|CM|68
+Tomas Sasso|RB|66
+Maximiliano Comba|CAM|71
+Pablo De Blasis|CAM|73
+Cristian Tarragona|ST|70
+Alan Sonora|CAM|69
+Leandro Contin|LW|67
+Brahian Galvan|RW|66
+Erik Ramires|CM|64
+Rodrigo Cabral|ST|65
+Lucas Castro|CM|70
+Santiago Brambilla|CM|65
+Nicolas Sansotre|CB|63
+Facundo Ancelmo|RB|62
+Franco Torres|CB|61
+Luciano Pons|ST|63
+Jorge Polleri|GK|60
+
+newells-old-boys|2025|Liga Profesional|Newells Old Boys 2025
+Lucas Hoyos|GK|70
+Joaquin Indacoechea|CB|67
+Angelo Preciado|RB|69
+Dylan Ocampo|LB|65
+Santiago Gentiletti|CB|71
+Mauro Formica|CAM|73
+Justo Giani|CM|68
+Jhonny Quiroz|CM|66
+Juan Sforza|CDM|68
+Lucas Bernardi|CM|70
+Alexis Mac Allister|CAM|69
+Mateo Silvetti|ST|66
+Francisco Gonzalez|ST|64
+Ignacio Mendez|CAM|65
+Fabricio Formiliano|CB|68
+Nazareno Funez|RW|63
+Pablo Solari|ST|62
+Maxi Rodriguez|GK|61
+Leandro Brey|GK|60
+Joaquin Mosqueira|LB|62
+
+banfield|2025|Liga Profesional|Banfield 2025
+Facundo Sanguinetti|GK|68
+Santiago Etchebarne|CB|66
+Bruno Sepulveda|CB|67
+Gonzalo Asis|LB|65
+Julian Celaya|RB|66
+Ricardo Alvarez|CM|72
+Fabrizio Callejo|CM|65
+Juan Alvarez|CDM|67
+Santiago Hernandez|CAM|64
+Augusto Lotauro|ST|66
+Miguel Berry|ST|68
+Agustin Urzi|LW|69
+Agustin Obando|LW|70
+Jorge Rodriguez|CM|66
+Facundo Tobal|CDM|64
+Nicolas Demartini|CB|63
+Emanuel Insua|LB|67
+Elias Gomez|RB|63
+Leandro Garate|ST|65
+Rodrigo Burgos|GK|62
+
+lanus|2025|Liga Profesional|Lanus 2025
+Jose Devecchi|GK|70
+Carlos Quintana|CB|69
+Nicolas Thalhammer|CB|67
+Braian Aguirre|LB|66
+Julian Aude|RB|65
+Jose Sand|ST|71
+Lautaro Acosta|CAM|70
+Nicolas Pasquini|LB|68
+Raul Loaiza|CM|67
+Marcelino Nunez|CM|69
+Franco Troyansky|ST|68
+Tomas Belmonte|CM|71
+Lucas Orellana|LW|67
+Angel Gonzalez|RW|66
+Facundo Sanchez|CB|65
+Alexis Pedrozo|ST|63
+Mauricio Martinez|CDM|66
+Cristian Lema|CB|64
+Franco Watson|GK|62
+Victor Malquez|CM|61
+
+colon|2025|Liga Profesional|Colon 2025
+Leonardo Buriak|GK|68
+Facundo Garces|CB|66
+Jonathan Gallardo|LB|67
+Emanuel Olivera|RB|66
+Sergio Ojeda|CB|68
+Christian Bernardi|CM|69
+Juan Cruz Villagra|CM|65
+Facundo Pellegrino|CDM|64
+Leandro Diaz|CAM|66
+Tomás Chancalay|ST|67
+Santiago Pierotti|RW|65
+Ramiro Enrique|ST|64
+Joaquin Novarese|CB|63
+Julian Velazquez|LB|62
+Franco Pellegrini|RB|61
+Fabricio Dominguez|CM|63
+Andres Flores|CDM|65
+Maximiliano Pena|ST|63
+Alexis Canelo|CAM|62
+Roberto Ramallo|GK|61
+
+velez-sarsfield|2025|Liga Profesional|Velez Sarsfield 2025
+Leonardo Jara|GK|69
+Matias de los Santos|CB|68
+Damian Fernandez|CB|67
+Tomas Cavanagh|LB|64
+Hernan De La Fuente|RB|66
+Maximo Romero|CM|67
+Gastón Gimenez|CDM|70
+Ricaldo Centurion|CAM|71
+Agustin Bouzat|LW|69
+Lucas Pratto|ST|72
+Abel Hernandez|ST|73
+Mateo Seoane|CM|65
+Santiago Castro|ST|66
+Leandro Olaicoechea|LB|63
+Francisco Ortega|CB|62
+Miguel Brizuela|RB|64
+Joel Soñora|CAM|67
+Joaquin Piquerez|LB|66
+Franco Fagundez|CM|63
+Lucas Villalba|GK|61
+
+defensa-y-justicia|2025|Liga Profesional|Defensa y Justicia 2025
+Cristian Fabbiani|GK|69
+Nelson Deossa|CB|67
+Tomas Cardona|CB|68
+Adonis Frias|LB|66
+Matias Ramírez|RB|65
+Gabriel Alanis|CM|68
+Kevin Lopez|CM|66
+Francisco Gonzalez|CDM|64
+Nicolas Palavecino|CAM|67
+Miguel Merentiel|ST|66
+Nicolas Fernandez|ST|68
+Lucas Beltran|LW|65
+Cristian Barco|RW|63
+Domingo Blanco|CAM|70
+Nicolas Sanchez|CB|67
+Enzo Cabrera|LB|64
+Aaron Molinas|CM|65
+Abiel Osorio|ST|66
+Julian Lopez|RB|63
+Ezequiel Centurion|GK|62
+
+argentinos-juniors|2025|Liga Profesional|Argentinos Juniors 2025
+Carlos Carbonero|GK|68
+Kevin Mac Allister|CB|69
+Marco Di Cesare|CB|67
+Brian Leiva|LB|65
+Leonel Mosevich|RB|66
+Santiago Gonzalez|CM|67
+Gabriel Hachen|CAM|70
+Nicolas Watner|CM|65
+Federico Redondo|CDM|71
+Gabriel Avalos|ST|69
+Faustino Anjorran|ST|66
+Lucas Cincunegui|LW|64
+Lucas Nahuel Espindola|RW|63
+Lucas Villalba|CM|62
+Leonardo Heredia|CAM|66
+Alan Lescano|LB|64
+Matias Romero|CB|63
+Nicolas Cuesta|RB|62
+Thiago Nuss|ST|65
+Damián Batallini|GK|61
+
+talleres-cba|2025|Liga Profesional|Talleres 2025
+Guido Herrera|GK|73
+Matias Catalán|CB|70
+Joaquin Varela|CB|68
+Blas Riveros|LB|69
+Marco Campagnaro|RB|67
+Rodrigo Villalba|CDM|66|
+Kevin Vazquez|CM|65|
+Matias Godoy|CAM|68|
+Ramiro Stalteri|ST|67|
+Andres Vidal|LW|65|
+Emiliano Endres|RW|63|
+Nahuel Banegas|ST|66|
+Francisco Meza|CB|64|
+Nicolas Camacho|LB|62|
+Alan Franco|ST|71|
+
