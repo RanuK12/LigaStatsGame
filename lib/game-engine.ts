@@ -1,5 +1,23 @@
 import { Player, Squad, Club, Formation, FormationConfig, Position, MatchResult } from './types';
 
+// ═══════════════════════════════════════════════════════════════
+// POSITION LABELS (Español)
+// ═══════════════════════════════════════════════════════════════
+export const POS_LABELS: Record<string, string> = {
+  GK: 'POR', CB: 'DEF', LB: 'LI', RB: 'LD', LWB: 'Carr. Izq', RWB: 'Carr. Der',
+  CDM: 'MCD', CM: 'MC', CAM: 'MCO', LM: 'MI', RM: 'MD',
+  LW: 'EI', RW: 'ED', ST: 'DC', CF: 'CD',
+};
+
+export const POS_SHORT: Record<string, string> = {
+  GK: 'POR', CB: 'DFC', LB: 'DFI', RB: 'DFD', LWB: 'CII', RWB: 'CID',
+  CDM: 'MCD', CM: 'MED', CAM: 'MCO', LM: 'MII', RM: 'MDD',
+  LW: 'EXT', RW: 'EXT', ST: 'DEL', CF: 'DCO',
+};
+
+// ═══════════════════════════════════════════════════════════════
+// FORMATIONS
+// ═══════════════════════════════════════════════════════════════
 export const formations: Record<string, FormationConfig> = {
   '4-3-3': {
     id: '4-3-3', name: '4-3-3',
@@ -26,14 +44,14 @@ export const formations: Record<string, FormationConfig> = {
       { pos: 'CB', x: 37, y: 72, label: 'Zaguero Central' },
       { pos: 'CB', x: 63, y: 72, label: 'Zaguero Central' },
       { pos: 'RB', x: 88, y: 72, label: 'Lateral Der.' },
-      { pos: 'CM', x: 15, y: 48, label: 'Med. Izq.' },
+      { pos: 'LM', x: 15, y: 48, label: 'Med. Izq.' },
       { pos: 'CM', x: 38, y: 48, label: 'Centrocampista' },
       { pos: 'CM', x: 62, y: 48, label: 'Centrocampista' },
-      { pos: 'CM', x: 85, y: 48, label: 'Med. Der.' },
+      { pos: 'RM', x: 85, y: 48, label: 'Med. Der.' },
       { pos: 'ST', x: 37, y: 18, label: 'Delantero' },
       { pos: 'ST', x: 63, y: 18, label: 'Delantero' },
     ],
-    requirements: { GK: 1, CB: 2, LB: 1, RB: 1, CM: 4, ST: 2 },
+    requirements: { GK: 1, CB: 2, LB: 1, RB: 1, LM: 1, CM: 2, RM: 1, ST: 2 },
   },
   '4-2-3-1': {
     id: '4-2-3-1', name: '4-2-3-1',
@@ -71,43 +89,113 @@ export const formations: Record<string, FormationConfig> = {
   },
 };
 
+// ═══════════════════════════════════════════════════════════════
+// POSITION COMPATIBILITY
+// ═══════════════════════════════════════════════════════════════
 export const positionCompatibility: Record<string, string[]> = {
-  GK: ['GK'], CB: ['CB'], LB: ['LB', 'LWB'], RB: ['RB', 'RWB'],
-  LWB: ['LWB', 'LB'], RWB: ['RWB', 'RB'],
-  CDM: ['CDM', 'CM'], CM: ['CM', 'CDM', 'CAM', 'LM', 'RM'],
-  CAM: ['CAM', 'CM', 'CF'], LM: ['LM', 'LW', 'LB', 'CM'],
-  RM: ['RM', 'RW', 'RB', 'CM'], LW: ['LW', 'LM'], RW: ['RW', 'RM'],
-  ST: ['ST', 'CF'], CF: ['CF', 'ST', 'CAM'],
+  GK: ['GK'],
+  CB: ['CB'],
+  LB: ['LB', 'LWB', 'CB'],
+  RB: ['RB', 'RWB', 'CB'],
+  LWB: ['LWB', 'LB'],
+  RWB: ['RWB', 'RB'],
+  CDM: ['CDM', 'CM', 'CB'],
+  CM: ['CM', 'CDM', 'CAM', 'LM', 'RM'],
+  CAM: ['CAM', 'CM', 'CF', 'ST'],
+  LM: ['LM', 'LW', 'LB', 'CM'],
+  RM: ['RM', 'RW', 'RB', 'CM'],
+  LW: ['LW', 'LM', 'ST'],
+  RW: ['RW', 'RM', 'ST'],
+  ST: ['ST', 'CF', 'CAM'],
+  CF: ['CF', 'ST', 'CAM'],
 };
 
+// ═══════════════════════════════════════════════════════════════
+// GAME MODES
+// ═══════════════════════════════════════════════════════════════
 export const GAME_MODES: Record<string, any> = {
-  clasico: { id: 'clasico', name: 'Clásico', description: 'Ratings visibles', icon: '⚽', ratingsVisible: true, rerolls: 3 },
-  almanaque: { id: 'almanaque', name: 'El Almanaque', description: 'Ratings ocultos', icon: '🧠', ratingsVisible: false, rerolls: 3 },
-  liga: { id: 'liga', name: 'Liga Argentina', description: 'Formato real', icon: '🏆', ratingsVisible: true, rerolls: 3 },
-  copa: { id: 'copa', name: 'Copa Argentina', description: 'Eliminación directa', icon: '🏅', ratingsVisible: true, rerolls: 3 },
+  clasico: { id: 'clasico', name: 'Clásico', description: 'Ratings visibles. Intenta superar los 100 pts.', icon: '⚽', ratingsVisible: true, rerolls: 3 },
+  almanaque: { id: 'almanaque', name: 'El Almanaque', description: 'Sin estadísticas. Solo tu conocimiento.', icon: '🧠', ratingsVisible: false, rerolls: 2 },
+  liga: { id: 'liga', name: 'Liga Argentina', description: 'Formato real. 2 zonas + playoffs.', icon: '🏆', ratingsVisible: true, rerolls: 3 },
+  copa: { id: 'copa', name: 'Copa Argentina', description: 'Eliminación directa.', icon: '🏅', ratingsVisible: true, rerolls: 3 },
 };
 
+// ═══════════════════════════════════════════════════════════════
+// CORE FUNCTIONS
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Check if a player can play in a given formation slot position.
+ * Uses both primary position and alternate positions array.
+ */
 export function canPlayHere(player: Player, requiredPos: string): boolean {
   const compat = positionCompatibility[requiredPos] || [requiredPos];
-  return compat.includes(player.position) || (player.positions?.some(p => compat.includes(p)) ?? false);
+  // Check primary position
+  if (compat.includes(player.position)) return true;
+  // Check alternate positions array
+  if (player.positions && player.positions.length > 0) {
+    return player.positions.some(p => compat.includes(p));
+  }
+  return false;
 }
 
+/**
+ * Get all players from a squad that can play in a specific formation slot.
+ * This is the MAIN filter used by the draft UI.
+ */
+export function getPlayersForSlot(squad: Squad, allPlayers: Player[], slotPosition: string): Player[] {
+  const squadPlayers = allPlayers.filter(p => squad.playerIds.includes(p.id));
+  return squadPlayers.filter(p => canPlayHere(p, slotPosition));
+}
+
+/**
+ * Get all players from a squad (no position filter).
+ */
 export function getSquadPlayers(squad: Squad, allPlayers: Player[]): Player[] {
   return allPlayers.filter(p => squad.playerIds.includes(p.id));
 }
 
+/**
+ * Spin a random squad from the available ones.
+ * Only returns squads with at least 11 players.
+ */
 export function spinSquad(allSquads: Squad[]): Squad {
   const valid = allSquads.filter(s => s.playerIds.length >= 11);
   return valid[Math.floor(Math.random() * valid.length)];
 }
 
+/**
+ * Calculate team score (average rating of filled positions).
+ * Returns 0 if not all 11 positions are filled.
+ */
 export function calculateTeamScore(team: (Player | null)[], formation: FormationConfig): number {
+  const valid = team.filter(Boolean) as Player[];
+  if (valid.length === 0) return 0;
+  // Partial score even if not all 11 filled
+  let score = 0;
+  valid.forEach(p => { score += p.rating || 50; });
+  return Math.round(score / valid.length);
+}
+
+/**
+ * Calculate a full team score bonus (only when all 11 are filled).
+ */
+export function calculateFullTeamScore(team: (Player | null)[], formation: FormationConfig): number {
   const valid = team.filter(Boolean) as Player[];
   if (valid.length < 11) return 0;
   let score = 0;
   valid.forEach(p => { score += p.rating || 50; });
-  return Math.round(score / 11);
+  // Chemistry bonus for having correct positions
+  let chemBonus = 0;
+  team.forEach((p, i) => {
+    if (p && formation.positions[i] && p.position === formation.positions[i].pos) chemBonus += 2;
+  });
+  return Math.round(score / 11 + chemBonus);
 }
+
+// ═══════════════════════════════════════════════════════════════
+// SIMULATION
+// ═══════════════════════════════════════════════════════════════
 
 function simulateGoals(teamStr: number): number {
   const avg = Math.max(0.3, (teamStr - 50) / 25);
@@ -118,16 +206,6 @@ function simulateGoals(teamStr: number): number {
 
 interface LigaTeam { name: string; pts: number; gf: number; ga: number; w: number; d: number; l: number; form: string[] }
 
-function playMatch(home: LigaTeam, away: LigaTeam, hStr: number, aStr: number) {
-  const hg = simulateGoals(hStr);
-  const ag = simulateGoals(aStr);
-  home.gf += hg; home.ga += ag; away.gf += ag; away.ga += hg;
-  if (hg > ag) { home.pts += 3; home.w++; away.l++; home.form.push('V'); away.form.push('D'); }
-  else if (hg < ag) { away.pts += 3; away.w++; home.l++; home.form.push('D'); away.form.push('V'); }
-  else { home.pts++; away.pts++; home.d++; away.d++; home.form.push('E'); away.form.push('E'); }
-  if (home.form.length > 5) { home.form.shift(); away.form.shift(); }
-}
-
 function sortTable(teams: LigaTeam[]) {
   return teams.sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf);
 }
@@ -136,7 +214,7 @@ function sortTable(teams: LigaTeam[]) {
 export function simulateSeasonMatchByMatch(
   playerTeam: Player[], squad: Squad, allSquads: Squad[], allPlayers: Player[], formation: FormationConfig
 ): { schedule: any[]; table: LigaTeam[]; playerPos: number; champion: string } {
-  const teamStr = calculateTeamScore(playerTeam, formation);
+  const teamStr = calculateFullTeamScore(playerTeam, formation) || calculateTeamScore(playerTeam, formation);
   const opponents = allSquads
     .filter(s => s.id !== squad.id && s.playerIds.length >= 11)
     .sort(() => Math.random() - 0.5).slice(0, 29);
@@ -149,7 +227,7 @@ export function simulateSeasonMatchByMatch(
   strengths[squad.label] = teamStr;
   opponents.forEach(o => {
     const p = getSquadPlayers(o, allPlayers).slice(0, 11);
-    strengths[o.label] = p.length >= 11 ? calculateTeamScore(p, formations['4-3-3']) : 55 + Math.random() * 15;
+    strengths[o.label] = p.length >= 11 ? calculateFullTeamScore(p, formations['4-3-3']) || calculateTeamScore(p, formations['4-3-3']) : 55 + Math.random() * 15;
   });
   allNames.forEach(n => { if (!strengths[n]) strengths[n] = 50 + Math.random() * 20; });
 
@@ -184,13 +262,13 @@ export function simulateSeasonMatchByMatch(
 export function simulateCopaArgentinaMatchByMatch(
   playerTeam: Player[], squad: Squad, allSquads: Squad[], allPlayers: Player[], formation: FormationConfig
 ): { rounds: any[]; champion?: string; eliminated: boolean; eliminatedRound: string } {
-  const teamStr = calculateTeamScore(playerTeam, formation);
+  const teamStr = calculateFullTeamScore(playerTeam, formation) || calculateTeamScore(playerTeam, formation);
   const opponents = allSquads.filter(s => s.id !== squad.id && s.playerIds.length >= 11)
     .sort(() => Math.random() - 0.5).slice(0, 31);
   const names = [squad.label, ...opponents.map(o => o.label)];
   const str: Record<string, number> = {};
   str[squad.label] = teamStr;
-  opponents.forEach(o => { const p = getSquadPlayers(o, allPlayers).slice(0, 11); str[o.label] = p.length >= 11 ? calculateTeamScore(p, formations['4-3-3']) : 45 + Math.random() * 25; });
+  opponents.forEach(o => { const p = getSquadPlayers(o, allPlayers).slice(0, 11); str[o.label] = p.length >= 11 ? calculateFullTeamScore(p, formations['4-3-3']) || calculateTeamScore(p, formations['4-3-3']) : 45 + Math.random() * 25; });
   const roundNames = ['32avos', '16avos', 'Octavos', 'Cuartos', 'Semifinal', 'Final'];
   const rounds: any[] = [];
   let alive = [...names]; let eliminated = false; let eliminatedRound = '';
