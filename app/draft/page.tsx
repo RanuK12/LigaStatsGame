@@ -342,7 +342,7 @@ function DraftInner() {
         )}
 
         {/* Squad Info + Position Picker + Pitch */}
-        {(phase === "pick" || phase === "start" || showPicker) && currentSquad && (
+        {(phase === "pick" || phase === "start" || (showPicker && phase !== "done" && phase !== "sim")) && currentSquad && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             {/* Current position indicator */}
             <div className="text-center mb-4">
@@ -419,18 +419,23 @@ function DraftInner() {
                 <Pitch f={f} draft={drafted} highlight={-1} onSlotClick={handleSlotClick} showRatings={mode.ratingsVisible} slotAvail={slotAvailability} />
               </div>
               <div className="mt-4 flex flex-wrap gap-3 justify-center">
-                {drafted.filter(Boolean).map((p, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-slate-800/50 rounded-lg px-3 py-1.5 border border-slate-700">
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold text-white" style={{ backgroundColor: PC[f.positions[i]?.pos] || '#666' }}>
-                      {p!.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()}
+                {drafted.filter(Boolean).map((p, i) => {
+                  const slotIdx = drafted.indexOf(p)
+                  return (
+                    <div key={i} className="flex items-center gap-2 bg-slate-800/50 rounded-lg px-3 py-1.5 border border-slate-700 group relative">
+                      <button onClick={() => { removePlayer(slotIdx); setShowPicker(true); setPickerSlotIdx(slotIdx); setCurrentPosIdx(slotIdx) }}
+                        className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-red-500 text-white text-[8px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
+                      <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold text-white" style={{ backgroundColor: PC[f.positions[slotIdx]?.pos] || '#666' }}>
+                        {p!.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()}
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-white">{p!.name.split(' ').pop()}</div>
+                        <div className="text-[9px] text-slate-500">{POS_LABELS[f.positions[slotIdx]?.pos] || f.positions[slotIdx]?.pos}</div>
+                      </div>
+                      {mode.ratingsVisible && <span className="text-xs font-bold text-[#75AADB]">{p!.rating}</span>}
                     </div>
-                    <div>
-                      <div className="text-xs font-semibold text-white">{p!.name.split(' ').pop()}</div>
-                      <div className="text-[9px] text-slate-500">{POS_LABELS[f.positions[i]?.pos] || f.positions[i]?.pos}</div>
-                    </div>
-                    {mode.ratingsVisible && <span className="text-xs font-bold text-[#75AADB]">{p!.rating}</span>}
-                  </div>
-                ))}
+                  )
+                })}
               </div>
               <div className="mt-4 text-2xl font-display font-black text-[#75AADB]">
                 Score: {teamScore || partialScore} pts
