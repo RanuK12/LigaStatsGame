@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "scrape:players": "node scripts/scrape-players.js",
+    "scrape:players": "node scripts/scrape-players.mjs",
     "generate:quizzes": "node scripts/generate-quizzes.js",
     "update:db": "node scripts/update-db.js",
     "typecheck": "tsc --noEmit"

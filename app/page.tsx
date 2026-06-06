@@ -91,14 +91,14 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/logos/afa/afa.svg"
+              src="/LigaStatsGame/logos/afa/afa.svg"
               alt="AFA Logo"
               width={48}
               height={48}
               className="drop-shadow-lg"
             />
             <Image
-              src="/logos/afa/liga.svg"
+              src="/LigaStatsGame/logos/afa/liga.svg"
               alt="Liga Logo"
               width={40}
               height={40}
@@ -264,7 +264,7 @@ export default function HomePage() {
               <div className="card-gradient rounded-xl p-3 flex flex-col items-center justify-center aspect-square cursor-pointer group transition-all duration-300 hover:border-[#75AADB]/30">
                 <div className="relative w-12 h-12 sm:w-14 sm:h-14 mb-2">
                   <Image
-                    src={`/logos/clubs/${club.id}.svg`}
+                    src={`/LigaStatsGame/logos/clubs/${club.id}.svg`}
                     alt={club.name}
                     fill
                     className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
@@ -319,7 +319,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <Image
-                src="/logos/afa/afa.svg"
+                src="/LigaStatsGame/logos/afa/afa.svg"
                 alt="AFA"
                 width={28}
                 height={28}

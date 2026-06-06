@@ -1,4 +1,8 @@
-"use client"
+#!/usr/bin/env python3
+"""Write the complete draft page for LigaStatsGame."""
+import os
+
+CONTENT = '''"use client"
 import { useState, Suspense, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
@@ -136,11 +140,11 @@ function DraftInner() {
     setTimeout(() => { setCurrentSquad(result); setSpinning(false); setPhase("pick") }, 2200)
   }, [spinning, allS])
 
-  const rerollTeam = useCallback(() => { if (wildcards > 0) { setWildcards((w: number) => w - 1); spinWheel() } }, [wildcards, spinWheel])
+  const rerollTeam = useCallback(() => { if (wildcards > 0) { setWildcards(w => w - 1); spinWheel() } }, [wildcards, spinWheel])
 
   const changeYear = useCallback(() => {
     if (wildcards <= 0 || !currentSquad) return
-    setWildcards((w: number) => w - 1)
+    setWildcards(w => w - 1)
     const same = allS.filter(s => s.clubId === currentSquad.clubId && s.season !== currentSquad.season && s.playerIds.length >= 11)
     if (same.length > 0) setCurrentSquad(same[Math.floor(Math.random() * same.length)])
   }, [wildcards, currentSquad, allS])
@@ -162,22 +166,10 @@ function DraftInner() {
     setPickerSlotIdx(idx); setCurrentPosIdx(idx); setShowPicker(true)
   }, [])
 
-  // Pre-compute which slots have available players
-  const slotAvailability = useMemo(() => {
-    if (!currentSquad) return f.positions.map(() => 0)
-    return f.positions.map((pos: any) => getPlayersForSlot(currentSquad, allP, pos.pos).length)
-  }, [currentSquad, allP, f])
-
   const pickerPlayers = useMemo(() => {
     if (!currentSquad) return []
     const slotPos = f.positions[pickerSlotIdx]?.pos || 'CM'
-    let pool = getPlayersForSlot(currentSquad, allP, slotPos)
-    // Fallback: if current slot has 0 players, show ALL squad players
-    // so the user can see what's available and click a different slot
-    if (pool.length === 0) {
-      pool = allP.filter(p => currentSquad.playerIds.includes(p.id))
-    }
-    return pool
+    return getPlayersForSlot(currentSquad, allP, slotPos)
       .filter(p => {
         if (search && !p.name.toLowerCase().includes(search.toLowerCase())) return false
         if (filter !== "all" && p.position !== filter) return false
@@ -238,7 +230,7 @@ function DraftInner() {
     return (
       <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg w-full text-center">
-          <img src="/LigaStatsGame/logos/afa/afa.svg" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
+          <img src="/logos/afa/afa.svg" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
           <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">Liga Argentina Fans</h1>
           <p className="text-slate-400 mb-6">{mode.icon} {mode.name}</p>
           <div className="card-gradient rounded-2xl p-6 mb-6">
@@ -309,7 +301,7 @@ function DraftInner() {
                 <span className="text-slate-300 text-sm">{currentPos?.label}</span>
               </div>
               <div className="flex items-center justify-center gap-3 mb-2">
-                <img src={`/LigaStatsGame/logos/clubs/${currentSquad.clubId}.svg`} alt="" className="w-10 h-10" onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
+                <img src={`/logos/clubs/${currentSquad.clubId}.svg`} alt="" className="w-10 h-10" onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
                 <div className="text-left">
                   <div className="font-display font-bold text-lg">{currentSquad.label}</div>
                   <div className="text-xs text-slate-400">{currentSquad.playerIds.length} jugadores en plantel</div>
@@ -334,14 +326,7 @@ function DraftInner() {
               <input type="text" placeholder="Buscar jugador..." value={search} onChange={e => setSearch(e.target.value)}
                 className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white placeholder-slate-500 focus:border-[#75AADB] focus:outline-none w-full mb-3" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[30vh] overflow-y-auto pr-1">
-                {pickerPlayers.length === 0 && slotAvailability.every((n: number) => n === 0) && (
-                  <p className="text-slate-500 text-sm text-center col-span-2 py-4">Este plantel no tiene jugadores para ninguna posicion. Cambia de equipo.</p>
-                )}
-                {pickerPlayers.length === 0 && !slotAvailability.every((n: number) => n === 0) && (
-                  <p className="text-amber-400/80 text-xs text-center col-span-2 py-3">
-                    Sin jugadores para {POS_LABELS[currentPos?.pos] || currentPos?.pos}. Toca otra posicion en la cancha o cambia de equipo.
-                  </p>
-                )}
+                {pickerPlayers.length === 0 && <p className="text-slate-500 text-sm text-center col-span-2 py-4">No hay jugadores disponibles. Cambia de equipo o ano.</p>}
                 {pickerPlayers.slice(0, 20).map(player => (
                   <PlayerCard key={player.id} player={player} mode={mode} onSelect={() => pickPlayer(player)} slotPos={currentPos?.pos || 'CM'} />
                 ))}
@@ -509,3 +494,9 @@ function DraftInner() {
 export default function DraftPage() {
   return <Suspense fallback={<div className="min-h-screen gradient-bg flex items-center justify-center text-slate-400">Cargando...</div>}><DraftInner /></Suspense>
 }
+'''
+
+target = os.path.expanduser('~/Desktop/Oficina_Ranuk/LigaStatsGame/app/draft/page.tsx')
+with open(target, 'w') as f:
+    f.write(CONTENT)
+print(f'Wrote {len(CONTENT)} bytes to {target}')
