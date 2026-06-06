@@ -1947,39 +1947,6 @@
     "legendary": false
   },
   {
-    "id": "diego-maradona",
-    "name": "Diego Maradona",
-    "fullName": "Diego Maradona",
-    "birthDate": "1977-04-15",
-    "position": "CAM",
-    "positions": [
-      "CAM"
-    ],
-    "nationality": "Argentina",
-    "height": 175,
-    "weight": 75,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "argentinos-jrs",
-        "name": "Argentinos Juniors",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 34,
-    "goalsNationalTeam": 8,
-    "capsClub": 160,
-    "goalsClub": 116,
-    "assistsClub": 35,
-    "trophies": [],
-    "image": "",
-    "marketValue": "29M€",
-    "activeYears": "1990-2006",
-    "decade": "1990s",
-    "rating": 49,
-    "legendary": true
-  },
-  {
     "id": "hector-henrin",
     "name": "Héctor Henrín",
     "fullName": "Héctor Henrín",
@@ -3993,39 +3960,6 @@
     "legendary": false
   },
   {
-    "id": "ubaldo-fillol",
-    "name": "Ubaldo Fillol",
-    "fullName": "Ubaldo Fillol",
-    "birthDate": "1958-11-21",
-    "position": "GK",
-    "positions": [
-      "GK"
-    ],
-    "nationality": "Argentina",
-    "height": 168,
-    "weight": 66,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "independiente",
-        "name": "Independiente",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 5,
-    "goalsNationalTeam": 0,
-    "capsClub": 380,
-    "goalsClub": 0,
-    "assistsClub": 1,
-    "trophies": [],
-    "image": "",
-    "marketValue": "15M€",
-    "activeYears": "1966-1982",
-    "decade": "1970s",
-    "rating": 35,
-    "legendary": false
-  },
-  {
     "id": "victorio-cocco",
     "name": "Victorio Cocco",
     "fullName": "Victorio Cocco",
@@ -4851,39 +4785,6 @@
     "legendary": true
   },
   {
-    "id": "mario-kempes",
-    "name": "Mario Kempes",
-    "fullName": "Mario Kempes",
-    "birthDate": "1957-05-26",
-    "position": "ST",
-    "positions": [
-      "ST"
-    ],
-    "nationality": "Argentina",
-    "height": 192,
-    "weight": 65,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "river-plate",
-        "name": "River Plate",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 43,
-    "goalsNationalTeam": 20,
-    "capsClub": 360,
-    "goalsClub": 175,
-    "assistsClub": 40,
-    "trophies": [],
-    "image": "",
-    "marketValue": "49M€",
-    "activeYears": "1966-1978",
-    "decade": "1970s",
-    "rating": 78,
-    "legendary": true
-  },
-  {
     "id": "ricardo-toledo",
     "name": "Ricardo Toledo",
     "fullName": "Ricardo Toledo",
@@ -5016,39 +4917,6 @@
     "legendary": false
   },
   {
-    "id": "claudio-borghi",
-    "name": "Claudio Borghi",
-    "fullName": "Claudio Borghi",
-    "birthDate": "1981-04-15",
-    "position": "ST",
-    "positions": [
-      "ST"
-    ],
-    "nationality": "Argentina",
-    "height": 187,
-    "weight": 73,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "argentinos-jrs",
-        "name": "Argentinos Juniors",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 10,
-    "goalsNationalTeam": 4,
-    "capsClub": 280,
-    "goalsClub": 68,
-    "assistsClub": 30,
-    "trophies": [],
-    "image": "",
-    "marketValue": "24M€",
-    "activeYears": "1990-2005",
-    "decade": "1990s",
-    "rating": 46,
-    "legendary": true
-  },
-  {
     "id": "mauricio-cuero",
     "name": "Mauricio Cuero",
     "fullName": "Mauricio Cuero",
@@ -5143,39 +5011,6 @@
     "image": "",
     "marketValue": "8M€",
     "activeYears": "2003-2013",
-    "decade": "2000s",
-    "rating": 35,
-    "legendary": false
-  },
-  {
-    "id": "marcelo-ojeda",
-    "name": "Marcelo Ojeda",
-    "fullName": "Marcelo Ojeda",
-    "birthDate": "1991-12-18",
-    "position": "GK",
-    "positions": [
-      "GK"
-    ],
-    "nationality": "Argentina",
-    "height": 175,
-    "weight": 76,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "talleres-cba",
-        "name": "Talleres",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 2,
-    "goalsNationalTeam": 0,
-    "capsClub": 200,
-    "goalsClub": 0,
-    "assistsClub": 1,
-    "trophies": [],
-    "image": "",
-    "marketValue": "8M€",
-    "activeYears": "2003-2020",
     "decade": "2000s",
     "rating": 35,
     "legendary": false
@@ -6432,39 +6267,6 @@
     "activeYears": "2003-2022",
     "decade": "2000s",
     "rating": 70,
-    "legendary": false
-  },
-  {
-    "id": "juan-carlos-olave",
-    "name": "Juan Carlos Olave",
-    "fullName": "Juan Carlos Olave",
-    "birthDate": "1986-09-15",
-    "position": "GK",
-    "positions": [
-      "GK"
-    ],
-    "nationality": "Argentina",
-    "height": 165,
-    "weight": 88,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "belgrano",
-        "name": "Belgrano",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 0,
-    "goalsNationalTeam": 0,
-    "capsClub": 250,
-    "goalsClub": 0,
-    "assistsClub": 0,
-    "trophies": [],
-    "image": "",
-    "marketValue": "10M€",
-    "activeYears": "2003-2015",
-    "decade": "2000s",
-    "rating": 35,
     "legendary": false
   },
   {
@@ -7788,39 +7590,6 @@
     "legendary": false
   },
   {
-    "id": "cristian-tarragona",
-    "name": "Cristian Tarragona",
-    "fullName": "Cristian Tarragona",
-    "birthDate": "1993-01-20",
-    "position": "LW",
-    "positions": [
-      "LW"
-    ],
-    "nationality": "Argentina",
-    "height": 167,
-    "weight": 72,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "belgrano",
-        "name": "Belgrano",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 0,
-    "goalsNationalTeam": 0,
-    "capsClub": 180,
-    "goalsClub": 18,
-    "assistsClub": 5,
-    "trophies": [],
-    "image": "",
-    "marketValue": "10M€",
-    "activeYears": "2003-2023",
-    "decade": "2000s",
-    "rating": 35,
-    "legendary": false
-  },
-  {
     "id": "angel-di-maria",
     "name": "Ángel Di María",
     "fullName": "Ángel Di María",
@@ -8118,39 +7887,6 @@
     "legendary": false
   },
   {
-    "id": "sergio-goycochea",
-    "name": "Sergio Goycochea",
-    "fullName": "Sergio Goycochea",
-    "birthDate": "1972-03-13",
-    "position": "GK",
-    "positions": [
-      "GK"
-    ],
-    "nationality": "Argentina",
-    "height": 165,
-    "weight": 77,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "racing",
-        "name": "Racing Club",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 44,
-    "goalsNationalTeam": 0,
-    "capsClub": 350,
-    "goalsClub": 0,
-    "assistsClub": 2,
-    "trophies": [],
-    "image": "",
-    "marketValue": "14M€",
-    "activeYears": "1990-2004",
-    "decade": "1990s",
-    "rating": 47,
-    "legendary": true
-  },
-  {
     "id": "alejandro-caputo",
     "name": "Alejandro Caputo",
     "fullName": "Alejandro Caputo",
@@ -8281,39 +8017,6 @@
     "decade": "2000s",
     "rating": 35,
     "legendary": false
-  },
-  {
-    "id": "rene-houseman",
-    "name": "René Houseman",
-    "fullName": "René Houseman",
-    "birthDate": "1980-08-14",
-    "position": "ST",
-    "positions": [
-      "ST"
-    ],
-    "nationality": "Argentina",
-    "height": 166,
-    "weight": 71,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "huracan",
-        "name": "Huracán",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 12,
-    "goalsNationalTeam": 4,
-    "capsClub": 300,
-    "goalsClub": 65,
-    "assistsClub": 18,
-    "trophies": [],
-    "image": "",
-    "marketValue": "25M€",
-    "activeYears": "1990-2006",
-    "decade": "1990s",
-    "rating": 49,
-    "legendary": true
   },
   {
     "id": "juan-pereira",
@@ -8514,39 +8217,6 @@
     "legendary": true
   },
   {
-    "id": "diego-maradona",
-    "name": "Diego Maradona",
-    "fullName": "Diego Maradona",
-    "birthDate": "1973-12-16",
-    "position": "LW",
-    "positions": [
-      "LW"
-    ],
-    "nationality": "Argentina",
-    "height": 191,
-    "weight": 67,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 34,
-    "goalsNationalTeam": 8,
-    "capsClub": 120,
-    "goalsClub": 65,
-    "assistsClub": 20,
-    "trophies": [],
-    "image": "",
-    "marketValue": "17M€",
-    "activeYears": "1990-2008",
-    "decade": "1990s",
-    "rating": 39,
-    "legendary": true
-  },
-  {
     "id": "gaston-diaz",
     "name": "Gastón Díaz",
     "fullName": "Gastón Díaz",
@@ -8710,39 +8380,6 @@
     "decade": "1990s",
     "rating": 56,
     "legendary": true
-  },
-  {
-    "id": "ruben-diaz",
-    "name": "Rubén Díaz",
-    "fullName": "Rubén Díaz",
-    "birthDate": "1968-11-28",
-    "position": "CM",
-    "positions": [
-      "CM"
-    ],
-    "nationality": "Argentina",
-    "height": 173,
-    "weight": 81,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "san-lorenzo",
-        "name": "San Lorenzo",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 5,
-    "goalsNationalTeam": 0,
-    "capsClub": 300,
-    "goalsClub": 25,
-    "assistsClub": 8,
-    "trophies": [],
-    "image": "",
-    "marketValue": "17M€",
-    "activeYears": "1976-1993",
-    "decade": "1980s",
-    "rating": 35,
-    "legendary": false
   },
   {
     "id": "fernando-cavenaghi",
@@ -9139,39 +8776,6 @@
     "decade": "2000s",
     "rating": 42,
     "legendary": false
-  },
-  {
-    "id": "carlos-tevez",
-    "name": "Carlos Tevez",
-    "fullName": "Carlos Tevez",
-    "birthDate": "1974-11-06",
-    "position": "ST",
-    "positions": [
-      "ST"
-    ],
-    "nationality": "Argentina",
-    "height": 190,
-    "weight": 86,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2010-2020"
-      }
-    ],
-    "capsNationalTeam": 76,
-    "goalsNationalTeam": 13,
-    "capsClub": 450,
-    "goalsClub": 125,
-    "assistsClub": 45,
-    "trophies": [],
-    "image": "",
-    "marketValue": "43M€",
-    "activeYears": "1990-2006",
-    "decade": "1990s",
-    "rating": 80,
-    "legendary": true
   },
   {
     "id": "fernando-gamboa",
