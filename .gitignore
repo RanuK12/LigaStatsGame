@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+*.log
+.DS_Store
+scripts/__pycache__
+scripts/gen.py
+scripts/gen_current.py
+scripts/generate_all.py
+scripts/generate_players.py
+scripts/players.csv
+scripts/scrape_tm.py
+.next/
+node_modules/
