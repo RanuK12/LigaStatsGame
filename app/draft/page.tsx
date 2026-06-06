@@ -59,6 +59,7 @@ function DraftInner() {
   const [simResult, setSimResult] = useState<any>(null)
   const [simIdx, setSimIdx] = useState(0)
   const [confetti, setConfetti] = useState(false)
+  const [showImage, setShowImage] = useState(false)
   const [lastResult, setLastResult] = useState<any>(null)
 
   const f = formations[fm]
@@ -98,6 +99,70 @@ function DraftInner() {
 
   const sqPlayers = currentSquad ? getSquadPlayers(currentSquad, allP).filter(p => canPlayHere(p, currentPos.pos)) : []
   const filteredPlayers = sqPlayers.filter(p => (filter === "all" || p.position === filter) && (!search || p.name.toLowerCase().includes(search.toLowerCase())))
+
+  const generateShareImage = async () => {
+    const canvas = document.createElement('canvas')
+    canvas.width = 1080; canvas.height = 1920
+    const ctx = canvas.getContext('2d')!
+    // Background
+    const bg = ctx.createLinearGradient(0, 0, 0, 1920)
+    bg.addColorStop(0, '#071422'); bg.addColorStop(0.5, '#0a1929'); bg.addColorStop(1, '#071422')
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, 1080, 1920)
+    // Header
+    ctx.fillStyle = '#75AADB'; ctx.font = 'bold 52px Space Grotesk, sans-serif'; ctx.textAlign = 'center'
+    ctx.fillText('LIGA ARGENTINA FANS', 540, 100)
+    ctx.font = '28px Inter, sans-serif'; ctx.fillStyle = '#94a3b8'
+    ctx.fillText(`${currentSquad?.label} · ${fm} · Score: ${teamScore}`, 540, 150)
+    // Pitch background
+    ctx.fillStyle = '#1a6b2a'; ctx.fillRect(80, 200, 920, 800)
+    // Pitch lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 2
+    ctx.strokeRect(80, 200, 920, 800)
+    ctx.strokeRect(360, 200, 360, 800) // center area
+    ctx.beginPath(); ctx.arc(540, 600, 50, 0, Math.PI * 2); ctx.stroke()
+    // Players on pitch
+    f.positions.forEach((pos: any, i: number) => {
+      const pl = drafted[i]; if (!pl) return
+      const x = 80 + (pos.x / 100) * 920; const y = 200 + (pos.y / 100) * 800
+      // Circle
+      ctx.beginPath(); ctx.arc(x, y, 28, 0, Math.PI * 2)
+      ctx.fillStyle = PC[pos.pos] || '#666'; ctx.fill()
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke()
+      // Initials
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 18px Inter'; ctx.textAlign = 'center'
+      const initials = pl.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()
+      ctx.fillText(initials, x, y + 6)
+      // Name below
+      ctx.font = '14px Inter'; ctx.fillStyle = '#fff'
+      ctx.fillText(pl.name.split(' ').pop() || pl.name, x, y + 48)
+      if (mode.ratingsVisible) { ctx.font = 'bold 14px Inter'; ctx.fillStyle = '#75AADB'; ctx.fillText(`${pl.rating}`, x, y + 66) }
+    })
+    // Stats section
+    let yPos = 1040
+    const bestPlayer = drafted.filter(Boolean).sort((a: any, b: any) => (b.rating || 0) - (a.rating || 0))[0]
+    const topScorer = drafted.filter(Boolean).sort((a: any, b: any) => (b.goalsClub || 0) - (a.goalsClub || 0))[0]
+    ctx.textAlign = 'center'
+    ctx.font = 'bold 32px Space Grotesk'; ctx.fillStyle = '#D4AF37'
+    ctx.fillText('🏆 MEJOR JUGADOR', 540, yPos); yPos += 45
+    if (bestPlayer) { ctx.font = 'bold 28px Inter'; ctx.fillStyle = '#fff'; ctx.fillText(`${bestPlayer.name} (${bestPlayer.rating})`, 540, yPos); yPos += 55 }
+    ctx.font = 'bold 32px Space Grotesk'; ctx.fillStyle = '#D4AF37'
+    ctx.fillText('⚽ GOLEADOR', 540, yPos); yPos += 45
+    if (topScorer) { ctx.font = 'bold 28px Inter'; ctx.fillStyle = '#fff'; ctx.fillText(`${topScorer.name} — ${topScorer.goalsClub} goles`, 540, yPos); yPos += 55 }
+    // Team score
+    ctx.font = 'bold 60px Space Grotesk'; ctx.fillStyle = '#75AADB'
+    ctx.fillText(`${teamScore}`, 540, yPos + 60); yPos += 90
+    ctx.font = '24px Inter'; ctx.fillStyle = '#94a3b8'
+    ctx.fillText('RATING DEL EQUIPO', 540, yPos + 20)
+    // Footer
+    ctx.font = '20px Inter'; ctx.fillStyle = '#475569'
+    ctx.fillText('Liga Argentina Fans · ranuk12.github.io/LigaStatsGame', 540, 1880)
+    // Download
+    const link = document.createElement('a')
+    link.download = `liga-argentina-fans-${currentSquad?.clubId}.png`
+    link.href = canvas.toDataURL('image/png')
+    link.click()
+  }
+
   if (!started) {
     return (
       <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
@@ -152,18 +217,34 @@ function DraftInner() {
 
         {/* SPIN PHASE */}
         {phase === "spin" && (
-          <motion.div initial={{opacity:0}} animate={{opacity:1}} className="text-center py-16">
-            <div className="relative w-48 h-48 mx-auto mb-8">
-              <div className={`w-full h-full rounded-full border-4 border-[#75AADB] bg-gradient-to-br from-[#0d2137] to-[#132d46] flex items-center justify-center ${spinning ? "animate-spin" : ""}`} style={{animationDuration: spinning ? "0.8s" : "0s"}}>
-                <div className="text-center">
-                  <div className="text-4xl mb-1">🎰</div>
-                  <div className="text-xs text-slate-400">{spinning ? "..." : "Ruleta"}</div>
+          <motion.div initial={{opacity:0}} animate={{opacity:1}} className="text-center py-12">
+            <p className="text-sm text-slate-500 mb-2">Posición: <span style={{color:PC[currentPos?.pos]}}>{currentPos?.label}</span></p>
+            <div className="relative w-64 h-64 mx-auto mb-6">
+              {/* Roulette wheel with club badges */}
+              <div className={`w-full h-full rounded-full border-4 border-[#75AADB] bg-gradient-to-br from-[#0d2137] to-[#132d46] overflow-hidden ${spinning ? "animate-spin" : ""}`} style={{animationDuration: spinning ? "0.6s" : "0s"}}>
+                <div className="w-full h-full grid grid-cols-4 grid-rows-4 gap-0">
+                  {Array.from({length:16}).map((_,i) => {
+                    const clubs = allC.filter(c => allS.some(s => s.clubId === c.id))
+                    const club = clubs[i % clubs.length]
+                    return (
+                      <div key={i} className="flex items-center justify-center p-0.5" style={{background: `linear-gradient(135deg, ${club?.colors?.[0] || '#333'}22, ${club?.colors?.[1] || club?.colors?.[0] || '#333'}33)`}}>
+                        <img src={`/logos/clubs/${club?.id}.svg`} alt="" className="w-8 h-8 object-contain drop-shadow-sm" onError={(e)=>{(e.target as HTMLImageElement).style.display="none"}} />
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
-              {spinning && <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[18px] border-l-transparent border-r-transparent border-t-[#75AADB] z-10" />}
+              {/* Pointer */}
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[18px] border-l-transparent border-r-transparent border-t-[#D4AF37] z-10 drop-shadow-lg" />
+              {/* Center badge */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-16 h-16 rounded-full bg-[#0d2137] border-2 border-[#75AADB] flex items-center justify-center shadow-xl">
+                  <span className="text-2xl">⚽</span>
+                </div>
+              </div>
             </div>
-            <p className="text-slate-400 text-lg">{spinning ? "🎰 Girando la ruleta..." : "Preparando..."}</p>
-            <p className="text-sm text-slate-600 mt-2">Posición: <span style={{color:PC[currentPos?.pos]}}>{currentPos?.label}</span></p>
+            <p className="text-[#75AADB] text-lg font-semibold">{spinning ? "🎰 Girando la ruleta..." : "Preparando..."}</p>
+            {spinning && <p className="text-xs text-slate-600 mt-1">Buscando equipo y año...</p>}
           </motion.div>
         )}
         {/* PICK PHASE */}
@@ -231,6 +312,7 @@ function DraftInner() {
             <div className="mb-8"><Pitch f={f} draft={drafted} highlight={-1} cMap={cMap} /></div>
             <div className="flex gap-3 justify-center flex-wrap mb-6">
               <button onClick={startSim} className="btn-primary text-base px-8 py-3">🏆 Simular Torneo</button>
+              <button onClick={generateShareImage} className="px-6 py-3 rounded-xl font-bold text-base bg-gradient-to-r from-[#D4AF37] to-[#B8960C] text-white shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">📸 Generar Imagen</button>
               <button onClick={() => { setDrafted(Array(totalSlots).fill(null)); setCurrentPosIdx(0); setWildcards(3); setPhase("start") }} className="btn-secondary text-sm">🔄 Empezar de Nuevo</button>
             </div>
             <Link href="/" className="text-sm text-slate-500 hover:text-slate-300">← Volver al inicio</Link>
@@ -306,6 +388,7 @@ function DraftInner() {
                         <div className="text-sm text-slate-400 mt-1">Tu posición: {simResult.playerPos}°</div>
                       </div>
                       <button onClick={() => { setPhase("done"); setSimResult(null) }} className="btn-secondary">← Volver al 11</button>
+                      <button onClick={generateShareImage} className="px-6 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-[#D4AF37] to-[#B8960C] text-white shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-200">📸 Generar Imagen</button>
                     </div>
                   )}
                 </div>
