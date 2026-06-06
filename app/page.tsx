@@ -1,43 +1,22 @@
 "use client"
-
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import clubsData from '@/data/clubs.json'
-import playersData from '@/data/players.json'
-import { Club, GameMode } from '@/lib/types'
-
-const MODES: { id: GameMode; name: string; desc: string; icon: string; href: string; color: string }[] = [
-  { id: 'legend-draft', name: 'Leyendas Draft', desc: 'Armá tu 11 ideal con jugadores históricos', icon: '⚽', href: '/draft', color: 'from-blue-600 to-cyan-500' },
-  { id: 'memory', name: 'Ruleta del Fútbol', desc: 'Girá la ruleta y descubrí una leyenda', icon: '🎰', href: '/ruleta', color: 'from-rose-600 to-orange-500' },
-  { id: 'records', name: 'Leaderboard', desc: 'Compará tu puntaje con otros jugadores', icon: '🏆', href: '/leaderboard', color: 'from-yellow-600 to-amber-500' },
+import squadsData from '@/data/squads.json'
+import { Club, Squad } from '@/lib/types'
+const MODES = [
+  { id:'clasico', name:'Clásico', desc:'Ratings visibles, armá el 11 ideal', icon:'⚽', href:'/draft?mode=clasico', color:'from-blue-600 to-cyan-500' },
+  { id:'almanaque', name:'El Almanaque', desc:'Ratings ocultos, gana la memoria', icon:'🧠', href:'/draft?mode=almanaque', color:'from-amber-600 to-orange-500' },
+  { id:'liga', name:'Liga', desc:'Tu 11 juega 38 fechas', icon:'🏆', href:'/draft?mode=liga', color:'from-green-600 to-emerald-500' },
+  { id:'reto-dia', name:'Reto del Día', desc:'Combinación fija, compartí tu score', icon:'🎯', href:'/draft?mode=reto-dia', color:'from-rose-600 to-pink-500' },
+  { id:'ruleta', name:'Ruleta', desc:'Girá y descubrí una leyenda', icon:'🎰', href:'/ruleta', color:'from-purple-600 to-violet-500' },
 ]
-
-function ClubCard({ club, selected, onClick }: { club: Club; selected: boolean; onClick: () => void }) {
-  const count = playersData.filter((p: any) => p.clubs?.some((c: any) => c.id === club.id)).length
-  return (
-    <motion.button onClick={onClick} whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}
-      className={`relative overflow-hidden rounded-xl p-4 text-left transition-all duration-200 ${selected ? 'ring-2 ring-blue-500 bg-blue-500/15' : 'card-gradient card-hover'}`}>
-      <div className="flex items-center gap-3">
-        <div className="w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold shrink-0 shadow-md"
-          style={{ background: club.colors?.[0] || '#334155', color: club.colors?.[1] || '#fff' }}>
-          {club.shortName?.slice(0, 2).toUpperCase()}
-        </div>
-        <div className="min-w-0">
-          <div className="font-semibold text-sm truncate">{club.name}</div>
-          <div className="text-xs text-slate-400 mt-0.5">{count} leyendas</div>
-        </div>
-      </div>
-      {selected && <motion.div layoutId="club-check" className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center"><span className="text-white text-xs">✓</span></motion.div>}
-    </motion.button>
-  )
-}
-
 export default function HomePage() {
-  const [selectedClub, setSelectedClub] = useState<Club | null>(null)
-  const [selectedMode, setSelectedMode] = useState<string | null>(null)
   const clubs = clubsData as Club[]
-
+  const squads = squadsData as Squad[]
+  const sByClub = new Map<string, number>()
+  squads.forEach(s => sByClub.set(s.clubId, (sByClub.get(s.clubId) || 0) + 1))
   return (
     <div className="gradient-bg">
       <header className="pt-16 pb-10 px-4 text-center relative overflow-hidden">
@@ -45,58 +24,55 @@ export default function HomePage() {
           <div className="absolute top-20 left-1/4 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
           <div className="absolute top-10 right-1/4 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl" />
         </div>
-        <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight font-display">
-            <span className="gradient-text">LigaStatsGame</span>
-          </h1>
-          <p className="mt-4 text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">
-            El draft del fútbol argentino. Arma tu 11 de leyendas y convertite en campeón.
-          </p>
+        <motion.div initial={{opacity:0,y:-30}} animate={{opacity:1,y:0}} transition={{duration:0.6}} className="relative">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight font-display"><span className="gradient-text">LigaStatsGame</span></h1>
+          <p className="mt-4 text-lg text-slate-400 max-w-xl mx-auto leading-relaxed">Armá tu 11 de la historia. Elegí un plantel por año, elegí jugadores reales, simulá la temporada.</p>
           <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-500">
-            <div className="flex items-center gap-2"><div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /><span><strong className="text-slate-300">{clubs.length}</strong> clubes</span></div>
-            <div className="flex items-center gap-2"><div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" /><span><strong className="text-slate-300">{playersData.length}</strong> jugadores</span></div>
+            <div className="flex items-center gap-2"><div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /><span><strong className="text-slate-300">{squads.length}</strong> plantels</span></div>
+            <div className="flex items-center gap-2"><div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" /><span><strong className="text-slate-300">{clubs.length}</strong> clubes + selección</span></div>
           </div>
         </motion.div>
       </header>
-
       <main className="max-w-5xl mx-auto px-4 pb-20 space-y-12">
-        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-          <h2 className="text-xl font-bold mb-5 font-display flex items-center gap-2">🎮 Modo de juego</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <motion.section initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.2}}>
+          <h2 className="text-xl font-bold mb-5 font-display">🎮 Modos de Juego</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {MODES.map(mode => (
-              <motion.div key={mode.id} whileHover={{ scale: 1.02, y: -3 }} whileTap={{ scale: 0.98 }}
-                onClick={() => setSelectedMode(mode.href)}
-                className={`card-gradient rounded-xl p-6 cursor-pointer transition-all duration-200 ${selectedMode === mode.href ? 'ring-2 ring-blue-500 bg-blue-500/10' : ''}`}>
-                <div className="text-4xl mb-3">{mode.icon}</div>
-                <h3 className="font-bold text-lg font-display">{mode.name}</h3>
-                <p className="text-sm text-slate-400 mt-2 leading-relaxed">{mode.desc}</p>
-                <div className={`mt-4 h-1 w-12 rounded-full bg-gradient-to-r ${mode.color}`} />
-              </motion.div>
+              <Link key={mode.id} href={mode.href}>
+                <motion.div whileHover={{scale:1.02,y:-3}} whileTap={{scale:0.98}} className="card-gradient rounded-xl p-5 cursor-pointer transition-all duration-200 card-hover h-full">
+                  <div className="text-3xl mb-2">{mode.icon}</div>
+                  <h3 className="font-bold text-base font-display">{mode.name}</h3>
+                  <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">{mode.desc}</p>
+                  <div className={`mt-3 h-1 w-10 rounded-full bg-gradient-to-r ${mode.color}`} />
+                </motion.div>
+              </Link>
             ))}
           </div>
         </motion.section>
-
-        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-          <h2 className="text-xl font-bold mb-5 font-display flex items-center gap-2">⚽ Elegí tu club</h2>
+        <motion.section initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:0.3}}>
+          <h2 className="text-xl font-bold mb-5 font-display">⚽ Clubes y Selecciones</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {clubs.map(club => <ClubCard key={club.id} club={club} selected={selectedClub?.id === club.id} onClick={() => setSelectedClub(club)} />)}
+            {clubs.map(club => (
+              <Link key={club.id} href={`/draft?mode=clasico&club=${club.id}`}>
+                <motion.div whileHover={{scale:1.03,y:-2}} whileTap={{scale:0.97}} className="card-gradient rounded-xl p-4 cursor-pointer card-hover">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 shadow-md"
+                      style={{background:club.colors?.[0]||'#334155',color:club.colors?.[1]||'#fff'}}>
+                      {club.shortName?.slice(0,2).toUpperCase()}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-sm truncate">{club.name}</div>
+                      <div className="text-xs text-slate-400">{sByClub.get(club.id)||0} plantels</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
           </div>
         </motion.section>
-
-        <AnimatePresence>
-          {selectedClub && selectedMode && (
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className="text-center pt-4">
-              <Link href={`${selectedMode}?club=${selectedClub.id}`}>
-                <button className="btn-primary text-xl px-12 py-4">🚀 ¡Empezar a jugar!</button>
-              </Link>
-              <p className="mt-4 text-sm text-slate-500">{selectedClub.name} • {selectedMode === '/draft' ? 'Leyendas Draft' : selectedMode === '/ruleta' ? 'Ruleta' : 'Leaderboard'}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </main>
-
       <footer className="text-center py-8 text-xs text-slate-600 border-t border-slate-800/50">
-        LigaStatsGame © 2026 — Hecho con ⚽ por Ranuk
+        LigaStatsGame © 2026 — Hecho con ⚽ por Ranuk · {squads.length} plantels · {clubs.length} clubes
       </footer>
     </div>
   )
