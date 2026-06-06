@@ -41,7 +41,7 @@ function DraftInner() {
   const dk = (p: Player) => { if (sl === null) return; const d = [...dr]; d[sl] = p; setDr(d); const nx = d.findIndex((x, i) => i > sl && x === null); setSl(nx !== -1 ? nx : d.findIndex(x => x === null)) }
   const rm = (i: number) => { const d = [...dr]; d[i] = null; setDr(d); setSl(i) }
   const rst = () => { setDr(Array(tot).fill(null)); setSl(0); setRes(false); setSn(null) }
-  const sim = () => { const tp = dr.filter(Boolean) as Player[]; const op = allS.filter(s => s.id !== sq?.id && s.playerIds.length >= 11).slice(0, 38).map(s => getSquadPlayers(s, allP).slice(0, 11)); setSn(simulateSeason(tp, op)); setRes(true) }
+  const sim = () => { const tp = dr.filter(Boolean) as Player[]; setSn(simulateSeason(tp, sq!, allS, allP)); setRes(true) }
   const doSh = () => { navigator.clipboard?.writeText(generateShareText(sq!, sc, fm)); setSh(true); setTimeout(() => setSh(false), 2000) }
   if (!on) return (
     <div className="min-h-screen gradient-bg py-6 px-4">

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" width="120" height="140">
+  <defs><linearGradient id="afa-bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#75AADB"/><stop offset="50%" stop-color="#FFFFFF"/>
+    <stop offset="50%" stop-color="#75AADB"/><stop offset="100%" stop-color="#FFFFFF"/>
+  </linearGradient></defs>
+  <path d="M60 5 L110 30 L110 90 Q110 130 60 138 Q10 130 10 90 L10 30 Z" fill="url(#afa-bg)" stroke="#1a1a2e" stroke-width="3"/>
+  <path d="M60 5 L110 30 L110 90 Q110 130 60 138 Q10 130 10 90 L10 30 Z" fill="none" stroke="#FEDD00" stroke-width="2"/>
+  <text x="60" y="85" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="bold" fill="#1a1a2e">AFA</text>
+</svg>
