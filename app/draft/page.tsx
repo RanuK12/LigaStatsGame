@@ -701,7 +701,7 @@ function DraftInner() {
             {/* Team info card */}
             <div className="card-gradient rounded-xl p-4 mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <img src={`/LigaStatsGame/logos/clubs/${currentSquad.clubId}.svg`} alt=""
+                <img src={`/LigaStatsGame/logos/clubs/${currentSquad.clubId}.png`} alt=""
                   className="w-12 h-12 rounded-lg object-contain"
                   onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
                 <div>

@@ -264,7 +264,7 @@ export default function HomePage() {
               <div className="card-gradient rounded-xl p-3 flex flex-col items-center justify-center aspect-square cursor-pointer group transition-all duration-300 hover:border-[#75AADB]/30">
                 <div className="relative w-12 h-12 sm:w-14 sm:h-14 mb-2">
                   <Image
-                    src={`/LigaStatsGame/logos/clubs/${club.id}.svg`}
+                    src={`/LigaStatsGame/logos/clubs/${club.id}.png`}
                     alt={club.name}
                     fill
                     className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"

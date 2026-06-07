@@ -12,3 +12,4 @@ scripts/players.csv
 scripts/scrape_tm.py
 .next/
 node_modules/
+app/draft/page.tsx.bak
