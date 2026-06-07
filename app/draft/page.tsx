@@ -340,16 +340,25 @@ function DraftInner() {
   // ═══════════════════════════════════════════════════════════
   const startSim = useCallback((type: 'liga' | 'copa') => {
     const players = drafted.filter(Boolean) as Player[]
-    if (players.length < 11 || !currentSquad) return
+    if (players.length < 11) return
+    // Create a virtual "Mi 11" squad since players come from different teams
+    const virtualSquad: Squad = {
+      id: 'mi-11-fantasy',
+      clubId: 'mi-11',
+      season: '2026',
+      competition: 'Liga Profesional',
+      label: 'Mi 11 Fantasy',
+      playerIds: players.map(p => p.id),
+    }
     if (type === 'liga') {
-      const r = simulateSeasonMatchByMatch(players, currentSquad, allS, allP, f)
+      const r = simulateSeasonMatchByMatch(players, virtualSquad, allS, allP, f)
       setSimResult({ type: 'liga', ...r })
     } else {
-      const r = simulateCopaArgentinaMatchByMatch(players, currentSquad, allS, allP, f)
+      const r = simulateCopaArgentinaMatchByMatch(players, virtualSquad, allS, allP, f)
       setSimResult({ type: 'copa', ...r })
     }
     setPhase("sim")
-  }, [drafted, currentSquad, allS, allP, f])
+  }, [drafted, allS, allP, f])
 
   // ═══════════════════════════════════════════════════════════
   //  PLAYER LIST FOR PICKER (key fix!)
@@ -480,7 +489,7 @@ function DraftInner() {
                     </thead>
                     <tbody>
                       {simResult.table.map((t: any, i: number) => {
-                        const isPlayer = t.name === currentSquad?.label
+                        const isPlayer = t.name === "Mi 11 Fantasy"
                         return (
                           <tr key={i} className={`border-b border-slate-800 ${
                             isPlayer ? "bg-[#75AADB]/10 font-semibold" : ""
@@ -525,7 +534,7 @@ function DraftInner() {
                     <h3 className="text-sm font-bold text-slate-400 mb-2">{round.round}</h3>
                     <div className="space-y-1">
                       {round.matches.map((m: any, mi: number) => {
-                        const isPlayer = m.home === currentSquad?.label || m.away === currentSquad?.label
+                        const isPlayer = m.home === "Mi 11 Fantasy" || m.away === "Mi 11 Fantasy"
                         return (
                           <div key={mi} className={`flex items-center justify-between text-xs px-2 py-1 rounded ${
                             isPlayer ? "bg-[#75AADB]/10" : ""
