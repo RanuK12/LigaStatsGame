@@ -200,6 +200,7 @@ function DraftInner() {
   const [fm, setFm] = useState<string>("4-3-3")
   const [phase, setPhase] = useState<Phase>("start")
   const [drafted, setDrafted] = useState<(Player | null)[]>([])
+  const [draftedIds, setDraftedIds] = useState<Set<string>>(new Set())
   const [activeSlotIdx, setActiveSlotIdx] = useState(0)
   const [currentSquad, setCurrentSquad] = useState<Squad | null>(null)
   const [spinning, setSpinning] = useState(false)
@@ -231,6 +232,7 @@ function DraftInner() {
   const startGame = useCallback(() => {
     const empty = new Array(totalSlots).fill(null)
     setDrafted(empty)
+    setDraftedIds(new Set())
     draftedRef.current = empty
     setActiveSlotIdx(0)
     setCurrentSquad(null)
@@ -273,67 +275,94 @@ function DraftInner() {
   }, [wildcards, spinWheel])
 
   // ═══════════════════════════════════════════════════════════
-  //  PICK PLAYER
+  //  PICK PLAYER (ONE per spin — then back to ready)
   // ═══════════════════════════════════════════════════════════
   const pickPlayer = useCallback((player: Player, slotIdx: number) => {
+    // Block if player already drafted (safety check)
+    if (draftedIds.has(player.id)) return
+
     setDrafted(prev => {
       const nd = [...prev]
       nd[slotIdx] = player
       draftedRef.current = nd
-
-      // Find next empty after a tick
-      setTimeout(() => {
-        let nextIdx = slotIdx + 1
-        while (nextIdx < nd.length && nd[nextIdx] !== null) nextIdx++
-
-        if (nextIdx < nd.length) {
-          // More positions to fill → back to ready
-          setActiveSlotIdx(nextIdx)
-          setCurrentSquad(null)
-          setPhase("ready")
-          setSearch("")
-        } else {
-          // All 11 filled!
-          setConfetti(true)
-          setTimeout(() => setConfetti(false), 4000)
-          setPhase("done")
-        }
-      }, 150)
-
       return nd
     })
-  }, [])
+    setDraftedIds(prev => new Set(prev).add(player.id))
+
+    // Find next empty slot
+    const newDrafted = [...drafted]
+    newDrafted[slotIdx] = player
+    let nextIdx = slotIdx + 1
+    while (nextIdx < newDrafted.length && newDrafted[nextIdx] !== null) nextIdx++
+
+    if (nextIdx < newDrafted.length) {
+      // More positions → force back to READY (must spin again)
+      setTimeout(() => {
+        setActiveSlotIdx(nextIdx)
+        setCurrentSquad(null)
+        setPhase("ready")
+        setSearch("")
+      }, 300)
+    } else {
+      // All 11 filled!
+      setTimeout(() => {
+        setConfetti(true)
+        setTimeout(() => setConfetti(false), 4000)
+        setPhase("done")
+      }, 300)
+    }
+  }, [drafted, draftedIds])
 
   // ═══════════════════════════════════════════════════════════
   //  SLOT CLICK (on pitch)
   // ═══════════════════════════════════════════════════════════
   const handleSlotClick = useCallback((idx: number) => {
     if (phase === "done") {
-      // Swap: go back to ready for this slot
+      // Clicking a slot in done phase → replace that player
+      // Remove the old player from draftedIds
+      const oldPlayer = drafted[idx]
+      if (oldPlayer) {
+        setDraftedIds(prev => {
+          const next = new Set(prev)
+          next.delete(oldPlayer.id)
+          return next
+        })
+      }
+      // Clear the slot
+      setDrafted(prev => {
+        const nd = [...prev]; nd[idx] = null; return nd
+      })
       setActiveSlotIdx(idx)
       setCurrentSquad(null)
       setSearch("")
       setPhase("ready")
-    } else if (phase === "picking") {
-      // Change which slot to fill (still viewing same squad)
-      setActiveSlotIdx(idx)
-      setSearch("")
-    } else if (phase === "ready") {
+    }
+    // During "picking" → DO NOT allow switching slots (forces one pick per spin)
+    // During "ready" → can click to change which slot to fill next spin
+    else if (phase === "ready") {
       setActiveSlotIdx(idx)
     }
-  }, [phase])
+  }, [phase, drafted])
 
   // ═══════════════════════════════════════════════════════════
   //  REMOVE PLAYER (done phase)
   // ═══════════════════════════════════════════════════════════
   const removePlayer = useCallback((idx: number) => {
+    const oldPlayer = drafted[idx]
+    if (oldPlayer) {
+      setDraftedIds(prev => {
+        const next = new Set(prev)
+        next.delete(oldPlayer.id)
+        return next
+      })
+    }
     setDrafted(prev => {
       const nd = [...prev]; nd[idx] = null; return nd
     })
     setActiveSlotIdx(idx)
     setCurrentSquad(null)
     setPhase("ready")
-  }, [])
+  }, [drafted])
 
   // ═══════════════════════════════════════════════════════════
   //  SIMULATION
@@ -361,13 +390,17 @@ function DraftInner() {
   }, [drafted, allS, allP, f])
 
   // ═══════════════════════════════════════════════════════════
-  //  PLAYER LIST FOR PICKER (key fix!)
+  //  PLAYER LIST FOR PICKER (no repeats, one per spin!)
   // ═══════════════════════════════════════════════════════════
   const pickerPlayers = useMemo(() => {
     if (!currentSquad) return []
     const targetPos = f.positions[activeSlotIdx]?.pos || "CM"
     const squadPlayers = getSquadPlayers(currentSquad, allP)
-    const enriched: EnrichedPlayer[] = squadPlayers.map(p => ({
+
+    // FILTER OUT already-drafted players — NO REPEATS ALLOWED
+    const available = squadPlayers.filter(p => !draftedIds.has(p.id))
+
+    const enriched: EnrichedPlayer[] = available.map(p => ({
       ...p,
       isCompatible: canPlayHere(p, targetPos),
     }))
@@ -376,11 +409,11 @@ function DraftInner() {
       if (a.isCompatible !== b.isCompatible) return a.isCompatible ? -1 : 1
       return (b.rating || 0) - (a.rating || 0)
     })
-    // Filter by search only (NOT by position!)
+    // Filter by search only
     return enriched.filter(p =>
       !search || p.name.toLowerCase().includes(search.toLowerCase())
     )
-  }, [currentSquad, allP, f, activeSlotIdx, search])
+  }, [currentSquad, allP, f, activeSlotIdx, search, draftedIds])
 
   const compatibleCount = pickerPlayers.filter(p => p.isCompatible).length
 
@@ -391,6 +424,7 @@ function DraftInner() {
     setStarted(false)
     setPhase("start")
     setDrafted([])
+    setDraftedIds(new Set())
     setCurrentSquad(null)
     setSimResult(null)
     setActiveSlotIdx(0)
@@ -620,7 +654,7 @@ function DraftInner() {
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <div className="card-gradient rounded-xl p-4 mb-4 text-center">
               <div className="text-sm text-slate-400 mb-1">
-                Posición a completar:
+                Posición {filledCount + 1} de {totalSlots}:
               </div>
               <div className="flex items-center justify-center gap-2">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
@@ -642,7 +676,7 @@ function DraftInner() {
                 🎲 ¡Girar Ruleta!
               </button>
               <p className="text-xs text-slate-500 mt-2">
-                Tocá cualquier posición en la cancha para cambiarla
+                Elegí 1 posición en la cancha o girá para la siguiente
               </p>
             </div>
           </motion.div>
@@ -651,7 +685,12 @@ function DraftInner() {
         {/* ═══ PHASE: SPINNING ═══ */}
         {phase === "spinning" && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
-            <p className="text-slate-400 mb-4 text-sm">🎰 Girando la ruleta para <strong className="text-white">{POS_LABELS[currentPos.pos]}</strong>...</p>
+            <p className="text-slate-400 mb-4 text-sm">🎰 Girando la ruleta para{" "}
+              <strong style={{ color: getPC(currentPos.pos) }}>
+                {POS_LABELS[currentPos.pos]}
+              </strong>
+              {" "}({filledCount + 1}/{totalSlots})
+            </p>
             <RouletteWheel squads={allS} spinning={true} result={null} />
           </motion.div>
         )}
@@ -691,13 +730,14 @@ function DraftInner() {
             <div className="card-gradient rounded-xl p-4 border border-slate-700">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-display font-bold text-sm">
-                  Elegí un{" "}
+                  ⚡ Elegí{" "}
                   <span style={{ color: getPC(currentPos.pos) }}>
                     {POS_LABELS[currentPos.pos] || currentPos.pos}
                   </span>
+                  {" "}— 1 solo jugador
                 </h3>
                 <span className="text-xs text-slate-500">
-                  {compatibleCount} opciones
+                  {pickerPlayers.length} disp. · {filledCount}/{totalSlots}
                 </span>
               </div>
 
@@ -710,7 +750,9 @@ function DraftInner() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[40vh] overflow-y-auto pr-1">
                 {pickerPlayers.length === 0 && (
                   <p className="text-slate-500 text-sm text-center col-span-2 py-4">
-                    Sin jugadores para esta posición. Usá un comodín para re-sortear.
+                    {draftedIds.size > 0 && currentSquad
+                      ? "🔄 Todos los jugadores de este plantel ya fueron elegidos. Girá de nuevo."
+                      : "Sin jugadores para esta posición. Usá 🔄 Re-sortear."}
                   </p>
                 )}
                 {pickerPlayers.map(player => (
@@ -722,8 +764,8 @@ function DraftInner() {
               {pickerPlayers.length > 0 && (
                 <p className="text-xs text-slate-500 text-center mt-2">
                   {compatibleCount > 0
-                    ? `${compatibleCount} compatible${compatibleCount !== 1 ? "s" : ""} arriba, el resto en gris`
-                    : "Ninguno compatible — re-sortear con comodín"}
+                    ? `✅ ${compatibleCount} compatible${compatibleCount !== 1 ? "s" : ""} — elegí uno y girá de nuevo`
+                    : "⚠️ Ninguno compatible — usá 🔄 Re-sortear"}
                 </p>
               )}
             </div>
