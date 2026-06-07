@@ -557,6 +557,32 @@ function DraftInner() {
           </motion.div>
         )}
 
+        {/* ── Need to spin for next position ── */}
+        {phase === "picking" && !currentSquad && !spinning && (
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center">
+            {/* Pitch still visible */}
+            <div className="mb-6">
+              <Pitch f={f} draft={drafted} highlight={-1} onSlotClick={() => {}} showRatings={mode.ratingsVisible} slotAvail={slotAvailability} activeSlot={currentPosIdx} />
+            </div>
+            <div className="card-gradient rounded-2xl p-8">
+              <p className="text-slate-300 mb-2">Posición a completar:</p>
+              <div className="flex items-center justify-center gap-2 mb-6">
+                <span className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ backgroundColor: PC[currentPos?.pos] }}>
+                  {POS_LABELS[currentPos?.pos]}
+                </span>
+                <span className="font-display font-bold text-xl">{currentPos?.label}</span>
+              </div>
+              <button onClick={spinWheel}
+                className="px-10 py-4 bg-gradient-to-r from-rose-600 to-orange-600 rounded-xl font-bold text-lg shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]">
+                🎰 ¡Girar Ruleta!
+              </button>
+              {filledCount > 0 && (
+                <p className="text-xs text-slate-500 mt-4">{filledCount}/11 armados — te faltan {totalSlots - filledCount}</p>
+              )}
+            </div>
+          </motion.div>
+        )}
+
         {/* ── Team Result after spin ── */}
         {phase === "picking" && currentSquad && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
