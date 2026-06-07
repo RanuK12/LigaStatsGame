@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head>
-        <link rel="icon" href="/logos/afa/afa.svg" />
+        <link rel="icon" href="/logos/afa.png" />
       </head>
       <body className="bg-[#071422] text-white min-h-screen antialiased">
         {children}

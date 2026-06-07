@@ -277,7 +277,7 @@ function DraftInner() {
     return (
       <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg w-full text-center">
-          <img src="/LigaStatsGame/logos/afa/afa.svg" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
+          <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
           <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">Liga Argentina Fans</h1>
           <p className="text-slate-400 mb-6">{mode.icon} {mode.name}</p>
           <div className="card-gradient rounded-2xl p-6 mb-6">
@@ -352,7 +352,7 @@ function DraftInner() {
                 <span className="text-slate-300 text-sm">{currentPos?.label}</span>
               </div>
               <div className="flex items-center justify-center gap-3 mb-2">
-                <img src={`/LigaStatsGame/logos/clubs/${currentSquad.clubId}.svg`} alt="" className="w-10 h-10 rounded-lg" onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
+                <img src={`/LigaStatsGame/img/${currentSquad.clubId}-128.png`} alt="" className="w-10 h-10 rounded-lg object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = "none" }} />
                 <div className="text-left">
                   <div className="font-display font-bold text-lg">{currentSquad.label}</div>
                   <div className="text-xs text-slate-400">{currentSquad.playerIds.length} jugadores en plantel</div>
