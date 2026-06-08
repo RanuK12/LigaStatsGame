@@ -281,17 +281,15 @@ function DraftInner() {
     // Block if player already drafted (safety check)
     if (draftedIds.has(player.id)) return
 
-    setDrafted(prev => {
-      const nd = [...prev]
-      nd[slotIdx] = player
-      draftedRef.current = nd
-      return nd
-    })
-    setDraftedIds(prev => new Set(prev).add(player.id))
-
-    // Find next empty slot
+    // Compute the new board locally to avoid stale closure
     const newDrafted = [...drafted]
     newDrafted[slotIdx] = player
+
+    setDrafted(newDrafted)
+    draftedRef.current = newDrafted
+    setDraftedIds(prev => new Set(prev).add(player.id))
+
+    // Find next empty slot from the LOCAL new board (not stale state)
     let nextIdx = slotIdx + 1
     while (nextIdx < newDrafted.length && newDrafted[nextIdx] !== null) nextIdx++
 

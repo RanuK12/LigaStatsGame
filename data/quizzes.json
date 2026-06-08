@@ -1,0 +1,205 @@
+[
+  {
+    "id": "whois-maradona-diego-1960",
+    "type": "whois",
+    "question": "¿Quién es este jugador argentino de la década de 1980s?",
+    "image": "https://www.bdfa.com.ar/fotos/diego-maradona.jpg",
+    "options": [
+      {
+        "name": "Diego Armando Maradona",
+        "correct": true,
+        "stats": {
+          "caps": 91,
+          "goals": 34
+        }
+      },
+      {
+        "name": "Lionel Messi",
+        "correct": false,
+        "stats": {
+          "caps": 180,
+          "goals": 106
+        }
+      },
+      {
+        "name": "Diego Maradona",
+        "correct": false,
+        "stats": {
+          "caps": 91,
+          "goals": 34
+        }
+      },
+      {
+        "name": "Gabriel Batistuta",
+        "correct": false,
+        "stats": {
+          "caps": 78,
+          "goals": 56
+        }
+      }
+    ],
+    "difficulty": "medium",
+    "decade": "1980s",
+    "tags": [
+      "leyenda",
+      "selección",
+      "histórico"
+    ]
+  },
+  {
+    "id": "whois-messi-lionel-1987",
+    "type": "whois",
+    "question": "¿Quién es este jugador argentino de la década de 2020s?",
+    "image": "https://www.bdfa.com.ar/fotos/lionel-messi.jpg",
+    "options": [
+      {
+        "name": "Lionel Messi",
+        "correct": true,
+        "stats": {
+          "caps": 180,
+          "goals": 106
+        }
+      },
+      {
+        "name": "Lionel Messi",
+        "correct": false,
+        "stats": {
+          "caps": 180,
+          "goals": 106
+        }
+      },
+      {
+        "name": "Diego Maradona",
+        "correct": false,
+        "stats": {
+          "caps": 91,
+          "goals": 34
+        }
+      },
+      {
+        "name": "Gabriel Batistuta",
+        "correct": false,
+        "stats": {
+          "caps": 78,
+          "goals": 56
+        }
+      }
+    ],
+    "difficulty": "medium",
+    "decade": "2020s",
+    "tags": [
+      "leyenda",
+      "selección",
+      "histórico"
+    ]
+  },
+  {
+    "id": "whois-batistuta-gabriel-1969",
+    "type": "whois",
+    "question": "¿Quién es este jugador argentino de la década de 1990s?",
+    "image": "https://www.bdfa.com.ar/fotos/gabriel-batistuta.jpg",
+    "options": [
+      {
+        "name": "Gabriel Batistuta",
+        "correct": true,
+        "stats": {
+          "caps": 78,
+          "goals": 56
+        }
+      },
+      {
+        "name": "Lionel Messi",
+        "correct": false,
+        "stats": {
+          "caps": 180,
+          "goals": 106
+        }
+      },
+      {
+        "name": "Diego Maradona",
+        "correct": false,
+        "stats": {
+          "caps": 91,
+          "goals": 34
+        }
+      },
+      {
+        "name": "Gabriel Batistuta",
+        "correct": false,
+        "stats": {
+          "caps": 78,
+          "goals": 56
+        }
+      }
+    ],
+    "difficulty": "medium",
+    "decade": "1990s",
+    "tags": [
+      "leyenda",
+      "selección",
+      "histórico"
+    ]
+  },
+  {
+    "id": "memory-1",
+    "type": "memory",
+    "question": "¿Quién tiene más goles en la selección argentina?",
+    "options": [
+      {
+        "name": "Lionel Messi",
+        "correct": true,
+        "points": 106
+      },
+      {
+        "name": "Diego Maradona",
+        "correct": false,
+        "points": 34
+      },
+      {
+        "name": "Gabriel Batistuta",
+        "correct": false,
+        "points": 56
+      },
+      {
+        "name": "Sergio Agüero",
+        "correct": false,
+        "points": 42
+      }
+    ],
+    "difficulty": "easy",
+    "decade": "all",
+    "tags": [
+      "goles",
+      "selección"
+    ]
+  },
+  {
+    "id": "decade-1",
+    "type": "decade",
+    "question": "¿En qué década jugó Lionel Messi su mejor fútbol de club?",
+    "options": [
+      {
+        "name": "2000s",
+        "correct": true
+      },
+      {
+        "name": "2010s",
+        "correct": true
+      },
+      {
+        "name": "2020s",
+        "correct": false
+      },
+      {
+        "name": "1990s",
+        "correct": false
+      }
+    ],
+    "decade": "2020s",
+    "difficulty": "hard",
+    "tags": [
+      "messi",
+      "década"
+    ]
+  }
+]
