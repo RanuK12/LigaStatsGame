@@ -1,305 +1,2812 @@
 [
-  {
-    "id": "maradona-diego-1960",
-    "name": "Diego Armando Maradona",
-    "fullName": "Diego Armando Maradona",
-    "birthDate": "1960-10-30",
-    "position": "Mediocampista",
-    "positions": [
-      "Mediocampista",
-      "Delantero"
-    ],
-    "nationality": "Argentina",
-    "height": 1.65,
-    "weight": 75,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "argentinos-jrs",
-        "name": "Argentinos Juniors",
-        "years": "1976-1981"
-      },
-      {
-        "id": "boca-jrs",
-        "name": "Boca Juniors",
-        "years": "1981-1982"
-      },
-      {
-        "id": "barcelona",
-        "name": "FC Barcelona",
-        "years": "1982-1984"
-      },
-      {
-        "id": "napoli",
-        "name": "SSC Napoli",
-        "years": "1984-1991"
-      },
-      {
-        "id": "sevilla",
-        "name": "Sevilla FC",
-        "years": "1992-1993"
-      },
-      {
-        "id": "boca-jrs-2",
-        "name": "Boca Juniors",
-        "years": "1995-1997"
-      }
-    ],
-    "capsNationalTeam": 91,
-    "goalsNationalTeam": 34,
-    "capsClub": 588,
-    "goalsClub": 259,
-    "trophies": [
-      {
-        "competition": "Copa UEFA",
-        "year": "1989",
-        "club": "SSC Napoli"
-      },
-      {
-        "competition": "Scudetto",
-        "year": "1987",
-        "club": "SSC Napoli"
-      },
-      {
-        "competition": "Scudetto",
-        "year": "1990",
-        "club": "SSC Napoli"
-      },
-      {
-        "competition": "Primera División",
-        "year": "1981",
-        "club": "Boca Juniors"
-      }
-    ],
-    "image": "https://www.bdfa.com.ar/fotos/diego-maradona.jpg",
-    "marketValue": "50.00",
-    "activeYears": "1976-1997",
-    "decade": "1980s"
-  },
-  {
-    "id": "messi-lionel-1987",
-    "name": "Lionel Messi",
-    "fullName": "Lionel Andrés Messi",
-    "birthDate": "1987-06-24",
-    "position": "Delantero",
-    "positions": [
-      "Delantero",
-      "Extremo derecho"
-    ],
-    "nationality": "Argentina",
-    "height": 1.7,
-    "weight": 72,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "newells",
-        "name": "Newell's Old Boys",
-        "years": "2000-2003"
-      },
-      {
-        "id": "barcelona-ii",
-        "name": "FC Barcelona",
-        "years": "2004-2021"
-      },
-      {
-        "id": "psg",
-        "name": "Paris Saint-Germain",
-        "years": "2021-2023"
-      },
-      {
-        "id": "inter-miami",
-        "name": "Inter Miami CF",
-        "years": "2023-2025"
-      }
-    ],
-    "capsNationalTeam": 180,
-    "goalsNationalTeam": 106,
-    "capsClub": 1028,
-    "goalsClub": 808,
-    "trophies": [
-      {
-        "competition": "Copa Mundial",
-        "year": "2022",
-        "club": "Selección Argentina"
-      },
-      {
-        "competition": "Copa América",
-        "year": "2021",
-        "club": "Selección Argentina"
-      },
-      {
-        "competition": "Finalissima",
-        "year": "2022",
-        "club": "Selección Argentina"
-      },
-      {
-        "competition": "LaLiga",
-        "year": "2005",
-        "club": "FC Barcelona"
-      },
-      {
-        "competition": "Champions League",
-        "year": "2006",
-        "club": "FC Barcelona"
-      },
-      {
-        "competition": "Champions League",
-        "year": "2009",
-        "club": "FC Barcelona"
-      },
-      {
-        "competition": "Champions League",
-        "year": "2011",
-        "club": "FC Barcelona"
-      },
-      {
-        "competition": "Champions League",
-        "year": "2015",
-        "club": "FC Barcelona"
-      }
-    ],
-    "image": "https://www.bdfa.com.ar/fotos/lionel-messi.jpg",
-    "marketValue": "120.00",
-    "activeYears": "2004-2025",
-    "decade": "2020s"
-  },
-  {
-    "id": "batistuta-gabriel-1969",
-    "name": "Gabriel Batistuta",
-    "fullName": "Gabriel Omar Batistuta",
-    "birthDate": "1969-02-01",
-    "position": "Delantero",
-    "positions": [
-      "Delantero"
-    ],
-    "nationality": "Argentina",
-    "height": 1.87,
-    "weight": 82,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "newells-ii",
-        "name": "Newell's Old Boys",
-        "years": "1988-1989"
-      },
-      {
-        "id": "river",
-        "name": "River Plate",
-        "years": "1989-1990"
-      },
-      {
-        "id": "boca-jrs-iii",
-        "name": "Boca Juniors",
-        "years": "1990-1991"
-      },
-      {
-        "id": "fiorentina",
-        "name": "ACF Fiorentina",
-        "years": "1991-2000"
-      },
-      {
-        "id": "roma",
-        "name": "AS Roma",
-        "years": "2000-2003"
-      },
-      {
-        "id": "inter",
-        "name": "Inter Milan",
-        "years": "2003"
-      }
-    ],
-    "capsNationalTeam": 78,
-    "goalsNationalTeam": 56,
-    "capsClub": 556,
-    "goalsClub": 332,
-    "trophies": [
-      {
-        "competition": "Serie A",
-        "year": "2001",
-        "club": "AS Roma"
-      }
-    ],
-    "image": "https://www.bdfa.com.ar/fotos/gabriel-batistuta.jpg",
-    "marketValue": "45.00",
-    "activeYears": "1988-2003",
-    "decade": "1990s"
-  },
-  {
-    "id": "di-maria-angel-1988",
-    "name": "Ángel Di María",
-    "fullName": "Ángel Fabián Di María",
-    "birthDate": "1988-02-14",
-    "position": "Extremo",
-    "positions": [
-      "Extremo izquierdo",
-      "Extremo derecho",
-      "Mediocampista"
-    ],
-    "nationality": "Argentina",
-    "height": 1.8,
-    "weight": 75,
-    "preferredFoot": "Izquierdo",
-    "clubs": [
-      {
-        "id": "rosario",
-        "name": "Rosario Central",
-        "years": "2005-2007"
-      },
-      {
-        "id": "benfica",
-        "name": "SL Benfica",
-        "years": "2007-2010"
-      },
-      {
-        "id": "real-madrid",
-        "name": "Real Madrid",
-        "years": "2010-2014"
-      },
-      {
-        "id": "psg",
-        "name": "Paris Saint-Germain",
-        "years": "2015-2022"
-      },
-      {
-        "id": "juventus",
-        "name": "Juventus FC",
-        "years": "2022-2023"
-      },
-      {
-        "id": "benfica-ii",
-        "name": "SL Benfica",
-        "years": "2023-"
-      }
-    ],
-    "capsNationalTeam": 136,
-    "goalsNationalTeam": 25,
-    "capsClub": 700,
-    "goalsClub": 150,
-    "trophies": [
-      {
-        "competition": "Copa Mundial",
-        "year": "2022",
-        "club": "Selección Argentina"
-      },
-      {
-        "competition": "Champions League",
-        "year": "2014",
-        "club": "Real Madrid"
-      },
-      {
-        "competition": "Liga Portuguesa",
-        "year": "2009",
-        "club": "SL Benfica"
-      },
-      {
-        "competition": "Liga Francesa",
-        "year": "2016",
-        "club": "Paris Saint-Germain"
-      }
-    ],
-    "image": "https://tmssl.akamaized.net/images/fotos/normal/angel-di-maria.jpg",
-    "marketValue": "8.00",
-    "activeYears": "2005-2025",
-    "decade": "2010s"
-  }
+ {
+  "id": "franco-armani",
+  "name": "Franco Armani",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 84,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "david-martinez",
+  "name": "David Martinez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "paulo-diaz",
+  "name": "Paulo Diaz",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 80,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "hector-martinez",
+  "name": "Hector Martinez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "milton-casco",
+  "name": "Milton Casco",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fabricio-bustos",
+  "name": "Fabricio Bustos",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "enzo-perez",
+  "name": "Enzo Perez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 82,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "rodrigo-aliendro",
+  "name": "Rodrigo Aliendro",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ezequiel-barco",
+  "name": "Ezequiel Barco",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 80,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "pablo-solari",
+  "name": "Pablo Solari",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "miguel-borja",
+  "name": "Miguel Borja",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "marcos-acuna",
+  "name": "Marcos Acuna",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "kevin-castano",
+  "name": "Kevin Castano",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-simon",
+  "name": "Santiago Simon",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leandro-diaz",
+  "name": "Leandro Diaz",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-colidio",
+  "name": "Facundo Colidio",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nacho-fernandez",
+  "name": "Nacho Fernandez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-palavecino",
+  "name": "Agustin Palavecino",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "adrian-martinez",
+  "name": "Adrian Martinez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-beltran",
+  "name": "Lucas Beltran",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "sergio-romero",
+  "name": "Sergio Romero",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 80,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "marcos-rojo",
+  "name": "Marcos Rojo",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-figal",
+  "name": "Nicolas Figal",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "luis-advincula",
+  "name": "Luis Advincula",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "marcelo-saracchi",
+  "name": "Marcelo Saracchi",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nahuel-molina",
+  "name": "Nahuel Molina",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 81,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "pol-fernandez",
+  "name": "Pol Fernandez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "guillermo-fernandez",
+  "name": "Guillermo Fernandez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jorman-campuzano",
+  "name": "Jorman Campuzano",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "edinson-cavani",
+  "name": "Edinson Cavani",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 82,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "miguel-merentiel",
+  "name": "Miguel Merentiel",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "dario-benedetto",
+  "name": "Dario Benedetto",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-janson",
+  "name": "Lucas Janson",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "kevin-zenon",
+  "name": "Kevin Zenon",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "eduardo-salvio",
+  "name": "Eduardo Salvio",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-valentini",
+  "name": "Nicolas Valentini",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mauricio-benitez",
+  "name": "Mauricio Benitez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leandro-brey",
+  "name": "Leandro Brey",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "alexis-mac-allister",
+  "name": "Alexis Mac Allister",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jorge-figal",
+  "name": "Jorge Figal",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "rodrigo-rey",
+  "name": "Rodrigo Rey",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joaquin-laso",
+  "name": "Joaquin Laso",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ivan-marcone",
+  "name": "Ivan Marcone",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ailton",
+  "name": "Ailton",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "dante-hidalgo",
+  "name": "Dante Hidalgo",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mauricio-isla",
+  "name": "Mauricio Isla",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-gonzalez",
+  "name": "Lucas Gonzalez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "alexis-canelo",
+  "name": "Alexis Canelo",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "andres-roa",
+  "name": "Andres Roa",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gabriel-avalos",
+  "name": "Gabriel Avalos",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lebrijeiro",
+  "name": "Lebrijeiro",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fabian-bordagaray",
+  "name": "Fabian Bordagaray",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "raul-lencina",
+  "name": "Raul Lencina",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-barrientos",
+  "name": "Lucas Barrientos",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-hidalgo",
+  "name": "Santiago Hidalgo",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fernando-ametrano",
+  "name": "Fernando Ametrano",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joaquin-pereyra",
+  "name": "Joaquin Pereyra",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-blanco",
+  "name": "Nicolas Blanco",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "bautista-menna",
+  "name": "Bautista Menna",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "miguel-angel-russo",
+  "name": "Miguel Angel Russo",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gabriel-arias",
+  "name": "Gabriel Arias",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "marco-di-cesare",
+  "name": "Marco Di Cesare",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-mura",
+  "name": "Facundo Mura",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leonardo-godoy",
+  "name": "Leonardo Godoy",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "emilio-martinez",
+  "name": "Emilio Martinez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "bruno-zuculini",
+  "name": "Bruno Zuculini",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "roger-martinez",
+  "name": "Roger Martinez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "carlos-alcaraz",
+  "name": "Carlos Alcaraz",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ignacio-aliseda",
+  "name": "Ignacio Aliseda",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "maximiliano-salas",
+  "name": "Maximiliano Salas",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "adolfo-gaich",
+  "name": "Adolfo Gaich",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gaston-martirena",
+  "name": "Gaston Martirena",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-sosa",
+  "name": "Santiago Sosa",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "roberto-de-la-rosa",
+  "name": "Roberto De La Rosa",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ivan-pillud",
+  "name": "Ivan Pillud",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "juan-nardoni",
+  "name": "Juan Nardoni",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-chancalay",
+  "name": "Tomas Chancalay",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "matias-laba",
+  "name": "Matias Laba",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "andres-ayala",
+  "name": "Andres Ayala",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nery-dominguez",
+  "name": "Nery Dominguez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "oscar-ustari",
+  "name": "Oscar Ustari",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "german-conti",
+  "name": "German Conti",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "emanuel-cecchini",
+  "name": "Emanuel Cecchini",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "alejandro-molina",
+  "name": "Alejandro Molina",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-giay",
+  "name": "Agustin Giay",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "federico-gattoni",
+  "name": "Federico Gattoni",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ramiro-gonzalez",
+  "name": "Ramiro Gonzalez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "elias-baez",
+  "name": "Elias Baez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "juan-ramirez",
+  "name": "Juan Ramirez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ezequiel-cerutti",
+  "name": "Ezequiel Cerutti",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-blandi",
+  "name": "Nicolas Blandi",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gabriel-rojas",
+  "name": "Gabriel Rojas",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "diego-perea",
+  "name": "Diego Perea",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-vegas",
+  "name": "Lucas Vegas",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fabian-cubero",
+  "name": "Fabian Cubero",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nazareno-colombo",
+  "name": "Nazareno Colombo",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-rolon",
+  "name": "Santiago Rolon",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-bayo",
+  "name": "Agustin Bayo",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-martinez",
+  "name": "Tomas Martinez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lautaro-lopez",
+  "name": "Lautaro Lopez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mariano-andujar",
+  "name": "Mariano Andujar",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "roman-colombia",
+  "name": "Roman Colombia",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "david-ayala",
+  "name": "David Ayala",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-rodriguez",
+  "name": "Lucas Rodriguez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fausto-espindola",
+  "name": "Fausto Espindola",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "zaid-romero",
+  "name": "Zaid Romero",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mateo-retegui",
+  "name": "Mateo Retegui",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jose-sosa",
+  "name": "Jose Sosa",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mauro-boselli",
+  "name": "Mauro Boselli",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "juan-iglesias",
+  "name": "Juan Iglesias",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-rogel",
+  "name": "Agustin Rogel",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "benjamin-rollheiser",
+  "name": "Benjamin Rollheiser",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "eduardo-domingo",
+  "name": "Eduardo Domingo",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-nunez",
+  "name": "Santiago Nunez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "francisco-apaolaza",
+  "name": "Francisco Apaolaza",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "matias-godoy",
+  "name": "Matias Godoy",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nahuel-bustos",
+  "name": "Nahuel Bustos",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-ojeda",
+  "name": "Tomas Ojeda",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-indjet",
+  "name": "Agustin Indjet",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leonel-moral",
+  "name": "Leonel Moral",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "hugo-lopes",
+  "name": "Hugo Lopes",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-mineiro",
+  "name": "Santiago Mineiro",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-sasso",
+  "name": "Tomas Sasso",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "maximiliano-comba",
+  "name": "Maximiliano Comba",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "pablo-de-blasis",
+  "name": "Pablo De Blasis",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "cristian-tarragona",
+  "name": "Cristian Tarragona",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "alan-sonora",
+  "name": "Alan Sonora",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leandro-contin",
+  "name": "Leandro Contin",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "brahian-galvan",
+  "name": "Brahian Galvan",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "erik-ramires",
+  "name": "Erik Ramires",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "rodrigo-cabral",
+  "name": "Rodrigo Cabral",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-castro",
+  "name": "Lucas Castro",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-brambilla",
+  "name": "Santiago Brambilla",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-sansotre",
+  "name": "Nicolas Sansotre",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-ancelmo",
+  "name": "Facundo Ancelmo",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "franco-torres",
+  "name": "Franco Torres",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "luciano-pons",
+  "name": "Luciano Pons",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jorge-polleri",
+  "name": "Jorge Polleri",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-hoyos",
+  "name": "Lucas Hoyos",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joaquin-indacoechea",
+  "name": "Joaquin Indacoechea",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "angelo-preciado",
+  "name": "Angelo Preciado",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "dylan-ocampo",
+  "name": "Dylan Ocampo",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-gentiletti",
+  "name": "Santiago Gentiletti",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mauro-formica",
+  "name": "Mauro Formica",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "justo-giani",
+  "name": "Justo Giani",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jhonny-quiroz",
+  "name": "Jhonny Quiroz",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "juan-sforza",
+  "name": "Juan Sforza",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-bernardi",
+  "name": "Lucas Bernardi",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mateo-silvetti",
+  "name": "Mateo Silvetti",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "francisco-gonzalez",
+  "name": "Francisco Gonzalez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ignacio-mendez",
+  "name": "Ignacio Mendez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fabricio-formiliano",
+  "name": "Fabricio Formiliano",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nazareno-funez",
+  "name": "Nazareno Funez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "maxi-rodriguez",
+  "name": "Maxi Rodriguez",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joaquin-mosqueira",
+  "name": "Joaquin Mosqueira",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-sanguinetti",
+  "name": "Facundo Sanguinetti",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-etchebarne",
+  "name": "Santiago Etchebarne",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "bruno-sepulveda",
+  "name": "Bruno Sepulveda",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gonzalo-asis",
+  "name": "Gonzalo Asis",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "julian-celaya",
+  "name": "Julian Celaya",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ricardo-alvarez",
+  "name": "Ricardo Alvarez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fabrizio-callejo",
+  "name": "Fabrizio Callejo",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "juan-alvarez",
+  "name": "Juan Alvarez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-hernandez",
+  "name": "Santiago Hernandez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "augusto-lotauro",
+  "name": "Augusto Lotauro",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "miguel-berry",
+  "name": "Miguel Berry",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-urzi",
+  "name": "Agustin Urzi",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-obando",
+  "name": "Agustin Obando",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jorge-rodriguez",
+  "name": "Jorge Rodriguez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-tobal",
+  "name": "Facundo Tobal",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-demartini",
+  "name": "Nicolas Demartini",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "emanuel-insua",
+  "name": "Emanuel Insua",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "elias-gomez",
+  "name": "Elias Gomez",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leandro-garate",
+  "name": "Leandro Garate",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "rodrigo-burgos",
+  "name": "Rodrigo Burgos",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jose-devecchi",
+  "name": "Jose Devecchi",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "carlos-quintana",
+  "name": "Carlos Quintana",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-thalhammer",
+  "name": "Nicolas Thalhammer",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "braian-aguirre",
+  "name": "Braian Aguirre",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "julian-aude",
+  "name": "Julian Aude",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jose-sand",
+  "name": "Jose Sand",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lautaro-acosta",
+  "name": "Lautaro Acosta",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-pasquini",
+  "name": "Nicolas Pasquini",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "raul-loaiza",
+  "name": "Raul Loaiza",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "marcelino-nunez",
+  "name": "Marcelino Nunez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "franco-troyansky",
+  "name": "Franco Troyansky",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-belmonte",
+  "name": "Tomas Belmonte",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-orellana",
+  "name": "Lucas Orellana",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "angel-gonzalez",
+  "name": "Angel Gonzalez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-sanchez",
+  "name": "Facundo Sanchez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "alexis-pedrozo",
+  "name": "Alexis Pedrozo",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mauricio-martinez",
+  "name": "Mauricio Martinez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "cristian-lema",
+  "name": "Cristian Lema",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "franco-watson",
+  "name": "Franco Watson",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "victor-malquez",
+  "name": "Victor Malquez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leonardo-buriak",
+  "name": "Leonardo Buriak",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-garces",
+  "name": "Facundo Garces",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "jonathan-gallardo",
+  "name": "Jonathan Gallardo",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "emanuel-olivera",
+  "name": "Emanuel Olivera",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "sergio-ojeda",
+  "name": "Sergio Ojeda",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "christian-bernardi",
+  "name": "Christian Bernardi",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "juan-cruz-villagra",
+  "name": "Juan Cruz Villagra",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "facundo-pellegrino",
+  "name": "Facundo Pellegrino",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-chancalay-st",
+  "name": "Tomas Chancalay St",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-pierotti",
+  "name": "Santiago Pierotti",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ramiro-enrique",
+  "name": "Ramiro Enrique",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joaquin-novarese",
+  "name": "Joaquin Novarese",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "julian-velazquez",
+  "name": "Julian Velazquez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "franco-pellegrini",
+  "name": "Franco Pellegrini",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "fabricio-dominguez",
+  "name": "Fabricio Dominguez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "andres-flores",
+  "name": "Andres Flores",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "maximiliano-pena",
+  "name": "Maximiliano Pena",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "roberto-ramallo",
+  "name": "Roberto Ramallo",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leonardo-jara",
+  "name": "Leonardo Jara",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "matias-de-los-santos",
+  "name": "Matias De Los Santos",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "damian-fernandez",
+  "name": "Damian Fernandez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-cavanagh",
+  "name": "Tomas Cavanagh",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "hernan-de-la-fuente",
+  "name": "Hernan De La Fuente",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "maximo-romero",
+  "name": "Maximo Romero",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gaston-gimenez",
+  "name": "Gaston Gimenez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ricaldo-centurion",
+  "name": "Ricaldo Centurion",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "agustin-bouzat",
+  "name": "Agustin Bouzat",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-pratto",
+  "name": "Lucas Pratto",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "abel-hernandez",
+  "name": "Abel Hernandez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "mateo-seoane",
+  "name": "Mateo Seoane",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-castro",
+  "name": "Santiago Castro",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leandro-olaicoechea",
+  "name": "Leandro Olaicoechea",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "francisco-ortega",
+  "name": "Francisco Ortega",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "miguel-brizuela",
+  "name": "Miguel Brizuela",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joel-sonora",
+  "name": "Joel Sonora",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joaquin-piquerez",
+  "name": "Joaquin Piquerez",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "franco-fagundez",
+  "name": "Franco Fagundez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-villalba",
+  "name": "Lucas Villalba",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "cristian-fabbiani",
+  "name": "Cristian Fabbiani",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nelson-deossa",
+  "name": "Nelson Deossa",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "tomas-cardona",
+  "name": "Tomas Cardona",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "adonis-frias",
+  "name": "Adonis Frias",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "matias-ramirez",
+  "name": "Matias Ramirez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gabriel-alanis",
+  "name": "Gabriel Alanis",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "kevin-lopez",
+  "name": "Kevin Lopez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-palavecino",
+  "name": "Nicolas Palavecino",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-fernandez",
+  "name": "Nicolas Fernandez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "cristian-barco",
+  "name": "Cristian Barco",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "domingo-blanco",
+  "name": "Domingo Blanco",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-sanchez",
+  "name": "Nicolas Sanchez",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "enzo-cabrera",
+  "name": "Enzo Cabrera",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "aaron-molinas",
+  "name": "Aaron Molinas",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "abiel-osorio",
+  "name": "Abiel Osorio",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "julian-lopez",
+  "name": "Julian Lopez",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ezequiel-centurion",
+  "name": "Ezequiel Centurion",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "carlos-carbonero",
+  "name": "Carlos Carbonero",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "kevin-mac-allister",
+  "name": "Kevin Mac Allister",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "brian-leiva",
+  "name": "Brian Leiva",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leonel-mosevich",
+  "name": "Leonel Mosevich",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "santiago-gonzalez",
+  "name": "Santiago Gonzalez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "gabriel-hachen",
+  "name": "Gabriel Hachen",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-watner",
+  "name": "Nicolas Watner",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 76,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "federico-redondo",
+  "name": "Federico Redondo",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "faustino-anjorran",
+  "name": "Faustino Anjorran",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-cincunegui",
+  "name": "Lucas Cincunegui",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "lucas-nahuel-espindola",
+  "name": "Lucas Nahuel Espindola",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "leonardo-heredia",
+  "name": "Leonardo Heredia",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "alan-lescano",
+  "name": "Alan Lescano",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "matias-romero",
+  "name": "Matias Romero",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 70,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-cuesta",
+  "name": "Nicolas Cuesta",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "thiago-nuss",
+  "name": "Thiago Nuss",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "damian-batallini",
+  "name": "Damian Batallini",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 79,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "guido-herrera",
+  "name": "Guido Herrera",
+  "position": "Arquero",
+  "positions": [
+   "Arquero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "matias-catalan",
+  "name": "Matias Catalan",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "joaquin-varela",
+  "name": "Joaquin Varela",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "blas-riveros",
+  "name": "Blas Riveros",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "marco-campagnaro",
+  "name": "Marco Campagnaro",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 75,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "rodrigo-villalba",
+  "name": "Rodrigo Villalba",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "kevin-vazquez",
+  "name": "Kevin Vazquez",
+  "position": "Defensor",
+  "positions": [
+   "Defensor"
+  ],
+  "rating": 74,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "ramiro-stalteri",
+  "name": "Ramiro Stalteri",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "andres-vidal",
+  "name": "Andres Vidal",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "emiliano-endres",
+  "name": "Emiliano Endres",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 78,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nahuel-banegas",
+  "name": "Nahuel Banegas",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 72,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "francisco-meza",
+  "name": "Francisco Meza",
+  "position": "Mediocampista",
+  "positions": [
+   "Mediocampista"
+  ],
+  "rating": 77,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "nicolas-camacho",
+  "name": "Nicolas Camacho",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 71,
+  "nationality": "Argentina"
+ },
+ {
+  "id": "alan-franco",
+  "name": "Alan Franco",
+  "position": "Delantero",
+  "positions": [
+   "Delantero"
+  ],
+  "rating": 73,
+  "nationality": "Argentina"
+ }
 ]
