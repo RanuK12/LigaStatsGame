@@ -1,2812 +1,2872 @@
 [
- {
-  "id": "franco-armani",
-  "name": "Franco Armani",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 84,
-  "nationality": "Argentina"
- },
- {
-  "id": "david-martinez",
-  "name": "David Martinez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "paulo-diaz",
-  "name": "Paulo Diaz",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 80,
-  "nationality": "Argentina"
- },
- {
-  "id": "hector-martinez",
-  "name": "Hector Martinez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "milton-casco",
-  "name": "Milton Casco",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "fabricio-bustos",
-  "name": "Fabricio Bustos",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "enzo-perez",
-  "name": "Enzo Perez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 82,
-  "nationality": "Argentina"
- },
- {
-  "id": "rodrigo-aliendro",
-  "name": "Rodrigo Aliendro",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "ezequiel-barco",
-  "name": "Ezequiel Barco",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 80,
-  "nationality": "Argentina"
- },
- {
-  "id": "pablo-solari",
-  "name": "Pablo Solari",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "miguel-borja",
-  "name": "Miguel Borja",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "marcos-acuna",
-  "name": "Marcos Acuna",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "kevin-castano",
-  "name": "Kevin Castano",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-simon",
-  "name": "Santiago Simon",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "leandro-diaz",
-  "name": "Leandro Diaz",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-colidio",
-  "name": "Facundo Colidio",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "nacho-fernandez",
-  "name": "Nacho Fernandez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-palavecino",
-  "name": "Agustin Palavecino",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "adrian-martinez",
-  "name": "Adrian Martinez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-beltran",
-  "name": "Lucas Beltran",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "sergio-romero",
-  "name": "Sergio Romero",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 80,
-  "nationality": "Argentina"
- },
- {
-  "id": "marcos-rojo",
-  "name": "Marcos Rojo",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-figal",
-  "name": "Nicolas Figal",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "luis-advincula",
-  "name": "Luis Advincula",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "marcelo-saracchi",
-  "name": "Marcelo Saracchi",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "nahuel-molina",
-  "name": "Nahuel Molina",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 81,
-  "nationality": "Argentina"
- },
- {
-  "id": "pol-fernandez",
-  "name": "Pol Fernandez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "guillermo-fernandez",
-  "name": "Guillermo Fernandez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "jorman-campuzano",
-  "name": "Jorman Campuzano",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "edinson-cavani",
-  "name": "Edinson Cavani",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 82,
-  "nationality": "Argentina"
- },
- {
-  "id": "miguel-merentiel",
-  "name": "Miguel Merentiel",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "dario-benedetto",
-  "name": "Dario Benedetto",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-janson",
-  "name": "Lucas Janson",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "kevin-zenon",
-  "name": "Kevin Zenon",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "eduardo-salvio",
-  "name": "Eduardo Salvio",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-valentini",
-  "name": "Nicolas Valentini",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "mauricio-benitez",
-  "name": "Mauricio Benitez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "leandro-brey",
-  "name": "Leandro Brey",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "alexis-mac-allister",
-  "name": "Alexis Mac Allister",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "jorge-figal",
-  "name": "Jorge Figal",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "rodrigo-rey",
-  "name": "Rodrigo Rey",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "joaquin-laso",
-  "name": "Joaquin Laso",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "ivan-marcone",
-  "name": "Ivan Marcone",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "ailton",
-  "name": "Ailton",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "dante-hidalgo",
-  "name": "Dante Hidalgo",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "mauricio-isla",
-  "name": "Mauricio Isla",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-gonzalez",
-  "name": "Lucas Gonzalez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "alexis-canelo",
-  "name": "Alexis Canelo",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "andres-roa",
-  "name": "Andres Roa",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "gabriel-avalos",
-  "name": "Gabriel Avalos",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "lebrijeiro",
-  "name": "Lebrijeiro",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "fabian-bordagaray",
-  "name": "Fabian Bordagaray",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "raul-lencina",
-  "name": "Raul Lencina",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-barrientos",
-  "name": "Lucas Barrientos",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-hidalgo",
-  "name": "Santiago Hidalgo",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "fernando-ametrano",
-  "name": "Fernando Ametrano",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "joaquin-pereyra",
-  "name": "Joaquin Pereyra",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-blanco",
-  "name": "Nicolas Blanco",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "bautista-menna",
-  "name": "Bautista Menna",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "miguel-angel-russo",
-  "name": "Miguel Angel Russo",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "gabriel-arias",
-  "name": "Gabriel Arias",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "marco-di-cesare",
-  "name": "Marco Di Cesare",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-mura",
-  "name": "Facundo Mura",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "leonardo-godoy",
-  "name": "Leonardo Godoy",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "emilio-martinez",
-  "name": "Emilio Martinez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "bruno-zuculini",
-  "name": "Bruno Zuculini",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "roger-martinez",
-  "name": "Roger Martinez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "carlos-alcaraz",
-  "name": "Carlos Alcaraz",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "ignacio-aliseda",
-  "name": "Ignacio Aliseda",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "maximiliano-salas",
-  "name": "Maximiliano Salas",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "adolfo-gaich",
-  "name": "Adolfo Gaich",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "gaston-martirena",
-  "name": "Gaston Martirena",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-sosa",
-  "name": "Santiago Sosa",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "roberto-de-la-rosa",
-  "name": "Roberto De La Rosa",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "ivan-pillud",
-  "name": "Ivan Pillud",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "juan-nardoni",
-  "name": "Juan Nardoni",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-chancalay",
-  "name": "Tomas Chancalay",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "matias-laba",
-  "name": "Matias Laba",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "andres-ayala",
-  "name": "Andres Ayala",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "nery-dominguez",
-  "name": "Nery Dominguez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "oscar-ustari",
-  "name": "Oscar Ustari",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "german-conti",
-  "name": "German Conti",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "emanuel-cecchini",
-  "name": "Emanuel Cecchini",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "alejandro-molina",
-  "name": "Alejandro Molina",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-giay",
-  "name": "Agustin Giay",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "federico-gattoni",
-  "name": "Federico Gattoni",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "ramiro-gonzalez",
-  "name": "Ramiro Gonzalez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "elias-baez",
-  "name": "Elias Baez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "juan-ramirez",
-  "name": "Juan Ramirez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "ezequiel-cerutti",
-  "name": "Ezequiel Cerutti",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-blandi",
-  "name": "Nicolas Blandi",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "gabriel-rojas",
-  "name": "Gabriel Rojas",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "diego-perea",
-  "name": "Diego Perea",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-vegas",
-  "name": "Lucas Vegas",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "fabian-cubero",
-  "name": "Fabian Cubero",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "nazareno-colombo",
-  "name": "Nazareno Colombo",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-rolon",
-  "name": "Santiago Rolon",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-bayo",
-  "name": "Agustin Bayo",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-martinez",
-  "name": "Tomas Martinez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "lautaro-lopez",
-  "name": "Lautaro Lopez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "mariano-andujar",
-  "name": "Mariano Andujar",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "roman-colombia",
-  "name": "Roman Colombia",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "david-ayala",
-  "name": "David Ayala",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-rodriguez",
-  "name": "Lucas Rodriguez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "fausto-espindola",
-  "name": "Fausto Espindola",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "zaid-romero",
-  "name": "Zaid Romero",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "mateo-retegui",
-  "name": "Mateo Retegui",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "jose-sosa",
-  "name": "Jose Sosa",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "mauro-boselli",
-  "name": "Mauro Boselli",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "juan-iglesias",
-  "name": "Juan Iglesias",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-rogel",
-  "name": "Agustin Rogel",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "benjamin-rollheiser",
-  "name": "Benjamin Rollheiser",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "eduardo-domingo",
-  "name": "Eduardo Domingo",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-nunez",
-  "name": "Santiago Nunez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "francisco-apaolaza",
-  "name": "Francisco Apaolaza",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "matias-godoy",
-  "name": "Matias Godoy",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "nahuel-bustos",
-  "name": "Nahuel Bustos",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-ojeda",
-  "name": "Tomas Ojeda",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-indjet",
-  "name": "Agustin Indjet",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "leonel-moral",
-  "name": "Leonel Moral",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "hugo-lopes",
-  "name": "Hugo Lopes",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-mineiro",
-  "name": "Santiago Mineiro",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-sasso",
-  "name": "Tomas Sasso",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "maximiliano-comba",
-  "name": "Maximiliano Comba",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "pablo-de-blasis",
-  "name": "Pablo De Blasis",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "cristian-tarragona",
-  "name": "Cristian Tarragona",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "alan-sonora",
-  "name": "Alan Sonora",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "leandro-contin",
-  "name": "Leandro Contin",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "brahian-galvan",
-  "name": "Brahian Galvan",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "erik-ramires",
-  "name": "Erik Ramires",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "rodrigo-cabral",
-  "name": "Rodrigo Cabral",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-castro",
-  "name": "Lucas Castro",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-brambilla",
-  "name": "Santiago Brambilla",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-sansotre",
-  "name": "Nicolas Sansotre",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-ancelmo",
-  "name": "Facundo Ancelmo",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "franco-torres",
-  "name": "Franco Torres",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "luciano-pons",
-  "name": "Luciano Pons",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "jorge-polleri",
-  "name": "Jorge Polleri",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-hoyos",
-  "name": "Lucas Hoyos",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "joaquin-indacoechea",
-  "name": "Joaquin Indacoechea",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "angelo-preciado",
-  "name": "Angelo Preciado",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "dylan-ocampo",
-  "name": "Dylan Ocampo",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-gentiletti",
-  "name": "Santiago Gentiletti",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "mauro-formica",
-  "name": "Mauro Formica",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "justo-giani",
-  "name": "Justo Giani",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "jhonny-quiroz",
-  "name": "Jhonny Quiroz",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "juan-sforza",
-  "name": "Juan Sforza",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-bernardi",
-  "name": "Lucas Bernardi",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "mateo-silvetti",
-  "name": "Mateo Silvetti",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "francisco-gonzalez",
-  "name": "Francisco Gonzalez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "ignacio-mendez",
-  "name": "Ignacio Mendez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "fabricio-formiliano",
-  "name": "Fabricio Formiliano",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "nazareno-funez",
-  "name": "Nazareno Funez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "maxi-rodriguez",
-  "name": "Maxi Rodriguez",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "joaquin-mosqueira",
-  "name": "Joaquin Mosqueira",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-sanguinetti",
-  "name": "Facundo Sanguinetti",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-etchebarne",
-  "name": "Santiago Etchebarne",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "bruno-sepulveda",
-  "name": "Bruno Sepulveda",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "gonzalo-asis",
-  "name": "Gonzalo Asis",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "julian-celaya",
-  "name": "Julian Celaya",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "ricardo-alvarez",
-  "name": "Ricardo Alvarez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "fabrizio-callejo",
-  "name": "Fabrizio Callejo",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "juan-alvarez",
-  "name": "Juan Alvarez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-hernandez",
-  "name": "Santiago Hernandez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "augusto-lotauro",
-  "name": "Augusto Lotauro",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "miguel-berry",
-  "name": "Miguel Berry",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-urzi",
-  "name": "Agustin Urzi",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-obando",
-  "name": "Agustin Obando",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "jorge-rodriguez",
-  "name": "Jorge Rodriguez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-tobal",
-  "name": "Facundo Tobal",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-demartini",
-  "name": "Nicolas Demartini",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "emanuel-insua",
-  "name": "Emanuel Insua",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "elias-gomez",
-  "name": "Elias Gomez",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "leandro-garate",
-  "name": "Leandro Garate",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "rodrigo-burgos",
-  "name": "Rodrigo Burgos",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "jose-devecchi",
-  "name": "Jose Devecchi",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "carlos-quintana",
-  "name": "Carlos Quintana",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-thalhammer",
-  "name": "Nicolas Thalhammer",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "braian-aguirre",
-  "name": "Braian Aguirre",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "julian-aude",
-  "name": "Julian Aude",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "jose-sand",
-  "name": "Jose Sand",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "lautaro-acosta",
-  "name": "Lautaro Acosta",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-pasquini",
-  "name": "Nicolas Pasquini",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "raul-loaiza",
-  "name": "Raul Loaiza",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "marcelino-nunez",
-  "name": "Marcelino Nunez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "franco-troyansky",
-  "name": "Franco Troyansky",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-belmonte",
-  "name": "Tomas Belmonte",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-orellana",
-  "name": "Lucas Orellana",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "angel-gonzalez",
-  "name": "Angel Gonzalez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-sanchez",
-  "name": "Facundo Sanchez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "alexis-pedrozo",
-  "name": "Alexis Pedrozo",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "mauricio-martinez",
-  "name": "Mauricio Martinez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "cristian-lema",
-  "name": "Cristian Lema",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "franco-watson",
-  "name": "Franco Watson",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "victor-malquez",
-  "name": "Victor Malquez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "leonardo-buriak",
-  "name": "Leonardo Buriak",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-garces",
-  "name": "Facundo Garces",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "jonathan-gallardo",
-  "name": "Jonathan Gallardo",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "emanuel-olivera",
-  "name": "Emanuel Olivera",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "sergio-ojeda",
-  "name": "Sergio Ojeda",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "christian-bernardi",
-  "name": "Christian Bernardi",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "juan-cruz-villagra",
-  "name": "Juan Cruz Villagra",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "facundo-pellegrino",
-  "name": "Facundo Pellegrino",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-chancalay-st",
-  "name": "Tomas Chancalay St",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-pierotti",
-  "name": "Santiago Pierotti",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "ramiro-enrique",
-  "name": "Ramiro Enrique",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "joaquin-novarese",
-  "name": "Joaquin Novarese",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "julian-velazquez",
-  "name": "Julian Velazquez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "franco-pellegrini",
-  "name": "Franco Pellegrini",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "fabricio-dominguez",
-  "name": "Fabricio Dominguez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "andres-flores",
-  "name": "Andres Flores",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "maximiliano-pena",
-  "name": "Maximiliano Pena",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "roberto-ramallo",
-  "name": "Roberto Ramallo",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "leonardo-jara",
-  "name": "Leonardo Jara",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "matias-de-los-santos",
-  "name": "Matias De Los Santos",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "damian-fernandez",
-  "name": "Damian Fernandez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-cavanagh",
-  "name": "Tomas Cavanagh",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "hernan-de-la-fuente",
-  "name": "Hernan De La Fuente",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "maximo-romero",
-  "name": "Maximo Romero",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "gaston-gimenez",
-  "name": "Gaston Gimenez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "ricaldo-centurion",
-  "name": "Ricaldo Centurion",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "agustin-bouzat",
-  "name": "Agustin Bouzat",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-pratto",
-  "name": "Lucas Pratto",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "abel-hernandez",
-  "name": "Abel Hernandez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "mateo-seoane",
-  "name": "Mateo Seoane",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-castro",
-  "name": "Santiago Castro",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "leandro-olaicoechea",
-  "name": "Leandro Olaicoechea",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "francisco-ortega",
-  "name": "Francisco Ortega",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "miguel-brizuela",
-  "name": "Miguel Brizuela",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "joel-sonora",
-  "name": "Joel Sonora",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "joaquin-piquerez",
-  "name": "Joaquin Piquerez",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "franco-fagundez",
-  "name": "Franco Fagundez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-villalba",
-  "name": "Lucas Villalba",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "cristian-fabbiani",
-  "name": "Cristian Fabbiani",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "nelson-deossa",
-  "name": "Nelson Deossa",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "tomas-cardona",
-  "name": "Tomas Cardona",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "adonis-frias",
-  "name": "Adonis Frias",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "matias-ramirez",
-  "name": "Matias Ramirez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "gabriel-alanis",
-  "name": "Gabriel Alanis",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "kevin-lopez",
-  "name": "Kevin Lopez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-palavecino",
-  "name": "Nicolas Palavecino",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-fernandez",
-  "name": "Nicolas Fernandez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "cristian-barco",
-  "name": "Cristian Barco",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "domingo-blanco",
-  "name": "Domingo Blanco",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-sanchez",
-  "name": "Nicolas Sanchez",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "enzo-cabrera",
-  "name": "Enzo Cabrera",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "aaron-molinas",
-  "name": "Aaron Molinas",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "abiel-osorio",
-  "name": "Abiel Osorio",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "julian-lopez",
-  "name": "Julian Lopez",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "ezequiel-centurion",
-  "name": "Ezequiel Centurion",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "carlos-carbonero",
-  "name": "Carlos Carbonero",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "kevin-mac-allister",
-  "name": "Kevin Mac Allister",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "brian-leiva",
-  "name": "Brian Leiva",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "leonel-mosevich",
-  "name": "Leonel Mosevich",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "santiago-gonzalez",
-  "name": "Santiago Gonzalez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "gabriel-hachen",
-  "name": "Gabriel Hachen",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-watner",
-  "name": "Nicolas Watner",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 76,
-  "nationality": "Argentina"
- },
- {
-  "id": "federico-redondo",
-  "name": "Federico Redondo",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "faustino-anjorran",
-  "name": "Faustino Anjorran",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-cincunegui",
-  "name": "Lucas Cincunegui",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "lucas-nahuel-espindola",
-  "name": "Lucas Nahuel Espindola",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "leonardo-heredia",
-  "name": "Leonardo Heredia",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "alan-lescano",
-  "name": "Alan Lescano",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "matias-romero",
-  "name": "Matias Romero",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 70,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-cuesta",
-  "name": "Nicolas Cuesta",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "thiago-nuss",
-  "name": "Thiago Nuss",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- },
- {
-  "id": "damian-batallini",
-  "name": "Damian Batallini",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 79,
-  "nationality": "Argentina"
- },
- {
-  "id": "guido-herrera",
-  "name": "Guido Herrera",
-  "position": "Arquero",
-  "positions": [
-   "Arquero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "matias-catalan",
-  "name": "Matias Catalan",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "joaquin-varela",
-  "name": "Joaquin Varela",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "blas-riveros",
-  "name": "Blas Riveros",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "marco-campagnaro",
-  "name": "Marco Campagnaro",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 75,
-  "nationality": "Argentina"
- },
- {
-  "id": "rodrigo-villalba",
-  "name": "Rodrigo Villalba",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "kevin-vazquez",
-  "name": "Kevin Vazquez",
-  "position": "Defensor",
-  "positions": [
-   "Defensor"
-  ],
-  "rating": 74,
-  "nationality": "Argentina"
- },
- {
-  "id": "ramiro-stalteri",
-  "name": "Ramiro Stalteri",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "andres-vidal",
-  "name": "Andres Vidal",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "emiliano-endres",
-  "name": "Emiliano Endres",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 78,
-  "nationality": "Argentina"
- },
- {
-  "id": "nahuel-banegas",
-  "name": "Nahuel Banegas",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 72,
-  "nationality": "Argentina"
- },
- {
-  "id": "francisco-meza",
-  "name": "Francisco Meza",
-  "position": "Mediocampista",
-  "positions": [
-   "Mediocampista"
-  ],
-  "rating": 77,
-  "nationality": "Argentina"
- },
- {
-  "id": "nicolas-camacho",
-  "name": "Nicolas Camacho",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 71,
-  "nationality": "Argentina"
- },
- {
-  "id": "alan-franco",
-  "name": "Alan Franco",
-  "position": "Delantero",
-  "positions": [
-   "Delantero"
-  ],
-  "rating": 73,
-  "nationality": "Argentina"
- }
+  {
+    "name": "Titular",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Alternativo",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División1/8 final35Copa Argentina1/16 final4Copa LibertadoresFase de grupos6Mundial de ClubesFase de grupos-Títulos",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/8 final",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1915-1932",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2004–2006",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "266",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "228",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "223",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "214",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ARG!",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "CHI!",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ESP!",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "URU!",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "PAR!",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1997-2000; 2004-2011",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1926-1938",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1931-1939",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1922-1932",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1940-1948",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1941-1949; 1955",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1931-1938",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1971-1984",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1976-1988",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1960-1972",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1988-1996",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1996-2002; 2007; 2008-2014",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1956-1970",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1934-1947",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1967-1972; 1976-1980",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1942-1956",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Apertura 1998Clausura 1999Copa Libertadores 2000Apertura 2000Copa Intercontinental 2000Copa Libertadores 2001Copa Libertadores 2003Apertura 2003Copa Intercontinental 2003",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1930Primera División 1931Primera División 1934Primera División 1935Copa Competencia Británica 1946Copa Confraternidad Escobar-Gerona 1946",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Metropolitano 1976Nacional 1976Copa Libertadores 1977Copa Libertadores 1978Copa Intercontinental 1977",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Apertura 2005Recopa Sudamericana 2005Clausura 2006Copa Sudamericana 2005Recopa Sudamericana 2006",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1943Primera División 1944Copa Confraternidad Escobar-Gerona 1945Copa Competencia Británica 1946",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Copa Libertadores 2007Primera División 2019-20Copa Diego Armando Maradona 2020Copa Argentina 2019-20",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Copa Argentina 2019-20Copa de la Liga 2022Primera División 2022",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Nacional 1969Copa Argentina 1969",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Supercopa Sudamericana 1989Recopa Sudamericana 1990",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Copa Máster de Supercopa 1992Primera División 1992-93",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Apertura 2008Recopa Sudamericana 2008",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Apertura 2011Copa Argentina 2011-12",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Copa Argentina 2014-15Primera División 2015",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 2016-17Superliga 2017-18",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 2022Supercopa Argentina 2022",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Supercopa Argentina 2018Superliga 2019-20",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1919,1920,1923,1924,1926,1930,1931,1934,1935,1940,1943,1944,1954,1962,1964,1965;N. 1969,N. 1970,M. 1976;N. 1976,1981,Ap. 1992,Ap. 1998,Cl. 1999,Ap. 2000,Ap. 2003,Ap. 2005,Cl. 2006,Ap. 2008,Ap. 2011,2015,2016-17,2017-18,2019-20,2022.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1969,2011-12,2014-15,2019-20.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2018,2022.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2020,2022.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1919, 1925.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1919, 1923, 1924, 1940, 1944.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1926.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1946.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1977,2000,2003.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1977,1978,2000,2001,2003,2007.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2004,2005.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1990,2005,2006,2008.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1989.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1992.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1993.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1945, 1946.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1919.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1920.",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Boca Juniors",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "River Plate",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Rosario Central",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Newell's Old Boys",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Independiente",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Racing Club",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "San Lorenzo",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Estadísticas del Club Atlético Boca JuniorsRécords del Club Atlético Boca JuniorsPalmarés del Club Atlético Boca JuniorsGira europea del Club Atlético Boca JuniorsPartidos internacionales del Club Atlético Boca JuniorsHistorial del Club Atlético Boca Juniors en competiciones internacionales",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa LibertadoresCopa Libertadores 1977Copa Libertadores 1978Copa Libertadores 2000Copa Libertadores 2001Copa Libertadores 2003Copa Libertadores 2007",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa SudamericanaCopa Sudamericana 2004Copa Sudamericana 2005",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laSupercopa SudamericanaSupercopa Sudamericana 1989",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laRecopa SudamericanaRecopa Sudamericana 1990Recopa Sudamericana 2005Recopa Sudamericana 2006Recopa Sudamericana 2008",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa de Oro Nicolás LeozCopa de Oro Nicolás Leoz 1993",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa Master de SupercopaCopa Master de Supercopa 1992",
+    "club": "Club_Atlético_Boca_Juniors",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Titular",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Alternativo",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera DivisiónSubcampeón38Copa ArgentinaSemifinales3Copa Libertadores1/4 final4Mundial de ClubesFase de grupos-Títulos",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Subcampeón",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Betano(2025-act)",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "7° - Zona A",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "6° - Zona B",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "7°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "5°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "6°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2° - Zona A",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "3°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "17°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "11°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "10°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "4°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Copa de Honor",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Metropolitano",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "3° - Zona A",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "4° - Zona A",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "5° - Zona B",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "3° - Zona C",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División[256]",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Cuartofinalista",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Nacional",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "18°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Apertura",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "14°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "8°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "13°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "9°",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Inicial",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "9° - Zona A",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Octavofinalista",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Por disputarse",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "En disputa",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Ángel Labruna",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Oscar Más",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Bernabé Ferreyra",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "José Manuel Moreno",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Norberto Alonso",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Argentina!",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Chile!",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Uruguay!",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Colombia!",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Ecuador!",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Brasil!",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Nigeria!",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Defensor",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Arquero",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Mediocampista",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Delantero",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Formado en las inferiores.Como jugador:Capitán y referente deLa Máquina. 26° mejor jugador de Sudamérica del sigloXX, segúnIFFHS. Su fecha de nacimiento, el 28 de septiembre, es celebrado como el \"Día Internacional del Hincha de River\".Distinciones:Máximo goleador del club con 318 Goles. Junto conRamón Díaz, el DT más ganador de ligas locales (6). Logró 16 títulos como jugador, y 6 como DT.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Formado en las inferiores. LaIFFHSlo posiciona como uno de los 10 mejores porteros del sigloXX.Distinciones:Segundo jugador con más presencias en el club (551).",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Formado en las inferiores. Convirtió 158 goles en 421 partidos jugados. Campeón deAméricay delmundo. Tricampeón del fútbol argentino.Distinciones:Tuvo su partido despedida en 1987.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Convirtió 137 goles en 237 partidos. Campeón invicto y tricampeón del fútbol argentino.Futbolista argentino del añoyMejor futbolista de América, en 2 ocasiones. Parte delEquipo Ideal de Américaen 4 ocasiones consecutivas.Distinciones:Máximo goleador extranjero del club. Tuvo su partido despedida en 1999.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Formado en las inferiores.Como jugador:Convirtió 95 goles en 205 partidos jugados. Parte del Equipo Ideal de América y segundo mejor jugador de América en1991. Goleador del fútbol argentino en1991.Como entrenador:Campeón de América. Tricampeón del fútbol argentino.Distinciones:Segundo DT más ganador del club. Junto conÁngel Labrunael DT más ganador de ligas locales (6). Logró 5 títulos como jugador y 9 como DT.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Formado en las inferiores. Convirtió 80 goles en 361 partidos. Campeóninvicto. Campeón de América. Parte del Equipo Ideal de América en tres ocasiones representando al club. Tercer mejor jugador de América en1996.Distinciones:Tuvo su partido despedida en 2013.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Formado en las inferiores.Como jugador:Campeón de América. Tricampeón del fútbol argentino. Campeón invicto.Como entrenador:Campeón de América en dos ocasiones. Campeón invicto internacional: Máximo ganador de copas internacionales. Máximo ganador de copas nacionales. Máximo invicto del club con 32 partidos. Bicampeón deCopa Argentina.Distinciones:Único en el club en ser campeón de América como jugador y DT. Junto conÁngel Labrunalos más ganadores del club con 22 títulos. Logró 8 títulos como jugador y 14 como DT.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "358 partidos oficiales disputados en River. Campeón de América con River en dos ocasiones. Campeón invicto internacional. Bicampeón de Copa Argentina.Distinciones:Jugador con más títulos en el club. Jugador con más copas internacionales. Jugador con más copas nacionales. Tuvo su partido despedida en 2022.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1920,1932,C. Campeonato 1936,[312]C. de Oro 1936,1937,1941,1942,1945,1947,1952,1953,1955,1956,1957,M. 1975,N. 1975,M. 1977,M. 1979,N. 1979,1980,N. 1981,1985-86,1989-90,Ap. 1991,Ap. 1993,Ap. 1994,Ap. 1996,Cl. 1997,Ap. 1997,Ap. 1999,Cl. 2000,Cl. 2002,Cl. 2003,Cl. 2004,Cl. 2008,F. 2014,2021,2023.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2015-16,2016-17,2018-19.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2017,2019,2023.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2021,2023.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1937,1941,1942,1952.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1941.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1914.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2014.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1932.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2011-12.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1986.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1986,1996,2015,2018.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1987.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2015,2016,2019.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1997.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2015.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1936,1937,1941,1945,1947.",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "73",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "5",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "10",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa LibertadoresCopa Libertadores 1986Copa Libertadores 1996Copa Libertadores 2015Copa Libertadores 2018",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa SudamericanaCopa Sudamericana 2014",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laSupercopa SudamericanaSupercopa Sudamericana 1997",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laRecopa SudamericanaRecopa Sudamericana 2015Recopa Sudamericana 2016Recopa Sudamericana 2019",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa InteramericanaCopa Interamericana 1987",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa J.League-SudamericanaCopa Suruga Bank 2015",
+    "club": "Club_Atlético_River_Plate",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Titular",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División1/4 final18Copa Argentina1/4 final-Copa SudamericanaFase de grupos1Títulos",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/4 final",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "18/10",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/2",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/1",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "4/0",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "5/3",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/0",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "0/1",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/3",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2/1",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Arqueros",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "AR!",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "URU!",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "USA!",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "COL!",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "PalmarésPartidos nacionalesPartidos internacionalesClásico de AvellanedaClásico con Boca JuniorsClásico con River PlateClásico con San Lorenzo",
+    "club": "Racing_Club_de_Avellaneda",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Titular",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Alternativo",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División1/8 final16Copa Argentina1/8 final–Copa Sudamericana1/8 final2Títulos",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/8 final",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "230",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "194",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "192",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ARG!",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "COL!",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "URU!",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "CHI!",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "PAR!",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "HUN!",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Portero",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Defensa",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Delantero",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Arsenio Erico[34]",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Manuel Seoane",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Vicente de la Mata",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Luis Ravaschino",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Antonio Sastre",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Ricardo Bochini",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Norberto Outes",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Ernesto Grillo",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Raimundo Orsi",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Camilo Cervino",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1922,1926,1938,1939,1948,1960,1963,Nacional 1967,Metropolitano 1970,Metropolitano 1971,Nacional 1977,Nacional 1978,Metropolitano 1983,1988/89,Clausura 1994,Apertura 2002.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1924, 1925, 1926.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1938, 1939.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1917.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1918.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1914.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1939.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1909.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1973,1984.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1964,1965,1972,1973,1974,1975,1984.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2010,2017.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1973,1974,1975.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1994,1995.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1995.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2018.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1938,1939.",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa LibertadoresCopa Libertadores 1964Copa Libertadores 1965Copa Libertadores 1972Copa Libertadores 1973Copa Libertadores 1974Copa Libertadores 1975Copa Libertadores 1984",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa SudamericanaCopa Sudamericana 2010Copa Sudamericana 2017",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laSupercopa SudamericanaSupercopa Sudamericana 1994Supercopa Sudamericana 1995",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laRecopa SudamericanaRecopa Sudamericana 1995",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa InteramericanaCopa Interamericana 1972Copa Interamericana 1974Copa Interamericana 1975",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa Suruga BankCopa Suruga Bank 2018",
+    "club": "Club_Atlético_Independiente",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Titular",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Alternativo",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División1/8 final15Copa Argentina1/8 final-Copa SudamericanaFase de grupos1Títulos",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1/8 final",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Sergio Villar",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Roberto Telch",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Leandro Romagnoli",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Ángel Zubieta",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "José Fossa",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Alfredo Carricaberry",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Alberto Acosta",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Arturo Arrieta",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Rodolfo Fischer",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Diego García",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "José Sanfilippo",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Rinaldo Martino",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Héctor Scotta",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Isidro Lángara",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Bernardo Romeo",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Claudio Biaggio",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1929",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1940",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1942",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1950",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1953",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1954",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1958",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1959",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1960",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1961",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1964",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Metropolitano 1968",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Nacional 1972",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Metropolitano 1975",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Nacional 1975",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Primera División 1988/89",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Apertura 1992",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Clausura 2001",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Copa Mercosur 2001",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Copa Sudamericana 2002",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Luis Monti",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "5.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "3.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "6.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "9.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "4.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "7.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "8.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "11.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Fase de grupos",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "12.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "14.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "16.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "17.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Segunda fase",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Semifinales",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Octavos de final",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "15.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "19.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "11°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "7°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "15°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "14°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "17°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "12°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "4°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "8°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "23°",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "21.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "23.º",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "6",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "9",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "4",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "5",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "3",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "11",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "13",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "14",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "52",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "66",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "8",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "10",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "7",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "21",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "12",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Subcampeón",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "138",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "64",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "38",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Boca Juniors",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "River Plate",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "San Lorenzo",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Racing Club",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Independiente",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ARG!",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "PAR!",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "COL!",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "URU!",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Defensa",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Mediocampista",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Delantero",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "SantiagoTorres",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "MateoClemente",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "DemianTalavera",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "JonasRodriguez",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ValentinLopez",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "LautaroCuelli",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "AlejoCórdoba",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "RamiroPedroza",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ThiagoRamirez",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "TeoRodríguez Pagano",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "LautaroMontenegro",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "NicolásBlanco",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "NahuelArias",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "SantinoPasini",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "RamiroCenturión",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "LucasCoronel",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "FranciscoGiovachini",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "FabricioLópez",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "luciogreco",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "IgnacioElissagaray",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Juan CruzCrisafulli",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Juan CruzRatalino",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "IgnacioPerruzzi",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "NahuelRomero",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "GonzaloAlassia",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "AlejoRivas",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ValentinoBossio",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "CristianGallardo",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "FacundoGulli",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "LeónMancini",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "PatricioCéspedes",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "UrielOjeda",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "BautistaGómez",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "JoseBanegas",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "MatíasHernández",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "BrancoSalinardi",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "ValentinEscalante",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "AgustínLadstatter",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "IgnacioMónaco",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Enzo AlanSalas",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "TomásYaciuk",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "BrunoBrito",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "DamiánAyude",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "RodrigoLista",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Héctor Veira",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Juan Carlos Lorenzo",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "José Barreiro",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Rubén Darío Insúa",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Oscar Ruggeri",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Antonio Malvassi",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Edgardo Bauza",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1923(AAmF),1924(AAmF),1927(AAmF),1933,Copa de Honor 1936,1946,1959,Metropolitano 1968,Metropolitano 1972,Nacional 1972,Nacional 1974,Clausura 1995,Clausura 2001,Clausura 2007,Inicial 2013.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2015.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1943.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1988,1991.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1982.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1914(AAF).",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2014.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2002.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "2001.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1927.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "1923.",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "182",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa SudamericanaCopa Sudamericana 2002",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  },
+  {
+    "name": "Campeón de laCopa MercosurCopa Mercosur 2001",
+    "club": "Club_Atlético_San_Lorenzo_de_Almagro",
+    "year": 2024,
+    "position": "MF",
+    "rating": 80
+  }
 ]
