@@ -202,10 +202,19 @@ export default function HomePage() {
             <motion.div key={mode.id} variants={itemVariants}>
               <Link href={mode.href} className="block group">
                 <div className="card-hover rounded-2xl overflow-hidden h-full">
-                  <div className={`bg-gradient-to-br ${mode.color} p-1 rounded-2xl`}>
+                  <div
+                    className={`bg-gradient-to-br ${mode.color} p-1 rounded-2xl`}
+                    style={{ '--accent': mode.accent } as React.CSSProperties}
+                  >
                     <div className="bg-[#0a1e33] rounded-[14px] p-6 h-full flex flex-col">
-                      <div className="text-5xl mb-4">{mode.icon}</div>
-                      <h4 className="font-display text-xl font-bold text-white mb-2 group-hover:text-[#75AADB] transition-colors">
+                      <div
+                        className="text-5xl mb-4"
+                        aria-label={`Icono de ${mode.name}`}
+                        role="img"
+                      >
+                        {mode.icon}
+                      </div>
+                      <h4 className="font-display text-xl font-bold text-white mb-2 group-hover:text-[var(--accent)] transition-colors">
                         {mode.name}
                       </h4>
                       <p className="text-[#75AADB]/50 text-sm flex-1">
