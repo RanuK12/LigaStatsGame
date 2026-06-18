@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import playersData from '@/data/players.json'
@@ -19,27 +19,66 @@ const MOCK_SCORES: Score[] = [
   { id: '8', club: 'estudiantes-lp', clubName: 'Estudiantes', rating: 62, players: 11, pts: 48, pos: 16, date: '2026-06-05' },
 ]
 
+function LeaderboardRow({ rank, clubName, rating, players, pts, pos, isTopThree }: {
+  rank: number
+  clubName: string
+  rating: number
+  players: number
+  pts: number
+  pos: number
+  isTopThree: boolean
+}) {
+  const medal = (i: number) => i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}°`
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: rank * 0.05 }}
+      className={`card-gradient rounded-xl p-4 flex items-center gap-4 ${isTopThree ? 'border border-yellow-500/20' : ''}`}
+    >
+      <div className="text-2xl w-10 text-center font-display">{medal(rank)}</div>
+      <div className="flex-1 min-w-0">
+        <div className="font-bold text-sm truncate">{clubName}</div>
+        <div className="text-xs text-slate-400">Rating: {rating} • {players}/11</div>
+      </div>
+      <div className="text-right shrink-0">
+        <div className="text-xl font-black text-green-400">{pts}</div>
+        <div className="text-[10px] text-slate-500">{pos}° pos</div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function LeaderboardPage() {
   const [scores, setScores] = useState<Score[]>([])
   const [tab, setTab] = useState<'global'|'club'>('global')
 
   useEffect(() => {
     try {
-      const saved = JSON.parse(localStorage.getItem('ligastats_scores') || '[]') as Score[]
+      const raw = localStorage.getItem('ligastats_scores')
+      const saved: Score[] = raw ? JSON.parse(raw) : []
+      if (!Array.isArray(saved)) throw new Error('invalid format')
       setScores([...MOCK_SCORES, ...saved].sort((a, b) => b.pts - a.pts))
-    } catch { setScores([...MOCK_SCORES].sort((a, b) => b.pts - a.pts)) }
+    } catch {
+      setScores([...MOCK_SCORES].sort((a, b) => b.pts - a.pts))
+    }
   }, [])
 
-  const clubStats = scores.reduce((acc: Record<string, { club: string; count: number; avgRating: number; bestPts: number }>, s) => {
-    if (!acc[s.club]) acc[s.club] = { club: s.clubName, count: 0, avgRating: 0, bestPts: 0 }
-    acc[s.club].count++
-    acc[s.club].avgRating += s.rating
-    acc[s.club].bestPts = Math.max(acc[s.club].bestPts, s.pts)
-    return acc
-  }, {})
-  const clubList = Object.entries(clubStats).map(([k, v]) => ({ id: k, ...v, avgRating: Math.round(v.avgRating / v.count) })).sort((a, b) => b.bestPts - a.bestPts)
+  const clubStats = useMemo(() => {
+    return scores.reduce((acc: Record<string, { club: string; count: number; avgRating: number; bestPts: number }>, s) => {
+      if (!acc[s.club]) acc[s.club] = { club: s.clubName, count: 0, avgRating: 0, bestPts: 0 }
+      acc[s.club].count++
+      acc[s.club].avgRating += s.rating
+      acc[s.club].bestPts = Math.max(acc[s.club].bestPts, s.pts)
+      return acc
+    }, {})
+  }, [scores])
 
-  const medal = (i: number) => i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}°`
+  const clubList = useMemo(() => {
+    return Object.entries(clubStats)
+      .map(([k, v]) => ({ id: k, ...v, avgRating: Math.round(v.avgRating / v.count) }))
+      .sort((a, b) => b.bestPts - a.bestPts)
+  }, [clubStats])
 
   return (
     <div className="min-h-screen gradient-bg">
@@ -58,18 +97,16 @@ export default function LeaderboardPage() {
         {tab==='global'?(
           <div className="space-y-2">
             {scores.map((s,i)=>(
-              <motion.div key={s.id} initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{delay:i*0.05}}
-                className={`card-gradient rounded-xl p-4 flex items-center gap-4 ${i<3?'border border-yellow-500/20':''}`}>
-                <div className="text-2xl w-10 text-center font-display">{medal(i)}</div>
-                <div className="flex-1 min-w-0">
-                  <div className="font-bold text-sm truncate">{s.clubName}</div>
-                  <div className="text-xs text-slate-400">Rating: {s.rating} • {s.players}/11</div>
-                </div>
-                <div className="text-right shrink-0">
-                  <div className="text-xl font-black text-green-400">{s.pts}</div>
-                  <div className="text-[10px] text-slate-500">{s.pos}° pos</div>
-                </div>
-              </motion.div>
+              <LeaderboardRow
+                key={s.id}
+                rank={i}
+                clubName={s.clubName}
+                rating={s.rating}
+                players={s.players}
+                pts={s.pts}
+                pos={s.pos}
+                isTopThree={i < 3}
+              />
             ))}
           </div>
         ):(
