@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import playersData from '@/data/players.json'
@@ -13,6 +13,9 @@ const posColors: Record<string, string> = {
   ST: '#dc2626', CF: '#ea580c'
 }
 
+const FULL_SPINS = 4
+const ANIMATION_DURATION_MS = 3000
+
 export default function RuletaPage() {
   const allPlayers = playersData as Player[]
   const allClubs = clubsData as Club[]
@@ -23,6 +26,16 @@ export default function RuletaPage() {
   const [rotation, setRotation] = useState(0)
   const wheelRef = useRef<HTMLDivElement>(null)
 
+  // Reset rotation after animation ends to avoid overflow
+  useEffect(() => {
+    if (!spinning && rotation !== 0) {
+      const timer = setTimeout(() => {
+        setRotation(rotation % 360)
+      }, ANIMATION_DURATION_MS)
+      return () => clearTimeout(timer)
+    }
+  }, [spinning, rotation])
+
   const spin = () => {
     if (spinning) return
     setSpinning(true)
@@ -32,8 +45,8 @@ export default function RuletaPage() {
     const randomIdx = Math.floor(Math.random() * allPlayers.length)
     const player = allPlayers[randomIdx]
 
-    // Animate wheel
-    const newRotation = rotation + 1440 + (360 * randomIdx / allPlayers.length)
+    // Animate wheel – use FULL_SPINS constant instead of magic number
+    const newRotation = rotation + FULL_SPINS * 360 + (360 * randomIdx / allPlayers.length)
     setRotation(newRotation)
 
     setTimeout(() => {
@@ -41,7 +54,7 @@ export default function RuletaPage() {
       setSpinning(false)
       setSpinCount(c => c + 1)
       setHistory(h => [player, ...h].slice(0, 10))
-    }, 3000)
+    }, ANIMATION_DURATION_MS)
   }
 
   const getClubInfo = (player: Player): Club | undefined => {
@@ -76,7 +89,7 @@ export default function RuletaPage() {
           className="flex flex-col items-center"
         >
           {/* Indicator */}
-          <div className="text-3xl mb-2">▼</div>
+          <div className="text-3xl mb-2 text-rose-400">▼</div>
 
           <div className="relative w-72 h-72 md:w-80 md:h-80">
             {/* Wheel */}
@@ -131,7 +144,7 @@ export default function RuletaPage() {
             </div>
 
             {/* Glow effect */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-500/5 to-rose-500/5 pointer-events-none" />
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-rose-500/10 to-orange-500/10 pointer-events-none" />
           </div>
 
           {/* Spin Button */}
@@ -142,7 +155,7 @@ export default function RuletaPage() {
             disabled={spinning}
             className={`mt-8 px-10 py-5 rounded-2xl font-bold text-xl shadow-2xl transition-all ${
               spinning
-                ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-rose-600 to-orange-600 text-white opacity-50 cursor-not-allowed'
                 : 'bg-gradient-to-r from-rose-600 to-orange-600 text-white shadow-rose-500/30 hover:shadow-rose-500/50'
             }`}
           >
