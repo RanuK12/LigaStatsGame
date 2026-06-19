@@ -304,3 +304,23 @@ export function simulateCopaArgentinaMatchByMatch(
 export function generateShareText(squad: Squad, score: number, formation: string): string {
   return `⚽ Mi 11 de ${squad.label} | ${formation} | Score: ${score}/99\n🇦🇷 Liga Argentina Fans — Armá tu 11 de la historia`;
 }
+
+export function validateSquadFormation(
+  squad: Squad,
+  formationId: string,
+  players: Player[]
+): { isValid: boolean; missing: string[] } {
+  const formation = formations[formationId];
+  if (!formation) {
+    return { isValid: false, missing: [`Formation "${formationId}" not found`] };
+  }
+  const squadPlayers = players.filter(p => squad.playerIds.includes(p.id));
+  const missing: string[] = [];
+  for (const [pos, needed] of Object.entries(formation.requirements)) {
+    const count = squadPlayers.filter(p => canPlayHere(p, pos)).length;
+    if (count < needed) {
+      missing.push(`${pos} (needs ${needed}, has ${count})`);
+    }
+  }
+  return { isValid: missing.length === 0, missing };
+}

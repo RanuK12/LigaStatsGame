@@ -199,14 +199,19 @@ export default function HomePage() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {MODES.map((mode) => (
-            <motion.div key={mode.id} variants={itemVariants}>
+            <motion.div
+              key={mode.id}
+              variants={itemVariants}
+              whileHover={{ scale: 1.03, boxShadow: '0 8px 30px rgba(117,170,219,0.25)' }}
+              className="transition-all duration-300"
+            >
               <Link href={mode.href} className="block group">
-                <div className="card-hover rounded-2xl overflow-hidden h-full">
+                <div className="card-hover rounded-2xl overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:shadow-[#75AADB]/20">
                   <div
                     className={`bg-gradient-to-br ${mode.color} p-1 rounded-2xl`}
                     style={{ '--accent': mode.accent } as React.CSSProperties}
                   >
-                    <div className="bg-[#0a1e33] rounded-[14px] p-6 h-full flex flex-col">
+                    <div className="bg-[#0a1e33] rounded-[14px] p-6 h-full flex flex-col border border-[rgba(117,170,219,0.1)] transition-all duration-300">
                       <div
                         className="text-5xl mb-4"
                         aria-label={`Icono de ${mode.name}`}
@@ -217,7 +222,7 @@ export default function HomePage() {
                       <h4 className="font-display text-xl font-bold text-white mb-2 group-hover:text-[var(--accent)] transition-colors">
                         {mode.name}
                       </h4>
-                      <p className="text-[#75AADB]/50 text-sm flex-1">
+                      <p className="text-[#75AADB]/70 text-sm flex-1">
                         {mode.desc}
                       </p>
                       <div className="mt-5 flex items-center gap-2 text-sm font-semibold" style={{ color: mode.accent }}>
