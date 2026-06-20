@@ -99,10 +99,11 @@ export default function RuletaPage() {
 
           <div className="relative w-72 h-72 md:w-80 md:h-80">
             {/* Wheel */}
-            <div
+            <motion.div
               ref={wheelRef}
-              className="w-full h-full rounded-full border-4 border-slate-600 overflow-hidden transition-transform duration-3000 ease-out"
-              style={{ transform: `rotate(${rotation}deg)` }}
+              className="w-full h-full rounded-full border-4 border-slate-600 overflow-hidden"
+              animate={{ rotate: rotation }}
+              transition={{ duration: 3, ease: 'easeOut' }}
             >
               <svg viewBox="0 0 100 100" className="w-full h-full">
                 {wheelPlayers.map((player, i) => {
@@ -147,7 +148,7 @@ export default function RuletaPage() {
                 <circle cx="50" cy="50" r="8" fill="#0f172a" stroke="#475569" strokeWidth="0.5"/>
                 <text x="50" y="51" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="5">⚽</text>
               </svg>
-            </div>
+            </motion.div>
 
             {/* Glow effect */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-rose-500/10 to-orange-500/10 pointer-events-none" />
@@ -199,6 +200,11 @@ export default function RuletaPage() {
                       <div className="text-sm text-slate-400">
                         {result.position} • {result.decade}
                       </div>
+                      {result.clubs && result.clubs.length > 0 && (
+                        <div className="text-sm text-slate-400 mt-1">
+                          {result.clubs[0].name} ({result.clubs[0].years})
+                        </div>
+                      )}
                     </div>
                   </div>
                   {result.legendary && (
