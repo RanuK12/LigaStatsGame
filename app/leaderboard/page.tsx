@@ -58,7 +58,11 @@ export default function LeaderboardPage() {
       const raw = localStorage.getItem('ligastats_scores')
       const saved: Score[] = raw ? JSON.parse(raw) : []
       if (!Array.isArray(saved)) throw new Error('invalid format')
-      setScores([...MOCK_SCORES, ...saved].sort((a, b) => b.pts - a.pts))
+      if (saved.length > 0) {
+        setScores([...saved].sort((a, b) => b.pts - a.pts))
+      } else {
+        setScores([...MOCK_SCORES].sort((a, b) => b.pts - a.pts))
+      }
     } catch {
       setScores([...MOCK_SCORES].sort((a, b) => b.pts - a.pts))
     }

@@ -18,7 +18,23 @@ export default function ResultsPage() {
       const sp = new URLSearchParams(window.location.search)
       const raw = sp.get('team') || (typeof window !== 'undefined' ? window.localStorage.getItem('ligastats_result') : null)
       if (!raw) throw new Error("No hay datos del equipo")
-      setTeam(JSON.parse(raw))
+      const parsedTeam = JSON.parse(raw)
+      setTeam(parsedTeam)
+      // persist score to leaderboard
+      const existingRaw = window.localStorage.getItem('ligastats_scores')
+      const existing: any[] = existingRaw ? JSON.parse(existingRaw) : []
+      const newEntry = {
+        id: Date.now().toString(),
+        club: (parsedTeam.label || '').toLowerCase().replace(/\s+/g, '-') || 'unknown',
+        clubName: parsedTeam.label || 'Mi equipo',
+        rating: parsedTeam.score ?? (parsedTeam.players?.length ? Math.round(parsedTeam.players.reduce((s: number, p: any) => s + (p.rating || 50), 0) / parsedTeam.players.length) : 0),
+        players: parsedTeam.players?.length || 0,
+        pts: parsedTeam.score ?? (parsedTeam.players?.length ? Math.round(parsedTeam.players.reduce((s: number, p: any) => s + (p.rating || 50), 0) / parsedTeam.players.length) : 0),
+        pos: 1,
+        date: new Date().toISOString().slice(0, 10)
+      }
+      existing.push(newEntry)
+      window.localStorage.setItem('ligastats_scores', JSON.stringify(existing))
       setLoading(false)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error cargando resultados")

@@ -169,7 +169,7 @@ export function spinSquad(allSquads: Squad[]): Squad {
  * Returns 0 if not all 11 positions are filled.
  */
 export function calculateTeamScore(team: (Player | null)[], formation: FormationConfig): number {
-  const valid = team.filter(Boolean) as Player[];
+  const valid = team.filter(Boolean) as unknown as Player[];
   if (valid.length === 0) return 0;
   // Partial score even if not all 11 filled
   let score = 0;
@@ -181,7 +181,7 @@ export function calculateTeamScore(team: (Player | null)[], formation: Formation
  * Calculate a full team score bonus (only when all 11 are filled).
  */
 export function calculateFullTeamScore(team: (Player | null)[], formation: FormationConfig): number {
-  const valid = team.filter(Boolean) as Player[];
+  const valid = team.filter(Boolean) as unknown as Player[];
   if (valid.length < 11) return 0;
   let score = 0;
   valid.forEach(p => { score += p.rating || 50; });
