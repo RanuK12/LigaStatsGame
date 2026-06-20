@@ -199,6 +199,11 @@ export default function RuletaPage() {
                       <div className="text-sm text-slate-400">
                         {result.position} • {result.decade}
                       </div>
+                      {result.clubs && result.clubs.length > 0 && (
+                        <div className="text-sm text-slate-400 mt-1">
+                          {result.clubs[0].name} ({result.clubs[0].years})
+                        </div>
+                      )}
                     </div>
                   </div>
                   {result.legendary && (
