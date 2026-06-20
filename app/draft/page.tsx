@@ -375,7 +375,7 @@ function DraftInner() {
       season: '2026',
       competition: 'Liga Profesional',
       label: 'Mi 11 Fantasy',
-      playerIds: players.map(p => p.id),
+      playerIds: players.map(p => p.id) as [string, ...string[]],
     }
     if (type === 'liga') {
       const r = simulateSeasonMatchByMatch(players, virtualSquad, allS, allP, f)
