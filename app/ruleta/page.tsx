@@ -17,8 +17,8 @@ const FULL_SPINS = 4
 const ANIMATION_DURATION_MS = 3000
 
 export default function RuletaPage() {
-  const allPlayers = playersData as Player[]
-  const allClubs = clubsData as Club[]
+  const allPlayers = playersData as unknown as Player[]
+  const allClubs = clubsData as unknown as Club[]
   const [spinning, setSpinning] = useState(false)
   const [result, setResult] = useState<Player | null>(null)
   const [spinCount, setSpinCount] = useState(0)

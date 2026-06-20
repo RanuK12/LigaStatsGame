@@ -366,7 +366,7 @@ function DraftInner() {
   //  SIMULATION
   // ═══════════════════════════════════════════════════════════
   const startSim = useCallback((type: 'liga' | 'copa') => {
-    const players = drafted.filter(Boolean) as Player[]
+    const players = drafted.filter(Boolean) as unknown as Player[]
     if (players.length < 11) return
     // Create a virtual "Mi 11" squad since players come from different teams
     const virtualSquad: Squad = {
@@ -375,7 +375,7 @@ function DraftInner() {
       season: '2026',
       competition: 'Liga Profesional',
       label: 'Mi 11 Fantasy',
-      playerIds: players.map(p => p.id) as [string, ...string[]],
+      playerIds: players.map(p => p.id) as unknown as [string, ...string[]],
     }
     if (type === 'liga') {
       const r = simulateSeasonMatchByMatch(players, virtualSquad, allS, allP, f)
