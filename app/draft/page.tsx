@@ -2,12 +2,14 @@
 
 import { useSearchParams } from "next/navigation"
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { z } from "zod"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import playersData from "@/data/players.json"
 import squadsData from "@/data/squads.json"
 import clubsData from "@/data/clubs.json"
 import type { Player, Squad, Club } from "@/lib/types"
+import { playerSchema, squadSchema, clubSchema } from "@/lib/types"
 import {
   formations,
   canPlayHere,
@@ -23,6 +25,11 @@ import {
 /* ═══════════════════════════════════════════════════════════════
    POSITION COLORS
    ═══════════════════════════════════════════════════════════════ */
+function safeParseArray<T>(data: unknown, schema: z.ZodArray<any>): T[] {
+  const result = schema.safeParse(data);
+  return result.success ? result.data : [];
+}
+
 const PC: Record<string, string> = {
   GK: "#f59e0b", CB: "#3b82f6", LB: "#06b6d4", RB: "#06b6d4",
   CDM: "#059669", CM: "#10b981", CAM: "#8b5cf6",
@@ -190,9 +197,9 @@ function DraftInner() {
   const modeId = (sp.get("mode") || "clasico") as string
   const mode = GAME_MODES[modeId] || GAME_MODES.clasico
 
-  const allP = useMemo(() => playersData as unknown as Player[], [])
-  const allS = useMemo(() => squadsData as unknown as Squad[], [])
-  const allC = useMemo(() => clubsData as unknown as Club[], [])
+  const allP = useMemo(() => safeParseArray<Player>(playersData, z.array(playerSchema)), [])
+  const allS = useMemo(() => safeParseArray<Squad>(squadsData, z.array(squadSchema)), [])
+  const allC = useMemo(() => safeParseArray<Club>(clubsData, z.array(clubSchema)), [])
   const cMap = useMemo(() => Object.fromEntries(allC.map(c => [c.id, c])), [allC])
 
   // ── Game State ──
@@ -366,7 +373,8 @@ function DraftInner() {
   //  SIMULATION
   // ═══════════════════════════════════════════════════════════
   const startSim = useCallback((type: 'liga' | 'copa') => {
-    const players = drafted.filter(Boolean) as unknown as Player[]
+    const isPlayer = (x: any): x is Player => x && typeof x.id === 'string' && typeof x.name === 'string'
+    const players = drafted.filter(isPlayer)
     if (players.length < 11) return
     // Create a virtual "Mi 11" squad since players come from different teams
     const virtualSquad: Squad = {
@@ -375,7 +383,11 @@ function DraftInner() {
       season: '2026',
       competition: 'Liga Profesional',
       label: 'Mi 11 Fantasy',
-      playerIds: players.map(p => p.id) as unknown as [string, ...string[]],
+      playerIds: (() => {
+        const ids = players.map(p => p.id);
+        if (ids.length === 0) throw new Error('playerIds cannot be empty');
+        return ids as [string, ...string[]];
+      })(),
     }
     if (type === 'liga') {
       const r = simulateSeasonMatchByMatch(players, virtualSquad, allS, allP, f)

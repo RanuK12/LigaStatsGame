@@ -5,7 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import playersData from '@/data/players.json'
 import clubsData from '@/data/clubs.json'
-import { Player, Club } from '@/lib/types'
+import { Player, Club, playerSchema, clubSchema } from '@/lib/types'
+import { z } from 'zod'
+
+function safeParseArray<T>(data: unknown, schema: z.ZodArray<any>): T[] {
+  const result = schema.safeParse(data);
+  return result.success ? result.data : [];
+}
 
 const posColors: Record<string, string> = {
   GK: '#f59e0b', CB: '#3b82f6', LB: '#06b6d4', RB: '#06b6d4',
@@ -17,8 +23,8 @@ const FULL_SPINS = 4
 const ANIMATION_DURATION_MS = 3000
 
 export default function RuletaPage() {
-  const allPlayers = playersData as unknown as Player[]
-  const allClubs = clubsData as unknown as Club[]
+  const allPlayers = safeParseArray<Player>(playersData, z.array(playerSchema))
+  const allClubs = safeParseArray<Club>(clubsData, z.array(clubSchema))
   const [spinning, setSpinning] = useState(false)
   const [result, setResult] = useState<Player | null>(null)
   const [spinCount, setSpinCount] = useState(0)
