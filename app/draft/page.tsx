@@ -385,7 +385,8 @@ function DraftInner() {
       label: 'Mi 11 Fantasy',
       playerIds: (() => {
         const ids = players.map(p => p.id);
-        return ids.length > 0 ? (ids as [string, ...string[]]) : [];
+        if (ids.length === 0) throw new Error('playerIds cannot be empty');
+        return ids as [string, ...string[]];
       })(),
     }
     if (type === 'liga') {
