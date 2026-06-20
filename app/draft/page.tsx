@@ -190,9 +190,9 @@ function DraftInner() {
   const modeId = (sp.get("mode") || "clasico") as string
   const mode = GAME_MODES[modeId] || GAME_MODES.clasico
 
-  const allP = useMemo(() => playersData as Player[], [])
-  const allS = useMemo(() => squadsData as Squad[], [])
-  const allC = useMemo(() => clubsData as Club[], [])
+  const allP = useMemo(() => playersData as unknown as Player[], [])
+  const allS = useMemo(() => squadsData as unknown as Squad[], [])
+  const allC = useMemo(() => clubsData as unknown as Club[], [])
   const cMap = useMemo(() => Object.fromEntries(allC.map(c => [c.id, c])), [allC])
 
   // ── Game State ──
