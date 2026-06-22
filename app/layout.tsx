@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import Header from '@/components/Header'
 
 export const metadata: Metadata = {
   title: 'Liga Argentina Fans ⚽ | Arma tu 11 de la Historia',
@@ -25,7 +26,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/logos/afa.png" />
       </head>
       <body className="bg-[#071422] text-white min-h-screen antialiased">
-        {children}
+        <Header />
+        <main className="mx-auto max-w-5xl px-4 py-6">
+          {children}
+        </main>
       </body>
     </html>
   )
