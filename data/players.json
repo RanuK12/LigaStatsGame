@@ -4,10 +4,10 @@
     "name": "Diego Armando Maradona",
     "fullName": "Diego Armando Maradona",
     "birthDate": "1960-10-30",
-    "position": "CM",
+    "position": "Mediocampista",
     "positions": [
-      "CM",
-      "ST"
+      "Mediocampista",
+      "Delantero"
     ],
     "nationality": "Argentina",
     "height": 1.65,
@@ -74,20 +74,17 @@
     "image": "https://www.bdfa.com.ar/fotos/diego-maradona.jpg",
     "marketValue": "50.00",
     "activeYears": "1976-1997",
-    "decade": "1980s",
-    "assistsClub": 0,
-    "rating": 80.0,
-    "legendary": false
+    "decade": "1980s"
   },
   {
     "id": "messi-lionel-1987",
     "name": "Lionel Messi",
     "fullName": "Lionel Andrés Messi",
     "birthDate": "1987-06-24",
-    "position": "ST",
+    "position": "Delantero",
     "positions": [
-      "ST",
-      "RW"
+      "Delantero",
+      "Extremo derecho"
     ],
     "nationality": "Argentina",
     "height": 1.7,
@@ -164,19 +161,16 @@
     "image": "https://www.bdfa.com.ar/fotos/lionel-messi.jpg",
     "marketValue": "120.00",
     "activeYears": "2004-2025",
-    "decade": "2020s",
-    "assistsClub": 0,
-    "rating": 80.0,
-    "legendary": false
+    "decade": "2020s"
   },
   {
     "id": "batistuta-gabriel-1969",
     "name": "Gabriel Batistuta",
     "fullName": "Gabriel Omar Batistuta",
     "birthDate": "1969-02-01",
-    "position": "ST",
+    "position": "Delantero",
     "positions": [
-      "ST"
+      "Delantero"
     ],
     "nationality": "Argentina",
     "height": 1.87,
@@ -228,21 +222,18 @@
     "image": "https://www.bdfa.com.ar/fotos/gabriel-batistuta.jpg",
     "marketValue": "45.00",
     "activeYears": "1988-2003",
-    "decade": "1990s",
-    "assistsClub": 0,
-    "rating": 80.0,
-    "legendary": false
+    "decade": "1990s"
   },
   {
     "id": "di-maria-angel-1988",
     "name": "Ángel Di María",
     "fullName": "Ángel Fabián Di María",
     "birthDate": "1988-02-14",
-    "position": "LW",
+    "position": "Extremo",
     "positions": [
-      "LW",
-      "RW",
-      "CM"
+      "Extremo izquierdo",
+      "Extremo derecho",
+      "Mediocampista"
     ],
     "nationality": "Argentina",
     "height": 1.8,
@@ -309,10 +300,7 @@
     "image": "https://tmssl.akamaized.net/images/fotos/normal/angel-di-maria.jpg",
     "marketValue": "8.00",
     "activeYears": "2005-2025",
-    "decade": "2010s",
-    "assistsClub": 0,
-    "rating": 80.0,
-    "legendary": false
+    "decade": "2010s"
   },
   {
     "id": "franco-armani",
