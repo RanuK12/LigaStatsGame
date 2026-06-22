@@ -136,14 +136,15 @@ describe('calculateFullTeamScore()', () => {
     expect(calculateFullTeamScore(team, formation433)).toBe(Math.round(avg + chem))
   })
 
-  it('no da chemistry bonus por posiciones incorrectas', () => {
-    const team = formation433.positions.map((_, i) => {
+  it('da chemistry bonus solo por posiciones exactas (GK y ST coinciden)', () => {
+    const team = formation433.positions.map((slot, i) => {
       if (i === 0) return makePlayer({ position: 'GK', rating: 80, positions: ['GK'] })
-      return makePlayer({ position: 'ST', rating: 80, positions: ['ST'] })
+      // Ponemos LW en todos los slots no-GK — LW no coincide con ningún slot excepto LW
+      return makePlayer({ position: 'LW', rating: 80, positions: ['LW'] })
     })
-    // Solo GK en posición correcta → 1 * 2 = 2 de chem
-    const avg = 80
-    expect(calculateFullTeamScore(team, formation433)).toBe(Math.round(avg + 2))
+    // Coincidencias exactas: GK (slot 0) → +2, LW (slot 8, el slot LW) → +2
+    // Total chem = 4, avg = 80, score = 84
+    expect(calculateFullTeamScore(team, formation433)).toBe(84)
   })
 })
 
@@ -161,15 +162,15 @@ describe('generateShareText()', () => {
 
 // ── formations ─────────────────────────────────────────────────
 describe('formations', () => {
-  it('tiene las 5 formaciones definidas', () => {
-    expect(Object.keys(formations)).toEqual(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2', '4-2-4'])
+  it('tiene las 4 formaciones definidas', () => {
+    expect(Object.keys(formations)).toEqual(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2'])
   })
 
-  it.each(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2', '4-2-4'])('%s tiene exactamente 11 posiciones', (id) => {
+  it.each(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2'])('%s tiene exactamente 11 posiciones', (id) => {
     expect(formations[id].positions).toHaveLength(11)
   })
 
-  it.each(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2', '4-2-4'])('%s tiene un GK en la primera posición', (id) => {
+  it.each(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2'])('%s tiene un GK en la primera posición', (id) => {
     expect(formations[id].positions[0].pos).toBe('GK')
   })
 })
