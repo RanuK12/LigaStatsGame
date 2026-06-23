@@ -67,7 +67,7 @@ export const squadSchema = z.object({
   playerIds: z.array(z.string()).nonempty(),
 });
 
-export const formatSchema = z.enum(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2', '4-2-4']);
+export const formatSchema = z.enum(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2']);
 
 export type Position = z.infer<typeof positionSchema>;
 export type Club = z.infer<typeof clubSchema>;
