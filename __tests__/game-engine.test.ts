@@ -7,8 +7,11 @@ import {
   formations,
   POS_LABELS,
   POS_SHORT,
+  simulateSeasonMatchByMatch,
+  simulateCopaArgentinaMatchByMatch,
+  validateSquadFormation,
 } from '@/lib/game-engine'
-import type { Player, FormationConfig } from '@/lib/types'
+import type { Player, Squad, FormationConfig } from '@/lib/types'
 
 // ── Helpers ────────────────────────────────────────────────────
 function makePlayer(overrides: Partial<Player> = {}): Player {
@@ -172,5 +175,154 @@ describe('formations', () => {
 
   it.each(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2'])('%s tiene un GK en la primera posición', (id) => {
     expect(formations[id].positions[0].pos).toBe('GK')
+  })
+})
+
+// ── simulateSeasonMatchByMatch ─────────────────────────────────
+describe('simulateSeasonMatchByMatch()', () => {
+  it('devuelve schedule, table, playerPos y champion con datos reales', () => {
+    const squad: Squad = {
+      id: 's1',
+      clubId: 'c1',
+      season: '2000',
+      competition: 'arg1',
+      label: 'Test Squad',
+      playerIds: ['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11'],
+    }
+    const allSquads: Squad[] = [
+      squad,
+      { id:'s2', clubId:'c2', season:'2000', competition:'arg1', label:'Opp1', playerIds:['p12','p13','p14','p15','p16','p17','p18','p19','p20','p21','p22'] },
+      { id:'s3', clubId:'c3', season:'2000', competition:'arg1', label:'Opp2', playerIds:['p23','p24','p25','p26','p27','p28','p29','p30','p31','p32','p33'] },
+      { id:'s4', clubId:'c4', season:'2000', competition:'arg1', label:'Opp3', playerIds:['p34','p35','p36','p37','p38','p39','p40','p41','p42','p43','p44'] },
+    ]
+    const players: Player[] = []
+    for (let i = 1; i <= 44; i++) {
+      players.push(makePlayer({ id:`p${i}`, rating:80, position:'ST', positions:['ST'] }))
+    }
+    const result = simulateSeasonMatchByMatch(players.slice(0,11), squad, allSquads, players, formations['4-3-3'])
+    expect(result.schedule.length).toBeGreaterThan(0)
+    expect(result.table.length).toBeGreaterThan(0)
+    expect(result.playerPos).toBeGreaterThanOrEqual(1)
+    expect(typeof result.champion).toBe('string')
+  })
+
+  it('playerPos es 1 si el equipo es el más fuerte', () => {
+    const squad: Squad = {
+      id:'s1', clubId:'c1', season:'2000', competition:'arg1', label:'Strong', playerIds:['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11'],
+    }
+    const allSquads: Squad[] = [
+      squad,
+      { id:'s2', clubId:'c2', season:'2000', competition:'arg1', label:'Weak1', playerIds:['p12','p13','p14','p15','p16','p17','p18','p19','p20','p21','p22'] },
+      { id:'s3', clubId:'c3', season:'2000', competition:'arg1', label:'Weak2', playerIds:['p23','p24','p25','p26','p27','p28','p29','p30','p31','p32','p33'] },
+    ]
+    const players: Player[] = []
+    for (let i = 1; i <= 33; i++) {
+      players.push(makePlayer({ id:`p${i}`, rating:99, position:'ST', positions:['ST'] }))
+    }
+    const result = simulateSeasonMatchByMatch(players.slice(0,11), squad, allSquads, players, formations['4-3-3'])
+    expect(result.playerPos).toBe(1)
+  })
+})
+
+// ── simulateCopaArgentinaMatchByMatch ──────────────────────────
+describe('simulateCopaArgentinaMatchByMatch()', () => {
+  it('devuelve rounds con estructura correcta', () => {
+    const squad: Squad = {
+      id:'s1', clubId:'c1', season:'2000', competition:'arg1', label:'CopaTeam', playerIds:['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11'],
+    }
+    const allSquads: Squad[] = [
+      squad,
+      { id:'s2', clubId:'c2', season:'2000', competition:'arg1', label:'Opp1', playerIds:['p12','p13','p14','p15','p16','p17','p18','p19','p20','p21','p22'] },
+      { id:'s3', clubId:'c3', season:'2000', competition:'arg1', label:'Opp2', playerIds:['p23','p24','p25','p26','p27','p28','p29','p30','p31','p32','p33'] },
+      { id:'s4', clubId:'c4', season:'2000', competition:'arg1', label:'Opp3', playerIds:['p34','p35','p36','p37','p38','p39','p40','p41','p42','p43','p44'] },
+    ]
+    const players: Player[] = []
+    for (let i = 1; i <= 44; i++) {
+      players.push(makePlayer({ id:`p${i}`, rating:80, position:'ST', positions:['ST'] }))
+    }
+    const result = simulateCopaArgentinaMatchByMatch(players.slice(0,11), squad, allSquads, players, formations['4-3-3'])
+    expect(result.rounds.length).toBeGreaterThan(0)
+    result.rounds.forEach(r => {
+      expect(typeof r.round).toBe('string')
+      expect(Array.isArray(r.matches)).toBe(true)
+      r.matches.forEach((m: any) => {
+        expect(typeof m.home).toBe('string')
+        expect(typeof m.away).toBe('string')
+        expect(typeof m.hg).toBe('number')
+        expect(typeof m.ag).toBe('number')
+        expect(typeof m.winner).toBe('string')
+      })
+    })
+  })
+
+  it('eliminated es false si el squad gana todos los partidos', () => {
+    const squad: Squad = {
+      id:'s1', clubId:'c1', season:'2000', competition:'arg1', label:'StrongCopa', playerIds:['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11'],
+    }
+    const allSquads: Squad[] = [
+      squad,
+      { id:'s2', clubId:'c2', season:'2000', competition:'arg1', label:'Weak1', playerIds:['p12','p13','p14','p15','p16','p17','p18','p19','p20','p21','p22'] },
+      { id:'s3', clubId:'c3', season:'2000', competition:'arg1', label:'Weak2', playerIds:['p23','p24','p25','p26','p27','p28','p29','p30','p31','p32','p33'] },
+    ]
+    const players: Player[] = []
+    for (let i = 1; i <= 33; i++) {
+      players.push(makePlayer({ id:`p${i}`, rating:99, position:'ST', positions:['ST'] }))
+    }
+    const result = simulateCopaArgentinaMatchByMatch(players.slice(0,11), squad, allSquads, players, formations['4-3-3'])
+    expect(result.eliminated).toBe(false)
+  })
+})
+
+// ── validateSquadFormation ─────────────────────────────────────
+describe('validateSquadFormation()', () => {
+  it('devuelve isValid=true si el squad cubre los requisitos', () => {
+    const squad: Squad = {
+      id:'s1', clubId:'c1', season:'2000', competition:'arg1', label:'FullSquad', playerIds:['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11'],
+    }
+    const players: Player[] = [
+      makePlayer({ id:'p1', position:'GK', positions:['GK'] }),
+      makePlayer({ id:'p2', position:'LB', positions:['LB'] }),
+      makePlayer({ id:'p3', position:'CB', positions:['CB'] }),
+      makePlayer({ id:'p4', position:'CB', positions:['CB'] }),
+      makePlayer({ id:'p5', position:'RB', positions:['RB'] }),
+      makePlayer({ id:'p6', position:'CDM', positions:['CDM'] }),
+      makePlayer({ id:'p7', position:'CM', positions:['CM'] }),
+      makePlayer({ id:'p8', position:'CAM', positions:['CAM'] }),
+      makePlayer({ id:'p9', position:'LW', positions:['LW'] }),
+      makePlayer({ id:'p10', position:'ST', positions:['ST'] }),
+      makePlayer({ id:'p11', position:'RW', positions:['RW'] }),
+    ]
+    const result = validateSquadFormation(squad, '4-3-3', players)
+    expect(result.isValid).toBe(true)
+    expect(result.missing).toEqual([])
+  })
+
+  it('devuelve isValid=false si faltan posiciones', () => {
+    const squad: Squad = {
+      id:'s1', clubId:'c1', season:'2000', competition:'arg1', label:'PartialSquad', playerIds:['p1','p2','p3','p4','p5'],
+    }
+    const players: Player[] = [
+      makePlayer({ id:'p1', position:'GK', positions:['GK'] }),
+      makePlayer({ id:'p2', position:'LB', positions:['LB'] }),
+      makePlayer({ id:'p3', position:'CB', positions:['CB'] }),
+      makePlayer({ id:'p4', position:'CB', positions:['CB'] }),
+      makePlayer({ id:'p5', position:'RB', positions:['RB'] }),
+    ]
+    const result = validateSquadFormation(squad, '4-3-3', players)
+    expect(result.isValid).toBe(false)
+  })
+
+  it('devuelve missing con las posiciones faltantes', () => {
+    const squad: Squad = {
+      id:'s1', clubId:'c1', season:'2000', competition:'arg1', label:'SinglePlayer', playerIds:['p1'],
+    }
+    const players: Player[] = [
+      makePlayer({ id:'p1', position:'ST', positions:['ST'] }),
+    ]
+    const result = validateSquadFormation(squad, '4-3-3', players)
+    expect(result.isValid).toBe(false)
+    expect(result.missing.length).toBeGreaterThan(0)
+    // At least one missing position should mention something like "GK"
+    expect(result.missing.some(m => m.includes('GK'))).toBe(true)
   })
 })
