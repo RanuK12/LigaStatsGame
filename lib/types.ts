@@ -64,7 +64,7 @@ export const squadSchema = z.object({
   season: z.string(),
   competition: z.string(),
   label: z.string(),
-  playerIds: z.array(z.string()).nonempty(),
+  playerIds: z.array(z.string()).min(1),
 });
 
 export const formatSchema = z.enum(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2']);
