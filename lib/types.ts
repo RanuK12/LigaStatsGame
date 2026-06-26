@@ -103,7 +103,7 @@ export interface FormationConfig {
 // ═══════════════════════════════════════════════════════════════
 // GAME MODES
 // ═══════════════════════════════════════════════════════════════
-export type GameMode = 'clasico' | 'almanaque' | 'liga' | 'reto-dia' | 'ruleta';
+export type GameMode = 'clasico' | 'almanaque' | 'liga' | 'reto-dia' | 'ruleta' | 'copa';
 
 export interface GameModeConfig {
   id: GameMode;
