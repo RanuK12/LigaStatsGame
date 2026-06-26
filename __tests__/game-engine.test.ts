@@ -250,9 +250,8 @@ describe('simulateCopaArgentinaMatchByMatch()', () => {
       r.matches.forEach((m: any) => {
         expect(typeof m.home).toBe('string')
         expect(typeof m.away).toBe('string')
-        expect(typeof m.hg).toBe('number')
-        expect(typeof m.ag).toBe('number')
-        expect(typeof m.winner).toBe('string')
+        expect(typeof m.homeGoals).toBe('number')
+        expect(typeof m.awayGoals).toBe('number')
       })
     })
   })
