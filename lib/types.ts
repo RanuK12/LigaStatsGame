@@ -103,7 +103,7 @@ export interface FormationConfig {
 // ═══════════════════════════════════════════════════════════════
 // GAME MODES
 // ═══════════════════════════════════════════════════════════════
-export type GameMode = 'clasico' | 'almanaque' | 'liga' | 'reto-dia' | 'ruleta';
+export type GameMode = 'clasico' | 'almanaque' | 'liga' | 'reto-dia' | 'ruleta' | 'copa';
 
 export interface GameModeConfig {
   id: GameMode;
@@ -111,8 +111,8 @@ export interface GameModeConfig {
   description: string;
   icon: string;
   ratingsVisible: boolean;
-  rerollsAllowed: number;
-  shareable: boolean;
+  rerolls: number;
+  shareable?: boolean;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -162,4 +162,18 @@ export interface SeasonResult {
   goalsFor: number;
   goalsAgainst: number;
   results: MatchResult[];
+}
+
+export interface ScheduleMatch {
+  home: string;
+  away: string;
+  homeGoals: number;
+  awayGoals: number;
+  isPlayerHome: boolean;
+  penalties?: string;
+}
+
+export interface RoundMatch {
+  round: string;
+  matches: ScheduleMatch[];
 }
