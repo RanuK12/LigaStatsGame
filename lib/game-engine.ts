@@ -3,7 +3,7 @@ import { Player, Squad, Club, Formation, FormationConfig, Position, MatchResult,
 // ═══════════════════════════════════════════════════════════════
 // POSITION LABELS (Español)
 // ═══════════════════════════════════════════════════════════════
-function isPlayer(x: unknown): x is Player {
+function isPlayer(x: any): x is Player {
   return x && typeof x.id === 'string' && typeof x.name === 'string';
 }
 
