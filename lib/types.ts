@@ -111,7 +111,7 @@ export interface GameModeConfig {
   description: string;
   icon: string;
   ratingsVisible: boolean;
-  rerollsAllowed: number;
+  rerolls: number;
   shareable: boolean;
 }
 
