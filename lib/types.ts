@@ -163,3 +163,17 @@ export interface SeasonResult {
   goalsAgainst: number;
   results: MatchResult[];
 }
+
+export interface ScheduleMatch {
+  home: string;
+  away: string;
+  homeGoals: number;
+  awayGoals: number;
+  isPlayerHome: boolean;
+  penalties?: string;
+}
+
+export interface RoundMatch {
+  round: string;
+  matches: ScheduleMatch[];
+}

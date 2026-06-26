@@ -1,9 +1,9 @@
-import { Player, Squad, Club, Formation, FormationConfig, Position, MatchResult } from './types';
+import { Player, Squad, Club, Formation, FormationConfig, Position, MatchResult, GameModeConfig, ScheduleMatch, RoundMatch } from './types';
 
 // ═══════════════════════════════════════════════════════════════
 // POSITION LABELS (Español)
 // ═══════════════════════════════════════════════════════════════
-function isPlayer(x: any): x is Player {
+function isPlayer(x: unknown): x is Player {
   return x && typeof x.id === 'string' && typeof x.name === 'string';
 }
 
@@ -117,7 +117,7 @@ export const positionCompatibility: Record<string, string[]> = {
 // ═══════════════════════════════════════════════════════════════
 // GAME MODES
 // ═══════════════════════════════════════════════════════════════
-export const GAME_MODES: Record<string, any> = {
+export const GAME_MODES: Record<string, GameModeConfig> = {
   clasico: { id: 'clasico', name: 'Clásico', description: 'Ratings visibles. Intenta superar los 100 pts.', icon: '⚽', ratingsVisible: true, rerolls: 3 },
   almanaque: { id: 'almanaque', name: 'El Almanaque', description: 'Sin estadísticas. Solo tu conocimiento.', icon: '🧠', ratingsVisible: false, rerolls: 2 },
   liga: { id: 'liga', name: 'Liga Argentina', description: 'Formato real. 2 zonas + playoffs.', icon: '🏆', ratingsVisible: true, rerolls: 3 },
@@ -217,7 +217,7 @@ function sortTable(teams: LigaTeam[]) {
 // ═══ MATCH-BY-MATCH SEASON SIMULATION ═══
 export function simulateSeasonMatchByMatch(
   playerTeam: Player[], squad: Squad, allSquads: Squad[], allPlayers: Player[], formation: FormationConfig
-): { schedule: any[]; table: LigaTeam[]; playerPos: number; champion: string } {
+): { schedule: ScheduleMatch[]; table: LigaTeam[]; playerPos: number; champion: string } {
   const teamStr = calculateFullTeamScore(playerTeam, formation) || calculateTeamScore(playerTeam, formation);
   const opponents = allSquads
     .filter(s => s.id !== squad.id && s.playerIds.length >= 11)
@@ -236,7 +236,7 @@ export function simulateSeasonMatchByMatch(
   allNames.forEach(n => { if (!strengths[n]) strengths[n] = 50 + Math.random() * 20; });
 
   const teams: LigaTeam[] = playerZone.map(name => ({ name, pts: 0, gf: 0, ga: 0, w: 0, d: 0, l: 0, form: [] }));
-  const schedule: any[] = [];
+  const schedule: ScheduleMatch[] = [];
   for (let i = 0; i < teams.length; i++) {
     for (let j = i + 1; j < teams.length; j++) {
       const home = teams[i], away = teams[j];
@@ -250,10 +250,11 @@ export function simulateSeasonMatchByMatch(
       else { home.pts++; away.pts++; home.d++; away.d++; home.form.push('E'); away.form.push('E'); }
       if (home.form.length > 5) { home.form.shift(); away.form.shift(); }
       schedule.push({
-        home: home.name, away: away.name,
-        hg, ag,
-        playerInvolved: isPlayerHome || isPlayerAway,
-        isHome: isPlayerHome,
+        home: home.name,
+        away: away.name,
+        homeGoals: hg,
+        awayGoals: ag,
+        isPlayerHome,
       });
     }
   }
@@ -265,7 +266,7 @@ export function simulateSeasonMatchByMatch(
 // ═══ COPA ARGENTINA SIMULATION ═══
 export function simulateCopaArgentinaMatchByMatch(
   playerTeam: Player[], squad: Squad, allSquads: Squad[], allPlayers: Player[], formation: FormationConfig
-): { rounds: any[]; champion?: string; eliminated: boolean; eliminatedRound: string } {
+): { rounds: RoundMatch[]; champion?: string; eliminated: boolean; eliminatedRound: string } {
   const teamStr = calculateFullTeamScore(playerTeam, formation) || calculateTeamScore(playerTeam, formation);
   const opponents = allSquads.filter(s => s.id !== squad.id && s.playerIds.length >= 11)
     .sort(() => Math.random() - 0.5).slice(0, 31);
@@ -274,17 +275,17 @@ export function simulateCopaArgentinaMatchByMatch(
   str[squad.label] = teamStr;
   opponents.forEach(o => { const p = getSquadPlayers(o, allPlayers).slice(0, 11); str[o.label] = p.length >= 11 ? calculateFullTeamScore(p, formations['4-3-3']) || calculateTeamScore(p, formations['4-3-3']) : 45 + Math.random() * 25; });
   const roundNames = ['32avos', '16avos', 'Octavos', 'Cuartos', 'Semifinal', 'Final'];
-  const rounds: any[] = [];
+  const rounds: RoundMatch[] = [];
   let alive = [...names]; let eliminated = false; let eliminatedRound = '';
   for (let r = 0; r < roundNames.length && alive.length > 1; r++) {
-    const matches: any[] = [];
+    const matches: ScheduleMatch[] = [];
     const next: string[] = [];
     for (let i = 0; i < alive.length; i += 2) {
       if (i + 1 >= alive.length) { next.push(alive[i]); continue; }
       const home = alive[i], away = alive[i + 1];
       let hg = simulateGoals((str[home] || 55) + 3);
       let ag = simulateGoals(str[away] || 55);
-      let penalties: string | null = null;
+      let penalties: string | undefined;
       let winner = home;
       if (hg === ag) {
         let ph = Math.floor(Math.random() * 5) + 1;
@@ -295,7 +296,14 @@ export function simulateCopaArgentinaMatchByMatch(
       } else {
         winner = hg > ag ? home : away;
       }
-      matches.push({ home, away, hg, ag, penalties, winner });
+      matches.push({
+        home,
+        away,
+        homeGoals: hg,
+        awayGoals: ag,
+        isPlayerHome: home === squad.label,
+        penalties,
+      });
       next.push(winner);
       if ((home === squad.label || away === squad.label) && winner !== squad.label) { eliminated = true; eliminatedRound = roundNames[r]; }
     }
