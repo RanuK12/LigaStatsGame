@@ -112,7 +112,7 @@ export interface GameModeConfig {
   icon: string;
   ratingsVisible: boolean;
   rerolls: number;
-  shareable: boolean;
+  shareable?: boolean;
 }
 
 // ═══════════════════════════════════════════════════════════════
