@@ -2,7 +2,7 @@
   "name": "ligastatsgame",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
+  "scripts": {\n    \"test\": \"vitest\",\n    \"test\": \"vitest\",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
