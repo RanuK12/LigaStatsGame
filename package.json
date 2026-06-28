@@ -2,7 +2,7 @@
   "name": "ligastatsgame",
   "version": "1.0.0",
   "private": true,
-  "scripts": {\n    \"test\": \"vitest\",\n    \"test\": \"vitest\",
+  "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -10,7 +10,8 @@
     "scrape:players": "node scripts/scrape-players.mjs",
     "generate:quizzes": "node scripts/generate-quizzes.js",
     "update:db": "node scripts/update-db.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
