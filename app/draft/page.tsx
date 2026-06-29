@@ -114,7 +114,7 @@ function PlayerCard({ player, onSelect, showRating }: {
       className={`flex items-center gap-2.5 p-2.5 rounded-xl text-left transition-all duration-150 ${
         player.isCompatible
           ? "bg-slate-800/80 border border-[#75AADB]/30 hover:border-[#75AADB] hover:bg-slate-700/80 cursor-pointer"
-          : "bg-slate-900/40 border border-slate-800 opacity-40 hover:opacity-60 cursor-pointer"
+          : "bg-slate-900/40 border border-slate-800 opacity-40 hover:opacity-60 cursor-not-allowed"
       }`}>
       <div className="w-9 h-9 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0"
         style={{ backgroundColor: getPC(player.position) }}>
@@ -287,6 +287,9 @@ function DraftInner() {
   const pickPlayer = useCallback((player: Player, slotIdx: number) => {
     // Block if player already drafted (safety check)
     if (draftedIds.has(player.id)) return
+    // Restriccion de posicion: un jugador NO puede ir en un slot incompatible (un CB no va de ST). (fix 06-29)
+    const requiredPos = f.positions[slotIdx]?.pos
+    if (requiredPos && !canPlayHere(player, requiredPos)) return
 
     // Compute the new board locally to avoid stale closure
     const newDrafted = [...drafted]
@@ -316,7 +319,7 @@ function DraftInner() {
         setPhase("done")
       }, 300)
     }
-  }, [drafted, draftedIds])
+  }, [drafted, draftedIds, f])
 
   // ═══════════════════════════════════════════════════════════
   //  SLOT CLICK (on pitch)
