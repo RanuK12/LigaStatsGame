@@ -87,49 +87,24 @@ LigaStatsGame/
 
 ### 1. Clonar
 ```bash
-git clone https://github.com/RanuK12/LigaStatsGame.git
-cd LigaStatsGame
 ```
 
 ### 2. Frontend
 ```bash
-npm install
-npm run dev
 ```
-→ Abrir http://localhost:3000
 
 ### 3. Backend
 ```bash
-cd backend
-npm install
-npm run dev
 ```
-→ Abrir http://localhost:3001
 
 ### 4. Datos
 ```bash
-npm run scrape:players    # Descargar jugadores
-npm run generate:quizzes  # Generar preguntas
 ```
 
 ## 🔧 Configuración
 
 ### Variables de entorno (.env.local)
 ```bash
-# Supabase
-SUPABASE_URL=https://tu-proyecto.supabase.co
-SUPABASE_KEY=tu-api-key
-
-# Redis (opcional)
-REDIS_URL=redis://localhost:6379
-
-# NextAuth
-NEXTAUTH_SECRET=tu-secret
-NEXTAUTH_URL=http://localhost:3000
-
-# Google OAuth (login)
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
 ```
 
 ## 📊 Base de datos
@@ -139,22 +114,6 @@ GOOGLE_CLIENT_SECRET=
 - **Décadas:** 1960s - 2020s
 - **Club de origen:** Todos los 28 clubes actuales
 - **Actualización:** Cada lunes via scrapers automáticos
-
-### Campos
-```typescript
-{
-  id: string;
-  name: string;
-  position: 'GK' | 'CB' | 'CM' | 'ST' | ...;
-  clubs: { id: string; name: string; years: string }[];
-  capsClub: number;
-  goalsClub: number;
-  trophies: { competition: string; year: string }[];
-  rating: number; // 0-100 calculado
-  legendary: boolean;
-  decade: string; // '1990s', '2020s', etc.
-}
-```
 
 ## 🎨 Paleta de colores
 
@@ -173,25 +132,19 @@ GOOGLE_CLIENT_SECRET=
 - **Goles:** +0.5 puntos por gol
 - **Bonus leyenda:** +5 puntos si el jugador es leyenda
 
-### Récords
-- **Récord real:** 101 puntos (Barcelona 2011-12)
-- **Objetivo:** Superar 101 puntos en la liga argentina
-
 ## 🔧 Deploy
 
 ### Frontend: Vercel
 ```bash
-vercel
 ```
 
 ### Backend: Railway
-- Push a GitHub
-- Railway detecta cambios automáticamente
+```bash
+```
 
 ### Base de datos: Supabase
-- Crear proyecto en supabase.com
-- Importar esquema SQL
-- Configurar variables de entorno
+```bash
+```
 
 ## 📝 Roadmap
 
