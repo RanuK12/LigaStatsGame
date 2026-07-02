@@ -33,6 +33,9 @@ eligiendo jugadores por posición según la formación, y se simula el rendimien
    defensor. Tiene que respetar la posición/formación (un CB no va de ST). [es el bug más concreto a fixear]
 4. **DB pobre:** casi no hay jugadores (285) — falta volumen (ver roadmap, es lo prioritario).
 5. **Visual:** mucho por mejorar (UI/UX, pulido).
+6. **Pelota oficial "ARGENTUM GAMBETA":** Emilio mandó la nueva pelota del fútbol argentino para
+   incorporar como pelota/branding del juego (en la cancha del draft, loader, ícono). Usar la imagen que
+   envió (si hace falta, pedírsela de nuevo) como asset visual. Va en la fase de pulido visual (L-P).
 
 ## Roadmap a paridad (DB primero — es lo que más mueve la aguja)
 1. **Expandir la DB (lo crítico):** seedear/scrapear muchos más PLANTELES históricos por club y
