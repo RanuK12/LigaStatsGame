@@ -14,3 +14,10 @@ scripts/scrape_tm.py
 node_modules/
 app/draft/page.tsx.bak
 .aider*
+
+# scraper artifacts (do not commit)
+data/cache/
+data/*_historical.json
+data/scrape_progress.json
+data/players.backup-*.json
+data/*.log
