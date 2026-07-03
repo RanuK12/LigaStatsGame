@@ -87,18 +87,27 @@ LigaStatsGame/
 
 ### 1. Clonar
 ```bash
+git clone https://github.com/RanuK12/LigaStatsGame.git
+cd LigaStatsGame
 ```
 
 ### 2. Frontend
 ```bash
+npm install
+npm run dev
 ```
 
 ### 3. Backend
 ```bash
+cd backend
+npm install
+npm run start:dev
 ```
 
 ### 4. Datos
 ```bash
+npm run scrape:players
+npm run update:db
 ```
 
 ## 🔧 Configuración
@@ -156,10 +165,10 @@ LigaStatsGame/
 - [x] Formaciones disponibles
 
 ### v0.2 (En progreso)
-- [ ] Scrapers de jugadores
-- [ ] UI de la ruleta
-- [ ] Draft de jugadores
-- [ ] Simulación de temporada
+- [x] Scrapers de jugadores (Node.js + Cheerio)
+- [ ] UI de la ruleta (Framer Motion + Shadcn/ui)
+- [x] Draft de jugadores (Motor de juego + formaciones)
+- [x] Simulación de temporada (Game engine + 38 fechas)
 
 ### v0.3
 - [ ] Modo Memoria
@@ -190,6 +199,7 @@ MIT License - Ver [LICENSE](LICENSE)
 - GitHub: [@RanuK12](https://github.com/RanuK12)
 - Web: [ranuk.dev](https://ranuk.dev)
 - Email: ranucoliemilio@gmail.com
+- LinkedIn: [Emilio Ranucoli](https://linkedin.com/in/emilio-ranucoli)
 
 ---
 
