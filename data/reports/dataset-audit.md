@@ -24,6 +24,35 @@
 - Players with valid position: 285
 - Playable squads: 14
 
+## Players by club
+- psg: 2
+- argentinos-jrs: 1
+- barcelona: 1
+- barcelona-ii: 1
+- benfica: 1
+- benfica-ii: 1
+- boca-jrs: 1
+- boca-jrs-2: 1
+- boca-jrs-iii: 1
+- fiorentina: 1
+- inter: 1
+- inter-miami: 1
+- juventus: 1
+- napoli: 1
+- newells: 1
+- newells-ii: 1
+- real-madrid: 1
+- river: 1
+- roma: 1
+- rosario: 1
+- sevilla: 1
+
+## Players by decade
+- 1980s: 1
+- 1990s: 1
+- 2010s: 1
+- 2020s: 1
+
 ## Top Recommendations
 - Expand the player pool with curated historical squads.
 - Add more historical squads to improve matchups and coverage.

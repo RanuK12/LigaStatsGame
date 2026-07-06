@@ -70,6 +70,8 @@ function audit() {
       playersWithValidPosition: 0,
       squadsPlayable: 0,
       squadsByClub: {},
+      playersByClub: {},
+      playersByDecade: {},
       playersByPosition: {},
     },
     summary: {
@@ -119,11 +121,20 @@ function audit() {
 
     if (Array.isArray(player.clubs) && player.clubs.length > 0) {
       report.coverage.playersWithClubs += 1
+      for (const club of player.clubs) {
+        if (club && club.id) {
+          report.coverage.playersByClub[club.id] = (report.coverage.playersByClub[club.id] || 0) + 1
+        }
+      }
     }
 
     if (player.position && isValidPosition(normalizedPosition)) {
       report.coverage.playersWithValidPosition += 1
       report.coverage.playersByPosition[normalizedPosition] = (report.coverage.playersByPosition[normalizedPosition] || 0) + 1
+    }
+
+    if (player.decade) {
+      report.coverage.playersByDecade[player.decade] = (report.coverage.playersByDecade[player.decade] || 0) + 1
     }
   }
 
@@ -245,6 +256,26 @@ function printSection(title, items, limit = 20) {
   }
 }
 
+function printCountMap(title, counts, limit = 15) {
+  const entries = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+
+  console.log(`\n## ${title}`)
+
+  if (entries.length === 0) {
+    console.log('- Sin datos')
+    return
+  }
+
+  for (const [key, value] of entries.slice(0, limit)) {
+    console.log(`- ${key}: ${value}`)
+  }
+
+  if (entries.length > limit) {
+    console.log(`... +${entries.length - limit} más`)
+  }
+}
+
 const report = audit()
 
 console.log('\n# LigaStatsGame Dataset Audit')
@@ -279,6 +310,8 @@ console.log(`- Players with rating: ${report.coverage.playersWithRating}`)
 console.log(`- Players with clubs: ${report.coverage.playersWithClubs}`)
 console.log(`- Players with valid position: ${report.coverage.playersWithValidPosition}`)
 console.log(`- Playable squads: ${report.coverage.squadsPlayable}`)
+printCountMap('Players by club', report.coverage.playersByClub)
+printCountMap('Players by decade', report.coverage.playersByDecade)
 
 const outputDir = path.join(ROOT, 'data', 'reports')
 fs.mkdirSync(outputDir, { recursive: true })
@@ -313,6 +346,16 @@ const markdown = [
   `- Players with clubs: ${report.coverage.playersWithClubs}`,
   `- Players with valid position: ${report.coverage.playersWithValidPosition}`,
   `- Playable squads: ${report.coverage.squadsPlayable}`,
+  '',
+  '## Players by club',
+  ...Object.entries(report.coverage.playersByClub)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([clubId, count]) => `- ${clubId}: ${count}`),
+  '',
+  '## Players by decade',
+  ...Object.entries(report.coverage.playersByDecade)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([decade, count]) => `- ${decade}: ${count}`),
   '',
   '## Top Recommendations',
   ...report.summary.recommendations.map((recommendation) => `- ${recommendation}`),
