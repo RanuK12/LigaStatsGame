@@ -13,7 +13,9 @@
     "update:db": "node scripts/update-db.js",
     "typecheck": "tsc --noEmit",
     "audit:data": "node scripts/data/validate-dataset.mjs",
-    "normalize:data": "node scripts/data/normalize-dataset.mjs"
+    "normalize:data": "node scripts/data/normalize-dataset.mjs",
+    "curate:data": "node scripts/data/backfill-player-clubs.mjs",
+    "balance:squads": "node scripts/data/balance-squads.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
