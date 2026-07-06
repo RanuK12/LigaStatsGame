@@ -15,7 +15,7 @@ const MODES = [
   {
     id: 'draft',
     name: 'Draft de Leyendas',
-    desc: 'Armá tu 11 con plantels reales por año',
+    desc: 'Armá tu 11 con planteles reales por año',
     icon: '⚽',
     href: '/draft?mode=clasico',
     color: 'from-[#75AADB] to-[#4a8ab8]',
@@ -48,6 +48,27 @@ const MODES = [
     color: 'from-yellow-600 to-amber-500',
     accent: '#eab308'
   }
+]
+
+const EXTRA_LINKS = [
+  {
+    href: '/como-jugar',
+    title: 'Cómo se juega',
+    text: 'Aprendé el flujo del draft, las posiciones y la simulación.',
+    icon: '📘',
+  },
+  {
+    href: '/records',
+    title: 'Records',
+    text: 'Rankings de ratings, goleadores y leyendas de la base actual.',
+    icon: '📚',
+  },
+  {
+    href: '/daily',
+    title: 'Reto diario',
+    text: 'El futuro desafío compartido con el mismo sorteo para todos.',
+    icon: '🔥',
+  },
 ]
 
 const containerVariants = {
@@ -242,6 +263,33 @@ export default function HomePage() {
             </motion.div>
           ))}
         </motion.div>
+      </section>
+
+      {/* Extra Links */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="grid gap-4 md:grid-cols-3">
+          {EXTRA_LINKS.map((item, index) => (
+            <motion.div
+              key={item.href}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06 }}
+            >
+              <Link href={item.href} className="group block">
+                <div className="card-gradient rounded-2xl p-5 transition-all duration-300 group-hover:border-[#75AADB]/30 group-hover:shadow-xl group-hover:shadow-[#75AADB]/10">
+                  <div className="mb-3 text-3xl">{item.icon}</div>
+                  <h3 className="font-display text-lg font-black text-white group-hover:text-[#75AADB]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-400">
+                    {item.text}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* Club Grid */}

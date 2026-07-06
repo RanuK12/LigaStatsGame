@@ -7,10 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_ITEMS = [
   { href: '/', label: 'Inicio', icon: '🏠' },
-  { href: '/draft', label: 'Draft', icon: '⚽' },
+  { href: '/draft?mode=clasico', match: '/draft', label: 'Draft', icon: '⚽' },
   { href: '/ruleta', label: 'Ruleta', icon: '🎰' },
+  { href: '/records', label: 'Records', icon: '📚' },
+  { href: '/daily', label: 'Reto diario', icon: '🔥' },
   { href: '/leaderboard', label: 'Tabla', icon: '🏆' },
-  { href: '/results', label: 'Resultados', icon: '📊' },
 ]
 
 export default function Header() {
@@ -19,25 +20,23 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#071422]/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-        {/* Logo */}
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold text-white">
           <span className="text-xl">⚽</span>
           <span className="hidden sm:inline">LigaStats</span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+            const matchPath = item.match || item.href
+            const isActive = pathname === matchPath || (matchPath !== '/' && pathname.startsWith(matchPath))
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'text-white'
-                    : 'text-gray-400 hover:text-white'
+                  isActive ? 'text-white' : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {isActive && (
@@ -53,7 +52,6 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden rounded-lg p-2 text-gray-400 hover:text-white transition-colors"
@@ -69,7 +67,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
@@ -80,7 +77,9 @@ export default function Header() {
           >
             <div className="flex flex-col gap-1 px-4 py-3">
               {NAV_ITEMS.map((item) => {
-                const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                const matchPath = item.match || item.href
+                const isActive = pathname === matchPath || (matchPath !== '/' && pathname.startsWith(matchPath))
+
                 return (
                   <Link
                     key={item.href}

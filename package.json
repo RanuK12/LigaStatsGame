@@ -11,7 +11,9 @@
     "scrape:players": "node scripts/scrape-players.mjs",
     "generate:quizzes": "node scripts/generate-quizzes.js",
     "update:db": "node scripts/update-db.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "audit:data": "node scripts/data/validate-dataset.mjs",
+    "normalize:data": "node scripts/data/normalize-dataset.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
