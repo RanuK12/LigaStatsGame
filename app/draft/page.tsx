@@ -2,14 +2,17 @@
 
 import { useSearchParams } from "next/navigation"
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { z } from "zod"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import playersData from "@/data/players.json"
 import squadsData from "@/data/squads.json"
 import clubsData from "@/data/clubs.json"
 import type { Player, Squad, Club } from "@/lib/types"
-import { playerSchema, squadSchema, clubSchema } from "@/lib/types"
+import {
+  normalizePlayers,
+  normalizeSquads,
+  normalizeClubs,
+} from "@/lib/data-normalizers"
 import {
   formations,
   canPlayHere,
@@ -25,9 +28,16 @@ import {
 /* ═══════════════════════════════════════════════════════════════
    POSITION COLORS
    ═══════════════════════════════════════════════════════════════ */
-function safeParseArray<T>(data: unknown, schema: z.ZodArray<any>): T[] {
-  const result = schema.safeParse(data);
-  return result.success ? result.data : [];
+function getEligibleSquadsForSlot(
+  squads: Squad[],
+  players: Player[],
+  slotPosition: string,
+  draftedIds: Set<string>
+): Squad[] {
+  return squads.filter((squad) => {
+    const squadPlayers = players.filter((player) => squad.playerIds.includes(player.id))
+    return squadPlayers.some((player) => !draftedIds.has(player.id) && canPlayHere(player, slotPosition))
+  })
 }
 
 const PC: Record<string, string> = {
@@ -150,18 +160,25 @@ function RouletteWheel({ squads, spinning, result }: {
   squads: Squad[]; spinning: boolean; result: Squad | null
 }) {
   const [rotation, setRotation] = useState(0)
-  const segCount = Math.min(squads.length, 30)
-  const segAngle = 360 / segCount
+  const visibleSquads = useMemo(() => squads.slice(0, 18), [squads])
+  const segCount = visibleSquads.length
+  const segAngle = segCount > 0 ? 360 / segCount : 360
+
+  const abbrevLabel = (label: string) => {
+    const words = label.replace(/['’]/g, '').split(/\s+/).filter(Boolean)
+    if (words.length === 0) return label.slice(0, 8)
+    return words.map((word) => word[0]).join('').slice(0, 4).toUpperCase()
+  }
 
   useEffect(() => {
-    if (spinning && result) {
-      const idx = squads.findIndex(s => s.id === result.id)
+    if (spinning && result && segCount > 0) {
+      const idx = visibleSquads.findIndex(s => s.id === result.id)
       if (idx >= 0) {
         const target = 360 * 6 + (360 - (idx % segCount) * segAngle - segAngle / 2)
         setRotation(prev => prev + target)
       }
     }
-  }, [spinning, result, squads, segCount, segAngle])
+  }, [spinning, result, visibleSquads, segCount, segAngle])
 
   const colors = [
     '#dc2626', '#ea580c', '#d97706', '#65a30d', '#16a34a', '#0d9488',
@@ -171,20 +188,71 @@ function RouletteWheel({ squads, spinning, result }: {
     '#4f46e5', '#7c3aed', '#9333ea', '#c026d3', '#db2777', '#e11d48'
   ]
 
-  return (
-    <div className="w-64 h-64 mx-auto rounded-full border-4 border-slate-600 relative overflow-hidden"
-      style={{
-        background: `conic-gradient(from 0deg, ${Array.from({ length: segCount }, (_, i) =>
-          `${colors[i % colors.length]} 20`
-        ).join(', ')})`
-      }}>
-      <motion.div animate={{ rotate: rotation }}
-        transition={{ duration: spinning ? 4 : 0, ease: [0.17, 0.67, 0.12, 0.99] }}
-        className="absolute inset-0" />
-      <div className="absolute inset-[28%] bg-slate-900 rounded-full flex items-center justify-center text-3xl shadow-lg border-2 border-slate-700 z-10">
-        ⚽
+  if (segCount === 0) {
+    return (
+      <div className="mx-auto flex h-64 w-64 items-center justify-center rounded-full border border-slate-700 bg-slate-900/70 text-center text-sm text-slate-400">
+        No hay planteles disponibles para esta posición.
       </div>
-      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[20px] border-l-transparent border-r-transparent border-t-white z-20" />
+    )
+  }
+
+  return (
+    <div className="relative mx-auto h-64 w-64 overflow-hidden rounded-full border-4 border-slate-600 bg-slate-950 shadow-[0_0_0_8px_rgba(117,170,219,0.08),0_0_50px_rgba(249,115,22,0.18)]">
+      <div className="absolute -inset-8 rounded-full bg-orange-500/15 blur-2xl" />
+      <div className="absolute -top-1 left-1/2 z-30 h-0 w-0 -translate-x-1/2 border-l-[12px] border-r-[12px] border-t-[20px] border-l-transparent border-r-transparent border-t-white drop-shadow-[0_0_10px_rgba(255,255,255,0.85)]" />
+
+      <motion.div
+        animate={{ rotate: rotation, scale: spinning ? [1, 1.03, 1] : 1, y: spinning ? [0, -1, 1, 0] : 0 }}
+        transition={{
+          rotate: { duration: spinning ? 3.4 : 0, ease: [0.17, 0.67, 0.12, 0.99] },
+          scale: { duration: 0.35, repeat: spinning ? Infinity : 0 },
+          y: { duration: 0.35, repeat: spinning ? Infinity : 0 },
+        }}
+        className="absolute inset-0 z-10"
+      >
+        <svg viewBox="0 0 100 100" className="h-full w-full">
+          {visibleSquads.map((squad, index) => {
+            const startAngle = index * segAngle
+            const endAngle = (index + 1) * segAngle
+            const startRad = (startAngle - 90) * Math.PI / 180
+            const endRad = (endAngle - 90) * Math.PI / 180
+            const x1 = 50 + 50 * Math.cos(startRad)
+            const y1 = 50 + 50 * Math.sin(startRad)
+            const x2 = 50 + 50 * Math.cos(endRad)
+            const y2 = 50 + 50 * Math.sin(endRad)
+            const midRad = ((startAngle + endAngle) / 2 - 90) * Math.PI / 180
+            const textX = 50 + 31 * Math.cos(midRad)
+            const textY = 50 + 31 * Math.sin(midRad)
+            const isSelected = spinning && result?.id === squad.id
+
+            return (
+              <g key={squad.id}>
+                <path
+                  d={`M50,50 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`}
+                  fill={isSelected ? '#f97316' : colors[index % colors.length]}
+                  stroke="#94a3b8"
+                  strokeWidth="0.25"
+                />
+                <text
+                  x={textX}
+                  y={textY}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fill="white"
+                  fontSize="3.1"
+                  fontWeight="900"
+                  transform={`rotate(${(startAngle + endAngle) / 2}, ${textX}, ${textY})`}
+                >
+                  {abbrevLabel(squad.label)}
+                </text>
+              </g>
+            )
+          })}
+
+          <circle cx="50" cy="50" r="10" fill="#020617" stroke="#f97316" strokeWidth="0.8" />
+          <text x="50" y="51.5" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="6">⚽</text>
+        </svg>
+      </motion.div>
     </div>
   )
 }
@@ -197,10 +265,9 @@ function DraftInner() {
   const modeId = (sp.get("mode") || "clasico") as string
   const mode = GAME_MODES[modeId] || GAME_MODES.clasico
 
-  const allP = useMemo(() => safeParseArray<Player>(playersData, z.array(playerSchema)), [])
-  const allS = useMemo(() => safeParseArray<Squad>(squadsData, z.array(squadSchema)), [])
-  const allC = useMemo(() => safeParseArray<Club>(clubsData, z.array(clubSchema)), [])
-  const cMap = useMemo(() => Object.fromEntries(allC.map(c => [c.id, c])), [allC])
+  const allP = useMemo(() => normalizePlayers(playersData), [])
+  const allS = useMemo(() => normalizeSquads(squadsData), [])
+  const allC = useMemo(() => normalizeClubs(clubsData), [])
 
   // ── Game State ──
   const [started, setStarted] = useState(false)
@@ -215,12 +282,17 @@ function DraftInner() {
   const [search, setSearch] = useState("")
   const [simResult, setSimResult] = useState<any>(null)
   const [confetti, setConfetti] = useState(false)
+  const [spinNotice, setSpinNotice] = useState<string | null>(null)
   const draftedRef = useRef<(Player | null)[]>([])
 
   const f = formations[fm as keyof typeof formations] || formations["4-3-3"]
   const totalSlots = f.positions.length
   const currentPos = f.positions[activeSlotIdx] || f.positions[0]
   const filledCount = drafted.filter(Boolean).length
+  const eligibleSquads = useMemo(
+    () => getEligibleSquadsForSlot(allS, allP, currentPos.pos, draftedIds),
+    [allS, allP, currentPos.pos, draftedIds]
+  )
 
   // ── Score ──
   const teamScore = useMemo(() => calculateFullTeamScore(drafted, f), [drafted, f])
@@ -246,6 +318,7 @@ function DraftInner() {
     setWildcards(mode.rerolls || 3)
     setSearch("")
     setSimResult(null)
+    setSpinNotice(null)
     setStarted(true)
     setPhase("ready")
   }, [totalSlots, mode])
@@ -255,22 +328,25 @@ function DraftInner() {
   // ═══════════════════════════════════════════════════════════
   const spinWheel = useCallback(() => {
     if (spinning) return
-    setSpinning(true)
-    setPhase("spinning")
-    const valid = allS.filter(s => s.playerIds.length >= 11)
-    if (valid.length === 0) {
+    const eligible = getEligibleSquadsForSlot(allS, allP, currentPos.pos, draftedIds)
+    if (eligible.length === 0) {
+      setSpinNotice("No hay planteles disponibles para esta posición. Probá cambiar de formación o reiniciar.")
+      setCurrentSquad(null)
       setSpinning(false)
       setPhase("ready")
       return
     }
-    const result = valid[Math.floor(Math.random() * valid.length)]
+    const result = eligible[Math.floor(Math.random() * eligible.length)]
+    setSpinNotice(null)
+    setCurrentSquad(result)
+    setSpinning(true)
+    setPhase("spinning")
     setTimeout(() => {
-      setCurrentSquad(result)
       setSpinning(false)
       setPhase("picking")
       setSearch("")
     }, 2800)
-  }, [spinning, allS])
+  }, [spinning, allS, allP, currentPos.pos, draftedIds])
 
   // ═══════════════════════════════════════════════════════════
   //  REROLL (wildcard)
@@ -343,6 +419,7 @@ function DraftInner() {
       setActiveSlotIdx(idx)
       setCurrentSquad(null)
       setSearch("")
+      setSpinNotice(null)
       setPhase("ready")
     }
     // During "picking" → DO NOT allow switching slots (forces one pick per spin)
@@ -369,6 +446,7 @@ function DraftInner() {
     })
     setActiveSlotIdx(idx)
     setCurrentSquad(null)
+    setSpinNotice(null)
     setPhase("ready")
   }, [drafted])
 
@@ -440,6 +518,7 @@ function DraftInner() {
     setDraftedIds(new Set())
     setCurrentSquad(null)
     setSimResult(null)
+    setSpinNotice(null)
     setActiveSlotIdx(0)
   }, [])
 
@@ -665,6 +744,11 @@ function DraftInner() {
         {/* ═══ PHASE: READY — Spin button ═══ */}
         {phase === "ready" && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+            {spinNotice && (
+              <div className="card-gradient rounded-xl p-3 mb-4 text-sm text-amber-200 border border-amber-400/20">
+                {spinNotice}
+              </div>
+            )}
             <div className="card-gradient rounded-xl p-4 mb-4 text-center">
               <div className="text-sm text-slate-400 mb-1">
                 Posición {filledCount + 1} de {totalSlots}:
@@ -704,7 +788,8 @@ function DraftInner() {
               </strong>
               {" "}({filledCount + 1}/{totalSlots})
             </p>
-            <RouletteWheel squads={allS} spinning={true} result={null} />
+            <RouletteWheel squads={eligibleSquads} spinning={true} result={currentSquad} />
+            <p className="mt-4 text-sm text-slate-500">Buscando un plantel elegible para la posición actual...</p>
           </motion.div>
         )}
 

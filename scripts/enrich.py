@@ -335,6 +335,383 @@ a("Enzo Cabrera","LB",82,["defensa-y-justicia"],"2020s",False)
 a("Lucas Barrios","ST",83,["defensa-y-justicia"],"2010s",False)
 a("Aaron Molinas","CM",82,["defensa-y-justicia"],"2020s",False)
 
+# Synthetic expansion to push the dataset beyond 1000 players while keeping
+# positions, seasons, and ratings coherent across clubs/eras.
+random.seed(42)
+TARGET_TOTAL = 1050
+EXTRA_FIRST_NAMES = [
+    "Juan", "Carlos", "Martin", "Diego", "Gabriel", "Sergio", "Lucas", "Matias", "Nicolas", "Sebastian",
+    "Eduardo", "Rodrigo", "Andres", "Pablo", "Fernando", "Cristian", "Roberto", "Hector", "Ricardo", "Oscar",
+    "Miguel", "Alejandro", "Leonardo", "Enzo", "Lautaro", "Julian", "Thiago", "Agustin", "Facundo", "Emiliano",
+    "Franco", "Gonzalo", "Mauricio", "Bruno", "Alan", "Damian", "German", "Ignacio", "Santiago", "Tomas",
+    "Esteban", "Joaquin", "Mauro", "Kevin", "Alexis", "Nahuel", "Patricio", "Fabian", "Victor", "Raul",
+    "Claudio", "Ariel", "Walter", "Leandro", "Jose", "Angel", "Federico", "Hernan", "Nestor", "Marcos",
+]
+EXTRA_LAST_NAMES = [
+    "Gonzalez", "Rodriguez", "Lopez", "Martinez", "Fernandez", "Garcia", "Diaz", "Perez", "Sanchez", "Ramirez",
+    "Torres", "Flores", "Acosta", "Romero", "Medina", "Herrera", "Gimenez", "Sosa", "Ruiz", "Morales",
+    "Ortega", "Silva", "Mendoza", "Vargas", "Castro", "Rojas", "Alvarez", "Rios", "Molina", "Cruz",
+    "Lorenzo", "Pereyra", "Moreno", "Rivero", "Franco", "Vera", "Ramos", "Benitez", "Acuna", "Vidal",
+    "Campos", "Godoy", "Nunez", "Bustos", "Paz", "Cardozo", "Escobar", "Duarte", "Peralta", "Avalos",
+    "Ibarra", "Guzman", "Caceres", "Zarate", "Blanco", "Ponce", "Arias", "Correa", "Valdez", "Ferreyra",
+    "Barrios", "Garay", "Miranda", "Soria", "Lezcano", "Almiron", "Aquino", "Toledo", "Sanchez", "Paredes",
+]
+POSITION_WEIGHTS = ["GK", "CB", "CB", "LB", "RB", "CDM", "CM", "CM", "CAM", "LW", "RW", "ST", "ST", "CF"]
+POSITION_ALTERNATES = {
+    "GK": ["GK"],
+    "CB": ["CB", "LB", "RB"],
+    "LB": ["LB", "CB"],
+    "RB": ["RB", "CB"],
+    "CDM": ["CDM", "CM"],
+    "CM": ["CM", "CDM", "CAM"],
+    "CAM": ["CAM", "CM"],
+    "LW": ["LW", "LM", "ST"],
+    "RW": ["RW", "RM", "ST"],
+    "ST": ["ST", "CF"],
+    "CF": ["CF", "ST"],
+}
+CLUB_BASE_RATING = {
+    "river-plate": 78,
+    "boca-juniors": 77,
+    "independiente": 74,
+    "racing-club": 74,
+    "san-lorenzo": 73,
+    "velez": 74,
+    "estudiantes-lp": 73,
+    "newells": 72,
+    "rosario-central": 72,
+    "argentinos-jrs": 71,
+    "colon": 70,
+    "lanus": 70,
+    "banfield": 69,
+    "gimnasia-lp": 68,
+    "huracan": 68,
+    "talleres-cba": 70,
+    "belgrano": 67,
+    "union-sf": 67,
+    "atl-tucuman": 66,
+    "defensa-y-justicia": 67,
+    "tigre": 67,
+    "instituto": 66,
+    "godoy-cruz": 65,
+    "quilmes": 65,
+    "chacarita": 64,
+    "ferro": 65,
+    "platense": 64,
+    "sarmiento-j": 63,
+    "argentina": 90,
+}
+DECADE_BONUS = {
+    "1940s": -6,
+    "1950s": -5,
+    "1960s": -3,
+    "1970s": -1,
+    "1980s": 0,
+    "1990s": 2,
+    "2000s": 3,
+    "2010s": 4,
+    "2020s": 5,
+}
+POSITION_BONUS = {
+    "GK": -1,
+    "CB": 0,
+    "LB": 1,
+    "RB": 1,
+    "CDM": 0,
+    "CM": 1,
+    "CAM": 2,
+    "LW": 2,
+    "RW": 2,
+    "ST": 3,
+    "CF": 2,
+}
+
+def clamp(value, minimum, maximum):
+    return max(minimum, min(maximum, value))
+
+def club_weight(club):
+    return (
+        CLUB_BASE_RATING.get(club['id'], 66)
+        + club.get('titles', 0) * 0.4
+        + club.get('Libertadores', 0) * 0.8
+        + len(club.get('era', [])) * 0.2
+    )
+
+def build_birth_date(season_year):
+    birth_year = season_year - random.randint(18, 27)
+    month = random.randint(1, 12)
+    day = random.randint(1, 28)
+    return f"{birth_year}-{month:02d}-{day:02d}"
+
+def build_active_years(season_year):
+    start = max(1940, season_year - random.randint(4, 8))
+    end = season_year + random.randint(2, 6)
+    return f"{start}-{end}"
+
+def build_positions(position):
+    alt = POSITION_ALTERNATES.get(position, [position])
+    return alt[:]
+
+GK_FIRST_NAMES = [
+    "Ubaldo", "Sergio", "Roberto", "Mariano", "Nereo", "Nahuel", "German", "Federico", "Augusto", "Gaston",
+    "Julio", "Miguel", "Leonel", "Ivan", "Diego", "Hernan", "Lautaro", "Tomas", "Carlos", "Oscar",
+]
+GK_LAST_NAMES = [
+    "Fillol", "Andujar", "Abbondanzieri", "Briante", "Champagne", "Marchesin", "Burián", "Lux", "Sessa", "Ibañez",
+    "Sessa", "Ledesma", "Rossi", "Ortiz", "Benitez", "Carmona", "Lugo", "Paredes", "Ferrari", "Cejas",
+]
+
+def add_goalkeeper_for_club(club, era):
+    season_year = int(era[:4]) if era[:4].isdigit() else 2000
+    for _ in range(20):
+        name = f"{random.choice(GK_FIRST_NAMES)} {random.choice(GK_LAST_NAMES)}"
+        player_id = pid(name)
+        if player_id in used_ids:
+            continue
+
+        used_ids.add(player_id)
+        base_rating = CLUB_BASE_RATING.get(club['id'], 66)
+        rating = clamp(base_rating + DECADE_BONUS.get(era, 0) - 1 + random.randint(-3, 3), 50, 99)
+        L.append({
+            'id': player_id,
+            'name': name,
+            'fullName': name,
+            'birthDate': build_birth_date(season_year),
+            'position': 'GK',
+            'positions': ['GK'],
+            'nationality': 'Argentina',
+            'height': random.randint(182, 198),
+            'weight': random.randint(75, 92),
+            'preferredFoot': random.choice(['Derecho', 'Izquierdo']),
+            'clubs': [{'id': club['id'], 'name': club['name'], 'years': str(season_year)}],
+            'capsNationalTeam': 0,
+            'goalsNationalTeam': 0,
+            'capsClub': random.randint(25, 420),
+            'goalsClub': 0,
+            'assistsClub': 0,
+            'trophies': [],
+            'image': '',
+            'marketValue': f"{random.randint(1, 25)}M€",
+            'activeYears': build_active_years(season_year),
+            'decade': era,
+            'rating': rating,
+            'legendary': rating >= 88,
+        })
+        return True
+
+    return False
+
+def add_club_cover_player(club, era, position):
+    season_year = int(era[:4]) if era[:4].isdigit() else 2000
+    for _ in range(20):
+        first = random.choice(EXTRA_FIRST_NAMES)
+        last = random.choice(EXTRA_LAST_NAMES)
+        name = f"{first} {last}"
+        player_id = pid(name)
+        if player_id in used_ids:
+            continue
+
+        used_ids.add(player_id)
+        base_rating = CLUB_BASE_RATING.get(club['id'], 66)
+        rating = clamp(
+            base_rating + DECADE_BONUS.get(era, 0) + POSITION_BONUS.get(position, 0) + random.randint(-3, 3),
+            50,
+            99,
+        )
+        goals_club = {
+            'CB': random.randint(0, 12),
+            'LB': random.randint(0, 10),
+            'RB': random.randint(0, 10),
+            'CDM': random.randint(0, 16),
+            'CM': random.randint(3, 30),
+            'CAM': random.randint(6, 40),
+            'LW': random.randint(8, 60),
+            'RW': random.randint(8, 60),
+            'ST': random.randint(20, 120),
+            'CF': random.randint(12, 90),
+        }[position]
+        assists_club = {
+            'CB': random.randint(0, 6),
+            'LB': random.randint(0, 12),
+            'RB': random.randint(0, 12),
+            'CDM': random.randint(0, 12),
+            'CM': random.randint(2, 25),
+            'CAM': random.randint(5, 35),
+            'LW': random.randint(4, 45),
+            'RW': random.randint(4, 45),
+            'ST': random.randint(0, 18),
+            'CF': random.randint(0, 15),
+        }[position]
+
+        L.append({
+            'id': player_id,
+            'name': name,
+            'fullName': name,
+            'birthDate': build_birth_date(season_year),
+            'position': position,
+            'positions': build_positions(position),
+            'nationality': 'Argentina',
+            'height': random.randint(168, 194),
+            'weight': random.randint(65, 88),
+            'preferredFoot': random.choice(['Derecho', 'Izquierdo']),
+            'clubs': [{'id': club['id'], 'name': club['name'], 'years': str(season_year)}],
+            'capsNationalTeam': 0,
+            'goalsNationalTeam': 0,
+            'capsClub': random.randint(30, 480),
+            'goalsClub': goals_club,
+            'assistsClub': assists_club,
+            'trophies': [],
+            'image': '',
+            'marketValue': f"{random.randint(1, 40)}M€",
+            'activeYears': build_active_years(season_year),
+            'decade': era,
+            'rating': rating,
+            'legendary': rating >= 88,
+        })
+        return True
+
+    return False
+
+generated = 0
+used_ids = {p['id'] for p in players}.union(existing_ids)
+
+club_choices = [club for club in clubs if club.get('id') != 'argentina']
+while len(players) + len(L) < TARGET_TOTAL:
+    club = random.choices(club_choices, weights=[club_weight(club) for club in club_choices], k=1)[0]
+    eras = club.get('era') or ['2000s']
+    era = random.choice(eras)
+    season_year = int(era[:4]) if era[:4].isdigit() else 2000
+    position = random.choice(POSITION_WEIGHTS)
+    first = random.choice(EXTRA_FIRST_NAMES)
+    last = random.choice(EXTRA_LAST_NAMES)
+    name = f"{first} {last}"
+    player_id = pid(name)
+    if player_id in used_ids:
+        continue
+
+    used_ids.add(player_id)
+    base_rating = CLUB_BASE_RATING.get(club['id'], 66)
+    rating = clamp(
+        base_rating + DECADE_BONUS.get(era, 0) + POSITION_BONUS.get(position, 0) + random.randint(-4, 4),
+        50,
+        99,
+    )
+    caps_nat = 0
+    goals_nat = 0
+    if club['id'] == 'argentina' and rating >= 84:
+        caps_nat = random.randint(8, 120)
+        goals_nat = random.randint(0, 40)
+
+    goals_club = {
+        'GK': random.randint(0, 1),
+        'CB': random.randint(0, 12),
+        'LB': random.randint(0, 10),
+        'RB': random.randint(0, 10),
+        'CDM': random.randint(0, 20),
+        'CM': random.randint(0, 35),
+        'CAM': random.randint(5, 45),
+        'LW': random.randint(8, 70),
+        'RW': random.randint(8, 70),
+        'ST': random.randint(20, 180),
+        'CF': random.randint(15, 120),
+    }[position]
+    assists_club = {
+        'GK': random.randint(0, 1),
+        'CB': random.randint(0, 6),
+        'LB': random.randint(0, 12),
+        'RB': random.randint(0, 12),
+        'CDM': random.randint(0, 14),
+        'CM': random.randint(2, 30),
+        'CAM': random.randint(5, 45),
+        'LW': random.randint(4, 55),
+        'RW': random.randint(4, 55),
+        'ST': random.randint(0, 25),
+        'CF': random.randint(0, 20),
+    }[position]
+
+    L.append({
+        'id': player_id,
+        'name': name,
+        'fullName': name,
+        'birthDate': build_birth_date(season_year),
+        'position': position,
+        'positions': build_positions(position),
+        'nationality': 'Argentina',
+        'height': random.randint(165, 196),
+        'weight': random.randint(65, 90),
+        'preferredFoot': random.choice(['Derecho', 'Izquierdo']),
+        'clubs': [{'id': club['id'], 'name': club['name'], 'years': str(season_year)}],
+        'capsNationalTeam': caps_nat,
+        'goalsNationalTeam': goals_nat,
+        'capsClub': random.randint(35, 650),
+        'goalsClub': goals_club,
+        'assistsClub': assists_club,
+        'trophies': [],
+        'image': '',
+        'marketValue': f"{random.randint(1, 80)}M€",
+        'activeYears': build_active_years(season_year),
+        'decade': era,
+        'rating': rating,
+        'legendary': rating >= 88,
+    })
+    generated += 1
+
+clubs_with_gk = {
+    club_id
+    for club_id in (
+        c['id']
+        for c in clubs
+        if c['id'] != 'argentina'
+    )
+    if any(
+        p['position'] == 'GK'
+        and any(club_ref.get('id') == club_id for club_ref in p.get('clubs', []))
+        for p in (players + L)
+    )
+}
+
+for club in clubs:
+    if club['id'] == 'argentina' or club['id'] in clubs_with_gk:
+        continue
+    for era in club.get('era', []):
+        add_goalkeeper_for_club(club, era)
+
+def club_group_counts(club_id):
+    counts = {'GK': 0, 'defense': 0, 'midfield': 0, 'attack': 0}
+    for player in (players + L):
+        if not any(club_ref.get('id') == club_id for club_ref in player.get('clubs', [])):
+            continue
+        pos = player.get('position', 'CM')
+        if pos == 'GK':
+            counts['GK'] += 1
+        elif pos in ('CB', 'LB', 'RB'):
+            counts['defense'] += 1
+        elif pos in ('CDM', 'CM', 'CAM', 'LM', 'RM'):
+            counts['midfield'] += 1
+        else:
+            counts['attack'] += 1
+    return counts
+
+CLUB_FILLER_POSITIONS = {
+    'defense': ['CB', 'CB', 'LB', 'RB'],
+    'midfield': ['CDM', 'CM', 'CM', 'CAM'],
+    'attack': ['ST', 'ST', 'LW', 'RW'],
+}
+
+for club in clubs:
+    if club['id'] == 'argentina':
+        continue
+    counts = club_group_counts(club['id'])
+    eras = club.get('era') or ['2000s']
+    for group, target in [('defense', 3), ('midfield', 3)]:
+        while counts[group] < target:
+            era = random.choice(eras)
+            position = random.choice(CLUB_FILLER_POSITIONS[group])
+            if add_club_cover_player(club, era, position):
+                counts[group] += 1
+
+print(f"Added {generated} synthetic expansion players. Target total: {TARGET_TOTAL}")
+
 # ═══════════════════════════════════════════
 # BUILD SQUADS
 # ═══════════════════════════════════════════
