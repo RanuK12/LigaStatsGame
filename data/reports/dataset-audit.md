@@ -2,11 +2,11 @@
 
 ## Totals
 - Clubs: 29
-- Players: 487
-- Squads: 218
+- Players: 1088
+- Squads: 371
 
 ## Health Score
-- Score: 80
+- Score: 100
 - Critical issues: 0
 - Warnings: 0
 
@@ -19,37 +19,44 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 487
-- Players with clubs: 487
-- Players with valid position: 487
-- Playable squads: 218
+- Players with rating: 1088
+- Players with clubs: 1088
+- Players with valid position: 1088
+- Playable squads: 371
 
 ## Players by club
-- argentina: 64
-- river-plate: 34
-- independiente: 33
-- racing-club: 33
-- boca-juniors: 32
-- san-lorenzo: 32
-- estudiantes-lp: 30
-- banfield: 24
-- lanus: 24
-- argentinos-jrs: 21
-- newells: 21
-- colon: 20
-- defensa-y-justicia: 20
-- gimnasia-lp: 20
-- velez: 20
-- talleres-cba: 18
+- argentina: 68
+- boca-juniors: 67
+- san-lorenzo: 65
+- racing-club: 57
+- river-plate: 52
+- independiente: 51
+- argentinos-jrs: 49
+- estudiantes-lp: 46
+- velez: 44
+- defensa-y-justicia: 42
+- banfield: 41
+- lanus: 41
+- colon: 39
+- gimnasia-lp: 39
+- talleres-cba: 39
+- newells: 38
+- tigre: 38
+- rosario-central: 30
+- union-sf: 28
+- chacarita: 25
+- huracan: 25
+- sarmiento-j: 25
+- godoy-cruz: 22
+- atl-tucuman: 20
+- belgrano: 20
+- quilmes: 20
+- platense: 19
+- instituto: 17
+- ferro: 16
 - velez-sarsfield: 11
-- rosario-central: 10
 - newells-old-boys: 7
-- huracan: 6
-- tigre: 6
-- belgrano: 4
-- union-sf: 4
 - argentinos-juniors: 3
-- atl-tucuman: 2
 - psg: 2
 - barcelona: 1
 - barcelona-ii: 1
@@ -71,18 +78,23 @@
 - sevilla: 1
 
 ## Players by decade
-- 2020s: 298
-- 1990s: 48
-- 2010s: 36
-- 2000s: 33
-- 1970s: 30
-- 1980s: 25
-- 1960s: 13
-- 1940s: 3
-- 1950s: 1
+- 2020s: 330
+- 1990s: 90
+- 1970s: 89
+- 2010s: 89
+- 2000s: 87
+- 1980s: 73
+- 1950s: 57
+- 1960s: 55
+- 1910s: 47
+- 1930s: 47
+- 1940s: 44
+- 1920s: 42
+- 1900s: 33
+- 1880s: 4
+- 1890s: 1
 
 ## Top Recommendations
-- Expand the player pool with curated historical squads.
 
 ## Player Problems
 - Missing rating: 0
