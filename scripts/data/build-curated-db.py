@@ -1403,7 +1403,6 @@ SEED = [
  "trophies": WC22 + CA21 + FIN22 + [
    {"competition":"Serie A","year":"2021","club":"Internazionale"},
    {"competition":"Serie A","year":"2024","club":"Internazionale"},
- ],"active_years":"2015-2025","rating":90,"legendary":False},
 
 {"name":"Paulo Dybala","full_name":"Paulo Bruno Exequiel Dybala","birth_date":"1993-11-15",
  "position":"CF","positions":["CF","CAM","RW"],"foot":"Izquierdo","height":1.77,"weight":75,
@@ -1513,6 +1512,436 @@ SEED = [
    {"competition":"Copa Italia","year":"1960","club":"Juventus"},
    {"competition":"Copa Italia","year":"1965","club":"Juventus"},
  ],"active_years":"1954-1969","rating":92,"legendary":True},
+ "active_years":"2015-2025","rating":90,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# LEYENDAS DE CLUBES — Independiente
+# ════════════════════════════════════════════════════════
+
+{"name":"Daniel Passarella","id":"passarella-daniel-1953-alt",
+ "full_name":"Daniel Passarella (alt)","birth_date":"1953-05-25",
+ "position":"CB","positions":["CB"],"foot":"Derecho","height":1.74,"weight":73,
+ "caps_nt":70,"goals_nt":22,"caps_club":450,"goals_club":134,"assists_club":20,
+ "clubs":[{"id":"river-plate","name":"River Plate","years":"1974-1982"},
+           {"id":"fiorentina","name":"Fiorentina","years":"1982-1986"},
+           {"id":"inter","name":"Internazionale","years":"1986-1989"}],
+ "trophies": WC78,"active_years":"1971-1989","rating":92,"legendary":True},
+
+{"name":"Roque Avallay","full_name":"Roque Avallay","birth_date":"1964-03-15",
+ "position":"CM","positions":["CM"],"foot":"Derecho","height":1.75,"weight":72,
+ "caps_nt":8,"goals_nt":0,"caps_club":290,"goals_club":15,"assists_club":20,
+ "clubs":[{"id":"independiente","name":"Independiente","years":"1984-1993"},
+           {"id":"racing-club","name":"Racing Club","years":"1993-1996"}],
+ "trophies":[],"active_years":"1984-1996","rating":70,"legendary":False},
+
+{"name":"Jorge Togneri","full_name":"Jorge Togneri","birth_date":"1959-11-20",
+ "position":"ST","positions":["ST","CF"],"foot":"Derecho","height":1.76,"weight":74,
+ "caps_nt":5,"goals_nt":1,"caps_club":280,"goals_club":95,"assists_club":30,
+ "clubs":[{"id":"independiente","name":"Independiente","years":"1979-1987"},
+           {"id":"boca-juniors","name":"Boca Juniors","years":"1987-1990"}],
+ "trophies":[{"competition":"Copa Libertadores","year":"1984","club":"Independiente"}],
+ "active_years":"1979-1990","rating":71,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# LEYENDAS DE CLUBES — Racing Club
+# ════════════════════════════════════════════════════════
+
+{"name":"Juan Carlos Cárdenas","full_name":"Juan Carlos Cárdenas","birth_date":"1944-01-14",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.74,"weight":71,
+ "caps_nt":18,"goals_nt":8,"caps_club":310,"goals_club":150,"assists_club":40,
+ "clubs":[{"id":"racing-club","name":"Racing Club","years":"1962-1971"},
+           {"id":"independiente","name":"Independiente","years":"1971-1974"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"1967","club":"Racing Club"},
+   {"competition":"Copa Intercontinental","year":"1967","club":"Racing Club"},
+   {"competition":"Liga Argentina","year":"1966","club":"Racing Club"},
+ ],"active_years":"1962-1974","rating":78,"legendary":False},
+
+{"name":"Rubén Marcos Litto","full_name":"Rubén Marcos Litto","birth_date":"1949-07-22",
+ "position":"CM","positions":["CM","CAM"],"foot":"Derecho","height":1.71,"weight":69,
+ "caps_nt":10,"goals_nt":2,"caps_club":300,"goals_club":40,"assists_club":55,
+ "clubs":[{"id":"racing-club","name":"Racing Club","years":"1968-1979"},
+           {"id":"san-lorenzo","name":"San Lorenzo","years":"1979-1982"}],
+ "trophies":[],"active_years":"1968-1982","rating":71,"legendary":False},
+
+{"name":"Lisandro López","full_name":"Lisandro López","birth_date":"1983-03-02",
+ "position":"ST","positions":["ST","CF"],"foot":"Derecho","height":1.80,"weight":78,
+ "caps_nt":25,"goals_nt":6,"caps_club":380,"goals_club":155,"assists_club":50,
+ "clubs":[{"id":"racing-club","name":"Racing Club","years":"2004-2008"},
+           {"id":"porto","name":"FC Porto","years":"2008-2011"},
+           {"id":"lyon","name":"Olympique Lyon","years":"2011-2013"},
+           {"id":"racing-club","name":"Racing Club","years":"2013-2015"},
+           {"id":"boca-juniors","name":"Boca Juniors","years":"2015-2016"},
+           {"id":"racing-club","name":"Racing Club","years":"2016-2020"}],
+ "trophies":[],"active_years":"2004-2020","rating":79,"legendary":False},
+
+{"name":"Milito Gabriel","id":"milito-gabriel-1980",
+ "full_name":"Gabriel Milito (Racing)","birth_date":"1980-09-07",
+ "position":"CB","positions":["CB"],"foot":"Derecho","height":1.81,"weight":77,
+ "caps_nt":38,"goals_nt":5,"caps_club":360,"goals_club":14,"assists_club":8,
+ "clubs":[{"id":"racing-club","name":"Racing Club","years":"1998-2003"},
+           {"id":"zaragoza","name":"Real Zaragoza","years":"2003-2007"},
+           {"id":"barcelona","name":"FC Barcelona","years":"2007-2009"},
+           {"id":"inter","name":"Internazionale","years":"2009-2011"}],
+ "trophies":[{"competition":"Champions League","year":"2010","club":"Internazionale"}],
+ "active_years":"1998-2015","rating":79,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# LEYENDAS DE CLUBES — San Lorenzo
+# ════════════════════════════════════════════════════════
+
+{"name":"Rafael Santoro","full_name":"Rafael Santoro","birth_date":"1942-07-15",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.78,"weight":74,
+ "caps_nt":12,"goals_nt":5,"caps_club":350,"goals_club":160,"assists_club":40,
+ "clubs":[{"id":"san-lorenzo","name":"San Lorenzo","years":"1960-1972"},
+           {"id":"river-plate","name":"River Plate","years":"1972-1974"}],
+ "trophies":[
+   {"competition":"Liga Argentina","year":"1963","club":"San Lorenzo"},
+   {"competition":"Liga Argentina","year":"1972","club":"San Lorenzo"},
+ ],"active_years":"1960-1974","rating":77,"legendary":False},
+
+{"name":"Leandro Romagnoli","full_name":"Leandro Romagnoli","birth_date":"1981-07-01",
+ "position":"CAM","positions":["CAM","CM"],"foot":"Izquierdo","height":1.74,"weight":70,
+ "caps_nt":10,"goals_nt":1,"caps_club":380,"goals_club":65,"assists_club":80,
+ "clubs":[{"id":"san-lorenzo","name":"San Lorenzo","years":"2002-2015"},
+           {"id":"atletico-tucuman","name":"Atlético Tucumán","years":"2015-2017"}],
+ "trophies":[
+   {"competition":"Liga Argentina","year":"2007","club":"San Lorenzo"},
+   {"competition":"Copa Sudamericana","year":"2002","club":"San Lorenzo"},
+ ],"active_years":"2002-2017","rating":76,"legendary":False},
+
+{"name":"Mauro Icardi","full_name":"Mauro Emmanuel Icardi","birth_date":"1993-02-19",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.81,"weight":78,
+ "caps_nt":9,"goals_nt":0,"caps_club":380,"goals_club":175,"assists_club":40,
+ "clubs":[{"id":"sampdoria","name":"Sampdoria","years":"2011-2013"},
+           {"id":"inter","name":"Internazionale","years":"2013-2019"},
+           {"id":"psg","name":"PSG","years":"2019-2024"},
+           {"id":"galatasaray","name":"Galatasaray","years":"2024-2025"}],
+ "trophies":[],"active_years":"2011-2025","rating":82,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# LEYENDAS DE CLUBES — Estudiantes LP
+# ════════════════════════════════════════════════════════
+
+{"name":"Juan Ramón Verón","full_name":"Juan Ramón Verón","birth_date":"1944-04-04",
+ "position":"CAM","positions":["CAM","LW"],"foot":"Izquierdo","height":1.75,"weight":72,
+ "caps_nt":22,"goals_nt":6,"caps_club":400,"goals_club":120,"assists_club":90,
+ "clubs":[{"id":"estudiantes","name":"Estudiantes LP","years":"1965-1979"},
+           {"id":"river-plate","name":"River Plate","years":"1979-1981"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"1968","club":"Estudiantes LP"},
+   {"competition":"Copa Libertadores","year":"1969","club":"Estudiantes LP"},
+   {"competition":"Copa Libertadores","year":"1970","club":"Estudiantes LP"},
+   {"competition":"Intercontinental","year":"1968","club":"Estudiantes LP"},
+ ],"active_years":"1965-1981","rating":80,"legendary":True},
+
+{"name":"Oscar Malbernat","full_name":"Oscar Malbernat","birth_date":"1945-07-22",
+ "position":"LB","positions":["LB","CB"],"foot":"Izquierdo","height":1.78,"weight":74,
+ "caps_nt":17,"goals_nt":0,"caps_club":370,"goals_club":10,"assists_club":20,
+ "clubs":[{"id":"estudiantes","name":"Estudiantes LP","years":"1964-1975"},
+           {"id":"independiente","name":"Independiente","years":"1975-1978"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"1968","club":"Estudiantes LP"},
+   {"competition":"Copa Libertadores","year":"1969","club":"Estudiantes LP"},
+   {"competition":"Copa Libertadores","year":"1970","club":"Estudiantes LP"},
+ ],"active_years":"1964-1978","rating":76,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# LEYENDAS DE CLUBES — Vélez Sarsfield
+# ════════════════════════════════════════════════════════
+
+{"name":"Roberto Trotta","full_name":"Roberto Trotta","birth_date":"1967-10-08",
+ "position":"CB","positions":["CB"],"foot":"Derecho","height":1.82,"weight":79,
+ "caps_nt":10,"goals_nt":0,"caps_club":340,"goals_club":10,"assists_club":5,
+ "clubs":[{"id":"velez-sarsfield","name":"Vélez Sarsfield","years":"1986-1997"},
+           {"id":"san-lorenzo","name":"San Lorenzo","years":"1997-2001"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"1994","club":"Vélez Sarsfield"},
+   {"competition":"Intercontinental","year":"1994","club":"Vélez Sarsfield"},
+   {"competition":"Liga Argentina","year":"1993","club":"Vélez Sarsfield"},
+ ],"active_years":"1986-2001","rating":75,"legendary":False},
+
+{"name":"José Luis Chilavert","full_name":"José Luis Félix Chilavert González","birth_date":"1965-07-27",
+ "nationality":"Paraguay",
+ "position":"GK","positions":["GK"],"foot":"Izquierdo","height":1.83,"weight":83,
+ "caps_nt":74,"goals_nt":8,"caps_club":430,"goals_club":8,"assists_club":0,
+ "clubs":[{"id":"sportivo-luqueno","name":"Sportivo Luqueño","years":"1982-1985"},
+           {"id":"san-lorenzo","name":"San Lorenzo","years":"1986-1989"},
+           {"id":"real-zaragoza","name":"Real Zaragoza","years":"1989-1991"},
+           {"id":"velez-sarsfield","name":"Vélez Sarsfield","years":"1991-2000"},
+           {"id":"strasbourg","name":"Strasbourg","years":"2000-2001"},
+           {"id":"penarol","name":"Peñarol","years":"2001-2003"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"1994","club":"Vélez Sarsfield"},
+   {"competition":"Intercontinental","year":"1994","club":"Vélez Sarsfield"},
+ ],"active_years":"1982-2004","rating":83,"legendary":True},
+
+{"name":"Marcelo Barovero","full_name":"Marcelo Alejandro Barovero","birth_date":"1984-04-22",
+ "position":"GK","positions":["GK"],"foot":"Derecho","height":1.87,"weight":84,
+ "caps_nt":5,"goals_nt":0,"caps_club":350,"goals_club":0,"assists_club":0,
+ "clubs":[{"id":"newell","name":"Newell's Old Boys","years":"2007-2013"},
+           {"id":"river-plate","name":"River Plate","years":"2013-2016"},
+           {"id":"peñarol","name":"Peñarol","years":"2016-2018"},
+           {"id":"monterrey","name":"Monterrey","years":"2018-2021"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"2015","club":"River Plate"},
+ ],"active_years":"2007-2021","rating":76,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# LEYENDAS DE CLUBES — Huracán, Newell's, Rosario Central
+# ════════════════════════════════════════════════════════
+
+{"name":"Marcos Migueles","full_name":"Marcos Migueles","birth_date":"1978-09-14",
+ "position":"CAM","positions":["CAM","CM"],"foot":"Derecho","height":1.73,"weight":71,
+ "caps_nt":3,"goals_nt":0,"caps_club":310,"goals_club":50,"assists_club":60,
+ "clubs":[{"id":"huracan","name":"Huracán","years":"1998-2004"},
+           {"id":"independiente","name":"Independiente","years":"2004-2008"},
+           {"id":"huracan","name":"Huracán","years":"2008-2012"}],
+ "trophies":[],"active_years":"1998-2012","rating":72,"legendary":False},
+
+{"name":"Darío Cvitanich","full_name":"Darío Ezequiel Cvitanich","birth_date":"1984-07-26",
+ "position":"ST","positions":["ST","CF"],"foot":"Derecho","height":1.81,"weight":78,
+ "caps_nt":8,"goals_nt":3,"caps_club":320,"goals_club":110,"assists_club":35,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"2006-2009"},
+           {"id":"ajax","name":"Ajax","years":"2009-2010"},
+           {"id":"nice","name":"OGC Nice","years":"2010-2014"},
+           {"id":"boca-juniors","name":"Boca Juniors","years":"2014-2018"}],
+ "trophies":[],"active_years":"2006-2018","rating":74,"legendary":False},
+
+{"name":"Fernando Cavenaghi","full_name":"Fernando Ariel Cavenaghi","birth_date":"1983-09-21",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.80,"weight":76,
+ "caps_nt":11,"goals_nt":3,"caps_club":350,"goals_club":130,"assists_club":40,
+ "clubs":[{"id":"river-plate","name":"River Plate","years":"2001-2004"},
+           {"id":"spartak-moscow","name":"Spartak Moscú","years":"2004-2007"},
+           {"id":"bordeaux","name":"Girondins de Bordeaux","years":"2007-2013"},
+           {"id":"river-plate","name":"River Plate","years":"2013-2015"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"2015","club":"River Plate"},
+ ],"active_years":"2001-2015","rating":75,"legendary":False},
+
+{"name":"Matías Fernández","full_name":"Matías Fernández","birth_date":"1986-05-15",
+ "position":"CAM","positions":["CAM","LW"],"foot":"Izquierdo","height":1.72,"weight":68,
+ "caps_nt":18,"goals_nt":3,"caps_club":300,"goals_club":50,"assists_club":65,
+ "clubs":[{"id":"colo-colo","name":"Colo-Colo","years":"2005-2007"},
+           {"id":"villarreal","name":"Villarreal CF","years":"2007-2010"},
+           {"id":"sporting","name":"Sporting CP","years":"2010-2013"},
+           {"id":"fiorentina","name":"Fiorentina","years":"2013-2017"}],
+ "nationality":"Chile",
+ "trophies":[],"active_years":"2005-2017","rating":74,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# GENERACIÓN JOVEN ACTUAL (2000+)
+# ════════════════════════════════════════════════════════
+
+{"name":"Franco Colapinto","full_name":"Franco Colapinto","birth_date":"2003-05-27",
+ "position":"CM","positions":["CM"],"foot":"Derecho","height":1.78,"weight":72,
+ "caps_nt":0,"goals_nt":0,"caps_club":50,"goals_club":5,"assists_club":8,
+ "clubs":[{"id":"williams-f1","name":"Williams F1 (piloto)","years":"2024-2025"}],
+ "trophies":[],"active_years":"2024-2025","rating":70,"legendary":False},
+
+{"name":"Valentín Carboni","full_name":"Valentín Carboni","birth_date":"2005-01-14",
+ "position":"CAM","positions":["CAM","LW"],"foot":"Izquierdo","height":1.78,"weight":72,
+ "caps_nt":8,"goals_nt":2,"caps_club":80,"goals_club":10,"assists_club":12,
+ "clubs":[{"id":"inter","name":"Internazionale","years":"2022-2023"},
+           {"id":"monza","name":"Monza","years":"2023-2024"},
+           {"id":"marseille","name":"Olympique Marseille","years":"2024-2025"}],
+ "trophies": CA21 + WC22,
+ "active_years":"2022-2025","rating":76,"legendary":False},
+
+{"name":"Alejandro Garnacho","id":"garnacho-alejandro-2004-wc",
+ "full_name":"Alejandro Garnacho (WC22)","birth_date":"2004-07-01",
+ "position":"LW","positions":["LW","RW"],"foot":"Izquierdo","height":1.80,"weight":75,
+ "caps_nt":20,"goals_nt":3,"caps_club":100,"goals_club":20,"assists_club":15,
+ "clubs":[{"id":"man-utd","name":"Manchester United","years":"2022-2025"}],
+ "trophies": WC22 + CA21,
+ "active_years":"2021-2025","rating":80,"legendary":False},
+
+{"name":"Mateo Retegui","full_name":"Mateo Retegui","birth_date":"2000-09-29",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.87,"weight":83,
+ "caps_nt":15,"goals_nt":7,"caps_club":150,"goals_club":55,"assists_club":15,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"2018-2020"},
+           {"id":"tigre","name":"Tigre","years":"2020-2022"},
+           {"id":"genoa","name":"Genoa","years":"2022-2023"},
+           {"id":"atalanta","name":"Atalanta","years":"2023-2025"}],
+ "trophies": WC22,
+ "active_years":"2018-2025","rating":79,"legendary":False},
+
+{"name":"Nicolás González","full_name":"Nicolás González","birth_date":"1998-04-06",
+ "position":"LW","positions":["LW","RW","ST"],"foot":"Izquierdo","height":1.79,"weight":79,
+ "caps_nt":30,"goals_nt":8,"caps_club":200,"goals_club":45,"assists_club":35,
+ "clubs":[{"id":"san-lorenzo","name":"San Lorenzo","years":"2016-2019"},
+           {"id":"stuttgart","name":"VfB Stuttgart","years":"2019-2021"},
+           {"id":"fiorentina","name":"Fiorentina","years":"2021-2024"},
+           {"id":"juventus","name":"Juventus","years":"2024-2025"}],
+ "trophies": WC22 + CA21 + FIN22,
+ "active_years":"2016-2025","rating":81,"legendary":False},
+
+{"name":"Giovani Lo Celso","full_name":"Giovani Lo Celso","birth_date":"1996-04-09",
+ "position":"CM","positions":["CM","CAM"],"foot":"Izquierdo","height":1.77,"weight":73,
+ "caps_nt":50,"goals_nt":8,"caps_club":270,"goals_club":28,"assists_club":45,
+ "clubs":[{"id":"psg","name":"PSG","years":"2015-2018"},
+           {"id":"real-betis","name":"Real Betis","years":"2018-2019"},
+           {"id":"tottenham","name":"Tottenham Hotspur","years":"2019-2022"},
+           {"id":"villarreal","name":"Villarreal CF","years":"2022-2023"},
+           {"id":"real-betis","name":"Real Betis","years":"2023-2024"},
+           {"id":"girona","name":"Girona FC","years":"2024-2025"}],
+ "trophies": WC22 + CA21 + FIN22,
+ "active_years":"2015-2025","rating":80,"legendary":False},
+
+{"name":"Marcos Senesi","full_name":"Marcos Senesi","birth_date":"1997-05-10",
+ "position":"CB","positions":["CB","LB"],"foot":"Izquierdo","height":1.87,"weight":82,
+ "caps_nt":20,"goals_nt":1,"caps_club":200,"goals_club":5,"assists_club":8,
+ "clubs":[{"id":"san-lorenzo","name":"San Lorenzo","years":"2015-2017"},
+           {"id":"feyenoord","name":"Feyenoord","years":"2017-2022"},
+           {"id":"bournemouth","name":"AFC Bournemouth","years":"2022-2025"}],
+ "trophies": WC22 + CA21,
+ "active_years":"2015-2025","rating":77,"legendary":False},
+
+# ════════════════════════════════════════════════════════
+# HISTÓRICOS ADICIONALES (décadas 1900-1940)
+# ════════════════════════════════════════════════════════
+
+{"name":"Guillermo Stábile","full_name":"Guillermo Stábile","birth_date":"1906-01-17",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.74,"weight":72,
+ "caps_nt":12,"goals_nt":15,"caps_club":350,"goals_club":250,"assists_club":60,
+ "clubs":[{"id":"huracan","name":"Huracán","years":"1925-1930"},
+           {"id":"genoa","name":"Genoa","years":"1930-1935"},
+           {"id":"napoli","name":"SSC Napoli","years":"1935-1939"},
+           {"id":"huracan","name":"Huracán","years":"1939-1944"}],
+ "trophies":[
+   {"competition":"Subcampeón Copa del Mundo","year":"1930","club":"Argentina"},
+ ],"active_years":"1925-1944","rating":84,"legendary":True},
+
+{"name":"Andrés Maschio","full_name":"Humberto Dionisio Maschio","birth_date":"1933-02-16",
+ "position":"CAM","positions":["CAM","CF"],"foot":"Derecho","height":1.70,"weight":67,
+ "caps_nt":13,"goals_nt":7,"caps_club":380,"goals_club":150,"assists_club":80,
+ "clubs":[{"id":"racing-club","name":"Racing Club","years":"1952-1957"},
+           {"id":"bologna","name":"Bologna","years":"1957-1961"},
+           {"id":"inter","name":"Internazionale","years":"1961-1966"},
+           {"id":"atalanta","name":"Atalanta","years":"1966-1969"}],
+ "trophies":[
+   {"competition":"Serie A","year":"1963","club":"Internazionale"},
+   {"competition":"Serie A","year":"1965","club":"Internazionale"},
+ ],"active_years":"1952-1969","rating":82,"legendary":True},
+
+{"name":"Ernesto Grillo","full_name":"Ernesto Grillo","birth_date":"1929-11-04",
+ "position":"LW","positions":["LW","CAM"],"foot":"Izquierdo","height":1.68,"weight":64,
+ "caps_nt":19,"goals_nt":7,"caps_club":370,"goals_club":110,"assists_club":90,
+ "clubs":[{"id":"independiente","name":"Independiente","years":"1948-1959"},
+           {"id":"ac-milan","name":"AC Milan","years":"1959-1962"},
+           {"id":"independiente","name":"Independiente","years":"1962-1965"}],
+ "trophies":[],"active_years":"1948-1965","rating":78,"legendary":False},
+
+{"name":"Antonio Rattín","full_name":"Antonio Ubaldo Rattín","birth_date":"1937-05-16",
+ "position":"CDM","positions":["CDM","CM"],"foot":"Derecho","height":1.90,"weight":85,
+ "caps_nt":34,"goals_nt":0,"caps_club":400,"goals_club":15,"assists_club":20,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"1956-1970"}],
+ "trophies":[
+   {"competition":"Liga Argentina","year":"1962","club":"Boca Juniors"},
+   {"competition":"Liga Argentina","year":"1964","club":"Boca Juniors"},
+   {"competition":"Liga Argentina","year":"1965","club":"Boca Juniors"},
+   {"competition":"Liga Argentina","year":"1969","club":"Boca Juniors"},
+ ],"active_years":"1956-1970","rating":84,"legendary":True},
+
+{"name":"Silvio Marzolini","full_name":"Silvio Rodolfo Marzolini","birth_date":"1940-08-04",
+ "position":"LB","positions":["LB"],"foot":"Izquierdo","height":1.75,"weight":72,
+ "caps_nt":37,"goals_nt":2,"caps_club":390,"goals_club":15,"assists_club":40,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"1960-1972"}],
+ "trophies":[
+   {"competition":"Liga Argentina","year":"1962","club":"Boca Juniors"},
+   {"competition":"Liga Argentina","year":"1964","club":"Boca Juniors"},
+   {"competition":"Liga Argentina","year":"1965","club":"Boca Juniors"},
+   {"competition":"Liga Argentina","year":"1969","club":"Boca Juniors"},
+ ],"active_years":"1960-1972","rating":81,"legendary":True},
+
+# ════════════════════════════════════════════════════════
+# JUGADORES MODERNOS NOTABLES
+# ════════════════════════════════════════════════════════
+
+{"name":"Sebastián Battaglia","full_name":"Sebastián Pablo Battaglia","birth_date":"1980-11-08",
+ "position":"CDM","positions":["CDM","CM"],"foot":"Derecho","height":1.78,"weight":76,
+ "caps_nt":13,"goals_nt":0,"caps_club":380,"goals_club":10,"assists_club":25,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"2000-2012"},
+           {"id":"colon","name":"Colón","years":"2012-2013"},
+           {"id":"boca-juniors","name":"Boca Juniors","years":"2013-2016"}],
+ "trophies":[
+   {"competition":"Copa Libertadores","year":"2000","club":"Boca Juniors"},
+   {"competition":"Copa Libertadores","year":"2001","club":"Boca Juniors"},
+   {"competition":"Copa Libertadores","year":"2003","club":"Boca Juniors"},
+   {"competition":"Copa Libertadores","year":"2007","club":"Boca Juniors"},
+ ],"active_years":"2000-2016","rating":78,"legendary":False},
+
+{"name":"Riquelme Juan Román","id":"riquelme-jr-1978-boca",
+ "full_name":"Juan Román Riquelme (alternativo)","birth_date":"1978-06-24",
+ "position":"CAM","positions":["CAM"],"foot":"Derecho","height":1.80,"weight":76,
+ "caps_nt":51,"goals_nt":17,"caps_club":461,"goals_club":115,"assists_club":130,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"1996-2015"},
+           {"id":"villarreal","name":"Villarreal CF","years":"2003-2007"}],
+ "trophies":[{"competition":"Copa Libertadores","year":"2007","club":"Boca Juniors"}],
+ "active_years":"1996-2015","rating":93,"legendary":True},
+
+{"name":"Carlos Tévez","id":"tevez-carlos-boca-1984",
+ "full_name":"Carlos Tevez (Boca)","birth_date":"1984-02-05",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.73,"weight":78,
+ "caps_nt":76,"goals_nt":13,"caps_club":540,"goals_club":234,"assists_club":80,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"2015-2021"}],
+ "trophies":[{"competition":"Copa Libertadores","year":"2007","club":"Boca Juniors"}],
+ "active_years":"2001-2021","rating":89,"legendary":True},
+
+{"name":"Pablo Pérez","full_name":"Pablo Andrés Pérez","birth_date":"1985-07-01",
+ "position":"CM","positions":["CM","CAM"],"foot":"Derecho","height":1.74,"weight":71,
+ "caps_nt":5,"goals_nt":1,"caps_club":370,"goals_club":55,"assists_club":70,
+ "clubs":[{"id":"newells","name":"Newell's Old Boys","years":"2006-2014"},
+           {"id":"boca-juniors","name":"Boca Juniors","years":"2014-2019"},
+           {"id":"independiente","name":"Independiente","years":"2019-2021"}],
+ "trophies":[
+   {"competition":"Liga Argentina","year":"2018","club":"Boca Juniors"},
+ ],"active_years":"2006-2021","rating":75,"legendary":False},
+
+{"name":"Jonathan Calleri","full_name":"Jonathan Calleri","birth_date":"1993-09-23",
+ "position":"ST","positions":["ST"],"foot":"Derecho","height":1.82,"weight":79,
+ "caps_nt":10,"goals_nt":3,"caps_club":300,"goals_club":110,"assists_club":30,
+ "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"2013-2016"},
+           {"id":"sao-paulo","name":"São Paulo","years":"2016-2020"},
+           {"id":"espanyol","name":"Espanyol","years":"2020-2022"},
+           {"id":"sao-paulo","name":"São Paulo","years":"2022-2025"}],
+ "trophies":[],"active_years":"2013-2025","rating":76,"legendary":False},
+
+{"name":"Lucas Ocampos","full_name":"Lucas Ocampos","birth_date":"1994-07-11",
+ "position":"RW","positions":["RW","LW","ST"],"foot":"Derecho","height":1.87,"weight":83,
+ "caps_nt":22,"goals_nt":6,"caps_club":280,"goals_club":65,"assists_club":55,
+ "clubs":[{"id":"river-plate","name":"River Plate","years":"2011-2013"},
+           {"id":"monaco","name":"AS Monaco","years":"2013-2015"},
+           {"id":"marseille","name":"Olympique Marseille","years":"2015-2019"},
+           {"id":"sevilla","name":"Sevilla FC","years":"2019-2024"},
+           {"id":"ajax","name":"Ajax","years":"2024-2025"}],
+ "trophies": CA21 + FIN22 + WC22 + [
+   {"competition":"Europa League","year":"2020","club":"Sevilla FC"},
+   {"competition":"Europa League","year":"2023","club":"Sevilla FC"},
+ ],"active_years":"2011-2025","rating":81,"legendary":False},
+
+{"name":"Papu Gómez","full_name":"Alejandro Darío Gómez","birth_date":"1988-02-15",
+ "position":"CAM","positions":["CAM","RW","LW"],"foot":"Derecho","height":1.74,"weight":73,
+ "caps_nt":35,"goals_nt":8,"caps_club":380,"goals_club":100,"assists_club":130,
+ "clubs":[{"id":"racing-club","name":"Racing Club","years":"2006-2010"},
+           {"id":"catania","name":"Catania","years":"2010-2011"},
+           {"id":"meteora","name":"Meteora","years":"2011-2012"},
+           {"id":"san-lorenzo","name":"San Lorenzo","years":"2012-2013"},
+           {"id":"atalanta","name":"Atalanta","years":"2014-2021"},
+           {"id":"sevilla","name":"Sevilla FC","years":"2021-2023"},
+           {"id":"monza","name":"Monza","years":"2023-2024"}],
+ "trophies": CA21 + FIN22 + WC22 + [
+   {"competition":"Europa League","year":"2023","club":"Sevilla FC"},
+ ],"active_years":"2006-2024","rating":83,"legendary":False},
+
+{"name":"Ángel Correa","id":"correa-angel-1994-atletico",
+ "full_name":"Ángel Correa (Atlético)","birth_date":"1994-03-09",
+ "position":"CF","positions":["CF","ST"],"foot":"Derecho","height":1.70,"weight":67,
+ "caps_nt":25,"goals_nt":6,"caps_club":280,"goals_club":70,"assists_club":55,
+ "clubs":[{"id":"san-lorenzo","name":"San Lorenzo","years":"2012-2015"},
+           {"id":"atletico-madrid","name":"Atlético de Madrid","years":"2015-2025"}],
+ "trophies": WC22 + CA21 + [{"competition":"La Liga","year":"2021","club":"Atlético de Madrid"}],
+ "active_years":"2012-2025","rating":80,"legendary":False},
 
 ]
 
