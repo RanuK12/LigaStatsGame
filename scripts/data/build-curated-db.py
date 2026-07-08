@@ -1403,6 +1403,7 @@ SEED = [
  "trophies": WC22 + CA21 + FIN22 + [
    {"competition":"Serie A","year":"2021","club":"Internazionale"},
    {"competition":"Serie A","year":"2024","club":"Internazionale"},
+ ],"active_years":"2015-2025","rating":90,"legendary":False},
 
 {"name":"Paulo Dybala","full_name":"Paulo Bruno Exequiel Dybala","birth_date":"1993-11-15",
  "position":"CF","positions":["CF","CAM","RW"],"foot":"Izquierdo","height":1.77,"weight":75,
@@ -1512,20 +1513,10 @@ SEED = [
    {"competition":"Copa Italia","year":"1960","club":"Juventus"},
    {"competition":"Copa Italia","year":"1965","club":"Juventus"},
  ],"active_years":"1954-1969","rating":92,"legendary":True},
- "active_years":"2015-2025","rating":90,"legendary":False},
 
 # ════════════════════════════════════════════════════════
 # LEYENDAS DE CLUBES — Independiente
 # ════════════════════════════════════════════════════════
-
-{"name":"Daniel Passarella","id":"passarella-daniel-1953-alt",
- "full_name":"Daniel Passarella (alt)","birth_date":"1953-05-25",
- "position":"CB","positions":["CB"],"foot":"Derecho","height":1.74,"weight":73,
- "caps_nt":70,"goals_nt":22,"caps_club":450,"goals_club":134,"assists_club":20,
- "clubs":[{"id":"river-plate","name":"River Plate","years":"1974-1982"},
-           {"id":"fiorentina","name":"Fiorentina","years":"1982-1986"},
-           {"id":"inter","name":"Internazionale","years":"1986-1989"}],
- "trophies": WC78,"active_years":"1971-1989","rating":92,"legendary":True},
 
 {"name":"Roque Avallay","full_name":"Roque Avallay","birth_date":"1964-03-15",
  "position":"CM","positions":["CM"],"foot":"Derecho","height":1.75,"weight":72,
@@ -1574,17 +1565,6 @@ SEED = [
            {"id":"boca-juniors","name":"Boca Juniors","years":"2015-2016"},
            {"id":"racing-club","name":"Racing Club","years":"2016-2020"}],
  "trophies":[],"active_years":"2004-2020","rating":79,"legendary":False},
-
-{"name":"Milito Gabriel","id":"milito-gabriel-1980",
- "full_name":"Gabriel Milito (Racing)","birth_date":"1980-09-07",
- "position":"CB","positions":["CB"],"foot":"Derecho","height":1.81,"weight":77,
- "caps_nt":38,"goals_nt":5,"caps_club":360,"goals_club":14,"assists_club":8,
- "clubs":[{"id":"racing-club","name":"Racing Club","years":"1998-2003"},
-           {"id":"zaragoza","name":"Real Zaragoza","years":"2003-2007"},
-           {"id":"barcelona","name":"FC Barcelona","years":"2007-2009"},
-           {"id":"inter","name":"Internazionale","years":"2009-2011"}],
- "trophies":[{"competition":"Champions League","year":"2010","club":"Internazionale"}],
- "active_years":"1998-2015","rating":79,"legendary":False},
 
 # ════════════════════════════════════════════════════════
 # LEYENDAS DE CLUBES — San Lorenzo
@@ -1748,14 +1728,6 @@ SEED = [
  "trophies": CA21 + WC22,
  "active_years":"2022-2025","rating":76,"legendary":False},
 
-{"name":"Alejandro Garnacho","id":"garnacho-alejandro-2004-wc",
- "full_name":"Alejandro Garnacho (WC22)","birth_date":"2004-07-01",
- "position":"LW","positions":["LW","RW"],"foot":"Izquierdo","height":1.80,"weight":75,
- "caps_nt":20,"goals_nt":3,"caps_club":100,"goals_club":20,"assists_club":15,
- "clubs":[{"id":"man-utd","name":"Manchester United","years":"2022-2025"}],
- "trophies": WC22 + CA21,
- "active_years":"2021-2025","rating":80,"legendary":False},
-
 {"name":"Mateo Retegui","full_name":"Mateo Retegui","birth_date":"2000-09-29",
  "position":"ST","positions":["ST"],"foot":"Derecho","height":1.87,"weight":83,
  "caps_nt":15,"goals_nt":7,"caps_club":150,"goals_club":55,"assists_club":15,
@@ -1870,23 +1842,6 @@ SEED = [
    {"competition":"Copa Libertadores","year":"2003","club":"Boca Juniors"},
    {"competition":"Copa Libertadores","year":"2007","club":"Boca Juniors"},
  ],"active_years":"2000-2016","rating":78,"legendary":False},
-
-{"name":"Riquelme Juan Román","id":"riquelme-jr-1978-boca",
- "full_name":"Juan Román Riquelme (alternativo)","birth_date":"1978-06-24",
- "position":"CAM","positions":["CAM"],"foot":"Derecho","height":1.80,"weight":76,
- "caps_nt":51,"goals_nt":17,"caps_club":461,"goals_club":115,"assists_club":130,
- "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"1996-2015"},
-           {"id":"villarreal","name":"Villarreal CF","years":"2003-2007"}],
- "trophies":[{"competition":"Copa Libertadores","year":"2007","club":"Boca Juniors"}],
- "active_years":"1996-2015","rating":93,"legendary":True},
-
-{"name":"Carlos Tévez","id":"tevez-carlos-boca-1984",
- "full_name":"Carlos Tevez (Boca)","birth_date":"1984-02-05",
- "position":"ST","positions":["ST"],"foot":"Derecho","height":1.73,"weight":78,
- "caps_nt":76,"goals_nt":13,"caps_club":540,"goals_club":234,"assists_club":80,
- "clubs":[{"id":"boca-juniors","name":"Boca Juniors","years":"2015-2021"}],
- "trophies":[{"competition":"Copa Libertadores","year":"2007","club":"Boca Juniors"}],
- "active_years":"2001-2021","rating":89,"legendary":True},
 
 {"name":"Pablo Pérez","full_name":"Pablo Andrés Pérez","birth_date":"1985-07-01",
  "position":"CM","positions":["CM","CAM"],"foot":"Derecho","height":1.74,"weight":71,
