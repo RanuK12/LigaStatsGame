@@ -2,11 +2,11 @@
 
 ## Totals
 - Clubs: 29
-- Players: 320
-- Squads: 160
+- Players: 2757
+- Squads: 188
 
 ## Health Score
-- Score: 80
+- Score: 100
 - Critical issues: 0
 - Warnings: 0
 
@@ -19,27 +19,29 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 320
-- Players with clubs: 320
-- Players with valid position: 320
-- Playable squads: 160
+- Players with rating: 2757
+- Players with clubs: 2757
+- Players with valid position: 2757
+- Playable squads: 188
 
 ## Players by club
-- river-plate: 39
-- boca-juniors: 36
-- racing-club: 27
-- argentinos-juniors: 25
-- estudiantes-lp: 24
-- independiente: 24
-- velez-sarsfield: 24
-- banfield: 23
+- banfield: 301
+- lanus: 293
+- estudiantes-lp: 279
+- huracan: 241
+- argentinos-juniors: 230
+- racing-club: 227
+- rosario-central: 227
+- independiente: 224
+- boca-juniors: 209
+- talleres-cba: 198
+- velez-sarsfield: 197
+- river-plate: 196
 - colon: 23
-- lanus: 23
 - san-lorenzo: 23
 - defensa-y-justicia: 20
 - gimnasia-lp: 20
 - newells-old-boys: 20
-- talleres-cba: 17
 - internazionale: 8
 - newells: 6
 - barcelona: 5
@@ -55,7 +57,6 @@
 - milan: 3
 - parma: 3
 - roma: 3
-- rosario-central: 3
 - villarreal: 3
 - corinthians: 2
 - cruzeiro: 2
@@ -89,7 +90,6 @@
 - getafe: 1
 - hamburg: 1
 - hebei-china-fortune: 1
-- huracan: 1
 - independiente-rivadavia: 1
 - instituto: 1
 - inter-miami: 1
@@ -122,8 +122,8 @@
 - zaragoza: 1
 
 ## Players by decade
-- 1990s: 190
-- 2000s: 95
+- 1990s: 1474
+- 2000s: 1248
 - 1970s: 11
 - 1960s: 8
 - 1980s: 8
@@ -132,7 +132,6 @@
 - 1920s: 1
 
 ## Top Recommendations
-- Expand the player pool with curated historical squads.
 
 ## Player Problems
 - Missing rating: 0

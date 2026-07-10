@@ -681,6 +681,139 @@ def main():
             players_db[p_id.lower()] = built_new
             added_from_raw += 1
             
+    # 3. Parse and merge historical players from players_historical.json
+    TM_CLUB_MAPPING = {
+        "club-atletico-river-plate": "river-plate",
+        "boca-juniors": "boca-juniors",
+        "independiente": "independiente",
+        "racing-club": "racing-club",
+        "ca-san-lorenzo-de-almaagro": "san-lorenzo",
+        "club-atletico-velez-sarsfield": "velez-sarsfield",
+        "estudiantes-de-la-plata": "estudiantes-lp",
+        "club-de-gimnasia-y-esgrima-la-plata": "gimnasia-lp",
+        "newells-old-boys": "newells-old-boys",
+        "club-atletico-rosario-central": "rosario-central",
+        "huracan": "huracan",
+        "argentinos-juniors": "argentinos-juniors",
+        "club-atletico-lanus": "lanus",
+        "casinos-unidos-de-banfield": "banfield",
+        "club-atletico-talleres-de-cordoba": "talleres-cba",
+        "club-atletico-belgrano-de-cordoba": "belgrano",
+        "club-atletico-godoy-cruz": "godoy-cruz"
+    }
+    
+    hist_path = ROOT / "data" / "players_historical.json"
+    added_from_hist = 0
+    if hist_path.exists():
+        print("Loading players_historical.json...")
+        with open(hist_path, 'r', encoding='utf-8') as f:
+            hist_pls = json.load(f)
+            
+        for hp in hist_pls:
+            name_lower = hp['name'].lower()
+            
+            # Map clubs using TM_CLUB_MAPPING and filter out any unknown ones
+            mapped_clubs = []
+            for c in hp.get('clubs', []):
+                mapped_id = TM_CLUB_MAPPING.get(c['id'])
+                if mapped_id:
+                    mapped_clubs.append({
+                        'id': mapped_id,
+                        'name': c['name'].split(' 2025')[0],
+                        'years': c['years']
+                    })
+            if not mapped_clubs:
+                continue
+                
+            # Determine birthdate realistically
+            # Find the minimum playing year in their clubs
+            all_years = []
+            for c in mapped_clubs:
+                for y_str in c['years'].split(','):
+                    y_clean = y_str.strip()
+                    if y_clean.isdigit():
+                        all_years.append(int(y_clean))
+            min_year = min(all_years) if all_years else 2015
+            max_year = max(all_years) if all_years else 2025
+            
+            # Estimate birth year (assuming debut at 20)
+            birth_year = min_year - 20
+            
+            # Find if player already exists
+            match = None
+            for p in players_db.values():
+                if p['name'].lower() == name_lower:
+                    if (p['position'] == 'GK') == (hp['position'] == 'GK'):
+                        match = p
+                        break
+                        
+            if match:
+                # Merge clubs
+                for mc in mapped_clubs:
+                    club_exists = False
+                    for ec in match['clubs']:
+                        if ec['id'] == mc['id']:
+                            club_exists = True
+                            # Merge years
+                            existing_yrs = {y.strip() for y in ec['years'].split(',') if y.strip()}
+                            new_yrs = {y.strip() for y in mc['years'].split(',') if y.strip()}
+                            merged_yrs = sorted(list(existing_yrs.union(new_yrs)))
+                            ec['years'] = ','.join(merged_yrs)
+                            break
+                    if not club_exists:
+                        match['clubs'].append(mc)
+            else:
+                # Create new player
+                h = int(hashlib.md5(hp['name'].encode('utf-8')).hexdigest(), 16)
+                
+                # Height and weight based on position
+                pos = hp['position']
+                if pos == 'GK':
+                    height = 1.85 + ((h % 12) / 100.0)
+                    weight = 80 + (h % 11)
+                elif pos == 'CB':
+                    height = 1.82 + ((h % 12) / 100.0)
+                    weight = 78 + (h % 11)
+                elif pos in ('LW', 'RW'):
+                    height = 1.68 + ((h % 11) / 100.0)
+                    weight = 64 + (h % 9)
+                elif pos in ('ST', 'CF'):
+                    height = 1.78 + ((h % 12) / 100.0)
+                    weight = 74 + (h % 11)
+                else:
+                    # CM, CAM, CDM, LB, RB
+                    height = 1.72 + ((h % 12) / 100.0)
+                    weight = 68 + (h % 11)
+                    
+                # Deduplicate ID
+                p_id = make_id(hp['name'], str(birth_year))
+                existing_ids = {p['id'] for p in players_db.values()}
+                if p_id in existing_ids:
+                    p_id = f"{p_id}-{pos.lower()}"
+                    
+                new_p = {
+                    "id": p_id,
+                    "name": hp['name'],
+                    "full_name": hp['name'],
+                    "birth_date": f"{birth_year}-06-15",
+                    "position": pos,
+                    "positions": [pos],
+                    "nationality": hp.get('nationality', 'Argentina'),
+                    "height": round(height, 2),
+                    "weight": weight,
+                    "foot": "Izquierdo" if (h % 4) == 0 else "Derecho",
+                    "clubs": mapped_clubs,
+                    "rating": hp.get('rating', 65),
+                    "legendary": hp.get('rating', 65) >= 88,
+                    "active_years": f"{min_year}-{max_year}"
+                }
+                
+                built_new = build(new_p)
+                players_db[p_id.lower()] = built_new
+                added_from_hist += 1
+                
+        print(f"Added {added_from_hist} new historical players from players_historical.json")
+        
     final_players = list(players_db.values())
     
     # 3. Write final players.json

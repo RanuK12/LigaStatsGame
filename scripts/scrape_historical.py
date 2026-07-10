@@ -3,9 +3,15 @@
 import json,re,sys,time,os,hashlib,random,urllib.request,urllib.error
 B=os.path.dirname(os.path.abspath(__file__))
 D=os.path.join(B,'..','data'); C=os.path.join(D,'cache'); os.makedirs(C,exist_ok=True)
-PM={'Goalkeeper':'GK','Centre-Back':'CB','Left-Back':'LB','Right-Back':'RB',
-'Defensive Midfield':'CDM','Central Midfield':'CM','Attacking Midfield':'CAM',
-'Left Winger':'LW','Right Winger':'RW','Centre-Forward':'ST','Second Striker':'CF'}
+PM={
+ 'goalkeeper':'GK','centre-back':'CB','left-back':'LB','right-back':'RB',
+ 'defensive midfield':'CDM','central midfield':'CM','attacking midfield':'CAM',
+ 'left winger':'LW','right winger':'RW','centre-forward':'ST','second striker':'CF',
+ 'portero':'GK','defensa central':'CB','lateral izquierdo':'LB','lateral derecho':'RB',
+ 'pivote':'CDM','mediocentro':'CM','mediocentro ofensivo':'CAM',
+ 'extremo izquierdo':'LW','extremo derecho':'RW','delantero centro':'ST','mediapunta':'CF',
+ 'interior izquierdo':'CM','interior derecho':'CM','delantero':'ST'
+}
 UA=['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/125.0.0.0 Safari/537.36',
 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36']
 def sl(n):
@@ -15,7 +21,7 @@ def sl(n):
 def fet(url,ck):
  cp=os.path.join(C,hashlib.md5(ck.encode()).hexdigest()+'.html')
  if os.path.exists(cp)and os.path.getmtime(cp)>time.time()-86400*60:return open(cp,'r',errors='ignore').read()
- time.sleep(random.uniform(2.5,4.5))
+ time.sleep(random.uniform(1.0, 2.0))
  for i in range(3):
   try:
    req=urllib.request.Request(url,headers={'User-Agent':random.choice(UA),'Accept':'text/html','Accept-Language':'es-AR,es;q=0.9','Referer':'https://www.transfermarkt.com/'})
@@ -29,22 +35,42 @@ def fet(url,ck):
  return ''
 def ps(html):
  pl=[]
- for row in re.findall(r'<tr[^>]*>(.*?)</tr>',html,re.DOTALL):
-  if 'hauptlink'not in row:continue
-  nm=re.search(r'class="hauptlink"[^>]*>.*?<a[^>]*>([^<]+)</a>',row,re.DOTALL)
-  if not nm:nm=re.search(r'class="hauptlink"[^>]*>\s*<a[^>]*title="([^"]+)"',row,re.DOTALL)
-  if not nm:continue
-  name=nm.group(1).strip()
-  pos='CM'
-  for tp,sh in PM.items():
-   if tp.lower() in row.lower():pos=sh;break
-  mv=''
-  mvm=re.search(r'class="rechts[^"]*"[^>]*>\s*(?:<a[^>]*>)?\s*([\d,.]+[kmK])',row)
-  if mvm:mv=mvm.group(1).strip()
-  nat='Argentina'
-  if 'flaggenrahmen' in row:
-   fm=re.search(r'alt="([^"]+)"',row[re.search(r'flaggenrahmen',row).start():re.search(r'flaggenrahmen',row).start()+200])
-   if fm:nat=fm.group(1)
+ start = html.find('<table class="items">')
+ if start != -1:
+  pos = start + 21
+  depth = 1
+  while depth > 0 and pos < len(html):
+   next_open = html.find('<table', pos)
+   next_close = html.find('</table>', pos)
+   if next_close == -1:
+    break
+   if next_open != -1 and next_open < next_close:
+    depth += 1
+    pos = next_open + 6
+   else:
+    depth -= 1
+    pos = next_close + 8
+  html = html[start:pos]
+ rows = re.split(r'<tr[^>]*class="(?:odd|even)"[^>]*>', html)
+ for row in rows[1:]:
+  nm = re.search(r'class="hauptlink"[^>]*>\s*<a[^>]*href="(?P<href>[^"]+)"[^>]*>\s*(?P<name>[^<]+?)\s*</a>\s*</td>\s*</tr>\s*<tr>\s*<td>\s*(?P<pos>[^<]+?)\s*</td>', row, re.DOTALL)
+  if not nm: continue
+  name = nm.group('name').strip()
+  pos_str = nm.group('pos').strip()
+  pos = 'CM'
+  for k, v in PM.items():
+   if k.lower() in pos_str.lower():
+    pos = v
+    break
+  mv = ''
+  mvm = re.search(r'class="rechts[^"#]*"[^>]*>\s*(?:<a[^>]*>)?\s*([\d,.]+[kmK])', row)
+  if mvm: mv = mvm.group(1).strip()
+  nat = 'Argentina'
+  img_tags = re.findall(r'<img\s+[^>]*class="flaggenrahmen"[^>]*>', row)
+  if img_tags:
+   alt_m = re.search(r'alt="([^"]+)"', img_tags[0])
+   if alt_m:
+    nat = alt_m.group(1).strip()
   pl.append({'id':sl(name),'name':name,'pos':pos,'nat':nat,'mv':mv})
  return pl
 def er(mv,pos):
@@ -58,8 +84,16 @@ def er(mv,pos):
  b=90 if v>50 else 85 if v>20 else 80 if v>10 else 75 if v>5 else 70 if v>2 else 65 if v>1 else 60 if v>0.5 else 55 if v>0.1 else 52
  return max(50,min(99,b+{'GK':-2,'CB':0,'LB':1,'RB':1,'CDM':0,'CM':1,'CAM':2,'LW':2,'RW':2,'ST':3,'CF':2}.get(pos,0)+random.randint(-3,3)))
 
-with open(os.path.join(B,'tm_clubs.json')) as f: CLUBS=json.load(f)
-SY,EY=1990,2025
+with open(os.path.join(B,'tm_clubs.json')) as f: ALL_CLUBS=json.load(f)
+TOP_15_IDS = {
+    'club-atletico-river-plate', 'boca-juniors', 'independiente', 'racing-club',
+    'ca-san-lorenzo-de-almaagro', 'club-atletico-velez-sarsfield', 'estudiantes-de-la-plata',
+    'club-de-gimnasia-y-esgrima-la-plata', 'newells-old-boys', 'club-atletico-rosario-central',
+    'huracan', 'argentinos-juniors', 'club-atletico-lanus', 'casinos-unidos-de-banfield',
+    'club-atletico-talleres-de-cordoba'
+}
+CLUBS = [c for c in ALL_CLUBS if c[0] in TOP_15_IDS]
+SY,EY=2015,2025
 pf=os.path.join(D,'scrape_progress.json')
 def lp():
  if os.path.exists(pf):return json.load(open(pf))

@@ -1,8 +1,8 @@
 {
   "totals": {
     "clubs": 29,
-    "players": 320,
-    "squads": 160
+    "players": 2757,
+    "squads": 188
   },
   "players": {
     "duplicatedIds": [],
@@ -24,16 +24,18 @@
     "duplicatedPlayerRefs": []
   },
   "coverage": {
-    "playersWithRating": 320,
-    "playersWithClubs": 320,
-    "playersWithValidPosition": 320,
-    "squadsPlayable": 160,
+    "playersWithRating": 2757,
+    "playersWithClubs": 2757,
+    "playersWithValidPosition": 2757,
+    "squadsPlayable": 188,
     "squadsByClub": {
       "river-plate": 13,
       "boca-juniors": 13,
       "independiente": 12,
       "san-lorenzo": 13,
       "estudiantes-lp": 13,
+      "rosario-central": 15,
+      "huracan": 13,
       "lanus": 12,
       "banfield": 14,
       "talleres-cba": 12,
@@ -44,15 +46,15 @@
       "argentina": 7
     },
     "playersByClub": {
-      "river-plate": 39,
+      "river-plate": 196,
       "millonarios": 2,
       "valencia": 5,
       "atlanta": 1,
       "san-lorenzo": 23,
       "colon": 23,
-      "boca-juniors": 36,
+      "boca-juniors": 209,
       "atletico-madrid": 4,
-      "racing-club": 27,
+      "racing-club": 227,
       "union-santa-fe": 1,
       "real-betis": 2,
       "defensores-belgrano": 2,
@@ -61,18 +63,18 @@
       "newells": 6,
       "ferro": 2,
       "mallorca": 1,
-      "rosario-central": 3,
+      "rosario-central": 227,
       "getafe": 1,
       "internacional": 2,
       "az-alkmaar": 1,
       "sampdoria": 2,
       "manchester-united": 4,
       "venezia": 1,
-      "independiente": 24,
+      "independiente": 224,
       "arsenal": 1,
       "aston-villa": 1,
       "real-zaragoza": 1,
-      "velez-sarsfield": 24,
+      "velez-sarsfield": 197,
       "strasbourg": 1,
       "penarol": 1,
       "fiorentina": 2,
@@ -92,8 +94,8 @@
       "atalanta": 1,
       "tottenham": 1,
       "talleres-re": 1,
-      "banfield": 23,
-      "argentinos-juniors": 25,
+      "banfield": 301,
+      "argentinos-juniors": 230,
       "juventus": 3,
       "barcelona": 5,
       "paris-saint-germain": 4,
@@ -107,7 +109,7 @@
       "west-ham": 2,
       "liverpool": 1,
       "hebei-china-fortune": 1,
-      "estudiantes-lp": 24,
+      "estudiantes-lp": 279,
       "pisa": 1,
       "sevilla": 2,
       "lazio": 3,
@@ -123,7 +125,7 @@
       "cagliari": 1,
       "torino": 1,
       "independiente-rivadavia": 1,
-      "lanus": 23,
+      "lanus": 293,
       "al-ain": 1,
       "deportivo-la-coruna": 1,
       "tijuana": 1,
@@ -132,8 +134,8 @@
       "deportivo-cali": 1,
       "libertad": 1,
       "vasco-da-gama": 1,
-      "talleres-cba": 17,
-      "huracan": 1,
+      "talleres-cba": 198,
+      "huracan": 241,
       "palermo": 1,
       "elche": 1,
       "newells-old-boys": 20,
@@ -147,28 +149,27 @@
       "1960s": 8,
       "1970s": 11,
       "1980s": 8,
-      "1990s": 190,
-      "2000s": 95
+      "1990s": 1474,
+      "2000s": 1248
     },
     "playersByPosition": {
-      "GK": 38,
-      "CB": 54,
-      "RB": 27,
-      "LB": 28,
-      "CDM": 23,
-      "CM": 45,
-      "CAM": 28,
-      "RW": 14,
-      "ST": 50,
-      "LW": 13
+      "GK": 299,
+      "CB": 445,
+      "RB": 198,
+      "LB": 205,
+      "CDM": 228,
+      "CM": 444,
+      "CAM": 213,
+      "RW": 168,
+      "ST": 374,
+      "LW": 168,
+      "CF": 15
     }
   },
   "summary": {
-    "healthScore": 80,
+    "healthScore": 100,
     "criticalIssues": 0,
     "warnings": 0,
-    "recommendations": [
-      "Expand the player pool with curated historical squads."
-    ]
+    "recommendations": []
   }
 }
