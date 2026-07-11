@@ -114,6 +114,25 @@ describe('calculateTeamScore()', () => {
     const team = [makePlayer({ rating: 0 })]
     expect(calculateTeamScore(team, formation433)).toBe(50)
   })
+
+  it('calcula correctamente el puntaje con una formación válida y jugadores en todas las posiciones', () => {
+    const team = [
+      makePlayer({ id: 'p1', position: 'GK', positions: ['GK'], rating: 85 }),
+      makePlayer({ id: 'p2', position: 'LB', positions: ['LB'], rating: 78 }),
+      makePlayer({ id: 'p3', position: 'CB', positions: ['CB'], rating: 82 }),
+      makePlayer({ id: 'p4', position: 'CB', positions: ['CB'], rating: 84 }),
+      makePlayer({ id: 'p5', position: 'RB', positions: ['RB'], rating: 76 }),
+      makePlayer({ id: 'p6', position: 'CDM', positions: ['CDM'], rating: 80 }),
+      makePlayer({ id: 'p7', position: 'CM', positions: ['CM'], rating: 88 }),
+      makePlayer({ id: 'p8', position: 'CAM', positions: ['CAM'], rating: 90 }),
+      makePlayer({ id: 'p9', position: 'LW', positions: ['LW'], rating: 86 }),
+      makePlayer({ id: 'p10', position: 'ST', positions: ['ST'], rating: 92 }),
+      makePlayer({ id: 'p11', position: 'RW', positions: ['RW'], rating: 87 }),
+    ]
+    // Promedio esperado: (85 + 78 + 82 + 84 + 76 + 80 + 88 + 90 + 86 + 92 + 87) / 11 = 928 / 11 = 84.36... ≈ 84
+    const expectedScore = Math.round((85 + 78 + 82 + 84 + 76 + 80 + 88 + 90 + 86 + 92 + 87) / 11)
+    expect(calculateTeamScore(team, formation433)).toBe(expectedScore)
+  })
 })
 
 // ── calculateFullTeamScore ─────────────────────────────────────
