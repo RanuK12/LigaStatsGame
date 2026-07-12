@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Historical TM Scraper for Argentine Primera División 1990-2025."""
+"""Historical TM Scraper for Argentine Primera División 2015-2025."""
 import json,re,sys,time,os,hashlib,random,urllib.request,urllib.error
 B=os.path.dirname(os.path.abspath(__file__))
 D=os.path.join(B,'..','data'); C=os.path.join(D,'cache'); os.makedirs(C,exist_ok=True)
@@ -20,8 +20,8 @@ def sl(n):
  return s
 def fet(url,ck):
  cp=os.path.join(C,hashlib.md5(ck.encode()).hexdigest()+'.html')
- if os.path.exists(cp)and os.path.getmtime(cp)>time.time()-86400*60:return open(cp,'r',errors='ignore').read()
- time.sleep(random.uniform(1.0, 2.0))
+ if os.path.exists(cp)and os.path.getmtime(cp)>time.time()-86400*30:return open(cp,'r',errors='ignore').read()
+ time.sleep(random.uniform(1.2, 2.5))
  for i in range(3):
   try:
    req=urllib.request.Request(url,headers={'User-Agent':random.choice(UA),'Accept':'text/html','Accept-Language':'es-AR,es;q=0.9','Referer':'https://www.transfermarkt.com/'})
@@ -33,6 +33,20 @@ def fet(url,ck):
    else:time.sleep(5*(i+1))
   except:time.sleep(5*(i+1))
  return ''
+def check_title(html, club_name):
+ """Check if the page title contains the expected club name (partial match)."""
+ title_m = re.search(r'<title>(.*?)</title>', html)
+ if not title_m:
+  return True  # Can't verify, assume OK
+ title = title_m.group(1).lower()
+ # Get key words from club name for matching
+ name_words = club_name.lower().split()
+ # Check if any significant word from the club name is in the title
+ # At least the main identifier word must match
+ for word in name_words:
+  if len(word) > 4 and word in title:
+   return True
+ return False
 def ps(html):
  pl=[]
  start = html.find('<table class="items">')
@@ -85,14 +99,8 @@ def er(mv,pos):
  return max(50,min(99,b+{'GK':-2,'CB':0,'LB':1,'RB':1,'CDM':0,'CM':1,'CAM':2,'LW':2,'RW':2,'ST':3,'CF':2}.get(pos,0)+random.randint(-3,3)))
 
 with open(os.path.join(B,'tm_clubs.json')) as f: ALL_CLUBS=json.load(f)
-TOP_15_IDS = {
-    'club-atletico-river-plate', 'boca-juniors', 'independiente', 'racing-club',
-    'ca-san-lorenzo-de-almaagro', 'club-atletico-velez-sarsfield', 'estudiantes-de-la-plata',
-    'club-de-gimnasia-y-esgrima-la-plata', 'newells-old-boys', 'club-atletico-rosario-central',
-    'huracan', 'argentinos-juniors', 'club-atletico-lanus', 'casinos-unidos-de-banfield',
-    'club-atletico-talleres-de-cordoba'
-}
-CLUBS = [c for c in ALL_CLUBS if c[0] in TOP_15_IDS]
+# Use ALL clubs from the JSON - no filtering by TOP_15_IDS
+CLUBS = ALL_CLUBS
 SY,EY=2015,2025
 pf=os.path.join(D,'scrape_progress.json')
 def lp():
@@ -113,6 +121,11 @@ for ci,(cs,cn,tm_id,nk,co) in enumerate(CLUBS):
   html=fet(url,key)
   if not html or len(html)<2000:
    print("SKIP");prog['errs']+=1;prog['done'].append(key);sp(prog);dc+=1;continue
+  # Verify the page is for the correct club
+  if not check_title(html, cn):
+   title_m = re.search(r'<title>(.*?)</title>', html)
+   t = title_m.group(1)[:60] if title_m else 'N/A'
+   print(f"WRONG_CLUB ({t})");prog['errs']+=1;prog['done'].append(key);sp(prog);dc+=1;continue
   pls=ps(html); nc=0
   for p in pls:
    pid=p['id']
