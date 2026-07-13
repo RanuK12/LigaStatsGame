@@ -1,0 +1,96 @@
+"use client"
+
+import { motion, useReducedMotion } from "framer-motion"
+import type { Player, FormationConfig } from "@/lib/types"
+import type { ChemistryBreakdown } from "@/lib/chemistry"
+import { POS_LABELS } from "@/lib/game-engine"
+import { getPC } from "@/lib/ui-constants"
+
+/**
+ * Campo táctico interactivo: líneas de pase entre jugadores conectados por
+ * química (celeste=club, dorado=nacionalidad), breathing/glow en el slot
+ * activo y float sutil en los tokens ocupados.
+ */
+export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemistry }: {
+  f: FormationConfig; draft: (Player | null)[]; activeSlot: number
+  onSlotClick: (idx: number) => void; phase: string; chemistry?: ChemistryBreakdown
+}) {
+  const reducedMotion = useReducedMotion()
+  const links = (chemistry?.links || []).filter(l => draft[l.aIndex] && draft[l.bIndex])
+
+  return (
+    <div className="pitch w-full max-w-[360px] aspect-[68/105] mx-auto relative">
+      <div className="pitch-lines" />
+      <div className="pitch-center" />
+      <div className="pitch-center-dot" />
+      <div className="pitch-area-top" />
+      <div className="pitch-area-bottom" />
+
+      {/* Líneas de química entre jugadores adyacentes */}
+      {links.length > 0 && (
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"
+          className="pointer-events-none absolute inset-0 z-[5] h-full w-full">
+          {links.map((l, i) => {
+            const a = f.positions[l.aIndex], b = f.positions[l.bIndex]
+            const isClub = l.type === "club"
+            return (
+              <motion.line
+                key={i}
+                x1={a.x} y1={a.y} x2={b.x} y2={b.y}
+                stroke={isClub ? "#74ACDF" : "#D4AF37"}
+                strokeWidth={isClub ? 0.7 : 0.45}
+                strokeOpacity={isClub ? 0.65 : 0.45}
+                strokeDasharray={isClub ? "2 1.4" : "1 1.6"}
+                strokeLinecap="round"
+                animate={reducedMotion ? undefined : { strokeDashoffset: [0, -6.8] }}
+                transition={{ repeat: Infinity, duration: isClub ? 2.2 : 3.2, ease: "linear" }}
+              />
+            )
+          })}
+        </svg>
+      )}
+
+      {f.positions.map((pos, i) => {
+        const pl = draft[i]
+        const isActive = i === activeSlot
+        const strongChem = (chemistry?.perSlot[i] ?? 0) >= 70
+        return (
+          <div key={i}
+            style={{ left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%,-50%)" }}
+            className="absolute cursor-pointer transition-all duration-200 hover:scale-110 z-10"
+            onClick={() => onSlotClick(i)}>
+            {pl ? (
+              <motion.div
+                className={`flex flex-col items-center ${isActive ? "scale-110" : ""}`}
+                animate={reducedMotion ? undefined : { y: [0, -1.5, 0] }}
+                transition={{ repeat: Infinity, duration: 3, delay: i * 0.18, ease: "easeInOut" }}>
+                <motion.div
+                  className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 shadow-lg ${strongChem ? "ring-2 ring-[#74ACDF]/50" : ""}`}
+                  style={{ backgroundColor: getPC(pos.pos), borderColor: isActive ? "#fbbf24" : "rgba(255,255,255,0.3)" }}
+                  animate={isActive && !reducedMotion
+                    ? { scale: [1, 1.07, 1], boxShadow: ["0 0 0px rgba(251,191,36,0)", "0 0 16px rgba(251,191,36,0.7)", "0 0 0px rgba(251,191,36,0)"] }
+                    : { scale: 1 }}
+                  transition={{ repeat: isActive ? Infinity : 0, duration: 1.6 }}>
+                  {pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()}
+                </motion.div>
+                <div className="text-[9px] text-white font-semibold mt-0.5 bg-black/40 px-1 rounded max-w-[70px] truncate text-center">
+                  {pl.name.split(" ").pop()}
+                </div>
+                <div className="text-[7px] text-slate-400">{POS_LABELS[pos.pos] || pos.pos}</div>
+              </motion.div>
+            ) : (
+              <div className={`flex flex-col items-center ${isActive ? "scale-110" : ""}`}>
+                <div className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold border-2 border-dashed transition-all ${
+                  isActive ? "border-yellow-400 bg-yellow-400/10 text-yellow-400 animate-pulse" : "border-slate-500 bg-slate-800/50 text-slate-500"
+                }`}>
+                  {POS_LABELS[pos.pos] || pos.pos}
+                </div>
+                <div className="text-[8px] text-slate-500 mt-0.5">{pos.label}</div>
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}

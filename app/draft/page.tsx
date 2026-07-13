@@ -34,6 +34,8 @@ import ChemistryPanel from "@/components/ChemistryPanel"
 import TournamentView from "@/components/tournament/TournamentView"
 import SquadRoulette from "@/components/roulette/SquadRoulette"
 import PackReveal from "@/components/roulette/PackReveal"
+import Pitch from "@/components/pitch/Pitch"
+import PlayerTradingCard from "@/components/pitch/PlayerTradingCard"
 import { generatePDF } from "@/lib/pdf"
 import { getPC, POS_GROUPS } from "@/lib/ui-constants"
 
@@ -61,94 +63,6 @@ interface PityState {
   consecutiveLow: number
   lastRatings: number[]
   pityActive: boolean
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PITCH COMPONENT
-   ═══════════════════════════════════════════════════════════════ */
-function Pitch({ f, draft, activeSlot, onSlotClick, phase }: {
-  f: any; draft: (Player | null)[]; activeSlot: number
-  onSlotClick: (idx: number) => void; phase: Phase
-}) {
-  return (
-    <div className="pitch w-full max-w-[360px] aspect-[68/105] mx-auto relative">
-      <div className="pitch-lines" />
-      <div className="pitch-center" />
-      <div className="pitch-center-dot" />
-      <div className="pitch-area-top" />
-      <div className="pitch-area-bottom" />
-      {f.positions.map((pos: any, i: number) => {
-        const pl = draft[i]
-        const isActive = i === activeSlot
-        return (
-          <div key={i}
-            style={{ left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%,-50%)" }}
-            className="absolute cursor-pointer transition-all duration-200 hover:scale-110 z-10"
-            onClick={() => onSlotClick(i)}>
-            {pl ? (
-              <div className={`flex flex-col items-center ${isActive ? "scale-110" : ""}`}>
-                <div className="w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 shadow-lg transition-all"
-                  style={{ backgroundColor: getPC(pos.pos), borderColor: isActive ? "#fbbf24" : "rgba(255,255,255,0.3)" }}>
-                  {pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()}
-                </div>
-                <div className="text-[9px] text-white font-semibold mt-0.5 bg-black/40 px-1 rounded max-w-[70px] truncate text-center">
-                  {pl.name.split(" ").pop()}
-                </div>
-                <div className="text-[7px] text-slate-400">{POS_LABELS[pos.pos] || pos.pos}</div>
-              </div>
-            ) : (
-              <div className={`flex flex-col items-center ${isActive ? "scale-110" : ""}`}>
-                <div className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold border-2 border-dashed transition-all ${
-                  isActive ? "border-yellow-400 bg-yellow-400/10 text-yellow-400 animate-pulse" : "border-slate-500 bg-slate-800/50 text-slate-500"
-                }`}>
-                  {POS_LABELS[pos.pos] || pos.pos}
-                </div>
-                <div className="text-[8px] text-slate-500 mt-0.5">{pos.label}</div>
-              </div>
-            )}
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   PLAYER CARD
-   ═══════════════════════════════════════════════════════════════ */
-function PlayerCard({ player, onSelect, showRating }: {
-  player: EnrichedPlayer; onSelect: () => void; showRating: boolean
-}) {
-  return (
-    <button onClick={onSelect}
-      className={`flex items-center gap-2.5 p-2.5 rounded-xl text-left transition-all duration-150 ${
-        player.isCompatible
-          ? "bg-slate-800/80 border border-[#75AADB]/30 hover:border-[#75AADB] hover:bg-slate-700/80 cursor-pointer"
-          : "bg-slate-900/40 border border-slate-800 opacity-40 hover:opacity-60 cursor-not-allowed"
-      }`}>
-      <div className="w-9 h-9 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0"
-        style={{ backgroundColor: getPC(player.position) }}>
-        {player.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="text-sm font-semibold text-white truncate">{player.name}</div>
-        <div className="flex items-center gap-1.5">
-          <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
-            player.isCompatible ? "bg-[#75AADB]/20 text-[#75AADB]" : "bg-slate-800 text-slate-500"
-          }`}>
-            {POS_LABELS[player.position] || player.position}
-          </span>
-          <span className="text-[10px] text-slate-500">{player.goalsClub}⚽ {player.capsClub}📋</span>
-          {player.legendary && <span className="text-[10px]">⭐</span>}
-        </div>
-      </div>
-      {showRating && (
-        <div className="text-right shrink-0">
-          <div className="text-lg font-black text-[#75AADB]">{player.rating}</div>
-        </div>
-      )}
-    </button>
-  )
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -555,7 +469,7 @@ function DraftInner() {
                 <span className="font-display font-bold text-xl text-white">{currentPos.label}</span>
               </div>
             </div>
-            <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} /></div>
+            <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
             {filledCount >= 2 && <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>}
             <div className="flex gap-3 justify-center flex-wrap font-sport">
               <button onClick={() => spinWheel()} className="btn-primary px-10 py-4">
@@ -626,7 +540,7 @@ function DraftInner() {
                 </button>
               </div>
             </div>
-            <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} /></div>
+            <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
             <div className="card-gradient rounded-xl p-4 border border-slate-700">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-display font-bold text-sm">
@@ -648,7 +562,7 @@ function DraftInner() {
                   </p>
                 )}
                 {pickerPlayers.map(player => (
-                  <PlayerCard key={player.id} player={player}
+                  <PlayerTradingCard key={player.id} player={player}
                     onSelect={() => pickPlayer(player, activeSlotIdx)}
                     showRating={mode.ratingsVisible} />
                 ))}
@@ -675,7 +589,7 @@ function DraftInner() {
             <div className="card-gradient rounded-2xl p-6 mb-6">
               <h2 className="font-display text-3xl font-black gradient-text mb-2">¡11 Armado!</h2>
               <p className="text-slate-400 text-sm mb-4">Tocá cualquier posición para cambiar el jugador</p>
-              <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} /></div>
+              <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
               <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>
               {/* Player chips */}
               <div className="flex flex-wrap gap-2 justify-center mb-4">

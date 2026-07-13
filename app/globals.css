@@ -297,3 +297,17 @@ h1, h2, h3, h4, .font-display {
 .mode-card:hover {
   transform: translateY(-5px);
 }
+
+/* Shine sweep para trading cards (barrido de brillo on-hover, estilo figurita) */
+.card-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.14) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 600ms ease;
+  pointer-events: none;
+}
+.card-shine:hover::after {
+  transform: translateX(120%);
+}
