@@ -311,3 +311,12 @@ h1, h2, h3, h4, .font-display {
 .card-shine:hover::after {
   transform: translateX(120%);
 }
+
+/* Accesibilidad: anillo visible al navegar con teclado */
+.btn-primary:focus-visible,
+.btn-gold:focus-visible,
+.btn-secondary:focus-visible,
+.btn-danger:focus-visible {
+  outline: 2px solid rgba(116, 172, 223, 0.85);
+  outline-offset: 3px;
+}

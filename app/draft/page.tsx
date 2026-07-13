@@ -38,6 +38,7 @@ import Pitch from "@/components/pitch/Pitch"
 import PlayerTradingCard from "@/components/pitch/PlayerTradingCard"
 import { generatePDF } from "@/lib/pdf"
 import { getPC, POS_GROUPS } from "@/lib/ui-constants"
+import MagneticButton from "@/components/ui/MagneticButton"
 
 /* ═══════════════════════════════════════════════════════════════
    CONSTANTS & HELPERS
@@ -386,9 +387,11 @@ function DraftInner() {
               <li>5. Armá los 11 y <strong className="text-slate-200">simulá el torneo con estadísticas</strong></li>
             </ol>
           </div>
-          <button onClick={startGame} className="btn-primary px-10 py-4 font-sport">
-            Comenzar Draft
-          </button>
+          <MagneticButton>
+            <button onClick={startGame} className="btn-primary px-10 py-4 font-sport">
+              Comenzar Draft
+            </button>
+          </MagneticButton>
           <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider">Volver al inicio</Link>
         </motion.div>
       </div>
@@ -472,14 +475,16 @@ function DraftInner() {
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
             {filledCount >= 2 && <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>}
             <div className="flex gap-3 justify-center flex-wrap font-sport">
-              <button onClick={() => spinWheel()} className="btn-primary px-10 py-4">
-                Girar Ruleta
-              </button>
+              <MagneticButton>
+                <button onClick={() => spinWheel()} className="btn-primary px-10 py-4">
+                  Girar Ruleta
+                </button>
+              </MagneticButton>
               <button onClick={() => setShowPosSelector(true)} className="btn-secondary px-6 py-4">
                 Elegir posición
               </button>
             </div>
-            <p className="text-xs text-slate-500 mt-2 text-center">
+            <p className="text-xs text-slate-400 mt-2 text-center">
               Girá para la posición actual · o elegí otra posición manualmente
             </p>
           </motion.div>
@@ -568,7 +573,7 @@ function DraftInner() {
                 ))}
               </div>
               {pickerPlayers.length > 0 && (
-                <p className="text-xs text-slate-500 text-center mt-2">
+                <p className="text-xs text-slate-400 text-center mt-2">
                   {compatibleCount > 0
                     ? `✅ ${compatibleCount} compatible${compatibleCount !== 1 ? "s" : ""} — elegí uno y girá de nuevo`
                     : "⚠️ Ninguno compatible — usá 🔄 Re-sortear"}
@@ -617,8 +622,12 @@ function DraftInner() {
               <div className="text-2xl font-display font-black text-[#75AADB]">Score: {teamScore || partialScore} pts</div>
             </div>
             <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">
-              <button onClick={() => startSim("liga")} className="btn-primary px-8 py-3">Simular Liga</button>
-              <button onClick={() => startSim("copa")} className="btn-primary px-6 py-3">Simular Copa</button>
+              <MagneticButton>
+                <button onClick={() => startSim("liga")} className="btn-primary px-8 py-3">Simular Liga</button>
+              </MagneticButton>
+              <MagneticButton>
+                <button onClick={() => startSim("copa")} className="btn-primary px-6 py-3">Simular Copa</button>
+              </MagneticButton>
               <button onClick={resetGame} className="btn-secondary px-6 py-3">Nuevo Draft</button>
             </div>
             <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">Volver al inicio</Link>
