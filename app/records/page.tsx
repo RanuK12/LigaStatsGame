@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import playersData from '@/data/players.json'
 import { normalizePlayers } from '@/lib/data-normalizers'
+import LifetimeStatsPanel from '@/components/LifetimeStatsPanel'
 
 const players = normalizePlayers(playersData)
 
@@ -42,6 +43,8 @@ export default function RecordsPage() {
           con goleadores, ídolos por club, campeones y planteles históricos.
         </p>
       </section>
+
+      <LifetimeStatsPanel />
 
       <section className="mx-auto mt-10 grid max-w-5xl gap-5 lg:grid-cols-2">
         <article className="card-gradient rounded-2xl p-5">

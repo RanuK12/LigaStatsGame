@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { appendScore } from '@/lib/storage'
 
 interface ResPlayer { name?: string; rating?: number; position?: string; club?: string }
 interface ResTeam { label?: string; score?: number; formation?: string; players?: ResPlayer[] }
@@ -21,8 +22,6 @@ export default function ResultsPage() {
       const parsedTeam = JSON.parse(raw)
       setTeam(parsedTeam)
       // persist score to leaderboard
-      const existingRaw = window.localStorage.getItem('ligastats_scores')
-      const existing: any[] = existingRaw ? JSON.parse(existingRaw) : []
       const newEntry = {
         id: Date.now().toString(),
         club: (parsedTeam.label || '').toLowerCase().replace(/\s+/g, '-') || 'unknown',
@@ -33,8 +32,7 @@ export default function ResultsPage() {
         pos: 1,
         date: new Date().toISOString().slice(0, 10)
       }
-      existing.push(newEntry)
-      window.localStorage.setItem('ligastats_scores', JSON.stringify(existing))
+      appendScore(newEntry)
       setLoading(false)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error cargando resultados")

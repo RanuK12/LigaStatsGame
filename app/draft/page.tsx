@@ -27,6 +27,7 @@ import {
   updatePity,
   PITY_LOW_THRESHOLD,
 } from "@/lib/game-engine"
+import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
 
 /* ═══════════════════════════════════════════════════════════════
    CONSTANTS & HELPERS
@@ -857,6 +858,12 @@ function DraftInner() {
       : simulateCopaWithStats(players, virtualSquad, allS, allP, f, score)
     setSimResult(r)
     setPhase("sim")
+    // Récords de por vida + último equipo para /results
+    saveLifetimeStats(applyTournament(applyDraftCompleted(loadLifetimeStats(), players, score), r))
+    saveLastResult({
+      label: virtualSquad.label, score, formation: f.id,
+      players: players.map(p => ({ name: p.name, rating: p.rating, position: p.position })),
+    })
   }, [drafted, allS, allP, f, teamScore, partialScore])
 
   // ── RESET ──
