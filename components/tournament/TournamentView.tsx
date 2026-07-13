@@ -6,6 +6,7 @@ import Link from "next/link"
 import type { TournamentResult } from "@/lib/types"
 import { POS_LABELS } from "@/lib/game-engine"
 import { getPC } from "@/lib/ui-constants"
+import MatchChronicleFeed from "./MatchChronicleFeed"
 
 export default
 function TournamentView({ result, onBack, onReset, onDownloadPDF }: {
@@ -14,11 +15,15 @@ function TournamentView({ result, onBack, onReset, onDownloadPDF }: {
   onReset: () => void
   onDownloadPDF: () => void
 }) {
-  const [tab, setTab] = useState<"table" | "stats" | "assisters" | "schedule">("table")
+  const [tab, setTab] = useState<"table" | "stats" | "assisters" | "schedule" | "relatos">("table")
+  const [matchIdx, setMatchIdx] = useState(0)
   const isChamp = result.isChampion
+  const hasChronicle = (result.chronicle?.length ?? 0) > 0
   const tabs = result.type === "liga"
     ? [{ id: "table", label: "📊 Tabla" }, { id: "stats", label: "⚽ Goleadores" }, { id: "assisters", label: "🅰️ Asistencias" }]
     : [{ id: "stats", label: "⚽ Goles" }, { id: "assisters", label: "🅰️ Asistencias" }]
+  if (hasChronicle) tabs.push({ id: "relatos", label: "📻 Relatos" })
+  const currentChronicle = result.chronicle?.[matchIdx]
 
   return (
     <div className="min-h-screen gradient-bg px-4 py-6">
@@ -224,6 +229,25 @@ function TournamentView({ result, onBack, onReset, onDownloadPDF }: {
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {/* RELATOS TAB */}
+          {tab === "relatos" && hasChronicle && (
+            <div className="card-gradient rounded-2xl p-4 mb-5">
+              <select
+                value={matchIdx}
+                onChange={e => setMatchIdx(Number(e.target.value))}
+                className="w-full mb-4 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white px-3 py-2">
+                {result.chronicle!.map((c, i) => (
+                  <option key={i} value={i}>
+                    {c.roundLabel ? `${c.roundLabel} · ` : `Fecha ${i + 1} · `}
+                    {c.isHome ? `${c.myGoals}-${c.oppGoals}` : `${c.oppGoals}-${c.myGoals}`} vs {c.opponent}
+                    {c.penalties ? ` (${c.penalties}p)` : ""}
+                  </option>
+                ))}
+              </select>
+              {currentChronicle && <MatchChronicleFeed chronicle={currentChronicle} />}
             </div>
           )}
 

@@ -99,6 +99,7 @@ export const formations: Record<string, FormationConfig> = {
 export { positionCompatibility, normPos, canPlayHere } from './positions';
 import { normPos, canPlayHere } from './positions';
 import { calculateChemistry } from './chemistry';
+import { buildMatchChronicle, type MatchChronicle } from './chronicle';
 
 // ═══════════════════════════════════════════════════════════════
 // GAME MODES
@@ -545,6 +546,7 @@ export function simulateSeasonWithStats(
   const playerStats = initPlayerStats(playerTeam);
   const statsMap: Record<string, TournamentPlayerStats> = {};
   playerStats.forEach(ps => { statsMap[ps.playerId] = ps; });
+  const chronicles: MatchChronicle[] = [];
 
   for (let i = 0; i < teams.length; i++) {
     for (let j = i + 1; j < teams.length; j++) {
@@ -555,34 +557,28 @@ export function simulateSeasonWithStats(
       const isPlayerHome = home.name === squad.label;
       const isPlayerAway = away.name === squad.label;
 
-      // Distribute goals to player's team
-      if (isPlayerHome && hg > 0) {
-        const { goals, assists } = distributeGoalsAmongPlayers(playerTeam, hg, formation);
-        playerTeam.forEach(p => {
-          if (statsMap[p.id]) {
-            statsMap[p.id].goals += goals[p.id] || 0;
-            statsMap[p.id].assists += assists[p.id] || 0;
-            statsMap[p.id].matchesPlayed += 1;
-            if (Math.random() < 0.08) statsMap[p.id].yellowCards += 1;
-            if (Math.random() < 0.01) statsMap[p.id].redCards += 1;
-          }
+      // Partido del usuario: distribuir goles, generar crónica y aplicar tarjetas
+      if (isPlayerHome || isPlayerAway) {
+        const myGoals = isPlayerHome ? hg : ag;
+        const oppGoals = isPlayerHome ? ag : hg;
+        const { goals, assists } = myGoals > 0
+          ? distributeGoalsAmongPlayers(playerTeam, myGoals, formation)
+          : { goals: {}, assists: {} };
+        const { chronicle, discipline } = buildMatchChronicle({
+          opponent: isPlayerHome ? away.name : home.name,
+          isHome: isPlayerHome,
+          myGoals, oppGoals,
+          goalsByPlayer: goals, assistsByPlayer: assists,
+          team: playerTeam,
         });
-      } else if (isPlayerAway && ag > 0) {
-        const { goals, assists } = distributeGoalsAmongPlayers(playerTeam, ag, formation);
+        chronicles.push(chronicle);
         playerTeam.forEach(p => {
           if (statsMap[p.id]) {
-            statsMap[p.id].goals += goals[p.id] || 0;
-            statsMap[p.id].assists += assists[p.id] || 0;
+            statsMap[p.id].goals += (goals as Record<string, number>)[p.id] || 0;
+            statsMap[p.id].assists += (assists as Record<string, number>)[p.id] || 0;
             statsMap[p.id].matchesPlayed += 1;
-            if (Math.random() < 0.08) statsMap[p.id].yellowCards += 1;
-            if (Math.random() < 0.01) statsMap[p.id].redCards += 1;
-          }
-        });
-      } else if (isPlayerHome || isPlayerAway) {
-        playerTeam.forEach(p => {
-          if (statsMap[p.id]) {
-            statsMap[p.id].matchesPlayed += 1;
-            if (Math.random() < 0.06) statsMap[p.id].yellowCards += 1;
+            if (discipline.yellows.includes(p.id)) statsMap[p.id].yellowCards += 1;
+            if (discipline.reds.includes(p.id)) statsMap[p.id].redCards += 1;
           }
         });
       }
@@ -616,6 +612,7 @@ export function simulateSeasonWithStats(
     teamLabel: squad.label,
     formation: formation.id,
     teamScore,
+    chronicle: chronicles,
   };
 }
 
@@ -644,6 +641,7 @@ export function simulateCopaWithStats(
   const playerStats = initPlayerStats(playerTeam);
   const statsMap: Record<string, TournamentPlayerStats> = {};
   playerStats.forEach(ps => { statsMap[ps.playerId] = ps; });
+  const chronicles: MatchChronicle[] = [];
 
   for (let r = 0; r < roundNames.length && alive.length > 1; r++) {
     const matches: import('./types').ScheduleMatch[] = [];
@@ -669,21 +667,29 @@ export function simulateCopaWithStats(
       const isPlayerAway = away === squad.label;
       if (isPlayerHome || isPlayerAway) {
         const myGoals = isPlayerHome ? hg : ag;
-        if (myGoals > 0) {
-          const { goals, assists } = distributeGoalsAmongPlayers(playerTeam, myGoals, formation);
-          playerTeam.forEach(p => {
-            if (statsMap[p.id]) {
-              statsMap[p.id].goals += goals[p.id] || 0;
-              statsMap[p.id].assists += assists[p.id] || 0;
-              statsMap[p.id].matchesPlayed += 1;
-              if (Math.random() < 0.08) statsMap[p.id].yellowCards += 1;
-            }
-          });
-        } else {
-          playerTeam.forEach(p => {
-            if (statsMap[p.id]) { statsMap[p.id].matchesPlayed += 1; }
-          });
-        }
+        const oppGoals = isPlayerHome ? ag : hg;
+        const { goals, assists } = myGoals > 0
+          ? distributeGoalsAmongPlayers(playerTeam, myGoals, formation)
+          : { goals: {}, assists: {} };
+        const { chronicle, discipline } = buildMatchChronicle({
+          opponent: isPlayerHome ? away : home,
+          isHome: isPlayerHome,
+          myGoals, oppGoals,
+          goalsByPlayer: goals, assistsByPlayer: assists,
+          team: playerTeam,
+          penalties,
+          roundLabel: roundNames[r],
+        });
+        chronicles.push(chronicle);
+        playerTeam.forEach(p => {
+          if (statsMap[p.id]) {
+            statsMap[p.id].goals += (goals as Record<string, number>)[p.id] || 0;
+            statsMap[p.id].assists += (assists as Record<string, number>)[p.id] || 0;
+            statsMap[p.id].matchesPlayed += 1;
+            if (discipline.yellows.includes(p.id)) statsMap[p.id].yellowCards += 1;
+            if (discipline.reds.includes(p.id)) statsMap[p.id].redCards += 1;
+          }
+        });
       }
 
       matches.push({ home, away, homeGoals: hg, awayGoals: ag, isPlayerHome, penalties });
@@ -711,6 +717,7 @@ export function simulateCopaWithStats(
     teamLabel: squad.label,
     formation: formation.id,
     teamScore,
+    chronicle: chronicles,
   };
 }
 

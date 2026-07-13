@@ -231,6 +231,8 @@ export interface TournamentResult {
   teamLabel: string;
   formation: string;
   teamScore: number;
+  /** Relatos de los partidos del usuario (opcional: resultados viejos no lo traen) */
+  chronicle?: import('./chronicle').MatchChronicle[];
 }
 
 // ═══════════════════════════════════════════════════════════════
