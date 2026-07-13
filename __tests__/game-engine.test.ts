@@ -10,6 +10,7 @@ import {
   simulateSeasonMatchByMatch,
   simulateCopaArgentinaMatchByMatch,
   validateSquadFormation,
+  getSquadTier,
 } from '@/lib/game-engine'
 import type { Player, Squad, FormationConfig } from '@/lib/types'
 
@@ -349,5 +350,32 @@ describe('validateSquadFormation()', () => {
     expect(result.missing.length).toBeGreaterThan(0)
     // At least one missing position should mention something like "GK"
     expect(result.missing.some(m => m.includes('GK'))).toBe(true)
+  })
+})
+
+// ── getSquadTier ───────────────────────────────────────────────
+describe('getSquadTier()', () => {
+  const squad: Squad = {
+    id: 's1', clubId: 'c1', season: '2000', competition: 'arg1', label: 'Tier Test',
+    playerIds: ['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11'],
+  }
+  const mk = (rating: number, legendary = false) =>
+    Array.from({ length: 11 }, (_, i) => makePlayer({ id: `p${i + 1}`, rating, legendary }))
+
+  it('avg >= 64 es legendario', () => {
+    expect(getSquadTier(squad, mk(66)).tier).toBe('legendario')
+  })
+  it('3+ legendarios es legendario aunque el avg sea bajo', () => {
+    const players = mk(50)
+    players[0].legendary = true; players[1].legendary = true; players[2].legendary = true
+    expect(getSquadTier(squad, players).tier).toBe('legendario')
+  })
+  it('avg >= 58 es elite', () => {
+    expect(getSquadTier(squad, mk(60)).tier).toBe('elite')
+  })
+  it('avg bajo es comun y reporta el promedio', () => {
+    const t = getSquadTier(squad, mk(50))
+    expect(t.tier).toBe('comun')
+    expect(t.avg).toBe(50)
   })
 })

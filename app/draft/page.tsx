@@ -24,6 +24,7 @@ import {
   simulateSeasonWithStats,
   simulateCopaWithStats,
   spinSquadWithPity,
+  getSquadTier,
   updatePity,
   PITY_LOW_THRESHOLD,
 } from "@/lib/game-engine"
@@ -31,6 +32,8 @@ import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournam
 import { calculateChemistry } from "@/lib/chemistry"
 import ChemistryPanel from "@/components/ChemistryPanel"
 import TournamentView from "@/components/tournament/TournamentView"
+import SquadRoulette from "@/components/roulette/SquadRoulette"
+import PackReveal from "@/components/roulette/PackReveal"
 import { generatePDF } from "@/lib/pdf"
 import { getPC, POS_GROUPS } from "@/lib/ui-constants"
 
@@ -50,7 +53,7 @@ function getEligibleSquadsForSlot(
 /* ═══════════════════════════════════════════════════════════════
    TYPES
    ═══════════════════════════════════════════════════════════════ */
-type Phase = "start" | "ready" | "pos-select" | "spinning" | "picking" | "done" | "sim"
+type Phase = "start" | "ready" | "pos-select" | "spinning" | "reveal" | "picking" | "done" | "sim"
 
 interface EnrichedPlayer extends Player { isCompatible: boolean }
 
@@ -145,86 +148,6 @@ function PlayerCard({ player, onSelect, showRating }: {
         </div>
       )}
     </button>
-  )
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   ROULETTE WHEEL
-   ═══════════════════════════════════════════════════════════════ */
-const SPIN_DURATION_MS = 3400
-
-function RouletteWheel({ squads, spinning, result }: {
-  squads: Squad[]; spinning: boolean; result: Squad | null
-}) {
-  const [rotation, setRotation] = useState(0)
-  const visible = useMemo(() => {
-    if (!result) return squads.slice(0, 18)
-    const sliced = squads.slice(0, 17)
-    // Guarantee that result is always in the visible list for the wheel animation to spin correctly
-    if (!sliced.some(s => s.id === result.id)) {
-      sliced.push(result)
-    } else {
-      if (squads.length > 17) {
-        const extra = squads.find(s => s.id !== result.id && !sliced.some(x => x.id === s.id))
-        if (extra) sliced.push(extra)
-      }
-    }
-    return sliced
-  }, [squads, result])
-
-  const segAngle = visible.length > 0 ? 360 / visible.length : 360
-  const abbrev = (label: string) => label.replace(/['']/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 4).toUpperCase()
-  const colors = ['#dc2626','#ea580c','#d97706','#65a30d','#16a34a','#0d9488','#0891b2','#0284c7','#2563eb','#4f46e5','#7c3aed','#9333ea','#c026d3','#db2777','#e11d48','#dc2626','#ea580c','#d97706']
-
-  useEffect(() => {
-    if (spinning && result && visible.length > 0) {
-      const idx = visible.findIndex(s => s.id === result.id)
-      if (idx >= 0) {
-        const targetRotation = 360 * 6 + (360 - idx * segAngle - segAngle / 2)
-        setRotation(prev => prev + targetRotation)
-      }
-    }
-  }, [spinning, result, visible, segAngle])
-
-  if (visible.length === 0) return (
-    <div className="mx-auto flex h-64 w-64 items-center justify-center rounded-full border border-slate-700 bg-slate-900/70 text-center text-sm text-slate-400">
-      No hay planteles disponibles para esta posición.
-    </div>
-  )
-
-  return (
-    <div className="relative mx-auto h-64 w-64 overflow-hidden rounded-full border-4 border-slate-600 bg-slate-950 shadow-[0_0_0_8px_rgba(117,170,219,0.08),0_0_50px_rgba(249,115,22,0.18)]">
-      <div className="absolute -inset-8 rounded-full bg-orange-500/15 blur-2xl" />
-      <div className="absolute -top-1 left-1/2 z-30 h-0 w-0 -translate-x-1/2 border-l-[12px] border-r-[12px] border-t-[20px] border-l-transparent border-r-transparent border-t-white drop-shadow-[0_0_10px_rgba(255,255,255,0.85)]" />
-      <motion.div
-        animate={{ rotate: rotation, scale: spinning ? [1, 1.03, 1] : 1 }}
-        transition={{ rotate: { duration: spinning ? SPIN_DURATION_MS / 1000 : 0, ease: [0.17, 0.67, 0.12, 0.99] }, scale: { duration: 0.35, repeat: spinning ? Infinity : 0 } }}
-        className="absolute inset-0 z-10">
-        <svg viewBox="0 0 100 100" className="h-full w-full">
-          {visible.map((sq, idx) => {
-            const s = idx * segAngle, e = (idx + 1) * segAngle
-            const sr = (s - 90) * Math.PI / 180, er = (e - 90) * Math.PI / 180
-            const x1 = 50 + 50 * Math.cos(sr), y1 = 50 + 50 * Math.sin(sr)
-            const x2 = 50 + 50 * Math.cos(er), y2 = 50 + 50 * Math.sin(er)
-            const mr = ((s + e) / 2 - 90) * Math.PI / 180
-            const tx = 50 + 31 * Math.cos(mr), ty = 50 + 31 * Math.sin(mr)
-            return (
-              <g key={sq.id}>
-                <path d={`M50,50 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`}
-                  fill={spinning && result?.id === sq.id ? "#f97316" : colors[idx % colors.length]}
-                  stroke="#94a3b8" strokeWidth="0.25" />
-                <text x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="3.1" fontWeight="900"
-                  transform={`rotate(${(s + e) / 2}, ${tx}, ${ty})`}>
-                  {abbrev(sq.label)}
-                </text>
-              </g>
-            )
-          })}
-          <circle cx="50" cy="50" r="10" fill="#020617" stroke="#f97316" strokeWidth="0.8" />
-          <text x="50" y="51.5" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="6">⚽</text>
-        </svg>
-      </motion.div>
-    </div>
   )
 }
 
@@ -410,7 +333,6 @@ function DraftInner() {
     setCurrentSquad(result)
     setSpinning(true)
     setPhase("spinning")
-    setTimeout(() => { setSpinning(false); setPhase("picking"); setSearch("") }, SPIN_DURATION_MS)
   }, [spinning, allS, allP, currentPos.pos, draftedIds, pity, f, drafted])
 
   // ── REROLL ──
@@ -664,10 +586,22 @@ function DraftInner() {
               <strong style={{ color: getPC(currentPos.pos) }}>{POS_LABELS[currentPos.pos]}</strong>
               {" "}({filledCount + 1}/{totalSlots})
             </p>
-            <RouletteWheel squads={eligibleSquads} spinning={true} result={currentSquad} />
+            <SquadRoulette squads={eligibleSquads} spinning={true} result={currentSquad}
+              onSpinComplete={() => { setSpinning(false); setPhase("reveal"); setSearch("") }} />
             <p className="mt-4 text-sm text-slate-500">Buscando el plantel perfecto para tu equipo...</p>
           </motion.div>
         )}
+
+        {/* PHASE: REVEAL (pack opening) */}
+        <AnimatePresence>
+          {phase === "reveal" && currentSquad && (() => {
+            const { tier, avg } = getSquadTier(currentSquad, allP)
+            return (
+              <PackReveal squad={currentSquad} tier={tier} avg={avg}
+                onContinue={() => setPhase("picking")} />
+            )
+          })()}
+        </AnimatePresence>
 
         {/* PHASE: PICKING */}
         {phase === "picking" && currentSquad && (

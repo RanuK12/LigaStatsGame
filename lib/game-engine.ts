@@ -237,6 +237,20 @@ export function getSquadPlayers(squad: Squad, allPlayers: Player[]): Player[] {
   return allPlayers.filter(p => squad.playerIds.includes(p.id));
 }
 
+export type SquadTier = 'comun' | 'elite' | 'legendario';
+
+/**
+ * Tier del plantel para el reveal de la ruleta. Umbrales calibrados a la base
+ * real (mejores planteles avg ~64-68, mediana ~54).
+ */
+export function getSquadTier(squad: Squad, allPlayers: Player[]): { avg: number; legendaryCount: number; tier: SquadTier } {
+  const players = getSquadPlayers(squad, allPlayers);
+  const avg = players.length === 0 ? 0 : players.reduce((s, p) => s + (p.rating || 60), 0) / players.length;
+  const legendaryCount = players.filter(p => p.legendary).length;
+  const tier: SquadTier = avg >= 64 || legendaryCount >= 3 ? 'legendario' : avg >= 58 ? 'elite' : 'comun';
+  return { avg: Math.round(avg), legendaryCount, tier };
+}
+
 /**
  * Spin a random squad from the available ones.
  * Only returns squads with at least 11 players.
