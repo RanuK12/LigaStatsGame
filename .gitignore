@@ -21,3 +21,7 @@ data/*_historical.json
 data/scrape_progress.json
 data/players.backup-*.json
 data/*.log
+
+# generados por scripts/data/build-public-data.mjs (prebuild)
+public/data/
+data/derived/

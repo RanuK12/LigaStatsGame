@@ -2,21 +2,10 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import playersData from '@/data/players.json'
-import { normalizePlayers } from '@/lib/data-normalizers'
+import recordsData from '@/data/derived/records.json'
 import LifetimeStatsPanel from '@/components/LifetimeStatsPanel'
 
-const players = normalizePlayers(playersData)
-
-const topRated = [...players]
-  .filter((player) => typeof player.rating === 'number')
-  .sort((a, b) => b.rating - a.rating)
-  .slice(0, 10)
-
-const topScorers = [...players]
-  .filter((player) => typeof player.goalsClub === 'number')
-  .sort((a, b) => b.goalsClub - a.goalsClub)
-  .slice(0, 10)
+const { topRated, topScorers } = recordsData
 
 export default function RecordsPage() {
   return (

@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
-import playersData from '@/data/players.json'
+import wheelData from '@/data/derived/ruleta-wheel.json'
 import clubsData from '@/data/clubs.json'
 import type { Player, Club } from '@/lib/types'
 import { normalizePlayers, normalizeClubs } from '@/lib/data-normalizers'
@@ -30,7 +30,7 @@ const FULL_SPINS = 7
 const ANIMATION_DURATION_MS = 3600
 
 export default function RuletaPage() {
-  const allPlayers = useMemo(() => normalizePlayers(playersData), [])
+  const allPlayers = useMemo(() => normalizePlayers(wheelData), [])
   const allClubs = useMemo(() => normalizeClubs(clubsData), [])
   const [spinning, setSpinning] = useState(false)
   const [result, setResult] = useState<Player | null>(null)

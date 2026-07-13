@@ -4,15 +4,10 @@ import { useSearchParams } from "next/navigation"
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import playersData from "@/data/players.json"
 import squadsData from "@/data/squads.json"
-import clubsData from "@/data/clubs.json"
 import type { Player, Squad, TournamentResult } from "@/lib/types"
-import {
-  normalizePlayers,
-  normalizeSquads,
-  normalizeClubs,
-} from "@/lib/data-normalizers"
+import { normalizeSquads } from "@/lib/data-normalizers"
+import { usePlayersCore } from "@/lib/data-loader"
 import {
   formations,
   canPlayHere,
@@ -172,7 +167,8 @@ function DraftInner() {
   const modeId = (sp.get("mode") || "clasico") as string
   const mode = GAME_MODES[modeId] || GAME_MODES.clasico
 
-  const allP = useMemo(() => normalizePlayers(playersData), [])
+  const { players: playersCore, error: playersError } = usePlayersCore()
+  const allP = useMemo(() => playersCore ?? [], [playersCore])
   const allS = useMemo(() => normalizeSquads(squadsData), [])
 
   // ── Game State ──
@@ -388,10 +384,13 @@ function DraftInner() {
             </ol>
           </div>
           <MagneticButton>
-            <button onClick={startGame} className="btn-primary px-10 py-4 font-sport">
-              Comenzar Draft
+            <button onClick={startGame} disabled={!playersCore} className="btn-primary px-10 py-4 font-sport">
+              {playersCore ? "Comenzar Draft" : "Cargando jugadores..."}
             </button>
           </MagneticButton>
+          {playersError && (
+            <p className="mt-3 text-xs text-red-400">No se pudo cargar la base de jugadores: {playersError}. Recargá la página.</p>
+          )}
           <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider">Volver al inicio</Link>
         </motion.div>
       </div>

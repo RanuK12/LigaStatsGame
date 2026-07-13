@@ -5,6 +5,8 @@
   "scripts": {
     "test": "vitest",
     "dev": "next dev",
+    "build:data": "node scripts/data/build-public-data.mjs",
+    "prebuild": "npm run build:data",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
