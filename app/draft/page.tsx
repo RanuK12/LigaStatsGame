@@ -267,14 +267,17 @@ function PityIndicator({ pity }: { pity: PityState }) {
 /* ═══════════════════════════════════════════════════════════════
    POSITION SELECTOR MODAL
    ═══════════════════════════════════════════════════════════════ */
-function PositionSelector({ formation, onSelect, onClose, currentPos }: {
+function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }: {
   formation: any
+  drafted: (Player | null)[]
   onSelect: (pos: string) => void
   onClose: () => void
   currentPos: string
 }) {
-  // Get unique positions from the formation's remaining slots
-  const positions = formation.positions.map((p: any) => p.pos)
+  // Get unique positions from the formation's remaining empty slots
+  const positions = formation.positions
+    .filter((p: any, i: number) => !drafted[i])
+    .map((p: any) => p.pos)
   const unique = [...new Set<string>(positions)]
 
   return (
@@ -868,11 +871,12 @@ function DraftInner() {
     const squadPlayers = getSquadPlayers(currentSquad, allP)
     const available = squadPlayers.filter(p => !draftedIds.has(p.id))
     const enriched: EnrichedPlayer[] = available.map(p => ({ ...p, isCompatible: canPlayHere(p, targetPos) }))
-    enriched.sort((a, b) => {
-      if (a.isCompatible !== b.isCompatible) return a.isCompatible ? -1 : 1
-      return (b.rating || 0) - (a.rating || 0)
-    })
-    return enriched.filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()))
+    
+    // Filter to keep ONLY compatible players so that incompatible players are not shown in the grid
+    const compatible = enriched.filter(p => p.isCompatible)
+    
+    compatible.sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    return compatible.filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()))
   }, [currentSquad, allP, f, activeSlotIdx, search, draftedIds])
 
   const compatibleCount = pickerPlayers.filter(p => p.isCompatible).length
@@ -936,6 +940,7 @@ function DraftInner() {
         {showPosSelector && (
           <PositionSelector
             formation={f}
+            drafted={drafted}
             currentPos={currentPos.pos}
             onSelect={(pos) => {
               setShowPosSelector(false)
