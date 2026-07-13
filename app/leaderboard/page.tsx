@@ -88,14 +88,14 @@ export default function LeaderboardPage() {
     <div className="min-h-screen gradient-bg">
       <header className="pt-12 pb-6 px-4 text-center">
         <motion.div initial={{opacity:0,y:-30}} animate={{opacity:1,y:0}} transition={{duration:0.6}}>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight font-display"><span className="gradient-text">🏆 Leaderboard</span></h1>
-          <p className="mt-3 text-lg text-slate-400">Los mejores drafts de LigaStatsGame</p>
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight font-display uppercase"><span className="gradient-text">🏆 TABLA DE LÍDERES</span></h1>
+          <p className="mt-3 text-sm text-slate-400">Los mejores once ideales de Draft Tres Estrellas</p>
         </motion.div>
       </header>
       <main className="max-w-3xl mx-auto px-4 pb-20">
-        <div className="flex gap-2 mb-6 justify-center">
-          <button onClick={()=>setTab('global')} className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${tab==='global'?'bg-blue-600 text-white':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>🌍 Global</button>
-          <button onClick={()=>setTab('club')} className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${tab==='club'?'bg-blue-600 text-white':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>⚽ Por Club</button>
+        <div className="flex gap-2.5 mb-8 justify-center">
+          <button onClick={()=>setTab('global')} className={`px-5 py-2.5 rounded-xl text-xs font-black tracking-widest transition-all ${tab==='global'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>🌍 GLOBAL</button>
+          <button onClick={()=>setTab('club')} className={`px-5 py-2.5 rounded-xl text-xs font-black tracking-widest transition-all ${tab==='club'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>⚽ POR CLUB</button>
         </div>
 
         {tab==='global'?(

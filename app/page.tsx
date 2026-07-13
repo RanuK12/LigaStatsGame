@@ -568,37 +568,9 @@ export default function HomePage() {
       {/* ── TOP TICKER ── */}
       <TickerStrip />
 
-      {/* ── HEADER ── */}
-      <header className="relative z-10 border-b border-[rgba(116,172,223,0.10)] backdrop-blur-md bg-[#040D18]/60 sticky top-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <Image src="/LigaStatsGame/logos/afa.png" alt="AFA" width={44} height={44} className="drop-shadow-lg" />
-              <div className="absolute -inset-1 rounded-full bg-[#74ACDF]/15 blur-sm" />
-            </div>
-            <Image src="/LigaStatsGame/logos/liga-profesional.png" alt="LPF" width={36} height={36} className="drop-shadow-lg opacity-90" />
-            <div className="ml-1.5">
-              <h1 className="font-display text-xl sm:text-2xl font-black gradient-text leading-tight">
-                Liga Argentina Fans
-              </h1>
-              <p className="text-[#74ACDF]/50 text-[10px] sm:text-xs font-semibold tracking-wider uppercase">
-                El Draft del Fútbol Argentino
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link href="/records" className="hidden sm:flex btn-secondary text-sm py-2 px-4">
-              📊 Records
-            </Link>
-            <Link href="/draft?mode=clasico" className="btn-primary text-sm py-2.5 px-5 font-black">
-              ⚽ Jugar
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* ── HERO ── */}
       <HeroSection />
+
 
       {/* ── WORLD CUP BANNER ── */}
       <WorldCupBanner />

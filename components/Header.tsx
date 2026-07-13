@@ -4,14 +4,15 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 const NAV_ITEMS = [
-  { href: '/', label: 'Inicio', icon: '🏠' },
-  { href: '/draft?mode=clasico', match: '/draft', label: 'Draft', icon: '⚽' },
-  { href: '/ruleta', label: 'Ruleta', icon: '🎰' },
-  { href: '/records', label: 'Records', icon: '📚' },
-  { href: '/daily', label: 'Reto diario', icon: '🔥' },
-  { href: '/leaderboard', label: 'Tabla', icon: '🏆' },
+  { href: '/', label: 'INICIO', icon: '🏠' },
+  { href: '/draft?mode=clasico', match: '/draft', label: 'DRAFT', icon: '⚽' },
+  { href: '/ruleta', label: 'RULETA', icon: '🎰' },
+  { href: '/records', label: 'RECORDS', icon: '📚' },
+  { href: '/daily', label: 'RETO DIARIO', icon: '🔥' },
+  { href: '/leaderboard', label: 'POSICIONES', icon: '🏆' },
 ]
 
 export default function Header() {
@@ -19,14 +20,30 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#071422]/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 text-lg font-bold text-white">
-          <span className="text-xl">⚽</span>
-          <span className="hidden sm:inline">LigaStats</span>
+    <header className="sticky top-0 z-50 w-full border-b border-[rgba(116,172,223,0.12)] bg-[#020813]/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+        {/* Brand Logo */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9">
+            <Image
+              src="/LigaStatsGame/logos/afa.png"
+              alt="AFA Logo"
+              fill
+              className="object-contain drop-shadow-md group-hover:scale-105 transition-transform"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-display text-sm sm:text-base font-black tracking-wider text-white flex items-center gap-1 leading-none">
+              DRAFT TRES ESTRELLAS <span className="text-[10px] text-[#FFD700] animate-pulse">⭐️⭐️⭐️</span>
+            </span>
+            <span className="text-[8px] sm:text-[9px] text-[#74ACDF]/70 font-black tracking-widest leading-none mt-0.5">
+              EL JUEGO DEL FÚTBOL ARGENTINO
+            </span>
+          </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1.5">
           {NAV_ITEMS.map((item) => {
             const matchPath = item.match || item.href
             const isActive = pathname === matchPath || (matchPath !== '/' && pathname.startsWith(matchPath))
@@ -35,47 +52,52 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
-                  isActive ? 'text-white' : 'text-gray-400 hover:text-white'
+                className={`relative rounded-xl px-3 py-2 text-xs font-black tracking-widest transition-all ${
+                  isActive ? 'text-white' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-lg bg-white/10"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#74ACDF]/15 to-[#4A90D9]/10 border border-[#74ACDF]/30 shadow-[0_0_12px_rgba(116,172,223,0.1)]"
+                    transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
                   />
                 )}
-                <span className="relative z-10">{item.icon} {item.label}</span>
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <span>{item.icon}</span>
+                  <span>{item.label}</span>
+                </span>
               </Link>
             )
           })}
         </nav>
 
+        {/* Mobile menu trigger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden rounded-lg p-2 text-gray-400 hover:text-white transition-colors"
+          className="md:hidden rounded-xl p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/40 border border-slate-800 transition-colors"
           aria-label="Abrir menú"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             {menuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
+              <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
             ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
+              <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" strokeLinejoin="round" />
             )}
           </svg>
         </button>
       </div>
 
+      {/* Mobile Navigation */}
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden border-t border-white/10"
+            className="md:hidden overflow-hidden border-t border-slate-800/80 bg-[#020813]/95 backdrop-blur-lg"
           >
-            <div className="flex flex-col gap-1 px-4 py-3">
+            <div className="flex flex-col gap-1 px-4 py-3.5">
               {NAV_ITEMS.map((item) => {
                 const matchPath = item.match || item.href
                 const isActive = pathname === matchPath || (matchPath !== '/' && pathname.startsWith(matchPath))
@@ -85,13 +107,14 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    className={`flex items-center gap-3 rounded-xl px-4 py-3 text-xs font-black tracking-widest transition-all ${
                       isActive
-                        ? 'bg-white/10 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        ? 'bg-gradient-to-r from-[#74ACDF]/20 to-transparent text-white border-l-4 border-[#74ACDF]'
+                        : 'text-slate-400 hover:text-white hover:bg-slate-900/50'
                     }`}
                   >
-                    {item.icon} {item.label}
+                    <span className="text-sm">{item.icon}</span>
+                    <span>{item.label}</span>
                   </Link>
                 )
               })}

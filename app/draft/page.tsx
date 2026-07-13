@@ -163,7 +163,21 @@ function RouletteWheel({ squads, spinning, result }: {
   squads: Squad[]; spinning: boolean; result: Squad | null
 }) {
   const [rotation, setRotation] = useState(0)
-  const visible = useMemo(() => squads.slice(0, 18), [squads])
+  const visible = useMemo(() => {
+    if (!result) return squads.slice(0, 18)
+    const sliced = squads.slice(0, 17)
+    // Guarantee that result is always in the visible list for the wheel animation to spin correctly
+    if (!sliced.some(s => s.id === result.id)) {
+      sliced.push(result)
+    } else {
+      if (squads.length > 17) {
+        const extra = squads.find(s => s.id !== result.id && !sliced.some(x => x.id === s.id))
+        if (extra) sliced.push(extra)
+      }
+    }
+    return sliced
+  }, [squads, result])
+
   const segAngle = visible.length > 0 ? 360 / visible.length : 360
   const abbrev = (label: string) => label.replace(/['']/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 4).toUpperCase()
   const colors = ['#dc2626','#ea580c','#d97706','#65a30d','#16a34a','#0d9488','#0891b2','#0284c7','#2563eb','#4f46e5','#7c3aed','#9333ea','#c026d3','#db2777','#e11d48','#dc2626','#ea580c','#d97706']
@@ -171,7 +185,10 @@ function RouletteWheel({ squads, spinning, result }: {
   useEffect(() => {
     if (spinning && result && visible.length > 0) {
       const idx = visible.findIndex(s => s.id === result.id)
-      if (idx >= 0) setRotation(prev => prev + 360 * 6 + (360 - idx * segAngle - segAngle / 2))
+      if (idx >= 0) {
+        const targetRotation = 360 * 6 + (360 - idx * segAngle - segAngle / 2)
+        setRotation(prev => prev + targetRotation)
+      }
     }
   }, [spinning, result, visible, segAngle])
 
@@ -227,15 +244,22 @@ function PityIndicator({ pity }: { pity: PityState }) {
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border ${
+      className={`flex flex-col sm:flex-row items-center gap-2 px-4 py-2 rounded-xl text-xs font-black border ${
         isPityActive
-          ? "bg-yellow-500/20 border-yellow-400/50 text-yellow-300 shadow-[0_0_12px_rgba(251,191,36,0.4)]"
-          : "bg-orange-500/10 border-orange-400/30 text-orange-300"
+          ? "bg-yellow-500/20 border-yellow-400/40 text-yellow-300 shadow-[0_0_16px_rgba(251,191,36,0.35)]"
+          : "bg-blue-500/10 border-blue-400/20 text-[#74ACDF]"
       }`}>
-      {isPityActive ? (
-        <motion.span animate={{ rotate: [0, 10, -10, 0] }} transition={{ repeat: Infinity, duration: 0.5 }}>✨</motion.span>
-      ) : "🔥"}
-      {isPityActive ? "¡Pity activado! Próximo sorteo será épico" : `${pity.consecutiveLow} pick${pity.consecutiveLow > 1 ? "s" : ""} bajo — el siguiente mejora`}
+      <div className="flex items-center gap-1.5 uppercase tracking-wider">
+        {isPityActive ? (
+          <motion.span animate={{ rotate: [0, 15, -15, 0] }} transition={{ repeat: Infinity, duration: 0.6 }}>✨</motion.span>
+        ) : "🔥"}
+        <span>LA CÁBALA (ANTI-MUFA):</span>
+      </div>
+      <span className="font-medium text-[11px] text-slate-300">
+        {isPityActive
+          ? "¡ACTIVADA! Próximo spin de élite garantizado por meter 2 picks bajos seguidos."
+          : `Llevás ${pity.consecutiveLow} pick${pity.consecutiveLow > 1 ? "s" : ""} de bajo rating (<=60). ¡Si sumás otro, el siguiente se potencia!`}
+      </span>
     </motion.div>
   )
 }
@@ -567,7 +591,7 @@ async function generatePDF(result: TournamentResult, draftedPlayers: (Player | n
   doc.setTextColor(117, 170, 219)
   doc.setFontSize(22)
   doc.setFont("helvetica", "bold")
-  doc.text("LigaStats Game", W / 2, y, { align: "center" })
+  doc.text("Draft Tres Estrellas", W / 2, y, { align: "center" })
   y += 8
 
   doc.setTextColor(180, 180, 200)
@@ -663,9 +687,9 @@ async function generatePDF(result: TournamentResult, draftedPlayers: (Player | n
   doc.rect(0, 294, W, 3, "F")
   doc.setTextColor(100, 110, 140)
   doc.setFontSize(8)
-  doc.text("LigaStats Game · ligastatsgame.com · Generado automáticamente", W / 2, 291, { align: "center" })
+  doc.text("Draft Tres Estrellas · draft3estrellas.com · Generado automáticamente", W / 2, 291, { align: "center" })
 
-  doc.save(`LigaStats_${result.teamLabel.replace(/\s+/g, "_")}_${result.type}.pdf`)
+  doc.save(`Draft3Estrellas_${result.teamLabel.replace(/\s+/g, "_")}_${result.type}.pdf`)
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -880,7 +904,7 @@ function DraftInner() {
               <li>1. Elegís la <strong className="text-slate-200">posición</strong> que querés sortear</li>
               <li>2. Girás la ruleta — te toca un <strong className="text-slate-200">equipo + año</strong></li>
               <li>3. Elegís <strong className="text-slate-200">un solo jugador</strong> de esa posición</li>
-              <li>4. El <strong className="text-yellow-300">sistema Pity</strong> garantiza que no te salgan solo jugadores bajos</li>
+              <li>4. El sistema de <strong className="text-yellow-300">La Cábala (Anti-Mufa)</strong> garantiza que no te salgan solo jugadores de bajo nivel seguidos</li>
               <li>5. Armá los 11 y <strong className="text-slate-200">simulá el torneo con estadísticas</strong></li>
             </ol>
           </div>
@@ -992,7 +1016,7 @@ function DraftInner() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-4 px-4 py-2 bg-yellow-500/20 border border-yellow-400/40 rounded-xl text-yellow-300 text-sm font-bold shadow-[0_0_20px_rgba(251,191,36,0.3)]">
-                ✨ ¡Modo Pity Activado! Buscando un plantel de élite...
+                ✨ ¡LA CÁBALA (ANTI-MUFA) ACTIVADA! Buscando un plantel de élite...
               </motion.div>
             )}
             <p className="text-slate-400 mb-4 text-sm">🎰 Girando para{" "}

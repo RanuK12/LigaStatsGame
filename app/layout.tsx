@@ -1,36 +1,50 @@
 import type { Metadata, Viewport } from 'next'
+import { Montserrat, Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-display',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+})
+
 export const metadata: Metadata = {
-  title: 'Liga Argentina Fans ⚽ | Arma tu 11 de la Historia',
-  description: 'Armá tu 11 ideal de la historia del fútbol argentino. Elegí plantels reales, simulá partidos y compartí tu resultado.',
+  title: 'Draft Tres Estrellas ⭐️⭐️⭐️ | El Juego del Fútbol Argentino',
+  description: 'Armá tu 11 ideal de la historia del fútbol argentino. Elegí planteles reales, simulá partidos y compartí tu resultado.',
   manifest: '/manifest.json',
   openGraph: {
-    title: 'Liga Argentina Fans',
+    title: 'Draft Tres Estrellas ⭐️⭐️⭐️',
     description: 'El juego del fútbol argentino',
     type: 'website',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#071422',
+  themeColor: '#020813',
   width: 'device-width',
   initialScale: 1,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${montserrat.variable} ${inter.variable}`}>
       <head>
-        <link rel="icon" href="/logos/afa.png" />
+        <link rel="icon" href="/LigaStatsGame/logos/afa.png" />
       </head>
-      <body className="bg-[#071422] text-white min-h-screen antialiased">
+      <body className="bg-[#020813] text-white min-h-screen antialiased font-sans">
         <Header />
-        <main className="mx-auto max-w-5xl px-4 py-6">
+        <main className="w-full">
           {children}
         </main>
       </body>
     </html>
   )
 }
+
