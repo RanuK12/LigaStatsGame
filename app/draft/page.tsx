@@ -28,6 +28,8 @@ import {
   PITY_LOW_THRESHOLD,
 } from "@/lib/game-engine"
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
+import { calculateChemistry } from "@/lib/chemistry"
+import ChemistryPanel from "@/components/ChemistryPanel"
 
 /* ═══════════════════════════════════════════════════════════════
    CONSTANTS & HELPERS
@@ -735,6 +737,7 @@ function DraftInner() {
   )
   const teamScore = useMemo(() => calculateFullTeamScore(drafted, f), [drafted, f])
   const partialScore = useMemo(() => calculateTeamScore(drafted, f), [drafted, f])
+  const chemBreakdown = useMemo(() => calculateChemistry(drafted, f), [drafted, f])
 
   const findNextEmpty = useCallback((from: number, board: (Player | null)[]) => {
     let idx = from
@@ -1004,6 +1007,7 @@ function DraftInner() {
               </div>
             </div>
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} /></div>
+            {filledCount >= 2 && <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>}
             <div className="flex gap-3 justify-center flex-wrap font-sport">
               <button onClick={() => spinWheel()} className="btn-primary px-10 py-4">
                 Girar Ruleta
@@ -1111,6 +1115,7 @@ function DraftInner() {
               <h2 className="font-display text-3xl font-black gradient-text mb-2">¡11 Armado!</h2>
               <p className="text-slate-400 text-sm mb-4">Tocá cualquier posición para cambiar el jugador</p>
               <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} /></div>
+              <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>
               {/* Player chips */}
               <div className="flex flex-wrap gap-2 justify-center mb-4">
                 {f.positions.map((pos: any, i: number) => {

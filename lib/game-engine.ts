@@ -94,25 +94,11 @@ export const formations: Record<string, FormationConfig> = {
 };
 
 // ═══════════════════════════════════════════════════════════════
-// POSITION COMPATIBILITY
+// POSITION COMPATIBILITY (movido a lib/positions.ts; re-export para consumidores)
 // ═══════════════════════════════════════════════════════════════
-export const positionCompatibility: Record<string, string[]> = {
-  GK: ['GK'],
-  CB: ['CB'],
-  LB: ['LB', 'LWB'],
-  RB: ['RB', 'RWB'],
-  LWB: ['LWB', 'LB'],
-  RWB: ['RWB', 'RB'],
-  CDM: ['CDM', 'CM'],
-  CM: ['CM', 'CDM', 'CAM', 'LM', 'RM'],
-  CAM: ['CAM', 'CM', 'CF', 'ST'],
-  LM: ['LM', 'LW', 'LB', 'CM'],
-  RM: ['RM', 'RW', 'RB', 'CM'],
-  LW: ['LW', 'LM', 'ST'],
-  RW: ['RW', 'RM', 'ST'],
-  ST: ['ST', 'CF', 'CAM'],
-  CF: ['CF', 'ST', 'CAM'],
-};
+export { positionCompatibility, normPos, canPlayHere } from './positions';
+import { normPos, canPlayHere } from './positions';
+import { calculateChemistry } from './chemistry';
 
 // ═══════════════════════════════════════════════════════════════
 // GAME MODES
@@ -178,20 +164,11 @@ function lineRating(team: (Player | null)[], formation: FormationConfig, line: T
 }
 
 export function calculateTeamStrength(team: (Player | null)[], formation: FormationConfig): TeamStrength {
-  const valid = team.filter(isPlayer);
-  const chemistryMatches = team.reduce((acc, player, index) => {
-    const slot = formation.positions[index];
-    if (!player || !slot) return acc;
-    if (normPos(player.position) === slot.pos) return acc + 1;
-    if (player.positions?.some((pos) => normPos(pos) === slot.pos)) return acc + 1;
-    return acc;
-  }, 0);
-
   const goalkeeper = lineRating(team, formation, 'goalkeeper');
   const defense = lineRating(team, formation, 'defense');
   const midfield = lineRating(team, formation, 'midfield');
   const attack = lineRating(team, formation, 'attack');
-  const chemistry = valid.length === 0 ? 0 : Math.round((chemistryMatches / Math.min(valid.length, formation.positions.length)) * 100);
+  const chemistry = calculateChemistry(team, formation).total;
   const overall = Math.round(
     goalkeeper * 0.18 +
     defense * 0.28 +
@@ -242,34 +219,6 @@ function teamToStrength(team: Player[], formation: FormationConfig, mode: GameMo
 // ═══════════════════════════════════════════════════════════════
 // CORE FUNCTIONS
 // ═══════════════════════════════════════════════════════════════
-
-// Normaliza etiquetas de posición en español a los códigos enum (defensa: datos viejos/scrapeados a
-// veces traen "Mediocampista"/"Delantero" en vez de CM/ST y rompen la compatibilidad). (fix 06-29)
-const POS_ALIAS: Record<string, string> = {
-  Arquero: 'GK', Portero: 'GK', Defensor: 'CB', 'Defensa central': 'CB',
-  'Lateral izquierdo': 'LB', 'Lateral derecho': 'RB',
-  Mediocampista: 'CM', Volante: 'CM', 'Volante central': 'CDM', 'Volante defensivo': 'CDM',
-  Enganche: 'CAM', Mediapunta: 'CAM',
-  Delantero: 'ST', Centrodelantero: 'CF', Extremo: 'RW', 'Extremo derecho': 'RW', 'Extremo izquierdo': 'LW',
-};
-export function normPos(p: string): string {
-  return POS_ALIAS[p] || p;
-}
-
-/**
- * Check if a player can play in a given formation slot position.
- * Uses both primary position and alternate positions array.
- */
-export function canPlayHere(player: Player, requiredPos: string): boolean {
-  const compat = positionCompatibility[normPos(requiredPos)] || [requiredPos];
-  // Check primary position
-  if (compat.includes(normPos(player.position))) return true;
-  // Check alternate positions array
-  if (player.positions && player.positions.length > 0) {
-    return player.positions.some(p => compat.includes(normPos(p)));
-  }
-  return false;
-}
 
 /**
  * Get all players from a squad that can play in a specific formation slot.
@@ -329,11 +278,15 @@ export function calculateFullTeamScore(team: (Player | null)[], formation: Forma
 // SIMULATION
 // ═══════════════════════════════════════════════════════════════
 
-function simulateGoals(teamStr: number): number {
-  const avg = Math.max(0.3, (teamStr - 50) / 25);
-  let goals = 0;
-  for (let i = 0; i < 5; i++) { if (Math.random() < avg * 0.2) goals++; }
-  return goals;
+// Muestreo Poisson (Knuth) sobre los goles esperados. Reemplaza al viejo
+// simulateGoals(expected*18) que aplanaba todo al piso 0.3 y hacía que la
+// fuerza del equipo casi no afectara los resultados.
+function samplePoissonGoals(lambda: number): number {
+  const L = Math.exp(-lambda);
+  let k = 0;
+  let p = 1;
+  do { k++; p *= Math.random(); } while (p > L);
+  return Math.min(k - 1, 7);
 }
 
 interface LigaTeam { name: string; pts: number; gf: number; ga: number; w: number; d: number; l: number; form: string[] }
@@ -351,8 +304,8 @@ function simulateMatchGoals(home: TeamStrength, away: TeamStrength): { homeGoals
   const homeExpected = clamp((homeAttack - awayDefense + 52) / 28, 0.35, 2.85);
   const awayExpected = clamp((awayAttack - homeDefense + 50) / 29, 0.25, 2.55);
 
-  const homeGoals = simulateGoals(homeExpected * 18);
-  const awayGoals = simulateGoals(awayExpected * 18);
+  const homeGoals = samplePoissonGoals(homeExpected);
+  const awayGoals = samplePoissonGoals(awayExpected);
 
   return { homeGoals, awayGoals };
 }
