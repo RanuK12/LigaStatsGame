@@ -2,9 +2,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import playersData from '@/data/players.json'
-import clubsData from '@/data/clubs.json'
-import { Player, Club } from '@/lib/types'
 
 interface Score { id: string; club: string; clubName: string; rating: number; players: number; pts: number; pos: number; date: string }
 

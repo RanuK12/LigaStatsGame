@@ -159,6 +159,8 @@ function PlayerCard({ player, onSelect, showRating }: {
 /* ═══════════════════════════════════════════════════════════════
    ROULETTE WHEEL
    ═══════════════════════════════════════════════════════════════ */
+const SPIN_DURATION_MS = 3400
+
 function RouletteWheel({ squads, spinning, result }: {
   squads: Squad[]; spinning: boolean; result: Squad | null
 }) {
@@ -204,7 +206,7 @@ function RouletteWheel({ squads, spinning, result }: {
       <div className="absolute -top-1 left-1/2 z-30 h-0 w-0 -translate-x-1/2 border-l-[12px] border-r-[12px] border-t-[20px] border-l-transparent border-r-transparent border-t-white drop-shadow-[0_0_10px_rgba(255,255,255,0.85)]" />
       <motion.div
         animate={{ rotate: rotation, scale: spinning ? [1, 1.03, 1] : 1 }}
-        transition={{ rotate: { duration: spinning ? 3.4 : 0, ease: [0.17, 0.67, 0.12, 0.99] }, scale: { duration: 0.35, repeat: spinning ? Infinity : 0 } }}
+        transition={{ rotate: { duration: spinning ? SPIN_DURATION_MS / 1000 : 0, ease: [0.17, 0.67, 0.12, 0.99] }, scale: { duration: 0.35, repeat: spinning ? Infinity : 0 } }}
         className="absolute inset-0 z-10">
         <svg viewBox="0 0 100 100" className="h-full w-full">
           {visible.map((sq, idx) => {
@@ -777,7 +779,7 @@ function DraftInner() {
     setCurrentSquad(result)
     setSpinning(true)
     setPhase("spinning")
-    setTimeout(() => { setSpinning(false); setPhase("picking"); setSearch("") }, 2800)
+    setTimeout(() => { setSpinning(false); setPhase("picking"); setSearch("") }, SPIN_DURATION_MS)
   }, [spinning, allS, allP, currentPos.pos, draftedIds, pity, f, drafted])
 
   // ── REROLL ──
