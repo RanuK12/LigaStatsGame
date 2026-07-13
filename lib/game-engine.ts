@@ -494,3 +494,332 @@ export function validateSquadFormation(
   }
   return { isValid: missing.length === 0, missing };
 }
+
+// ═══════════════════════════════════════════════════════════════
+// INDIVIDUAL PLAYER STATS SIMULATION
+// ═══════════════════════════════════════════════════════════════
+
+import type { TournamentPlayerStats, TournamentResult } from './types';
+
+const GOAL_PROBS: Record<string, number> = {
+  GK: 0.01, CB: 0.04, LB: 0.06, RB: 0.06, LWB: 0.07, RWB: 0.07,
+  CDM: 0.07, CM: 0.10, CAM: 0.14, LM: 0.12, RM: 0.12,
+  LW: 0.18, RW: 0.18, ST: 0.28, CF: 0.24,
+};
+const ASSIST_PROBS: Record<string, number> = {
+  GK: 0.00, CB: 0.03, LB: 0.09, RB: 0.09, LWB: 0.10, RWB: 0.10,
+  CDM: 0.08, CM: 0.14, CAM: 0.20, LM: 0.16, RM: 0.16,
+  LW: 0.16, RW: 0.16, ST: 0.10, CF: 0.12,
+};
+
+function distributeGoalsAmongPlayers(
+  players: Player[], totalGoals: number, formation: FormationConfig
+): { goals: Record<string, number>; assists: Record<string, number> } {
+  const goals: Record<string, number> = {};
+  const assists: Record<string, number> = {};
+  players.forEach(p => { goals[p.id] = 0; assists[p.id] = 0; });
+
+  for (let g = 0; g < totalGoals; g++) {
+    // Pick goal scorer weighted by position + rating
+    const weights = players.map(p => {
+      const pos = normPos(p.position);
+      const base = (GOAL_PROBS[pos] || 0.08);
+      const ratingBonus = (p.rating || 60) / 200;
+      return Math.max(0.005, base + ratingBonus);
+    });
+    const totalW = weights.reduce((a, b) => a + b, 0);
+    let rand = Math.random() * totalW;
+    let scorer = players[0];
+    for (let i = 0; i < players.length; i++) {
+      rand -= weights[i];
+      if (rand <= 0) { scorer = players[i]; break; }
+    }
+    goals[scorer.id] = (goals[scorer.id] || 0) + 1;
+
+    // Pick assister (different from scorer, weighted by assist probs)
+    const assistCandidates = players.filter(p => p.id !== scorer.id);
+    if (assistCandidates.length > 0 && Math.random() < 0.75) {
+      const aw = assistCandidates.map(p => {
+        const pos = normPos(p.position);
+        return Math.max(0.005, (ASSIST_PROBS[pos] || 0.08) + (p.rating || 60) / 300);
+      });
+      const totalAW = aw.reduce((a, b) => a + b, 0);
+      let aRand = Math.random() * totalAW;
+      let assister = assistCandidates[0];
+      for (let i = 0; i < assistCandidates.length; i++) {
+        aRand -= aw[i];
+        if (aRand <= 0) { assister = assistCandidates[i]; break; }
+      }
+      assists[assister.id] = (assists[assister.id] || 0) + 1;
+    }
+  }
+  return { goals, assists };
+}
+
+function initPlayerStats(players: Player[]): TournamentPlayerStats[] {
+  return players.map(p => ({
+    playerId: p.id,
+    playerName: p.name,
+    position: p.position,
+    rating: p.rating || 60,
+    goals: 0, assists: 0, yellowCards: 0, redCards: 0, matchesPlayed: 0,
+  }));
+}
+
+/** Simulate a Liga season AND track per-player goals/assists for the user's 11 */
+export function simulateSeasonWithStats(
+  playerTeam: Player[], squad: Squad, allSquads: Squad[], allPlayers: Player[],
+  formation: FormationConfig, teamScore: number
+): TournamentResult {
+  const playerStrength = teamToStrength(playerTeam, formation, 'liga');
+  const opponents = allSquads
+    .filter(s => s.id !== squad.id && s.playerIds.length >= 11)
+    .sort(() => Math.random() - 0.5).slice(0, 13); // 14 teams in zone
+  const allNames = [squad.label, ...opponents.map(o => o.label)];
+  const strengthByTeam: Record<string, TeamStrength> = {};
+  strengthByTeam[squad.label] = playerStrength;
+  opponents.forEach(o => {
+    const p = getSquadPlayers(o, allPlayers).slice(0, 11);
+    strengthByTeam[o.label] = p.length >= 11
+      ? teamToStrength(p, formations['4-3-3'], 'liga')
+      : { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 40, overall: 55 };
+  });
+
+  interface LigaTeam { name: string; pts: number; gf: number; ga: number; w: number; d: number; l: number; form: string[] }
+  const teams: LigaTeam[] = allNames.map(n => ({ name: n, pts: 0, gf: 0, ga: 0, w: 0, d: 0, l: 0, form: [] }));
+  const schedule: import('./types').ScheduleMatch[] = [];
+
+  const playerStats = initPlayerStats(playerTeam);
+  const statsMap: Record<string, TournamentPlayerStats> = {};
+  playerStats.forEach(ps => { statsMap[ps.playerId] = ps; });
+
+  for (let i = 0; i < teams.length; i++) {
+    for (let j = i + 1; j < teams.length; j++) {
+      const home = teams[i], away = teams[j];
+      const hs = strengthByTeam[home.name] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 50, overall: 55 };
+      const as_ = strengthByTeam[away.name] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 50, overall: 55 };
+      const { homeGoals: hg, awayGoals: ag } = simulateMatchGoals(hs, as_);
+      const isPlayerHome = home.name === squad.label;
+      const isPlayerAway = away.name === squad.label;
+
+      // Distribute goals to player's team
+      if (isPlayerHome && hg > 0) {
+        const { goals, assists } = distributeGoalsAmongPlayers(playerTeam, hg, formation);
+        playerTeam.forEach(p => {
+          if (statsMap[p.id]) {
+            statsMap[p.id].goals += goals[p.id] || 0;
+            statsMap[p.id].assists += assists[p.id] || 0;
+            statsMap[p.id].matchesPlayed += 1;
+            if (Math.random() < 0.08) statsMap[p.id].yellowCards += 1;
+            if (Math.random() < 0.01) statsMap[p.id].redCards += 1;
+          }
+        });
+      } else if (isPlayerAway && ag > 0) {
+        const { goals, assists } = distributeGoalsAmongPlayers(playerTeam, ag, formation);
+        playerTeam.forEach(p => {
+          if (statsMap[p.id]) {
+            statsMap[p.id].goals += goals[p.id] || 0;
+            statsMap[p.id].assists += assists[p.id] || 0;
+            statsMap[p.id].matchesPlayed += 1;
+            if (Math.random() < 0.08) statsMap[p.id].yellowCards += 1;
+            if (Math.random() < 0.01) statsMap[p.id].redCards += 1;
+          }
+        });
+      } else if (isPlayerHome || isPlayerAway) {
+        playerTeam.forEach(p => {
+          if (statsMap[p.id]) {
+            statsMap[p.id].matchesPlayed += 1;
+            if (Math.random() < 0.06) statsMap[p.id].yellowCards += 1;
+          }
+        });
+      }
+
+      home.gf += hg; home.ga += ag; away.gf += ag; away.ga += hg;
+      if (hg > ag) { home.pts += 3; home.w++; away.l++; home.form.push('V'); away.form.push('D'); }
+      else if (hg < ag) { away.pts += 3; away.w++; home.l++; home.form.push('D'); away.form.push('V'); }
+      else { home.pts++; away.pts++; home.d++; away.d++; home.form.push('E'); away.form.push('E'); }
+      if (home.form.length > 5) { home.form.shift(); away.form.shift(); }
+      schedule.push({ home: home.name, away: away.name, homeGoals: hg, awayGoals: ag, isPlayerHome });
+    }
+  }
+
+  const sorted = [...teams].sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf);
+  const playerPos = sorted.findIndex(t => t.name === squad.label) + 1;
+  const champion = sorted[0].name;
+  const finalStats = Object.values(statsMap);
+  const topScorers = [...finalStats].sort((a, b) => b.goals - a.goals || b.assists - a.assists);
+  const topAssisters = [...finalStats].sort((a, b) => b.assists - a.assists || b.goals - a.goals);
+
+  return {
+    type: 'liga',
+    table: sorted,
+    playerPos,
+    champion,
+    isChampion: champion === squad.label,
+    playerStats: finalStats,
+    topScorers,
+    topAssisters,
+    schedule,
+    teamLabel: squad.label,
+    formation: formation.id,
+    teamScore,
+  };
+}
+
+/** Simulate Copa Argentina AND track per-player goals/assists */
+export function simulateCopaWithStats(
+  playerTeam: Player[], squad: Squad, allSquads: Squad[], allPlayers: Player[],
+  formation: FormationConfig, teamScore: number
+): TournamentResult {
+  const playerStrength = teamToStrength(playerTeam, formation, 'copa');
+  const opponents = allSquads.filter(s => s.id !== squad.id && s.playerIds.length >= 11)
+    .sort(() => Math.random() - 0.5).slice(0, 31);
+  const names = [squad.label, ...opponents.map(o => o.label)];
+  const strengthByTeam: Record<string, TeamStrength> = {};
+  strengthByTeam[squad.label] = playerStrength;
+  opponents.forEach(o => {
+    const p = getSquadPlayers(o, allPlayers).slice(0, 11);
+    strengthByTeam[o.label] = p.length >= 11
+      ? teamToStrength(p, formations['4-3-3'], 'copa')
+      : { attack: 50, midfield: 50, defense: 50, goalkeeper: 50, chemistry: 35, overall: 50 };
+  });
+
+  const roundNames = ['32avos', '16avos', 'Octavos', 'Cuartos', 'Semifinal', 'Final'];
+  const rounds: import('./types').RoundMatch[] = [];
+  let alive = [...names]; let eliminated = false; let eliminatedRound = '';
+
+  const playerStats = initPlayerStats(playerTeam);
+  const statsMap: Record<string, TournamentPlayerStats> = {};
+  playerStats.forEach(ps => { statsMap[ps.playerId] = ps; });
+
+  for (let r = 0; r < roundNames.length && alive.length > 1; r++) {
+    const matches: import('./types').ScheduleMatch[] = [];
+    const next: string[] = [];
+    for (let i = 0; i < alive.length; i += 2) {
+      if (i + 1 >= alive.length) { next.push(alive[i]); continue; }
+      const home = alive[i], away = alive[i + 1];
+      const hs = strengthByTeam[home] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 45, overall: 55 };
+      const as_ = strengthByTeam[away] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 45, overall: 55 };
+      const { homeGoals: hg, awayGoals: ag } = simulateMatchGoals(hs, as_);
+      let penalties: string | undefined;
+      let winner = home;
+      if (hg === ag) {
+        let ph = Math.floor(Math.random() * 5) + 1;
+        let pa = Math.floor(Math.random() * 5) + 1;
+        while (ph === pa) { ph += Math.random() > 0.5 ? 1 : 0; pa += Math.random() > 0.5 ? 1 : 0; }
+        penalties = Math.min(ph, 5) + '-' + Math.min(pa, 5);
+        winner = ph > pa ? home : away;
+      } else { winner = hg > ag ? home : away; }
+
+      // Track player stats for user's games
+      const isPlayerHome = home === squad.label;
+      const isPlayerAway = away === squad.label;
+      if (isPlayerHome || isPlayerAway) {
+        const myGoals = isPlayerHome ? hg : ag;
+        if (myGoals > 0) {
+          const { goals, assists } = distributeGoalsAmongPlayers(playerTeam, myGoals, formation);
+          playerTeam.forEach(p => {
+            if (statsMap[p.id]) {
+              statsMap[p.id].goals += goals[p.id] || 0;
+              statsMap[p.id].assists += assists[p.id] || 0;
+              statsMap[p.id].matchesPlayed += 1;
+              if (Math.random() < 0.08) statsMap[p.id].yellowCards += 1;
+            }
+          });
+        } else {
+          playerTeam.forEach(p => {
+            if (statsMap[p.id]) { statsMap[p.id].matchesPlayed += 1; }
+          });
+        }
+      }
+
+      matches.push({ home, away, homeGoals: hg, awayGoals: ag, isPlayerHome, penalties });
+      next.push(winner);
+      if ((home === squad.label || away === squad.label) && winner !== squad.label) {
+        eliminated = true; eliminatedRound = roundNames[r];
+      }
+    }
+    rounds.push({ round: roundNames[r], matches });
+    alive = next;
+  }
+
+  const finalStats = Object.values(statsMap);
+  const champion = alive[0];
+  return {
+    type: 'copa',
+    champion,
+    isChampion: champion === squad.label,
+    playerStats: finalStats,
+    topScorers: [...finalStats].sort((a, b) => b.goals - a.goals),
+    topAssisters: [...finalStats].sort((a, b) => b.assists - a.assists),
+    rounds,
+    eliminated,
+    eliminatedRound,
+    teamLabel: squad.label,
+    formation: formation.id,
+    teamScore,
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PITY SYSTEM — smart squad selection
+// ═══════════════════════════════════════════════════════════════
+export const PITY_LOW_THRESHOLD = 60;   // rating considered "low"
+export const PITY_GOOD_THRESHOLD = 72;  // rating considered "good" for pity
+
+/**
+ * Given a list of eligible squads and the current pity state,
+ * returns a squad with boosted probability towards high-rated squads
+ * when pity is active.
+ */
+export function spinSquadWithPity(
+  eligible: Squad[], allPlayers: Player[], pity: { consecutiveLow: number; pityActive: boolean }
+): Squad {
+  if (eligible.length === 0) throw new Error('No eligible squads');
+  if (eligible.length === 1) return eligible[0];
+
+  // Compute avg squad rating for each eligible squad
+  const withRating = eligible.map(sq => {
+    const ps = allPlayers.filter(p => sq.playerIds.includes(p.id));
+    const avg = ps.length > 0 ? ps.reduce((s, p) => s + (p.rating || 55), 0) / ps.length : 55;
+    return { sq, avg };
+  });
+
+  // If pity is active (2+ consecutive low picks), boost squads with avg > 68
+  const isPityActive = pity.consecutiveLow >= 2;
+  if (isPityActive) {
+    const goodSquads = withRating.filter(x => x.avg >= 68);
+    if (goodSquads.length > 0) {
+      // 65% chance to pick from good squads
+      if (Math.random() < 0.65) {
+        const pick = goodSquads[Math.floor(Math.random() * goodSquads.length)];
+        return pick.sq;
+      }
+    }
+  } else if (pity.consecutiveLow === 1) {
+    // 1 consecutive low → 30% chance to get a decent squad
+    const decentSquads = withRating.filter(x => x.avg >= 62);
+    if (decentSquads.length > 0 && Math.random() < 0.30) {
+      return decentSquads[Math.floor(Math.random() * decentSquads.length)].sq;
+    }
+  }
+
+  // Normal random pick
+  return eligible[Math.floor(Math.random() * eligible.length)];
+}
+
+/** Update pity state after a player is picked */
+export function updatePity(
+  current: { consecutiveLow: number; lastRatings: number[]; pityActive: boolean },
+  pickedRating: number
+): { consecutiveLow: number; lastRatings: number[]; pityActive: boolean } {
+  const newLast = [pickedRating, ...current.lastRatings].slice(0, 5);
+  const isLow = pickedRating <= PITY_LOW_THRESHOLD;
+  const newConsec = isLow ? current.consecutiveLow + 1 : 0;
+  return {
+    consecutiveLow: newConsec,
+    lastRatings: newLast,
+    pityActive: newConsec >= 2,
+  };
+}
+

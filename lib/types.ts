@@ -177,3 +177,89 @@ export interface RoundMatch {
   round: string;
   matches: ScheduleMatch[];
 }
+
+// ═══════════════════════════════════════════════════════════════
+// PLAYER STATS (individual — generated during simulation)
+// ═══════════════════════════════════════════════════════════════
+export interface PlayerMatchStats {
+  playerId: string;
+  playerName: string;
+  position: string;
+  rating: number;
+  goals: number;
+  assists: number;
+  yellowCards: number;
+  redCards: number;
+}
+
+export interface TournamentPlayerStats {
+  playerId: string;
+  playerName: string;
+  position: string;
+  rating: number;
+  goals: number;
+  assists: number;
+  yellowCards: number;
+  redCards: number;
+  matchesPlayed: number;
+}
+
+export interface LigaTeamRow {
+  name: string;
+  pts: number;
+  gf: number;
+  ga: number;
+  w: number;
+  d: number;
+  l: number;
+  form: string[];
+}
+
+export interface TournamentResult {
+  type: 'liga' | 'copa';
+  table?: LigaTeamRow[];
+  playerPos?: number;
+  champion: string;
+  isChampion: boolean;
+  playerStats: TournamentPlayerStats[];
+  topScorers: TournamentPlayerStats[];
+  topAssisters: TournamentPlayerStats[];
+  schedule?: ScheduleMatch[];
+  rounds?: RoundMatch[];
+  eliminated?: boolean;
+  eliminatedRound?: string;
+  teamLabel: string;
+  formation: string;
+  teamScore: number;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PITY SYSTEM
+// ═══════════════════════════════════════════════════════════════
+export interface PityState {
+  consecutiveLow: number;   // consecutive picks with rating <= LOW_THRESHOLD
+  lastRatings: number[];    // last 5 ratings picked
+  pityActive: boolean;      // whether pity is forcing a good pick this spin
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MULTIPLAYER TOURNAMENT (seed-based, no backend needed)
+// ═══════════════════════════════════════════════════════════════
+export interface MultiplayerSession {
+  code: string;             // e.g. "RIVER-7821"
+  seed: number;             // shared RNG seed
+  createdAt: number;        // timestamp ms
+  expiresAt: number;        // createdAt + 10 min
+  players: MultiplayerSlot[];
+  maxHumans: number;        // up to 4
+  totalTeams: number;       // always 24
+}
+
+export interface MultiplayerSlot {
+  id: string;
+  nickname: string;
+  teamLabel: string;
+  formation: string;
+  playerIds: string[];
+  ready: boolean;
+}
