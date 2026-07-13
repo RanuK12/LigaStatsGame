@@ -1,15 +1,21 @@
 import type { Metadata, Viewport } from 'next'
-import { Montserrat, Inter } from 'next/font/google'
+import { Outfit, Syncopate, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 
-const montserrat = Montserrat({
+const outfit = Outfit({
   subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
+  weight: ['400', '600', '700', '900'],
   variable: '--font-display',
 })
 
-const inter = Inter({
+const syncopate = Syncopate({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-sport',
+})
+
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
@@ -34,7 +40,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${montserrat.variable} ${inter.variable}`}>
+    <html lang="es" className={`${outfit.variable} ${syncopate.variable} ${plusJakarta.variable}`}>
       <head>
         <link rel="icon" href="/LigaStatsGame/logos/afa.png" />
       </head>

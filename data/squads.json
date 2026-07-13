@@ -89,7 +89,6 @@
    "mauro-formica",
    "leandro-figueroa",
    "joaquin-torres",
-   "jalil-elias",
    "nehuen-paz",
    "luciano-pocrnjic",
    "sebastian-d’angelo",
@@ -169,7 +168,6 @@
    "agustin-fontana",
    "claudio-villagra",
    "santiago-silva",
-   "romel-morales",
    "nahuel-yeri",
    "lihue-prichoda",
    "mauricio-asenjo",
@@ -206,29 +204,12 @@
   ]
  },
  {
-  "id": "club-atletico-river-plate_2020",
-  "clubId": "club-atletico-river-plate",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "River Plate 2020",
-  "playerIds": [
-   "daniel-lucero",
-   "tomas-galvan",
-   "agustin-gomez",
-   "leonardo-diaz",
-   "tomas-lecanda",
-   "felipe-salomoni",
-   "felipe-pena-biafore"
-  ]
- },
- {
   "id": "boca-juniors_2015",
   "clubId": "boca-juniors",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Boca Juniors 2015",
   "playerIds": [
-   "daniel-osvaldo",
    "andres-chavez",
    "gonzalo-castellani",
    "ricardo-centurion",
@@ -276,7 +257,6 @@
   "competition": "Liga Profesional",
   "label": "Banfield 2019",
   "playerIds": [
-   "daniel-osvaldo",
    "luciano-pons",
    "andres-chavez",
    "milton-gimenez",
@@ -295,7 +275,6 @@
    "sebastian-dubarbier",
    "alan-di-pippa",
    "ramiro-enrique",
-   "joel-sonora",
    "emmanuel-olivera",
    "federico-torres",
    "juan-bisanz",
@@ -362,21 +341,6 @@
    "facundo-daffonchio",
    "rodrigo-moreira",
    "nicolas-tagliafico"
-  ]
- },
- {
-  "id": "club-atletico-lanus_2016",
-  "clubId": "club-atletico-lanus",
-  "season": "2016",
-  "competition": "Liga Profesional",
-  "label": "Lanús 2016",
-  "playerIds": [
-   "german-denis",
-   "hernan-toledo",
-   "rolando-garcia-guerreno",
-   "matias-rojas",
-   "ain-acosta-luna",
-   "jonny-magallon"
   ]
  },
  {
@@ -520,7 +484,6 @@
    "agustin-orion",
    "diego-gonzalez",
    "nelson-ibanez",
-   "pablo-alvarez",
    "alejandro-garcia",
    "leandro-grimi",
    "francisco-cerro",
@@ -620,23 +583,6 @@
   ]
  },
  {
-  "id": "ca-velez-sarsfield_2018",
-  "clubId": "ca-velez-sarsfield",
-  "season": "2018",
-  "competition": "Liga Profesional",
-  "label": "Vélez Sarsfield 2018",
-  "playerIds": [
-   "jhonathan-ramis",
-   "thiago-almada",
-   "pablo-galdames",
-   "alvaro-barreal",
-   "luca-orellano",
-   "alexander-dominguez",
-   "leandro-fernandez",
-   "tomas-guidara"
-  ]
- },
- {
   "id": "club-atletico-belgrano_2017",
   "clubId": "club-atletico-belgrano",
   "season": "2017",
@@ -644,7 +590,6 @@
   "label": "Belgrano 2017",
   "playerIds": [
    "jhonathan-ramis",
-   "mauro-guevgeozian",
    "epifanio-garcia",
    "tomas-attis",
    "joaquin-rikemberg",
@@ -701,8 +646,7 @@
    "maher-carrizo",
    "alvaro-montero",
    "tomas-marchiori",
-   "thiago-silvero",
-   "jalil-elias"
+   "thiago-silvero"
   ]
  },
  {
@@ -808,7 +752,6 @@
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2020",
   "playerIds": [
-   "pablo-sabbag",
    "ezequiel-naya",
    "nicolas-palavecino",
    "vinicius-lansade",
@@ -832,7 +775,6 @@
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2020",
   "playerIds": [
-   "pablo-sabbag",
    "guillermo-balzi",
    "juan-garro",
    "nazareno-funez",
@@ -878,7 +820,6 @@
    "franco-cacace",
    "ezequiel-munoz",
    "jorge-morel",
-   "matteo-trombini",
    "pablo-piatti",
    "brian-orosco",
    "luciano-lollo",
@@ -898,7 +839,6 @@
    "leonel-miranda",
    "gonzalo-rios",
    "tiziano-perrotta",
-   "ignacio-abraham",
    "martin-rio",
    "santiago-lopez-garcia",
    "frank-castaneda",
@@ -923,7 +863,6 @@
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2016",
   "playerIds": [
-   "mauro-guevgeozian",
    "mauro-matos",
    "francisco-fydriszewski",
    "nery-leyes",
@@ -955,7 +894,6 @@
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2017",
   "playerIds": [
-   "mauro-guevgeozian",
    "santiago-silva",
    "juan-cataldi",
    "lautaro-chavez",
@@ -996,7 +934,6 @@
    "gonzalo-bergessio",
    "nicolas-blandi",
    "julio-buffarini",
-   "german-berterame",
    "gabriel-rojas",
    "nestor-ortigoza",
    "gonzalo-prosperi",
@@ -1033,25 +970,6 @@
   ]
  },
  {
-  "id": "club-de-gimnasia-y-esgrima-la-plata_2016",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
-  "season": "2016",
-  "competition": "Liga Profesional",
-  "label": "Gimnasia LP 2016",
-  "playerIds": [
-   "mauro-matos",
-   "nicolas-benavidez",
-   "brahian-aleman",
-   "enzo-martinez",
-   "dario-bottinelli",
-   "nicolas-ortiz",
-   "leandro-sapetti",
-   "diego-nicolaievsky",
-   "mauricio-arias",
-   "juan-pablo-noce"
-  ]
- },
- {
   "id": "club-atletico-san-lorenzo-de-almagro_2023",
   "clubId": "club-atletico-san-lorenzo-de-almagro",
   "season": "2023",
@@ -1059,7 +977,6 @@
   "label": "San Lorenzo 2023",
   "playerIds": [
    "francisco-fydriszewski",
-   "iker-muniain",
    "matias-reali",
    "nahuel-bustos",
    "fabricio-lopez",
@@ -1094,7 +1011,6 @@
   "label": "Newell's Old Boys 2018",
   "playerIds": [
    "lisandro-cabrera",
-   "ze-turbo",
    "juan-pablo-freytes",
    "lisandro-alzugaray",
    "santiago-gentiletti",
@@ -1152,11 +1068,9 @@
    "rodrigo-echeverria",
    "hector-fertoli",
    "valentin-burgoa",
-   "alan-sonora",
    "fernando-torrent",
    "mauro-villar",
    "walter-mazzantti",
-   "joel-sonora",
    "williams-alarcon",
    "rodrigo-lugo",
    "gaston-sauro",
@@ -1175,7 +1089,6 @@
   "playerIds": [
    "marco-ruben",
    "ezequiel-rodriguez",
-   "nicolas-gimenez",
    "marcelo-larrondo",
    "washington-camacho",
    "maximiliano-gonzalez",
@@ -1207,12 +1120,10 @@
    "mauricio-martinez",
    "maximiliano-lovera",
    "gaston-gil-romero",
-   "dylan-gissi",
    "rodrigo-migone",
    "javier-pinola",
    "conan-ledesma",
    "sebastian-sosa",
-   "pablo-alvarez",
    "damian-musto",
    "felix-banega"
   ]
@@ -1256,7 +1167,6 @@
    "ciro-rius",
    "lucas-gamba",
    "sebastian-ribas",
-   "luca-martinez-dupuy",
    "emanuel-britez",
    "cristian-tassano",
    "federico-martinez",
@@ -1317,8 +1227,6 @@
   "competition": "Liga Profesional",
   "label": "Rosario Central 2022",
   "playerIds": [
-   "agustin-modica",
-   "tobias-cervera",
    "carlos-campos",
    "octavio-bianchi",
    "marcelo-acosta",
@@ -1340,83 +1248,6 @@
   ]
  },
  {
-  "id": "aa-argentinos-juniors_2015",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2015",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2015",
-  "playerIds": [
-   "kemel-koussaybani",
-   "alexander-willers",
-   "emanuel-beckmann-smith",
-   "jannis-meyer",
-   "philip-fontein",
-   "omar-guetat",
-   "philip-röhe",
-   "philip-grewe",
-   "dominic-schmidt",
-   "rafael-figueiredo",
-   "luca-meyer",
-   "christopher-strotmann",
-   "andrej-wiesch",
-   "daniel-hallmann",
-   "phillip-brüggemeyer",
-   "nils-woltering",
-   "julius-hölscher",
-   "timo-scherping",
-   "christoph-maug",
-   "nils-wiedenhöft",
-   "marvin-wiesmann",
-   "kevin-grewe",
-   "yannik-grabbe",
-   "manuel-dieckmann",
-   "alexander-noack",
-   "hannes-schäperklaus",
-   "arton-balja"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2020",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2020",
-  "playerIds": [
-   "jonas-burke",
-   "guglielmo-maddente",
-   "joshua-roß",
-   "mick-schüttpelz",
-   "jörg-husmann",
-   "mirko-janning",
-   "alexander-bügener",
-   "adrian-knüver",
-   "luca-ehler",
-   "luis-klante",
-   "cornelius-watta",
-   "hannes-hesping",
-   "jannis-fraundörfer",
-   "pascal-petruschka"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2022",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2022",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2022",
-  "playerIds": [
-   "mervin-kalac",
-   "georges-baya-baya",
-   "phil-fockers",
-   "jakob-duhme",
-   "jan-chorushij",
-   "ramon-büsken",
-   "tim-johan-heger",
-   "timon-schmitz",
-   "robin-schultealbert"
-  ]
- },
- {
   "id": "ca-talleres_2017",
   "clubId": "ca-talleres",
   "season": "2017",
@@ -1433,7 +1264,6 @@
    "gonzalo-maroni",
    "cristian-ojeda",
    "matias-pisano",
-   "joel-sonora",
    "federico-navarro",
    "mauro-ortiz",
    "lucas-olaza",
@@ -1484,7 +1314,6 @@
    "braian-aguirre",
    "cristian-nunez",
    "alejo-tabares",
-   "ousmane-ndong",
    "matias-vera",
    "matias-esquivel",
    "gonzalo-casazza",
@@ -1604,24 +1433,6 @@
   ]
  },
  {
-  "id": "club-atletico-huracan_2023",
-  "clubId": "club-atletico-huracan",
-  "season": "2023",
-  "competition": "Liga Profesional",
-  "label": "Huracán 2023",
-  "playerIds": [
-   "leandro-garate",
-   "eric-ramirez",
-   "ignacio-campo",
-   "franco-watson",
-   "hernan-de-la-fuente",
-   "maximo-palazzo",
-   "pablo-siles",
-   "guillermo-burdisso",
-   "agustin-toledo"
-  ]
- },
- {
   "id": "ca-talleres_2022",
   "clubId": "ca-talleres",
   "season": "2022",
@@ -1700,8 +1511,7 @@
    "lucas-acosta",
    "lucas-aveldano",
    "jose-rojas",
-   "pier-barrios",
-   "gaston-alvarez-suarez"
+   "pier-barrios"
   ]
  },
  {
@@ -1927,7 +1737,6 @@
    "juan-ignacio-silva",
    "alvaro-fernandez",
    "daniel-imperiale",
-   "lucas-lobos",
    "manuel-garcia",
    "pablo-vegetti",
    "maximiliano-coronel",
@@ -1981,7 +1790,6 @@
    "santino-primante",
    "franco-troyansky",
    "matias-ramirez",
-   "norberto-briasco",
    "juan-cruz-esquivel",
    "federico-milo",
    "juan-pintado",
@@ -2069,26 +1877,6 @@
   ]
  },
  {
-  "id": "club-atletico-huracan_2017",
-  "clubId": "club-atletico-huracan",
-  "season": "2017",
-  "competition": "Liga Profesional",
-  "label": "Huracán 2017",
-  "playerIds": [
-   "andres-chavez",
-   "juan-garro",
-   "carlos-auzqui",
-   "lucas-gamba",
-   "nicolas-silva",
-   "ivan-rossi",
-   "ricardo-noir",
-   "israel-damonte",
-   "omar-alderete",
-   "pablo-alvarez",
-   "federico-marin"
-  ]
- },
- {
   "id": "racing-club_2021",
   "clubId": "racing-club",
   "season": "2021",
@@ -2134,7 +1922,6 @@
    "ivan-marcone",
    "marcelo-torres",
    "santiago-ramos-mingo",
-   "daniele-de-rossi",
    "lisandro-lopez",
    "marcos-diaz",
    "manuel-roffo",
@@ -2172,24 +1959,6 @@
   ]
  },
  {
-  "id": "boca-juniors_2022",
-  "clubId": "boca-juniors",
-  "season": "2022",
-  "competition": "Liga Profesional",
-  "label": "Boca Juniors 2022",
-  "playerIds": [
-   "ezequiel-bullaude",
-   "federico-aguirre",
-   "lucas-janson",
-   "julian-carrasco",
-   "roman-rodriguez",
-   "edinson-cavani",
-   "aaron-anselmino",
-   "lucas-blondel",
-   "marcelo-saracchi"
-  ]
- },
- {
   "id": "boca-juniors_2023",
   "clubId": "boca-juniors",
   "season": "2023",
@@ -2215,24 +1984,6 @@
    "ignacio-miramon",
    "milton-delgado",
    "julian-ceballos"
-  ]
- },
- {
-  "id": "boca-juniors_2024",
-  "clubId": "boca-juniors",
-  "season": "2024",
-  "competition": "Liga Profesional",
-  "label": "Boca Juniors 2024",
-  "playerIds": [
-   "carlos-palacios",
-   "alan-velasco",
-   "ander-herrera",
-   "valentino-simoni",
-   "ayrton-costa",
-   "camilo-rey-domenech",
-   "williams-alarcon",
-   "marco-pellegrino",
-   "malcom-braida"
   ]
  },
  {
@@ -2282,7 +2033,6 @@
    "valentin-gomez",
    "yago-de-vito",
    "jose-florentin",
-   "joel-sonora",
    "leonardo-burian",
    "jonathan-beron",
    "sebastian-sosa",
@@ -2326,8 +2076,6 @@
   "label": "Talleres 2016",
   "playerIds": [
    "jonathan-menendez",
-   "nicolas-gimenez",
-   "okiki-afolabi",
    "junior-arias",
    "ian-escobar",
    "santiago-moyano",
@@ -2345,30 +2093,10 @@
    "guillermo-cosaro",
    "fernando-alarcon",
    "lucas-kruspzky",
-   "matias-vuoso",
    "javier-gandolfi",
    "juan-ramirez",
    "guillermo-cotugno",
    "gabriel-ramirez"
-  ]
- },
- {
-  "id": "ca-independiente_2018",
-  "clubId": "ca-independiente",
-  "season": "2018",
-  "competition": "Liga Profesional",
-  "label": "Independiente 2018",
-  "playerIds": [
-   "cecilio-dominguez",
-   "alan-velasco",
-   "alexander-barboza",
-   "sebastian-palacios",
-   "andres-roa",
-   "alan-sonora",
-   "lucas-gonzalez",
-   "cristian-chavez",
-   "pablo-perez",
-   "lucas-villalba"
   ]
  },
  {
@@ -2430,28 +2158,8 @@
    "francisco-flores",
    "ezequiel-godoy",
    "juan-ramirez",
-   "jalil-elias",
    "agustin-peralta-bauer",
    "agustin-hausch"
-  ]
- },
- {
-  "id": "ca-independiente_2020",
-  "clubId": "ca-independiente",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Independiente 2020",
-  "playerIds": [
-   "david-sayago",
-   "joaquin-laso",
-   "rodrigo-marquez",
-   "ezequiel-munoz",
-   "ezequiel-moschen",
-   "matias-sosa",
-   "diego-segovia",
-   "mauro-zurita",
-   "juan-kulak",
-   "julian-romero"
   ]
  },
  {
@@ -2561,7 +2269,6 @@
    "alvaro-angulo",
    "milton-valenzuela",
    "luciano-cabral",
-   "lucas-roman",
    "nicolas-freire",
    "sebastian-valdez",
    "gonzalo-bordon",
@@ -2744,7 +2451,6 @@
    "agustin-rojas",
    "benjamin-garre",
    "leonel-miranda",
-   "ezequiel-schelotto",
    "alan-ortiz",
    "nahuel-gomez",
    "gaston-viera",
@@ -2858,25 +2564,6 @@
   ]
  },
  {
-  "id": "ca-banfield_2018",
-  "clubId": "ca-banfield",
-  "season": "2018",
-  "competition": "Liga Profesional",
-  "label": "Banfield 2018",
-  "playerIds": [
-   "agustin-urzi",
-   "nicolas-silva",
-   "junior-arias",
-   "sergio-vittor",
-   "matias-moya",
-   "esteban-conde",
-   "israel-damonte",
-   "reinaldo-lenis",
-   "luciano-lollo",
-   "rodrigo-tapia"
-  ]
- },
- {
   "id": "club-atletico-huracan_2024",
   "clubId": "club-atletico-huracan",
   "season": "2024",
@@ -2895,7 +2582,6 @@
    "emmanuel-ojeda",
    "juan-bisanz",
    "facundo-waller",
-   "matko-miljevic",
    "natanael-samaniego",
    "thaiel-peralta",
    "marco-pellegrino",
@@ -2918,7 +2604,6 @@
    "nicolas-delgadillo",
    "cristian-nasuti",
    "maximiliano-caire",
-   "emiliano-amor",
    "agustin-doffo",
    "blas-caceres",
    "emiliano-bogado",
@@ -2983,7 +2668,6 @@
    "matias-cordoba",
    "mateo-mamani",
    "carlos-auzqui",
-   "jose-mauri",
    "diego-garcia",
    "angelo-martino",
    "juan-cruz-esquivel",
@@ -3005,24 +2689,6 @@
    "joaquin-blazquez",
    "julian-velazquez",
    "francis-mac-allister"
-  ]
- },
- {
-  "id": "ca-velez-sarsfield_2024",
-  "clubId": "ca-velez-sarsfield",
-  "season": "2024",
-  "competition": "Liga Profesional",
-  "label": "Vélez Sarsfield 2024",
-  "playerIds": [
-   "diego-valdes",
-   "manuel-fernandez",
-   "raul-cabral",
-   "mateo-acuna",
-   "ignacio-gomez",
-   "demian-dominguez",
-   "alex-veron",
-   "alvaro-busso",
-   "kevin-vazquez"
   ]
  },
  {
@@ -3087,7 +2753,6 @@
    "nicolas-cordero",
    "ezequiel-miralles",
    "agustin-gil-clarotti",
-   "norberto-briasco",
    "diego-mendoza",
    "ezequiel-garre",
    "mauro-bogado",
@@ -3106,7 +2771,6 @@
    "ignacio-pussetto",
    "lucio-compagnucci",
    "matias-juarez",
-   "ivan-moreno-y-fabianesi",
    "patricio-toranzo",
    "kaku",
    "mariano-gonzalez",
@@ -3177,7 +2841,6 @@
    "gabriel-carabajal",
    "fabricio-tirado",
    "agustin-juarez",
-   "matko-miljevic",
    "ezequiel-moya",
    "faustino-piotti",
    "saul-salcedo",
@@ -3203,9 +2866,7 @@
    "fabian-noguera",
    "alejo-tabares",
    "joaquin-amadio",
-   "thiago-gigena",
    "dario-benedetto",
-   "keylor-navas",
    "victor-cuesta",
    "luca-sosa",
    "alan-mereles",
@@ -3272,81 +2933,6 @@
   ]
  },
  {
-  "id": "club-de-gimnasia-y-esgrima-la-plata_2021",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
-  "season": "2021",
-  "competition": "Liga Profesional",
-  "label": "Gimnasia LP 2021",
-  "playerIds": [
-   "gonzalo-gonzalez",
-   "ramon-sosa",
-   "franco-soldano",
-   "oscar-piris",
-   "mauro-davila",
-   "cristian-tarragona",
-   "alexis-steimbach",
-   "tomas-muro",
-   "alan-lescano"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2021",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2021",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2021",
-  "playerIds": [
-   "viktor-maier",
-   "yannic-kreutzkämper",
-   "fabian-kerellaj",
-   "joschka-brüggemann",
-   "marius-lackmann",
-   "paul-dreesen",
-   "mustafa-hadid",
-   "oskar-wameling",
-   "gino-lago-bentron",
-   "tom-planitz"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2023",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2023",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2023",
-  "playerIds": [
-   "sören-wald",
-   "diaoul-tchadjobo",
-   "junior-kone",
-   "yakup-kilinc",
-   "abdullah-kaan-karakoc",
-   "montasar-hammami",
-   "leon-niehues",
-   "thijs-terhalle",
-   "noah-kosthorst",
-   "fitim-fejza",
-   "qerim-avdijaj"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2024",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2024",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2024",
-  "playerIds": [
-   "tugay-gündogan",
-   "luca-de-angelis",
-   "marcel-pieper",
-   "bennet-van-den-berg",
-   "ben-wittenbernds",
-   "adrian-wanner",
-   "lennard-maßmann",
-   "pierre-miguel-de-faria-alves-pinto",
-   "tom-bauer"
-  ]
- },
- {
   "id": "club-atletico-lanus_2021",
   "clubId": "club-atletico-lanus",
   "season": "2021",
@@ -3374,20 +2960,6 @@
   ]
  },
  {
-  "id": "ca-banfield_2025",
-  "clubId": "ca-banfield",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Banfield 2025",
-  "playerIds": [
-   "federico-anselmo",
-   "neyder-moreno",
-   "ignacio-pais",
-   "favio-alvarez",
-   "david-zalazar"
-  ]
- },
- {
   "id": "ca-talleres_2015",
   "clubId": "ca-talleres",
   "season": "2015",
@@ -3402,7 +2974,6 @@
    "emanuel-reynoso",
    "wilfredo-olivera",
    "ezequiel-barrionuevo",
-   "eial-strahman",
    "carlos-quintana",
    "luis-jerez-silva",
    "david-achucarro",
@@ -3573,9 +3144,7 @@
    "tomas-badaloni",
    "ivan-ramirez",
    "brian-alferez",
-   "agustin-manzur",
    "agustin-aleo",
-   "jalil-elias",
    "andres-mehring"
   ]
  },
@@ -3647,7 +3216,6 @@
    "bruno-barrionuevo",
    "maximiliano-porcel",
    "maximiliano-gonzalez",
-   "luca-martinez-dupuy",
    "exequiel-tejada",
    "bastian-yanez",
    "leonardo-jara",
@@ -3700,7 +3268,6 @@
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2021",
   "playerIds": [
-   "andres-vombergar",
    "ricardo-centurion",
    "gonzalo-maroni",
    "diego-calcaterra",
@@ -3713,25 +3280,6 @@
    "malcom-braida",
    "mateo-clemente",
    "jeremias-james"
-  ]
- },
- {
-  "id": "club-de-gimnasia-y-esgrima-la-plata_2020",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Gimnasia LP 2020",
-  "playerIds": [
-   "benja-dominguez",
-   "franco-torres",
-   "gustavo-areco",
-   "fernando-martinez",
-   "matias-toledo",
-   "guillermo-enrique",
-   "nahuel-manganelli",
-   "leandro-mamut",
-   "estanislao-jara",
-   "matias-bazzi"
   ]
  },
  {
@@ -3751,35 +3299,17 @@
    "carlos-matheu",
    "pablo-barboza",
    "manuel-falon",
-   "david-depetris",
    "german-lesman",
    "martin-sarrafiore",
    "juan-vivas",
    "leandro-cuomo",
    "lucas-campana",
    "manuel-garcia",
-   "arouna-bissene",
    "lucas-villalba",
    "saul-salcedo",
    "joaquin-mendive",
    "fernando-cosciuc",
    "cristian-chimino"
-  ]
- },
- {
-  "id": "club-atletico-huracan_2025",
-  "clubId": "club-atletico-huracan",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Huracán 2025",
-  "playerIds": [
-   "jordy-caicedo",
-   "alejandro-martinez",
-   "oscar-cortes",
-   "oscar-romero",
-   "federico-vera",
-   "facundo-kalinger",
-   "lucas-blondel"
   ]
  },
  {
@@ -3805,24 +3335,6 @@
    "marcelo-saracchi",
    "javier-pinola",
    "ariel-rojas"
-  ]
- },
- {
-  "id": "ca-velez-sarsfield_2020",
-  "clubId": "ca-velez-sarsfield",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Vélez Sarsfield 2020",
-  "playerIds": [
-   "lucas-pratto",
-   "santiago-coronel",
-   "santiago-castro",
-   "leonardo-jara",
-   "enzo-martinez",
-   "nazareno-romero",
-   "geronimo-ulibarri",
-   "carlos-lampe",
-   "ian-rasso"
   ]
  },
  {
@@ -3877,24 +3389,6 @@
   ]
  },
  {
-  "id": "club-atletico-river-plate_2025",
-  "clubId": "club-atletico-river-plate",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "River Plate 2025",
-  "playerIds": [
-   "matias-vina",
-   "giovanni-gonzalez",
-   "kendry-paez",
-   "fausto-vera",
-   "mauro-arambarri",
-   "tobias-ramirez",
-   "nicolas-otamendi",
-   "anibal-moreno",
-   "lucas-silva"
-  ]
- },
- {
   "id": "boca-juniors_2017",
   "clubId": "boca-juniors",
   "season": "2017",
@@ -3926,7 +3420,6 @@
    "luis-advincula",
    "pol-fernandez",
    "rodrigo-montes",
-   "norberto-briasco",
    "luis-vazquez",
    "carlos-zambrano",
    "equi-fernandez",
@@ -3946,20 +3439,6 @@
    "diego-gonzalez",
    "juan-ramirez",
    "valentin-barco"
-  ]
- },
- {
-  "id": "ca-rosario-central_2025",
-  "clubId": "ca-rosario-central",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Rosario Central 2025",
-  "playerIds": [
-   "pol-fernandez",
-   "alexis-soto",
-   "julian-fernandez",
-   "sebastian-zaracho",
-   "vicente-pizarro"
   ]
  },
  {
@@ -4160,7 +3639,6 @@
    "milton-treppo",
    "fabricio-fontanini",
    "facundo-nadalin",
-   "luis-leal",
    "nicolas-ibanez",
    "joaquin-varela",
    "alan-luque",
@@ -4186,7 +3664,6 @@
    "gabriel-compagnucci",
    "guillermo-pereira",
    "diego-garcia",
-   "ibrahim-hesar",
    "joaquin-susvielles",
    "nicolas-meriano",
    "francisco-oliver",
@@ -4196,128 +3673,6 @@
    "daniel-barrea",
    "maximiliano-comba",
    "manuel-vicentini"
-  ]
- },
- {
-  "id": "ca-newells-old-boys_2025",
-  "clubId": "ca-newells-old-boys",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Newell's Old Boys 2025",
-  "playerIds": [
-   "gabriel-risso-patron",
-   "walter-nunez",
-   "martin-ortega",
-   "walter-mazzantti",
-   "nicolas-goitea",
-   "rodrigo-herrera",
-   "gabriel-arias",
-   "lautaro-giannetti"
-  ]
- },
- {
-  "id": "club-atletico-lanus_2020",
-  "clubId": "club-atletico-lanus",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Lanús 2020",
-  "playerIds": [
-   "maximiliano-gonzalez",
-   "ignacio-malcorra",
-   "angel-gonzalez",
-   "brian-aguilar",
-   "jorge-morel",
-   "tomas-canteros",
-   "pity-rodriguez",
-   "luciano-peraggini"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2016",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2016",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2016",
-  "playerIds": [
-   "florian-quabeck",
-   "marco-bensmann",
-   "björn-laurenz",
-   "moritz-rosenberger",
-   "johann-benner",
-   "colin-van-den-berg",
-   "stephane-sylla",
-   "vitaliy-ganske",
-   "leon-tia"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2017",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2017",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2017",
-  "playerIds": [
-   "fabian-golz",
-   "alessio-wilms-dellunto",
-   "viktor-braininger",
-   "andreas-heckmann",
-   "luis-overkamp",
-   "philipp-hinkerohe",
-   "tejan-fofana",
-   "daniel-mladenovic",
-   "bo-weishaupt",
-   "lukas-greiwe",
-   "oskar-ricken",
-   "maik-osterhaus"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2018",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2018",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2018",
-  "playerIds": [
-   "joel-flasse",
-   "dario-vujicevic",
-   "steffen-menke",
-   "denis-rosum",
-   "jona-brüning",
-   "felix-frank",
-   "philip-strauß",
-   "marvin-holtmann",
-   "xhemil-terziqi",
-   "gerrit-brinkmann",
-   "nicholas-beermann",
-   "leon-varelmann",
-   "julian-kuchen",
-   "simon-wamser",
-   "jan-müller",
-   "joel-kiranyaz",
-   "daniel-olthoff",
-   "nils-hönicke"
-  ]
- },
- {
-  "id": "aa-argentinos-juniors_2025",
-  "clubId": "aa-argentinos-juniors",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Argentinos Juniors 2025",
-  "playerIds": [
-   "johann-tschirbs",
-   "matti-koch",
-   "krenar-krasniqi",
-   "daniel-peters",
-   "josha-häusler",
-   "dicle-sahin",
-   "lamin-touray",
-   "ralf-lamaj",
-   "bennet-wesselkämper",
-   "fynn-fellmann",
-   "kubilay-yilmaz",
-   "matthias-bräuer",
-   "gabriel-cavar"
   ]
  },
  {
@@ -4361,31 +3716,10 @@
    "jeremias-perales",
    "maximiliano-cuadra",
    "jose-alvarez",
-   "dany-edjoo",
    "juan-andrada",
    "erik-lopez",
-   "dylan-gissi",
    "enrique-bologna",
    "dylan-gamarra"
-  ]
- },
- {
-  "id": "ca-banfield_2022",
-  "clubId": "ca-banfield",
-  "season": "2022",
-  "competition": "Liga Profesional",
-  "label": "Banfield 2022",
-  "playerIds": [
-   "jesus-soraire",
-   "matias-ramirez",
-   "tomas-adoryan",
-   "mauricio-roldan",
-   "ezequiel-bonifacio",
-   "ezequiel-canete",
-   "alejandro-piedrahita",
-   "marcelo-barovero",
-   "gabriel-aranda",
-   "yvo-calleros"
   ]
  },
  {
@@ -4485,22 +3819,6 @@
   ]
  },
  {
-  "id": "club-atletico-san-lorenzo-de-almagro_2025",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "San Lorenzo 2025",
-  "playerIds": [
-   "mauricio-cardillo",
-   "rodrigo-auzmendi",
-   "mathias-de-ritis",
-   "guzman-corujo",
-   "gonzalo-abrego",
-   "gregorio-rodriguez",
-   "franco-lorenzon"
-  ]
- },
- {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2019",
   "clubId": "club-de-gimnasia-y-esgrima-la-plata",
   "season": "2019",
@@ -4584,39 +3902,6 @@
   ]
  },
  {
-  "id": "ca-velez-sarsfield_2022",
-  "clubId": "ca-velez-sarsfield",
-  "season": "2022",
-  "competition": "Liga Profesional",
-  "label": "Vélez Sarsfield 2022",
-  "playerIds": [
-   "braian-romero",
-   "elias-gomez",
-   "francisco-pizzini",
-   "juan-ignacio-mendez",
-   "lautaro-garzon",
-   "thiago-fernandez",
-   "yeison-gordillo",
-   "gaston-gomez",
-   "lautaro-lopez"
-  ]
- },
- {
-  "id": "boca-juniors_2025",
-  "clubId": "boca-juniors",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Boca Juniors 2025",
-  "playerIds": [
-   "santiago-ascacibar",
-   "angel-romero",
-   "gonzalo-gelini",
-   "leandro-lozano",
-   "adam-bareiro",
-   "tomas-aranda"
-  ]
- },
- {
   "id": "ca-banfield_2017",
   "clubId": "ca-banfield",
   "season": "2017",
@@ -4665,22 +3950,6 @@
   ]
  },
  {
-  "id": "racing-club_2025",
-  "clubId": "racing-club",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Racing Club 2025",
-  "playerIds": [
-   "ezequiel-cannavo",
-   "damian-pizarro",
-   "matias-kranevitter",
-   "gonzalo-sosa",
-   "alfonso-espino",
-   "ulises-ortegoza",
-   "matko-miljevic"
-  ]
- },
- {
   "id": "club-estudiantes-de-la-plata_2016",
   "clubId": "club-estudiantes-de-la-plata",
   "season": "2016",
@@ -4708,22 +3977,6 @@
   ]
  },
  {
-  "id": "ca-talleres_2025",
-  "clubId": "ca-talleres",
-  "season": "2025",
-  "competition": "Liga Profesional",
-  "label": "Talleres 2025",
-  "playerIds": [
-   "martin-rio",
-   "lucio-ferrari",
-   "alexandro-maidana",
-   "franco-cristaldo",
-   "juan-sforza",
-   "ronaldo-martinez",
-   "ezequiel-unsain"
-  ]
- },
- {
   "id": "cd-godoy-cruz-antonio-tomba_2016",
   "clubId": "cd-godoy-cruz-antonio-tomba",
   "season": "2016",
@@ -4748,25 +4001,6 @@
    "leonardo-burian",
    "gaston-suso",
    "brayan-ayetz"
-  ]
- },
- {
-  "id": "cd-godoy-cruz-antonio-tomba_2020",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Godoy Cruz 2020",
-  "playerIds": [
-   "rober-colucci",
-   "julian-garcia",
-   "leandro-soria-zarate",
-   "alejo-cerda",
-   "jeison-chala",
-   "mario-galeano",
-   "matias-soria",
-   "emanuel-quinteros",
-   "augusto-aguirre",
-   "ezequiel-cirigliano"
   ]
  },
  {
@@ -4844,24 +4078,6 @@
    "ezequiel-herrera",
    "augusto-batalla",
    "francisco-perruzzi"
-  ]
- },
- {
-  "id": "club-atletico-river-plate_2022",
-  "clubId": "club-atletico-river-plate",
-  "season": "2022",
-  "competition": "Liga Profesional",
-  "label": "River Plate 2022",
-  "playerIds": [
-   "sebastian-boselli",
-   "rodrigo-villagra",
-   "nicolas-fonseca",
-   "facundo-colidio",
-   "agustin-santanna",
-   "manuel-lanzini",
-   "claudio-echeverri",
-   "franco-mastantuono",
-   "lucas-lavagnino"
   ]
  },
  {
@@ -5026,7 +4242,6 @@
    "marcelo-meli",
    "carlos-alcaraz",
    "tiago-banega",
-   "ezequiel-schelotto",
    "matias-rojas",
    "gonzalo-cordoba",
    "tomas-chancalay",
@@ -5185,7 +4400,6 @@
    "gaston-machin",
    "juan-manuel-cobo",
    "cristian-ledesma",
-   "ezequiel-ham",
    "facundo-barboza",
    "nahuel-rodriguez",
    "federico-insua",
@@ -5232,7 +4446,6 @@
    "esteban-rolon",
    "francis-mac-allister",
    "juan-ignacio-mendez",
-   "ezequiel-ham",
    "gaston-machin",
    "facundo-barboza",
    "alexis-mac-allister",
@@ -5332,13 +4545,11 @@
    "alexis-mac-allister",
    "facundo-barboza",
    "gaston-machin",
-   "ezequiel-ham",
    "matias-romero",
    "diego-sosa",
    "ivan-colman",
    "leonardo-pisculichi",
    "leandro-paiva",
-   "matko-miljevic",
    "gabriel-florentin",
    "francisco-gonzalez-metilli",
    "lucas-ferraz",
@@ -5387,10 +4598,8 @@
    "franco-ibarra",
    "enzo-kalinski",
    "matias-romero",
-   "facundo-mater",
    "diego-sosa",
    "gabriel-carabajal",
-   "matko-miljevic",
    "jonatan-gomez",
    "tomas-andrade",
    "ivan-colman",
@@ -5445,7 +4654,6 @@
    "federico-redondo",
    "enzo-kalinski",
    "matias-romero",
-   "facundo-mater",
    "diego-sosa",
    "gabriel-carabajal",
    "jonatan-gomez",
@@ -5667,7 +4875,6 @@
    "joaquin-ardaiz",
    "lautaro-ovando",
    "ismael-sosa",
-   "ryoga-kida",
    "manuel-brondo",
    "gaston-bouhier",
    "diego-porcel"
@@ -5700,8 +4907,7 @@
    "facundo-jainikoski",
    "gaston-veron",
    "ivan-morales",
-   "diego-porcel",
-   "ryoga-kida"
+   "diego-porcel"
   ]
  },
  {
@@ -5766,10 +4972,8 @@
    "federico-navarro",
    "rodrigo-villagra",
    "carlos-villalba",
-   "jose-mauri",
    "conrado-puigdellivol",
    "cristian-luduena",
-   "joel-sonora",
    "gonzalo-alvez",
    "agustin-venezia",
    "gaston-torres",
@@ -5824,7 +5028,6 @@
    "german-gaitan",
    "jorge-ortiz",
    "guillermo-farre",
-   "gaston-alvarez-suarez",
    "ivan-paz",
    "francisco-romero",
    "ivan-etevenaux",
@@ -5897,7 +5100,6 @@
   "playerIds": [
    "roberto-ramirez",
    "juan-espinola",
-   "matias-soria",
    "gianluca-ferrari",
    "guillermo-ortiz",
    "nestor-breitenbruch",
@@ -5927,9 +5129,7 @@
    "matias-ramirez",
    "gaston-pedernera",
    "nahuel-cainelli",
-   "alessio-iadelisi",
    "facundo-altamira",
-   "leandro-soria-zarate",
    "tomas-badaloni",
    "santiago-paiva",
    "cristian-chavez",
@@ -6000,8 +5200,6 @@
   "label": "Boca Juniors 2010s",
   "playerIds": [
    "bustillos-javier-1997",
-   "rossi-daniele-1998",
-   "osvaldo-daniel-1995",
    "marin-leandro-1996",
    "molinas-aaron-1998",
    "castellani-gonzalo-1995",
@@ -6103,327 +5301,23 @@
   ]
  },
  {
-  "id": "estudiantes-lp-2010",
-  "clubId": "estudiantes-lp",
-  "season": "2010",
-  "competition": "Liga Profesional",
-  "label": "Estudiantes de La Plata 2010s",
-  "playerIds": [
-   "saportas-liel-1996",
-   "kolani-gal-1997",
-   "agbaria-muhamad-1999",
-   "kidron-tal-1995",
-   "pambou-yvessimon-1998",
-   "mizrahi-amit-1998",
-   "hassan-yarin-1996",
-   "yosef-haim-1996",
-   "levi-barak-1999",
-   "natan-yakir-1998",
-   "peso-uri-1995",
-   "dahan-rotem-1999",
-   "mahamid-faeq-1995",
-   "dvora-robi-1996",
-   "qtifan-nizar-1998",
-   "rudoselskiy-timur-1998",
-   "kobani-shoval-1996",
-   "levi-sharon-1995"
-  ]
- },
- {
-  "id": "estudiantes-lp-2020",
-  "clubId": "estudiantes-lp",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Estudiantes de La Plata 2020s",
-  "playerIds": [
-   "boselli-mauro-1999",
-   "mashiah-amit-2004",
-   "shmuel-itay-2000",
-   "beni-golan-2003",
-   "meledje-yaya-2000",
-   "korsia-omer-2001",
-   "bustos-nahuel-1990",
-   "cohen-omri-2005",
-   "nave-nadav-2000",
-   "meidan-gil-2004",
-   "amian-boni-2005",
-   "elimelech-roey-2003",
-   "coulibaly-abdoul-2003",
-   "felczer-daniel-2003",
-   "retegui-mateo-2003",
-   "solel-yoav-2004",
-   "greenberg-zohar-2005",
-   "haspia-ran-2000"
-  ]
- },
- {
-  "id": "rosario-central-2010",
-  "clubId": "rosario-central",
-  "season": "2010",
-  "competition": "Liga Profesional",
-  "label": "Rosario Central 2010s",
-  "playerIds": [
-   "br-marcel-1999",
-   "cichos-lukas-1998",
-   "lauberbach-lion-1996",
-   "laurito-andre-1995",
-   "dittrich-danilo-1998",
-   "tellez-kevin-1998",
-   "schwitalla-max-1997",
-   "erb-mario-1995",
-   "schiwatsch-manuel-1999",
-   "jovanovic-velimir-1998",
-   "kurz-bastian-1997",
-   "novy-lukas-1998",
-   "geurts-darryl-1998",
-   "szimayer-sebastian-1995",
-   "aydn-okan-1995",
-   "twardzik-rene-1998",
-   "sarr-wilfried-1997",
-   "bieber-christopher-1996"
-  ]
- },
- {
-  "id": "rosario-central-2020",
-  "clubId": "rosario-central",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Rosario Central 2020s",
-  "playerIds": [
-   "cerrudo-juan-2002",
-   "oviedo-fabricio-2002",
-   "rodriguez-fernando-2002",
-   "ndiaye-moulaye-2000",
-   "imrock-elias-2000",
-   "catic-ervin-2001",
-   "barbieri-miguel-2003",
-   "bach-lenny-2000",
-   "sivaci-bedirhan-2000",
-   "campos-carlos-2002",
-   "hajrulla-romarjo-2001",
-   "pizarro-vicente-2005",
-   "woiwod-tom-2001",
-   "persson-gabriel-2001",
-   "servio-gaspar-2002",
-   "rodriguez-alan-2002",
-   "modica-agustin-2002",
-   "schmidt-lenno-2001"
-  ]
- },
- {
-  "id": "huracan-2010",
-  "clubId": "huracan",
-  "season": "2010",
-  "competition": "Liga Profesional",
-  "label": "Huracán 2010s",
-  "playerIds": [
-   "jabiri-adam-1999",
-   "scaglia-filippo-1998",
-   "anastasio-armando-1998",
-   "barba-gianluca-1998",
-   "reichert-jan-1999",
-   "danhof-tim-1999",
-   "brero-matteo-1998",
-   "calviello-jacopo-1996",
-   "muller-marino-1995",
-   "duler-adrian-1995",
-   "palesi-luca-1996",
-   "yarbrough-lamar-1999",
-   "capelli-alessandro-1996",
-   "giudici-luca-1997",
-   "maderer-stefan-1999",
-   "sommariva-daniele-1998",
-   "dachs-dominic-1995",
-   "bauer-maximilian-1999"
-  ]
- },
- {
-  "id": "huracan-2020",
-  "clubId": "huracan",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Huracán 2020s",
-  "playerIds": [
-   "scheithauer-vitus-2000",
-   "machin-pepin-2000",
-   "whner-lennart-2002",
-   "buerlein-lorenz-2002",
-   "cavadias-fabian-2002",
-   "schneller-lukas-2004",
-   "hofmann-patrick-2004",
-   "bausenwein-lauris-2004",
-   "langhans-leonard-2004",
-   "hyseni-edin-2000",
-   "spanoudakis-georgios-2002",
-   "mari-mirko-2003",
-   "colpani-andrea-2003",
-   "grimbs-nico-2005",
-   "maldini-daniel-2003",
-   "donati-giulio-2003",
-   "schmidt-bennet-2001",
-   "engel-jacob-2002"
-  ]
- },
- {
   "id": "lanus-2010",
   "clubId": "lanus",
   "season": "2010",
   "competition": "Liga Profesional",
   "label": "Lanús 2010s",
   "playerIds": [
-   "bosnjak-andrija-1998",
    "acosta-lautaro-1996",
-   "holek-martin-1998",
    "sand-jose-1980",
    "caceres-dario-1997",
    "castellani-gonzalo-1995",
-   "kappacher-christian-1996",
    "lodico-gaston-1997",
    "gomez-jose-1995",
-   "vorderwestner-daniel-1998",
    "thaller-nicolas-1997",
-   "ndong-ousmane-1999",
    "pelletieri-agustin-1995",
    "martinez-joel-1997",
-   "emerllahu-arian-1998",
-   "subasic-muhamed-1998",
    "monetti-fernando-1995",
    "novo-rocco-1999"
-  ]
- },
- {
-  "id": "lanus-2020",
-  "clubId": "lanus",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Lanús 2020s",
-  "playerIds": [
-   "stjepanovic-daniel-2002",
-   "reiter-maximilian-2002",
-   "acosta-lautaro-1996",
-   "sorge-alexander-2005",
-   "ginzo-juan-2001",
-   "stapfer-fabian-2002",
-   "andreichyk-artur-2002",
-   "dieguiz-evaristo-2004",
-   "sand-jose-1997",
-   "canelo-alexis-1992",
-   "cabrera-bruno-2004",
-   "biafore-felipe-2000",
-   "cardozo-leonel-2004",
-   "sigl-kenneth-2002",
-   "segovia-alexis-2001",
-   "lapsin-christian-2005",
-   "krasniqi-kurbin-2005",
-   "marcich-sasha-2004"
-  ]
- },
- {
-  "id": "banfield-2010",
-  "clubId": "banfield",
-  "season": "2010",
-  "competition": "Liga Profesional",
-  "label": "Banfield 2010s",
-  "playerIds": [
-   "selasi-ransford-1995",
-   "lerch-bastian-1996",
-   "hesse-uwe-1996",
-   "mazzotta-antonio-1995",
-   "fein-adrian-1998",
-   "kopp-sven-1996",
-   "valoti-mattia-1995",
-   "kappacher-christian-1996",
-   "hyseni-haris-1996",
-   "milillo-alessio-1995",
-   "fhrenbach-jonas-1998",
-   "weis-andre-1997",
-   "sansovini-marco-1995",
-   "esposito-vittorio-1995",
-   "gimber-benedikt-1997",
-   "schpf-daniel-1996",
-   "vrenezi-albion-1997",
-   "srensen-asger-1997"
-  ]
- },
- {
-  "id": "banfield-2020",
-  "clubId": "banfield",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Banfield 2020s",
-  "playerIds": [
-   "jaroszyski-pawe-2000",
-   "staver-cornelius-2003",
-   "becker-andre-2001",
-   "demilio-filippo-2005",
-   "machin-pepin-2000",
-   "rodriguez-jorge-1995",
-   "zwarts-jol-2001",
-   "chiarella-marco-2000",
-   "dagasso-matteo-2003",
-   "tsadjout-frank-2005",
-   "guwara-leon-2001",
-   "tonin-riccardo-2004",
-   "calio-andrea-2000",
-   "iacovo-cristiano-2004",
-   "fernandes-leandro-2000",
-   "altare-giorgio-2005",
-   "bonassi-lorenzo-2005",
-   "mesik-ivan-2003"
-  ]
- },
- {
-  "id": "talleres-cba-2010",
-  "clubId": "talleres-cba",
-  "season": "2010",
-  "competition": "Liga Profesional",
-  "label": "Talleres de Córdoba 2010s",
-  "playerIds": [
-   "rochd-ayoub-1995",
-   "jutting-sascha-1995",
-   "jung-sunghyun-1997",
-   "gronewold-janhendrik-1995",
-   "henningsson-erikove-1995",
-   "camara-malick-1995",
-   "park-changil-1998",
-   "meinecke-sven-1996",
-   "kim-wonjun-1995",
-   "cengel-tolga-1997",
-   "donyina-isaac-1995",
-   "gcke-nils-1999",
-   "karabas-kadir-1995",
-   "wasmus-leander-1999",
-   "jobe-ebrima-1997",
-   "khler-erik-1999",
-   "behrens-marco-1995",
-   "hatke-marcpatrick-1995"
-  ]
- },
- {
-  "id": "talleres-cba-2020",
-  "clubId": "talleres-cba",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Talleres de Córdoba 2020s",
-  "playerIds": [
-   "reppel-vincent-2005",
-   "yazgan-serhat-2000",
-   "grpler-nicolai-2002",
-   "nankishi-sadrak-2005",
-   "wapsas-fabian-2005",
-   "appiah-victor-2005",
-   "monteiro-ridel-2000",
-   "deerli-kaan-2002",
-   "ates-mert-2002",
-   "inusah-abdul-2005",
-   "erkul-hamdi-2005",
-   "graban-lion-2005",
-   "stalteri-ramiro-1998",
-   "casanova-kiano-2005",
-   "hakansson-bjrn-2000",
-   "camacho-nicolas-1994",
-   "aytun-emre-2000",
-   "weide-nico-2005"
   ]
  },
  {
@@ -6485,60 +5379,6 @@
   ]
  },
  {
-  "id": "racing-club-2010",
-  "clubId": "racing-club",
-  "season": "2010",
-  "competition": "Liga Profesional",
-  "label": "Racing Club 2010s",
-  "playerIds": [
-   "schmitz-maurits-1995",
-   "beukema-sam-1997",
-   "abdat-nicolas-1999",
-   "maneschijn-patrick-1996",
-   "groenbast-joey-1995",
-   "marengo-ludcinio-1996",
-   "hettinga-dennis-1996",
-   "slijngard-jairzinho-1998",
-   "duits-sander-1995",
-   "marselia-isa-1997",
-   "verhulst-hobie-1998",
-   "iperen-donny-1999",
-   "ojamaa-henrik-1996",
-   "werkhoven-givan-1996",
-   "nieuwpoort-sven-1995",
-   "brands-kevin-1996",
-   "achenteh-rochdi-1996",
-   "thomas-sander-1997"
-  ]
- },
- {
-  "id": "racing-club-2020",
-  "clubId": "racing-club",
-  "season": "2020",
-  "competition": "Liga Profesional",
-  "label": "Racing Club 2020s",
-  "playerIds": [
-   "berenschot-milan-2002",
-   "michaelis-mitchel-2000",
-   "hahn-warner-2001",
-   "alcaraz-carlos-1993",
-   "ghafour-dielan-2003",
-   "godoy-leonardo-1994",
-   "kok-olaf-2001",
-   "bakker-justin-2000",
-   "breum-jakob-2003",
-   "serra-dario-2002",
-   "veldhuis-shawn-2000",
-   "pettersson-oscar-2004",
-   "smits-jorn-2002",
-   "meulensteen-melle-2005",
-   "zuculini-bruno-1992",
-   "martina-cuco-2001",
-   "cordoba-inigo-2001",
-   "pillud-ivan-2003"
-  ]
- },
- {
   "id": "colon-2020",
   "clubId": "colon",
   "season": "2020",
@@ -6565,38 +5405,6 @@
    "ojeda-sergio-1992",
    "pierotti-santiago-2003",
    "pellegrini-franco-2003"
-  ]
- },
- {
-  "id": "argentina-1990",
-  "clubId": "argentina",
-  "season": "1990",
-  "competition": "Copa del Mundo",
-  "label": "Argentina Mundial 1990",
-  "playerIds": [
-   "carrizo-amadeo-1926",
-   "passarella-daniel-1953",
-   "samuel-walter-1978",
-   "batistuta-gabriel-1969",
-   "maradona-diego-1960",
-   "messi-lionel-1987",
-   "kempes-mario-1954",
-   "redondo-fernando-1969",
-   "crespo-hernan-1975",
-   "tevez-carlos-1984",
-   "ayala-roberto-1973",
-   "francescoli-enzo-1961",
-   "fillol-ubaldo-1950",
-   "perfumo-roberto-1942",
-   "mascherano-javier-1984",
-   "riquelme-juan-1978",
-   "martinez-emiliano-1992",
-   "ruggeri-oscar-1962",
-   "veron-juan-1975",
-   "bochini-ricardo-1954",
-   "chilavert-jose-1965",
-   "zanetti-javier-1973",
-   "maria-angel-1988"
   ]
  }
 ]

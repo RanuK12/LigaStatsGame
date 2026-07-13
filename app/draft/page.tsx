@@ -552,13 +552,12 @@ function TournamentView({ result, onBack, onReset, onDownloadPDF }: {
           )}
 
           {/* Action buttons */}
-          <div className="flex gap-3 justify-center flex-wrap mb-6">
-            <button onClick={onDownloadPDF}
-              className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 rounded-xl font-bold text-white shadow-lg hover:scale-[1.03] transition-all">
-              📄 Descargar PDF
+          <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">
+            <button onClick={onDownloadPDF} className="btn-primary px-6 py-3">
+              Descargar PDF
             </button>
-            <button onClick={onBack} className="btn-secondary px-6 py-3">← Ver equipo</button>
-            <button onClick={onReset} className="btn-secondary px-6 py-3">🔄 Nuevo Draft</button>
+            <button onClick={onBack} className="btn-secondary px-6 py-3">Ver equipo</button>
+            <button onClick={onReset} className="btn-secondary px-6 py-3">Nuevo Draft</button>
           </div>
           <Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm text-center block">
             ← Volver al inicio
@@ -908,11 +907,10 @@ function DraftInner() {
               <li>5. Armá los 11 y <strong className="text-slate-200">simulá el torneo con estadísticas</strong></li>
             </ol>
           </div>
-          <button onClick={startGame}
-            className="px-10 py-4 bg-gradient-to-r from-[#75AADB] to-blue-600 rounded-xl font-bold text-lg shadow-lg shadow-[#75AADB]/25 hover:shadow-[#75AADB]/40 transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]">
-            🚀 Comenzar Draft
+          <button onClick={startGame} className="btn-primary px-10 py-4 font-sport">
+            Comenzar Draft
           </button>
-          <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-sm">← Volver al inicio</Link>
+          <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider">Volver al inicio</Link>
         </motion.div>
       </div>
     )
@@ -992,14 +990,12 @@ function DraftInner() {
               </div>
             </div>
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} /></div>
-            <div className="flex gap-3 justify-center flex-wrap">
-              <button onClick={() => spinWheel()}
-                className="px-10 py-4 bg-gradient-to-r from-[#75AADB] to-blue-600 rounded-xl font-bold text-lg shadow-lg shadow-[#75AADB]/25 hover:shadow-[#75AADB]/40 transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]">
-                🎲 ¡Girar Ruleta!
+            <div className="flex gap-3 justify-center flex-wrap font-sport">
+              <button onClick={() => spinWheel()} className="btn-primary px-10 py-4">
+                Girar Ruleta
               </button>
-              <button onClick={() => setShowPosSelector(true)}
-                className="px-6 py-4 bg-slate-800 border border-slate-600 rounded-xl font-bold text-slate-200 hover:border-[#75AADB]/60 hover:bg-slate-700 transition-all">
-                🎯 Elegir posición
+              <button onClick={() => setShowPosSelector(true)} className="btn-secondary px-6 py-4">
+                Elegir posición
               </button>
             </div>
             <p className="text-xs text-slate-500 mt-2 text-center">
@@ -1126,12 +1122,12 @@ function DraftInner() {
               </div>
               <div className="text-2xl font-display font-black text-[#75AADB]">Score: {teamScore || partialScore} pts</div>
             </div>
-            <div className="flex gap-3 justify-center flex-wrap mb-6">
-              <button onClick={() => startSim("liga")} className="btn-primary text-lg px-8 py-3">🏆 Simular Liga</button>
-              <button onClick={() => startSim("copa")} className="btn-primary text-lg px-6 py-3">🏅 Simular Copa</button>
-              <button onClick={resetGame} className="btn-secondary px-6 py-3">🔄 Nuevo Draft</button>
+            <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">
+              <button onClick={() => startSim("liga")} className="btn-primary px-8 py-3">Simular Liga</button>
+              <button onClick={() => startSim("copa")} className="btn-primary px-6 py-3">Simular Copa</button>
+              <button onClick={resetGame} className="btn-secondary px-6 py-3">Nuevo Draft</button>
             </div>
-            <Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm">← Volver al inicio</Link>
+            <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">Volver al inicio</Link>
           </motion.div>
         )}
       </main>
