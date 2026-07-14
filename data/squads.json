@@ -1,7 +1,7 @@
 [
  {
   "id": "club-atletico-river-plate_2015",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "River Plate 2015",
@@ -57,7 +57,7 @@
  },
  {
   "id": "ca-newells-old-boys_2015",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2015",
@@ -101,7 +101,7 @@
  },
  {
   "id": "club-atletico-river-plate_2018",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "River Plate 2018",
@@ -131,7 +131,7 @@
  },
  {
   "id": "club-atletico-river-plate_2019",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "River Plate 2019",
@@ -160,7 +160,7 @@
  },
  {
   "id": "ca-banfield_2015",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Banfield 2015",
@@ -252,7 +252,7 @@
  },
  {
   "id": "ca-banfield_2019",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Banfield 2019",
@@ -295,7 +295,7 @@
  },
  {
   "id": "ca-independiente_2015",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Independiente 2015",
@@ -345,7 +345,7 @@
  },
  {
   "id": "ca-velez-sarsfield_2019",
-  "clubId": "ca-velez-sarsfield",
+  "clubId": "velez",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Vélez Sarsfield 2019",
@@ -382,7 +382,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2018",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2018",
@@ -413,7 +413,7 @@
  },
  {
   "id": "club-atletico-lanus_2017",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Lanús 2017",
@@ -557,7 +557,7 @@
  },
  {
   "id": "ca-velez-sarsfield_2017",
-  "clubId": "ca-velez-sarsfield",
+  "clubId": "velez",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Vélez Sarsfield 2017",
@@ -584,7 +584,7 @@
  },
  {
   "id": "club-atletico-belgrano_2017",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Belgrano 2017",
@@ -616,7 +616,7 @@
  },
  {
   "id": "ca-velez-sarsfield_2023",
-  "clubId": "ca-velez-sarsfield",
+  "clubId": "velez",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Vélez Sarsfield 2023",
@@ -651,7 +651,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2015",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2015",
@@ -695,7 +695,7 @@
  },
  {
   "id": "club-atletico-lanus_2015",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Lanús 2015",
@@ -747,7 +747,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2020",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2020",
@@ -770,7 +770,7 @@
  },
  {
   "id": "ca-newells-old-boys_2020",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2020",
@@ -794,7 +794,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2021",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2021",
@@ -828,7 +828,7 @@
  },
  {
   "id": "ca-banfield_2024",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Banfield 2024",
@@ -858,7 +858,7 @@
  },
  {
   "id": "ca-newells-old-boys_2016",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2016",
@@ -889,7 +889,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2017",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2017",
@@ -924,7 +924,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2015",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2015",
@@ -971,7 +971,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2023",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2023",
@@ -1005,7 +1005,7 @@
  },
  {
   "id": "ca-newells-old-boys_2018",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2018",
@@ -1027,7 +1027,7 @@
  },
  {
   "id": "ca-newells-old-boys_2021",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2021",
@@ -1053,7 +1053,7 @@
  },
  {
   "id": "club-atletico-huracan_2022",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Huracán 2022",
@@ -1082,7 +1082,7 @@
  },
  {
   "id": "ca-rosario-central_2015",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2015",
@@ -1130,7 +1130,7 @@
  },
  {
   "id": "ca-rosario-central_2017",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2017",
@@ -1154,7 +1154,7 @@
  },
  {
   "id": "ca-rosario-central_2019",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2019",
@@ -1189,7 +1189,7 @@
  },
  {
   "id": "ca-rosario-central_2021",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2021",
@@ -1222,7 +1222,7 @@
  },
  {
   "id": "ca-rosario-central_2022",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2022",
@@ -1249,7 +1249,7 @@
  },
  {
   "id": "ca-talleres_2017",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Talleres 2017",
@@ -1276,7 +1276,7 @@
  },
  {
   "id": "club-atletico-lanus_2018",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Lanús 2018",
@@ -1299,7 +1299,7 @@
  },
  {
   "id": "club-atletico-lanus_2019",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Lanús 2019",
@@ -1330,7 +1330,7 @@
  },
  {
   "id": "club-atletico-lanus_2022",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Lanús 2022",
@@ -1355,7 +1355,7 @@
  },
  {
   "id": "club-atletico-lanus_2024",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Lanús 2024",
@@ -1380,7 +1380,7 @@
  },
  {
   "id": "ca-banfield_2020",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Banfield 2020",
@@ -1403,7 +1403,7 @@
  },
  {
   "id": "ca-banfield_2023",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Banfield 2023",
@@ -1434,7 +1434,7 @@
  },
  {
   "id": "ca-talleres_2022",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Talleres 2022",
@@ -1469,7 +1469,7 @@
  },
  {
   "id": "club-atletico-belgrano_2015",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Belgrano 2015",
@@ -1516,7 +1516,7 @@
  },
  {
   "id": "club-atletico-belgrano_2018",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Belgrano 2018",
@@ -1558,7 +1558,7 @@
  },
  {
   "id": "club-atletico-belgrano_2020",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Belgrano 2020",
@@ -1596,7 +1596,7 @@
  },
  {
   "id": "club-atletico-belgrano_2022",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Belgrano 2022",
@@ -1624,7 +1624,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2015",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2015",
@@ -1664,7 +1664,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2019",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2019",
@@ -1703,7 +1703,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2015",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2015",
@@ -1757,7 +1757,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2018",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2018",
@@ -1782,7 +1782,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2023",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2023",
@@ -1811,7 +1811,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2022",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2022",
@@ -1854,7 +1854,7 @@
  },
  {
   "id": "club-atletico-river-plate_2023",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "River Plate 2023",
@@ -1988,7 +1988,7 @@
  },
  {
   "id": "ca-independiente_2017",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Independiente 2017",
@@ -2017,7 +2017,7 @@
  },
  {
   "id": "ca-velez-sarsfield_2021",
-  "clubId": "ca-velez-sarsfield",
+  "clubId": "velez",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Vélez Sarsfield 2021",
@@ -2042,7 +2042,7 @@
  },
  {
   "id": "ca-newells-old-boys_2022",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2022",
@@ -2070,7 +2070,7 @@
  },
  {
   "id": "ca-talleres_2016",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Talleres 2016",
@@ -2101,7 +2101,7 @@
  },
  {
   "id": "ca-independiente_2019",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Independiente 2019",
@@ -2129,7 +2129,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2019",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2019",
@@ -2164,7 +2164,7 @@
  },
  {
   "id": "ca-independiente_2022",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Independiente 2022",
@@ -2196,7 +2196,7 @@
  },
  {
   "id": "ca-talleres_2021",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Talleres 2021",
@@ -2230,7 +2230,7 @@
  },
  {
   "id": "ca-rosario-central_2024",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2024",
@@ -2252,7 +2252,7 @@
  },
  {
   "id": "ca-independiente_2024",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Independiente 2024",
@@ -2284,7 +2284,7 @@
  },
  {
   "id": "ca-talleres_2023",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Talleres 2023",
@@ -2336,7 +2336,7 @@
  },
  {
   "id": "ca-velez-sarsfield_2016",
-  "clubId": "ca-velez-sarsfield",
+  "clubId": "velez",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Vélez Sarsfield 2016",
@@ -2361,7 +2361,7 @@
  },
  {
   "id": "ca-newells-old-boys_2019",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2019",
@@ -2422,7 +2422,7 @@
  },
  {
   "id": "ca-banfield_2016",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Banfield 2016",
@@ -2485,7 +2485,7 @@
  },
  {
   "id": "club-atletico-huracan_2021",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Huracán 2021",
@@ -2514,7 +2514,7 @@
  },
  {
   "id": "ca-rosario-central_2023",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2023",
@@ -2565,7 +2565,7 @@
  },
  {
   "id": "club-atletico-huracan_2024",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Huracán 2024",
@@ -2593,7 +2593,7 @@
  },
  {
   "id": "ca-velez-sarsfield_2015",
-  "clubId": "ca-velez-sarsfield",
+  "clubId": "velez",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Vélez Sarsfield 2015",
@@ -2636,7 +2636,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2017",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2017",
@@ -2657,7 +2657,7 @@
  },
  {
   "id": "ca-talleres_2019",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Talleres 2019",
@@ -2693,7 +2693,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2018",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2018",
@@ -2717,7 +2717,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2019",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2019",
@@ -2742,7 +2742,7 @@
  },
  {
   "id": "club-atletico-huracan_2015",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Huracán 2015",
@@ -2795,7 +2795,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2023",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2023",
@@ -2818,7 +2818,7 @@
  },
  {
   "id": "ca-newells-old-boys_2023",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2023",
@@ -2849,7 +2849,7 @@
  },
  {
   "id": "ca-newells-old-boys_2024",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2024",
@@ -2881,7 +2881,7 @@
  },
  {
   "id": "ca-rosario-central_2016",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2016",
@@ -2907,7 +2907,7 @@
  },
  {
   "id": "ca-rosario-central_2020",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2020",
@@ -2934,7 +2934,7 @@
  },
  {
   "id": "club-atletico-lanus_2021",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Lanús 2021",
@@ -2961,7 +2961,7 @@
  },
  {
   "id": "ca-talleres_2015",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Talleres 2015",
@@ -2994,7 +2994,7 @@
  },
  {
   "id": "ca-talleres_2018",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Talleres 2018",
@@ -3020,7 +3020,7 @@
  },
  {
   "id": "ca-talleres_2024",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Talleres 2024",
@@ -3044,7 +3044,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2016",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2016",
@@ -3075,7 +3075,7 @@
  },
  {
   "id": "club-atletico-belgrano_2019",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Belgrano 2019",
@@ -3096,7 +3096,7 @@
  },
  {
   "id": "club-atletico-belgrano_2023",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Belgrano 2023",
@@ -3129,7 +3129,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2017",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2017",
@@ -3150,7 +3150,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2023",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2023",
@@ -3179,7 +3179,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2024",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2024",
@@ -3208,7 +3208,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2024",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2024",
@@ -3235,7 +3235,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2018",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2018",
@@ -3263,7 +3263,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2021",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2021",
@@ -3284,7 +3284,7 @@
  },
  {
   "id": "club-atletico-huracan_2016",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Huracán 2016",
@@ -3314,7 +3314,7 @@
  },
  {
   "id": "club-atletico-river-plate_2016",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "River Plate 2016",
@@ -3339,7 +3339,7 @@
  },
  {
   "id": "ca-independiente_2016",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Independiente 2016",
@@ -3363,7 +3363,7 @@
  },
  {
   "id": "club-atletico-river-plate_2024",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "River Plate 2024",
@@ -3466,7 +3466,7 @@
  },
  {
   "id": "ca-independiente_2023",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Independiente 2023",
@@ -3498,7 +3498,7 @@
  },
  {
   "id": "club-atletico-huracan_2019",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Huracán 2019",
@@ -3559,7 +3559,7 @@
  },
  {
   "id": "ca-rosario-central_2018",
-  "clubId": "ca-rosario-central",
+  "clubId": "rosario-central",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Rosario Central 2018",
@@ -3582,7 +3582,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2022",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2022",
@@ -3610,7 +3610,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2024",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2024",
@@ -3631,7 +3631,7 @@
  },
  {
   "id": "ca-newells-old-boys_2017",
-  "clubId": "ca-newells-old-boys",
+  "clubId": "newells",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Newell's Old Boys 2017",
@@ -3656,7 +3656,7 @@
  },
  {
   "id": "club-atletico-belgrano_2021",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Belgrano 2021",
@@ -3677,7 +3677,7 @@
  },
  {
   "id": "club-atletico-lanus_2023",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Lanús 2023",
@@ -3703,7 +3703,7 @@
  },
  {
   "id": "ca-banfield_2021",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Banfield 2021",
@@ -3724,7 +3724,7 @@
  },
  {
   "id": "club-atletico-belgrano_2024",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Belgrano 2024",
@@ -3749,7 +3749,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2017",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2017",
@@ -3773,7 +3773,7 @@
  },
  {
   "id": "club-atletico-huracan_2018",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Huracán 2018",
@@ -3799,7 +3799,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2024",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2024",
@@ -3820,7 +3820,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2019",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2019",
@@ -3857,7 +3857,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2022",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2022",
@@ -3879,7 +3879,7 @@
  },
  {
   "id": "ca-independiente_2021",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Independiente 2021",
@@ -3903,7 +3903,7 @@
  },
  {
   "id": "ca-banfield_2017",
-  "clubId": "ca-banfield",
+  "clubId": "banfield",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Banfield 2017",
@@ -3927,7 +3927,7 @@
  },
  {
   "id": "club-atletico-huracan_2020",
-  "clubId": "club-atletico-huracan",
+  "clubId": "huracan",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Huracán 2020",
@@ -3951,7 +3951,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2016",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2016",
@@ -3978,7 +3978,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2016",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2016",
@@ -4005,7 +4005,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2022",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2022",
@@ -4041,7 +4041,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2025",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2025",
@@ -4062,7 +4062,7 @@
  },
  {
   "id": "club-atletico-san-lorenzo-de-almagro_2020",
-  "clubId": "club-atletico-san-lorenzo-de-almagro",
+  "clubId": "san-lorenzo",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "San Lorenzo 2020",
@@ -4082,7 +4082,7 @@
  },
  {
   "id": "club-atletico-river-plate_2017",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "River Plate 2017",
@@ -4134,7 +4134,7 @@
  },
  {
   "id": "club-atletico-river-plate_2021",
-  "clubId": "club-atletico-river-plate",
+  "clubId": "river-plate",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "River Plate 2021",
@@ -4177,7 +4177,7 @@
  },
  {
   "id": "ca-independiente_2025",
-  "clubId": "ca-independiente",
+  "clubId": "independiente",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Independiente 2025",
@@ -4262,7 +4262,7 @@
  },
  {
   "id": "ca-velez-sarsfield_2025",
-  "clubId": "ca-velez-sarsfield",
+  "clubId": "velez",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Vélez Sarsfield 2025",
@@ -4296,7 +4296,7 @@
  },
  {
   "id": "club-estudiantes-de-la-plata_2025",
-  "clubId": "club-estudiantes-de-la-plata",
+  "clubId": "estudiantes-lp",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Estudiantes LP 2025",
@@ -4336,7 +4336,7 @@
  },
  {
   "id": "club-de-gimnasia-y-esgrima-la-plata_2025",
-  "clubId": "club-de-gimnasia-y-esgrima-la-plata",
+  "clubId": "gimnasia-lp",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Gimnasia LP 2025",
@@ -4374,7 +4374,7 @@
  },
  {
   "id": "argentinos-juniors_2015",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2015",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2015",
@@ -4420,7 +4420,7 @@
  },
  {
   "id": "argentinos-juniors_2016",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2016",
@@ -4464,7 +4464,7 @@
  },
  {
   "id": "argentinos-juniors_2017",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2017",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2017",
@@ -4514,7 +4514,7 @@
  },
  {
   "id": "argentinos-juniors_2018",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2018",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2018",
@@ -4569,7 +4569,7 @@
  },
  {
   "id": "argentinos-juniors_2019",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2019",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2019",
@@ -4626,7 +4626,7 @@
  },
  {
   "id": "argentinos-juniors_2020",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2020",
@@ -4677,7 +4677,7 @@
  },
  {
   "id": "argentinos-juniors_2021",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2021",
@@ -4721,7 +4721,7 @@
  },
  {
   "id": "argentinos-juniors_2022",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2022",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2022",
@@ -4765,7 +4765,7 @@
  },
  {
   "id": "argentinos-juniors_2023",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2023",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2023",
@@ -4832,7 +4832,7 @@
  },
  {
   "id": "argentinos-juniors_2024",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2024",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2024",
@@ -4882,7 +4882,7 @@
  },
  {
   "id": "argentinos-juniors_2025",
-  "clubId": "argentinos-juniors",
+  "clubId": "argentinos-jrs",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Argentinos Juniors 2025",
@@ -4912,7 +4912,7 @@
  },
  {
   "id": "club-atletico-lanus_2025",
-  "clubId": "club-atletico-lanus",
+  "clubId": "lanus",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Lanús 2025",
@@ -4946,7 +4946,7 @@
  },
  {
   "id": "ca-talleres_2020",
-  "clubId": "ca-talleres",
+  "clubId": "talleres-cba",
   "season": "2020",
   "competition": "Liga Profesional",
   "label": "Talleres 2020",
@@ -4996,7 +4996,7 @@
  },
  {
   "id": "club-atletico-belgrano_2016",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2016",
   "competition": "Liga Profesional",
   "label": "Belgrano 2016",
@@ -5058,7 +5058,7 @@
  },
  {
   "id": "club-atletico-belgrano_2025",
-  "clubId": "club-atletico-belgrano",
+  "clubId": "belgrano",
   "season": "2025",
   "competition": "Liga Profesional",
   "label": "Belgrano 2025",
@@ -5093,7 +5093,7 @@
  },
  {
   "id": "cd-godoy-cruz-antonio-tomba_2021",
-  "clubId": "cd-godoy-cruz-antonio-tomba",
+  "clubId": "godoy-cruz",
   "season": "2021",
   "competition": "Liga Profesional",
   "label": "Godoy Cruz 2021",
