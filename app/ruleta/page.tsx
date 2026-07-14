@@ -26,6 +26,25 @@ const posColors: Record<string, string> = {
   RWB: '#06b6d4',
 }
 
+const LEGEND_BIOGRAPHIES: Record<string, string> = {
+  "messi-lionel-1987": "El mejor jugador de todos los tiempos. Surgido de Newell's y consagrado en el FC Barcelona, lideró a la Selección Argentina a la conquista de la Copa América 2021, la Finalissima 2022 y el Mundial de Qatar 2022, logrando la ansiada tercera estrella.",
+  "maradona-diego-1960": "El eterno 'Diez'. Ídolo absoluto y símbolo del fútbol argentino. Su inolvidable campaña en el Mundial de México 1986, con el 'Gol del Siglo' y la 'Mano de Dios' ante Inglaterra, lo consagró como leyenda universal del deporte.",
+  "passarella-daniel-1953": "El 'Gran Capitán'. Único futbolista argentino bicampeón del mundo (1978 y 1986). Zaguero central de enorme temperamento, gran cabezazo y uno de los defensores más goleadores en la historia del fútbol mundial.",
+  "batistuta-gabriel-1969": "'Batigol'. Uno de los delanteros centro más letales de la historia de la Selección. Goleador histórico indiscutido con potencia física arrolladora y remates devastadores que dejaron huella en Newell's, River, Boca y la Fiorentina.",
+  "zanetti-javier-1973": "'Pupi'. Símbolo de constancia, conducta y profesionalismo. Histórico capitán del Inter de Milán y segundo jugador con más presencias en la Selección Argentina. Defensor incansable que brilló en Banfield y el Calcio.",
+  "riquelme-juan-1978": "El último gran 'Diez' pensante. Ídolo supremo de Boca Juniors, donde conquistó tres Copas Libertadores e intercontinentales con una visión de juego, control de balón y pegada magistrales que definieron una era.",
+  "kempes-mario-1954": "'El Matador'. Héroe indiscutido del primer Mundial ganado por Argentina en 1978, donde fue el goleador del torneo y marcó dos goles en la gran final ante Holanda. Potente delantero que brilló en Central y Valencia.",
+  "fillol-ubaldo-1950": "'El Pato'. Considerado por muchos el mejor arquero en la historia del fútbol argentino. Clave en el título mundial de 1978 por sus reflejos felinos y su capacidad única para tapar mano a mano memorables.",
+  "maria-angel-1988": "'Fideo'. Jugador de partidos decisivos. Marcó los goles de la victoria en las finales de los Juegos Olímpicos 2008, Copa América 2021, Finalissima 2022 y la final del Mundial de Qatar 2022. Leyenda eterna.",
+  "martinez-emiliano-1992": "'Dibu'. Arquero carismático y fundamental en la época dorada de la Scaloneta. Sus históricas atajadas ante Francia en la final de Qatar 2022 y en las series de penales lo convirtieron en un prócer nacional.",
+  "perfumo-roberto-1942": "'El Mariscal'. Uno de los mejores zagueros de la historia de la Liga. Lideró la defensa de Racing Club en su época dorada ganando la Libertadores e Intercontinental, y luego brilló con clase mundial en River y Cruzeiro.",
+  "redondo-fernando-1969": "Un mediocampista central de elegancia pura e inteligencia táctica incomparable. De estilo fino y zurda prodigiosa, brilló en Argentinos Juniors y fue figura consagrada en el Real Madrid ganando múltiples Champions.",
+  "veron-juan-1975": "'La Brujita'. Volante de pegada excelsa, visión periférica y gran liderazgo. Lideró a Estudiantes de La Plata a ganar la Copa Libertadores 2009 y tuvo una destacada carrera en Europa (Manchester United, Lazio, Inter).",
+  "bochini-ricardo-1954": "'El Bocha'. Máximo ídolo de Independiente de Avellaneda, donde jugó toda su carrera ganando 4 Copas Libertadores. Su juego de pases precisos inspiró el término 'pase bochinesco' y al propio Diego Maradona.",
+  "tevez-carlos-1984": "'El Apache'. El jugador del pueblo. Ganador serial que conquistó títulos en Boca, Corinthians, Inglaterra e Italia. Dueño de una garra y potencia física indomables que lo hicieron ídolo en cada club que pisó.",
+  "francescoli-enzo-1961": "'El Príncipe'. Elegante mediapunta uruguayo e ídolo de River Plate. Lideró al Millonario a la obtención de la Libertadores 1996 con su clase, técnica depurada y goles espectaculares que inspiraron a Zinedine Zidane."
+}
+
 const FULL_SPINS = 7
 const ANIMATION_DURATION_MS = 3600
 
@@ -255,6 +274,12 @@ export default function RuletaPage() {
                     <div className="mt-2 text-sm text-yellow-400">⭐ Jugador legendario</div>
                   )}
                 </div>
+
+                {LEGEND_BIOGRAPHIES[result.id] && (
+                  <div className="mb-6 border-l-2 border-[#74ACDF]/50 pl-3 py-1 text-xs sm:text-sm text-slate-300 italic font-sans leading-relaxed text-left">
+                    "{LEGEND_BIOGRAPHIES[result.id]}"
+                  </div>
+                )}
 
                 <div className="mb-6 grid grid-cols-3 gap-4">
                   <div className="rounded-xl bg-slate-800/50 p-3 text-center">

@@ -42,20 +42,20 @@ const MODES = [
   {
     id: 'liga',
     name: 'Liga Argentina',
-    desc: 'Competí en el campeonato tradicional de 2 zonas más fase de eliminación',
+    desc: 'Competí en el campeonato tradicional de la Liga Profesional',
     initials: 'LA',
     href: '/draft?mode=liga',
     gradient: 'from-emerald-600/20 via-green-500/10 to-transparent',
     border: 'rgba(16,185,129,0.4)',
     glow: 'rgba(16,185,129,0.25)',
     accent: '#10b981',
-    badge: 'TORNEO',
+    badge: 'LPF',
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
   },
   {
     id: 'copa',
     name: 'Copa Argentina',
-    desc: 'El torneo más federal de eliminación directa con infartantes definiciones por penales',
+    desc: 'El torneo más federal de eliminación directa con definiciones por penales',
     initials: 'CA',
     href: '/draft?mode=copa',
     gradient: 'from-yellow-500/20 via-amber-400/10 to-transparent',
@@ -64,6 +64,19 @@ const MODES = [
     accent: '#eab308',
     badge: 'COPA',
     badgeColor: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
+  },
+  {
+    id: 'versus',
+    name: 'Duelo Versus (Local)',
+    desc: 'Armá tu 11 y competí contra un amigo en el mismo dispositivo',
+    initials: 'VS',
+    href: '/versus',
+    gradient: 'from-purple-500/20 via-pink-450/10 to-transparent',
+    border: 'rgba(168,85,247,0.4)',
+    glow: 'rgba(168,85,247,0.25)',
+    accent: '#a855f7',
+    badge: 'AMIGOS',
+    badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
   },
 ]
 
@@ -123,7 +136,7 @@ function WorldCupBanner() {
       className="relative z-10 max-w-6xl mx-auto px-4 mb-14"
     >
       <div className="relative rounded-2xl overflow-hidden border border-[rgba(116,172,223,0.15)] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
-        {/* Background image (clean stadium backdrop, no text overlap) */}
+        {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/LigaStatsGame/img/mundial_banner.jpg')" }}
@@ -250,23 +263,30 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
               </div>
             </div>
 
-            {/* Custom styled FUT-like badge instead of raw emoji */}
-            <div 
-              className="w-12 h-12 rounded-xl flex items-center justify-center font-sport text-xs font-bold mb-4 border transition-all duration-300"
-              style={{
-                background: hovered ? mode.accent : 'rgba(116, 172, 223, 0.05)',
-                color: hovered ? '#020813' : mode.accent,
-                borderColor: hovered ? mode.accent : 'rgba(116, 172, 223, 0.15)',
-                boxShadow: hovered ? `0 0 15px ${mode.glow}` : 'none'
-              }}
-            >
-              {mode.initials}
+            {/* Custom styled FUT-like badge with LPF integration */}
+            <div className="flex items-center justify-between mb-4">
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center font-sport text-xs font-bold border transition-all duration-300"
+                style={{
+                  background: hovered ? mode.accent : 'rgba(116, 172, 223, 0.05)',
+                  color: hovered ? '#020813' : mode.accent,
+                  borderColor: hovered ? mode.accent : 'rgba(116, 172, 223, 0.15)',
+                  boxShadow: hovered ? `0 0 15px ${mode.glow}` : 'none'
+                }}
+              >
+                {mode.initials}
+              </div>
+              {mode.id === 'liga' && (
+                <div className="relative w-7 h-10 shrink-0">
+                  <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
+                </div>
+              )}
             </div>
 
             <h4 className="font-display text-lg font-bold text-white mb-2 tracking-tight group-hover:text-white transition-colors">
               {mode.name}
             </h4>
-            <p className="text-slate-400 text-xs flex-1 leading-relaxed group-hover:text-slate-300 transition-colors">
+            <p className="text-slate-400 text-xs flex-1 leading-relaxed group-hover:text-slate-300 transition-colors font-sans">
               {mode.desc}
             </p>
 
@@ -325,7 +345,10 @@ function HeroSection() {
           <Link href="/draft?mode=clasico" className="btn-primary px-8 py-4">
             Jugar Ahora
           </Link>
-          <Link href="/draft?mode=liga" className="btn-secondary px-8 py-4">
+          <Link href="/draft?mode=liga" className="btn-secondary px-8 py-4 flex items-center gap-2">
+            <span className="relative w-4 h-5 inline-block shrink-0">
+              <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
+            </span>
             Liga Argentina
           </Link>
         </div>
@@ -340,7 +363,7 @@ function HeroSection() {
           {[
             { val: clubs.length, label: 'Clubes oficiales' },
             { val: squads.length, label: 'Planteles limpios' },
-            { val: 4, label: 'Formatos de juego' },
+            { val: 5, label: 'Formatos de juego' },
             { val: 11, label: 'Titulares en cancha' },
           ].map((s, i) => (
             <motion.div
@@ -464,7 +487,7 @@ function HowToPlay() {
     <section className="relative z-10 max-w-6xl mx-auto px-4 pb-20">
       <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-10">
         <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2 uppercase tracking-tight">Cómo <span className="gradient-text">Jugar</span></h3>
-        <p className="text-slate-400 text-xs max-w-md mx-auto">4 pasos y sos el DT más capo de la liga</p>
+        <p className="text-slate-400 text-xs max-w-md mx-auto font-sans">4 pasos y sos el DT más capo de la liga</p>
       </motion.div>
       <motion.div
         variants={container} initial="hidden" whileInView="visible" viewport={{ once: true }}
@@ -482,6 +505,48 @@ function HowToPlay() {
             )}
           </motion.div>
         ))}
+      </motion.div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SUPPORT THE PROJECT (donation box)
+   ═══════════════════════════════════════════════════════════════ */
+function DonationSection() {
+  return (
+    <section className="relative z-10 max-w-4xl mx-auto px-4 pb-20">
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="card-gradient rounded-2xl p-6 sm:p-8 border border-slate-900 text-center relative overflow-hidden"
+      >
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500/30 via-yellow-450/40 to-amber-500/30 animate-pulse" />
+        <span className="text-[10px] font-bold text-[#FFD700] uppercase tracking-widest font-sport block mb-2.5">
+          PROYECTO DE HINCHAS PARA HINCHAS ⭐️
+        </span>
+        <h3 className="font-display text-xl sm:text-2xl font-black text-white mb-3 uppercase tracking-tight">
+          ¡APOYÁ ESTE PROYECTO PARA SEGUIR CRECIENDO!
+        </h3>
+        <p className="text-slate-400 text-xs sm:text-sm mb-8 max-w-xl mx-auto font-sans leading-relaxed">
+          Este es un desarrollo independiente y 100% libre de publicidad, hecho a pulmón por pura pasión futbolera. Tu colaboración nos ayuda un montón a costear los servidores, seguir recopilando plantillas históricas y programar funciones tácticas más avanzadas. ¡Ayudanos a hacer el simulador definitivo del fútbol argentino!
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 font-sport">
+          <button 
+            onClick={() => alert("¡Muchas gracias por tu intención de colaborar! Muy pronto habilitaremos la integración oficial con Cafecito y Mercado Pago.")}
+            className="btn-gold px-8 py-3.5 text-xs font-bold tracking-widest uppercase rounded-xl shadow-[0_4px_25px_rgba(212,175,55,0.25)] hover:scale-105 transition-transform"
+          >
+            Invitame un Cafecito ☕
+          </button>
+          <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">o</span>
+          <button 
+            onClick={() => alert("¡Muchas gracias por tu intención de colaborar! Muy pronto habilitaremos la integración oficial con Stripe para donaciones internacionales.")}
+            className="px-6 py-3.5 bg-slate-950 border border-slate-800 rounded-xl hover:border-slate-700 text-xs font-bold tracking-widest uppercase transition-colors"
+          >
+            Donar con Stripe 💳
+          </button>
+        </div>
       </motion.div>
     </section>
   )
@@ -507,7 +572,7 @@ function CTASection() {
           <p className="text-slate-400 text-xs sm:text-sm mb-10 max-w-sm mx-auto font-sans leading-relaxed">
             Elegí un formato y empezá a crear el mejor equipo de la historia del fútbol local
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 font-sport">
             <Link href="/draft?mode=clasico" className="btn-primary px-8 py-4">
               Draft Clásico
             </Link>
@@ -548,14 +613,14 @@ export default function HomePage() {
           <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2 uppercase tracking-tight">
             Modos de <span className="gradient-text">Juego</span>
           </h3>
-          <p className="text-slate-400 text-xs max-w-md mx-auto">
+          <p className="text-slate-400 text-xs max-w-md mx-auto font-sans">
             Seleccioná tu formato y demostrá tus conocimientos tácticos
           </p>
         </motion.div>
 
         <motion.div
           variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4"
         >
           {MODES.map((mode, i) => (
             <ModeCard key={mode.id} mode={mode} index={i} />
@@ -600,6 +665,9 @@ export default function HomePage() {
 
       {/* ── CLUB GRID ── */}
       <ClubGrid />
+
+      {/* ── DONATION BOX ── */}
+      <DonationSection />
 
       {/* ── CTA ── */}
       <CTASection />

@@ -209,7 +209,7 @@ function styleModifier(mode: GameModeConfig['id'], strength: TeamStrength): Team
   return strength;
 }
 
-function teamToStrength(team: Player[], formation: FormationConfig, mode: GameModeConfig['id'] = 'clasico'): TeamStrength {
+export function teamToStrength(team: Player[], formation: FormationConfig, mode: GameModeConfig['id'] = 'clasico'): TeamStrength {
   const slots: (Player | null)[] = new Array(formation.positions.length).fill(null);
   team.slice(0, formation.positions.length).forEach((player, index) => {
     slots[index] = player;
@@ -310,7 +310,7 @@ function sortTable(teams: LigaTeam[]) {
   return teams.sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf);
 }
 
-function simulateMatchGoals(home: TeamStrength, away: TeamStrength): { homeGoals: number; awayGoals: number } {
+export function simulateMatchGoals(home: TeamStrength, away: TeamStrength): { homeGoals: number; awayGoals: number } {
   const homeAttack = home.attack * 0.55 + home.midfield * 0.25 + home.chemistry * 0.12 + home.overall * 0.08;
   const awayAttack = away.attack * 0.55 + away.midfield * 0.25 + away.chemistry * 0.12 + away.overall * 0.08;
   const homeDefense = home.defense * 0.55 + home.goalkeeper * 0.3 + home.chemistry * 0.15;
@@ -542,7 +542,7 @@ export function simulateSeasonWithStats(
   const playerStrength = teamToStrength(playerTeam, formation, 'liga');
   const opponents = allSquads
     .filter(s => s.id !== squad.id && s.playerIds.length >= 11)
-    .sort(() => Math.random() - 0.5).slice(0, 13); // 14 teams in zone
+    .sort(() => Math.random() - 0.5).slice(0, 13); // 14 teams total
   const allNames = [squad.label, ...opponents.map(o => o.label)];
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;
@@ -555,23 +555,38 @@ export function simulateSeasonWithStats(
 
   interface LigaTeam { name: string; pts: number; gf: number; ga: number; w: number; d: number; l: number; form: string[] }
   const teams: LigaTeam[] = allNames.map(n => ({ name: n, pts: 0, gf: 0, ga: 0, w: 0, d: 0, l: 0, form: [] }));
-  const schedule: import('./types').ScheduleMatch[] = [];
 
   const playerStats = initPlayerStats(playerTeam);
   const statsMap: Record<string, TournamentPlayerStats> = {};
   playerStats.forEach(ps => { statsMap[ps.playerId] = ps; });
   const chronicles: MatchChronicle[] = [];
+  const rounds: import('./types').RoundMatch[] = [];
 
-  for (let i = 0; i < teams.length; i++) {
-    for (let j = i + 1; j < teams.length; j++) {
-      const home = teams[i], away = teams[j];
-      const hs = strengthByTeam[home.name] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 50, overall: 55 };
-      const as_ = strengthByTeam[away.name] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 50, overall: 55 };
+  // Berger Round-Robin Scheduling
+  const numTeams = allNames.length;
+  const numRounds = numTeams - 1;
+  const matchesPerRound = numTeams / 2;
+
+  for (let r = 0; r < numRounds; r++) {
+    const roundMatches: import('./types').ScheduleMatch[] = [];
+    for (let i = 0; i < matchesPerRound; i++) {
+      const homeIdx = (r + i) % (numTeams - 1);
+      let awayIdx = (numTeams - 1 - i + r) % (numTeams - 1);
+      if (i === 0) awayIdx = numTeams - 1;
+
+      const homeName = allNames[homeIdx];
+      const awayName = allNames[awayIdx];
+
+      // Alternar localía
+      const h = (r + i) % 2 === 0 ? homeName : awayName;
+      const a = (r + i) % 2 === 0 ? awayName : homeName;
+
+      const hs = strengthByTeam[h] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 50, overall: 55 };
+      const as_ = strengthByTeam[a] || { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 50, overall: 55 };
       const { homeGoals: hg, awayGoals: ag } = simulateMatchGoals(hs, as_);
-      const isPlayerHome = home.name === squad.label;
-      const isPlayerAway = away.name === squad.label;
+      const isPlayerHome = h === squad.label;
+      const isPlayerAway = a === squad.label;
 
-      // Partido del usuario: distribuir goles, generar crónica y aplicar tarjetas
       if (isPlayerHome || isPlayerAway) {
         const myGoals = isPlayerHome ? hg : ag;
         const oppGoals = isPlayerHome ? ag : hg;
@@ -579,11 +594,12 @@ export function simulateSeasonWithStats(
           ? distributeGoalsAmongPlayers(playerTeam, myGoals, formation)
           : { goals: {}, assists: {} };
         const { chronicle, discipline } = buildMatchChronicle({
-          opponent: isPlayerHome ? away.name : home.name,
+          opponent: isPlayerHome ? a : h,
           isHome: isPlayerHome,
           myGoals, oppGoals,
           goalsByPlayer: goals, assistsByPlayer: assists,
           team: playerTeam,
+          roundLabel: `Fecha ${r + 1}`,
         });
         chronicles.push(chronicle);
         playerTeam.forEach(p => {
@@ -597,13 +613,19 @@ export function simulateSeasonWithStats(
         });
       }
 
-      home.gf += hg; home.ga += ag; away.gf += ag; away.ga += hg;
-      if (hg > ag) { home.pts += 3; home.w++; away.l++; home.form.push('V'); away.form.push('D'); }
-      else if (hg < ag) { away.pts += 3; away.w++; home.l++; home.form.push('D'); away.form.push('V'); }
-      else { home.pts++; away.pts++; home.d++; away.d++; home.form.push('E'); away.form.push('E'); }
-      if (home.form.length > 5) { home.form.shift(); away.form.shift(); }
-      schedule.push({ home: home.name, away: away.name, homeGoals: hg, awayGoals: ag, isPlayerHome });
+      // Update league table teams data
+      const homeTeam = teams.find(t => t.name === h)!;
+      const awayTeam = teams.find(t => t.name === a)!;
+      homeTeam.gf += hg; homeTeam.ga += ag; awayTeam.gf += ag; awayTeam.ga += hg;
+      if (hg > ag) { homeTeam.pts += 3; homeTeam.w++; awayTeam.l++; homeTeam.form.push('V'); awayTeam.form.push('D'); }
+      else if (hg < ag) { awayTeam.pts += 3; awayTeam.w++; homeTeam.l++; homeTeam.form.push('D'); awayTeam.form.push('V'); }
+      else { homeTeam.pts++; awayTeam.pts++; homeTeam.d++; awayTeam.d++; homeTeam.form.push('E'); awayTeam.form.push('E'); }
+      if (homeTeam.form.length > 5) homeTeam.form.shift();
+      if (awayTeam.form.length > 5) awayTeam.form.shift();
+
+      roundMatches.push({ home: h, away: a, homeGoals: hg, awayGoals: ag, isPlayerHome });
     }
+    rounds.push({ round: `Fecha ${r + 1}`, matches: roundMatches });
   }
 
   const sorted = [...teams].sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf);
@@ -612,6 +634,7 @@ export function simulateSeasonWithStats(
   const finalStats = Object.values(statsMap);
   const topScorers = [...finalStats].sort((a, b) => b.goals - a.goals || b.assists - a.assists);
   const topAssisters = [...finalStats].sort((a, b) => b.assists - a.assists || b.goals - a.goals);
+  const schedule = rounds.flatMap(r => r.matches);
 
   return {
     type: 'liga',
@@ -623,6 +646,7 @@ export function simulateSeasonWithStats(
     topScorers,
     topAssisters,
     schedule,
+    rounds,
     teamLabel: squad.label,
     formation: formation.id,
     teamScore,

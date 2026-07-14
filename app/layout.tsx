@@ -1,18 +1,12 @@
 import type { Metadata, Viewport } from 'next'
-import { Outfit, Syncopate, Plus_Jakarta_Sans } from 'next/font/google'
+import { Outfit, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 
 const outfit = Outfit({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '900'],
+  weight: ['400', '500', '600', '700', '900'],
   variable: '--font-display',
-})
-
-const syncopate = Syncopate({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-sport',
 })
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -40,7 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${outfit.variable} ${syncopate.variable} ${plusJakarta.variable}`}>
+    <html lang="es" className={`${outfit.variable} ${plusJakarta.variable}`}>
       <head>
         <link rel="icon" href="/LigaStatsGame/logos/afa.png" />
       </head>

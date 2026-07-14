@@ -9,6 +9,7 @@ import Image from 'next/image'
 const NAV_ITEMS = [
   { href: '/', label: 'INICIO', match: '/' },
   { href: '/draft?mode=clasico', match: '/draft', label: 'DRAFT' },
+  { href: '/versus', label: 'VERSUS' },
   { href: '/ruleta', label: 'RULETA' },
   { href: '/records', label: 'RECORDS' },
   { href: '/daily', label: 'RETO DIARIO' },

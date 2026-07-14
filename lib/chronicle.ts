@@ -24,6 +24,8 @@ export interface MatchChronicle {
   penalties?: string;
   roundLabel?: string;
   events: MatchEvent[];
+  myGoalsByPlayer?: Record<string, number>;
+  myAssistsByPlayer?: Record<string, number>;
 }
 
 /** Tarjetas decididas por el builder: única fuente de verdad para stats y relato */
@@ -262,7 +264,17 @@ export function buildMatchChronicle(
   });
 
   return {
-    chronicle: { opponent, isHome, myGoals, oppGoals, penalties, roundLabel, events },
+    chronicle: {
+      opponent,
+      isHome,
+      myGoals,
+      oppGoals,
+      penalties,
+      roundLabel,
+      events,
+      myGoalsByPlayer: goalsByPlayer as Record<string, number>,
+      myAssistsByPlayer: assistsByPlayer as Record<string, number>
+    },
     discipline: { yellows, reds },
   };
 }
