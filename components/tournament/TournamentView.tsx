@@ -406,6 +406,29 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                       : `El campeón fue ${result.champion}. ¡Mejor suerte en el próximo draft! 💪`}
                   </p>
                 )}
+
+                {/* Division Outcome Banners for Liga */}
+                {result.type === "liga" && result.playerPos === 14 && (
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 text-xs font-semibold leading-relaxed text-center shadow-[0_0_12px_rgba(239,68,68,0.1)] animate-pulse">
+                    🚨 ¡LO SENTIMOS! Tu equipo quedó último en la tabla y desciende de categoría. ¡A levantar cabeza y buscar el ascenso en el próximo draft! 🚨
+                  </div>
+                )}
+                {result.type === "liga" && result.playerPos && result.playerPos <= 3 && !isChamp && (
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-200 text-xs font-semibold leading-relaxed text-center">
+                    🔵 ¡CLASIFICADO A LA COPA LIBERTADORES! Tu once ideal jugará el torneo continental más prestigioso. ¡Gran campaña! 🔵
+                  </div>
+                )}
+                {result.type === "liga" && result.playerPos && result.playerPos >= 4 && result.playerPos <= 6 && (
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-200 text-xs font-semibold leading-relaxed text-center">
+                    🟢 ¡CLASIFICADO A LA COPA SUDAMERICANA! Aseguraste competencia continental para la próxima temporada. ¡Muy buen torneo! 🟢
+                  </div>
+                )}
+                {result.type === "liga" && result.playerPos && result.playerPos >= 7 && result.playerPos <= 13 && (
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-slate-700 bg-slate-800/20 text-slate-300 text-xs font-semibold leading-relaxed text-center font-sans">
+                    ⚪ ¡CUMPLISTE EL OBJETIVO! Aseguraste la permanencia en la Primera División de la Liga Profesional de Fútbol. ⚪
+                  </div>
+                )}
+
                 <div className="flex items-center justify-center gap-3.5 text-[10px] font-bold uppercase tracking-wider font-sport text-slate-500 flex-wrap">
                   <span>{result.teamLabel}</span>
                   <span>·</span>
@@ -465,7 +488,19 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                           const isMe = t.name === result.teamLabel
                           return (
                             <tr key={idx} className={`border-b border-slate-900/60 ${isMe ? "bg-[#74ACDF]/10 font-semibold" : ""}`}>
-                              <td className="py-2 text-slate-400">{idx + 1}</td>
+                              <td className="py-2 pr-1">
+                                <span className={`inline-flex w-5 h-5 items-center justify-center rounded-full text-[9px] font-black font-sport ${
+                                  idx < 3
+                                    ? "bg-blue-600/20 text-blue-400 border border-blue-500/35"
+                                    : idx < 6
+                                    ? "bg-emerald-600/20 text-emerald-400 border border-emerald-500/35"
+                                    : idx === 13
+                                    ? "bg-red-600/20 text-red-400 border border-red-500/35 animate-pulse"
+                                    : "bg-slate-950/60 text-slate-500 border border-slate-900"
+                                }`}>
+                                  {idx + 1}
+                                </span>
+                              </td>
                               <td className="py-2 text-white truncate max-w-[130px]">
                                 {isMe ? <span className="text-[#74ACDF]">▶ {t.name}</span> : t.name}
                               </td>
@@ -486,6 +521,12 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                         })}
                       </tbody>
                     </table>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-slate-900/60 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[9px] font-bold font-sport uppercase tracking-wider text-slate-500">
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-600/30 border border-blue-500/40" /> 1-3: Libertadores</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600/30 border border-emerald-500/40" /> 4-6: Sudamericana</span>
+                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-650/30 border border-red-500/40" /> 14: Descenso</span>
                   </div>
                 </div>
               )}
