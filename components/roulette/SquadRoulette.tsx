@@ -70,14 +70,14 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
 
   return (
     <div className="relative mx-auto w-64" style={{ perspective: 900 }}>
-      <div className="relative h-64 w-64 overflow-hidden rounded-full border-4 border-slate-600 bg-slate-950 shadow-[0_0_0_8px_rgba(117,170,219,0.08),0_0_50px_rgba(249,115,22,0.18)]"
+      <div className="relative h-64 w-64 overflow-hidden rounded-full border border-white/5 wheel-shell shadow-[0_0_0_8px_rgba(116,172,223,0.08)]"
         style={{ transform: reducedMotion ? undefined : "rotateX(12deg)" }}>
-        <div className="absolute -inset-8 rounded-full bg-orange-500/15 blur-2xl" />
+        <div className="absolute -inset-10 rounded-full bg-gradient-to-br from-[#74ACDF]/16 via-transparent to-[#D4AF37]/12 blur-3xl" />
         {/* Puntero con nudge mientras gira */}
         <motion.div
           animate={{ rotate: spinning && !reducedMotion ? [0, -12, 0] : 0 }}
           transition={{ repeat: spinning ? Infinity : 0, duration: 0.22 }}
-          className="absolute -top-1 left-1/2 z-30 h-0 w-0 -translate-x-1/2 border-l-[12px] border-r-[12px] border-t-[20px] border-l-transparent border-r-transparent border-t-white drop-shadow-[0_0_10px_rgba(255,255,255,0.85)]"
+          className="absolute -top-1 left-1/2 z-30 h-0 w-0 -translate-x-1/2 border-l-[12px] border-r-[12px] border-t-[20px] border-l-transparent border-r-transparent border-t-[#D4AF37] drop-shadow-[0_0_16px_rgba(212,175,55,0.75)]"
           style={{ originY: 0 }} />
         <motion.div
           animate={{
@@ -91,7 +91,7 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
             scale: { duration: 0.35, repeat: spinning ? Infinity : 0 },
           }}
           onAnimationComplete={() => { if (spinning) fireComplete() }}
-          className="absolute inset-0 z-10">
+          className="absolute inset-0 z-10 rounded-full overflow-hidden">
           <svg viewBox="0 0 100 100" className="h-full w-full">
             {visible.map((sq, idx) => {
               const s = idx * segAngle, e = (idx + 1) * segAngle
@@ -112,7 +112,7 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
                 </g>
               )
             })}
-            <circle cx="50" cy="50" r="10" fill="#020617" stroke="#f97316" strokeWidth="0.8" />
+            <circle cx="50" cy="50" r="10" fill="#020617" stroke="#D4AF37" strokeWidth="0.8" />
             <text x="50" y="51.5" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="6">⚽</text>
           </svg>
           {/* Brillo radial para dar volumen al disco */}

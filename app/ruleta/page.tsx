@@ -98,17 +98,18 @@ export default function RuletaPage() {
   }
 
   const resultClub = result ? getClubInfo(result) : undefined
+  const isLegend = (result?.rating || 0) >= 89
 
   return (
     <div className="min-h-screen gradient-bg">
       <header className="pt-12 pb-6 px-4 text-center">
         <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-orange-300">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-[#74ACDF]">
             Scouting argentino
           </p>
 
           <h1 className="font-display text-5xl md:text-7xl font-black tracking-tight">
-            🎰 <span className="bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">Ruleta del Fútbol</span>
+            🎰 <span className="bg-gradient-to-r from-[#74ACDF] via-white to-[#D4AF37] bg-clip-text text-transparent">Ruleta del Fútbol</span>
           </h1>
 
           <p className="mt-3 text-lg text-slate-400 max-w-2xl mx-auto">
@@ -129,12 +130,12 @@ export default function RuletaPage() {
           </div>
 
           <div className="relative h-72 w-72 md:h-96 md:w-96">
-            <div className="absolute -inset-6 rounded-full bg-gradient-to-br from-orange-500/20 via-rose-500/10 to-[#75AADB]/10 blur-2xl" />
-            <div className="absolute -inset-2 rounded-full border border-orange-300/20" />
-            <div className="absolute inset-0 rounded-full bg-slate-950/50 shadow-2xl shadow-orange-500/20" />
+            <div className="absolute -inset-8 rounded-full bg-gradient-to-br from-[#74ACDF]/20 via-[#74ACDF]/8 to-[#D4AF37]/14 blur-3xl" />
+            <div className="absolute -inset-2 rounded-full border border-white/10" />
+            <div className="absolute inset-0 rounded-full wheel-shell" />
 
             <motion.div
-              className="relative z-10 h-full w-full overflow-hidden rounded-full border-[10px] border-slate-800 bg-slate-900 shadow-inner"
+              className="relative z-10 h-full w-full overflow-hidden rounded-full border-[10px] border-white/5 bg-slate-900 shadow-inner"
               animate={{
                 rotate: rotation,
                 scale: spinning ? [1, 1.025, 1] : 1,
@@ -192,7 +193,7 @@ export default function RuletaPage() {
             </motion.div>
 
             <motion.div
-              className="absolute left-1/2 top-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-slate-950/70 text-3xl"
+              className="absolute left-1/2 top-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-slate-950/70 text-3xl shadow-[0_0_24px_rgba(116,172,223,0.16)]"
               animate={spinning ? { rotate: [0, -8, 8, -4, 4, 0] } : { rotate: 0 }}
               transition={{ duration: 0.35, repeat: spinning ? Infinity : 0 }}
             >
@@ -215,7 +216,7 @@ export default function RuletaPage() {
             whileTap={{ scale: spinning ? 1 : 0.95 }}
             onClick={spin}
             disabled={spinning || wheelPlayers.length === 0}
-            className={`mt-8 rounded-2xl px-10 py-5 text-xl font-bold shadow-2xl transition-all ${
+            className={`mt-8 rounded-2xl px-10 py-5 text-xl font-bold uppercase tracking-[0.35em] shadow-2xl transition-all ${
               spinning
                 ? 'cursor-not-allowed bg-gradient-to-r from-rose-600 to-orange-600 text-white opacity-50'
                 : 'bg-gradient-to-r from-rose-600 to-orange-600 text-white shadow-rose-500/30 hover:shadow-rose-500/50'
@@ -238,7 +239,20 @@ export default function RuletaPage() {
               transition={{ type: 'spring', stiffness: 200, damping: 15 }}
               className="mx-auto max-w-md"
             >
-              <div className="card-gradient rounded-2xl border border-orange-400/20 p-8 shadow-2xl">
+              <div className={`card-glass rounded-3xl border p-8 shadow-2xl ${isLegend ? 'border-[#D4AF37]/30 shadow-[0_0_60px_rgba(212,175,55,0.22)]' : 'border-white/5'}`}>
+                {isLegend && (
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
+                    {Array.from({ length: 14 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="absolute animate-pulse text-[#D4AF37]"
+                        style={{ left: `${8 + (i * 6) % 84}%`, top: `${10 + (i * 11) % 76}%`, opacity: 0.45 + (i % 3) * 0.1 }}
+                      >
+                        ✦
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <div className="mb-6 text-center">
                   <div className="mb-2 text-sm text-slate-400">🎉 ¡Leyenda sorteada!</div>
 
@@ -282,34 +296,34 @@ export default function RuletaPage() {
                 )}
 
                 <div className="mb-6 grid grid-cols-3 gap-4">
-                  <div className="rounded-xl bg-slate-800/50 p-3 text-center">
+                  <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-yellow-400">{result.rating}</div>
                     <div className="text-xs text-slate-400">Rating</div>
                   </div>
-                  <div className="rounded-xl bg-slate-800/50 p-3 text-center">
+                  <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-green-400">{result.goalsClub}</div>
                     <div className="text-xs text-slate-400">Goles Club</div>
                   </div>
-                  <div className="rounded-xl bg-slate-800/50 p-3 text-center">
+                  <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-blue-400">{result.capsClub}</div>
                     <div className="text-xs text-slate-400">Partidos</div>
                   </div>
-                  <div className="rounded-xl bg-slate-800/50 p-3 text-center">
+                  <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-purple-400">{result.goalsNationalTeam}</div>
                     <div className="text-xs text-slate-400">Goles Selección</div>
                   </div>
-                  <div className="rounded-xl bg-slate-800/50 p-3 text-center">
+                  <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-cyan-400">{result.capsNationalTeam}</div>
                     <div className="text-xs text-slate-400">Partidos Selección</div>
                   </div>
-                  <div className="rounded-xl bg-slate-800/50 p-3 text-center">
+                  <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-orange-400">{result.assistsClub}</div>
                     <div className="text-xs text-slate-400">Asistencias</div>
                   </div>
                 </div>
 
                 {result.clubs && result.clubs.length > 0 && (
-                  <div className="mb-4 rounded-xl bg-slate-800/30 p-4">
+                  <div className="mb-4 rounded-2xl bg-white/5 border border-white/5 p-4 backdrop-blur-md">
                     <div className="mb-2 text-sm text-slate-400">⚽ Clubes</div>
                     {result.clubs.map((club, i) => (
                       <div key={i} className="flex justify-between text-sm">
@@ -321,7 +335,7 @@ export default function RuletaPage() {
                 )}
 
                 {result.trophies && result.trophies.length > 0 && (
-                  <div className="rounded-xl bg-slate-800/30 p-4">
+                  <div className="rounded-2xl bg-white/5 border border-white/5 p-4 backdrop-blur-md">
                     <div className="mb-2 text-sm text-slate-400">🏆 Títulos</div>
                     <div className="flex flex-wrap gap-2">
                       {result.trophies.slice(0, 6).map((t, i) => (
@@ -380,7 +394,7 @@ export default function RuletaPage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="rounded-xl bg-slate-700 px-8 py-4 text-lg font-bold transition-all hover:bg-slate-600"
+              className="btn-secondary px-8 py-4 text-lg"
             >
               🏠 Volver al Inicio
             </motion.button>

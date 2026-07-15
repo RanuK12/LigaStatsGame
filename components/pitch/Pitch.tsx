@@ -19,7 +19,8 @@ export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemis
   const links = (chemistry?.links || []).filter(l => draft[l.aIndex] && draft[l.bIndex])
 
   return (
-    <div className="pitch w-full max-w-[360px] aspect-[68/105] mx-auto relative">
+    <div className="pitch w-full max-w-[360px] aspect-[68/105] mx-auto relative shadow-[0_24px_70px_rgba(0,0,0,0.45)]">
+      <div className="pointer-events-none absolute inset-0 rounded-[inherit] bg-[radial-gradient(circle_at_top,rgba(116,172,223,0.10),transparent_46%)]" />
       <div className="pitch-lines" />
       <div className="pitch-center" />
       <div className="pitch-center-dot" />
@@ -66,9 +67,9 @@ export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemis
                 transition={{ repeat: Infinity, duration: 3, delay: i * 0.18, ease: "easeInOut" }}>
                 <motion.div
                   className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 shadow-lg ${strongChem ? "ring-2 ring-[#74ACDF]/50" : ""}`}
-                  style={{ backgroundColor: getPC(pos.pos), borderColor: isActive ? "#fbbf24" : "rgba(255,255,255,0.3)" }}
+                    style={{ backgroundColor: getPC(pos.pos), borderColor: isActive ? "#D4AF37" : "rgba(255,255,255,0.28)" }}
                   animate={isActive && !reducedMotion
-                    ? { scale: [1, 1.07, 1], boxShadow: ["0 0 0px rgba(251,191,36,0)", "0 0 16px rgba(251,191,36,0.7)", "0 0 0px rgba(251,191,36,0)"] }
+                      ? { scale: [1, 1.07, 1], boxShadow: ["0 0 0px rgba(212,175,55,0)", "0 0 18px rgba(212,175,55,0.72)", "0 0 0px rgba(212,175,55,0)"] }
                     : { scale: 1 }}
                   transition={{ repeat: isActive ? Infinity : 0, duration: 1.6 }}>
                   {pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()}
@@ -81,7 +82,7 @@ export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemis
             ) : (
               <div className={`flex flex-col items-center ${isActive ? "scale-110" : ""}`}>
                 <div className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold border-2 border-dashed transition-all ${
-                  isActive ? "border-yellow-400 bg-yellow-400/10 text-yellow-400 animate-pulse" : "border-slate-500 bg-slate-800/50 text-slate-500"
+                  isActive ? "border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37] animate-pulse" : "border-slate-500 bg-slate-800/50 text-slate-500"
                 }`}>
                   {POS_LABELS[pos.pos] || pos.pos}
                 </div>

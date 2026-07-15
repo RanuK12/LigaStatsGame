@@ -118,7 +118,7 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
         initial={{ scale: 0.85, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.85, y: 20 }}
-        className="w-full max-w-sm bg-slate-900 rounded-2xl border border-slate-700 p-6 shadow-2xl"
+        className="w-full max-w-sm card-glass p-6 shadow-2xl"
         onClick={e => e.stopPropagation()}>
         <h3 className="font-display font-black text-xl mb-1 text-center">¿Qué posición sorteás?</h3>
         <p className="text-slate-400 text-sm text-center mb-5">Elegí la posición para el próximo spin</p>
@@ -134,7 +134,7 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
                 <div className="flex flex-wrap gap-2">
                   {available.map(pos => (
                     <button key={pos} onClick={() => onSelect(pos)}
-                      className={`px-3 py-1.5 rounded-xl text-sm font-bold border transition-all hover:scale-105 ${
+                      className={`px-3 py-1.5 rounded-2xl text-sm font-bold border transition-all duration-300 ease-out hover:scale-[1.02] ${
                         pos === currentPos
                           ? "bg-[#75AADB] text-white border-[#75AADB] shadow-lg shadow-[#75AADB]/30"
                           : "bg-slate-800 border-slate-600 text-slate-200 hover:border-[#75AADB]/60 hover:bg-slate-700"
@@ -151,7 +151,7 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
             )
           })}
         </div>
-        <button onClick={onClose} className="w-full mt-5 py-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 text-sm transition-all">
+        <button onClick={onClose} className="w-full mt-5 py-2 rounded-2xl btn-secondary text-sm">
           Cancelar
         </button>
       </motion.div>
@@ -361,19 +361,19 @@ function DraftInner() {
           <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
           <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">Liga Argentina Fans</h1>
           <p className="text-slate-400 mb-6">{mode.icon} {mode.name}</p>
-          <div className="card-gradient rounded-2xl p-6 mb-6">
+          <div className="card-gradient rounded-3xl p-6 mb-6">
             <h3 className="font-display font-bold text-lg mb-4">Elegí tu formación</h3>
             <div className="flex gap-2 justify-center flex-wrap">
               {Object.values(formations).map((fmt: any) => (
                 <button key={fmt.id} onClick={() => setFm(fmt.id)}
-                  className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                  className={`px-4 py-2 rounded-2xl text-sm font-semibold uppercase tracking-widest transition-all duration-300 ease-out ${
                     fm === fmt.id ? "bg-[#75AADB] text-white shadow-lg shadow-[#75AADB]/20" : "bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700"
                   }`}>{fmt.name}</button>
               ))}
             </div>
             <div className="mt-4"><Pitch f={f} draft={[]} activeSlot={-1} onSlotClick={() => {}} phase="start" /></div>
           </div>
-          <div className="card-gradient rounded-2xl p-6 mb-6 text-left">
+          <div className="card-gradient rounded-3xl p-6 mb-6 text-left">
             <h3 className="font-display font-bold text-lg mb-3">Cómo Jugar</h3>
             <ol className="text-sm text-slate-400 space-y-2">
               <li>1. Elegís la <strong className="text-slate-200">posición</strong> que querés sortear</li>
@@ -461,9 +461,9 @@ function DraftInner() {
         {phase === "ready" && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             {spinNotice && (
-              <div className="card-gradient rounded-xl p-3 mb-4 text-sm text-amber-200 border border-amber-400/20">{spinNotice}</div>
+              <div className="card-gradient rounded-2xl p-3 mb-4 text-sm text-amber-200 border border-amber-400/20">{spinNotice}</div>
             )}
-            <div className="card-gradient rounded-xl p-4 mb-4 text-center">
+            <div className="card-gradient rounded-2xl p-4 mb-4 text-center">
               <div className="text-sm text-slate-400 mb-1">Posición {filledCount + 1} de {totalSlots}:</div>
               <div className="flex items-center justify-center gap-2">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
@@ -524,7 +524,7 @@ function DraftInner() {
         {/* PHASE: PICKING */}
         {phase === "picking" && currentSquad && (
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="card-gradient rounded-xl p-4 mb-4 flex items-center justify-between">
+            <div className="card-gradient rounded-2xl p-4 mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img src={`/LigaStatsGame/logos/clubs/${currentSquad.clubId}.png`} alt=""
                   className="w-12 h-12 rounded-lg object-contain"
@@ -539,13 +539,13 @@ function DraftInner() {
               </div>
               <div className="flex gap-2">
                 <button onClick={rerollTeam} disabled={wildcards <= 0}
-                  className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                  className="btn-secondary px-3 py-1.5 text-xs disabled:opacity-30 disabled:cursor-not-allowed">
                   🔄 Re-sortear ({wildcards})
                 </button>
               </div>
             </div>
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
-            <div className="card-gradient rounded-xl p-4 border border-slate-700">
+            <div className="card-gradient rounded-2xl p-4 border border-white/5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-display font-bold text-sm">
                   ⚡ Elegí{" "}
@@ -556,7 +556,7 @@ function DraftInner() {
               </div>
               <input type="text" placeholder="🔍 Buscar jugador..."
                 value={search} onChange={e => setSearch(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white placeholder-slate-500 focus:border-[#75AADB] focus:outline-none w-full mb-3" />
+                className="input-field mb-3 text-sm" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[40vh] overflow-y-auto pr-1">
                 {pickerPlayers.length === 0 && (
                   <p className="text-slate-500 text-sm text-center col-span-2 py-4">
@@ -590,7 +590,7 @@ function DraftInner() {
                 <motion.div initial={{ scale: 0 }} animate={{ scale: [0, 1.5, 1] }} transition={{ duration: 0.6 }} className="text-8xl">🎉</motion.div>
               </div>
             )}
-            <div className="card-gradient rounded-2xl p-6 mb-6">
+            <div className="card-gradient rounded-3xl p-6 mb-6">
               <h2 className="font-display text-3xl font-black gradient-text mb-2">¡11 Armado!</h2>
               <p className="text-slate-400 text-sm mb-4">Tocá cualquier posición para cambiar el jugador</p>
               <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>

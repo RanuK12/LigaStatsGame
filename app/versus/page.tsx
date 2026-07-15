@@ -434,7 +434,7 @@ export default function VersusPage() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              className="card-gradient rounded-2xl p-6 sm:p-8 border border-slate-900"
+              className="card-gradient rounded-3xl p-6 sm:p-8 border border-white/5"
             >
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sport mb-6 text-center">Configurá a los Directores Técnicos</h3>
               
@@ -451,7 +451,7 @@ export default function VersusPage() {
                       type="text"
                       value={dt1.name}
                       onChange={e => setDt1(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-900 text-sm focus:border-[#74ACDF]/40 focus:outline-none"
+                      className="input-field text-sm"
                     />
                   </div>
                   <div>
@@ -459,7 +459,7 @@ export default function VersusPage() {
                     <select
                       value={dt1.formationKey}
                       onChange={e => setDt1(prev => ({ ...prev, formationKey: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-900 text-sm focus:border-[#74ACDF]/40 focus:outline-none"
+                      className="input-field text-sm"
                     >
                       {Object.keys(formations).map(k => (
                         <option key={k} value={k}>{k}</option>
@@ -480,7 +480,7 @@ export default function VersusPage() {
                       type="text"
                       value={dt2.name}
                       onChange={e => setDt2(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-900 text-sm focus:border-[#74ACDF]/40 focus:outline-none"
+                      className="input-field text-sm"
                     />
                   </div>
                   <div>
@@ -488,7 +488,7 @@ export default function VersusPage() {
                     <select
                       value={dt2.formationKey}
                       onChange={e => setDt2(prev => ({ ...prev, formationKey: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-900 text-sm focus:border-[#74ACDF]/40 focus:outline-none"
+                      className="input-field text-sm"
                     >
                       {Object.keys(formations).map(k => (
                         <option key={k} value={k}>{k}</option>
@@ -521,7 +521,7 @@ export default function VersusPage() {
               {/* Left Column: Tactic Board & Score Card */}
               <div className="lg:col-span-7 space-y-5">
                 {/* Active DT indicator */}
-                <div className="card-gradient rounded-xl p-4 border border-slate-900 flex justify-between items-center relative overflow-hidden">
+                <div className="card-gradient rounded-2xl p-4 border border-white/5 flex justify-between items-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 bottom-0 w-[4px]" style={{ backgroundColor: activeDTKey === "dt1" ? "#74ACDF" : "#a855f7" }} />
                   <div>
                     <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport">Cancha de Selección</div>
@@ -536,7 +536,7 @@ export default function VersusPage() {
                 </div>
 
                 {/* Tactical board layout */}
-                <div className="card-gradient rounded-2xl p-5 border border-slate-900 relative overflow-hidden aspect-[4/5] sm:aspect-[4.5/5] flex flex-col justify-between select-none">
+                <div className="card-gradient rounded-3xl p-5 border border-white/5 relative overflow-hidden aspect-[4/5] sm:aspect-[4.5/5] flex flex-col justify-between select-none">
                   {/* Soccer field lines */}
                   <div className="absolute inset-0 border-[2px] border-slate-800/40 rounded-2xl m-3 pointer-events-none" />
                   <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-slate-800/30 pointer-events-none" />
@@ -623,7 +623,7 @@ export default function VersusPage() {
               <div className="lg:col-span-5 space-y-5">
                 
                 {/* 1. WHEEL CONTROL CARD */}
-                <div className="card-gradient rounded-2xl p-5 border border-slate-900 text-center relative overflow-hidden">
+                <div className="card-gradient rounded-3xl p-5 border border-white/5 text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-slate-900 via-[#74ACDF]/20 to-slate-900" />
                   <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-1">RULETA DE CLUBES</span>
                   <h4 className="font-display font-black text-xs text-[#74ACDF] uppercase tracking-wider mb-4">

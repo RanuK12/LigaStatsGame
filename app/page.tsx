@@ -135,7 +135,7 @@ function WorldCupBanner() {
       transition={{ duration: 0.7 }}
       className="relative z-10 max-w-6xl mx-auto px-4 mb-14"
     >
-      <div className="relative rounded-2xl overflow-hidden border border-[rgba(116,172,223,0.15)] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+      <div className="relative card-glass overflow-hidden">
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -218,7 +218,7 @@ function WorldCupBanner() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 + i * 0.1 }}
-                className="card-gold rounded-xl p-4 text-center border border-[#ffd700]/15"
+                className="card-gold rounded-2xl p-4 text-center border border-[#ffd700]/15"
               >
                 <div className="text-2xl font-black gradient-text-gold font-display">{s.value}</div>
                 <div className="text-[9px] text-[#D4AF37] font-bold mt-0.5 uppercase tracking-wider font-sport">{s.label}</div>
@@ -244,9 +244,9 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
       onMouseLeave={() => setHovered(false)}
       className="h-full"
     >
-      <Link href={mode.href} className="block h-full group">
-        <div
-          className="mode-card h-full flex flex-col bg-slate-950/80"
+          <Link href={mode.href} className="block h-full group">
+            <div
+              className="mode-card card-glass h-full flex flex-col"
           style={{
             border: `1px solid ${hovered ? mode.border : 'rgba(116,172,223,0.1)'}`,
             boxShadow: hovered ? `0 16px 36px ${mode.glow}` : '0 4px 16px rgba(0,0,0,0.4)',
@@ -258,7 +258,7 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
           <div className="p-6 flex flex-col flex-1">
             {/* Badge row */}
             <div className="flex items-start justify-between mb-5">
-              <div className={`text-[9px] font-bold px-2 py-0.5 rounded border tracking-widest font-sport ${mode.badgeColor}`}>
+              <div className={`text-[9px] font-bold px-2 py-0.5 rounded border tracking-widest font-sport uppercase ${mode.badgeColor}`}>
                 {mode.badge}
               </div>
             </div>
@@ -266,7 +266,7 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
             {/* Custom styled FUT-like badge with LPF integration */}
             <div className="flex items-center justify-between mb-4">
               <div 
-                className="w-12 h-12 rounded-xl flex items-center justify-center font-sport text-xs font-bold border transition-all duration-300"
+                className="w-12 h-12 rounded-2xl flex items-center justify-center font-sport text-xs font-bold border transition-all duration-300"
                 style={{
                   background: hovered ? mode.accent : 'rgba(116, 172, 223, 0.05)',
                   color: hovered ? '#020813' : mode.accent,
@@ -411,7 +411,7 @@ function ClubGrid() {
             placeholder="BUSCAR CLUB..."
             value={filter}
             onChange={e => setFilter(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-950/60 border border-slate-900 text-white text-xs tracking-wider placeholder-slate-600 focus:border-[#74ACDF]/40 focus:outline-none transition-all font-sport"
+              className="input-field pl-9 py-2.5 text-xs tracking-wider font-sport"
           />
         </div>
       </motion.div>
@@ -648,7 +648,7 @@ export default function HomePage() {
               whileHover={{ y: -4 }}
             >
               <Link href={item.href} className="group block h-full">
-                <div className={`card-gradient rounded-xl p-6 h-full transition-all duration-300 border ${item.color} hover:shadow-lg`}>
+                <div className={`card-gradient rounded-2xl p-6 h-full transition-all duration-300 border ${item.color} hover:shadow-lg`}>
                   <h4 className="font-sport text-[10px] font-bold tracking-widest text-white group-hover:text-[#74ACDF] transition-colors mb-3">
                     {item.title}
                   </h4>

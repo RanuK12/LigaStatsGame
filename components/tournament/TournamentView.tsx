@@ -11,7 +11,7 @@ import Image from "next/image"
 
 export default function TournamentView({ result, onBack, onReset, onDownloadPDF }: {
   result: TournamentResult
-  onBack: () => void
+    onBack: () => void
   onReset: () => void
   onDownloadPDF: () => void
 }) {
@@ -198,7 +198,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
   if (hasChronicle) finalTabs.push({ id: "relatos", label: "Relatos" })
 
   return (
-    <div className="min-h-screen bg-[#020813] text-white px-4 py-8">
+    <div className="min-h-screen gradient-bg arg-stripe-bg text-white px-4 py-8">
       <div className="max-w-2xl mx-auto">
         <AnimatePresence mode="wait">
           
@@ -209,7 +209,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="card-gradient rounded-2xl p-6 sm:p-10 border border-slate-900 text-center"
+              className="card-gradient rounded-3xl p-6 sm:p-10 border border-white/5 text-center"
             >
               <div className="relative w-16 h-16 mx-auto mb-6">
                 <Image src="/LigaStatsGame/logos/afa.png" alt="AFA" fill className="object-contain animate-pulse" />
@@ -220,7 +220,6 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               <p className="text-slate-400 text-xs sm:text-sm mb-10 max-w-sm mx-auto font-sans leading-relaxed">
                 Elegí cómo querés vivir el torneo de tu 11 ideal en la {result.type === "liga" ? "Liga Profesional" : "Copa Argentina"}.
               </p>
-
               <div className="flex flex-col gap-3.5 max-w-xs mx-auto font-sport">
                 <button onClick={handleStartStepSim} className="btn-primary py-4 text-xs font-bold tracking-widest uppercase">
                   Partido a Partido
@@ -245,7 +244,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               className="space-y-5"
             >
               {/* Round Header */}
-              <div className="card-gradient rounded-xl p-5 border border-slate-900 flex items-center justify-between">
+              <div className="card-gradient rounded-2xl p-5 border border-white/5 flex items-center justify-between">
                 <div>
                   <div className="text-[10px] font-bold text-[#74ACDF] tracking-widest uppercase font-sport">
                     Simulando
@@ -254,14 +253,14 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                     {activeRound.round}
                   </h3>
                 </div>
-                <button onClick={handleStartFullSim} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
+                 <button onClick={handleStartFullSim} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
                   Saltar simulación ⏩
                 </button>
               </div>
 
               {/* User Match Banner */}
               {userMatchInRound && (
-                <div className="card-gradient rounded-2xl p-6 border border-[#74ACDF]/20 shadow-[0_0_20px_rgba(116,172,223,0.06)] text-center relative overflow-hidden">
+                <div className="card-gradient rounded-3xl p-6 border border-[#74ACDF]/20 shadow-[0_0_20px_rgba(116,172,223,0.06)] text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#74ACDF]/40 to-transparent" />
                   <span className="text-[9px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport block mb-3">TU PARTIDO</span>
                   <div className="flex items-center justify-center gap-4 sm:gap-6">
@@ -276,7 +275,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               )}
 
               {/* Rest of Matches in Round */}
-              <div className="card-gradient rounded-xl p-4 border border-slate-900">
+              <div className="card-gradient rounded-2xl p-4 border border-white/5">
                 <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">OTROS CRUCES DE LA FECHA</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {activeRound.matches
@@ -296,9 +295,9 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                 <div className="card-gradient rounded-xl p-4 border border-slate-900">
                   <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">TABLA DE POSICIONES EN VIVO</h4>
                   <div className="overflow-x-auto">
-                    <table className="w-full text-xs">
+                      <table className="w-full text-xs">
                       <thead>
-                        <tr className="text-slate-600 border-b border-slate-900/60 font-bold uppercase">
+                        <tr className="text-slate-600 border-b border-white/5 font-bold uppercase">
                           <th className="py-1 text-left">#</th>
                           <th className="py-1 text-left">Equipo</th>
                           <th className="py-1 text-center">Pts</th>
@@ -309,7 +308,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                         {intermediateTable.slice(0, 6).map((t: any, idx: number) => {
                           const isMe = t.name === result.teamLabel
                           return (
-                            <tr key={idx} className={`border-b border-slate-900/40 ${isMe ? "bg-[#74ACDF]/10 font-bold" : ""}`}>
+                            <tr key={idx} className={`table-row-soft ${isMe ? "table-row-highlight font-bold" : ""}`}>
                               <td className="py-1.5 text-slate-500">{idx + 1}</td>
                               <td className="py-1.5 truncate max-w-[130px] text-white">
                                 {isMe ? <span className="text-[#74ACDF]">▶ {t.name}</span> : t.name}
@@ -593,7 +592,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
 
               {/* Copa rounds bracket (if Copa) */}
               {result.type === "copa" && result.rounds && tab === "stats" && (
-                <div className="card-gradient rounded-2xl p-4 border border-slate-900 mt-4">
+                <div className="card-gradient rounded-2xl p-4 border border-white/5 mt-4">
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">CRUCES DE LA COPA ARGENTINA</h3>
                   {result.rounds.map((round: any, ri: number) => (
                     <div key={ri} className="mb-5 last:mb-0">
@@ -602,8 +601,8 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                         {round.matches.map((m: any, mi: number) => {
                           const isMe = m.home === result.teamLabel || m.away === result.teamLabel
                           return (
-                            <div key={mi} className={`flex items-center justify-between text-xs px-3 py-2 rounded-xl border ${
-                              isMe ? "bg-[#74ACDF]/8 border-[#74ACDF]/20 shadow-[0_0_12px_rgba(116,172,223,0.04)]" : "bg-slate-950/20 border-slate-900"
+                            <div key={mi} className={`flex items-center justify-between text-xs px-3 py-2 rounded-2xl border ${
+                              isMe ? "bg-[#74ACDF]/8 border-[#74ACDF]/20 shadow-[0_0_12px_rgba(116,172,223,0.04)]" : "bg-slate-950/20 border-white/5"
                             }`}>
                               <span className={`flex-1 text-right truncate max-w-[120px] font-bold ${m.homeGoals > m.awayGoals ? "text-white" : "text-slate-500"}`}>{m.home}</span>
                               <span className="px-3.5 py-0.5 rounded-lg bg-slate-950 font-bold text-[10px] text-slate-300 font-sport">
