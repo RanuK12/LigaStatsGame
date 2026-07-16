@@ -114,7 +114,9 @@ function TickerStrip() {
       <div className="animate-ticker flex gap-16 text-[10px] font-bold tracking-widest uppercase text-[#74ACDF]/70 font-sport">
         {items.map((t, i) => (
           <span key={i} className="flex-shrink-0 flex items-center gap-2">
-            <span>⭐️</span>
+            <svg className="w-2.5 h-2.5 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
             <span>{t}</span>
           </span>
         ))}
@@ -405,13 +407,15 @@ function ClubGrid() {
         </p>
         {/* Search */}
         <div className="relative max-w-xs mx-auto">
-          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs">🔍</span>
+          <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
           <input
             type="text"
             placeholder="BUSCAR CLUB..."
             value={filter}
             onChange={e => setFilter(e.target.value)}
-              className="input-field pl-9 py-2.5 text-xs tracking-wider font-sport"
+            className="input-field pl-9 py-2.5 text-xs tracking-wider font-sport"
           />
         </div>
       </motion.div>
@@ -524,10 +528,10 @@ function DonationSection() {
       >
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500/30 via-yellow-450/40 to-amber-500/30 animate-pulse" />
         <span className="text-[10px] font-bold text-[#FFD700] uppercase tracking-widest font-sport block mb-2.5">
-          PROYECTO DE HINCHAS PARA HINCHAS ⭐️
+          PROYECTO DE HINCHAS PARA HINCHAS
         </span>
         <h3 className="font-display text-xl sm:text-2xl font-black text-white mb-3 uppercase tracking-tight">
-          ¡APOYÁ ESTE PROYECTO PARA SEGUIR CRECIENDO!
+          APOYÁ ESTE PROYECTO PARA SEGUIR CRECIENDO
         </h3>
         <p className="text-slate-400 text-xs sm:text-sm mb-8 max-w-xl mx-auto font-sans leading-relaxed">
           Este es un desarrollo independiente y 100% libre de publicidad, hecho a pulmón por pura pasión futbolera. Tu colaboración nos ayuda un montón a costear los servidores, seguir recopilando plantillas históricas y programar funciones tácticas más avanzadas. ¡Ayudanos a hacer el simulador definitivo del fútbol argentino!
@@ -537,14 +541,14 @@ function DonationSection() {
             onClick={() => alert("¡Muchas gracias por tu intención de colaborar! Muy pronto habilitaremos la integración oficial con Cafecito y Mercado Pago.")}
             className="btn-gold px-8 py-3.5 text-xs font-bold tracking-widest uppercase rounded-xl shadow-[0_4px_25px_rgba(212,175,55,0.25)] hover:scale-105 transition-transform"
           >
-            Invitame un Cafecito ☕
+            Invitame un Cafecito
           </button>
           <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">o</span>
           <button 
             onClick={() => alert("¡Muchas gracias por tu intención de colaborar! Muy pronto habilitaremos la integración oficial con Stripe para donaciones internacionales.")}
             className="px-6 py-3.5 bg-slate-950 border border-slate-800 rounded-xl hover:border-slate-700 text-xs font-bold tracking-widest uppercase transition-colors"
           >
-            Donar con Stripe 💳
+            Donar con Stripe
           </button>
         </div>
       </motion.div>

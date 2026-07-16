@@ -108,8 +108,8 @@ export default function RuletaPage() {
             Scouting argentino
           </p>
 
-          <h1 className="font-display text-5xl md:text-7xl font-black tracking-tight">
-            🎰 <span className="bg-gradient-to-r from-[#74ACDF] via-white to-[#D4AF37] bg-clip-text text-transparent">Ruleta del Fútbol</span>
+          <h1 className="font-display text-5xl md:text-7xl font-black tracking-tight uppercase">
+            <span className="bg-gradient-to-r from-[#74ACDF] via-white to-[#D4AF37] bg-clip-text text-transparent">Ruleta del Fútbol</span>
           </h1>
 
           <p className="mt-3 text-lg text-slate-400 max-w-2xl mx-auto">
@@ -126,7 +126,7 @@ export default function RuletaPage() {
           className="flex flex-col items-center"
         >
           <div className="relative z-20 mb-[-6px]">
-            <div className="h-0 w-0 border-l-[18px] border-r-[18px] border-t-[34px] border-l-transparent border-r-transparent border-t-orange-400 drop-shadow-[0_0_14px_rgba(251,146,60,0.8)]" />
+            <div className="h-0 w-0 border-l-[18px] border-r-[18px] border-t-[34px] border-l-transparent border-r-transparent border-t-[#D4AF37] drop-shadow-[0_0_14px_rgba(212,175,55,0.75)]" />
           </div>
 
           <div className="relative h-72 w-72 md:h-96 md:w-96">
@@ -159,7 +159,7 @@ export default function RuletaPage() {
                   const midRad = ((startAngle + endAngle) / 2 - 90) * Math.PI / 180
                   const textX = 50 + 31 * Math.cos(midRad)
                   const textY = 50 + 31 * Math.sin(midRad)
-                  const colors = ['#172554', '#0f766e', '#7f1d1d', '#78350f', '#312e81', '#14532d', '#881337', '#1e293b']
+                  const colors = ['#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b']
                   const textAngle = (startAngle + endAngle) / 2
                   const selected = targetIndex === i && spinning
 
@@ -167,7 +167,7 @@ export default function RuletaPage() {
                     <g key={player.id}>
                       <path
                         d={`M50,50 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`}
-                        fill={selected ? '#f97316' : colors[i % colors.length]}
+                        fill={selected ? '#74ACDF' : colors[i % colors.length]}
                         stroke="#94a3b8"
                         strokeWidth="0.25"
                       />
@@ -187,17 +187,19 @@ export default function RuletaPage() {
                   )
                 })}
 
-                <circle cx="50" cy="50" r="10" fill="#020617" stroke="#f97316" strokeWidth="0.8"/>
-                <text x="50" y="51.5" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="6">⚽</text>
+                <circle cx="50" cy="50" r="10" fill="#020617" stroke="#D4AF37" strokeWidth="0.8"/>
+                <path d="M50,46.5 L51.2,49.5 L54.5,49.5 L51.8,51.5 L52.8,54.5 L50,52.5 L47.2,54.5 L48.2,51.5 L45.5,49.5 L48.8,49.5 Z" fill="#D4AF37" />
               </svg>
             </motion.div>
 
             <motion.div
-              className="absolute left-1/2 top-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-slate-950/70 text-3xl shadow-[0_0_24px_rgba(116,172,223,0.16)]"
+              className="absolute left-1/2 top-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-slate-950/70 shadow-[0_0_24px_rgba(116,172,223,0.16)]"
               animate={spinning ? { rotate: [0, -8, 8, -4, 4, 0] } : { rotate: 0 }}
               transition={{ duration: 0.35, repeat: spinning ? Infinity : 0 }}
             >
-              ⚽
+              <svg className="w-8 h-8 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
             </motion.div>
           </div>
 
@@ -212,17 +214,17 @@ export default function RuletaPage() {
           )}
 
           <motion.button
-            whileHover={{ scale: spinning ? 1 : 1.05 }}
-            whileTap={{ scale: spinning ? 1 : 0.95 }}
+            whileHover={{ scale: spinning ? 1 : 1.02 }}
+            whileTap={{ scale: spinning ? 1 : 0.98 }}
             onClick={spin}
             disabled={spinning || wheelPlayers.length === 0}
-            className={`mt-8 rounded-2xl px-10 py-5 text-xl font-bold uppercase tracking-[0.35em] shadow-2xl transition-all ${
+            className={`mt-8 px-10 py-4.5 text-base font-bold uppercase tracking-[0.35em] rounded-2xl shadow-xl transition-all font-sport ${
               spinning
-                ? 'cursor-not-allowed bg-gradient-to-r from-rose-600 to-orange-600 text-white opacity-50'
-                : 'bg-gradient-to-r from-rose-600 to-orange-600 text-white shadow-rose-500/30 hover:shadow-rose-500/50'
+                ? 'cursor-not-allowed bg-slate-900 border border-slate-800 text-slate-500 opacity-50'
+                : 'btn-gold shadow-yellow-500/10 hover:shadow-yellow-500/20'
             }`}
           >
-            {spinning ? '⏳ Girando...' : '🎲 ¡Girar Ruleta!'}
+            {spinning ? 'GIRANDO...' : 'GIRAR RULETA'}
           </motion.button>
 
           <div className="mt-4 text-sm text-slate-500">
@@ -254,11 +256,11 @@ export default function RuletaPage() {
                   </div>
                 )}
                 <div className="mb-6 text-center">
-                  <div className="mb-2 text-sm text-slate-400">🎉 ¡Leyenda sorteada!</div>
+                  <div className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500 font-sport">LEYENDA SORTEADA</div>
 
                   <div className="flex items-center justify-center gap-3">
                     <div
-                      className="flex h-16 w-16 items-center justify-center rounded-full text-2xl font-black text-white shadow-lg"
+                      className="flex h-16 w-16 items-center justify-center rounded-full text-2xl font-black text-white shadow-lg font-sport"
                       style={{ backgroundColor: posColors[result.position] || '#666' }}
                     >
                       {result.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
@@ -285,7 +287,7 @@ export default function RuletaPage() {
                   </div>
 
                   {result.legendary && (
-                    <div className="mt-2 text-sm text-yellow-400">⭐ Jugador legendario</div>
+                    <div className="mt-2 text-xs font-bold uppercase tracking-wider text-yellow-400 font-sport">Jugador legendario</div>
                   )}
                 </div>
 
@@ -324,7 +326,7 @@ export default function RuletaPage() {
 
                 {result.clubs && result.clubs.length > 0 && (
                   <div className="mb-4 rounded-2xl bg-white/5 border border-white/5 p-4 backdrop-blur-md">
-                    <div className="mb-2 text-sm text-slate-400">⚽ Clubes</div>
+                    <div className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500 font-sport text-left">Trayectoria de Clubes</div>
                     {result.clubs.map((club, i) => (
                       <div key={i} className="flex justify-between text-sm">
                         <span className="font-semibold">{club.name}</span>
@@ -336,7 +338,7 @@ export default function RuletaPage() {
 
                 {result.trophies && result.trophies.length > 0 && (
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-4 backdrop-blur-md">
-                    <div className="mb-2 text-sm text-slate-400">🏆 Títulos</div>
+                    <div className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500 font-sport text-left">Títulos y Palmarés</div>
                     <div className="flex flex-wrap gap-2">
                       {result.trophies.slice(0, 6).map((t, i) => (
                         <span key={i} className="rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 text-xs text-yellow-300">
@@ -362,25 +364,25 @@ export default function RuletaPage() {
             animate={{ opacity: 1 }}
             className="space-y-3"
           >
-            <h2 className="text-xl font-bold">📜 Historial ({history.length})</h2>
+            <h2 className="font-display text-sm font-bold tracking-widest text-[#74ACDF] uppercase">HISTORIAL DE SORTEOS ({history.length})</h2>
 
             <div className="flex gap-3 overflow-x-auto pb-2">
               {history.map((p, i) => (
                 <div
                   key={`${p.id}-${i}`}
-                  className="w-40 flex-shrink-0 rounded-xl border border-slate-700 bg-slate-800/50 p-3"
+                  className="w-40 flex-shrink-0 rounded-xl border border-slate-900 bg-slate-950/40 p-3"
                 >
                   <div className="flex items-center gap-2">
                     <div
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white"
+                      className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white font-sport shrink-0"
                       style={{ backgroundColor: posColors[p.position] }}
                     >
                       {p.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
                     </div>
 
-                    <div>
-                      <div className="truncate text-xs font-semibold">{p.name}</div>
-                      <div className="text-xs text-slate-500">{p.rating}</div>
+                    <div className="min-w-0">
+                      <div className="truncate text-xs font-bold text-white">{p.name}</div>
+                      <div className="text-[10px] text-slate-500 font-sport">OVR: {p.rating}</div>
                     </div>
                   </div>
                 </div>
@@ -392,11 +394,11 @@ export default function RuletaPage() {
         <div className="pt-4 text-center">
           <Link href="/">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-secondary px-8 py-4 text-lg"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn-secondary px-8 py-4 text-xs font-sport"
             >
-              🏠 Volver al Inicio
+              VOLVER AL INICIO
             </motion.button>
           </Link>
         </div>

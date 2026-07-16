@@ -431,18 +431,29 @@ function DraftInner() {
       {/* Header */}
       <header className="pt-6 pb-4 px-4 text-center">
         <div className="flex items-center justify-center gap-2 mb-1">
-          <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-6 h-6" />
-          <span className="text-xs font-medium text-slate-500">{mode.icon} {mode.name}</span>
+          <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-5 h-5" />
+          <span className="text-[10px] font-bold text-slate-500 tracking-widest font-sport uppercase">{mode.name}</span>
         </div>
-        <h1 className="font-display text-2xl md:text-3xl font-black gradient-text">Armá tu 11</h1>
-        <div className="flex items-center justify-center gap-4 mt-2 text-sm flex-wrap">
-          <span className="text-slate-400">
-            Posición: <strong className="text-white">{POS_LABELS[currentPos.pos] || currentPos.pos}</strong>
+        <h1 className="font-display text-2xl md:text-3xl font-black gradient-text uppercase tracking-wider">Armá tu 11</h1>
+        <div className="flex items-center justify-center gap-4 mt-2 text-xs flex-wrap font-sport uppercase tracking-widest text-slate-400">
+          <span>
+            Posición: <strong className="text-white font-bold">{POS_LABELS[currentPos.pos] || currentPos.pos}</strong>
             <span className="text-slate-500 ml-1">({activeSlotIdx + 1}/{totalSlots})</span>
           </span>
-          <span className="text-slate-400">Equipo: <strong className="text-[#75AADB]">{filledCount}/11</strong></span>
-          {teamScore > 0 && <span className="text-[#75AADB] font-bold">⭐ {teamScore} pts</span>}
-          {wildcards > 0 && <span className="text-yellow-400">💎 {wildcards}</span>}
+          <span>·</span>
+          <span>Equipo: <strong className="text-[#75AADB] font-bold">{filledCount}/11</strong></span>
+          {teamScore > 0 && (
+            <>
+              <span>·</span>
+              <span className="text-[#75AADB] font-bold">OVR: {teamScore}</span>
+            </>
+          )}
+          {wildcards > 0 && (
+            <>
+              <span>·</span>
+              <span className="text-yellow-400 font-bold">COMODINES: {wildcards}</span>
+            </>
+          )}
         </div>
         {/* Pity indicator */}
         <div className="flex justify-center mt-2">
@@ -496,17 +507,17 @@ function DraftInner() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 px-4 py-2 bg-yellow-500/20 border border-yellow-400/40 rounded-xl text-yellow-300 text-sm font-bold shadow-[0_0_20px_rgba(251,191,36,0.3)]">
-                ✨ ¡LA CÁBALA (ANTI-MUFA) ACTIVADA! Buscando un plantel de élite...
+                className="mb-4 px-4 py-2 bg-yellow-500/20 border border-yellow-400/40 rounded-xl text-yellow-300 text-xs font-bold tracking-wider uppercase font-sport shadow-[0_0_20px_rgba(251,191,36,0.15)]">
+                LA CÁBALA ACTIVADA - GENERANDO JUGADORES DE ÉLITE
               </motion.div>
             )}
-            <p className="text-slate-400 mb-4 text-sm">🎰 Girando para{" "}
+            <p className="text-slate-400 mb-4 text-xs font-bold uppercase tracking-widest font-sport">SORTEANDO PLANTEL COMPATIBLE PARA{" "}
               <strong style={{ color: getPC(currentPos.pos) }}>{POS_LABELS[currentPos.pos]}</strong>
               {" "}({filledCount + 1}/{totalSlots})
             </p>
             <SquadRoulette squads={eligibleSquads} spinning={true} result={currentSquad}
               onSpinComplete={() => { setSpinning(false); setPhase("reveal"); setSearch("") }} />
-            <p className="mt-4 text-sm text-slate-500">Buscando el plantel perfecto para tu equipo...</p>
+            <p className="mt-4 text-xs text-slate-500 font-bold uppercase tracking-wider font-sport">Buscando el plantel perfecto para tu equipo...</p>
           </motion.div>
         )}
 

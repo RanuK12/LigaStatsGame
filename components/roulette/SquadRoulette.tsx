@@ -35,7 +35,7 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
 
   const segAngle = visible.length > 0 ? 360 / visible.length : 360
   const abbrev = (label: string) => label.replace(/['']/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 4).toUpperCase()
-  const colors = ['#dc2626','#ea580c','#d97706','#65a30d','#16a34a','#0d9488','#0891b2','#0284c7','#2563eb','#4f46e5','#7c3aed','#9333ea','#c026d3','#db2777','#e11d48','#dc2626','#ea580c','#d97706']
+  const colors = ['#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b']
 
   useEffect(() => {
     if (spinning && result && visible.length > 0) {
@@ -103,7 +103,7 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
               return (
                 <g key={sq.id}>
                   <path d={`M50,50 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`}
-                    fill={spinning && result?.id === sq.id ? "#f97316" : colors[idx % colors.length]}
+                    fill={spinning && result?.id === sq.id ? "#74ACDF" : colors[idx % colors.length]}
                     stroke="#94a3b8" strokeWidth="0.25" />
                   <text x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="3.1" fontWeight="900"
                     transform={`rotate(${(s + e) / 2}, ${tx}, ${ty})`}>
@@ -113,7 +113,7 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
               )
             })}
             <circle cx="50" cy="50" r="10" fill="#020617" stroke="#D4AF37" strokeWidth="0.8" />
-            <text x="50" y="51.5" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="6">⚽</text>
+            <path d="M50,46.5 L51.2,49.5 L54.5,49.5 L51.8,51.5 L52.8,54.5 L50,52.5 L47.2,54.5 L48.2,51.5 L45.5,49.5 L48.8,49.5 Z" fill="#D4AF37" />
           </svg>
           {/* Brillo radial para dar volumen al disco */}
           <div className="pointer-events-none absolute inset-0 rounded-full"

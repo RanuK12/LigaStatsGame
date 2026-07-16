@@ -222,11 +222,15 @@ button, input, select, textarea {
 }
 
 .table-row-soft {
-  @apply border-b border-white/5 transition-colors hover:bg-[#74ACDF]/5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 300ms ease-out;
+}
+.table-row-soft:hover {
+  background-color: rgba(116, 172, 223, 0.05);
 }
 
 .table-row-highlight {
-  @apply bg-[#74ACDF]/8;
+  background-color: rgba(116, 172, 223, 0.08);
 }
 
 .wheel-shell {
