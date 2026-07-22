@@ -50566,7 +50566,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 72,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -51098,6 +51098,16 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2015"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -51110,7 +51120,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 58,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -51302,6 +51312,11 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2022"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -51314,7 +51329,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 58,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -51578,6 +51593,16 @@
         "id": "banfield",
         "name": "Banfield",
         "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -51590,7 +51615,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 65,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -52531,7 +52556,7 @@
     "name": "Agustin Obando",
     "fullName": "Agustin Obando",
     "birthDate": "",
-    "position": "LW",
+    "position": "LM",
     "positions": [
       "LW"
     ],
@@ -52543,6 +52568,16 @@
       {
         "id": "banfield",
         "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
         "years": "2025"
       }
     ],
@@ -52556,7 +52591,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 73,
     "legendary": false
   },
   {
@@ -52716,7 +52751,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 57,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -53527,7 +53562,7 @@
     "name": "Jonatan Gómez",
     "fullName": "Jonatan Gómez",
     "birthDate": "",
-    "position": "CAM",
+    "position": "CM",
     "positions": [
       "CAM"
     ],
@@ -53545,6 +53580,26 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2023"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -53557,7 +53612,7 @@
     "marketValue": "",
     "activeYears": "2021-2023",
     "decade": "2020s",
-    "rating": 57,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -53955,7 +54010,7 @@
     "marketValue": "",
     "activeYears": "2017-2023",
     "decade": "2010s",
-    "rating": 57,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -54033,7 +54088,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 57,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -54460,7 +54515,7 @@
     "marketValue": "",
     "activeYears": "2023-2024",
     "decade": "2020s",
-    "rating": 57,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -56631,7 +56686,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 57,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -57488,7 +57543,7 @@
     "marketValue": "",
     "activeYears": "2018-2022",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -57527,7 +57582,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 68,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -57570,7 +57625,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 72,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -58261,7 +58316,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -58443,6 +58498,26 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2019"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -58455,7 +58530,7 @@
     "marketValue": "",
     "activeYears": "2015-2019",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -58684,7 +58759,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 72,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -60077,7 +60152,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 74,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -60153,7 +60228,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 56,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -61521,6 +61596,21 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "2025"
+      },
+      {
+        "id": "olympo",
+        "name": "Olimpo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -61533,7 +61623,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 68,
+    "rating": 73,
     "legendary": false
   },
   {
@@ -62036,6 +62126,11 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2021"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -62048,7 +62143,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 56,
+    "rating": 72,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -62070,6 +62165,21 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2022"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -62082,7 +62192,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 56,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -62091,7 +62201,7 @@
     "name": "Matias Ramírez",
     "fullName": "Matias Ramírez",
     "birthDate": "",
-    "position": "RB",
+    "position": "LW",
     "positions": [
       "RB"
     ],
@@ -62103,6 +62213,16 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
         "years": "2025"
       }
     ],
@@ -62116,7 +62236,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 65,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -62329,7 +62449,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 67,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -63504,7 +63624,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 68,
+    "rating": 73,
     "legendary": false
   },
   {
@@ -64133,7 +64253,7 @@
     "name": "Lucas Castro",
     "fullName": "Lucas Castro",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -64145,6 +64265,26 @@
       {
         "id": "gimnasia-lp",
         "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025"
+      },
+      {
+        "id": "sarmiento",
+        "name": "Sarmiento",
         "years": "2025"
       }
     ],
@@ -64158,7 +64298,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -64893,6 +65033,26 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2023"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -64905,7 +65065,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -65803,7 +65963,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 64,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -65945,6 +66105,16 @@
         "id": "ca-independiente",
         "name": "Independiente",
         "years": "2015"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -65957,7 +66127,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -66669,6 +66839,26 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2020"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -66681,7 +66871,7 @@
     "marketValue": "",
     "activeYears": "2020-2025",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -66889,6 +67079,21 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2015"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -66901,7 +67106,7 @@
     "marketValue": "",
     "activeYears": "2015-2025",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -67232,7 +67437,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -67338,7 +67543,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -67360,6 +67565,11 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -67372,7 +67582,7 @@
     "marketValue": "",
     "activeYears": "2025-2025",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -67756,7 +67966,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 67,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -69125,6 +69335,21 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2019"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-rafaela",
+        "name": "Atletico-rafaela",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -69137,7 +69362,7 @@
     "marketValue": "",
     "activeYears": "2019-2022",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -69271,6 +69496,21 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2019"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -69283,7 +69523,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -69292,7 +69532,7 @@
     "name": "Luciano Herrera",
     "fullName": "Luciano Herrera",
     "birthDate": "",
-    "position": "LW",
+    "position": "RW",
     "positions": [
       "LW"
     ],
@@ -69305,6 +69545,16 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2024"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "deportivo-maipu",
+        "name": "Deportivo-maipu",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -69317,7 +69567,7 @@
     "marketValue": "",
     "activeYears": "2024-2024",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -69824,6 +70074,16 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2017"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -69836,7 +70096,7 @@
     "marketValue": "",
     "activeYears": "2017-2023",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -71518,7 +71778,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -71539,6 +71799,21 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "barracas-central",
+        "name": "Barracas-central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -71551,7 +71826,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -71658,7 +71933,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -72374,6 +72649,21 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2018"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "patronato",
+        "name": "Patronato",
+        "years": "2025"
+      },
+      {
+        "id": "santamarina",
+        "name": "Santamarina",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -72386,7 +72676,7 @@
     "marketValue": "",
     "activeYears": "2018-2024",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -73352,7 +73642,7 @@
     "marketValue": "",
     "activeYears": "2020-2020",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -73498,7 +73788,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -73609,7 +73899,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -73908,6 +74198,11 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2019"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -73920,7 +74215,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 72,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -74151,6 +74446,16 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2023"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -74163,7 +74468,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -74799,7 +75104,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 74,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -75075,7 +75380,7 @@
     "marketValue": "",
     "activeYears": "2015-2019",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -75158,7 +75463,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -75255,7 +75560,7 @@
     "marketValue": "",
     "activeYears": "2018-2022",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -75858,7 +76163,7 @@
     "marketValue": "",
     "activeYears": "2015-2019",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -76079,7 +76384,7 @@
     "name": "Aaron Molinas",
     "fullName": "Aaron Molinas",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -76091,6 +76396,16 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
         "years": "2025"
       }
     ],
@@ -76104,7 +76419,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 65,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -76919,7 +77234,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 72,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -77127,7 +77442,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -77166,7 +77481,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -77205,7 +77520,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -77794,6 +78109,21 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2015"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -77806,7 +78136,7 @@
     "marketValue": "",
     "activeYears": "2015-2021",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -77913,7 +78243,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 79,
     "legendary": false
   },
   {
@@ -78537,6 +78867,16 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2023"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -78549,7 +78889,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -79429,7 +79769,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -80044,6 +80384,11 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2023"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -80056,7 +80401,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -80608,6 +80953,26 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "patronato",
+        "name": "Patronato",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -80620,7 +80985,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 69,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -80641,6 +81006,11 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2022"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -80653,7 +81023,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 79,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -81056,7 +81426,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -81927,6 +82297,21 @@
         "id": "club-atletico-huracan",
         "name": "Huracán",
         "years": "2019"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -81939,7 +82324,7 @@
     "marketValue": "",
     "activeYears": "2015-2022",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -82000,6 +82385,11 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -82012,7 +82402,7 @@
     "marketValue": "",
     "activeYears": "2023-2025",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 72,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -84975,7 +85365,7 @@
     "name": "Pablo De Blasis",
     "fullName": "Pablo De Blasis",
     "birthDate": "",
-    "position": "CAM",
+    "position": "CM",
     "positions": [
       "CAM"
     ],
@@ -84987,6 +85377,16 @@
       {
         "id": "gimnasia-lp",
         "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "ferro",
+        "name": "Ferro",
         "years": "2025"
       }
     ],
@@ -85000,7 +85400,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -85076,7 +85476,7 @@
     "name": "Manuel Panaro",
     "fullName": "Manuel Panaro",
     "birthDate": "",
-    "position": "RW",
+    "position": "LW",
     "positions": [
       "RW"
     ],
@@ -85089,6 +85489,11 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2023"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -85101,7 +85506,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -85912,7 +86317,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -86033,7 +86438,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 63,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -86639,7 +87044,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -86736,7 +87141,7 @@
     "marketValue": "",
     "activeYears": "2019-2021",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -87296,7 +87701,7 @@
     "marketValue": "",
     "activeYears": "2016-2022",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -88267,7 +88672,7 @@
     "marketValue": "",
     "activeYears": "2015-2021",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -88689,7 +89094,7 @@
     "name": "Julian Lopez",
     "fullName": "Julian Lopez",
     "birthDate": "",
-    "position": "RB",
+    "position": "CDM",
     "positions": [
       "RB"
     ],
@@ -88701,6 +89106,16 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "patronato",
+        "name": "Patronato",
         "years": "2025"
       }
     ],
@@ -88714,7 +89129,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 63,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -89017,6 +89432,21 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2023"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-rafaela",
+        "name": "Atletico-rafaela",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -89029,7 +89459,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -89286,7 +89716,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -89512,6 +89942,16 @@
         "id": "club-atletico-huracan",
         "name": "Huracán",
         "years": "2019"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -89524,7 +89964,7 @@
     "marketValue": "",
     "activeYears": "2017-2023",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -89882,7 +90322,7 @@
     "name": "Juan Ignacio Méndez",
     "fullName": "Juan Ignacio Méndez",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -89910,6 +90350,26 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2021"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -89922,7 +90382,7 @@
     "marketValue": "",
     "activeYears": "2018-2023",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -90280,6 +90740,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2021"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -90292,7 +90757,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -91105,7 +91570,7 @@
     "marketValue": "",
     "activeYears": "2020-2023",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -91182,7 +91647,7 @@
     "name": "Mateo Silvetti",
     "fullName": "Mateo Silvetti",
     "birthDate": "",
-    "position": "ST",
+    "position": "LW",
     "positions": [
       "ST"
     ],
@@ -91207,7 +91672,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 66,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -91379,6 +91844,21 @@
         "id": "cd-godoy-cruz-antonio-tomba",
         "name": "Godoy Cruz",
         "years": "2016"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -91391,7 +91871,7 @@
     "marketValue": "",
     "activeYears": "2015-2016",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -92910,7 +93390,7 @@
     "name": "Bruno Sepulveda",
     "fullName": "Bruno Sepulveda",
     "birthDate": "",
-    "position": "CB",
+    "position": "ST",
     "positions": [
       "CB"
     ],
@@ -92922,6 +93402,16 @@
       {
         "id": "banfield",
         "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "barracas-central",
+        "name": "Barracas-central",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes-rc",
+        "name": "Estudiantes-rc",
         "years": "2025"
       }
     ],
@@ -92935,7 +93425,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 67,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -93589,7 +94079,7 @@
     "name": "Gabriel Alanis",
     "fullName": "Gabriel Alanis",
     "birthDate": "",
-    "position": "CM",
+    "position": "RM",
     "positions": [
       "CM"
     ],
@@ -93601,6 +94091,16 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
+      },
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
         "years": "2025"
       }
     ],
@@ -93614,7 +94114,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 68,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -94837,7 +95337,7 @@
     "name": "Benjamín Schamine",
     "fullName": "Benjamín Schamine",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -94849,6 +95349,11 @@
       {
         "id": "cd-godoy-cruz-antonio-tomba",
         "name": "Godoy Cruz",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
         "years": "2025"
       }
     ],
@@ -94862,7 +95367,7 @@
     "marketValue": "",
     "activeYears": "2025-2025",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -95008,7 +95513,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -95754,6 +96259,16 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2017"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-rafaela",
+        "name": "Atletico-rafaela",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -95766,7 +96281,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -95992,6 +96507,26 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2023"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
+      },
+      {
+        "id": "quilmes",
+        "name": "Quilmes",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -96004,7 +96539,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -97067,7 +97602,7 @@
     "marketValue": "",
     "activeYears": "2015-2025",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -97335,7 +97870,7 @@
     "marketValue": "",
     "activeYears": "2022-2023",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -97413,7 +97948,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 79,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -97467,7 +98002,7 @@
     "marketValue": "",
     "activeYears": "2018-2025",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -98000,7 +98535,7 @@
     "marketValue": "",
     "activeYears": "2017-2022",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -98061,6 +98596,16 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2018"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -98073,7 +98618,7 @@
     "marketValue": "",
     "activeYears": "2018-2018",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -98255,6 +98800,16 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2022"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -98267,7 +98822,7 @@
     "marketValue": "",
     "activeYears": "2019-2022",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -98457,7 +99012,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -98623,7 +99178,7 @@
     "marketValue": "",
     "activeYears": "2018-2023",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -98886,7 +99441,7 @@
     "marketValue": "",
     "activeYears": "2015-2019",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -99129,7 +99684,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 71,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -99418,7 +99973,7 @@
     "marketValue": "",
     "activeYears": "2023-2025",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -99698,6 +100253,11 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2023"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -99710,7 +100270,7 @@
     "marketValue": "",
     "activeYears": "2023-2024",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -99787,7 +100347,7 @@
     "name": "Matías Abaldo",
     "fullName": "Matías Abaldo",
     "birthDate": "",
-    "position": "LW",
+    "position": "RW",
     "positions": [
       "LW"
     ],
@@ -99805,6 +100365,11 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2022"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -99817,7 +100382,7 @@
     "marketValue": "",
     "activeYears": "2022-2024",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -99922,6 +100487,26 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2022"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -99934,7 +100519,7 @@
     "marketValue": "",
     "activeYears": "2015-2022",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -100055,7 +100640,7 @@
     "name": "Nicolás Oroz",
     "fullName": "Nicolás Oroz",
     "birthDate": "",
-    "position": "CAM",
+    "position": "CM",
     "positions": [
       "CAM"
     ],
@@ -100068,6 +100653,21 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2016"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "chacarita",
+        "name": "Chacarita",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -100080,7 +100680,7 @@
     "marketValue": "",
     "activeYears": "2016-2016",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -100405,7 +101005,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 66,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -100460,6 +101060,16 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2022"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -100472,7 +101082,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -101207,7 +101817,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -101368,6 +101978,11 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2022"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -101380,7 +101995,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -101997,7 +102612,7 @@
     "marketValue": "",
     "activeYears": "2016-2022",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -102080,7 +102695,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -102657,7 +103272,7 @@
     "name": "Francisco Gonzalez",
     "fullName": "Francisco Gonzalez",
     "birthDate": "",
-    "position": "ST",
+    "position": "RW",
     "positions": [
       "ST"
     ],
@@ -102669,6 +103284,11 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
         "years": "2025"
       }
     ],
@@ -102682,7 +103302,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 64,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -102848,6 +103468,21 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2022"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -102860,7 +103495,7 @@
     "marketValue": "",
     "activeYears": "2018-2022",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -103125,6 +103760,16 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2023"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -103137,7 +103782,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -104659,7 +105304,7 @@
     "marketValue": "",
     "activeYears": "2019-2021",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -105056,6 +105701,21 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2022"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "deportivo-madryn",
+        "name": "Deportivo-madryn",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -105068,7 +105728,7 @@
     "marketValue": "",
     "activeYears": "2022-2024",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -106341,7 +107001,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -109242,7 +109902,7 @@
     "marketValue": "",
     "activeYears": "2015-2023",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -109665,7 +110325,7 @@
     "marketValue": "",
     "activeYears": "2018-2019",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -110042,6 +110702,26 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2017"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -110054,7 +110734,7 @@
     "marketValue": "",
     "activeYears": "2015-2024",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -110215,7 +110895,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 69,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -110531,7 +111211,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -110755,7 +111435,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -110877,7 +111557,7 @@
     "marketValue": "",
     "activeYears": "2019-2025",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -112245,6 +112925,21 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -112257,7 +112952,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 66,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -112411,7 +113106,7 @@
     "name": "Maximiliano Lovera",
     "fullName": "Maximiliano Lovera",
     "birthDate": "",
-    "position": "LW",
+    "position": "RW",
     "positions": [
       "LW"
     ],
@@ -112429,6 +113124,16 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2015"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -112441,7 +113146,7 @@
     "marketValue": "",
     "activeYears": "2015-2019",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -112490,7 +113195,7 @@
     "marketValue": "",
     "activeYears": "2019-2021",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -112597,7 +113302,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 68,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -112815,7 +113520,7 @@
     "marketValue": "",
     "activeYears": "2021-2025",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -113091,7 +113796,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -113286,7 +113991,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -113393,7 +114098,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -114111,7 +114816,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -114223,7 +114928,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -114947,6 +115652,11 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2021"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -114959,7 +115669,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -115686,6 +116396,21 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2019"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -115698,7 +116423,7 @@
     "marketValue": "",
     "activeYears": "2019-2020",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -116057,7 +116782,7 @@
     "name": "Jáminton Campaz",
     "fullName": "Jáminton Campaz",
     "birthDate": "",
-    "position": "LW",
+    "position": "LM",
     "positions": [
       "LW"
     ],
@@ -116070,6 +116795,11 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2022"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -116082,7 +116812,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -116138,6 +116868,16 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2023"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -116150,7 +116890,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -117064,7 +117804,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -117146,7 +117886,7 @@
     "name": "Juan Pablo Álvarez",
     "fullName": "Juan Pablo Álvarez",
     "birthDate": "",
-    "position": "RW",
+    "position": "RM",
     "positions": [
       "RW"
     ],
@@ -117159,6 +117899,16 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2016"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -117171,7 +117921,7 @@
     "marketValue": "",
     "activeYears": "2016-2016",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -118055,7 +118805,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -118315,6 +119065,21 @@
         "id": "club-atletico-belgrano",
         "name": "Belgrano",
         "years": "2017"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -118327,7 +119092,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -119406,7 +120171,7 @@
     "marketValue": "",
     "activeYears": "2016-2016",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -120167,7 +120932,7 @@
     "name": "Alan Lescano",
     "fullName": "Alan Lescano",
     "birthDate": "",
-    "position": "LB",
+    "position": "CAM",
     "positions": [
       "LB"
     ],
@@ -120179,6 +120944,11 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
         "years": "2025"
       }
     ],
@@ -120192,7 +120962,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 64,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -120908,6 +121678,21 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2015"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -120920,7 +121705,7 @@
     "marketValue": "",
     "activeYears": "2015-2021",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -121169,7 +121954,7 @@
     "marketValue": "",
     "activeYears": "2015-2024",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -121213,7 +121998,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 72,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -121987,6 +122772,21 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2022"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-rafaela",
+        "name": "Atletico-rafaela",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -121999,7 +122799,7 @@
     "marketValue": "",
     "activeYears": "2015-2022",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -122634,6 +123434,16 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2022"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -122646,7 +123456,7 @@
     "marketValue": "",
     "activeYears": "2020-2022",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -122835,7 +123645,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 66,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -122878,7 +123688,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -122993,7 +123803,7 @@
     "marketValue": "",
     "activeYears": "2019-2023",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -123115,7 +123925,7 @@
     "marketValue": "",
     "activeYears": "2023-2024",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -123169,7 +123979,7 @@
     "marketValue": "",
     "activeYears": "2021-2024",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -123954,7 +124764,7 @@
     "marketValue": "",
     "activeYears": "2015-2022",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -124105,7 +124915,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -124573,7 +125383,7 @@
     "marketValue": "",
     "activeYears": "2016-2023",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -125278,7 +126088,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 71,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -125336,7 +126146,7 @@
     "marketValue": "",
     "activeYears": "2015-2023",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -125884,6 +126694,16 @@
         "id": "newells",
         "name": "Newell's Old Boys",
         "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -125896,7 +126716,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -126084,7 +126904,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -126205,7 +127025,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 80,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -126708,7 +127528,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -127870,6 +128690,11 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2021"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -127882,7 +128707,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -127909,6 +128734,11 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2024"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -127921,7 +128751,7 @@
     "marketValue": "",
     "activeYears": "2021-2024",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -128016,6 +128846,16 @@
         "id": "club-atletico-huracan",
         "name": "Huracán",
         "years": "2016"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -128028,7 +128868,7 @@
     "marketValue": "",
     "activeYears": "2016-2023",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -128037,7 +128877,7 @@
     "name": "Valentino Acuña",
     "fullName": "Valentino Acuña",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -128050,6 +128890,11 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2023"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -128062,7 +128907,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -128149,7 +128994,7 @@
     "name": "Martín Fernández",
     "fullName": "Martín Fernández",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -128167,6 +129012,11 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2023"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -128179,7 +129029,7 @@
     "marketValue": "",
     "activeYears": "2023-2024",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -128342,6 +129192,16 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2023"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -128354,7 +129214,7 @@
     "marketValue": "",
     "activeYears": "2017-2023",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -128621,7 +129481,7 @@
     "marketValue": "",
     "activeYears": "2021-2022",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -128692,6 +129552,26 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2019"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -128704,7 +129584,7 @@
     "marketValue": "",
     "activeYears": "2019-2021",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -129948,7 +130828,7 @@
     "marketValue": "",
     "activeYears": "2016-2022",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -130123,7 +131003,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 68,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -130188,6 +131068,21 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2017"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -130200,7 +131095,7 @@
     "marketValue": "",
     "activeYears": "2017-2019",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -130533,6 +131428,21 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -130545,7 +131455,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -130966,7 +131876,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -131010,7 +131920,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -133747,6 +134657,16 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2017"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -133759,7 +134679,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -135444,7 +136364,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 69,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -137719,6 +138639,16 @@
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
         "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "quilmes",
+        "name": "Quilmes",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -137731,7 +138661,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 66,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -137818,6 +138748,11 @@
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
         "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -137830,7 +138765,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 66,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -138958,6 +139893,652 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "diego-ruso-rodriguez",
+    "name": "Diego Rodríguez",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 80,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "gonzalo-siri",
+    "name": "Gonzalo Siri",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "jonathan-galvan",
+    "name": "Jonathan Galván",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "roman-vega",
+    "name": "Román Vega",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 77,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "sebastian-prieto",
+    "name": "Sebastián Prieto",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
+      },
+      {
+        "id": "temperley",
+        "name": "Temperley",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "luciano-sanchez",
+    "name": "Luciano Sánchez",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Independiente-rivadavia",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "tobias-palacio",
+    "name": "Tobías Palacio",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "ariel-gamarra",
+    "name": "Ariel Gamarra",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "emiliano-viveros",
+    "name": "Emiliano Viveros",
+    "position": "RM",
+    "positions": [
+      "RM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "alan-rodriguez-arg",
+    "name": "Alan Rodríguez",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "gaston-veron",
+    "name": "Gastón Verón",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes-rc",
+        "name": "Estudiantes-rc",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "jose-maria-herrera",
+    "name": "José María Herrera",
+    "position": "LW",
+    "positions": [
+      "LW"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "santiago-rodriguez-arg",
+    "name": "Santiago Rodríguez",
+    "position": "RW",
+    "positions": [
+      "RW"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "matias-perello",
+    "name": "Matías Perelló",
+    "position": "LW",
+    "positions": [
+      "LW"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "cristopher-fiermarin",
+    "name": "Cristopher Fiermarín",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "cesar-perez",
+    "name": "César Pérez",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "juan-miritello",
+    "name": "Juan Miritello",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "san-martin-tucuman",
+        "name": "San-martin-tucuman",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "facundo-echevarria",
+    "name": "Facundo Echevarría",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "ramiro-macagno",
+    "name": "Ramiro Macagno",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-rafaela",
+        "name": "Atletico-rafaela",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "matko-miljevic",
+    "name": "Matko Miljevic",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "juan-ignacio-ramirez",
+    "name": "Juan Ignacio Ramírez",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 78,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "yonathan-rodriguez",
+    "name": "Yonathan Rodríguez",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "ignacio-rodriguez-ban",
+    "name": "Ignacio Rodríguez",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "damian-kitu-diaz",
+    "name": "Damián Díaz",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 78,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "ivo-mammini",
+    "name": "Ivo Mammini",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "juan-gimenez",
+    "name": "Juan Giménez",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
         "years": "2025"
       }
     ],

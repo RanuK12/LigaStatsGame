@@ -2,7 +2,7 @@
 
 ## Totals
 - Clubs: 29
-- Players: 3949
+- Players: 3975
 - Squads: 15
 
 ## Health Score
@@ -19,19 +19,19 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 3949
-- Players with clubs: 3949
-- Players with valid position: 3949
+- Players with rating: 3975
+- Players with clubs: 3975
+- Players with valid position: 3975
 - Playable squads: 15
 
 ## Players by club
-- boca-juniors: 378
-- independiente: 240
+- boca-juniors: 373
+- independiente: 265
 - racing-club: 240
-- river-plate: 213
-- lanus: 206
+- lanus: 228
+- banfield: 226
+- river-plate: 211
 - club-atletico-belgrano: 204
-- banfield: 202
 - club-atletico-huracan: 199
 - ca-newells-old-boys: 198
 - velez-sarsfield: 195
@@ -46,68 +46,94 @@
 - club-estudiantes-de-la-plata: 155
 - ca-velez-sarsfield: 154
 - club-atletico-river-plate: 139
-- huracan: 100
-- rosario-central: 91
+- rosario-central: 120
+- huracan: 105
+- san-lorenzo: 73
 - talleres-cba: 69
-- estudiantes-lp: 47
-- colon: 43
-- san-lorenzo: 43
-- defensa-y-justicia: 40
+- defensa-y-justicia: 63
+- colon: 51
+- argentinos-jrs: 49
+- newells: 48
+- estudiantes-lp: 46
+- boca: 42
+- velez: 42
 - gimnasia-lp: 40
+- racing: 37
+- river: 34
+- talleres: 31
 - argentinos-juniors: 27
-- newells: 26
-- argentinos-jrs: 21
+- gimnasia: 26
+- estudiantes: 23
 - newells-old-boys: 20
-- velez: 19
+- godoy-cruz: 12
+- tigre: 11
+- arsenal: 9
+- union: 9
+- central-cordoba: 8
 - aa-argentinos-juniors: 7
-- internazionale: 7
-- valencia: 5
+- aldosivi: 6
+- atletico-rafaela: 6
+- internazionale: 6
+- patronato: 6
+- platense: 6
+- atletico-tucuman: 5
+- belgrano: 5
+- instituto: 5
 - argentina: 4
-- atletico-madrid: 4
 - manchester-united: 4
+- olympo: 4
 - real-madrid: 4
+- valencia: 4
+- atletico-madrid: 3
 - barcelona: 3
-- benfica: 3
-- chelsea: 3
+- defensores-belgrano: 3
+- estudiantes-rc: 3
+- ferro: 3
+- gimnasia-mendoza: 3
+- independiente-rivadavia: 3
 - juventus: 3
 - lazio: 3
 - milan: 3
 - paris-saint-germain: 3
-- parma: 3
+- quilmes: 3
 - villarreal: 3
+- barracas-central: 2
+- benfica: 2
+- chacarita: 2
+- chelsea: 2
 - corinthians: 2
 - cruzeiro: 2
-- defensores-belgrano: 2
-- ferro: 2
 - genoa: 2
 - internacional: 2
+- los-andes: 2
 - manchester-city: 2
 - millonarios: 2
+- parma: 2
 - real-betis: 2
 - roma: 2
 - sampdoria: 2
+- santamarina: 2
 - west-ham: 2
 - ajax: 1
 - al-ain: 1
 - alaves: 1
-- aldosivi: 1
-- arsenal: 1
+- all-boys: 1
+- almagro: 1
 - aston-villa: 1
 - atalanta: 1
 - atlanta: 1
 - az-alkmaar: 1
 - basel: 1
-- belgrano: 1
 - cagliari: 1
 - deportivo-cali: 1
 - deportivo-la-coruna: 1
+- deportivo-madryn: 1
+- deportivo-maipu: 1
 - elche: 1
 - fiorentina: 1
 - getafe: 1
 - hamburg: 1
 - hebei-china-fortune: 1
-- independiente-rivadavia: 1
-- instituto: 1
 - libertad: 1
 - liverpool: 1
 - lyon: 1
@@ -117,18 +143,22 @@
 - napoli: 1
 - olimpia: 1
 - palermo: 1
+- palestino: 1
 - penarol: 1
 - pisa: 1
 - porto: 1
 - racing-paris: 1
 - real-murcia: 1
 - real-zaragoza: 1
+- san-martin-sj: 1
+- san-martin-tucuman: 1
+- sarmiento: 1
 - sevilla: 1
 - shanghai-shenhua: 1
 - strasbourg: 1
 - talleres-re: 1
+- temperley: 1
 - tenerife: 1
-- tigre: 1
 - tijuana: 1
 - torino: 1
 - tottenham: 1
@@ -140,7 +170,7 @@
 
 ## Players by decade
 - 2010s: 1307
-- 2020s: 896
+- 2020s: 922
 - 1990s: 807
 - 2000s: 625
 - 1970s: 11
