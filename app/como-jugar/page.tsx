@@ -7,22 +7,22 @@ const STEPS = [
   {
     title: 'Te toca un plantel histórico',
     text: 'La ruleta sortea un club y una temporada del fútbol argentino.',
-    icon: '🎰',
+    number: '01',
   },
   {
     title: 'Elegís formación',
     text: 'Jugás con 4-3-3, 4-4-2, 4-2-3-1 o 3-5-2.',
-    icon: '📋',
+    number: '02',
   },
   {
     title: 'Drafteás por posición',
     text: 'Cada slot exige una posición compatible. Un central no puede ir de nueve.',
-    icon: '⚽',
+    number: '03',
   },
   {
     title: 'Simulás la temporada',
     text: 'Tu once compite contra otros planteles históricos y se calcula el rendimiento.',
-    icon: '🏆',
+    number: '04',
   },
 ]
 
@@ -67,7 +67,7 @@ export default function ComoJugarPage() {
             transition={{ delay: 0.15 + index * 0.06 }}
             className="card-gradient rounded-2xl p-6"
           >
-            <div className="mb-4 text-4xl">{step.icon}</div>
+            <div className="mb-4 text-2xl font-black text-[#75AADB] font-sport">{step.number}</div>
             <h2 className="font-display text-xl font-bold text-white">{step.title}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-400">{step.text}</p>
           </motion.article>
@@ -81,16 +81,16 @@ export default function ComoJugarPage() {
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           <Link href="/draft?mode=clasico" className="btn-primary">
-            Clásico ⚽
+            Modo Clásico
           </Link>
           <Link href="/draft?mode=almanaque" className="btn-secondary">
-            Almanaque 🧠
+            Modo Almanaque
           </Link>
           <Link href="/draft?mode=liga" className="btn-secondary">
-            Liga Argentina 🏆
+            Liga Argentina
           </Link>
           <Link href="/draft?mode=copa" className="btn-secondary">
-            Copa Argentina 🏅
+            Copa Argentina
           </Link>
         </div>
       </section>

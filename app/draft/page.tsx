@@ -77,9 +77,7 @@ function PityIndicator({ pity }: { pity: PityState }) {
           : "bg-blue-500/10 border-blue-400/20 text-[#74ACDF]"
       }`}>
       <div className="flex items-center gap-1.5 uppercase tracking-wider">
-        {isPityActive ? (
-          <motion.span animate={{ rotate: [0, 15, -15, 0] }} transition={{ repeat: Infinity, duration: 0.6 }}>✨</motion.span>
-        ) : "🔥"}
+        <span className="font-bold text-[10px] text-yellow-400 font-sport uppercase tracking-widest">CÁBALA:</span>
         <span>LA CÁBALA (ANTI-MUFA):</span>
       </div>
       <span className="font-medium text-[11px] text-slate-300">
@@ -548,32 +546,32 @@ function DraftInner() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 font-sport">
                 <button onClick={rerollTeam} disabled={wildcards <= 0}
-                  className="btn-secondary px-3 py-1.5 text-xs disabled:opacity-30 disabled:cursor-not-allowed">
-                  🔄 Re-sortear ({wildcards})
+                  className="btn-secondary px-3 py-1.5 text-xs disabled:opacity-30 disabled:cursor-not-allowed uppercase font-bold tracking-wider">
+                  RE-SORTEAR ({wildcards})
                 </button>
               </div>
             </div>
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
             <div className="card-gradient rounded-2xl p-4 border border-white/5">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-display font-bold text-sm">
-                  ⚡ Elegí{" "}
+                <h3 className="font-display font-bold text-sm uppercase tracking-wider">
+                  SELECCIONÁ{" "}
                   <span style={{ color: getPC(currentPos.pos) }}>{POS_LABELS[currentPos.pos] || currentPos.pos}</span>
-                  {" "}— 1 solo jugador
+                  {" "}— 1 JUGADOR
                 </h3>
-                <span className="text-xs text-slate-500">{pickerPlayers.length} disp. · {filledCount}/{totalSlots}</span>
+                <span className="text-xs text-slate-500 font-sport">{pickerPlayers.length} disp. · {filledCount}/{totalSlots}</span>
               </div>
-              <input type="text" placeholder="🔍 Buscar jugador..."
+              <input type="text" placeholder="Buscar jugador..."
                 value={search} onChange={e => setSearch(e.target.value)}
-                className="input-field mb-3 text-sm" />
+                className="input-field mb-3 text-sm font-sans" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[40vh] overflow-y-auto pr-1">
                 {pickerPlayers.length === 0 && (
-                  <p className="text-slate-500 text-sm text-center col-span-2 py-4">
+                  <p className="text-slate-500 text-sm text-center col-span-2 py-4 font-sport uppercase tracking-wider">
                     {draftedIds.size > 0 && currentSquad
-                      ? "🔄 Todos los jugadores ya fueron elegidos. Girá de nuevo."
-                      : "Sin jugadores para esta posición. Usá 🔄 Re-sortear."}
+                      ? "Todos los jugadores ya fueron elegidos. Girá de nuevo."
+                      : "Sin jugadores para esta posición. Usá Re-sortear."}
                   </p>
                 )}
                 {pickerPlayers.map(player => (
@@ -583,10 +581,10 @@ function DraftInner() {
                 ))}
               </div>
               {pickerPlayers.length > 0 && (
-                <p className="text-xs text-slate-400 text-center mt-2">
+                <p className="text-xs text-slate-400 text-center mt-2 font-sport uppercase tracking-wider font-semibold">
                   {compatibleCount > 0
-                    ? `✅ ${compatibleCount} compatible${compatibleCount !== 1 ? "s" : ""} — elegí uno y girá de nuevo`
-                    : "⚠️ Ninguno compatible — usá 🔄 Re-sortear"}
+                    ? `${compatibleCount} COMPATIBLE${compatibleCount !== 1 ? "S" : ""} — ELEGÍ UNO Y GIRÁ DE NUEVO`
+                    : "NINGUNO COMPATIBLE — USÁ RE-SORTEAR"}
                 </p>
               )}
             </div>
@@ -596,11 +594,6 @@ function DraftInner() {
         {/* PHASE: DONE */}
         {phase === "done" && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
-            {confetti && (
-              <div className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center">
-                <motion.div initial={{ scale: 0 }} animate={{ scale: [0, 1.5, 1] }} transition={{ duration: 0.6 }} className="text-8xl">🎉</motion.div>
-              </div>
-            )}
             <div className="card-gradient rounded-3xl p-6 mb-6">
               <h2 className="font-display text-3xl font-black gradient-text mb-2">¡11 Armado!</h2>
               <p className="text-slate-400 text-sm mb-4">Tocá cualquier posición para cambiar el jugador</p>

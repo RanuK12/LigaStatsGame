@@ -49,7 +49,7 @@ export default function PlayerTradingCard({ player, onSelect, showRating }: {
           }`}>
             {POS_LABELS[player.position] || player.position}
           </span>
-          <span className="text-[10px] text-slate-500">{player.goalsClub}⚽ {player.capsClub}📋</span>
+          <span className="text-[10px] text-slate-500 font-sport font-semibold">{player.goalsClub} G · {player.capsClub} PJ</span>
         </div>
         {firstClub && (
           <div className="mt-0.5 truncate text-[9px] text-slate-500">

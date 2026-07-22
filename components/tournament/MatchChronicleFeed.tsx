@@ -5,8 +5,8 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import type { MatchChronicle, MatchEvent } from "@/lib/chronicle"
 
 const EVENT_ICON: Record<MatchEvent["type"], string> = {
-  inicio: "🟢", gol: "⚽", atajada: "🧤", amarilla: "🟨", roja: "🟥",
-  entretiempo: "⏸️", penales: "🎯", final: "🏁",
+  inicio: "[INICIO]", gol: "[GOL]", atajada: "[PARADA]", amarilla: "[AMARILLA]", roja: "[ROJA]",
+  entretiempo: "[ET]", penales: "[PENALES]", final: "[FINAL]",
 }
 
 // Delay antes de mostrar cada evento (pausa dramática en goles)
@@ -48,13 +48,13 @@ export default function MatchChronicleFeed({ chronicle }: { chronicle: MatchChro
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-display font-bold">
-          📻 {chronicle.roundLabel ? `${chronicle.roundLabel} · ` : ""}vs {chronicle.opponent}
+        <h3 className="font-display font-bold uppercase tracking-wider text-[#75AADB]">
+          RELATO · {chronicle.roundLabel ? `${chronicle.roundLabel} · ` : ""}VS {chronicle.opponent}
         </h3>
         {!done && (
           <button onClick={() => setVisibleCount(chronicle.events.length)}
-            className="text-xs px-3 py-1 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-all">
-            Ver todo ⏩
+            className="text-xs px-3 py-1 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-all font-sport uppercase tracking-widest">
+            VER TODO
           </button>
         )}
       </div>

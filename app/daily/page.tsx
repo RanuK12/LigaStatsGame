@@ -17,15 +17,15 @@ export default function DailyPage() {
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full border border-orange-400/30 bg-orange-500/10 text-5xl"
+          className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-orange-400/30 bg-orange-500/10 text-xl font-bold font-sport text-orange-400"
         >
-          🔥
+          RETO
         </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm font-bold uppercase tracking-[0.3em] text-orange-300"
+          className="text-sm font-bold uppercase tracking-[0.3em] text-orange-300 font-sport"
         >
           Seed diario #{seed}
         </motion.p>
@@ -33,7 +33,7 @@ export default function DailyPage() {
         <motion.h1
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-4 font-display text-4xl font-black text-white md:text-6xl"
+          className="mt-4 font-display text-4xl font-black text-white md:text-6xl uppercase tracking-wider"
         >
           Reto diario
         </motion.h1>
@@ -54,7 +54,7 @@ export default function DailyPage() {
           transition={{ delay: 0.16 }}
           className="mx-auto mt-8 max-w-xl rounded-3xl border border-orange-400/20 bg-orange-500/5 p-6"
         >
-          <h2 className="font-display text-2xl font-black text-white">
+          <h2 className="font-display text-2xl font-black text-white uppercase tracking-wider">
             Mientras tanto, jugá el modo Clásico
           </h2>
 
@@ -65,7 +65,7 @@ export default function DailyPage() {
 
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/draft?mode=clasico" className="btn-primary">
-              Jugar clásico ⚽
+              JUGAR CLÁSICO
             </Link>
             <Link href="/como-jugar" className="btn-secondary">
               Cómo se juega

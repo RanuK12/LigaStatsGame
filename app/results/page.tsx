@@ -57,9 +57,9 @@ export default function ResultsPage() {
 
   if (error || !team) return wrap(
     <>
-      <h2 className="text-3xl font-bold text-yellow-500">🤔 Sin datos</h2>
-      <p className="mt-2 text-slate-400">{error || "No encontramos tu equipo. Armá tu 11 primero."}</p>
-      <Link href="/draft" className="mt-6 inline-block px-6 py-3 bg-cyan-600 rounded-xl hover:bg-cyan-500 transition-colors font-bold">
+      <h2 className="text-3xl font-bold text-yellow-500 uppercase tracking-wider font-sport">SIN DATOS DE EQUIPO</h2>
+      <p className="mt-2 text-slate-400 font-sans">{error || "No encontramos tu equipo. Armá tu 11 primero."}</p>
+      <Link href="/draft" className="mt-6 inline-block px-6 py-3 bg-cyan-600 rounded-xl hover:bg-cyan-500 transition-colors font-bold font-sport uppercase">
         Armar mi 11
       </Link>
     </>
@@ -68,7 +68,7 @@ export default function ResultsPage() {
   const players = (team.players || []).filter(Boolean)
   const score = team.score ?? (players.length ? Math.round(players.reduce((s, p) => s + (p.rating || 50), 0) / players.length) : 0)
   const best = [...players].sort((a, b) => (b.rating || 0) - (a.rating || 0))[0]
-  const shareText = `⚽ Mi 11 ${team.label ? 'de ' + team.label : ''} | ${team.formation || ''} | Score: ${score}/99 — Liga Argentina Fans`
+  const shareText = `Mi 11 ${team.label ? 'de ' + team.label : ''} | ${team.formation || ''} | Score: ${score}/99 — Liga Argentina Fans`
   const shareUrl = "https://ranuk12.github.io/LigaStatsGame/"
 
   const share = () => {
@@ -77,33 +77,33 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="min-h-screen gradient-bg py-10 px-4">
+    <div className="min-h-screen gradient-bg py-10 px-4 font-sans">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <p className="text-slate-400 text-sm uppercase tracking-widest">Tu resultado</p>
-          <h1 className="text-6xl font-black bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">{score}<span className="text-2xl text-slate-500">/99</span></h1>
-          {team.label && <p className="mt-1 text-lg text-slate-300">{team.label} · {team.formation}</p>}
-          {best?.name && <p className="mt-2 text-sm text-amber-400">⭐ Figura: {best.name} ({best.rating})</p>}
+          <p className="text-slate-400 text-xs uppercase tracking-widest font-sport">Tu resultado de la temporada</p>
+          <h1 className="text-6xl font-black bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent font-display">{score}<span className="text-2xl text-slate-500">/99</span></h1>
+          {team.label && <p className="mt-1 text-lg text-slate-300 font-bold">{team.label} · {team.formation}</p>}
+          {best?.name && <p className="mt-2 text-xs font-bold text-amber-400 font-sport uppercase tracking-wider">FIGURA DE LA CANCHA: {best.name} ({best.rating})</p>}
         </div>
 
         <div className="grid grid-cols-1 gap-2 mb-8">
           {players.map((p, i) => (
             <div key={i} className="flex items-center justify-between bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2">
-              <span className="text-slate-200">{p.position && <b className="text-cyan-400 mr-2 text-xs">{p.position}</b>}{p.name || '—'}{p.club && <span className="text-slate-500 text-xs ml-2">{p.club}</span>}</span>
-              <span className="font-bold text-emerald-400">{p.rating ?? '—'}</span>
+              <span className="text-slate-200">{p.position && <b className="text-cyan-400 mr-2 text-xs font-sport">{p.position}</b>}{p.name || '—'}{p.club && <span className="text-slate-500 text-xs ml-2">{p.club}</span>}</span>
+              <span className="font-bold text-emerald-400 font-sport">{p.rating ?? '—'}</span>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-3 justify-center">
-          <button onClick={share} className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-emerald-600 rounded-xl font-bold hover:scale-[1.03] transition-transform">
-            📲 Compartir
+        <div className="flex flex-wrap gap-3 justify-center font-sport uppercase tracking-wider text-xs">
+          <button onClick={share} className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-emerald-600 rounded-xl font-bold hover:scale-[1.03] transition-transform text-white">
+            COMPARTIR RESULTADO
           </button>
-          <Link href="/draft" className="px-6 py-3 bg-slate-700 rounded-xl font-bold hover:bg-slate-600 transition-colors">
-            🔄 Jugar de nuevo
+          <Link href="/draft" className="px-6 py-3 bg-slate-700 rounded-xl font-bold hover:bg-slate-600 transition-colors text-white">
+            JUGAR DE NUEVO
           </Link>
-          <Link href="/" className="px-6 py-3 bg-slate-800 rounded-xl hover:bg-slate-700 transition-colors">
-            🏠 Inicio
+          <Link href="/" className="px-6 py-3 bg-slate-800 rounded-xl hover:bg-slate-700 transition-colors text-slate-300">
+            VOLVER AL INICIO
           </Link>
         </div>
       </motion.div>

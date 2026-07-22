@@ -2,7 +2,7 @@
 
 ## Totals
 - Clubs: 29
-- Players: 5389
+- Players: 3938
 - Squads: 15
 
 ## Health Score
@@ -19,47 +19,47 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 5389
-- Players with clubs: 5389
-- Players with valid position: 5389
+- Players with rating: 3938
+- Players with clubs: 3938
+- Players with valid position: 3938
 - Playable squads: 15
 
 ## Players by club
-- racing-club: 432
-- boca-juniors: 382
-- banfield: 321
-- lanus: 313
-- estudiantes-lp: 297
-- huracan: 241
-- independiente: 241
-- argentinos-juniors: 229
-- rosario-central: 228
-- talleres-cba: 218
+- boca-juniors: 378
+- independiente: 240
+- racing-club: 240
 - river-plate: 213
-- club-atletico-belgrano: 207
-- ca-newells-old-boys: 206
-- club-atletico-huracan: 205
-- ca-rosario-central: 199
-- velez-sarsfield: 197
-- ca-talleres: 191
-- cd-godoy-cruz-antonio-tomba: 190
-- club-de-gimnasia-y-esgrima-la-plata: 190
+- lanus: 206
+- club-atletico-belgrano: 204
+- banfield: 202
+- club-atletico-huracan: 199
+- ca-newells-old-boys: 198
+- velez-sarsfield: 195
+- ca-rosario-central: 194
+- ca-talleres: 187
+- club-de-gimnasia-y-esgrima-la-plata: 187
+- cd-godoy-cruz-antonio-tomba: 185
 - ca-independiente: 183
-- ca-banfield: 182
-- club-atletico-san-lorenzo-de-almagro: 182
-- club-atletico-lanus: 170
-- ca-velez-sarsfield: 156
-- club-estudiantes-de-la-plata: 156
+- club-atletico-san-lorenzo-de-almagro: 179
+- ca-banfield: 177
+- club-atletico-lanus: 168
+- club-estudiantes-de-la-plata: 155
+- ca-velez-sarsfield: 154
 - club-atletico-river-plate: 139
-- aa-argentinos-juniors: 132
+- huracan: 100
+- rosario-central: 91
+- talleres-cba: 69
+- estudiantes-lp: 47
 - colon: 43
 - san-lorenzo: 43
 - defensa-y-justicia: 40
 - gimnasia-lp: 40
+- argentinos-juniors: 27
 - newells: 26
 - argentinos-jrs: 21
 - newells-old-boys: 20
 - velez: 19
+- aa-argentinos-juniors: 7
 - internazionale: 7
 - valencia: 5
 - argentina: 4
@@ -139,10 +139,10 @@
 - zaragoza: 1
 
 ## Players by decade
-- 1990s: 1475
-- 2010s: 1389
-- 2000s: 1248
-- 2020s: 963
+- 2010s: 1307
+- 2020s: 885
+- 1990s: 807
+- 2000s: 625
 - 1970s: 11
 - 1980s: 8
 - 1960s: 6

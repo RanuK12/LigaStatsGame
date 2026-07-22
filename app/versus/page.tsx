@@ -228,7 +228,7 @@ export default function VersusPage() {
 
     // Build interactive custom match chronicle
     const events: VersusMatchEvent[] = []
-    events.push({ minute: 0, type: "inicio", text: "🟢 ¡Comienza el Superclásico! Pitazo inicial del árbitro.", team: "home" })
+    events.push({ minute: 0, type: "inicio", text: "Pitazo inicial. ¡Comienza el partido!", team: "home" })
 
     let currentHomeGoals = 0
     let currentAwayGoals = 0
@@ -264,8 +264,8 @@ export default function VersusPage() {
       else currentAwayGoals++
 
       const text = g.assister
-        ? `⚽ ¡GOOOOOOL de ${g.scorer.name}! Remate espectacular asistido por ${g.assister.name}. [${currentHomeGoals} - ${currentAwayGoals}]`
-        : `⚽ ¡GOOOOOOL de ${g.scorer.name}! Golazo individual que rompe las redes. [${currentHomeGoals} - ${currentAwayGoals}]`
+        ? `¡GOOOOOOL de ${g.scorer.name}! Remate espectacular asistido por ${g.assister.name}. [${currentHomeGoals} - ${currentAwayGoals}]`
+        : `¡GOOOOOOL de ${g.scorer.name}! Golazo individual que rompe las redes. [${currentHomeGoals} - ${currentAwayGoals}]`
 
       events.push({
         minute: g.minute,
@@ -296,8 +296,8 @@ export default function VersusPage() {
         minute: min,
         type: isRed ? "roja" : "amarilla",
         text: isRed
-          ? `🟥 ¡Tarjeta ROJA directa para ${targetPlayer.name} por una falta temeraria!`
-          : `🟨 Tarjeta amarilla para ${targetPlayer.name} por protestar al árbitro.`,
+          ? `Tarjeta ROJA directa para ${targetPlayer.name} por una falta temeraria.`
+          : `Tarjeta amarilla para ${targetPlayer.name} por infracción.`,
         team: isHomeCard ? "home" : "away",
         playerId: targetPlayer.id,
         playerName: targetPlayer.name
@@ -320,7 +320,7 @@ export default function VersusPage() {
       events.push({
         minute: min,
         type: "atajada",
-        text: `🧤 ¡Soberbia atajada de ${targetGk.name} enviando la pelota al córner!`,
+        text: `Atajada brillante de ${targetGk.name} enviando la pelota al córner.`,
         team: isHomeGkSave ? "home" : "away",
         playerId: targetGk.id,
         playerName: targetGk.name
@@ -328,8 +328,8 @@ export default function VersusPage() {
     }
 
     // Midtime & Final
-    events.push({ minute: 45, type: "entretiempo", text: `⏸️ Final del primer tiempo. Marcador parcial: ${goalsList.filter(g => g.minute <= 45 && g.team === "home").length} - ${goalsList.filter(g => g.minute <= 45 && g.team === "away").length}`, team: "home" })
-    events.push({ minute: 90, type: "final", text: `🏁 ¡Final del partido! Resultado definitivo: ${res.homeGoals} - ${res.awayGoals}`, team: "home" })
+    events.push({ minute: 45, type: "entretiempo", text: `Entretiempo. Marcador parcial: ${goalsList.filter(g => g.minute <= 45 && g.team === "home").length} - ${goalsList.filter(g => g.minute <= 45 && g.team === "away").length}`, team: "home" })
+    events.push({ minute: 90, type: "final", text: `¡Final del partido! Resultado definitivo: ${res.homeGoals} - ${res.awayGoals}`, team: "home" })
 
     // Sort all events chronologically
     events.sort((a, b) => {
@@ -416,9 +416,9 @@ export default function VersusPage() {
             MODO MULTIJUGADOR LOCAL
           </span>
           <h2 className="font-display text-3xl font-black uppercase tracking-tight">
-            DUELO VERSUS 🤜🤛
+            DUELO VERSUS 1V1
           </h2>
-          <p className="text-slate-500 text-xs mt-1">
+          <p className="text-slate-500 text-xs mt-1 font-sport uppercase tracking-wider">
             Armá tu equipo con un amigo en la misma pantalla y simulen el partido de la fecha
           </p>
         </div>
@@ -442,7 +442,7 @@ export default function VersusPage() {
                 {/* DT 1 Setup */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-900">
-                    <span className="text-xl">🏠</span>
+                    <span className="text-xs font-bold text-[#75AADB] font-sport">LOCAL</span>
                     <h4 className="font-display font-bold text-white uppercase tracking-wider text-sm">DT LOCAL</h4>
                   </div>
                   <div>
@@ -471,7 +471,7 @@ export default function VersusPage() {
                 {/* DT 2 Setup */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-900">
-                    <span className="text-xl">🚌</span>
+                    <span className="text-xs font-bold text-[#75AADB] font-sport">VISITANTE</span>
                     <h4 className="font-display font-bold text-white uppercase tracking-wider text-sm">DT VISITANTE</h4>
                   </div>
                   <div>
@@ -525,8 +525,8 @@ export default function VersusPage() {
                   <div className="absolute top-0 left-0 bottom-0 w-[4px]" style={{ backgroundColor: activeDTKey === "dt1" ? "#74ACDF" : "#a855f7" }} />
                   <div>
                     <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport">Cancha de Selección</div>
-                    <h3 className="font-display text-lg font-black uppercase text-white mt-0.5">
-                      👉 Turno de {activeDT.name}
+                    <h3 className="font-display text-lg font-black uppercase text-white mt-0.5 font-sport tracking-wider">
+                      TURNO DE {activeDT.name}
                     </h3>
                   </div>
                   <div className="text-right">
@@ -647,7 +647,9 @@ export default function VersusPage() {
                           />
                         </div>
                       ) : (
-                        <span className="text-3xl">⚽</span>
+                        <svg className="w-6 h-6 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
                       )}
                     </motion.div>
                     {/* Spinner Arrow Indicator */}
@@ -739,7 +741,9 @@ export default function VersusPage() {
               exit={{ opacity: 0, scale: 0.98 }}
               className="card-gradient rounded-2xl p-8 sm:p-12 border border-slate-900 text-center"
             >
-              <div className="text-6xl mb-6 animate-bounce">🎮</div>
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#74ACDF]/30 bg-[#74ACDF]/10 text-xs font-black text-[#74ACDF] font-sport uppercase tracking-widest animate-pulse">
+                PASAR DISPOSITIVO
+              </div>
               <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight mb-2">
                 TURNO DEL JUGADOR 2
               </h3>
@@ -829,7 +833,7 @@ export default function VersusPage() {
                   onClick={handleStartSim}
                   className="btn-primary flex-1 py-4 text-xs font-bold tracking-widest uppercase shadow-[0_4px_25px_rgba(116,172,223,0.15)]"
                 >
-                  SIMULAR DUELO VERSUS 🏁
+                  SIMULAR DUELO VERSUS
                 </button>
                 <button
                   onClick={handleRestart}
@@ -867,12 +871,12 @@ export default function VersusPage() {
                   </div>
 
                   {matchResult && (
-                    <h3 className="font-display text-xl sm:text-2xl font-black uppercase text-yellow-400 mb-8 tracking-wide">
+                    <h3 className="font-display text-xl sm:text-2xl font-black uppercase text-yellow-400 mb-8 tracking-wide font-sport">
                       {matchResult.homeGoals > matchResult.awayGoals
-                        ? `🏆 ¡${dt1.name} es el Campeón!`
+                        ? `¡${dt1.name} ES EL CAMPEÓN DEL DUELO!`
                         : matchResult.homeGoals < matchResult.awayGoals
-                        ? `🏆 ¡${dt2.name} es el Campeón!`
-                        : "🤝 ¡Empate histórico en el duelo!"}
+                        ? `¡${dt2.name} ES EL CAMPEÓN DEL DUELO!`
+                        : "¡EMPATE HISTÓRICO EN EL DUELO!"}
                     </h3>
                   )}
 

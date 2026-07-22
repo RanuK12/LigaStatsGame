@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Outfit, Plus_Jakarta_Sans, Staatliches } from 'next/font/google'
+import { Outfit, Inter, Staatliches } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 
@@ -9,9 +9,9 @@ const outfit = Outfit({
   variable: '--font-display',
 })
 
-const plusJakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-sans',
 })
 
@@ -40,7 +40,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${outfit.variable} ${plusJakarta.variable} ${staatliches.variable}`}>
+    <html lang="es" className={`${outfit.variable} ${inter.variable} ${staatliches.variable}`}>
       <head>
         <link rel="icon" href="/LigaStatsGame/logos/afa.png" />
       </head>

@@ -60,7 +60,7 @@ export default function RecordsPage() {
         </article>
 
         <article className="card-gradient rounded-2xl p-5">
-          <h2 className="font-display text-xl font-black text-white">⚽ Goleadores</h2>
+          <h2 className="font-display text-xl font-black text-white uppercase tracking-wider">MÁXIMOS GOLEADORES</h2>
 
           <div className="mt-4 space-y-2">
             {topScorers.length > 0 ? topScorers.map((player, index) => (
@@ -74,7 +74,7 @@ export default function RecordsPage() {
                     {player.position || 'POS'} · {player.decade || 'Década N/D'}
                   </p>
                 </div>
-                <span className="font-display text-xl font-black text-emerald-400">{player.goalsClub}</span>
+                <span className="font-display text-xl font-black text-emerald-400 font-sport">{player.goalsClub} G</span>
               </div>
             )) : (
               <p className="text-sm text-slate-400">Todavía no hay datos suficientes.</p>
@@ -83,9 +83,9 @@ export default function RecordsPage() {
         </article>
       </section>
 
-      <div className="mt-10 text-center">
+      <div className="mt-10 text-center font-sport">
         <Link href="/draft?mode=clasico" className="btn-primary">
-          Armar mi once ⚽
+          ARMAR MI ONCE
         </Link>
       </div>
     </div>

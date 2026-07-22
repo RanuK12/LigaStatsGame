@@ -105,10 +105,10 @@ import { buildMatchChronicle, type MatchChronicle } from './chronicle';
 // GAME MODES
 // ═══════════════════════════════════════════════════════════════
 export const GAME_MODES: Record<string, GameModeConfig> = {
-  clasico: { id: 'clasico', name: 'Clásico', description: 'Ratings visibles. Intenta superar los 100 pts.', icon: '⚽', ratingsVisible: true, rerolls: 3 },
-  almanaque: { id: 'almanaque', name: 'El Almanaque', description: 'Sin estadísticas. Solo tu conocimiento.', icon: '🧠', ratingsVisible: false, rerolls: 2 },
-  liga: { id: 'liga', name: 'Liga Argentina', description: 'Formato real. 2 zonas + playoffs.', icon: '🏆', ratingsVisible: true, rerolls: 3 },
-  copa: { id: 'copa', name: 'Copa Argentina', description: 'Eliminación directa.', icon: '🏅', ratingsVisible: true, rerolls: 3 },
+  clasico: { id: 'clasico', name: 'Clásico', description: 'Ratings visibles. Intenta superar los 100 pts.', icon: '', ratingsVisible: true, rerolls: 3 },
+  almanaque: { id: 'almanaque', name: 'El Almanaque', description: 'Sin estadísticas. Solo tu conocimiento.', icon: '', ratingsVisible: false, rerolls: 2 },
+  liga: { id: 'liga', name: 'Liga Argentina', description: 'Formato real. 2 zonas + playoffs.', icon: '', ratingsVisible: true, rerolls: 3 },
+  copa: { id: 'copa', name: 'Copa Argentina', description: 'Eliminación directa.', icon: '', ratingsVisible: true, rerolls: 3 },
 };
 
 export type TeamStrength = {
@@ -440,7 +440,7 @@ export function simulateCopaArgentinaMatchByMatch(
 }
 
 export function generateShareText(squad: Squad, score: number, formation: string): string {
-  return `⚽ Mi 11 de ${squad.label} | ${formation} | Score: ${score}/99\n🇦🇷 Liga Argentina Fans — Armá tu 11 de la historia`;
+  return `Mi 11 de ${squad.label} | ${formation} | Score: ${score}/99\nLiga Argentina Fans — Armá tu 11 de la historia`;
 }
 
 export function validateSquadFormation(

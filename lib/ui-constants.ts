@@ -8,8 +8,8 @@ export const PC: Record<string, string> = {
 export const getPC = (pos?: string) => (pos && PC[pos]) || "#6b7280"
 
 export const POS_GROUPS: { label: string; positions: string[]; icon: string }[] = [
-  { label: "Arquero", positions: ["GK"], icon: "🧤" },
-  { label: "Defensa", positions: ["CB", "LB", "RB", "LWB", "RWB"], icon: "🛡️" },
-  { label: "Mediocampo", positions: ["CDM", "CM", "CAM", "LM", "RM"], icon: "⚙️" },
-  { label: "Ataque", positions: ["LW", "RW", "ST", "CF"], icon: "⚡" },
+  { label: "Arquero", positions: ["GK"], icon: "" },
+  { label: "Defensa", positions: ["CB", "LB", "RB", "LWB", "RWB"], icon: "" },
+  { label: "Mediocampo", positions: ["CDM", "CM", "CAM", "LM", "RM"], icon: "" },
+  { label: "Ataque", positions: ["LW", "RW", "ST", "CF"], icon: "" },
 ]

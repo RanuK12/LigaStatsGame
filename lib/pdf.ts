@@ -17,7 +17,7 @@ function getDivisionOutcome(result: TournamentResult) {
   if (result.type === "copa") {
     if (result.isChampion) {
       return {
-        text: "🏆 ¡CAMPEÓN DE LA COPA ARGENTINA! 🏆",
+        text: "CAMPEÓN DE LA COPA ARGENTINA",
         bg: [212, 175, 55], // Gold
         fg: [10, 14, 27]
       }
@@ -32,34 +32,34 @@ function getDivisionOutcome(result: TournamentResult) {
   // Liga outcomes
   if (result.playerPos === 14) {
     return {
-      text: "🚨 DESCENDIDO - RELEGADO A LA PRIMERA B NACIONAL 🚨",
+      text: "DESCENDIDO - RELEGADO A LA PRIMERA B NACIONAL",
       bg: [239, 68, 68], // Red
       fg: [255, 255, 255]
     }
   }
   if (result.isChampion) {
     return {
-      text: "🏆 ¡CAMPEÓN DE LA LIGA PROFESIONAL DE FÚTBOL! 🏆",
+      text: "CAMPEÓN DE LA LIGA PROFESIONAL DE FÚTBOL",
       bg: [212, 175, 55], // Gold
       fg: [10, 14, 27]
     }
   }
   if (result.playerPos && result.playerPos <= 3) {
     return {
-      text: "🔵 CLASIFICADO A LA COPA LIBERTADORES DE AMÉRICA 🔵",
+      text: "CLASIFICADO A LA COPA LIBERTADORES DE AMÉRICA",
       bg: [59, 130, 246], // Blue
       fg: [255, 255, 255]
     }
   }
   if (result.playerPos && result.playerPos >= 4 && result.playerPos <= 6) {
     return {
-      text: "🟢 CLASIFICADO A LA COPA SUDAMERICANA 🟢",
+      text: "CLASIFICADO A LA COPA SUDAMERICANA",
       bg: [16, 185, 129], // Emerald
       fg: [255, 255, 255]
     }
   }
   return {
-    text: "⚪ PERMANENCIA ASEGURADA EN PRIMERA DIVISIÓN ⚪",
+    text: "PERMANENCIA ASEGURADA EN PRIMERA DIVISIÓN",
     bg: [71, 85, 105], // Slate
     fg: [255, 255, 255]
   }
@@ -349,8 +349,8 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setTextColor(226, 232, 240)
   doc.setFontSize(8)
   doc.setFont("helvetica", "normal")
-  doc.text(`⚽ Goles anotados: ${totalGoals}`, pad + 8, statsY + 18)
-  doc.text(`🅰️ Asistencias totales: ${totalAssists}`, pad + 8, statsY + 26)
+  doc.text(`Goles anotados: ${totalGoals}`, pad + 8, statsY + 18)
+  doc.text(`Asistencias totales: ${totalAssists}`, pad + 8, statsY + 26)
 
   if (topScorer) {
     doc.setTextColor(226, 232, 240)

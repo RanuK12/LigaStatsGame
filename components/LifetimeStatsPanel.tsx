@@ -33,7 +33,7 @@ export default function LifetimeStatsPanel() {
       className="mx-auto mt-10 max-w-5xl"
     >
       <article className="card-gradient rounded-2xl p-5">
-        <h2 className="font-display text-xl font-black text-white">🏅 Tus récords</h2>
+        <h2 className="font-display text-xl font-black text-white uppercase tracking-wider">TUS RÉCORDS HISTÓRICOS</h2>
 
         <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
           <StatBox label="Drafts jugados" value={stats.draftsCompleted} />
@@ -45,7 +45,7 @@ export default function LifetimeStatsPanel() {
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {stats.biggestWin && (
             <div className="rounded-xl bg-slate-900/40 px-4 py-3">
-              <p className="text-xs uppercase tracking-wider text-slate-400">Mayor goleada</p>
+              <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">Mayor goleada</p>
               <p className="mt-1 font-bold text-white">
                 {stats.biggestWin.score} vs {stats.biggestWin.rival}
                 <span className="ml-2 text-xs text-slate-500">({stats.biggestWin.type} · {stats.biggestWin.date})</span>
@@ -54,7 +54,7 @@ export default function LifetimeStatsPanel() {
           )}
           {stats.bestPlayer && (
             <div className="rounded-xl bg-slate-900/40 px-4 py-3">
-              <p className="text-xs uppercase tracking-wider text-slate-400">Mejor jugador de tu historia</p>
+              <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">Mejor jugador de tu historia</p>
               <p className="mt-1 font-bold text-white">
                 {stats.bestPlayer.playerName}
                 <span className="ml-2 font-display font-black text-yellow-400">{stats.bestPlayer.rating}</span>
@@ -65,12 +65,12 @@ export default function LifetimeStatsPanel() {
 
         {topPlayers.length > 0 && (
           <div className="mt-4">
-            <p className="text-xs uppercase tracking-wider text-slate-400">Goleadores históricos de tus drafts</p>
-            <div className="mt-2 space-y-2">
+            <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">Goleadores históricos de tus drafts</p>
+            <div className="mt-2 space-y-2 font-sans">
               {topPlayers.map((p, i) => (
                 <div key={p.name} className="flex items-center justify-between rounded-xl bg-slate-900/40 px-4 py-2">
                   <p className="font-bold text-white">{i + 1}. {p.name} <span className="text-xs text-slate-500">({p.sims} torneos)</span></p>
-                  <span className="font-display font-black text-emerald-400">{p.goals}⚽ {p.assists}🅰️</span>
+                  <span className="font-display font-black text-emerald-400 font-sport">{p.goals} G · {p.assists} A</span>
                 </div>
               ))}
             </div>

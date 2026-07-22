@@ -374,7 +374,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                   <motion.div
                     initial={{ scale: 0 }} animate={{ scale: [0, 1.3, 1] }}
                     transition={{ duration: 0.6 }}
-                    className="text-6xl mb-3">🏆</motion.div>
+                    className="flex justify-center mb-3">
+                    <div className="w-14 h-14 rounded-full border border-yellow-500/30 bg-yellow-500/10 flex items-center justify-center">
+                      <svg className="w-7 h-7 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    </div>
+                  </motion.div>
                 )}
                 
                 {/* LPF logo on the tournament final view if it's Liga */}
@@ -394,37 +400,37 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                     : "Subcampeón"}
                 </h1>
                 {isChamp && (
-                  <p className="text-yellow-300 font-bold text-sm mb-2 font-sport tracking-wider uppercase">
-                    🎉 ¡{result.teamLabel} es campeón!
+                  <p className="text-yellow-300 font-bold text-xs mb-2 font-sport tracking-widest uppercase">
+                    ¡{result.teamLabel} ES CAMPEÓN DEL TORNEO!
                   </p>
                 )}
                 {!isChamp && (
-                  <p className="text-slate-400 text-xs mb-2">
+                  <p className="text-slate-400 text-xs mb-2 font-sport uppercase tracking-wider">
                     {result.type === "copa" && result.eliminated
-                      ? "Seguí intentando, el próximo draft será mejor 💪"
-                      : `El campeón fue ${result.champion}. ¡Mejor suerte en el próximo draft! 💪`}
+                      ? "Seguí intentando, el próximo draft será mejor."
+                      : `El campeón fue ${result.champion}. ¡Mejor suerte en el próximo draft!`}
                   </p>
                 )}
 
                 {/* Division Outcome Banners for Liga */}
                 {result.type === "liga" && result.playerPos === 14 && (
-                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 text-xs font-semibold leading-relaxed text-center shadow-[0_0_12px_rgba(239,68,68,0.1)] animate-pulse">
-                    🚨 ¡LO SENTIMOS! Tu equipo quedó último en la tabla y desciende de categoría. ¡A levantar cabeza y buscar el ascenso en el próximo draft! 🚨
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 text-xs font-bold leading-relaxed text-center shadow-[0_0_12px_rgba(239,68,68,0.1)] uppercase font-sport tracking-wider">
+                    LO SENTIMOS — Tu equipo quedó último en la tabla y desciende a la B Nacional.
                   </div>
                 )}
                 {result.type === "liga" && result.playerPos && result.playerPos <= 3 && !isChamp && (
-                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-200 text-xs font-semibold leading-relaxed text-center">
-                    🔵 ¡CLASIFICADO A LA COPA LIBERTADORES! Tu once ideal jugará el torneo continental más prestigioso. ¡Gran campaña! 🔵
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-200 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
+                    CLASIFICADO A LA COPA LIBERTADORES — Tu once jugará el torneo continental más prestigioso.
                   </div>
                 )}
                 {result.type === "liga" && result.playerPos && result.playerPos >= 4 && result.playerPos <= 6 && (
-                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-200 text-xs font-semibold leading-relaxed text-center">
-                    🟢 ¡CLASIFICADO A LA COPA SUDAMERICANA! Aseguraste competencia continental para la próxima temporada. ¡Muy buen torneo! 🟢
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-200 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
+                    CLASIFICADO A LA COPA SUDAMERICANA — Aseguraste competencia internacional para la próxima temporada.
                   </div>
                 )}
                 {result.type === "liga" && result.playerPos && result.playerPos >= 7 && result.playerPos <= 13 && (
-                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-slate-700 bg-slate-800/20 text-slate-300 text-xs font-semibold leading-relaxed text-center font-sans">
-                    ⚪ ¡CUMPLISTE EL OBJETIVO! Aseguraste la permanencia en la Primera División de la Liga Profesional de Fútbol. ⚪
+                  <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-slate-700 bg-slate-800/20 text-slate-300 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
+                    PERMANENCIA ASEGURADA — Mantuviste la categoría en la Liga Profesional de Fútbol.
                   </div>
                 )}
 
