@@ -318,9 +318,9 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
    ═══════════════════════════════════════════════════════════════ */
 function HeroSection() {
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-14 pb-10">
-      {/* Ambient glow */}
-      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[#74ACDF]/5 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-12 pb-14">
+      {/* Ambient glow spotlight */}
+      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[600px] h-[280px] bg-gradient-to-b from-[#74ACDF]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -328,58 +328,65 @@ function HeroSection() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="text-center relative"
       >
-        {/* Sub-badge */}
+        {/* Top Official Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="inline-flex items-center bg-[#74ACDF]/8 border border-[#74ACDF]/15 rounded-full px-4 py-1.5 mb-6"
+          transition={{ delay: 0.15 }}
+          className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#74ACDF]/15 via-blue-500/10 to-[#74ACDF]/15 border border-[#74ACDF]/30 rounded-full px-5 py-2 mb-6 shadow-[0_0_20px_rgba(116,172,223,0.15)]"
         >
-          <span className="text-[10px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport">EL DRAFT DEL FÚTBOL ARGENTINO</span>
+          <span className="relative w-4 h-5 inline-block shrink-0">
+            <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
+          </span>
+          <span className="text-[11px] font-bold text-white uppercase tracking-[0.2em] font-sport">
+            EL GAME DRAFT DEL FÚTBOL ARGENTINO
+          </span>
         </motion.div>
 
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.05] mb-5 uppercase tracking-tighter">
-          ARMÁ TU <span className="gradient-text">EQUIPO SOÑADO</span>
-        </h2>
+        {/* Hero Title */}
+        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.02] mb-6 uppercase tracking-tight">
+          ARMÁ TU <span className="gradient-text drop-shadow-[0_4px_25px_rgba(116,172,223,0.3)]">EQUIPO SOÑADO</span>
+        </h1>
 
-        <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-10 leading-relaxed font-sans">
-          Elegí de los mejores planteles históricos del fútbol argentino por año.
-          Simulá campeonatos enteros con estadísticas individuales reales.
+        <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium">
+          Drafteá los mejores planteles del fútbol argentino temporada por temporada. 
+          Simulá la Liga Profesional y Copa Argentina con estadísticas reales y química de equipo.
         </p>
 
-        {/* CTA buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-14">
-          <Link href="/draft?mode=clasico" className="btn-primary px-8 py-4">
-            Jugar Ahora
+        {/* Primary Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 font-sport">
+          <Link href="/draft?mode=clasico" className="btn-primary px-9 py-4 text-xs font-bold tracking-widest uppercase shadow-[0_4px_30px_rgba(116,172,223,0.25)] hover:scale-[1.02] transition-transform">
+            DRAFT CLÁSICO 11
           </Link>
-          <Link href="/draft?mode=liga" className="btn-secondary px-8 py-4 flex items-center gap-2">
+          <Link href="/draft?mode=liga" className="btn-secondary px-8 py-4 text-xs font-bold tracking-widest uppercase flex items-center gap-2.5 hover:scale-[1.02] transition-transform">
             <span className="relative w-4 h-5 inline-block shrink-0">
               <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
             </span>
-            Liga Argentina
+            JUGAR LIGA ARGENTINA
           </Link>
         </div>
 
-        {/* Stats row */}
+        {/* Hero Key Metrics */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-2xl mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto"
         >
           {[
-            { val: clubs.length, label: 'Clubes oficiales' },
-            { val: squads.length, label: 'Planteles limpios' },
-            { val: 5, label: 'Formatos de juego' },
-            { val: 11, label: 'Titulares en cancha' },
+            { val: "3.949", label: "Jugadores Reales", sub: "100% Auditados" },
+            { val: `${clubs.length}`, label: "Clubes Oficiales", sub: "Liga Profesional" },
+            { val: `${squads.length}`, label: "Planteles", sub: "Nóminas Históricas" },
+            { val: "5", label: "Modos de Juego", sub: "Liga, Copa & 1v1" },
           ].map((s, i) => (
             <motion.div
               key={i}
               variants={item}
-              className="card-gradient rounded-xl py-5 px-3 text-center cursor-default border border-slate-900"
+              className="card-gradient rounded-2xl py-5 px-4 text-center border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md hover:border-[#74ACDF]/40 transition-colors"
             >
-              <div className="text-2xl sm:text-3xl font-display font-black text-white">{s.val}</div>
-              <div className="text-[#74ACDF]/60 text-[9px] mt-1.5 font-bold uppercase tracking-wider font-sport">{s.label}</div>
+              <div className="text-3xl sm:text-4xl font-display font-black text-white">{s.val}</div>
+              <div className="text-[#74ACDF] text-[10px] mt-1.5 font-bold uppercase tracking-widest font-sport">{s.label}</div>
+              <div className="text-[9px] text-slate-400 mt-0.5 font-sans font-medium">{s.sub}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -520,6 +527,99 @@ function HowToPlay() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   DETALLES DE LA LIGA SHOWCASE
+   ═══════════════════════════════════════════════════════════════ */
+function LigaDetailsShowcase() {
+  const details = [
+    {
+      title: "ESTRUCTURA LPF Y CLASIFICACIÓN",
+      badge: "LIGA PROFESIONAL",
+      color: "border-[#74ACDF]/30 text-[#74ACDF]",
+      items: [
+        "14 Equipos Históricos por Sorteo Determinístico",
+        "Clasificación Directa a Copa Libertadores (1° al 3°)",
+        "Clasificación a Copa Sudamericana (4° al 6°)",
+        "Tabla de Promedios y Descenso Directo a la Primera B (14°)"
+      ]
+    },
+    {
+      title: "COPA ARGENTINA Y DEFINICIONES",
+      badge: "ELIMINACIÓN DIRECTA",
+      color: "border-amber-500/30 text-amber-400",
+      items: [
+        "Formato Federal de Llaves de Eliminación Directa",
+        "Simulación Partido a Partido con Crónica Radial en Vivo",
+        "Definiciones Agónicas por Penales en Empate",
+        "Campeón del Cuadro Clasifica a la Recopa del Juego"
+      ]
+    },
+    {
+      title: "MOTOR TÁCTICO Y QUÍMICA 100%",
+      badge: "STATS & QUÍMICA",
+      color: "border-emerald-500/30 text-emerald-400",
+      items: [
+        "Bonificación por Clubes Compartidos (Boca, River, Racing, etc.)",
+        "Química por Posición Natural (GK, CB, LB, CDM, CAM, ST)",
+        "Motor de Cálculo Individual de Goles, Asistencias y Vallas Invictas",
+        "Generación Instantánea del Reporte PDF Oficial de la Fecha"
+      ]
+    }
+  ]
+
+  return (
+    <section className="relative z-10 max-w-6xl mx-auto px-4 pb-20">
+      <motion.div
+        variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}
+        className="text-center mb-10"
+      >
+        <div className="inline-flex items-center gap-2 bg-[#74ACDF]/10 border border-[#74ACDF]/20 px-3.5 py-1 rounded-full mb-3">
+          <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-widest">SISTEMA OFICIAL DE SIMULACIÓN</span>
+        </div>
+        <h3 className="font-display text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
+          DETALLES DE LA <span className="gradient-text">LIGA Y TORNEOS</span>
+        </h3>
+        <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto font-sans mt-2">
+          Conocé el motor táctico, las reglas de descenso y la clasificación continental del juego
+        </p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {details.map((card, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            className="card-gradient rounded-3xl p-6 border border-white/10 relative flex flex-col justify-between hover:border-[#74ACDF]/40 transition-colors shadow-lg"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className={`text-[9px] font-bold px-2.5 py-1 rounded-full border font-sport tracking-widest uppercase ${card.color}`}>
+                  {card.badge}
+                </span>
+                <span className="text-xs font-black text-slate-600 font-sport">0{idx + 1}</span>
+              </div>
+              <h4 className="font-display text-base font-bold text-white mb-4 uppercase tracking-wider">
+                {card.title}
+              </h4>
+              <ul className="space-y-3 font-sans text-xs text-slate-300">
+                {card.items.map((it, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#74ACDF] mt-1.5 shrink-0" />
+                    <span className="leading-relaxed">{it}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════
    SUPPORT THE PROJECT (donation box)
    ═══════════════════════════════════════════════════════════════ */
 function DonationSection() {
@@ -639,6 +739,9 @@ export default function HomePage() {
 
       {/* ── HOW TO PLAY ── */}
       <HowToPlay />
+
+      {/* ── DETALLES DE LA LIGA SHOWCASE ── */}
+      <LigaDetailsShowcase />
 
       {/* ── EXTRA LINKS ── */}
       <section className="relative z-10 max-w-6xl mx-auto px-4 pb-16">

@@ -1,7 +1,7 @@
 {
   "totals": {
     "clubs": 29,
-    "players": 3938,
+    "players": 3949,
     "squads": 15
   },
   "players": {
@@ -24,9 +24,9 @@
     "duplicatedPlayerRefs": []
   },
   "coverage": {
-    "playersWithRating": 3938,
-    "playersWithClubs": 3938,
-    "playersWithValidPosition": 3938,
+    "playersWithRating": 3949,
+    "playersWithClubs": 3949,
+    "playersWithValidPosition": 3949,
     "squadsPlayable": 15,
     "squadsByClub": {
       "river-plate": 1,
@@ -167,22 +167,24 @@
       "1970s": 11,
       "1980s": 8,
       "1990s": 807,
-      "2020s": 885,
+      "2020s": 896,
       "2000s": 625,
       "2010s": 1307
     },
     "playersByPosition": {
-      "GK": 358,
+      "GK": 357,
       "CB": 688,
-      "RB": 278,
-      "LB": 286,
-      "CDM": 337,
-      "CM": 566,
-      "CAM": 321,
-      "ST": 582,
-      "RW": 251,
-      "LW": 244,
-      "CF": 27
+      "RB": 280,
+      "LB": 287,
+      "CDM": 342,
+      "CM": 559,
+      "CAM": 326,
+      "ST": 589,
+      "RW": 244,
+      "LW": 243,
+      "CF": 27,
+      "LM": 3,
+      "RM": 4
     }
   },
   "summary": {

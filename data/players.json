@@ -352,11 +352,6 @@
         "years": "2006-2009"
       },
       {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2009-2010"
-      },
-      {
         "id": "internacional",
         "name": "Internacional",
         "years": "2010-2011"
@@ -585,11 +580,6 @@
         "id": "internazionale",
         "name": "Internazionale",
         "years": "1986-1988"
-      },
-      {
-        "id": "river-plate",
-        "name": "River Plate",
-        "years": "1988-1989"
       }
     ],
     "capsNationalTeam": 70,
@@ -1370,11 +1360,6 @@
         "years": "1999-2003"
       },
       {
-        "id": "atletico-madrid",
-        "name": "Atlético de Madrid",
-        "years": "2003-2005"
-      },
-      {
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2005-2006"
@@ -1453,11 +1438,6 @@
         "id": "internazionale",
         "name": "Internazionale",
         "years": "2004-2006"
-      },
-      {
-        "id": "estudiantes-lp",
-        "name": "Estudiantes LP",
-        "years": "2006-2014"
       }
     ],
     "capsNationalTeam": 73,
@@ -1507,11 +1487,6 @@
         "id": "villarreal",
         "name": "Villarreal CF",
         "years": "2003-2007"
-      },
-      {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2007-2014"
       },
       {
         "id": "argentinos-juniors",
@@ -1825,24 +1800,9 @@
         "years": "2004-2005"
       },
       {
-        "id": "chelsea",
-        "name": "Chelsea",
-        "years": "2005-2006"
-      },
-      {
-        "id": "internazionale",
-        "name": "Internazionale",
-        "years": "2006-2008"
-      },
-      {
         "id": "genoa",
         "name": "Genoa",
         "years": "2009-2010"
-      },
-      {
-        "id": "parma",
-        "name": "Parma",
-        "years": "2010-2012"
       }
     ],
     "capsNationalTeam": 64,
@@ -1910,19 +1870,9 @@
         "years": "2013-2015"
       },
       {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2015-2016"
-      },
-      {
         "id": "shanghai-shenhua",
         "name": "Shanghai Shenhua",
         "years": "2017-2018"
-      },
-      {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2018-2021"
       }
     ],
     "capsNationalTeam": 76,
@@ -1978,11 +1928,6 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "1981-1982"
-      },
-      {
-        "id": "valencia",
-        "name": "Valencia CF",
-        "years": "1982-1984"
       }
     ],
     "capsNationalTeam": 43,
@@ -2047,11 +1992,6 @@
         "id": "alaves",
         "name": "Deportivo Alavés",
         "years": "2004"
-      },
-      {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2004-2011"
       }
     ],
     "capsNationalTeam": 15,
@@ -2118,11 +2058,6 @@
         "id": "juventus",
         "name": "Juventus",
         "years": "2022-2023"
-      },
-      {
-        "id": "benfica",
-        "name": "SL Benfica",
-        "years": "2023-2025"
       }
     ],
     "capsNationalTeam": 145,
@@ -2203,11 +2138,6 @@
         "id": "torino",
         "name": "Torino",
         "years": "1993-1994"
-      },
-      {
-        "id": "river-plate",
-        "name": "River Plate",
-        "years": "1994-1997"
       }
     ],
     "capsNationalTeam": 73,
@@ -2269,11 +2199,6 @@
         "years": "2005-2006"
       },
       {
-        "id": "colon",
-        "name": "Colón",
-        "years": "2006-2007"
-      },
-      {
         "id": "lanus",
         "name": "Lanús",
         "years": "2007-2009,2015"
@@ -2314,19 +2239,9 @@
         "years": "2015"
       },
       {
-        "id": "lanus",
-        "name": "Lanús",
-        "years": "2016-2017"
-      },
-      {
         "id": "deportivo-cali",
         "name": "Deportivo Cali",
         "years": "2018"
-      },
-      {
-        "id": "lanus",
-        "name": "Lanús",
-        "years": "2019-2023"
       }
     ],
     "capsNationalTeam": 2,
@@ -2366,11 +2281,6 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2001-2003"
-      },
-      {
-        "id": "newells",
-        "name": "Newell's Old Boys",
-        "years": "2003"
       },
       {
         "id": "libertad",
@@ -50284,6 +50194,16 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "olympo",
+        "name": "Olimpo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -50296,7 +50216,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 77,
+    "rating": 83,
     "legendary": false
   },
   {
@@ -50606,7 +50526,7 @@
     "name": "Roger Martinez",
     "fullName": "Roger Martinez",
     "birthDate": "",
-    "position": "CM",
+    "position": "ST",
     "positions": [
       "CM"
     ],
@@ -50618,6 +50538,21 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025"
+      },
+      {
+        "id": "santamarina",
+        "name": "Santamarina",
         "years": "2025"
       }
     ],
@@ -52754,6 +52689,21 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2019"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -53965,7 +53915,7 @@
     "name": "Matías Pellegrini",
     "fullName": "Matías Pellegrini",
     "birthDate": "",
-    "position": "RW",
+    "position": "LM",
     "positions": [
       "RW"
     ],
@@ -53983,6 +53933,16 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2017"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -54051,6 +54011,16 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2023"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -54468,6 +54438,16 @@
         "id": "club-atletico-huracan",
         "name": "Huracán",
         "years": "2024"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "chacarita",
+        "name": "Chacarita",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -56577,7 +56557,7 @@
     "name": "Iker Muniain",
     "fullName": "Iker Muniain",
     "birthDate": "",
-    "position": "LW",
+    "position": "CAM",
     "positions": [
       "LW"
     ],
@@ -56590,6 +56570,11 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2023"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -56602,7 +56587,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 57,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -56611,7 +56596,7 @@
     "name": "Matías Reali",
     "fullName": "Matías Reali",
     "birthDate": "",
-    "position": "RW",
+    "position": "LW",
     "positions": [
       "RW"
     ],
@@ -56624,6 +56609,16 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2023"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Independiente-rivadavia",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -57379,6 +57374,16 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2022"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -57391,7 +57396,7 @@
     "marketValue": "",
     "activeYears": "2018-2022",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 82,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -57456,6 +57461,21 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2022"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -57477,7 +57497,7 @@
     "name": "Santiago Simon",
     "fullName": "Santiago Simon",
     "birthDate": "",
-    "position": "CM",
+    "position": "RM",
     "positions": [
       "CM"
     ],
@@ -57488,6 +57508,11 @@
     "clubs": [
       {
         "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "river",
         "name": "River Plate",
         "years": "2025"
       }
@@ -57522,6 +57547,16 @@
       {
         "id": "river-plate",
         "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
         "years": "2025"
       }
     ],
@@ -57624,6 +57659,16 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -57636,7 +57681,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 75,
+    "rating": 78,
     "legendary": false
   },
   {
@@ -57939,6 +57984,16 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -57951,7 +58006,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 75,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -58184,6 +58239,16 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2019"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -58244,7 +58309,7 @@
     "name": "Kevin Zenon",
     "fullName": "Kevin Zenon",
     "birthDate": "",
-    "position": "LW",
+    "position": "LM",
     "positions": [
       "LW"
     ],
@@ -58256,6 +58321,16 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
         "years": "2025"
       }
     ],
@@ -58269,7 +58344,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 71,
+    "rating": 81,
     "legendary": false
   },
   {
@@ -58574,7 +58649,7 @@
     "name": "Alexis Canelo",
     "fullName": "Alexis Canelo",
     "birthDate": "",
-    "position": "CAM",
+    "position": "ST",
     "positions": [
       "CAM"
     ],
@@ -58586,6 +58661,16 @@
       {
         "id": "colon",
         "name": "Colón de Santa Fe",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "quilmes",
+        "name": "Quilmes",
         "years": "2025"
       }
     ],
@@ -59975,6 +60060,11 @@
         "id": "estudiantes-lp",
         "name": "Estudiantes de La Plata",
         "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -60041,6 +60131,16 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2022"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -61331,7 +61431,7 @@
     "name": "Lautaro Acosta",
     "fullName": "Lautaro Acosta",
     "birthDate": "",
-    "position": "CAM",
+    "position": "LW",
     "positions": [
       "CAM"
     ],
@@ -61343,6 +61443,11 @@
       {
         "id": "lanus",
         "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
         "years": "2025"
       }
     ],
@@ -61356,7 +61461,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -61470,7 +61575,7 @@
     "name": "Ramiro Carrera",
     "fullName": "Ramiro Carrera",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -61488,6 +61593,16 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2015"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -61500,7 +61615,7 @@
     "marketValue": "",
     "activeYears": "2015-2023",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -62191,6 +62306,16 @@
       {
         "id": "estudiantes-lp",
         "name": "Estudiantes de La Plata",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
         "years": "2025"
       }
     ],
@@ -63354,7 +63479,7 @@
     "name": "Elias Baez",
     "fullName": "Elias Baez",
     "birthDate": "",
-    "position": "CM",
+    "position": "LB",
     "positions": [
       "CM"
     ],
@@ -64561,7 +64686,7 @@
     "name": "Nacho Fernandez",
     "fullName": "Nacho Fernandez",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -64573,6 +64698,16 @@
       {
         "id": "river-plate",
         "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
         "years": "2025"
       }
     ],
@@ -64586,7 +64721,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 79,
     "legendary": false
   },
   {
@@ -64802,6 +64937,31 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2022"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -64814,7 +64974,7 @@
     "marketValue": "",
     "activeYears": "2017-2022",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 82,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -64836,6 +64996,16 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -64848,7 +65018,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 76,
+    "rating": 83,
     "legendary": false
   },
   {
@@ -65573,6 +65743,11 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -65585,7 +65760,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 78,
+    "rating": 84,
     "legendary": false
   },
   {
@@ -65605,6 +65780,16 @@
       {
         "id": "lanus",
         "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
         "years": "2025"
       }
     ],
@@ -65626,7 +65811,7 @@
     "name": "Tomas Belmonte",
     "fullName": "Tomas Belmonte",
     "birthDate": "",
-    "position": "CM",
+    "position": "CDM",
     "positions": [
       "CM"
     ],
@@ -65638,6 +65823,11 @@
       {
         "id": "lanus",
         "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
         "years": "2025"
       }
     ],
@@ -65651,7 +65841,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 71,
+    "rating": 77,
     "legendary": false
   },
   {
@@ -65677,6 +65867,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2015"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -65689,7 +65884,7 @@
     "marketValue": "",
     "activeYears": "2015-2025",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -67020,6 +67215,11 @@
         "id": "san-lorenzo",
         "name": "San Lorenzo",
         "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -67121,6 +67321,11 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2023"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -70294,6 +70499,11 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2021"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -70306,7 +70516,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -70401,6 +70611,11 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2022"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -70413,7 +70628,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -71281,6 +71496,16 @@
         "id": "talleres-cba",
         "name": "Talleres de Córdoba",
         "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -71416,6 +71641,11 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2022"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -73092,7 +73322,7 @@
     "name": "Gonzalo Luján",
     "fullName": "Gonzalo Luján",
     "birthDate": "",
-    "position": "CB",
+    "position": "RB",
     "positions": [
       "CB"
     ],
@@ -73105,6 +73335,11 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2020"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -73173,6 +73408,11 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2021"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -73185,7 +73425,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -73241,6 +73481,11 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2022"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -73342,6 +73587,16 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2023"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "olympo",
+        "name": "Olimpo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -74517,6 +74772,21 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -74783,6 +75053,16 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2015"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -74855,6 +75135,16 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
         "years": "2025"
       }
     ],
@@ -74938,6 +75228,21 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2019"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -75006,6 +75311,21 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -75018,7 +75338,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 79,
     "legendary": false
   },
   {
@@ -75039,6 +75359,11 @@
         "id": "club-atletico-river-plate",
         "name": "River Plate",
         "years": "2023"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -75051,7 +75376,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 82,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -75501,6 +75826,26 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2016"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -75814,6 +76159,16 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -75826,7 +76181,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 71,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -76056,6 +76411,16 @@
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
         "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -76068,7 +76433,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 82,
     "legendary": false
   },
   {
@@ -76532,6 +76897,16 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -76725,6 +77100,21 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2019"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -76746,7 +77136,7 @@
     "name": "Felipe Loyola",
     "fullName": "Felipe Loyola",
     "birthDate": "",
-    "position": "CM",
+    "position": "RM",
     "positions": [
       "CM"
     ],
@@ -76759,6 +77149,11 @@
         "id": "ca-independiente",
         "name": "Independiente",
         "years": "2023"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -76793,6 +77188,11 @@
         "id": "ca-independiente",
         "name": "Independiente",
         "years": "2023"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -77495,6 +77895,11 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
         "years": "2025"
       }
     ],
@@ -79007,6 +79412,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2022"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -79075,6 +79485,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2022"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -79087,7 +79502,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 80,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -80328,6 +80743,11 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2015"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -80340,7 +80760,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -80614,6 +81034,16 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2019"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -82123,6 +82553,26 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2016"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -82135,7 +82585,7 @@
     "marketValue": "",
     "activeYears": "2016-2023",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -85368,6 +85818,11 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -85380,7 +85835,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 78,
+    "rating": 83,
     "legendary": false
   },
   {
@@ -85434,6 +85889,16 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
         "years": "2025"
       }
     ],
@@ -85523,7 +85988,7 @@
     "name": "Elias Gomez",
     "fullName": "Elias Gomez",
     "birthDate": "",
-    "position": "RB",
+    "position": "LB",
     "positions": [
       "RB"
     ],
@@ -85535,6 +86000,26 @@
       {
         "id": "banfield",
         "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
         "years": "2025"
       }
     ],
@@ -85730,7 +86215,7 @@
     "name": "Maximiliano Salas",
     "fullName": "Maximiliano Salas",
     "birthDate": "",
-    "position": "LW",
+    "position": "ST",
     "positions": [
       "LW"
     ],
@@ -85742,6 +86227,21 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "all-boys",
+        "name": "All-boys",
+        "years": "2025"
+      },
+      {
+        "id": "palestino",
+        "name": "Palestino",
         "years": "2025"
       }
     ],
@@ -85755,7 +86255,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 72,
+    "rating": 79,
     "legendary": false
   },
   {
@@ -86112,6 +86612,21 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -86199,6 +86714,16 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2021"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -86739,6 +87264,26 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -87462,6 +88007,16 @@
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
         "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "patronato",
+        "name": "Patronato",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -87474,7 +88029,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 72,
+    "rating": 79,
     "legendary": false
   },
   {
@@ -87680,6 +88235,26 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2021"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -88248,6 +88823,21 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2023"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "almagro",
+        "name": "Almagro",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -88260,7 +88850,7 @@
     "marketValue": "",
     "activeYears": "2018-2023",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -88669,6 +89259,21 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2023"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia-mendoza",
+        "name": "Gimnasia-mendoza",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -88690,7 +89295,7 @@
     "name": "Adrian Martinez",
     "fullName": "Adrian Martinez",
     "birthDate": "",
-    "position": "GK",
+    "position": "ST",
     "positions": [
       "GK"
     ],
@@ -88702,6 +89307,16 @@
       {
         "id": "river-plate",
         "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
         "years": "2025"
       }
     ],
@@ -88715,7 +89330,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 83,
     "legendary": false
   },
   {
@@ -89207,6 +89822,11 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2021"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -89219,7 +89839,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 81,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -90463,6 +91083,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2023"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -94356,6 +94986,16 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2015"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -96410,6 +97050,11 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -96673,6 +97318,11 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2023"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -96707,6 +97357,11 @@
         "id": "club-atletico-river-plate",
         "name": "River Plate",
         "years": "2022"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -96719,7 +97374,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 80,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -96728,7 +97383,7 @@
     "name": "Franco Mastantuono",
     "fullName": "Franco Mastantuono",
     "birthDate": "",
-    "position": "RW",
+    "position": "CAM",
     "positions": [
       "RW"
     ],
@@ -96741,6 +97396,11 @@
         "id": "club-atletico-river-plate",
         "name": "River Plate",
         "years": "2022"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -96785,6 +97445,16 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2018"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -97308,6 +97978,16 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2022"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -97488,6 +98168,16 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -97500,7 +98190,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 74,
+    "rating": 79,
     "legendary": false
   },
   {
@@ -97604,6 +98294,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2024"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -97616,7 +98311,7 @@
     "marketValue": "",
     "activeYears": "2019-2024",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 80,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -97732,7 +98427,7 @@
     "name": "Jabes Saralegui",
     "fullName": "Jabes Saralegui",
     "birthDate": "",
-    "position": "CM",
+    "position": "RM",
     "positions": [
       "CM"
     ],
@@ -97745,6 +98440,11 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2021"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -97901,6 +98601,16 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2018"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -98154,6 +98864,16 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2019"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -98391,6 +99111,11 @@
       {
         "id": "estudiantes-lp",
         "name": "Estudiantes de La Plata",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
         "years": "2025"
       }
     ],
@@ -98670,6 +99395,16 @@
       {
         "id": "club-atletico-huracan",
         "name": "Huracán",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
         "years": "2025"
       }
     ],
@@ -99643,6 +100378,21 @@
         "id": "san-lorenzo",
         "name": "San Lorenzo",
         "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -100425,6 +101175,26 @@
         "id": "gimnasia-lp",
         "name": "Gimnasia y Esgrima La Plata",
         "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -101200,6 +101970,21 @@
         "id": "ca-rosario-central",
         "name": "Rosario Central",
         "years": "2016"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
+      },
+      {
+        "id": "patronato",
+        "name": "Patronato",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -101234,6 +102019,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2022"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -101246,7 +102036,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 79,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -101255,7 +102045,7 @@
     "name": "Tiago Palacios",
     "fullName": "Tiago Palacios",
     "birthDate": "",
-    "position": "RW",
+    "position": "RM",
     "positions": [
       "RW"
     ],
@@ -101268,6 +102058,16 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2022"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -103819,7 +104619,7 @@
     "name": "Matías Esquivel",
     "fullName": "Matías Esquivel",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -103837,6 +104637,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -104129,6 +104939,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -104141,7 +104961,7 @@
     "marketValue": "",
     "activeYears": "2021-2025",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -105486,7 +106306,7 @@
     "name": "Ramiro Ruiz Rodríguez",
     "fullName": "Ramiro Ruiz Rodríguez",
     "birthDate": "",
-    "position": "ST",
+    "position": "LW",
     "positions": [
       "ST"
     ],
@@ -105499,6 +106319,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2023"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -108390,6 +109220,16 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2023"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -108672,6 +109512,16 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -108684,7 +109534,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 70,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -108793,6 +109643,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2018"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -109320,7 +110180,7 @@
     "name": "Agustin Bouzat",
     "fullName": "Agustin Bouzat",
     "birthDate": "",
-    "position": "LW",
+    "position": "CDM",
     "positions": [
       "LW"
     ],
@@ -109332,6 +110192,16 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
         "years": "2025"
       }
     ],
@@ -109631,7 +110501,7 @@
     "name": "Exequiel Zeballos",
     "fullName": "Exequiel Zeballos",
     "birthDate": "",
-    "position": "RW",
+    "position": "LW",
     "positions": [
       "RW"
     ],
@@ -109644,6 +110514,11 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2019"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -109863,6 +110738,11 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2022"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -109952,7 +110832,7 @@
     "name": "Brian Aguirre",
     "fullName": "Brian Aguirre",
     "birthDate": "",
-    "position": "LW",
+    "position": "RW",
     "positions": [
       "LW"
     ],
@@ -109975,6 +110855,16 @@
         "id": "ca-newells-old-boys",
         "name": "Newell's Old Boys",
         "years": "2019"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -110225,7 +111115,7 @@
     "name": "Nery Dominguez",
     "fullName": "Nery Dominguez",
     "birthDate": "",
-    "position": "GK",
+    "position": "CDM",
     "positions": [
       "GK"
     ],
@@ -110237,6 +111127,21 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
         "years": "2025"
       }
     ],
@@ -110250,7 +111155,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 65,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -110484,6 +111389,21 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2018"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -110496,7 +111416,7 @@
     "marketValue": "",
     "activeYears": "2018-2021",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -111040,7 +111960,7 @@
     "name": "Santiago Montiel",
     "fullName": "Santiago Montiel",
     "birthDate": "",
-    "position": "RW",
+    "position": "LW",
     "positions": [
       "RW"
     ],
@@ -111053,6 +111973,16 @@
         "id": "ca-independiente",
         "name": "Independiente",
         "years": "2023"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -111065,7 +111995,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -111538,6 +112468,16 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2019"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -111627,7 +112567,7 @@
     "name": "Gaston Martirena",
     "fullName": "Gaston Martirena",
     "birthDate": "",
-    "position": "RW",
+    "position": "RB",
     "positions": [
       "RW"
     ],
@@ -111638,6 +112578,11 @@
     "clubs": [
       {
         "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
         "name": "Racing Club",
         "years": "2025"
       }
@@ -111830,7 +112775,7 @@
     "name": "Ulises Ortegoza",
     "fullName": "Ulises Ortegoza",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -111848,6 +112793,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia-mendoza",
+        "name": "Gimnasia-mendoza",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -112119,6 +113074,11 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2019"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -112304,6 +113264,16 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2019"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -112393,7 +113363,7 @@
     "name": "Maher Carrizo",
     "fullName": "Maher Carrizo",
     "birthDate": "",
-    "position": "RW",
+    "position": "ST",
     "positions": [
       "RW"
     ],
@@ -112406,6 +113376,11 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2023"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -113106,7 +114081,7 @@
     "name": "Pablo Piatti",
     "fullName": "Pablo Piatti",
     "birthDate": "",
-    "position": "CAM",
+    "position": "LW",
     "positions": [
       "CAM"
     ],
@@ -113119,6 +114094,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2021"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -113213,7 +114193,7 @@
     "name": "Alexis Manyoma",
     "fullName": "Alexis Manyoma",
     "birthDate": "",
-    "position": "LW",
+    "position": "CAM",
     "positions": [
       "LW"
     ],
@@ -113226,6 +114206,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2022"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -116057,6 +117042,16 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2015"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -117043,6 +118038,11 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2023"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -118366,7 +119366,7 @@
     "name": "Nahuel Barrios",
     "fullName": "Nahuel Barrios",
     "birthDate": "",
-    "position": "LW",
+    "position": "CAM",
     "positions": [
       "LW"
     ],
@@ -118379,6 +119379,21 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2016"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -120122,6 +121137,26 @@
         "id": "ca-banfield",
         "name": "Banfield",
         "years": "2018"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -120155,6 +121190,16 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
         "years": "2025"
       }
     ],
@@ -120305,6 +121350,16 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -120317,7 +121372,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 76,
+    "rating": 81,
     "legendary": false
   },
   {
@@ -120484,6 +121539,16 @@
         "id": "club-atletico-lanus",
         "name": "Lanús",
         "years": "2022"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -120496,7 +121561,7 @@
     "marketValue": "",
     "activeYears": "2020-2022",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -121195,6 +122260,16 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2017"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -121207,7 +122282,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 79,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -121695,6 +122770,16 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -121707,7 +122792,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 76,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -121727,6 +122812,16 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "los-andes",
+        "name": "Los-andes",
         "years": "2025"
       }
     ],
@@ -121760,6 +122855,16 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
         "years": "2025"
       }
     ],
@@ -121866,6 +122971,16 @@
         "id": "club-de-gimnasia-y-esgrima-la-plata",
         "name": "Gimnasia LP",
         "years": "2019"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -121978,6 +123093,16 @@
         "id": "club-atletico-huracan",
         "name": "Huracán",
         "years": "2024"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -121999,7 +123124,7 @@
     "name": "Malcom Braida",
     "fullName": "Malcom Braida",
     "birthDate": "",
-    "position": "LB",
+    "position": "LM",
     "positions": [
       "LB"
     ],
@@ -122017,6 +123142,21 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2021"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -122782,6 +123922,26 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2018"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -122905,7 +124065,7 @@
     "name": "Gabriel Neves",
     "fullName": "Gabriel Neves",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -122923,6 +124083,16 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2023"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -123376,6 +124546,21 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2023"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -123551,6 +124736,21 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "olympo",
+        "name": "Olimpo",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -123563,7 +124763,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 76,
+    "rating": 81,
     "legendary": false
   },
   {
@@ -124051,6 +125251,21 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -124094,6 +125309,21 @@
         "id": "club-atletico-huracan",
         "name": "Huracán",
         "years": "2019"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -124250,6 +125480,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -124262,7 +125502,7 @@
     "marketValue": "",
     "activeYears": "2015-2022",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -124827,6 +126067,11 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2021"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -124933,6 +126178,21 @@
         "id": "ca-velez-sarsfield",
         "name": "Vélez Sarsfield",
         "years": "2023"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025"
+      },
+      {
+        "id": "gimnasia-mendoza",
+        "name": "Gimnasia-mendoza",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -125111,6 +126371,16 @@
         "id": "club-atletico-belgrano",
         "name": "Belgrano",
         "years": "2020"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -125123,7 +126393,7 @@
     "marketValue": "",
     "activeYears": "2015-2023",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -125421,6 +126691,11 @@
         "id": "club-estudiantes-de-la-plata",
         "name": "Estudiantes LP",
         "years": "2019"
+      },
+      {
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -127319,6 +128594,21 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2022"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -128631,6 +129921,21 @@
         "id": "club-atletico-san-lorenzo-de-almagro",
         "name": "San Lorenzo",
         "years": "2022"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      },
+      {
+        "id": "patronato",
+        "name": "Patronato",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -129634,6 +130939,21 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
+      },
+      {
+        "id": "estudiantes-rc",
+        "name": "Estudiantes-rc",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -129668,6 +130988,16 @@
         "id": "ca-talleres",
         "name": "Talleres",
         "years": "2021"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "arsenal",
+        "name": "Arsenal",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -130902,6 +132232,16 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2025"
+      },
+      {
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -130914,7 +132254,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 74,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -134082,6 +135422,16 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2025"
+      },
+      {
+        "id": "racing",
+        "name": "Racing Club",
+        "years": "2025"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -135468,6 +136818,16 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -135480,7 +136840,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 67,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -136887,6 +138247,16 @@
         "id": "talleres-cba",
         "name": "Talleres de Córdoba",
         "years": "2025"
+      },
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "defensores-belgrano",
+        "name": "Defensores-belgrano",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 0,
@@ -136899,7 +138269,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "",
-    "rating": 73,
+    "rating": 80,
     "legendary": false
   },
   {
@@ -137277,5 +138647,321 @@
         "years": "2022-2025"
       }
     ]
+  },
+  {
+    "id": "brian-luciatti",
+    "name": "Brian Luciatti",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "walter-bou",
+    "name": "Walter Bou",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 81,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      },
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "jeremias-ledesma",
+    "name": "Jeremías Ledesma",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 78,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "river",
+        "name": "River Plate",
+        "years": "2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "lucas-blondel",
+    "name": "Lucas Blondel",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "boca",
+        "name": "Boca Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025"
+      },
+      {
+        "id": "atletico-rafaela",
+        "name": "Atletico-rafaela",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "david-martinez-ind",
+    "name": "David Martínez",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "matias-gimenez-rojas",
+    "name": "Matías Giménez Rojas",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "san-martin-sj",
+        "name": "San-martin-sj",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "andres-vombergar",
+    "name": "Andrés Vombergar",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "los-andes",
+        "name": "Los-andes",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "claudio-aquino",
+    "name": "Claudio Aquino",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 82,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
+      },
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "jalil-elias",
+    "name": "Jalil Elías",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      },
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025"
+      },
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "juan-camilo-portilla",
+    "name": "Juan Camilo Portilla",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 77,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
+  },
+  {
+    "id": "franco-moyano",
+    "name": "Franco Moyano",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "talleres",
+        "name": "Talleres",
+        "years": "2025"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      },
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
+    "capsClub": 25,
+    "goalsClub": 5
   }
 ]

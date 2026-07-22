@@ -2,7 +2,7 @@
 
 ## Totals
 - Clubs: 29
-- Players: 3938
+- Players: 3949
 - Squads: 15
 
 ## Health Score
@@ -19,9 +19,9 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 3938
-- Players with clubs: 3938
-- Players with valid position: 3938
+- Players with rating: 3949
+- Players with clubs: 3949
+- Players with valid position: 3949
 - Playable squads: 15
 
 ## Players by club
@@ -140,7 +140,7 @@
 
 ## Players by decade
 - 2010s: 1307
-- 2020s: 885
+- 2020s: 896
 - 1990s: 807
 - 2000s: 625
 - 1970s: 11
