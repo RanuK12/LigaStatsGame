@@ -1,6 +1,6 @@
 [
   {
-    "id": "carrizo-amadeo-1926",
+    "id": "amadeo-carrizo",
     "name": "Amadeo Carrizo",
     "fullName": "Amadeo Raúl Carrizo",
     "birthDate": "1926-06-12",
@@ -21,17 +21,12 @@
       {
         "id": "millonarios",
         "name": "Millonarios",
-        "years": "1968-1969"
-      },
-      {
-        "id": "valencia",
-        "name": "Valencia CF",
         "years": "1969-1970"
       }
     ],
     "capsNationalTeam": 20,
     "goalsNationalTeam": 0,
-    "capsClub": 520,
+    "capsClub": 552,
     "goalsClub": 0,
     "assistsClub": 0,
     "trophies": [
@@ -49,7 +44,7 @@
     "legendary": true
   },
   {
-    "id": "gatti-hugo-1944",
+    "id": "hugo-gatti",
     "name": "Hugo Gatti",
     "fullName": "Hugo Orlando Gatti",
     "birthDate": "1944-08-19",
@@ -65,33 +60,33 @@
       {
         "id": "atlanta",
         "name": "Atlanta",
-        "years": "1963-1967"
-      },
-      {
-        "id": "san-lorenzo",
-        "name": "San Lorenzo",
-        "years": "1967-1969"
+        "years": "1962-1964"
       },
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "1969-1970"
+        "years": "1964-1968"
       },
       {
-        "id": "colon",
-        "name": "Colón",
-        "years": "1970-1972"
+        "id": "gimnasia",
+        "name": "Gimnasia LP",
+        "years": "1969-1974"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "1974-1975"
       },
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "1972-1987"
+        "years": "1976-1988"
       }
     ],
     "capsNationalTeam": 18,
     "goalsNationalTeam": 0,
-    "capsClub": 650,
-    "goalsClub": 0,
+    "capsClub": 801,
+    "goalsClub": 1,
     "assistsClub": 0,
     "trophies": [
       {
@@ -108,7 +103,7 @@
     "legendary": true
   },
   {
-    "id": "fillol-ubaldo-1950",
+    "id": "ubaldo-fillol",
     "name": "Ubaldo Fillol",
     "fullName": "Ubaldo Matildo Fillol",
     "birthDate": "1950-07-21",
@@ -122,24 +117,49 @@
     "preferredFoot": "Derecho",
     "clubs": [
       {
-        "id": "river-plate",
-        "name": "River Plate",
-        "years": "1974-1985"
-      },
-      {
-        "id": "atletico-madrid",
-        "name": "Atlético de Madrid",
-        "years": "1985-1987"
+        "id": "quilmes",
+        "name": "Quilmes",
+        "years": "1968-1971"
       },
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "1987-1989"
+        "years": "1971-1973"
+      },
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "1973-1983"
+      },
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "1983-1984"
+      },
+      {
+        "id": "flamengo",
+        "name": "Flamengo",
+        "years": "1984-1985"
+      },
+      {
+        "id": "atletico-madrid",
+        "name": "Atlético Madrid",
+        "years": "1985-1986"
+      },
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "1986-1989"
+      },
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "1989-1991"
       }
     ],
     "capsNationalTeam": 60,
     "goalsNationalTeam": 0,
-    "capsClub": 420,
+    "capsClub": 708,
     "goalsClub": 0,
     "assistsClub": 0,
     "trophies": [
@@ -157,7 +177,7 @@
     "legendary": true
   },
   {
-    "id": "pumpido-nery-1957",
+    "id": "nery-pumpido",
     "name": "Nery Pumpido",
     "fullName": "Carlos Nery Pumpido",
     "birthDate": "1957-03-30",
@@ -176,19 +196,29 @@
         "years": "1976-1981"
       },
       {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "1981-1983"
+      },
+      {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "1981-1988"
+        "years": "1983-1988"
       },
       {
         "id": "real-betis",
         "name": "Real Betis",
-        "years": "1988-1994"
+        "years": "1988-1990"
+      },
+      {
+        "id": "union",
+        "name": "Unión",
+        "years": "1991-1992"
       }
     ],
     "capsNationalTeam": 35,
     "goalsNationalTeam": 0,
-    "capsClub": 350,
+    "capsClub": 440,
     "goalsClub": 0,
     "assistsClub": 0,
     "trophies": [
@@ -206,7 +236,7 @@
     "legendary": true
   },
   {
-    "id": "goycochea-sergio-1963",
+    "id": "sergio-goycochea",
     "name": "Sergio Goycochea",
     "fullName": "Sergio Javier Goycochea",
     "birthDate": "1963-10-17",
@@ -221,23 +251,33 @@
     "clubs": [
       {
         "id": "defensores-belgrano",
-        "name": "Defensores de Belgrano",
+        "name": "Defensores Unidos",
         "years": "1979-1982"
       },
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "1983-1988"
-      },
-      {
-        "id": "racing-club",
-        "name": "Racing Club",
-        "years": "1988-1990"
+        "years": "1982-1988"
       },
       {
         "id": "millonarios",
         "name": "Millonarios",
-        "years": "1991-1992"
+        "years": "1988-1990"
+      },
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "1990-1991"
+      },
+      {
+        "id": "brest",
+        "name": "Brest",
+        "years": "1991"
+      },
+      {
+        "id": "cerro-porteno",
+        "name": "Cerro Porteño",
+        "years": "1992"
       },
       {
         "id": "olimpia",
@@ -245,8 +285,8 @@
         "years": "1992-1993"
       },
       {
-        "id": "mandiyu",
-        "name": "Deportivo Mandiyú",
+        "id": "river-plate",
+        "name": "River Plate",
         "years": "1993-1994"
       },
       {
@@ -323,7 +363,7 @@
     "legendary": false
   },
   {
-    "id": "abbondanzieri-roberto-1972",
+    "id": "roberto-abbondanzieri",
     "name": "Roberto Abbondanzieri",
     "fullName": "Roberto Fabián Abbondanzieri",
     "birthDate": "1972-08-19",
@@ -348,18 +388,23 @@
       },
       {
         "id": "getafe",
-        "name": "Getafe CF",
+        "name": "Getafe",
         "years": "2006-2009"
+      },
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2009-2010"
       },
       {
         "id": "internacional",
         "name": "Internacional",
-        "years": "2010-2011"
+        "years": "2010"
       }
     ],
     "capsNationalTeam": 49,
     "goalsNationalTeam": 0,
-    "capsClub": 430,
+    "capsClub": 549,
     "goalsClub": 0,
     "assistsClub": 0,
     "trophies": [
@@ -494,7 +539,7 @@
     "legendary": false
   },
   {
-    "id": "chilavert-jose-1965",
+    "id": "jose-luis-chilavert",
     "name": "José Luis Chilavert",
     "fullName": "José Luis Félix Chilavert González",
     "birthDate": "1965-07-27",
@@ -507,6 +552,16 @@
     "weight": 90,
     "preferredFoot": "Izquierdo",
     "clubs": [
+      {
+        "id": "sportivo-luqueno",
+        "name": "Sportivo Luqueño",
+        "years": "1982-1984"
+      },
+      {
+        "id": "guarani",
+        "name": "Guaraní",
+        "years": "1984-1985"
+      },
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
@@ -524,7 +579,7 @@
       },
       {
         "id": "strasbourg",
-        "name": "Strasbourg",
+        "name": "RC Strasbourg",
         "years": "2000-2002"
       },
       {
@@ -535,7 +590,7 @@
     ],
     "capsNationalTeam": 74,
     "goalsNationalTeam": 8,
-    "capsClub": 650,
+    "capsClub": 720,
     "goalsClub": 59,
     "assistsClub": 0,
     "trophies": [
@@ -553,7 +608,7 @@
     "legendary": true
   },
   {
-    "id": "passarella-daniel-1953",
+    "id": "daniel-passarella",
     "name": "Daniel Passarella",
     "fullName": "Daniel Alberto Passarella",
     "birthDate": "1953-05-25",
@@ -567,6 +622,11 @@
     "preferredFoot": "Izquierdo",
     "clubs": [
       {
+        "id": "sarmiento",
+        "name": "Sarmiento",
+        "years": "1971-1973"
+      },
+      {
         "id": "river-plate",
         "name": "River Plate",
         "years": "1974-1982"
@@ -578,14 +638,19 @@
       },
       {
         "id": "internazionale",
-        "name": "Internazionale",
+        "name": "Inter Milan",
         "years": "1986-1988"
+      },
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "1988-1989"
       }
     ],
     "capsNationalTeam": 70,
     "goalsNationalTeam": 22,
-    "capsClub": 450,
-    "goalsClub": 134,
+    "capsClub": 546,
+    "goalsClub": 167,
     "assistsClub": 20,
     "trophies": [
       {
@@ -607,7 +672,7 @@
     "legendary": true
   },
   {
-    "id": "ruggeri-oscar-1962",
+    "id": "oscar-ruggeri",
     "name": "Oscar Ruggeri",
     "fullName": "Oscar Alfredo Ruggeri",
     "birthDate": "1962-01-26",
@@ -623,7 +688,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "1980-1984"
+        "years": "1980-1985"
       },
       {
         "id": "river-plate",
@@ -631,9 +696,14 @@
         "years": "1985-1988"
       },
       {
+        "id": "logrones",
+        "name": "Logroñés",
+        "years": "1988-1989"
+      },
+      {
         "id": "real-madrid",
         "name": "Real Madrid",
-        "years": "1988-1989"
+        "years": "1989-1990"
       },
       {
         "id": "velez",
@@ -641,15 +711,30 @@
         "years": "1990-1992"
       },
       {
+        "id": "ancona",
+        "name": "Ancona",
+        "years": "1992"
+      },
+      {
+        "id": "america",
+        "name": "Club América",
+        "years": "1992-1993"
+      },
+      {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "1994-1997"
+        "years": "1993-1997"
+      },
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "1997"
       }
     ],
     "capsNationalTeam": 97,
     "goalsNationalTeam": 7,
-    "capsClub": 500,
-    "goalsClub": 45,
+    "capsClub": 580,
+    "goalsClub": 47,
     "assistsClub": 15,
     "trophies": [
       {
@@ -666,7 +751,7 @@
     "legendary": true
   },
   {
-    "id": "perfumo-roberto-1942",
+    "id": "roberto-perfumo",
     "name": "Roberto Perfumo",
     "fullName": "Roberto Héctor Perfumo",
     "birthDate": "1942-10-03",
@@ -682,7 +767,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "1962-1971"
+        "years": "1962-1970"
       },
       {
         "id": "cruzeiro",
@@ -697,8 +782,8 @@
     ],
     "capsNationalTeam": 37,
     "goalsNationalTeam": 0,
-    "capsClub": 420,
-    "goalsClub": 15,
+    "capsClub": 458,
+    "goalsClub": 24,
     "assistsClub": 5,
     "trophies": [],
     "image": "",
@@ -709,7 +794,7 @@
     "legendary": true
   },
   {
-    "id": "ayala-roberto-1973",
+    "id": "roberto-ayala",
     "name": "Roberto Ayala",
     "fullName": "Roberto Fabián Ayala",
     "birthDate": "1973-04-14",
@@ -725,12 +810,12 @@
       {
         "id": "ferro",
         "name": "Ferro Carril Oeste",
-        "years": "1991-1994"
+        "years": "1991-1993"
       },
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "1994-1995"
+        "years": "1993-1995"
       },
       {
         "id": "napoli",
@@ -744,11 +829,11 @@
       },
       {
         "id": "valencia",
-        "name": "Valencia CF",
+        "name": "Valencia",
         "years": "2000-2007"
       },
       {
-        "id": "zaragoza",
+        "id": "real-zaragoza",
         "name": "Real Zaragoza",
         "years": "2007-2010"
       },
@@ -760,8 +845,8 @@
     ],
     "capsNationalTeam": 115,
     "goalsNationalTeam": 7,
-    "capsClub": 580,
-    "goalsClub": 22,
+    "capsClub": 595,
+    "goalsClub": 18,
     "assistsClub": 10,
     "trophies": [
       {
@@ -778,7 +863,7 @@
     "legendary": true
   },
   {
-    "id": "samuel-walter-1978",
+    "id": "walter-samuel",
     "name": "Walter Samuel",
     "fullName": "Walter Adrián Luján Samuel",
     "birthDate": "1978-03-23",
@@ -803,7 +888,7 @@
       },
       {
         "id": "roma",
-        "name": "AS Roma",
+        "name": "Roma",
         "years": "2000-2004"
       },
       {
@@ -813,19 +898,19 @@
       },
       {
         "id": "internazionale",
-        "name": "Internazionale",
+        "name": "Inter Milan",
         "years": "2005-2014"
       },
       {
-        "id": "basel",
+        "id": "fc-basel",
         "name": "FC Basel",
         "years": "2014-2016"
       }
     ],
     "capsNationalTeam": 56,
     "goalsNationalTeam": 5,
-    "capsClub": 500,
-    "goalsClub": 28,
+    "capsClub": 642,
+    "goalsClub": 40,
     "assistsClub": 5,
     "trophies": [
       {
@@ -837,7 +922,7 @@
     "image": "",
     "marketValue": "0",
     "activeYears": "1996-2016",
-    "decade": "1970s",
+    "decade": "1980s",
     "rating": 88,
     "legendary": true
   },
@@ -980,15 +1065,13 @@
     "legendary": false
   },
   {
-    "id": "zanetti-javier-1973",
+    "id": "javier-zanetti",
     "name": "Javier Zanetti",
     "fullName": "Javier Adelmar Zanetti",
     "birthDate": "1973-08-10",
     "position": "RB",
     "positions": [
-      "RB",
-      "CM",
-      "CDM"
+      "RB"
     ],
     "nationality": "Argentina",
     "height": 1.78,
@@ -997,7 +1080,7 @@
     "clubs": [
       {
         "id": "talleres-re",
-        "name": "Talleres (RdE)",
+        "name": "Talleres (RE)",
         "years": "1992-1993"
       },
       {
@@ -1007,14 +1090,14 @@
       },
       {
         "id": "internazionale",
-        "name": "Internazionale",
+        "name": "Inter Milan",
         "years": "1995-2014"
       }
     ],
     "capsNationalTeam": 143,
     "goalsNationalTeam": 5,
-    "capsClub": 858,
-    "goalsClub": 21,
+    "capsClub": 957,
+    "goalsClub": 26,
     "assistsClub": 65,
     "trophies": [
       {
@@ -1180,14 +1263,13 @@
     "legendary": false
   },
   {
-    "id": "redondo-fernando-1969",
+    "id": "fernando-redondo",
     "name": "Fernando Redondo",
     "fullName": "Fernando Carlos Redondo Neri",
     "birthDate": "1969-06-06",
     "position": "CDM",
     "positions": [
-      "CDM",
-      "CM"
+      "CDM"
     ],
     "nationality": "Argentina",
     "height": 1.86,
@@ -1201,7 +1283,7 @@
       },
       {
         "id": "tenerife",
-        "name": "CD Tenerife",
+        "name": "Tenerife",
         "years": "1990-1994"
       },
       {
@@ -1217,8 +1299,8 @@
     ],
     "capsNationalTeam": 29,
     "goalsNationalTeam": 1,
-    "capsClub": 320,
-    "goalsClub": 12,
+    "capsClub": 440,
+    "goalsClub": 14,
     "assistsClub": 20,
     "trophies": [
       {
@@ -1240,14 +1322,13 @@
     "legendary": true
   },
   {
-    "id": "mascherano-javier-1984",
+    "id": "javier-mascherano",
     "name": "Javier Mascherano",
     "fullName": "Javier Alejandro Mascherano",
     "birthDate": "1984-06-08",
     "position": "CDM",
     "positions": [
-      "CDM",
-      "CB"
+      "CDM"
     ],
     "nationality": "Argentina",
     "height": 1.74,
@@ -1266,7 +1347,7 @@
       },
       {
         "id": "west-ham",
-        "name": "West Ham United",
+        "name": "West Ham",
         "years": "2006-2007"
       },
       {
@@ -1276,12 +1357,12 @@
       },
       {
         "id": "barcelona",
-        "name": "FC Barcelona",
+        "name": "Barcelona",
         "years": "2010-2018"
       },
       {
-        "id": "hebei-china-fortune",
-        "name": "Hebei China Fortune",
+        "id": "hebei",
+        "name": "Hebei Fortune",
         "years": "2018-2019"
       },
       {
@@ -1292,7 +1373,7 @@
     ],
     "capsNationalTeam": 147,
     "goalsNationalTeam": 3,
-    "capsClub": 550,
+    "capsClub": 642,
     "goalsClub": 5,
     "assistsClub": 15,
     "trophies": [
@@ -1315,14 +1396,13 @@
     "legendary": true
   },
   {
-    "id": "simeone-diego-1970",
+    "id": "diego-simeone",
     "name": "Diego Simeone",
     "fullName": "Diego Pablo Simeone",
     "birthDate": "1970-04-28",
     "position": "CM",
     "positions": [
-      "CM",
-      "CDM"
+      "CM"
     ],
     "nationality": "Argentina",
     "height": 1.79,
@@ -1341,23 +1421,28 @@
       },
       {
         "id": "sevilla",
-        "name": "Sevilla FC",
+        "name": "Sevilla",
         "years": "1992-1994"
       },
       {
         "id": "atletico-madrid",
-        "name": "Atlético de Madrid",
+        "name": "Atlético Madrid",
         "years": "1994-1997"
       },
       {
         "id": "internazionale",
-        "name": "Internazionale",
+        "name": "Inter Milan",
         "years": "1997-1999"
       },
       {
         "id": "lazio",
         "name": "Lazio",
         "years": "1999-2003"
+      },
+      {
+        "id": "atletico-madrid",
+        "name": "Atlético Madrid",
+        "years": "2003-2005"
       },
       {
         "id": "racing-club",
@@ -1367,8 +1452,8 @@
     ],
     "capsNationalTeam": 106,
     "goalsNationalTeam": 11,
-    "capsClub": 510,
-    "goalsClub": 84,
+    "capsClub": 638,
+    "goalsClub": 101,
     "assistsClub": 30,
     "trophies": [
       {
@@ -1385,14 +1470,13 @@
     "legendary": true
   },
   {
-    "id": "veron-juan-1975",
+    "id": "juan-sebastian-veron",
     "name": "Juan Sebastián Verón",
     "fullName": "Juan Sebastián Verón",
     "birthDate": "1975-03-09",
     "position": "CM",
     "positions": [
-      "CM",
-      "CAM"
+      "CM"
     ],
     "nationality": "Argentina",
     "height": 1.86,
@@ -1402,7 +1486,7 @@
       {
         "id": "estudiantes",
         "name": "Estudiantes LP",
-        "years": "1993-1996"
+        "years": "1994-1996"
       },
       {
         "id": "boca-juniors",
@@ -1432,18 +1516,18 @@
       {
         "id": "chelsea",
         "name": "Chelsea",
-        "years": "2003-2004"
+        "years": "2003-2007"
       },
       {
-        "id": "internazionale",
-        "name": "Internazionale",
-        "years": "2004-2006"
+        "id": "estudiantes",
+        "name": "Estudiantes LP",
+        "years": "2006-2014"
       }
     ],
     "capsNationalTeam": 73,
     "goalsNationalTeam": 9,
-    "capsClub": 520,
-    "goalsClub": 75,
+    "capsClub": 630,
+    "goalsClub": 80,
     "assistsClub": 90,
     "trophies": [
       {
@@ -1460,7 +1544,7 @@
     "legendary": true
   },
   {
-    "id": "riquelme-juan-1978",
+    "id": "juan-roman-riquelme",
     "name": "Juan Román Riquelme",
     "fullName": "Juan Román Riquelme",
     "birthDate": "1978-06-24",
@@ -1480,24 +1564,29 @@
       },
       {
         "id": "barcelona",
-        "name": "FC Barcelona",
+        "name": "Barcelona",
         "years": "2002-2003"
       },
       {
         "id": "villarreal",
-        "name": "Villarreal CF",
+        "name": "Villarreal",
         "years": "2003-2007"
+      },
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2007-2014"
       },
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2014-2015"
+        "years": "2014"
       }
     ],
     "capsNationalTeam": 51,
     "goalsNationalTeam": 17,
-    "capsClub": 461,
-    "goalsClub": 115,
+    "capsClub": 592,
+    "goalsClub": 148,
     "assistsClub": 120,
     "trophies": [
       {
@@ -1509,7 +1598,7 @@
     "image": "",
     "marketValue": "0",
     "activeYears": "1996-2015",
-    "decade": "1970s",
+    "decade": "1980s",
     "rating": 91,
     "legendary": true
   },
@@ -1581,7 +1670,7 @@
     "rating": 97
   },
   {
-    "id": "bochini-ricardo-1954",
+    "id": "ricardo-bochini",
     "name": "Ricardo Bochini",
     "fullName": "Ricardo Enrique Bochini",
     "birthDate": "1954-01-28",
@@ -1602,8 +1691,8 @@
     ],
     "capsNationalTeam": 28,
     "goalsNationalTeam": 0,
-    "capsClub": 638,
-    "goalsClub": 97,
+    "capsClub": 714,
+    "goalsClub": 108,
     "assistsClub": 200,
     "trophies": [
       {
@@ -1754,7 +1843,7 @@
     "rating": 93
   },
   {
-    "id": "crespo-hernan-1975",
+    "id": "hernan-crespo",
     "name": "Hernán Crespo",
     "fullName": "Hernán Jorge Crespo",
     "birthDate": "1975-07-05",
@@ -1784,13 +1873,13 @@
       },
       {
         "id": "internazionale",
-        "name": "Internazionale",
+        "name": "Inter Milan",
         "years": "2002-2003"
       },
       {
         "id": "chelsea",
         "name": "Chelsea",
-        "years": "2003-2004"
+        "years": "2003-2008"
       },
       {
         "id": "milan",
@@ -1798,15 +1887,25 @@
         "years": "2004-2005"
       },
       {
+        "id": "internazionale",
+        "name": "Inter Milan",
+        "years": "2006-2009"
+      },
+      {
         "id": "genoa",
         "name": "Genoa",
         "years": "2009-2010"
+      },
+      {
+        "id": "parma",
+        "name": "Parma",
+        "years": "2010-2012"
       }
     ],
     "capsNationalTeam": 64,
     "goalsNationalTeam": 35,
-    "capsClub": 450,
-    "goalsClub": 230,
+    "capsClub": 608,
+    "goalsClub": 273,
     "assistsClub": 40,
     "trophies": [
       {
@@ -1823,14 +1922,13 @@
     "legendary": true
   },
   {
-    "id": "tevez-carlos-1984",
+    "id": "carlos-tevez",
     "name": "Carlos Tevez",
     "fullName": "Carlos Alberto Tevez",
     "birthDate": "1984-02-05",
     "position": "ST",
     "positions": [
-      "ST",
-      "CF"
+      "ST"
     ],
     "nationality": "Argentina",
     "height": 1.71,
@@ -1849,7 +1947,7 @@
       },
       {
         "id": "west-ham",
-        "name": "West Ham United",
+        "name": "West Ham",
         "years": "2006-2007"
       },
       {
@@ -1868,15 +1966,15 @@
         "years": "2013-2015"
       },
       {
-        "id": "shanghai-shenhua",
-        "name": "Shanghai Shenhua",
-        "years": "2017-2018"
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2015-2021"
       }
     ],
     "capsNationalTeam": 76,
     "goalsNationalTeam": 13,
-    "capsClub": 607,
-    "goalsClub": 237,
+    "capsClub": 729,
+    "goalsClub": 304,
     "assistsClub": 108,
     "trophies": [
       {
@@ -1893,14 +1991,13 @@
     "legendary": true
   },
   {
-    "id": "kempes-mario-1954",
+    "id": "mario-kempes",
     "name": "Mario Kempes",
     "fullName": "Mario Alberto Kempes",
     "birthDate": "1954-07-15",
     "position": "ST",
     "positions": [
-      "ST",
-      "CAM"
+      "ST"
     ],
     "nationality": "Argentina",
     "height": 1.82,
@@ -1910,7 +2007,7 @@
       {
         "id": "instituto",
         "name": "Instituto",
-        "years": "1970-1973"
+        "years": "1973"
       },
       {
         "id": "rosario-central",
@@ -1919,19 +2016,29 @@
       },
       {
         "id": "valencia",
-        "name": "Valencia CF",
+        "name": "Valencia",
         "years": "1976-1981"
       },
       {
         "id": "river-plate",
         "name": "River Plate",
         "years": "1981-1982"
+      },
+      {
+        "id": "valencia",
+        "name": "Valencia",
+        "years": "1982-1984"
+      },
+      {
+        "id": "hercules",
+        "name": "Hércules",
+        "years": "1984-1986"
       }
     ],
     "capsNationalTeam": 43,
     "goalsNationalTeam": 20,
-    "capsClub": 550,
-    "goalsClub": 300,
+    "capsClub": 645,
+    "goalsClub": 340,
     "assistsClub": 60,
     "trophies": [
       {
@@ -1953,7 +2060,7 @@
     "legendary": true
   },
   {
-    "id": "palermo-martin-1973",
+    "id": "martin-palermo",
     "name": "Martín Palermo",
     "fullName": "Martín Palermo",
     "birthDate": "1973-11-07",
@@ -1974,11 +2081,11 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "1997-2000"
+        "years": "1997-2001"
       },
       {
         "id": "villarreal",
-        "name": "Villarreal CF",
+        "name": "Villarreal",
         "years": "2001-2003"
       },
       {
@@ -1988,14 +2095,19 @@
       },
       {
         "id": "alaves",
-        "name": "Deportivo Alavés",
+        "name": "Alavés",
         "years": "2004"
+      },
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2004-2011"
       }
     ],
     "capsNationalTeam": 15,
     "goalsNationalTeam": 9,
-    "capsClub": 590,
-    "goalsClub": 306,
+    "capsClub": 611,
+    "goalsClub": 298,
     "assistsClub": 40,
     "trophies": [
       {
@@ -2012,15 +2124,13 @@
     "legendary": true
   },
   {
-    "id": "maria-angel-1988",
+    "id": "angel-di-maria",
     "name": "Ángel Di María",
     "fullName": "Ángel Fabián Di María",
     "birthDate": "1988-02-14",
     "position": "RW",
     "positions": [
-      "RW",
-      "LW",
-      "CAM"
+      "RW"
     ],
     "nationality": "Argentina",
     "height": 1.78,
@@ -2034,7 +2144,7 @@
       },
       {
         "id": "benfica",
-        "name": "SL Benfica",
+        "name": "Benfica",
         "years": "2007-2010"
       },
       {
@@ -2048,7 +2158,7 @@
         "years": "2014-2015"
       },
       {
-        "id": "paris-saint-germain",
+        "id": "psg",
         "name": "Paris Saint-Germain",
         "years": "2015-2022"
       },
@@ -2056,12 +2166,22 @@
         "id": "juventus",
         "name": "Juventus",
         "years": "2022-2023"
+      },
+      {
+        "id": "benfica",
+        "name": "Benfica",
+        "years": "2023-2025"
+      },
+      {
+        "id": "rosario-central",
+        "name": "Rosario Central",
+        "years": "2025"
       }
     ],
     "capsNationalTeam": 145,
     "goalsNationalTeam": 31,
-    "capsClub": 580,
-    "goalsClub": 140,
+    "capsClub": 840,
+    "goalsClub": 206,
     "assistsClub": 190,
     "trophies": [
       {
@@ -2093,14 +2213,13 @@
     "legendary": true
   },
   {
-    "id": "francescoli-enzo-1961",
+    "id": "enzo-francescoli",
     "name": "Enzo Francescoli",
     "fullName": "Enzo Francescoli Uriarte",
     "birthDate": "1961-11-12",
     "position": "CAM",
     "positions": [
-      "CAM",
-      "ST"
+      "CAM"
     ],
     "nationality": "Uruguay",
     "height": 1.78,
@@ -2119,12 +2238,12 @@
       },
       {
         "id": "racing-paris",
-        "name": "Racing París",
+        "name": "Racing Club de Paris",
         "years": "1986-1989"
       },
       {
         "id": "marseille",
-        "name": "Olympique Marseille",
+        "name": "Olympique de Marseille",
         "years": "1989-1990"
       },
       {
@@ -2136,12 +2255,17 @@
         "id": "torino",
         "name": "Torino",
         "years": "1993-1994"
+      },
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "1994-1997"
       }
     ],
     "capsNationalTeam": 73,
     "goalsNationalTeam": 17,
-    "capsClub": 510,
-    "goalsClub": 198,
+    "capsClub": 598,
+    "goalsClub": 233,
     "assistsClub": 80,
     "trophies": [
       {
@@ -75771,40 +75895,6 @@
     "source": "transfermarkt"
   },
   {
-    "id": "carlos-tevez",
-    "name": "Carlos Tévez",
-    "fullName": "Carlos Tévez",
-    "birthDate": "",
-    "position": "ST",
-    "positions": [
-      "ST"
-    ],
-    "nationality": "Argentina",
-    "height": 1.78,
-    "weight": 75,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "boca-juniors",
-        "name": "Boca Juniors",
-        "years": "2015"
-      }
-    ],
-    "capsNationalTeam": 0,
-    "goalsNationalTeam": 0,
-    "capsClub": 0,
-    "goalsClub": 0,
-    "assistsClub": 0,
-    "trophies": [],
-    "image": "",
-    "marketValue": "",
-    "activeYears": "2015-2015",
-    "decade": "2010s",
-    "rating": 54,
-    "legendary": false,
-    "source": "transfermarkt"
-  },
-  {
     "id": "leandro-marin",
     "name": "Leandro Marín",
     "fullName": "Leandro Marín",
@@ -113494,40 +113584,6 @@
     "source": "transfermarkt"
   },
   {
-    "id": "juan-sebastian-veron",
-    "name": "Juan Sebastián Verón",
-    "fullName": "Juan Sebastián Verón",
-    "birthDate": "",
-    "position": "CM",
-    "positions": [
-      "CM"
-    ],
-    "nationality": "Argentina",
-    "height": 1.78,
-    "weight": 75,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "estudiantes",
-        "name": "Estudiantes LP",
-        "years": "2016"
-      }
-    ],
-    "capsNationalTeam": 0,
-    "goalsNationalTeam": 0,
-    "capsClub": 0,
-    "goalsClub": 0,
-    "assistsClub": 0,
-    "trophies": [],
-    "image": "",
-    "marketValue": "",
-    "activeYears": "2016-2016",
-    "decade": "2010s",
-    "rating": 51,
-    "legendary": false,
-    "source": "transfermarkt"
-  },
-  {
     "id": "christian-aleman",
     "name": "Christian Alemán",
     "fullName": "Christian Alemán",
@@ -126277,40 +126333,6 @@
     "activeYears": "2019-2019",
     "decade": "2010s",
     "rating": 75,
-    "legendary": false,
-    "source": "transfermarkt"
-  },
-  {
-    "id": "javier-mascherano",
-    "name": "Javier Mascherano",
-    "fullName": "Javier Mascherano",
-    "birthDate": "",
-    "position": "CDM",
-    "positions": [
-      "CDM"
-    ],
-    "nationality": "Argentina",
-    "height": 1.78,
-    "weight": 75,
-    "preferredFoot": "Derecho",
-    "clubs": [
-      {
-        "id": "estudiantes",
-        "name": "Estudiantes LP",
-        "years": "2019"
-      }
-    ],
-    "capsNationalTeam": 0,
-    "goalsNationalTeam": 0,
-    "capsClub": 0,
-    "goalsClub": 0,
-    "assistsClub": 0,
-    "trophies": [],
-    "image": "",
-    "marketValue": "",
-    "activeYears": "2019-2019",
-    "decade": "2010s",
-    "rating": 50,
     "legendary": false,
     "source": "transfermarkt"
   },
