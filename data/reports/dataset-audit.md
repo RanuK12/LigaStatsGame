@@ -2,7 +2,7 @@
 
 ## Totals
 - Clubs: 29
-- Players: 3975
+- Players: 4005
 - Squads: 15
 
 ## Health Score
@@ -19,56 +19,34 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 3975
-- Players with clubs: 3975
-- Players with valid position: 3975
+- Players with rating: 4005
+- Players with clubs: 4005
+- Players with valid position: 4005
 - Playable squads: 15
 
 ## Players by club
-- boca-juniors: 373
-- independiente: 265
-- racing-club: 240
-- lanus: 228
-- banfield: 226
-- river-plate: 211
-- club-atletico-belgrano: 204
-- club-atletico-huracan: 199
-- ca-newells-old-boys: 198
-- velez-sarsfield: 195
-- ca-rosario-central: 194
-- ca-talleres: 187
-- club-de-gimnasia-y-esgrima-la-plata: 187
-- cd-godoy-cruz-antonio-tomba: 185
-- ca-independiente: 183
-- club-atletico-san-lorenzo-de-almagro: 179
-- ca-banfield: 177
-- club-atletico-lanus: 168
-- club-estudiantes-de-la-plata: 155
-- ca-velez-sarsfield: 154
-- club-atletico-river-plate: 139
-- rosario-central: 120
-- huracan: 105
-- san-lorenzo: 73
-- talleres-cba: 69
-- defensa-y-justicia: 63
-- colon: 51
-- argentinos-jrs: 49
-- newells: 48
-- estudiantes-lp: 46
-- boca: 42
-- velez: 42
-- gimnasia-lp: 40
-- racing: 37
-- river: 34
-- talleres: 31
-- argentinos-juniors: 27
-- gimnasia: 26
-- estudiantes: 23
-- newells-old-boys: 20
-- godoy-cruz: 12
+- independiente: 434
+- boca-juniors: 391
+- banfield: 390
+- lanus: 379
+- velez: 376
+- river-plate: 359
+- huracan: 301
+- rosario-central: 293
+- talleres: 262
+- newells: 250
+- racing-club: 250
+- san-lorenzo: 236
+- gimnasia: 233
+- belgrano: 208
+- estudiantes: 205
+- godoy-cruz: 195
+- argentinos-jrs: 76
+- defensa-y-justicia: 68
+- colon: 54
 - tigre: 11
+- union: 10
 - arsenal: 9
-- union: 9
 - central-cordoba: 8
 - aa-argentinos-juniors: 7
 - aldosivi: 6
@@ -77,16 +55,17 @@
 - patronato: 6
 - platense: 6
 - atletico-tucuman: 5
-- belgrano: 5
 - instituto: 5
 - argentina: 4
 - manchester-united: 4
+- newells-old-boys: 4
 - olympo: 4
 - real-madrid: 4
 - valencia: 4
 - atletico-madrid: 3
 - barcelona: 3
 - defensores-belgrano: 3
+- estudiantes-lp: 3
 - estudiantes-rc: 3
 - ferro: 3
 - gimnasia-mendoza: 3
@@ -104,6 +83,7 @@
 - corinthians: 2
 - cruzeiro: 2
 - genoa: 2
+- gimnasia-lp: 2
 - internacional: 2
 - los-andes: 2
 - manchester-city: 2
@@ -162,7 +142,6 @@
 - tijuana: 1
 - torino: 1
 - tottenham: 1
-- union-santa-fe: 1
 - vasco-da-gama: 1
 - venezia: 1
 - wanderers: 1
@@ -170,9 +149,9 @@
 
 ## Players by decade
 - 2010s: 1307
-- 2020s: 922
+- 2020s: 952
+- 2000s: 906
 - 1990s: 807
-- 2000s: 625
 - 1970s: 11
 - 1980s: 8
 - 1960s: 6
