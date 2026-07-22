@@ -50315,7 +50315,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "olympo",
@@ -50655,7 +50655,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "aldosivi",
@@ -51102,7 +51102,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -51209,7 +51209,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2015"
+        "years": "2015, 2026"
       },
       {
         "id": "river-plate",
@@ -52820,7 +52820,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "banfield",
@@ -53671,7 +53671,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "banfield",
@@ -54064,7 +54064,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "estudiantes",
@@ -54137,7 +54137,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "union",
@@ -54176,7 +54176,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "talleres",
@@ -56720,7 +56720,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "independiente-rivadavia",
@@ -57480,7 +57480,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -57591,7 +57591,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -57624,7 +57624,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "colon",
@@ -57730,7 +57730,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "independiente",
@@ -57973,7 +57973,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "talleres",
@@ -58050,7 +58050,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "newells",
@@ -58228,7 +58228,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -58295,7 +58295,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "rosario-central",
@@ -58334,7 +58334,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "belgrano",
@@ -58373,7 +58373,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "union",
@@ -58723,7 +58723,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "quilmes",
@@ -61649,7 +61649,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "gimnasia",
@@ -62388,7 +62388,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "talleres",
@@ -63568,7 +63568,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -64790,7 +64790,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "gimnasia",
@@ -65028,7 +65028,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "defensa-y-justicia",
@@ -65072,7 +65072,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "racing-club",
@@ -65246,7 +65246,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -65401,7 +65401,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2024"
+        "years": "2024, 2026"
       },
       {
         "id": "talleres",
@@ -65814,7 +65814,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -65852,7 +65852,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "newells",
@@ -65895,7 +65895,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -66011,7 +66011,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "godoy-cruz",
@@ -66473,7 +66473,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "lanus",
@@ -66735,7 +66735,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2021"
+        "years": "2021, 2026"
       },
       {
         "id": "lanus",
@@ -67306,7 +67306,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -67407,7 +67407,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -67446,7 +67446,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -67830,7 +67830,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -69925,7 +69925,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "banfield",
@@ -70605,7 +70605,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2021"
+        "years": "2021, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -70712,7 +70712,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -71062,7 +71062,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2019"
+        "years": "2019, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -71198,7 +71198,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2024"
+        "years": "2024, 2026"
       },
       {
         "id": "talleres",
@@ -71635,7 +71635,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "barracas-central",
@@ -73441,7 +73441,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2020"
+        "years": "2020, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -73509,7 +73509,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2021"
+        "years": "2021, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -73577,7 +73577,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -73678,7 +73678,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "olympo",
@@ -74684,7 +74684,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2015"
+        "years": "2015, 2026"
       },
       {
         "id": "estudiantes",
@@ -74723,7 +74723,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -75134,7 +75134,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2019"
+        "years": "2019, 2026"
       },
       {
         "id": "estudiantes",
@@ -75217,7 +75217,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "talleres",
@@ -75294,7 +75294,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "rosario-central",
@@ -75338,7 +75338,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -75372,7 +75372,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "tigre",
@@ -75415,7 +75415,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -75633,7 +75633,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2024"
+        "years": "2024, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -76089,7 +76089,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "boca-juniors",
@@ -76171,7 +76171,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -76418,7 +76418,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "godoy-cruz",
@@ -76899,7 +76899,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "velez",
@@ -77097,7 +77097,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "lanus",
@@ -77141,7 +77141,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -77175,7 +77175,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -77781,7 +77781,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -77888,7 +77888,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -77921,7 +77921,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -78061,7 +78061,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -80021,7 +80021,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -80590,7 +80590,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "talleres",
@@ -80638,7 +80638,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -80740,7 +80740,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2015"
+        "years": "2015, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -81026,7 +81026,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2019"
+        "years": "2019, 2026"
       },
       {
         "id": "platense",
@@ -82157,7 +82157,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2024"
+        "years": "2024, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -85800,7 +85800,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -85867,7 +85867,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "river-plate",
@@ -85978,7 +85978,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "river-plate",
@@ -86200,7 +86200,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "all-boys",
@@ -86355,7 +86355,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2015"
+        "years": "2015, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -86579,7 +86579,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "boca-juniors",
@@ -87216,7 +87216,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "talleres",
@@ -87954,7 +87954,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "patronato",
@@ -88031,7 +88031,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2024"
+        "years": "2024, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -88551,7 +88551,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2017"
+        "years": "2017, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -88760,7 +88760,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "almagro",
@@ -88944,7 +88944,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "atletico-rafaela",
@@ -89191,7 +89191,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "defensa-y-justicia",
@@ -89240,7 +89240,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "instituto",
@@ -89749,7 +89749,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2021"
+        "years": "2021, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -90966,7 +90966,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2020"
+        "years": "2020, 2026"
       },
       {
         "id": "godoy-cruz",
@@ -91447,7 +91447,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2015"
+        "years": "2015, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -92670,7 +92670,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2020"
+        "years": "2020, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -92845,7 +92845,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "barracas-central",
@@ -94797,7 +94797,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -94933,7 +94933,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2015"
+        "years": "2015, 2026"
       },
       {
         "id": "lanus",
@@ -97007,7 +97007,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2015"
+        "years": "2015, 2026"
       },
       {
         "id": "racing-club",
@@ -97270,7 +97270,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "velez",
@@ -97343,7 +97343,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -97377,7 +97377,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "boca-juniors",
@@ -97910,7 +97910,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -98095,7 +98095,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "estudiantes",
@@ -98138,7 +98138,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2020"
+        "years": "2020, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -98177,7 +98177,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -98357,7 +98357,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2021"
+        "years": "2021, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -98508,7 +98508,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "san-lorenzo",
@@ -98761,7 +98761,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2015"
+        "years": "2015, 2026"
       },
       {
         "id": "velez",
@@ -99014,7 +99014,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -99288,7 +99288,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "huracan",
@@ -99405,7 +99405,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "huracan",
@@ -99970,7 +99970,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "chacarita",
@@ -100290,7 +100290,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "defensa-y-justicia",
@@ -101275,7 +101275,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -102600,7 +102600,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2019"
+        "years": "2019, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -103022,7 +103022,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "boca-juniors",
@@ -104053,7 +104053,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2024"
+        "years": "2024, 2026"
       },
       {
         "id": "talleres",
@@ -104821,7 +104821,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "banfield",
@@ -105444,7 +105444,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2024"
+        "years": "2024, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -105512,7 +105512,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2024"
+        "years": "2024, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -109107,7 +109107,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -109389,7 +109389,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "river-plate",
@@ -109510,7 +109510,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2019"
+        "years": "2019, 2026"
       },
       {
         "id": "talleres",
@@ -110060,7 +110060,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "boca-juniors",
@@ -110381,7 +110381,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2019"
+        "years": "2019, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -110600,7 +110600,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -110702,7 +110702,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "estudiantes",
@@ -110980,7 +110980,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "rosario-central",
@@ -111231,7 +111231,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2018"
+        "years": "2018, 2026"
       },
       {
         "id": "boca-juniors",
@@ -111805,7 +111805,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "argentinos-jrs",
@@ -112271,7 +112271,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2015"
+        "years": "2015, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -112305,7 +112305,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2021"
+        "years": "2021, 2026"
       },
       {
         "id": "gimnasia",
@@ -112412,7 +112412,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -112896,7 +112896,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2019"
+        "years": "2019, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -113076,7 +113076,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "banfield",
@@ -113183,7 +113183,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -114705,7 +114705,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2021"
+        "years": "2021, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -115439,7 +115439,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2020"
+        "years": "2020, 2026"
       },
       {
         "id": "gimnasia",
@@ -115449,7 +115449,7 @@
       {
         "id": "colon",
         "name": "Colón",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -115619,7 +115619,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2021"
+        "years": "2021, 2026"
       },
       {
         "id": "talleres",
@@ -115833,7 +115833,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -115901,7 +115901,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "argentinos-jrs",
@@ -116567,7 +116567,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "san-lorenzo",
@@ -116815,7 +116815,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -118083,7 +118083,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "tigre",
@@ -119953,7 +119953,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "gimnasia",
@@ -120691,7 +120691,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -120954,7 +120954,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "river-plate",
@@ -121108,7 +121108,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "san-lorenzo",
@@ -121292,7 +121292,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2022"
+        "years": "2022, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -121730,7 +121730,7 @@
       {
         "id": "rosario-central",
         "name": "Rosario Central",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "atletico-rafaela",
@@ -122013,7 +122013,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -122513,7 +122513,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "racing-club",
@@ -122556,7 +122556,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "los-andes",
@@ -122594,7 +122594,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "independiente",
@@ -122699,7 +122699,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "gimnasia",
@@ -122811,7 +122811,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "huracan",
@@ -122860,7 +122860,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2021"
+        "years": "2021, 2026"
       },
       {
         "id": "aldosivi",
@@ -123484,7 +123484,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2020"
+        "years": "2020, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -123620,7 +123620,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "velez",
@@ -124234,7 +124234,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2023"
+        "years": "2023, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -124409,7 +124409,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "defensa-y-justicia",
@@ -124919,7 +124919,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "estudiantes",
@@ -124962,7 +124962,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "banfield",
@@ -125123,7 +125123,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "talleres",
@@ -125522,7 +125522,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "velez",
@@ -125715,7 +125715,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2021"
+        "years": "2021, 2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -125821,7 +125821,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "atletico-tucuman",
@@ -126004,7 +126004,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "belgrano",
@@ -127493,7 +127493,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2021"
+        "years": "2021, 2026"
       },
       {
         "id": "lanus",
@@ -127600,7 +127600,7 @@
       {
         "id": "newells",
         "name": "Newell's Old Boys",
-        "years": "2023"
+        "years": "2023, 2026"
       },
       {
         "id": "huracan",
@@ -128276,7 +128276,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "boca-juniors",
@@ -129510,7 +129510,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2022"
+        "years": "2022, 2026"
       },
       {
         "id": "patronato",
@@ -129690,7 +129690,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -131821,7 +131821,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "gimnasia",
@@ -135014,7 +135014,7 @@
       {
         "id": "racing-club",
         "name": "Racing Club",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "union",
@@ -136405,7 +136405,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "san-lorenzo",
@@ -137415,7 +137415,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "velez",
@@ -138287,7 +138287,7 @@
       {
         "id": "lanus",
         "name": "Lanús",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "boca-juniors",
@@ -138349,7 +138349,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "tigre",
@@ -138380,7 +138380,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138427,7 +138427,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "los-andes",
@@ -138453,7 +138453,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "independiente",
@@ -138489,7 +138489,7 @@
       {
         "id": "velez",
         "name": "Vélez Sarsfield",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "san-lorenzo",
@@ -138577,7 +138577,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "godoy-cruz",
@@ -138613,7 +138613,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138634,7 +138634,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "racing-club",
@@ -138670,7 +138670,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138691,7 +138691,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "tigre",
@@ -138748,7 +138748,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138769,7 +138769,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138790,7 +138790,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "arsenal",
@@ -138816,7 +138816,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138837,7 +138837,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "estudiantes-rc",
@@ -138863,7 +138863,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138884,7 +138884,7 @@
       {
         "id": "argentinos-jrs",
         "name": "Argentinos Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "instituto",
@@ -138952,7 +138952,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -138973,7 +138973,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "san-martin-tucuman",
@@ -139145,7 +139145,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       },
       {
         "id": "rosario-central",
@@ -139223,7 +139223,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139244,7 +139244,7 @@
       {
         "id": "river-plate",
         "name": "River Plate",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139265,7 +139265,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139286,7 +139286,7 @@
       {
         "id": "boca-juniors",
         "name": "Boca Juniors",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139307,7 +139307,7 @@
       {
         "id": "independiente",
         "name": "Independiente",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139328,7 +139328,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139349,7 +139349,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139370,7 +139370,7 @@
       {
         "id": "san-lorenzo",
         "name": "San Lorenzo",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139391,7 +139391,7 @@
       {
         "id": "estudiantes-lp",
         "name": "Estudiantes LP",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139412,7 +139412,7 @@
       {
         "id": "estudiantes-lp",
         "name": "Estudiantes LP",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139433,7 +139433,7 @@
       {
         "id": "estudiantes-lp",
         "name": "Estudiantes LP",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139454,7 +139454,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139475,7 +139475,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139496,7 +139496,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139517,7 +139517,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139538,7 +139538,7 @@
       {
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139643,7 +139643,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139664,7 +139664,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139685,7 +139685,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139706,7 +139706,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139727,7 +139727,7 @@
       {
         "id": "banfield",
         "name": "Banfield",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139748,7 +139748,7 @@
       {
         "id": "gimnasia-lp",
         "name": "Gimnasia LP",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139769,7 +139769,7 @@
       {
         "id": "gimnasia-lp",
         "name": "Gimnasia LP",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139790,7 +139790,7 @@
       {
         "id": "colon",
         "name": "Rosario Central",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139811,7 +139811,7 @@
       {
         "id": "colon",
         "name": "Rosario Central",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
@@ -139832,7 +139832,7 @@
       {
         "id": "colon",
         "name": "Rosario Central",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsClub": 25,
