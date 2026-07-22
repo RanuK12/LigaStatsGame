@@ -99,7 +99,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   // Add logos if successfully loaded
   if (afaLogo) {
     try {
-      doc.addImage(afaLogo, "PNG", pad, 7, 13, 16)
+      doc.addImage(afaLogo, "PNG", pad, 7, 11.5, 16)
     } catch (_) {}
   }
   if (lpfLogo) {

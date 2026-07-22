@@ -21,6 +21,8 @@ const config: Config = {
         sport: ['var(--font-sport)'],
         display: ['var(--font-display)'],
         sans: ['var(--font-sans)'],
+        bandera: ['var(--font-bandera)', 'var(--font-display)', 'sans-serif'],
+        malvinas: ['var(--font-bandera)', 'var(--font-display)', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

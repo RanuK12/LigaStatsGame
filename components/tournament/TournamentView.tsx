@@ -211,10 +211,10 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               exit={{ opacity: 0, scale: 0.95 }}
               className="card-gradient rounded-3xl p-6 sm:p-10 border border-white/5 text-center"
             >
-              <div className="relative w-16 h-16 mx-auto mb-6">
-                <Image src="/LigaStatsGame/logos/afa.png" alt="AFA" fill className="object-contain animate-pulse" />
+              <div className="relative w-[50px] h-[70px] mx-auto mb-6">
+                <Image src="/LigaStatsGame/logos/afa.png" alt="AFA" fill className="object-contain animate-pulse drop-shadow-lg" />
               </div>
-              <h2 className="font-display text-2xl sm:text-3xl font-black mb-3 uppercase tracking-tight">
+              <h2 className="font-bandera text-2xl sm:text-4xl text-white mb-3 uppercase tracking-[0.14em]">
                 MODO DE SIMULACIÓN
               </h2>
               <p className="text-slate-400 text-xs sm:text-sm mb-10 max-w-sm mx-auto font-sans leading-relaxed">

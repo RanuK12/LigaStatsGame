@@ -430,11 +430,11 @@ function DraftInner() {
 
       {/* Header */}
       <header className="pt-6 pb-4 px-4 text-center">
-        <div className="flex items-center justify-center gap-2 mb-1">
-          <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-5 h-5" />
+        <div className="flex items-center justify-center gap-2 mb-1.5">
+          <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-[18px] h-[25px] object-contain drop-shadow" />
           <span className="text-[10px] font-bold text-slate-500 tracking-widest font-sport uppercase">{mode.name}</span>
         </div>
-        <h1 className="font-display text-2xl md:text-3xl font-black gradient-text uppercase tracking-wider">Armá tu 11</h1>
+        <h1 className="font-bandera text-2xl md:text-4xl text-white tracking-[0.14em] uppercase">ARMÁ TU 11 DE SELECCIÓN</h1>
         <div className="flex items-center justify-center gap-4 mt-2 text-xs flex-wrap font-sport uppercase tracking-widest text-slate-400">
           <span>
             Posición: <strong className="text-white font-bold">{POS_LABELS[currentPos.pos] || currentPos.pos}</strong>

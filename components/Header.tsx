@@ -24,17 +24,17 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020813]/72 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="relative w-8 h-8 sm:w-9 sm:h-9">
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-[26px] h-[36px] sm:w-[29px] sm:h-[40px] shrink-0">
             <Image
               src="/LigaStatsGame/logos/afa.png"
               alt="AFA Logo"
               fill
-              className="object-contain drop-shadow-md group-hover:scale-105 transition-transform"
+              className="object-contain drop-shadow-[0_2px_10px_rgba(116,172,223,0.3)] group-hover:scale-105 transition-transform"
             />
           </div>
-          <div className="flex flex-col">
-            <span className="font-display text-xs sm:text-sm font-black tracking-[0.28em] text-white flex items-center gap-1.5 leading-none uppercase">
+          <div className="flex flex-col justify-center">
+            <span className="font-bandera text-xs sm:text-sm text-white flex items-center gap-1.5 leading-none uppercase tracking-[0.18em]">
               DRAFT TRES ESTRELLAS 
               <span className="inline-flex gap-0.5 ml-1.5 animate-pulse shrink-0">
                 {[1, 2, 3].map(n => (
@@ -44,7 +44,7 @@ export default function Header() {
                 ))}
               </span>
             </span>
-            <span className="text-[8px] sm:text-[9px] text-[#74ACDF]/72 font-black tracking-[0.35em] leading-none mt-0.5 font-sans uppercase">
+            <span className="text-[8px] sm:text-[9px] text-[#74ACDF]/80 font-bold tracking-[0.25em] leading-none mt-1 font-sport uppercase">
               EL JUEGO DEL FÚTBOL ARGENTINO
             </span>
           </div>

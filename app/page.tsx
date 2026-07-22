@@ -153,16 +153,21 @@ function WorldCupBanner() {
         <div className="relative z-10 px-8 py-12 sm:py-16 flex flex-col lg:flex-row items-center gap-8 justify-between">
           {/* Left: text */}
           <div className="text-center lg:text-left">
-            {/* Live badge */}
-            <div className="inline-flex items-center gap-2 mb-4 bg-red-500/10 border border-red-500/30 px-3 py-1 rounded-full">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-              </span>
-              <span className="text-[9px] font-black uppercase tracking-widest text-red-400 font-sport">MUNDIAL 2026</span>
+            {/* Badges row */}
+            <div className="flex flex-wrap items-center gap-2 mb-4 justify-center lg:justify-start">
+              <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 px-3 py-1 rounded-full">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                <span className="text-[9px] font-black uppercase tracking-widest text-red-400 font-sport">MUNDIAL 2026</span>
+              </div>
+              <div className="inline-flex items-center bg-[#74ACDF]/15 border border-[#74ACDF]/30 px-3 py-1 rounded-full">
+                <span className="text-[9px] font-bandera tracking-[0.16em] text-white">LAS MALVINAS SON ARGENTINAS</span>
+              </div>
             </div>
 
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-none mb-2 uppercase tracking-tight">
+            <h2 className="font-bandera text-4xl sm:text-5xl lg:text-6xl text-white leading-none mb-2 uppercase tracking-[0.12em]">
               VAMOS{' '}
               <span className="gradient-text-gold">ARGENTINA</span>
             </h2>
