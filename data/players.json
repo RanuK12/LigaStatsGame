@@ -16,33 +16,23 @@
     "clubs": [
       {
         "id": "argentinos-jrs",
-        "name": "Argentinos Juniors",
+        "name": "Argentinos Jrs",
         "years": "1976-1981"
       },
       {
-        "id": "boca-jrs",
+        "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "1981-1982"
       },
       {
-        "id": "barcelona",
-        "name": "FC Barcelona",
-        "years": "1982-1984"
+        "id": "newells",
+        "name": "Newell's",
+        "years": "1993-1994"
       },
       {
-        "id": "napoli",
-        "name": "SSC Napoli",
-        "years": "1984-1991"
-      },
-      {
-        "id": "sevilla",
-        "name": "Sevilla FC",
-        "years": "1992-1993"
-      },
-      {
-        "id": "boca-jrs-2",
-        "name": "Boca Juniors",
-        "years": "1995-1997"
+        "id": "argentina",
+        "name": "Argentina",
+        "years": "1977-1994"
       }
     ],
     "capsNationalTeam": 91,
@@ -74,7 +64,8 @@
     "image": "https://www.bdfa.com.ar/fotos/diego-maradona.jpg",
     "marketValue": "50.00",
     "activeYears": "1976-1997",
-    "decade": "1980s"
+    "decade": "1980s",
+    "rating": 97
   },
   {
     "id": "messi-lionel-1987",
@@ -93,23 +84,13 @@
     "clubs": [
       {
         "id": "newells",
-        "name": "Newell's Old Boys",
-        "years": "2000-2003"
+        "name": "Newell's",
+        "years": "1994-2000"
       },
       {
-        "id": "barcelona-ii",
-        "name": "FC Barcelona",
-        "years": "2004-2021"
-      },
-      {
-        "id": "psg",
-        "name": "Paris Saint-Germain",
-        "years": "2021-2023"
-      },
-      {
-        "id": "inter-miami",
-        "name": "Inter Miami CF",
-        "years": "2023-2025"
+        "id": "argentina",
+        "name": "Argentina",
+        "years": "2005-2025"
       }
     ],
     "capsNationalTeam": 180,
@@ -161,7 +142,8 @@
     "image": "https://www.bdfa.com.ar/fotos/lionel-messi.jpg",
     "marketValue": "120.00",
     "activeYears": "2004-2025",
-    "decade": "2020s"
+    "decade": "2020s",
+    "rating": 98
   },
   {
     "id": "batistuta-gabriel-1969",
@@ -178,34 +160,24 @@
     "preferredFoot": "Derecho",
     "clubs": [
       {
-        "id": "newells-ii",
-        "name": "Newell's Old Boys",
+        "id": "newells",
+        "name": "Newell's",
         "years": "1988-1989"
       },
       {
-        "id": "river",
+        "id": "river-plate",
         "name": "River Plate",
         "years": "1989-1990"
       },
       {
-        "id": "boca-jrs-iii",
+        "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "1990-1991"
       },
       {
-        "id": "fiorentina",
-        "name": "ACF Fiorentina",
-        "years": "1991-2000"
-      },
-      {
-        "id": "roma",
-        "name": "AS Roma",
-        "years": "2000-2003"
-      },
-      {
-        "id": "inter",
-        "name": "Inter Milan",
-        "years": "2003"
+        "id": "argentina",
+        "name": "Argentina",
+        "years": "1991-2002"
       }
     ],
     "capsNationalTeam": 78,
@@ -222,7 +194,8 @@
     "image": "https://www.bdfa.com.ar/fotos/gabriel-batistuta.jpg",
     "marketValue": "45.00",
     "activeYears": "1988-2003",
-    "decade": "1990s"
+    "decade": "1990s",
+    "rating": 93
   },
   {
     "id": "di-maria-angel-1988",
@@ -241,34 +214,14 @@
     "preferredFoot": "Izquierdo",
     "clubs": [
       {
-        "id": "rosario",
+        "id": "rosario-central",
         "name": "Rosario Central",
         "years": "2005-2007"
       },
       {
-        "id": "benfica",
-        "name": "SL Benfica",
-        "years": "2007-2010"
-      },
-      {
-        "id": "real-madrid",
-        "name": "Real Madrid",
-        "years": "2010-2014"
-      },
-      {
-        "id": "psg",
-        "name": "Paris Saint-Germain",
-        "years": "2015-2022"
-      },
-      {
-        "id": "juventus",
-        "name": "Juventus FC",
-        "years": "2022-2023"
-      },
-      {
-        "id": "benfica-ii",
-        "name": "SL Benfica",
-        "years": "2023-"
+        "id": "argentina",
+        "name": "Argentina",
+        "years": "2008-2024"
       }
     ],
     "capsNationalTeam": 136,
@@ -300,7 +253,8 @@
     "image": "https://tmssl.akamaized.net/images/fotos/normal/angel-di-maria.jpg",
     "marketValue": "8.00",
     "activeYears": "2005-2025",
-    "decade": "2010s"
+    "decade": "2010s",
+    "rating": 90
   },
   {
     "id": "franco-armani",
@@ -315,7 +269,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -342,7 +302,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -369,7 +335,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -396,7 +368,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -423,7 +401,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -450,7 +434,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -477,7 +467,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -504,7 +500,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -531,7 +533,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -558,7 +566,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -585,7 +599,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -612,7 +632,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -639,7 +665,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -666,7 +698,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -693,7 +731,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -720,7 +764,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -747,7 +797,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -774,7 +830,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -801,7 +863,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "river-plate",
+        "name": "River Plate",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -828,7 +896,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -855,7 +929,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -882,7 +962,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -909,7 +995,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -936,7 +1028,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -963,7 +1061,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -990,7 +1094,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1017,7 +1127,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1044,7 +1160,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1071,7 +1193,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1098,7 +1226,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1125,7 +1259,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1152,7 +1292,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1179,7 +1325,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1206,7 +1358,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1233,7 +1391,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1260,7 +1424,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1287,7 +1457,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1314,7 +1490,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1341,7 +1523,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1368,7 +1556,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "boca-juniors",
+        "name": "Boca Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1395,7 +1589,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1422,7 +1622,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1449,7 +1655,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1476,7 +1688,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1503,7 +1721,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1530,7 +1754,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1557,7 +1787,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1584,7 +1820,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1611,7 +1853,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1638,7 +1886,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1665,7 +1919,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1692,7 +1952,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1719,7 +1985,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1746,7 +2018,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1773,7 +2051,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1800,7 +2084,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1827,7 +2117,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1854,7 +2150,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1881,7 +2183,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1908,7 +2216,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "independiente",
+        "name": "Independiente",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1935,7 +2249,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1962,7 +2282,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -1989,7 +2315,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2016,7 +2348,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2043,7 +2381,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2070,7 +2414,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2097,7 +2447,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2124,7 +2480,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2151,7 +2513,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2178,7 +2546,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2205,7 +2579,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2232,7 +2612,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2259,7 +2645,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2286,7 +2678,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2313,7 +2711,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2340,7 +2744,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2367,7 +2777,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2394,7 +2810,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2421,7 +2843,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2448,7 +2876,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "racing-club",
+        "name": "Racing Club",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2475,7 +2909,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2502,7 +2942,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2529,7 +2975,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2556,7 +3008,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2583,7 +3041,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2610,7 +3074,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2637,7 +3107,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2664,7 +3140,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2691,7 +3173,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2718,7 +3206,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2745,7 +3239,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2772,7 +3272,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2799,7 +3305,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2826,7 +3338,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2853,7 +3371,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2880,7 +3404,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2907,7 +3437,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2934,7 +3470,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2961,7 +3503,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -2988,7 +3536,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "san-lorenzo",
+        "name": "San Lorenzo",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3015,7 +3569,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3042,7 +3602,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3069,7 +3635,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3096,7 +3668,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3123,7 +3701,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3150,7 +3734,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3177,7 +3767,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3204,7 +3800,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3231,7 +3833,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3258,7 +3866,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3285,7 +3899,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3312,7 +3932,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3339,7 +3965,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3366,7 +3998,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3393,7 +4031,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3420,7 +4064,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3447,7 +4097,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3474,7 +4130,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "estudiantes-lp",
+        "name": "Estudiantes de La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3501,7 +4163,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3528,7 +4196,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3555,7 +4229,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3582,7 +4262,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3609,7 +4295,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3636,7 +4328,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3663,7 +4361,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3690,7 +4394,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3717,7 +4427,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3744,7 +4460,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3771,7 +4493,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3798,7 +4526,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3825,7 +4559,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3852,7 +4592,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3879,7 +4625,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3906,7 +4658,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3933,7 +4691,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3960,7 +4724,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -3987,7 +4757,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4014,7 +4790,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "gimnasia-lp",
+        "name": "Gimnasia y Esgrima La Plata",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4041,7 +4823,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4068,7 +4856,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4095,7 +4889,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4122,7 +4922,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4149,7 +4955,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4176,7 +4988,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4203,7 +5021,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4230,7 +5054,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4257,7 +5087,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4284,7 +5120,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4311,7 +5153,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4338,7 +5186,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4365,7 +5219,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4392,7 +5252,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4419,7 +5285,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4446,7 +5318,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4473,7 +5351,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "newells",
+        "name": "Newell's Old Boys",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4500,7 +5384,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4527,7 +5417,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4554,7 +5450,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4581,7 +5483,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4608,7 +5516,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4635,7 +5549,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4662,7 +5582,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4689,7 +5615,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4716,7 +5648,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4743,7 +5681,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4770,7 +5714,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4797,7 +5747,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4824,7 +5780,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4851,7 +5813,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4878,7 +5846,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4905,7 +5879,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4932,7 +5912,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4959,7 +5945,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -4986,7 +5978,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5013,7 +6011,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "banfield",
+        "name": "Banfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5040,7 +6044,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5067,7 +6077,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5094,7 +6110,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5121,7 +6143,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5148,7 +6176,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5175,7 +6209,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5202,7 +6242,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5229,7 +6275,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5256,7 +6308,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5283,7 +6341,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5310,7 +6374,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5337,7 +6407,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5364,7 +6440,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5391,7 +6473,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5418,7 +6506,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5445,7 +6539,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5472,7 +6572,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5499,7 +6605,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5526,7 +6638,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5553,7 +6671,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "lanus",
+        "name": "Lanús",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5580,7 +6704,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5607,7 +6737,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5634,7 +6770,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5661,7 +6803,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5688,7 +6836,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5715,7 +6869,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5742,7 +6902,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5769,7 +6935,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5796,7 +6968,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5823,7 +7001,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5850,7 +7034,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5877,7 +7067,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5904,7 +7100,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5931,7 +7133,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5958,7 +7166,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -5985,7 +7199,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6012,7 +7232,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6039,7 +7265,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón de Santa Fe",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6066,7 +7298,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6093,7 +7331,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6120,7 +7364,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6147,7 +7397,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6174,7 +7430,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6201,7 +7463,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6228,7 +7496,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6255,7 +7529,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6282,7 +7562,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6309,7 +7595,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6336,7 +7628,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6363,7 +7661,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6390,7 +7694,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6417,7 +7727,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6444,7 +7760,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6471,7 +7793,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6498,7 +7826,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6525,7 +7859,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6552,7 +7892,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "velez",
+        "name": "Vélez Sarsfield",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6579,7 +7925,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6606,7 +7958,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6633,7 +7991,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6660,7 +8024,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6687,7 +8057,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6714,7 +8090,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6741,7 +8123,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6768,7 +8156,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6795,7 +8189,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6822,7 +8222,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6849,7 +8255,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6876,7 +8288,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6903,7 +8321,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6930,7 +8354,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6957,7 +8387,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -6984,7 +8420,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7011,7 +8453,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7038,7 +8486,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "defensa-y-justicia",
+        "name": "Defensa y Justicia",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7065,7 +8519,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7092,7 +8552,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7119,7 +8585,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7146,7 +8618,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7173,7 +8651,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7200,7 +8684,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7227,7 +8717,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7254,7 +8750,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7281,7 +8783,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7308,7 +8816,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7335,7 +8849,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7362,7 +8882,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7389,7 +8915,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7416,7 +8948,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7443,7 +8981,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7470,7 +9014,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7497,7 +9047,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "argentinos-jrs",
+        "name": "Argentinos Juniors",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7524,7 +9080,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7551,7 +9113,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7578,7 +9146,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7605,7 +9179,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7632,7 +9212,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7659,7 +9245,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7686,7 +9278,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7713,7 +9311,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7740,7 +9344,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7767,7 +9377,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7794,7 +9410,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7821,7 +9443,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7848,7 +9476,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7875,7 +9509,13 @@
     "height": 0,
     "weight": 0,
     "preferredFoot": "Derecho",
-    "clubs": [],
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres de Córdoba",
+        "years": "2025"
+      }
+    ],
     "capsNationalTeam": 0,
     "goalsNationalTeam": 0,
     "capsClub": 0,
@@ -7888,5 +9528,117 @@
     "decade": "",
     "rating": 71,
     "legendary": false
+  },
+  {
+    "id": "guido-herrera-talleres",
+    "name": "Guido Herrera",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 78,
+    "decade": "2020s",
+    "nationality": "Argentina",
+    "goalsClub": 0,
+    "capsClub": 240,
+    "goalsNationalTeam": 0,
+    "capsNationalTeam": 0,
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres",
+        "years": "2016-2025"
+      }
+    ]
+  },
+  {
+    "id": "juan-rodriguez-talleres",
+    "name": "Juan Gabriel Rodríguez",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "decade": "2020s",
+    "nationality": "Argentina",
+    "goalsClub": 4,
+    "capsClub": 75,
+    "goalsNationalTeam": 0,
+    "capsNationalTeam": 0,
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres",
+        "years": "2023-2025"
+      }
+    ]
+  },
+  {
+    "id": "ulises-ortegoza-talleres",
+    "name": "Ulises Ortegoza",
+    "position": "CM",
+    "positions": [
+      "CM",
+      "CDM"
+    ],
+    "rating": 74,
+    "decade": "2020s",
+    "nationality": "Chile",
+    "goalsClub": 3,
+    "capsClub": 82,
+    "goalsNationalTeam": 0,
+    "capsNationalTeam": 2,
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres",
+        "years": "2022-2025"
+      }
+    ]
+  },
+  {
+    "id": "matias-esquivel-talleres",
+    "name": "Matías Esquivel",
+    "position": "CAM",
+    "positions": [
+      "CAM",
+      "CM"
+    ],
+    "rating": 74,
+    "decade": "2020s",
+    "nationality": "Argentina",
+    "goalsClub": 7,
+    "capsClub": 68,
+    "goalsNationalTeam": 0,
+    "capsNationalTeam": 0,
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres",
+        "years": "2022-2025"
+      }
+    ]
+  },
+  {
+    "id": "federico-girotti-talleres",
+    "name": "Federico Girotti",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 76,
+    "decade": "2020s",
+    "nationality": "Argentina",
+    "goalsClub": 18,
+    "capsClub": 72,
+    "goalsNationalTeam": 0,
+    "capsNationalTeam": 0,
+    "clubs": [
+      {
+        "id": "talleres-cba",
+        "name": "Talleres",
+        "years": "2022-2025"
+      }
+    ]
   }
 ]

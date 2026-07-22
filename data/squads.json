@@ -204,7 +204,7 @@
   },
   {
     "id": "newells-old-boys-2025",
-    "clubId": "newells-old-boys",
+    "clubId": "newells",
     "season": "2025",
     "competition": "Liga Profesional",
     "label": "Newells Old Boys 2025",
@@ -320,7 +320,7 @@
   },
   {
     "id": "velez-sarsfield-2025",
-    "clubId": "velez-sarsfield",
+    "clubId": "velez",
     "season": "2025",
     "competition": "Liga Profesional",
     "label": "Velez Sarsfield 2025",
@@ -378,7 +378,7 @@
   },
   {
     "id": "argentinos-juniors-2025",
-    "clubId": "argentinos-juniors",
+    "clubId": "argentinos-jrs",
     "season": "2025",
     "competition": "Liga Profesional",
     "label": "Argentinos Juniors 2025",
@@ -426,7 +426,12 @@
       "nahuel-banegas",
       "francisco-meza",
       "nicolas-camacho",
-      "alan-franco"
+      "alan-franco",
+      "guido-herrera-talleres",
+      "juan-rodriguez-talleres",
+      "ulises-ortegoza-talleres",
+      "matias-esquivel-talleres",
+      "federico-girotti-talleres"
     ]
   }
 ]
