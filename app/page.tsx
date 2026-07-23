@@ -7,6 +7,7 @@ import Image from 'next/image'
 import clubsData from '@/data/clubs.json'
 import squadsData from '@/data/squads.json'
 import type { Club, Squad } from '@/lib/types'
+import LiveScoresWidget from '@/components/LiveScoresWidget'
 
 const clubs: Club[] = clubsData as Club[]
 const squads: Squad[] = squadsData as Squad[]
@@ -777,6 +778,11 @@ export default function HomePage() {
 
       {/* ── CLUB GRID ── */}
       <ClubGrid />
+
+      {/* ── LIVE SCORES WIDGET ── */}
+      <div className="max-w-6xl mx-auto px-4">
+        <LiveScoresWidget />
+      </div>
 
       {/* ── DONATION BOX ── */}
       <DonationSection />

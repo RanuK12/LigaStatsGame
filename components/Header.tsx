@@ -5,10 +5,14 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { useUserStore } from '@/lib/user-store'
+import AuthModal from './AuthModal'
+import UserProfileModal from './UserProfileModal'
 
 const NAV_ITEMS = [
   { href: '/', label: 'INICIO', match: '/' },
   { href: '/draft?mode=clasico', match: '/draft', label: 'DRAFT' },
+  { href: '/carrera', label: 'CARRERA' },
   { href: '/versus', label: 'VERSUS' },
   { href: '/ruleta', label: 'RULETA' },
   { href: '/records', label: 'RECORDS' },
@@ -19,6 +23,7 @@ const NAV_ITEMS = [
 export default function Header() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  const { user, openAuthModal, openProfileModal } = useUserStore()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020813]/72 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
@@ -49,7 +54,7 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop Navigation (text-only, using Syncopate font-sport for premium look) */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
             const matchPath = item.match || item.href
@@ -59,7 +64,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative rounded-2xl px-4 py-2.5 text-[10px] font-bold tracking-[0.35em] font-sport transition-all duration-300 ease-out uppercase ${
+                className={`relative rounded-2xl px-3.5 py-2 text-[10px] font-bold tracking-[0.25em] font-sport transition-all duration-300 ease-out uppercase ${
                   isActive ? 'text-white' : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -76,21 +81,48 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Mobile menu trigger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl p-2.5 text-slate-400 hover:text-white hover:bg-white/5 border border-white/5 transition-all duration-300 ease-out"
-          aria-label="Abrir menú"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            {menuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" strokeLinejoin="round" />
-            )}
-          </svg>
-        </button>
+        {/* User profile / Login button */}
+        <div className="flex items-center gap-2">
+          {user?.isLoggedIn ? (
+            <button
+              onClick={openProfileModal}
+              className="flex items-center gap-2 bg-gradient-to-r from-[#74ACDF]/20 to-blue-600/20 border border-[#74ACDF]/40 px-3 py-1.5 rounded-2xl font-sport text-xs text-white hover:border-[#74ACDF] transition-all shadow-[0_0_12px_rgba(116,172,223,0.15)]"
+            >
+              <span className="w-6 h-6 rounded-full bg-[#74ACDF] text-slate-950 font-black text-[10px] flex items-center justify-center">
+                {user.username.slice(0, 2).toUpperCase()}
+              </span>
+              <span className="font-bold max-w-[90px] truncate">{user.username}</span>
+              <span className="text-[10px] text-[#74ACDF] font-bold">⚡{user.elo}</span>
+            </button>
+          ) : (
+            <button
+              onClick={openAuthModal}
+              className="btn-primary px-3.5 py-1.5 text-[10px] font-bold tracking-widest uppercase font-sport rounded-xl shadow-md"
+            >
+              INGRESAR
+            </button>
+          )}
+
+          {/* Mobile menu trigger */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl p-2.5 text-slate-400 hover:text-white hover:bg-white/5 border border-white/5 transition-all duration-300 ease-out"
+            aria-label="Abrir menú"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              {menuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" strokeLinejoin="round" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
+
+      {/* Modals */}
+      <AuthModal />
+      <UserProfileModal />
 
       {/* Mobile Navigation */}
       <AnimatePresence>

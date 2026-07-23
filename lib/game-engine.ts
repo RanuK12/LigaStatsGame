@@ -480,7 +480,7 @@ const ASSIST_PROBS: Record<string, number> = {
   LW: 0.16, RW: 0.16, ST: 0.10, CF: 0.12,
 };
 
-function distributeGoalsAmongPlayers(
+export function distributeGoalsAmongPlayers(
   players: Player[], totalGoals: number, formation: FormationConfig
 ): { goals: Record<string, number>; assists: Record<string, number> } {
   const goals: Record<string, number> = {};
