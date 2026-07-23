@@ -1,0 +1,9 @@
+[
+  { "id": "seed-lpf-1", "homeTeam": "River Plate", "awayTeam": "Boca Juniors", "homeScore": 2, "awayScore": 1, "status": "FINAL", "league": "lpf" },
+  { "id": "seed-lpf-2", "homeTeam": "Racing Club", "awayTeam": "Independiente", "homeScore": 1, "awayScore": 1, "status": "FINAL", "league": "lpf" },
+  { "id": "seed-lpf-3", "homeTeam": "San Lorenzo", "awayTeam": "Vélez Sarsfield", "status": "UPCOMING", "time": "21:30", "league": "lpf" },
+  { "id": "seed-lib-1", "homeTeam": "Flamengo", "awayTeam": "Palmeiras", "homeScore": 3, "awayScore": 2, "status": "FINAL", "league": "libertadores" },
+  { "id": "seed-lib-2", "homeTeam": "River Plate", "awayTeam": "Peñarol", "status": "UPCOMING", "time": "19:00", "league": "libertadores" },
+  { "id": "seed-eur-1", "homeTeam": "Real Madrid", "awayTeam": "FC Barcelona", "homeScore": 2, "awayScore": 2, "status": "FINAL", "league": "europe" },
+  { "id": "seed-eur-2", "homeTeam": "Manchester City", "awayTeam": "Liverpool", "status": "UPCOMING", "time": "16:45", "league": "europe" }
+]

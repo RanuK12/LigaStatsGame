@@ -2,10 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useUserStore } from '@/lib/user-store'
+import { supabase } from '@/lib/supabase'
+import { profileFromSupabaseUser } from '@/lib/auth'
 import AuthModal from './AuthModal'
 import UserProfileModal from './UserProfileModal'
 
@@ -23,7 +25,23 @@ const NAV_ITEMS = [
 export default function Header() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const { user, openAuthModal, openProfileModal } = useUserStore()
+  const { user, openAuthModal, openProfileModal, setUser } = useUserStore()
+
+  // Hydrate the local store from Supabase Auth (OAuth redirect + persisted session).
+  useEffect(() => {
+    if (!supabase) return
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session?.user) {
+        setUser(profileFromSupabaseUser(data.session.user, useUserStore.getState().user))
+      }
+    })
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setUser(profileFromSupabaseUser(session.user, useUserStore.getState().user))
+      }
+    })
+    return () => sub.subscription.unsubscribe()
+  }, [setUser])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020813]/72 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
@@ -88,9 +106,18 @@ export default function Header() {
               onClick={openProfileModal}
               className="flex items-center gap-2 bg-gradient-to-r from-[#74ACDF]/20 to-blue-600/20 border border-[#74ACDF]/40 px-3 py-1.5 rounded-2xl font-sport text-xs text-white hover:border-[#74ACDF] transition-all shadow-[0_0_12px_rgba(116,172,223,0.15)]"
             >
-              <span className="w-6 h-6 rounded-full bg-[#74ACDF] text-slate-950 font-black text-[10px] flex items-center justify-center">
-                {user.username.slice(0, 2).toUpperCase()}
-              </span>
+              {user.avatarUrl ? (
+                <img
+                  src={user.avatarUrl}
+                  alt={user.username}
+                  referrerPolicy="no-referrer"
+                  className="w-6 h-6 rounded-full object-cover border border-[#74ACDF]/60"
+                />
+              ) : (
+                <span className="w-6 h-6 rounded-full bg-[#74ACDF] text-slate-950 font-black text-[10px] flex items-center justify-center">
+                  {user.username.slice(0, 2).toUpperCase()}
+                </span>
+              )}
               <span className="font-bold max-w-[90px] truncate">{user.username}</span>
               <span className="text-[10px] text-[#74ACDF] font-bold">⚡{user.elo}</span>
             </button>

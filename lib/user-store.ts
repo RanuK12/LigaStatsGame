@@ -1,6 +1,7 @@
 "use client"
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { supabase } from './supabase'
 
 export interface UserProfile {
   username: string
@@ -40,7 +41,10 @@ export const useUserStore = create<UserStore>()(
       openProfileModal: () => set({ isProfileModalOpen: true }),
       closeProfileModal: () => set({ isProfileModalOpen: false }),
       setUser: (user) => set({ user }),
-      logout: () => set({ user: null }),
+      logout: () => {
+        void supabase?.auth.signOut()
+        set({ user: null })
+      },
       loginGuest: (username) => {
         const cleanName = username.trim() || 'DT Fanático'
         const existing = get().user
