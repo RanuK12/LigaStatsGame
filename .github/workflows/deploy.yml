@@ -25,6 +25,18 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+        env:
+          # NEXT_PUBLIC_* se hornean en el build. Son públicos por diseño (van al bundle
+          # cliente), así que pueden ser Secrets o Variables del repo. Vacíos = feature
+          # deshabilitada con fallback. Config en Settings > Secrets and variables > Actions.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SPORTSDB_KEY: ${{ secrets.NEXT_PUBLIC_SPORTSDB_KEY }}
+          NEXT_PUBLIC_MP_ALIAS: ${{ secrets.NEXT_PUBLIC_MP_ALIAS }}
+          NEXT_PUBLIC_MP_LINK: ${{ secrets.NEXT_PUBLIC_MP_LINK }}
+          NEXT_PUBLIC_STRIPE_LINK_5: ${{ secrets.NEXT_PUBLIC_STRIPE_LINK_5 }}
+          NEXT_PUBLIC_STRIPE_LINK_10: ${{ secrets.NEXT_PUBLIC_STRIPE_LINK_10 }}
+          NEXT_PUBLIC_STRIPE_LINK_25: ${{ secrets.NEXT_PUBLIC_STRIPE_LINK_25 }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
