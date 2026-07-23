@@ -19,12 +19,16 @@ export default function AuthModal() {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+      <div
+        onClick={closeAuthModal}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md cursor-pointer"
+      >
         <motion.div
+          onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.9, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 15 }}
-          className="card-gradient rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_0_50px_rgba(116,172,223,0.15)] relative overflow-hidden"
+          className="card-gradient rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_0_50px_rgba(116,172,223,0.15)] relative overflow-hidden cursor-default"
         >
           {/* Close button */}
           <button
