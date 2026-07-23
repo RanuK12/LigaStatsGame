@@ -1,12 +1,11 @@
 "use client"
 
-import type { Player } from "@/lib/types"
+import type { Player, Squad } from "@/lib/types"
 import { POS_LABELS } from "@/lib/game-engine"
 import { getPC } from "@/lib/ui-constants"
 
 type EnrichedPlayer = Player & { isCompatible: boolean }
 
-// Marco por tier: legendario dorado, élite (>=80) celeste-plata, resto slate
 function tierClasses(p: EnrichedPlayer): string {
   if (!p.isCompatible) return "border-slate-800 bg-slate-900/40 opacity-40 hover:opacity-60 cursor-not-allowed"
   if (p.legendary) return "border-[#D4AF37]/70 bg-gradient-to-b from-yellow-900/40 to-slate-900/80 hover:border-[#FFD700] cursor-pointer"
@@ -15,11 +14,20 @@ function tierClasses(p: EnrichedPlayer): string {
 }
 
 /** Card de jugador estilo figurita para la grilla de reclutamiento */
-export default function PlayerTradingCard({ player, onSelect, showRating }: {
-  player: EnrichedPlayer; onSelect: () => void; showRating: boolean
+export default function PlayerTradingCard({ player, onSelect, showRating, currentSquad }: {
+  player: EnrichedPlayer; onSelect: () => void; showRating: boolean; currentSquad?: Squad | null
 }) {
   const ratingColor = player.legendary ? "text-[#FFD700]" : (player.rating || 0) >= 80 ? "text-[#75AADB]" : "text-slate-300"
-  const firstClub = player.clubs?.[0]
+  
+  // Buscar el club que coincide con el plantel sorteado actual, o usar el primero de la carrera
+  const matchedClub = currentSquad && player.clubs
+    ? player.clubs.find(c => {
+        const cid = typeof c === 'object' ? c.id : c
+        return cid === currentSquad.clubId || (currentSquad.clubId === 'rosario-central' && cid === 'colon')
+      })
+    : null
+  
+  const displayClub = (typeof matchedClub === 'object' ? matchedClub : null) || (player.clubs?.[0] && typeof player.clubs[0] === 'object' ? player.clubs[0] : null)
 
   return (
     <button onClick={onSelect}
@@ -51,9 +59,9 @@ export default function PlayerTradingCard({ player, onSelect, showRating }: {
           </span>
           <span className="text-[10px] text-slate-500 font-sport font-semibold">{player.goalsClub} G · {player.capsClub} PJ</span>
         </div>
-        {firstClub && (
-          <div className="mt-0.5 truncate text-[9px] text-slate-500">
-            {firstClub.name}{firstClub.years ? ` · ${firstClub.years}` : ""}
+        {displayClub && (
+          <div className="mt-0.5 truncate text-[9px] text-[#75AADB]">
+            {displayClub.name}{displayClub.years ? ` · ${displayClub.years}` : ""}
           </div>
         )}
       </div>

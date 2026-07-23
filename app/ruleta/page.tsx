@@ -77,8 +77,11 @@ export default function RuletaPage() {
     const randomIdx = Math.floor(Math.random() * wheelPlayers.length)
     const player = wheelPlayers[randomIdx]
     const sectorCenter = randomIdx * sectorAngle + sectorAngle / 2
-    const pointerAngle = 360 - sectorCenter
-    const newRotation = rotation + FULL_SPINS * 360 + pointerAngle
+    const targetAngle = (360 - sectorCenter) % 360
+    const currentMod = rotation % 360
+    let delta = targetAngle - currentMod
+    if (delta < 0) delta += 360
+    const newRotation = rotation + FULL_SPINS * 360 + delta
 
     setTargetIndex(randomIdx)
     setRotation(newRotation)

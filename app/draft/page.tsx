@@ -266,15 +266,17 @@ function DraftInner() {
     const newPity = updatePity(pity, player.rating || 60)
     setPity(newPity)
 
-    let nextIdx = slotIdx + 1
-    while (nextIdx < newDrafted.length && newDrafted[nextIdx] !== null) nextIdx++
-
-    if (nextIdx < newDrafted.length) {
+    const isTeamComplete = newDrafted.filter(Boolean).length === totalSlots
+    if (!isTeamComplete) {
+      let nextIdx = (slotIdx + 1) % totalSlots
+      while (newDrafted[nextIdx] !== null) {
+        nextIdx = (nextIdx + 1) % totalSlots
+      }
       setTimeout(() => { setActiveSlotIdx(nextIdx); setCurrentSquad(null); setPhase("ready"); setSearch("") }, 300)
     } else {
       setTimeout(() => { setConfetti(true); setTimeout(() => setConfetti(false), 4000); setPhase("done") }, 300)
     }
-  }, [drafted, draftedIds, f, pity])
+  }, [drafted, draftedIds, f, pity, totalSlots])
 
   // ── SLOT CLICK ──
   const handleSlotClick = useCallback((idx: number) => {
@@ -577,7 +579,8 @@ function DraftInner() {
                 {pickerPlayers.map(player => (
                   <PlayerTradingCard key={player.id} player={player}
                     onSelect={() => pickPlayer(player, activeSlotIdx)}
-                    showRating={mode.ratingsVisible} />
+                    showRating={mode.ratingsVisible}
+                    currentSquad={currentSquad} />
                 ))}
               </div>
               {pickerPlayers.length > 0 && (

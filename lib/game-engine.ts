@@ -542,7 +542,7 @@ export function simulateSeasonWithStats(
   const playerStrength = teamToStrength(playerTeam, formation, 'liga');
   const opponents = allSquads
     .filter(s => s.id !== squad.id && s.playerIds.length >= 11)
-    .sort(() => Math.random() - 0.5).slice(0, 13); // 14 teams total
+    .sort(() => Math.random() - 0.5).slice(0, 27); // 28 equipos totales (Liga Profesional)
   const allNames = [squad.label, ...opponents.map(o => o.label)];
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;

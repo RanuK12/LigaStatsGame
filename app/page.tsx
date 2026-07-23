@@ -790,7 +790,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <div className="relative w-8 h-8">
-                <Image src="/LigaStatsGame/logos/afa.png" alt="AFA" fill className="opacity-40 object-contain" />
+                <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-full h-full opacity-40 object-contain" />
               </div>
               <div>
                 <span className="text-[#74ACDF]/40 text-xs font-sport font-bold block tracking-wider">

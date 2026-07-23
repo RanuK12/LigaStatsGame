@@ -26,11 +26,10 @@ export default function Header() {
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-[26px] h-[36px] sm:w-[29px] sm:h-[40px] shrink-0">
-            <Image
+            <img
               src="/LigaStatsGame/logos/afa.png"
               alt="AFA Logo"
-              fill
-              className="object-contain drop-shadow-[0_2px_10px_rgba(116,172,223,0.3)] group-hover:scale-105 transition-transform"
+              className="w-full h-full object-contain drop-shadow-[0_2px_10px_rgba(116,172,223,0.3)] group-hover:scale-105 transition-transform"
             />
           </div>
           <div className="flex flex-col justify-center">
