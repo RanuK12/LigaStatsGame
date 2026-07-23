@@ -102,6 +102,16 @@ export interface SeasonResult {
   copaArgentina: boolean
   continental: 'libertadores' | 'sudamericana' | null
   continentalWon: boolean
+  rating: number // nota de la temporada 5.5 - 9.9
+  topScorer: boolean
+  highlights: string[] // momentos narrativos
+}
+
+export interface Milestones {
+  nationalTeam: boolean
+  balonDeOro: number
+  goldenBoots: number
+  worldCup: boolean
 }
 
 export interface CareerPlayer {
@@ -126,6 +136,7 @@ export interface CareerState {
   history: SeasonResult[]
   pendingOffers: TransferOffer[]
   nextContinental: 'libertadores' | 'sudamericana'
+  milestones: Milestones
   finished: boolean
 }
 
@@ -217,6 +228,25 @@ export function simulateSeason(
   if (copaArgentina) trophiesWon.push('copa-arg')
   if (continentalWon) trophiesWon.push(contType)
 
+  // Performance score 0..1 relative to a strong season for the position
+  const expected = (GOAL_BASE[cat] + ASSIST_BASE[cat]) * ovrScale || 1
+  const performance = clamp((goals + assists) / (expected * 1.1), 0, 1)
+
+  // Goleador del torneo (solo posiciones ofensivas, con algo de azar)
+  const scorerThreshold = cat === 'ATT' ? 15 : cat === 'MID' ? 12 : 999
+  const topScorer = goals >= scorerThreshold && rng() < 0.7
+
+  const rating = clamp(Math.round((5.5 + performance * 3.6 + trophiesWon.length * 0.25) * 10) / 10, 5.5, 9.9)
+
+  const highlights: string[] = []
+  if (liga) highlights.push(`🏆 Campeón de la Liga Profesional con ${club.name}`)
+  if (continentalWon) highlights.push(`🌎 Levantaste la ${contType === 'libertadores' ? 'Copa Libertadores' : 'Copa Sudamericana'}`)
+  if (copaArgentina) highlights.push(`🥛 Campeón de la Copa Argentina`)
+  if (topScorer) highlights.push(`🥇 Goleador del torneo con ${goals} goles`)
+  else if (goals >= 10 && cat === 'ATT') highlights.push(`⚽ Gran temporada: ${goals} goles`)
+  if (cat !== 'ATT' && assists >= 10) highlights.push(`🎯 Temporada de ${assists} asistencias`)
+  if (rating >= 9) highlights.push(`⭐ Figura del año (nota ${rating.toFixed(1)})`)
+
   const season: SeasonResult = {
     year,
     age,
@@ -231,11 +261,10 @@ export function simulateSeason(
     copaArgentina,
     continental: contType,
     continentalWon,
+    rating,
+    topScorer,
+    highlights,
   }
-
-  // Performance score 0..1 relative to a strong season for the position
-  const expected = (GOAL_BASE[cat] + ASSIST_BASE[cat]) * ovrScale || 1
-  const performance = clamp((goals + assists) / (expected * 1.1), 0, 1)
 
   // Generate transfer offers from stronger clubs when the season was good
   const offers = generateOffers(state, performance, rng)

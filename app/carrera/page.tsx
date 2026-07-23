@@ -369,6 +369,40 @@ function CareerDashboard() {
           </button>
         </div>
 
+        {/* MOMENTOS + PREMIOS */}
+        {career.history.length > 0 && (() => {
+          const last = career.history[career.history.length - 1]
+          const m = career.milestones
+          return (
+            <div className="card-gradient rounded-3xl p-5 border border-amber-400/20 space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="text-[10px] font-bold text-amber-400 font-sport uppercase tracking-[0.2em]">Temporada {last.year} · Momentos</h4>
+                <span className={`px-2.5 py-1 rounded-lg text-xs font-black font-display ${last.rating >= 8 ? "bg-emerald-500/20 text-emerald-300" : last.rating >= 6.8 ? "bg-amber-500/20 text-amber-300" : "bg-slate-800 text-slate-300"}`}>
+                  Nota {last.rating.toFixed(1)}
+                </span>
+              </div>
+              {last.highlights.length > 0 ? (
+                <ul className="space-y-1.5">
+                  {last.highlights.map((h, i) => (
+                    <li key={i} className="text-xs text-slate-200 leading-snug flex gap-2">
+                      <span className="text-amber-400 mt-0.5">›</span>{h}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-xs text-slate-500">Temporada tranquila. A meterle para la próxima. 💪</p>
+              )}
+              {(m.balonDeOro > 0 || m.goldenBoots > 0 || m.nationalTeam) && (
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {m.balonDeOro > 0 && <Award icon="🏅" label={`Balón de Oro ×${m.balonDeOro}`} />}
+                  {m.goldenBoots > 0 && <Award icon="👟" label={`Botín de Oro ×${m.goldenBoots}`} />}
+                  {m.nationalTeam && <Award icon={career.player.flag} label="Selección" />}
+                </div>
+              )}
+            </div>
+          )
+        })()}
+
         {/* HISTORY */}
         {career.history.length > 0 && (
           <div className="card-gradient rounded-3xl p-5 border border-white/10">
@@ -382,6 +416,7 @@ function CareerDashboard() {
                     <th className="py-1 pr-2 text-center">PJ</th>
                     <th className="py-1 pr-2 text-center">G</th>
                     <th className="py-1 pr-2 text-center">A</th>
+                    <th className="py-1 pr-2 text-center">Nota</th>
                     <th className="py-1 text-right">Títulos</th>
                   </tr>
                 </thead>
@@ -393,6 +428,7 @@ function CareerDashboard() {
                       <td className="py-1.5 pr-2 text-center">{s.matchesPlayed}</td>
                       <td className="py-1.5 pr-2 text-center text-green-400">{s.goals}</td>
                       <td className="py-1.5 pr-2 text-center text-blue-400">{s.assists}</td>
+                      <td className={`py-1.5 pr-2 text-center font-bold ${s.rating >= 8 ? "text-emerald-400" : s.rating >= 6.8 ? "text-amber-400" : "text-slate-400"}`}>{s.rating.toFixed(1)}</td>
                       <td className="py-1.5 text-right">
                         {[s.liga && "⭐", s.copaArgentina && "🥛", s.continentalWon && (s.continental === "libertadores" ? "🏆" : "🥇")].filter(Boolean).join(" ") || "—"}
                       </td>
@@ -421,6 +457,15 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 function clampNum(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, n))
+}
+
+function Award({ icon, label }: { icon: string; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-950/60 border border-amber-400/30 text-[10px] font-bold font-sport text-amber-200">
+      <span className="text-sm">{icon}</span>
+      {label}
+    </span>
+  )
 }
 
 function confirmReset(): boolean {

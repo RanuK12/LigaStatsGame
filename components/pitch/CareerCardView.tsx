@@ -19,46 +19,50 @@ export interface CareerCardData {
 
 export default function CareerCardView({ data }: { data: CareerCardData }) {
   return (
-    <div className="w-full max-w-md mx-auto card-gradient rounded-3xl p-6 sm:p-8 border border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.6)] font-sans relative text-white overflow-hidden">
-      {/* Glow highlight top */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 via-yellow-400 to-[#74ACDF]" />
+    <div className="w-full max-w-md mx-auto rounded-3xl p-6 sm:p-7 border border-amber-400/20 shadow-[0_20px_60px_rgba(0,0,0,0.7)] font-sans relative text-white overflow-hidden bg-gradient-to-b from-[#0c1526] via-[#0a1220] to-[#060b16]">
+      {/* Gold top accent + ambient glow */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-500 via-yellow-300 to-amber-500" />
+      <div className="absolute -top-16 -right-10 w-52 h-52 rounded-full bg-amber-400/10 blur-3xl pointer-events-none" />
 
-      {/* HEADER SECTION: OVR, FLAG, VALOR, NAME/POS */}
-      <div className="flex items-center gap-3 mb-6">
-        {/* OVR BADGE */}
-        <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl bg-gradient-to-b from-amber-400 via-yellow-500 to-amber-600 p-0.5 shadow-[0_0_20px_rgba(245,158,11,0.4)] shrink-0 flex flex-col items-center justify-center text-slate-950">
-          <span className="text-[9px] font-black tracking-widest uppercase font-sport opacity-80">OVR</span>
-          <span className="text-3xl sm:text-4xl font-black font-display leading-none">{data.overall}</span>
+      {/* HEADER: OVR + NAME */}
+      <div className="flex items-center gap-4 mb-5 relative">
+        {/* OVR BADGE (dorado 3D) */}
+        <div className="relative shrink-0">
+          <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-yellow-200 via-amber-400 to-amber-600 shadow-[0_6px_20px_rgba(245,158,11,0.45),inset_0_2px_4px_rgba(255,255,255,0.6)] flex flex-col items-center justify-center text-slate-950">
+            <span className="text-[9px] font-black tracking-[0.2em] uppercase font-sport opacity-70 -mb-1">OVR</span>
+            <span className="text-5xl font-black font-display leading-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">{data.overall}</span>
+          </div>
         </div>
 
-        {/* DETAILS COLUMN */}
-        <div className="flex-1 min-w-0 space-y-2">
-          {/* Top row: Flag + Market Value + Name Badge */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xl leading-none" title={data.nationalityFlag ? "Nacionalidad" : "Argentina"}>{data.nationalityFlag || "🇦🇷"}</span>
-            <div className="px-3 py-1 rounded-xl bg-slate-900/80 border border-slate-700/80 text-[10px] font-bold tracking-wider uppercase font-sport text-slate-200">
-              VALOR <span className="text-amber-400 font-black">{data.marketValue}</span>
-            </div>
-            <div className="px-3 py-1 rounded-xl bg-slate-900/80 border border-slate-700/80 text-[10px] font-bold tracking-wider uppercase font-sport text-slate-200 truncate max-w-[140px]">
-              {data.playerName.toUpperCase()} • #{data.number} • {data.position}
-            </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="text-2xl leading-none">{data.nationalityFlag || "🇦🇷"}</span>
+            <span className="px-2.5 py-1 rounded-lg bg-amber-400/15 border border-amber-400/30 text-[11px] font-black tracking-wider uppercase font-sport text-amber-300">
+              {data.marketValue}
+            </span>
           </div>
+          <h3 className="font-display font-black text-white uppercase leading-tight text-xl sm:text-2xl truncate">
+            {data.playerName}
+          </h3>
+          <p className="text-[11px] font-bold text-slate-400 font-sport uppercase tracking-wider mt-0.5">
+            #{data.number} · {data.position}
+          </p>
+        </div>
+      </div>
 
-          {/* STATS ROW: PJ, GLS, AST */}
-          <div className="grid grid-cols-3 gap-2 bg-slate-950/60 border border-white/5 rounded-2xl p-2.5 text-center">
-            <div>
-              <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">PJ</div>
-              <div className="text-lg font-black text-white font-display">{data.matchesPlayed}</div>
-            </div>
-            <div className="border-x border-white/5">
-              <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">GLS</div>
-              <div className="text-lg font-black text-green-400 font-display">{data.goals}</div>
-            </div>
-            <div>
-              <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">AST</div>
-              <div className="text-lg font-black text-blue-400 font-display">{data.assists}</div>
-            </div>
-          </div>
+      {/* STATS ROW: PJ, GLS, AST */}
+      <div className="grid grid-cols-3 gap-2 bg-slate-950/70 border border-white/5 rounded-2xl p-3 text-center mb-6">
+        <div>
+          <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">PJ</div>
+          <div className="text-xl font-black text-white font-display">{data.matchesPlayed}</div>
+        </div>
+        <div className="border-x border-white/5">
+          <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">GLS</div>
+          <div className="text-xl font-black text-green-400 font-display">{data.goals}</div>
+        </div>
+        <div>
+          <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">AST</div>
+          <div className="text-xl font-black text-blue-400 font-display">{data.assists}</div>
         </div>
       </div>
 
