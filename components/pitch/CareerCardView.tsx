@@ -35,7 +35,7 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
         <div className="flex-1 min-w-0 space-y-2">
           {/* Top row: Flag + Market Value + Name Badge */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xl leading-none" title="Argentina">🇦🇷</span>
+            <span className="text-xl leading-none" title={data.nationalityFlag ? "Nacionalidad" : "Argentina"}>{data.nationalityFlag || "🇦🇷"}</span>
             <div className="px-3 py-1 rounded-xl bg-slate-900/80 border border-slate-700/80 text-[10px] font-bold tracking-wider uppercase font-sport text-slate-200">
               VALOR <span className="text-amber-400 font-black">{data.marketValue}</span>
             </div>

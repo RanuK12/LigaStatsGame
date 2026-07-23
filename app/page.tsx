@@ -8,6 +8,7 @@ import clubsData from '@/data/clubs.json'
 import squadsData from '@/data/squads.json'
 import type { Club, Squad } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
+import DonationSection from '@/components/DonationSection'
 
 const clubs: Club[] = clubsData as Club[]
 const squads: Squad[] = squadsData as Squad[]
@@ -616,48 +617,6 @@ function LigaDetailsShowcase() {
           </motion.div>
         ))}
       </div>
-    </section>
-  )
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SUPPORT THE PROJECT (donation box)
-   ═══════════════════════════════════════════════════════════════ */
-function DonationSection() {
-  return (
-    <section className="relative z-10 max-w-4xl mx-auto px-4 pb-20">
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="card-gradient rounded-2xl p-6 sm:p-8 border border-slate-900 text-center relative overflow-hidden"
-      >
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500/30 via-yellow-450/40 to-amber-500/30 animate-pulse" />
-        <span className="text-[10px] font-bold text-[#FFD700] uppercase tracking-widest font-sport block mb-2.5">
-          PROYECTO DE HINCHAS PARA HINCHAS
-        </span>
-        <h3 className="font-display text-xl sm:text-2xl font-black text-white mb-3 uppercase tracking-tight">
-          APOYÁ ESTE PROYECTO PARA SEGUIR CRECIENDO
-        </h3>
-        <p className="text-slate-400 text-xs sm:text-sm mb-8 max-w-xl mx-auto font-sans leading-relaxed">
-          Este es un desarrollo independiente y 100% libre de publicidad, hecho a pulmón por pura pasión futbolera. Tu colaboración nos ayuda un montón a costear los servidores, seguir recopilando plantillas históricas y programar funciones tácticas más avanzadas. ¡Ayudanos a hacer el simulador definitivo del fútbol argentino!
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 font-sport">
-          <button 
-            onClick={() => alert("¡Muchas gracias por tu intención de colaborar! Muy pronto habilitaremos la integración oficial con Cafecito y Mercado Pago.")}
-            className="btn-gold px-8 py-3.5 text-xs font-bold tracking-widest uppercase rounded-xl shadow-[0_4px_25px_rgba(212,175,55,0.25)] hover:scale-105 transition-transform"
-          >
-            Invitame un Cafecito
-          </button>
-          <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider">o</span>
-          <button 
-            onClick={() => alert("¡Muchas gracias por tu intención de colaborar! Muy pronto habilitaremos la integración oficial con Stripe para donaciones internacionales.")}
-            className="px-6 py-3.5 bg-slate-950 border border-slate-800 rounded-xl hover:border-slate-700 text-xs font-bold tracking-widest uppercase transition-colors"
-          >
-            Donar con Stripe
-          </button>
-        </div>
-      </motion.div>
     </section>
   )
 }
