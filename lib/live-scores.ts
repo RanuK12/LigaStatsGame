@@ -21,6 +21,7 @@ export interface Match {
   minute?: string
   time?: string
   league: LeagueTab
+  competition?: string
 }
 
 interface SportsDbEvent {

@@ -28,16 +28,17 @@ export default function LiveScoresWidget() {
     let alive = true
     ;(async () => {
       // 1) live API
-      let data = await fetchLiveScores()
-      // 2) cached JSON (updated by scripts/data/fetch-live-scores.mjs)
-      if (data.length === 0) {
-        try {
-          const res = await fetch(`${BASE_PATH}/data/live-scores.json`)
-          if (res.ok) data = (await res.json()) as Match[]
-        } catch {
-          /* ignore */
-        }
+      // 1) cached JSON (real data from Copero, refreshed server-side by
+      //    scripts/data/fetch-live-scores.mjs on each deploy + cron)
+      let data: Match[] = []
+      try {
+        const res = await fetch(`${BASE_PATH}/data/live-scores.json`, { cache: "no-store" })
+        if (res.ok) data = (await res.json()) as Match[]
+      } catch {
+        /* ignore */
       }
+      // 2) optional live top-up via TheSportsDB (only meaningful with a key set)
+      if (data.length === 0) data = await fetchLiveScores()
       // 3) seed
       if (data.length === 0) data = SEED_MATCHES
       if (alive) {
@@ -99,7 +100,7 @@ export default function LiveScoresWidget() {
               className="card-glass rounded-2xl p-4 border border-white/5 flex flex-col justify-between"
             >
               <div className="flex justify-between items-center text-[10px] font-bold font-sport mb-3">
-                <span className="text-slate-400 uppercase tracking-wider">HOY</span>
+                <span className="text-slate-400 uppercase tracking-wider truncate max-w-[120px]">{m.competition || "HOY"}</span>
                 {m.status === "FINAL" && <span className="text-slate-500">FINALIZADO</span>}
                 {m.status === "LIVE" && <span className="text-red-400 animate-pulse">● EN VIVO {m.minute}</span>}
                 {m.status === "UPCOMING" && <span className="text-[#74ACDF]">{m.time ? `${m.time} HS` : "POR JUGARSE"}</span>}
