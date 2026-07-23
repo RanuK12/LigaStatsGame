@@ -1,9 +1,9 @@
 # LigaStatsGame Dataset Audit
 
 ## Totals
-- Clubs: 29
-- Players: 4002
-- Squads: 157
+- Clubs: 34
+- Players: 4095
+- Squads: 170
 
 ## Health Score
 - Score: 100
@@ -19,10 +19,10 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 4002
-- Players with clubs: 4002
-- Players with valid position: 4002
-- Playable squads: 157
+- Players with rating: 4095
+- Players with clubs: 4095
+- Players with valid position: 4095
+- Playable squads: 170
 
 ## Players by club
 - independiente: 434
@@ -31,31 +31,37 @@
 - lanus: 380
 - velez: 378
 - river-plate: 362
-- huracan: 301
+- huracan: 308
 - rosario-central: 294
 - talleres: 262
 - racing-club: 251
 - newells: 250
 - san-lorenzo: 235
 - gimnasia: 234
-- belgrano: 208
+- belgrano: 212
 - estudiantes: 204
-- godoy-cruz: 195
+- godoy-cruz: 198
 - argentinos-jrs: 77
 - defensa-y-justicia: 68
-- colon: 53
+- colon: 65
+- tigre: 25
+- central-cordoba: 19
+- instituto: 18
+- platense: 18
+- aldosivi: 17
+- atl-tucuman: 14
+- independiente-rivadavia: 14
+- union-sf: 14
+- barracas-central: 13
+- sarmiento-j: 13
 - union: 12
-- tigre: 11
+- riestra: 11
 - arsenal: 9
-- central-cordoba: 8
 - aa-argentinos-juniors: 7
-- aldosivi: 6
 - atletico-rafaela: 6
 - internazionale: 6
 - patronato: 6
-- platense: 6
 - atletico-tucuman: 5
-- instituto: 5
 - argentina: 4
 - atletico-madrid: 4
 - manchester-united: 4
@@ -71,13 +77,11 @@
 - estudiantes-rc: 3
 - ferro: 3
 - gimnasia-mendoza: 3
-- independiente-rivadavia: 3
 - juventus: 3
 - lazio: 3
 - milan: 3
 - parma: 3
 - villarreal: 3
-- barracas-central: 2
 - chacarita: 2
 - chelsea: 2
 - corinthians: 2
@@ -156,7 +160,7 @@
 
 ## Players by decade
 - 2010s: 1304
-- 2020s: 952
+- 2020s: 1045
 - 2000s: 906
 - 1990s: 807
 - 1980s: 10

@@ -839,5 +839,97 @@
       "2020s"
     ],
     "nickname": "Sabalero"
+  },
+  {
+    "id": "central-cordoba",
+    "name": "Central Córdoba (SdE)",
+    "shortName": "Central Córdoba",
+    "founded": 1919,
+    "stadium": "Madre de Ciudades",
+    "city": "Santiago del Estero",
+    "colors": [
+      "#000000",
+      "#FFFFFF"
+    ],
+    "titles": 0,
+    "Libertadores": 0,
+    "era": [
+      "2010s",
+      "2020s"
+    ],
+    "nickname": "El Ferroviario"
+  },
+  {
+    "id": "barracas-central",
+    "name": "Barracas Central",
+    "shortName": "Barracas",
+    "founded": 1904,
+    "stadium": "Claudio Chiqui Tapia",
+    "city": "Buenos Aires",
+    "colors": [
+      "#FF0000",
+      "#FFFFFF"
+    ],
+    "titles": 0,
+    "Libertadores": 0,
+    "era": [
+      "2020s"
+    ],
+    "nickname": "El Guapo"
+  },
+  {
+    "id": "riestra",
+    "name": "Deportivo Riestra",
+    "shortName": "Riestra",
+    "founded": 1931,
+    "stadium": "Guillermo Laza",
+    "city": "Buenos Aires",
+    "colors": [
+      "#000000",
+      "#FFFFFF"
+    ],
+    "titles": 0,
+    "Libertadores": 0,
+    "era": [
+      "2020s"
+    ],
+    "nickname": "Malevo"
+  },
+  {
+    "id": "independiente-rivadavia",
+    "name": "Independiente Rivadavia",
+    "shortName": "Indep. Rivadavia",
+    "founded": 1913,
+    "stadium": "Bautista Gargantini",
+    "city": "Mendoza",
+    "colors": [
+      "#000080",
+      "#FFFFFF"
+    ],
+    "titles": 0,
+    "Libertadores": 0,
+    "era": [
+      "2020s"
+    ],
+    "nickname": "La Lepra Mendocina"
+  },
+  {
+    "id": "aldosivi",
+    "name": "Aldosivi",
+    "shortName": "Aldosivi",
+    "founded": 1913,
+    "stadium": "José María Minella",
+    "city": "Mar del Plata",
+    "colors": [
+      "#008000",
+      "#FFFF00"
+    ],
+    "titles": 0,
+    "Libertadores": 0,
+    "era": [
+      "2010s",
+      "2020s"
+    ],
+    "nickname": "El Tiburón"
   }
 ]

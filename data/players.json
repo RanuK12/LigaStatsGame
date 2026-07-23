@@ -50359,6 +50359,11 @@
         "id": "banfield",
         "name": "Banfield",
         "years": "2015"
+      },
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -50371,7 +50376,7 @@
     "marketValue": "",
     "activeYears": "2015-2019",
     "decade": "2010s",
-    "rating": 68,
+    "rating": 72,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -50908,6 +50913,11 @@
         "id": "estudiantes",
         "name": "Estudiantes LP",
         "years": "2015"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -50920,7 +50930,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 66,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -51526,6 +51536,11 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2019"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -51538,7 +51553,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 71,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -51942,6 +51957,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2020"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -51954,7 +51974,7 @@
     "marketValue": "",
     "activeYears": "2020-2020",
     "decade": "2020s",
-    "rating": 65,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -52151,6 +52171,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2015"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -52163,7 +52188,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 65,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -52402,7 +52427,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -52415,7 +52440,7 @@
     "marketValue": "",
     "activeYears": "2019-2022",
     "decade": "2010s",
-    "rating": 57,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -56342,7 +56367,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2023"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -56355,7 +56380,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 57,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -59565,6 +59590,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2018"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -59577,7 +59607,7 @@
     "marketValue": "",
     "activeYears": "2018-2024",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -60457,7 +60487,7 @@
     "name": "Gabriel Compagnucci",
     "fullName": "Gabriel Compagnucci",
     "birthDate": "",
-    "position": "CM",
+    "position": "RB",
     "positions": [
       "CM"
     ],
@@ -60474,7 +60504,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2021"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -60487,7 +60517,7 @@
     "marketValue": "",
     "activeYears": "2020-2021",
     "decade": "2020s",
-    "rating": 56,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -61112,6 +61142,11 @@
         "id": "huracan",
         "name": "Huracán",
         "years": "2017"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -61124,7 +61159,7 @@
     "marketValue": "",
     "activeYears": "2017-2019",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -61694,6 +61729,11 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2024"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -61706,7 +61746,7 @@
     "marketValue": "",
     "activeYears": "2024-2024",
     "decade": "2020s",
-    "rating": 56,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -61830,6 +61870,11 @@
         "id": "banfield",
         "name": "Banfield",
         "years": "2015"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -61842,7 +61887,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -63257,7 +63302,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2019"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -63270,7 +63315,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 56,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -68662,7 +68707,7 @@
     "name": "Joaquin Pereyra",
     "fullName": "Joaquin Pereyra",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -68675,6 +68720,11 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2025"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -68687,7 +68737,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 67,
+    "rating": 79,
     "legendary": false
   },
   {
@@ -69173,6 +69223,11 @@
         "id": "newells",
         "name": "Newell's Old Boys",
         "years": "2021"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -69185,7 +69240,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -71559,6 +71614,11 @@
         "id": "talleres",
         "name": "Talleres",
         "years": "2019"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -71571,7 +71631,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 55,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -72419,7 +72479,7 @@
     "name": "Francisco González Metilli",
     "fullName": "Francisco González Metilli",
     "birthDate": "",
-    "position": "CAM",
+    "position": "CM",
     "positions": [
       "CAM"
     ],
@@ -72431,7 +72491,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2023"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -72444,7 +72504,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -72536,7 +72596,7 @@
     "name": "Adrián Sánchez",
     "fullName": "Adrián Sánchez",
     "birthDate": "",
-    "position": "CM",
+    "position": "CDM",
     "positions": [
       "CM"
     ],
@@ -72549,6 +72609,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2025"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -72561,7 +72626,7 @@
     "marketValue": "",
     "activeYears": "2025-2025",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -72922,7 +72987,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -72935,7 +73000,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -72990,7 +73055,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -73003,7 +73068,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -74570,7 +74635,7 @@
     "name": "Rodrigo Echeverría",
     "fullName": "Rodrigo Echeverría",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -74582,7 +74647,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -74595,7 +74660,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 55,
+    "rating": 80,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -75100,7 +75165,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2015"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -75113,7 +75178,7 @@
     "marketValue": "",
     "activeYears": "2015-2018",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -76273,6 +76338,11 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2019"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -76285,7 +76355,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -76312,6 +76382,11 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2018"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -76324,7 +76399,7 @@
     "marketValue": "",
     "activeYears": "2018-2019",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -77567,7 +77642,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -77580,7 +77655,7 @@
     "marketValue": "",
     "activeYears": "2015-2022",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -79954,6 +80029,11 @@
         "id": "newells",
         "name": "Newell's Old Boys",
         "years": "2021"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -79966,7 +80046,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 72,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -80552,6 +80632,11 @@
         "id": "huracan",
         "name": "Huracán",
         "years": "2020"
+      },
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -80564,7 +80649,7 @@
     "marketValue": "",
     "activeYears": "2020-2021",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -80847,6 +80932,11 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2017"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -80859,7 +80949,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -82490,7 +82580,7 @@
     "name": "Joaquin Mosqueira",
     "fullName": "Joaquin Mosqueira",
     "birthDate": "",
-    "position": "LB",
+    "position": "CDM",
     "positions": [
       "LB"
     ],
@@ -82503,6 +82593,11 @@
         "id": "newells",
         "name": "Newell's Old Boys",
         "years": "2025"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -82515,7 +82610,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 62,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -82930,6 +83025,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2019"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -82942,7 +83042,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -83167,7 +83267,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -83180,7 +83280,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -83201,7 +83301,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -83214,7 +83314,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -83698,6 +83798,11 @@
         "id": "san-lorenzo",
         "name": "San Lorenzo",
         "years": "2017"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -83710,7 +83815,7 @@
     "marketValue": "",
     "activeYears": "2017-2019",
     "decade": "2010s",
-    "rating": 54,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -84003,7 +84108,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2023"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -84016,7 +84121,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -85479,7 +85584,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2021"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -85492,7 +85597,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 54,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -86061,6 +86166,11 @@
         "id": "river-plate",
         "name": "River Plate",
         "years": "2021"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -86073,7 +86183,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -86494,7 +86604,7 @@
     "name": "Sebastián Villa",
     "fullName": "Sebastián Villa",
     "birthDate": "",
-    "position": "LW",
+    "position": "RW",
     "positions": [
       "LW"
     ],
@@ -86507,6 +86617,11 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2017"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -86519,7 +86634,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 79,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -87513,6 +87628,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2025"
+      },
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -87525,7 +87645,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 69,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -87718,7 +87838,7 @@
     "name": "Rodrigo Atencio",
     "fullName": "Rodrigo Atencio",
     "birthDate": "",
-    "position": "RW",
+    "position": "CAM",
     "positions": [
       "RW"
     ],
@@ -87731,6 +87851,11 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2021"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -87743,7 +87868,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -89347,6 +89472,11 @@
         "id": "racing-club",
         "name": "Racing Club",
         "years": "2024"
+      },
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -89359,7 +89489,7 @@
     "marketValue": "",
     "activeYears": "2024-2024",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -89508,6 +89638,11 @@
         "id": "velez",
         "name": "Vélez Sarsfield",
         "years": "2025"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -89520,7 +89655,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 68,
+    "rating": 73,
     "legendary": false
   },
   {
@@ -91302,6 +91437,11 @@
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
         "years": "2025"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -91773,7 +91913,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2021"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -91786,7 +91926,7 @@
     "marketValue": "",
     "activeYears": "2020-2024",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -92226,6 +92366,11 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2018"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -92238,7 +92383,7 @@
     "marketValue": "",
     "activeYears": "2018-2018",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -92247,7 +92392,7 @@
     "name": "Franco Watson",
     "fullName": "Franco Watson",
     "birthDate": "",
-    "position": "GK",
+    "position": "CAM",
     "positions": [
       "GK"
     ],
@@ -92260,6 +92405,11 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2025"
+      },
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -92272,7 +92422,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 62,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -93127,6 +93277,11 @@
         "id": "talleres",
         "name": "Talleres",
         "years": "2019"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -93139,7 +93294,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -93966,7 +94121,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2021"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -93979,7 +94134,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -94503,7 +94658,7 @@
     "name": "Renzo Tesuri",
     "fullName": "Renzo Tesuri",
     "birthDate": "",
-    "position": "CM",
+    "position": "RM",
     "positions": [
       "CM"
     ],
@@ -94516,6 +94671,11 @@
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
         "years": "2019"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -94528,7 +94688,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -94588,7 +94748,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -94601,7 +94761,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -94690,7 +94850,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2023"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -94703,7 +94863,7 @@
     "marketValue": "",
     "activeYears": "2023-2023",
     "decade": "2020s",
-    "rating": 53,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -95169,7 +95329,7 @@
     "name": "Jonás Acevedo",
     "fullName": "Jonás Acevedo",
     "birthDate": "",
-    "position": "LW",
+    "position": "LM",
     "positions": [
       "LW"
     ],
@@ -95187,6 +95347,11 @@
         "id": "huracan",
         "name": "Huracán",
         "years": "2020"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -95199,7 +95364,7 @@
     "marketValue": "",
     "activeYears": "2017-2020",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -95872,6 +96037,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2019"
+      },
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -95884,7 +96054,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -96430,7 +96600,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2018"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -96443,7 +96613,7 @@
     "marketValue": "",
     "activeYears": "2018-2018",
     "decade": "2010s",
-    "rating": 53,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -97949,7 +98119,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2015"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -97962,7 +98132,7 @@
     "marketValue": "",
     "activeYears": "2015-2017",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -99518,6 +99688,11 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2024"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -99530,7 +99705,7 @@
     "marketValue": "",
     "activeYears": "2024-2024",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -101002,7 +101177,7 @@
     "name": "Mauro Pittón",
     "fullName": "Mauro Pittón",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -101020,6 +101195,11 @@
         "id": "san-lorenzo",
         "name": "San Lorenzo",
         "years": "2018"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -101032,7 +101212,7 @@
     "marketValue": "",
     "activeYears": "2018-2019",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -101141,6 +101321,11 @@
         "id": "estudiantes",
         "name": "Estudiantes LP",
         "years": "2021"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -101153,7 +101338,7 @@
     "marketValue": "",
     "activeYears": "2019-2021",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -101209,6 +101394,11 @@
         "id": "velez",
         "name": "Vélez Sarsfield",
         "years": "2021"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -101221,7 +101411,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -103680,6 +103870,11 @@
         "id": "rosario-central",
         "name": "Rosario Central",
         "years": "2019"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -103692,7 +103887,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -105620,6 +105815,11 @@
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
         "years": "2016"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -105632,7 +105832,7 @@
     "marketValue": "",
     "activeYears": "2015-2016",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -105658,7 +105858,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2023"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -105671,7 +105871,7 @@
     "marketValue": "",
     "activeYears": "2016-2023",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -105727,6 +105927,11 @@
         "id": "talleres",
         "name": "Talleres",
         "years": "2016"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -105739,7 +105944,7 @@
     "marketValue": "",
     "activeYears": "2016-2016",
     "decade": "2010s",
-    "rating": 52,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -106251,6 +106456,11 @@
         "id": "talleres",
         "name": "Talleres",
         "years": "2025"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -106263,7 +106473,7 @@
     "marketValue": "",
     "activeYears": "2025-2025",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -106729,7 +106939,7 @@
     "name": "Daniel Barrea",
     "fullName": "Daniel Barrea",
     "birthDate": "",
-    "position": "ST",
+    "position": "LW",
     "positions": [
       "ST"
     ],
@@ -106746,7 +106956,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -106759,7 +106969,7 @@
     "marketValue": "",
     "activeYears": "2021-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -106768,7 +106978,7 @@
     "name": "Matías Marín",
     "fullName": "Matías Marín",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -106780,7 +106990,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -106793,7 +107003,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -108852,7 +109062,7 @@
     "name": "Mateo Bajamich",
     "fullName": "Mateo Bajamich",
     "birthDate": "",
-    "position": "ST",
+    "position": "RW",
     "positions": [
       "ST"
     ],
@@ -108865,6 +109075,11 @@
         "id": "huracan",
         "name": "Huracán",
         "years": "2021"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -108877,7 +109092,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 52,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -109476,7 +109691,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2023"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -109489,7 +109704,7 @@
     "marketValue": "",
     "activeYears": "2019-2025",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -109782,7 +109997,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2021"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -109795,7 +110010,7 @@
     "marketValue": "",
     "activeYears": "2015-2021",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -110785,7 +111000,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -110798,7 +111013,7 @@
     "marketValue": "",
     "activeYears": "2022-2024",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 79,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -110859,6 +111074,11 @@
         "id": "independiente",
         "name": "Independiente",
         "years": "2015"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -110871,7 +111091,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -112816,7 +113036,7 @@
     "name": "Guido Mainero",
     "fullName": "Guido Mainero",
     "birthDate": "",
-    "position": "RW",
+    "position": "RM",
     "positions": [
       "RW"
     ],
@@ -112829,6 +113049,11 @@
         "id": "velez",
         "name": "Vélez Sarsfield",
         "years": "2017"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -112841,7 +113066,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -113431,6 +113656,11 @@
         "id": "estudiantes",
         "name": "Estudiantes LP",
         "years": "2015"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -113443,7 +113673,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -114110,6 +114340,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2015"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -114122,7 +114357,7 @@
     "marketValue": "",
     "activeYears": "2015-2015",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -114284,6 +114519,11 @@
         "id": "newells",
         "name": "Newell's Old Boys",
         "years": "2016"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -114296,7 +114536,7 @@
     "marketValue": "",
     "activeYears": "2016-2016",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -114356,7 +114596,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2021"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -114369,7 +114609,7 @@
     "marketValue": "",
     "activeYears": "2016-2021",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 77,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -114779,6 +115019,11 @@
         "id": "san-lorenzo",
         "name": "San Lorenzo",
         "years": "2018"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -114791,7 +115036,7 @@
     "marketValue": "",
     "activeYears": "2018-2022",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -116082,6 +116327,11 @@
         "id": "san-lorenzo",
         "name": "San Lorenzo",
         "years": "2018"
+      },
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -116094,7 +116344,7 @@
     "marketValue": "",
     "activeYears": "2015-2018",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -117488,7 +117738,7 @@
     "name": "Carlos Villalba",
     "fullName": "Carlos Villalba",
     "birthDate": "",
-    "position": "CDM",
+    "position": "CM",
     "positions": [
       "CDM"
     ],
@@ -117501,6 +117751,11 @@
         "id": "talleres",
         "name": "Talleres",
         "years": "2018"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -117513,7 +117768,7 @@
     "marketValue": "",
     "activeYears": "2018-2018",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -118128,6 +118383,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2017"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -118140,7 +118400,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -118332,6 +118592,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2021"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -118344,7 +118609,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -118739,7 +119004,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2022"
+        "years": "2025-2026"
       },
       {
         "id": "san-lorenzo",
@@ -118757,7 +119022,7 @@
     "marketValue": "",
     "activeYears": "2017-2022",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -119643,6 +119908,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2017"
+      },
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -119655,7 +119925,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 51,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -120434,6 +120704,11 @@
         "id": "huracan",
         "name": "Huracán",
         "years": "2022"
+      },
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -120446,7 +120721,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 73,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -120467,7 +120742,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -120480,7 +120755,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 51,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -121076,6 +121351,11 @@
         "id": "defensa-y-justicia",
         "name": "Defensa y Justicia",
         "years": "2025"
+      },
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -121088,7 +121368,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 62,
+    "rating": 75,
     "legendary": false
   },
   {
@@ -121936,6 +122216,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2019"
+      },
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -121948,7 +122233,7 @@
     "marketValue": "",
     "activeYears": "2016-2019",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -122092,6 +122377,11 @@
         "id": "boca-juniors",
         "name": "Boca Juniors",
         "years": "2018"
+      },
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -122104,7 +122394,7 @@
     "marketValue": "",
     "activeYears": "2018-2018",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -125046,6 +125336,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2018"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -125058,7 +125353,7 @@
     "marketValue": "",
     "activeYears": "2018-2024",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -126435,6 +126730,11 @@
         "id": "huracan",
         "name": "Huracán",
         "years": "2024"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -126447,7 +126747,7 @@
     "marketValue": "",
     "activeYears": "2015-2024",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -128817,6 +129117,11 @@
         "id": "lanus",
         "name": "Lanús",
         "years": "2017"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -128829,7 +129134,7 @@
     "marketValue": "",
     "activeYears": "2017-2017",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -131000,7 +131305,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -131013,7 +131318,7 @@
     "marketValue": "",
     "activeYears": "2015-2022",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -131102,7 +131407,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2018"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -131115,7 +131420,7 @@
     "marketValue": "",
     "activeYears": "2018-2018",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 78,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -131205,6 +131510,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2019"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -131217,7 +131527,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -131442,7 +131752,7 @@
       {
         "id": "belgrano",
         "name": "Belgrano",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -131455,7 +131765,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -131788,6 +132098,11 @@
         "id": "belgrano",
         "name": "Belgrano",
         "years": "2024"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -131800,7 +132115,7 @@
     "marketValue": "",
     "activeYears": "2024-2024",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -131938,6 +132253,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2024"
+      },
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -131950,7 +132270,7 @@
     "marketValue": "",
     "activeYears": "2016-2024",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 75,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -132209,7 +132529,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2019"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -132222,7 +132542,7 @@
     "marketValue": "",
     "activeYears": "2019-2019",
     "decade": "2010s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -132345,7 +132665,7 @@
       {
         "id": "godoy-cruz",
         "name": "Godoy Cruz",
-        "years": "2022"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -132358,7 +132678,7 @@
     "marketValue": "",
     "activeYears": "2022-2022",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -133648,6 +133968,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2024"
+      },
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -133660,7 +133985,7 @@
     "marketValue": "",
     "activeYears": "2024-2024",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 74,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -134192,6 +134517,11 @@
         "id": "huracan",
         "name": "Huracán",
         "years": "2021"
+      },
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -134204,7 +134534,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 72,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -134259,7 +134589,7 @@
       {
         "id": "huracan",
         "name": "Huracán",
-        "years": "2021"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -134272,7 +134602,7 @@
     "marketValue": "",
     "activeYears": "2021-2021",
     "decade": "2020s",
-    "rating": 50,
+    "rating": 76,
     "legendary": false,
     "source": "transfermarkt"
   },
@@ -135766,7 +136096,7 @@
     "name": "Nicolas Sansotre",
     "fullName": "Nicolas Sansotre",
     "birthDate": "",
-    "position": "CB",
+    "position": "RB",
     "positions": [
       "CB"
     ],
@@ -135779,6 +136109,11 @@
         "id": "gimnasia",
         "name": "Gimnasia LP",
         "years": "2025"
+      },
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -135791,7 +136126,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 63,
+    "rating": 73,
     "legendary": false
   },
   {
@@ -136700,7 +137035,7 @@
     "name": "Christian Bernardi",
     "fullName": "Christian Bernardi",
     "birthDate": "",
-    "position": "CM",
+    "position": "CAM",
     "positions": [
       "CM"
     ],
@@ -136712,7 +137047,7 @@
       {
         "id": "colon",
         "name": "Colón",
-        "years": "2025"
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -136725,7 +137060,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 69,
+    "rating": 76,
     "legendary": false
   },
   {
@@ -138040,7 +138375,7 @@
     "name": "Nahuel Banegas",
     "fullName": "Nahuel Banegas",
     "birthDate": "",
-    "position": "ST",
+    "position": "LB",
     "positions": [
       "ST"
     ],
@@ -138053,6 +138388,11 @@
         "id": "talleres",
         "name": "Talleres",
         "years": "2025"
+      },
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
       }
     ],
     "capsNationalTeam": 0,
@@ -138065,7 +138405,7 @@
     "marketValue": "",
     "activeYears": "",
     "decade": "2000s",
-    "rating": 66,
+    "rating": 74,
     "legendary": false
   },
   {
@@ -139837,5 +140177,1958 @@
     ],
     "capsClub": 25,
     "goalsClub": 5
+  },
+  {
+    "id": "hernan-galindez",
+    "name": "Hernán Galíndez",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 79,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "sebastian-meza-hur",
+    "name": "Sebastián Meza",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "lucas-souto-hur",
+    "name": "Lucas Souto",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "walter-mazzantti-hur",
+    "name": "Walter Mazzantti",
+    "position": "RW",
+    "positions": [
+      "RW"
+    ],
+    "rating": 77,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "eric-ramirez-hur",
+    "name": "Eric Ramírez",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "huracan",
+        "name": "Huracán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "juan-espínola",
+    "name": "Juan Espínola",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "rafael-delgado-bel",
+    "name": "Rafael Delgado",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "esteban-roldan",
+    "name": "Esteban Rolón",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "lucas-zelarayan",
+    "name": "Lucas Zelarayán",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 81,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "belgrano",
+        "name": "Belgrano",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "roberto-ramirez-gc",
+    "name": "Roberto Ramírez",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "nicolas-fernandez-gc",
+    "name": "Nicolás Fernández",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "gonzalo-abreu",
+    "name": "Gonzalo Abrego",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 77,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "godoy-cruz",
+        "name": "Godoy Cruz",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "felipe-zenobio",
+    "name": "Felipe Zenobio",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "alan-sosa-tig",
+    "name": "Alan Sosa",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "brian-nardelli",
+    "name": "Brian Nardelli",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "joaquin-pombo-tig",
+    "name": "Joaquín Pombo",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "martin-ortega-tig",
+    "name": "Martín Ortega",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "agustin-cardozo",
+    "name": "Agustín Cardozo",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "sebastian-medina",
+    "name": "Sebastián Medina",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "gonzalo-maroni-tig",
+    "name": "Gonzalo Maroni",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "galvan-blas",
+    "name": "Blas Armoa",
+    "position": "RW",
+    "positions": [
+      "RW"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "eric-ramirez-tig",
+    "name": "Eric Ramírez",
+    "position": "LW",
+    "positions": [
+      "LW"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "tigre",
+        "name": "Tigre",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "miguel-torren",
+    "name": "Miguel Torrén",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "claudio-corvalan",
+    "name": "Claudio Corvalán",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "lautaro-vargas",
+    "name": "Lautaro Vargas",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "lionel-verde",
+    "name": "Lionel Verde",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "union-sf",
+        "name": "Unión",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "oscar-salomon-pla",
+    "name": "Óscar Salomón",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "bautista-barros-schelotto-pla",
+    "name": "Bautista Barros Schelotto",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "leonel-picco",
+    "name": "Leonel Picco",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "fernando-juarez",
+    "name": "Fernando Juárez",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "platense",
+        "name": "Platense",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "juan-marcos-joaquim",
+    "name": "Joaquín Papaleo",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 71,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "gonzalo-requena",
+    "name": "Gonzalo Requena",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "victor-cabrera",
+    "name": "Víctor Cabrera",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "giuliano-cerato",
+    "name": "Giuliano Cerato",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "lucas-rodolfo-bay",
+    "name": "Lucas Bay",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "nicolas-dubersarsky",
+    "name": "Nicolás Dubersarsky",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "damian-puebla",
+    "name": "Damián Puebla",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 77,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "facundo-suarez",
+    "name": "Facundo Suárez",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "instituto",
+        "name": "Instituto",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "juan-gonzalez-at",
+    "name": "Juan González",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 71,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "nicolas-romero-at",
+    "name": "Nicolás Romero",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "moises-brandan",
+    "name": "Moisés Brandán",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "juan-infante",
+    "name": "Juan Infante",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "mateo-coronel",
+    "name": "Mateo Coronel",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "atl-tucuman",
+        "name": "Atlético Tucumán",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "lucas-acosta-sar",
+    "name": "Lucas Acosta",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "juan-insaurralde",
+    "name": "Juan Manuel Insaurralde",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "emanuel-hernandez",
+    "name": "Emanuel Hernández",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "elias-lopez",
+    "name": "Elías López",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "yair-arismendi",
+    "name": "Yair Arismendi",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "emiliano-mendez",
+    "name": "Emiliano Méndez",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "manuel-garcia-sar",
+    "name": "Manuel García",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "manuel-moco-mendez",
+    "name": "Manuel Maza",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "joaquin-gho",
+    "name": "Joaquín Gho",
+    "position": "RW",
+    "positions": [
+      "RW"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "ivan-morales",
+    "name": "Iván Morales",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "sarmiento-j",
+        "name": "Sarmiento",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "tomas-gimenez",
+    "name": "Tomás Giménez",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 71,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "hernán-lopes",
+    "name": "Hernán Lopes",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "facundo-castet",
+    "name": "Facundo Castet",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "ezequiel-herrera-col",
+    "name": "Ezequiel Herrera",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "bernardello-hernán",
+    "name": "Hernán Bernardi",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "colon",
+        "name": "Colón",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "lucas-abrebaya",
+    "name": "Lucas Abascia",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "gonzalo-trindade",
+    "name": "Gonzalo Trindade",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "matías-godoy",
+    "name": "Matías Godoy",
+    "position": "RW",
+    "positions": [
+      "RW"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "luis-angulo",
+    "name": "Luis Angulo",
+    "position": "LW",
+    "positions": [
+      "LW"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "central-cordoba",
+        "name": "Central Córdoba",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "sebastian-moyano",
+    "name": "Sebastián Moyano",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "nicolas-capraro",
+    "name": "Nicolás Capraro",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "gonzalo-goni",
+    "name": "Gonzalo Goñi",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "rodrigo-insua",
+    "name": "Rodrigo Insúa",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "facundo-mater",
+    "name": "Facundo Mater",
+    "position": "RM",
+    "positions": [
+      "RM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "santiago-rosane",
+    "name": "Santiago Rosané",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "ivan-tapia-bar",
+    "name": "Iván Tapia",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "maximiliano-zalazar-bar",
+    "name": "Maximiliano Zalazar",
+    "position": "RW",
+    "positions": [
+      "RW"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "sirino-alan",
+    "name": "Alan Cantero",
+    "position": "LW",
+    "positions": [
+      "LW"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "barracas-central",
+        "name": "Barracas Central",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "ignacio-arce",
+    "name": "Ignacio Arce",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "nicolas-caro-torres",
+    "name": "Nicolás Caro Torres",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "alan-barrionuevo",
+    "name": "Alan Barrionuevo",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "pedro-ramirez",
+    "name": "Pedro Ramírez",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "pablo-monje",
+    "name": "Pablo Monje",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "milton-celiz",
+    "name": "Milton Céliz",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "braian-sanchez",
+    "name": "Braian Sánchez",
+    "position": "RM",
+    "positions": [
+      "RM"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "jonathan-herrera-rie",
+    "name": "Jonathan Herrera",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "antony-alonso",
+    "name": "Antony Alonso",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "gustavo-fernandez",
+    "name": "Gustavo Fernández",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "riestra",
+        "name": "Deportivo Riestra",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "matías-ruiz-diaz",
+    "name": "Matías Ruiz Díaz",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "franco-amarolo",
+    "name": "Franco Romero",
+    "position": "CDM",
+    "positions": [
+      "CDM"
+    ],
+    "rating": 75,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "ezechiel-ham",
+    "name": "Ezequiel Ham",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 76,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "fernando-romero",
+    "name": "Fernando Romero",
+    "position": "ST",
+    "positions": [
+      "ST"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "independiente-rivadavia",
+        "name": "Indep. Rivadavia",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "jorge-carranza",
+    "name": "Jorge Carranza",
+    "position": "GK",
+    "positions": [
+      "GK"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 0
+  },
+  {
+    "id": "rodrigo-gonzalez-ald",
+    "name": "Rodrigo González",
+    "position": "RB",
+    "positions": [
+      "RB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "gonzalo-soto",
+    "name": "Gonzalo Soto",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "juan-mottes",
+    "name": "Juan Mottes",
+    "position": "CB",
+    "positions": [
+      "CB"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "ignacio-guerrico",
+    "name": "Ignacio Guerrico",
+    "position": "LB",
+    "positions": [
+      "LB"
+    ],
+    "rating": 72,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "roberto-bochi",
+    "name": "Roberto Bochi",
+    "position": "CM",
+    "positions": [
+      "CM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "nicolas-lamendola",
+    "name": "Nicolás Laméndola",
+    "position": "RM",
+    "positions": [
+      "RM"
+    ],
+    "rating": 74,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
+  },
+  {
+    "id": "alan-sosa-ald",
+    "name": "Alan Sosa",
+    "position": "CAM",
+    "positions": [
+      "CAM"
+    ],
+    "rating": 73,
+    "legendary": false,
+    "nationality": "Argentina",
+    "decade": "2020s",
+    "clubs": [
+      {
+        "id": "aldosivi",
+        "name": "Aldosivi",
+        "years": "2025-2026"
+      }
+    ],
+    "capsClub": 20,
+    "goalsClub": 3
   }
 ]
