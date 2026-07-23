@@ -229,7 +229,7 @@ button, input, select, textarea {
 }
 
 .input-field {
-  @apply w-full rounded-2xl border border-white/5 bg-slate-950/55 px-4 py-3.5 text-sm text-slate-100 placeholder:text-slate-500 transition-all duration-300 ease-out focus:border-[#74ACDF]/50 focus:outline-none focus:ring-1 focus:ring-[#74ACDF]/30;
+  @apply w-full rounded-2xl border border-white/5 bg-slate-950/55 px-4 py-3.5 text-[16px] md:text-sm text-slate-100 placeholder:text-slate-500 transition-all duration-300 ease-out focus:border-[#74ACDF]/50 focus:outline-none focus:ring-1 focus:ring-[#74ACDF]/30;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -245,6 +245,70 @@ button, input, select, textarea {
 .table-row-soft:hover {
   background-color: rgba(116, 172, 223, 0.05);
 }
+
+/* Zebra stripes for standings table */
+.table-zebra tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+.table-zebra tr:nth-child(odd) {
+  background-color: transparent;
+}
+.table-zebra tr:hover {
+  background-color: rgba(116, 172, 223, 0.06);
+}
+
+/* User row highlight — strong celeste accent */
+.table-row-user {
+  background-color: rgba(116, 172, 223, 0.14) !important;
+  border-left: 3px solid #74ACDF;
+  box-shadow: inset 0 0 20px rgba(116, 172, 223, 0.06);
+}
+
+/* Sticky table header */
+.table-header-sticky {
+  background-color: rgba(5, 15, 33, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid rgba(116, 172, 223, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Tab with active glow */
+.tab-active {
+  background: linear-gradient(135deg, rgba(37, 83, 136, 0.95) 0%, #74ACDF 60%, rgba(70, 143, 209, 0.95) 100%);
+  color: white;
+  box-shadow: 0 0 16px rgba(116, 172, 223, 0.35), 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(116, 172, 223, 0.5);
+}
+.tab-inactive {
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(100, 116, 139, 0.4);
+  color: rgba(148, 163, 184, 1);
+  transition: all 200ms ease-out;
+}
+.tab-inactive:hover {
+  border-color: rgba(116, 172, 223, 0.4);
+  background-color: rgba(30, 41, 59, 0.8);
+  color: white;
+}
+
+/* Form badge V/D/E — slightly larger and rounded */
+.form-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.5rem;
+  font-weight: 800;
+  border-radius: 0.25rem;
+  margin: 0 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.form-badge-v { background-color: #16a34a; color: white; }
+.form-badge-e { background-color: #ca8a04; color: white; }
+.form-badge-d { background-color: #dc2626; color: white; }
 
 .table-row-highlight {
   background-color: rgba(116, 172, 223, 0.08);
@@ -265,7 +329,7 @@ button, input, select, textarea {
    PREMIUM SPORTY BUTTONS (UPPERCASE BY DEFAULT)
    ═══════════════════════════════════════════════════════════════ */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 font-display text-[11px] font-bold uppercase tracking-[0.35em] text-white transition-all duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-50;
+  @apply inline-flex items-center justify-center min-h-[44px] gap-2 rounded-2xl px-6 py-3.5 font-display text-[11px] font-bold uppercase tracking-[0.35em] text-white transition-all duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-50;
   background: linear-gradient(135deg, rgba(37, 83, 136, 0.98) 0%, #74ACDF 48%, rgba(70, 143, 209, 0.98) 100%);
   background-size: 200% 100%;
   box-shadow: 0 10px 26px rgba(116, 172, 223, 0.32), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
@@ -282,7 +346,7 @@ button, input, select, textarea {
 }
 
 .btn-gold {
-  @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 font-display text-[11px] font-bold uppercase tracking-[0.35em] transition-all duration-300 ease-out;
+  @apply inline-flex items-center justify-center min-h-[44px] gap-2 rounded-2xl px-6 py-3.5 font-display text-[11px] font-bold uppercase tracking-[0.35em] transition-all duration-300 ease-out;
   background: linear-gradient(135deg, #9f6d05 0%, #FFD700 48%, #d4af37 100%);
   color: #020813;
   box-shadow: 0 10px 28px rgba(255, 215, 0, 0.32), 0 1px 0 rgba(255, 255, 255, 0.25) inset;
@@ -296,7 +360,7 @@ button, input, select, textarea {
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 font-display text-[11px] font-bold uppercase tracking-[0.35em] text-slate-100 transition-all duration-300 ease-out;
+  @apply inline-flex items-center justify-center min-h-[44px] gap-2 rounded-2xl px-5 py-3 font-display text-[11px] font-bold uppercase tracking-[0.35em] text-slate-100 transition-all duration-300 ease-out;
   background: rgba(10, 22, 40, 0.68);
   border: 1px solid rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);

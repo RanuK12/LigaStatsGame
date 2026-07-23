@@ -12,7 +12,7 @@ export default function DailyPage() {
   const seed = getDailySeed()
 
   return (
-    <div className="min-h-[calc(100vh-6rem)] py-10">
+    <div className="min-h-[calc(100vh-6rem)] px-4 py-10">
       <section className="mx-auto max-w-3xl text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}

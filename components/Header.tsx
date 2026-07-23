@@ -43,7 +43,7 @@ export default function Header() {
                 ))}
               </span>
             </span>
-            <span className="text-[8px] sm:text-[9px] text-[#74ACDF]/80 font-bold tracking-[0.25em] leading-none mt-1 font-sport uppercase">
+            <span className="text-[10px] sm:text-[11px] text-[#74ACDF]/80 font-bold tracking-[0.25em] leading-none mt-1 font-sport uppercase">
               EL JUEGO DEL FÚTBOL ARGENTINO
             </span>
           </div>
@@ -79,7 +79,7 @@ export default function Header() {
         {/* Mobile menu trigger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden rounded-2xl p-2.5 text-slate-400 hover:text-white hover:bg-white/5 border border-white/5 transition-all duration-300 ease-out"
+          className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl p-2.5 text-slate-400 hover:text-white hover:bg-white/5 border border-white/5 transition-all duration-300 ease-out"
           aria-label="Abrir menú"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -111,7 +111,7 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`flex items-center rounded-2xl px-4 py-3 text-[10px] font-bold tracking-[0.35em] transition-all duration-300 ease-out uppercase ${
+                    className={`flex items-center rounded-2xl px-4 py-3.5 text-xs font-bold tracking-[0.35em] transition-all duration-300 ease-out uppercase ${
                       isActive
                         ? 'bg-gradient-to-r from-[#74ACDF]/20 to-transparent text-white border-l-4 border-[#74ACDF]'
                         : 'text-slate-400 hover:text-white hover:bg-white/5'

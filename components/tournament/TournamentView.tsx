@@ -413,22 +413,22 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                 )}
 
                 {/* Division Outcome Banners for Liga */}
-                {result.type === "liga" && result.playerPos === 14 && (
+                {result.type === "liga" && result.playerPos && result.playerPos >= 25 && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 text-xs font-bold leading-relaxed text-center shadow-[0_0_12px_rgba(239,68,68,0.1)] uppercase font-sport tracking-wider">
-                    LO SENTIMOS — Tu equipo quedó último en la tabla y desciende a la B Nacional.
+                    ZONA DE DESCENSO — Tu equipo quedó en zona de promoción/descenso.
                   </div>
                 )}
-                {result.type === "liga" && result.playerPos && result.playerPos <= 3 && !isChamp && (
+                {result.type === "liga" && result.playerPos && result.playerPos <= 4 && !isChamp && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-200 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
                     CLASIFICADO A LA COPA LIBERTADORES — Tu once jugará el torneo continental más prestigioso.
                   </div>
                 )}
-                {result.type === "liga" && result.playerPos && result.playerPos >= 4 && result.playerPos <= 6 && (
+                {result.type === "liga" && result.playerPos && result.playerPos >= 5 && result.playerPos <= 8 && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-200 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
                     CLASIFICADO A LA COPA SUDAMERICANA — Aseguraste competencia internacional para la próxima temporada.
                   </div>
                 )}
-                {result.type === "liga" && result.playerPos && result.playerPos >= 7 && result.playerPos <= 13 && (
+                {result.type === "liga" && result.playerPos && result.playerPos >= 9 && result.playerPos <= 24 && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-slate-700 bg-slate-800/20 text-slate-300 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
                     PERMANENCIA ASEGURADA — Mantuviste la categoría en la Liga Profesional de Fútbol.
                   </div>
@@ -460,11 +460,11 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               </div>
 
               {/* Tabs */}
-              <div className="flex gap-1.5 overflow-x-auto pb-1 font-sport">
+              <div className="flex gap-2 overflow-x-auto pb-1 font-sport">
                 {finalTabs.map(t => (
                   <button key={t.id} onClick={() => setTab(t.id as any)}
-                    className={`px-4 py-2 rounded-xl text-[10px] font-bold tracking-widest uppercase whitespace-nowrap transition-all ${
-                      tab === t.id ? "bg-[#74ACDF] text-white" : "bg-slate-900 border border-slate-900 text-slate-400 hover:text-white"
+                    className={`px-5 py-2.5 rounded-xl text-[10px] font-bold tracking-widest uppercase whitespace-nowrap transition-all ${
+                      tab === t.id ? "tab-active" : "tab-inactive"
                     }`}>
                     {t.label}
                   </button>
@@ -473,51 +473,54 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
 
               {/* TABLE TAB */}
               {tab === "table" && result.table && (
-                <div className="card-gradient rounded-2xl p-4 border border-slate-900">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs">
+                <div className="card-gradient rounded-2xl p-4 sm:p-5 border border-[#74ACDF]/10">
+                  <div className="overflow-x-auto -mx-1">
+                    <table className="w-full text-xs min-w-[520px]">
                       <thead>
-                        <tr className="text-slate-500 border-b border-slate-900 font-bold uppercase">
-                          <th className="py-2 text-left">#</th>
-                          <th className="py-2 text-left">Equipo</th>
-                          <th className="py-2 text-center">PJ</th>
-                          <th className="py-2 text-center">Pts</th>
-                          <th className="py-2 text-center">GF</th>
-                          <th className="py-2 text-center">GC</th>
-                          <th className="py-2 text-center">DG</th>
-                          <th className="py-2 text-center">Forma</th>
+                        <tr className="table-header-sticky text-slate-400 font-bold uppercase text-[10px] tracking-wider">
+                          <th className="py-2.5 pl-2 text-left w-8">#</th>
+                          <th className="py-2.5 text-left">Equipo</th>
+                          <th className="py-2.5 text-center w-8">PJ</th>
+                          <th className="py-2.5 text-center w-10">Pts</th>
+                          <th className="py-2.5 text-center w-8">GF</th>
+                          <th className="py-2.5 text-center w-8">GC</th>
+                          <th className="py-2.5 text-center w-10">DG</th>
+                          <th className="py-2.5 text-center pr-2">Forma</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="table-zebra">
                         {result.table.map((t: any, idx: number) => {
                           const isMe = t.name === result.teamLabel
+                          const totalTeams = result.table!.length
                           return (
-                            <tr key={idx} className={`border-b border-slate-900/60 ${isMe ? "bg-[#74ACDF]/10 font-semibold" : ""}`}>
-                              <td className="py-2 pr-1">
+                            <tr key={idx} className={`border-b border-white/[0.04] transition-colors ${isMe ? "table-row-user font-semibold" : ""}`}>
+                              <td className="py-2.5 pl-2 pr-1">
                                 <span className={`inline-flex w-5 h-5 items-center justify-center rounded-full text-[9px] font-black font-sport ${
-                                  idx < 3
-                                    ? "bg-blue-600/20 text-blue-400 border border-blue-500/35"
-                                    : idx < 6
-                                    ? "bg-emerald-600/20 text-emerald-400 border border-emerald-500/35"
-                                    : idx === 13
-                                    ? "bg-red-600/20 text-red-400 border border-red-500/35 animate-pulse"
-                                    : "bg-slate-950/60 text-slate-500 border border-slate-900"
+                                  idx < 4
+                                    ? "bg-blue-600/25 text-blue-400 border border-blue-500/40"
+                                    : idx < 8
+                                    ? "bg-emerald-600/25 text-emerald-400 border border-emerald-500/40"
+                                    : idx >= totalTeams - 4
+                                    ? "bg-red-600/25 text-red-400 border border-red-500/40"
+                                    : "bg-slate-950/60 text-slate-500 border border-slate-800"
                                 }`}>
                                   {idx + 1}
                                 </span>
                               </td>
-                              <td className="py-2 text-white truncate max-w-[130px]">
-                                {isMe ? <span className="text-[#74ACDF]">▶ {t.name}</span> : t.name}
+                              <td className="py-2.5 truncate max-w-[150px]">
+                                {isMe
+                                  ? <span className="text-[#74ACDF] font-bold">▶ {t.name}</span>
+                                  : <span className="text-slate-200">{t.name}</span>}
                               </td>
-                              <td className="py-2 text-center text-slate-400">{t.w + t.d + t.l}</td>
-                              <td className="py-2 text-center text-[#74ACDF] font-bold">{t.pts}</td>
-                              <td className="py-2 text-center text-slate-400">{t.gf}</td>
-                              <td className="py-2 text-center text-slate-400">{t.ga}</td>
-                              <td className={`py-2 text-center ${t.gf - t.ga > 0 ? "text-green-400" : t.gf - t.ga < 0 ? "text-red-400" : "text-slate-400"}`}>{t.gf - t.ga > 0 ? "+" : ""}{t.gf - t.ga}</td>
-                              <td className="py-2 text-center text-[8px] font-bold tracking-wider">
+                              <td className="py-2.5 text-center text-slate-500">{t.w + t.d + t.l}</td>
+                              <td className="py-2.5 text-center text-[#74ACDF] font-black text-sm">{t.pts}</td>
+                              <td className="py-2.5 text-center text-slate-400">{t.gf}</td>
+                              <td className="py-2.5 text-center text-slate-400">{t.ga}</td>
+                              <td className={`py-2.5 text-center font-semibold ${t.gf - t.ga > 0 ? "text-green-400" : t.gf - t.ga < 0 ? "text-red-400" : "text-slate-500"}`}>{t.gf - t.ga > 0 ? "+" : ""}{t.gf - t.ga}</td>
+                              <td className="py-2.5 text-center pr-2">
                                 {t.form.map((r: string, j: number) => (
-                                  <span key={j} className={`inline-block w-4 h-4 leading-4 text-center rounded mx-0.5 ${
-                                    r === "V" ? "bg-green-600 text-white" : r === "E" ? "bg-yellow-600 text-white" : "bg-red-600 text-white"
+                                  <span key={j} className={`form-badge ${
+                                    r === "V" ? "form-badge-v" : r === "E" ? "form-badge-e" : "form-badge-d"
                                   }`}>{r}</span>
                                 ))}
                               </td>
@@ -528,10 +531,10 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                     </table>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-900/60 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[9px] font-bold font-sport uppercase tracking-wider text-slate-500">
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-600/30 border border-blue-500/40" /> 1-3: Libertadores</span>
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600/30 border border-emerald-500/40" /> 4-6: Sudamericana</span>
-                    <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-650/30 border border-red-500/40" /> 14: Descenso</span>
+                  <div className="mt-4 pt-3 border-t border-[#74ACDF]/10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[9px] font-bold font-sport uppercase tracking-wider text-slate-400">
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-blue-600/30 border border-blue-500/40" /> 1-4: Libertadores</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-600/30 border border-emerald-500/40" /> 5-8: Sudamericana</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-600/30 border border-red-500/40" /> Últimos 4: Descenso</span>
                   </div>
                 </div>
               )}
@@ -646,11 +649,11 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
 
               {/* Action buttons */}
               <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">
-                <button onClick={onDownloadPDF} className="btn-primary px-6 py-3">
+                <button onClick={onDownloadPDF} className="btn-gold px-8 py-3.5 text-[11px] font-bold tracking-widest uppercase rounded-2xl shadow-lg">
                   Descargar PDF
                 </button>
-                <button onClick={onBack} className="btn-secondary px-6 py-3">Ver equipo</button>
-                <button onClick={onReset} className="btn-secondary px-6 py-3">Nuevo Draft</button>
+                <button onClick={onBack} className="btn-secondary px-7 py-3.5 text-[11px] font-bold tracking-widest uppercase border-[#74ACDF]/25 hover:border-[#74ACDF]/50">Ver equipo</button>
+                <button onClick={onReset} className="btn-secondary px-7 py-3.5 text-[11px] font-bold tracking-widest uppercase border-[#74ACDF]/25 hover:border-[#74ACDF]/50">Nuevo Draft</button>
               </div>
               <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">
                 Volver al inicio

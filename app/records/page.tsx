@@ -9,7 +9,7 @@ const { topRated, topScorers } = recordsData
 
 export default function RecordsPage() {
   return (
-    <div className="min-h-[calc(100vh-6rem)] py-10">
+    <div className="min-h-[calc(100vh-6rem)] px-4 py-10">
       <section className="mx-auto max-w-4xl text-center">
         <motion.p
           initial={{ opacity: 0, y: -8 }}

@@ -91,8 +91,8 @@ export default function LeaderboardPage() {
       </header>
       <main className="max-w-3xl mx-auto px-4 pb-20">
         <div className="flex gap-2.5 mb-8 justify-center">
-          <button onClick={()=>setTab('global')} className={`px-5 py-2.5 rounded-xl text-xs font-black tracking-widest transition-all font-sport ${tab==='global'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>GLOBAL</button>
-          <button onClick={()=>setTab('club')} className={`px-5 py-2.5 rounded-xl text-xs font-black tracking-widest transition-all font-sport ${tab==='club'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>POR CLUB</button>
+          <button onClick={()=>setTab('global')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all font-sport ${tab==='global'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>GLOBAL</button>
+          <button onClick={()=>setTab('club')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all font-sport ${tab==='club'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>POR CLUB</button>
         </div>
 
         {tab==='global'?(
@@ -128,7 +128,7 @@ export default function LeaderboardPage() {
           <p className="mt-1">Los scores se guardan localmente cuando simulás una temporada</p>
         </div>
       </main>
-      <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm">← Volver al inicio</Link></div>
+      <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm py-2.5 px-4 inline-block">← Volver al inicio</Link></div>
     </div>
   )
 }

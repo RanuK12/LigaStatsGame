@@ -609,7 +609,7 @@ function DraftInner() {
                   return (
                     <div key={i} className="flex items-center gap-1.5 bg-slate-800/50 rounded-lg px-2.5 py-1.5 border border-slate-700 group relative">
                       <button onClick={() => removePlayer(i)}
-                        className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-red-500 text-white text-[8px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
+                        className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[8px] flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
                       <div className="w-5 h-5 rounded-full flex items-center justify-center text-[7px] font-bold text-white"
                         style={{ backgroundColor: getPC(pos.pos) }}>
                         {pl ? pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase() : POS_LABELS[pos.pos]}
@@ -627,14 +627,14 @@ function DraftInner() {
               </div>
               <div className="text-2xl font-display font-black text-[#75AADB]">Score: {teamScore || partialScore} pts</div>
             </div>
-            <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6 font-sport">
               <MagneticButton>
-                <button onClick={() => startSim("liga")} className="btn-primary px-8 py-3">Simular Liga</button>
+                <button onClick={() => startSim("liga")} className="btn-primary w-full sm:w-auto px-8 py-3">Simular Liga</button>
               </MagneticButton>
               <MagneticButton>
-                <button onClick={() => startSim("copa")} className="btn-primary px-6 py-3">Simular Copa</button>
+                <button onClick={() => startSim("copa")} className="btn-primary w-full sm:w-auto px-6 py-3">Simular Copa</button>
               </MagneticButton>
-              <button onClick={resetGame} className="btn-secondary px-6 py-3">Nuevo Draft</button>
+              <button onClick={resetGame} className="btn-secondary w-full sm:w-auto px-6 py-3">Nuevo Draft</button>
             </div>
             <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">Volver al inicio</Link>
           </motion.div>
