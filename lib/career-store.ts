@@ -65,6 +65,7 @@ export const useCareerStore = create<CareerStore>()(
             history: [],
             pendingOffers: [],
             nextContinental: 'sudamericana',
+            milestones: { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false },
             finished: false,
           },
         })
@@ -81,6 +82,19 @@ export const useCareerStore = create<CareerStore>()(
         trophiesWon.forEach((id) => {
           trophies[id] = (trophies[id] || 0) + 1
         })
+
+        // Hitos de carrera (debut en Selección, Balón de Oro, botines de oro)
+        const milestones = { ...state.milestones }
+        const nation = state.player.nationality === 'Argentina' ? 'Argentina' : state.player.nationality
+        if (!milestones.nationalTeam && season.ovr >= 80) {
+          milestones.nationalTeam = true
+          season.highlights.unshift(`${state.player.flag} Debutaste en la Selección de ${nation}`)
+        }
+        if (season.topScorer) milestones.goldenBoots += 1
+        if (season.ovr >= 88 && (season.liga || season.continentalWon) && rng() < 0.6) {
+          milestones.balonDeOro += 1
+          season.highlights.unshift(`🏅 Ganaste el Balón de Oro`)
+        }
 
         const player = advancePlayer(state, season)
         const seasonsPlayed = state.seasonsPlayed + 1
@@ -99,6 +113,7 @@ export const useCareerStore = create<CareerStore>()(
             history: [...state.history, season],
             pendingOffers: offers,
             nextContinental: nextContinentalFrom(season),
+            milestones,
             finished: seasonsPlayed >= MAX_SEASONS,
           },
         })

@@ -23,6 +23,7 @@ function baseState(overrides: Partial<CareerState> = {}): CareerState {
     history: [],
     pendingOffers: [],
     nextContinental: 'libertadores',
+    milestones: { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false },
     finished: false,
     ...overrides,
   }

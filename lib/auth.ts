@@ -28,6 +28,32 @@ export async function signOutSupabase(): Promise<void> {
   await supabase?.auth.signOut()
 }
 
+export interface AuthResult {
+  ok: boolean
+  message: string
+}
+
+/** Register a real user in Supabase Auth (email + password). */
+export async function signUpWithEmail(email: string, password: string, username: string): Promise<AuthResult> {
+  if (!supabase) return { ok: false, message: 'El registro no está disponible todavía.' }
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: { data: { full_name: username } },
+  })
+  if (error) return { ok: false, message: error.message }
+  if (!data.session) return { ok: true, message: 'Te enviamos un email para confirmar tu cuenta.' }
+  return { ok: true, message: '¡Cuenta creada!' }
+}
+
+/** Sign in an existing email/password user. */
+export async function signInWithEmail(email: string, password: string): Promise<AuthResult> {
+  if (!supabase) return { ok: false, message: 'El login no está disponible todavía.' }
+  const { error } = await supabase.auth.signInWithPassword({ email, password })
+  if (error) return { ok: false, message: error.message }
+  return { ok: true, message: '¡Bienvenido de vuelta!' }
+}
+
 /**
  * Map a Supabase auth user to our UserProfile shape, preserving locally-earned
  * stats (elo/titles/...) from any existing profile so social login never resets progress.

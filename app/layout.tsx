@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next'
-import { Outfit, Inter, Staatliches } from 'next/font/google'
+import { Archivo, Inter, Bebas_Neue } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 
-const outfit = Outfit({
+const archivo = Archivo({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '900'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-display',
 })
 
@@ -15,7 +15,7 @@ const inter = Inter({
   variable: '--font-sans',
 })
 
-const staatliches = Staatliches({
+const bebas = Bebas_Neue({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-bandera',
@@ -40,7 +40,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${outfit.variable} ${inter.variable} ${staatliches.variable}`}>
+    <html lang="es" className={`${archivo.variable} ${inter.variable} ${bebas.variable}`}>
       <head>
         <link rel="icon" href="/LigaStatsGame/logos/afa.png" />
       </head>

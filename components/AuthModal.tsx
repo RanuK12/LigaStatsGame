@@ -4,12 +4,20 @@ import { motion, AnimatePresence } from "framer-motion"
 import { FcGoogle } from "react-icons/fc"
 import { FaXTwitter } from "react-icons/fa6"
 import { useUserStore } from "@/lib/user-store"
-import { signInWithProvider, isSupabaseConfigured } from "@/lib/auth"
+import { signInWithProvider, signUpWithEmail, signInWithEmail, isSupabaseConfigured } from "@/lib/auth"
+
+type Tab = "guest" | "account"
 
 export default function AuthModal() {
   const { isAuthModalOpen, closeAuthModal, loginGuest } = useUserStore()
+  const [tab, setTab] = useState<Tab>("account")
+  const [mode, setMode] = useState<"signup" | "login">("signup")
+
   const [usernameInput, setUsernameInput] = useState("")
-  const [tab, setTab] = useState<"guest" | "login">("guest")
+  const [emailInput, setEmailInput] = useState("")
+  const [passwordInput, setPasswordInput] = useState("")
+  const [busy, setBusy] = useState(false)
+  const [feedback, setFeedback] = useState<{ ok: boolean; text: string } | null>(null)
 
   // Close on ESC while the modal is open.
   useEffect(() => {
@@ -27,6 +35,24 @@ export default function AuthModal() {
     loginGuest(usernameInput.trim())
   }
 
+  const handleAccountSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!emailInput.trim() || !passwordInput) return
+    setBusy(true)
+    setFeedback(null)
+    const res =
+      mode === "signup"
+        ? await signUpWithEmail(emailInput.trim(), passwordInput, usernameInput.trim() || emailInput.split("@")[0])
+        : await signInWithEmail(emailInput.trim(), passwordInput)
+    setBusy(false)
+    setFeedback({ ok: res.ok, text: res.message })
+    // On a successful login with an active session, the Header's auth listener
+    // hydrates the store and we can close. Sign-ups may need email confirmation.
+    if (res.ok && mode === "login") setTimeout(closeAuthModal, 600)
+  }
+
+  const disabled = !isSupabaseConfigured
+
   return (
     <AnimatePresence>
       {isAuthModalOpen && (
@@ -36,20 +62,19 @@ export default function AuthModal() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={closeAuthModal}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md cursor-pointer"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md cursor-pointer overflow-y-auto"
         >
           <motion.div
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.9, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 15 }}
-            className="card-gradient rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_0_50px_rgba(116,172,223,0.15)] relative overflow-hidden cursor-default"
+            className="card-gradient rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_0_50px_rgba(116,172,223,0.15)] relative overflow-y-auto max-h-[90vh] cursor-default my-auto"
           >
-            {/* Close button */}
             <button
               onClick={closeAuthModal}
               aria-label="Cerrar"
-              className="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full flex items-center justify-center bg-slate-900/60 border border-slate-800"
+              className="absolute top-4 right-4 z-10 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full flex items-center justify-center bg-slate-900/80 border border-slate-800"
             >
               ✕
             </button>
@@ -62,27 +87,27 @@ export default function AuthModal() {
                 INGRESAR AL GAME
               </h2>
               <p className="text-slate-400 text-xs mt-1.5 leading-relaxed">
-                Creá tu usuario para figurar en la Tabla de Líderes Global y sumar ELO en cada torneo.
+                Registrate para guardar tu progreso, figurar en la Tabla de Líderes y sumar ELO.
               </p>
             </div>
 
             {/* Selector de modo */}
             <div className="flex gap-2 mb-6 font-sport">
               <button
-                onClick={() => setTab("guest")}
+                onClick={() => { setTab("account"); setFeedback(null) }}
+                className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                  tab === "account" ? "bg-[#74ACDF] text-white shadow-md shadow-[#74ACDF]/20" : "bg-slate-900 text-slate-400 border border-slate-800"
+                }`}
+              >
+                Cuenta
+              </button>
+              <button
+                onClick={() => { setTab("guest"); setFeedback(null) }}
                 className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
                   tab === "guest" ? "bg-[#74ACDF] text-white shadow-md shadow-[#74ACDF]/20" : "bg-slate-900 text-slate-400 border border-slate-800"
                 }`}
               >
-                Nombre de DT
-              </button>
-              <button
-                onClick={() => setTab("login")}
-                className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
-                  tab === "login" ? "bg-[#74ACDF] text-white shadow-md shadow-[#74ACDF]/20" : "bg-slate-900 text-slate-400 border border-slate-800"
-                }`}
-              >
-                Cuenta Social
+                Invitado
               </button>
             </div>
 
@@ -98,62 +123,103 @@ export default function AuthModal() {
                     placeholder="Ej: Scaloni_DT, El_Romi_10, Marcelo"
                     value={usernameInput}
                     onChange={(e) => setUsernameInput(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#74ACDF] font-sans"
+                    className="input-dark"
                   />
                 </div>
-
                 <div className="card-glass rounded-xl p-3 flex items-center gap-3 border border-white/5">
-                  <div className="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-lg">
-                    ⚡
-                  </div>
+                  <div className="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-lg">⚡</div>
                   <div className="text-xs">
                     <div className="font-bold text-white">Rating Inicial: 1000 ELO</div>
-                    <div className="text-[10px] text-slate-400">Sumás ELO si salís campeón o top 4 en cada liga</div>
+                    <div className="text-[10px] text-slate-400">Jugás al toque, sin registro. El progreso queda en este dispositivo.</div>
                   </div>
                 </div>
-
-                <button
-                  type="submit"
-                  className="btn-primary w-full py-3.5 text-xs font-bold tracking-widest uppercase font-sport rounded-2xl shadow-lg mt-2"
-                >
+                <button type="submit" className="btn-primary w-full py-3.5 text-xs font-bold tracking-widest uppercase font-sport rounded-2xl shadow-lg mt-2">
                   INGRESAR COMO DT
                 </button>
               </form>
             )}
 
-            {tab === "login" && (
+            {tab === "account" && (
               <div className="space-y-4">
-                <p className="text-center text-xs text-slate-400 leading-relaxed">
-                  Iniciá sesión con tu cuenta social para guardar tu progreso y ELO en la nube.
-                </p>
+                {/* OAuth */}
+                <div className="space-y-2.5">
+                  <button
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => signInWithProvider("google")}
+                    className="w-full flex items-center justify-center gap-3 py-3 rounded-2xl bg-white text-slate-900 text-sm font-bold font-sport shadow-lg transition-all hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    <FcGoogle className="text-xl" /> Continuar con Google
+                  </button>
+                  <button
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => signInWithProvider("twitter")}
+                    className="w-full flex items-center justify-center gap-3 py-3 rounded-2xl bg-black border border-slate-700 text-white text-sm font-bold font-sport shadow-lg transition-all hover:bg-slate-900 disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    <FaXTwitter className="text-lg" /> Continuar con X
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-3 text-[10px] text-slate-500 font-sport uppercase tracking-wider">
+                  <span className="flex-1 h-px bg-white/10" /> o con tu email <span className="flex-1 h-px bg-white/10" />
+                </div>
+
+                {/* Email / password */}
+                <form onSubmit={handleAccountSubmit} className="space-y-3">
+                  {mode === "signup" && (
+                    <input
+                      type="text"
+                      placeholder="Nombre de usuario"
+                      value={usernameInput}
+                      onChange={(e) => setUsernameInput(e.target.value)}
+                      className="input-dark"
+                    />
+                  )}
+                  <input
+                    type="email"
+                    required
+                    placeholder="tuemail@ejemplo.com"
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    className="input-dark"
+                  />
+                  <input
+                    type="password"
+                    required
+                    minLength={6}
+                    placeholder="Contraseña (mín. 6)"
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    className="input-dark"
+                  />
+
+                  {feedback && (
+                    <p className={`text-xs leading-relaxed ${feedback.ok ? "text-emerald-400" : "text-red-400"}`}>
+                      {feedback.text}
+                    </p>
+                  )}
+                  {disabled && (
+                    <p className="text-[10px] text-amber-400/80 leading-relaxed">
+                      Las cuentas se habilitan cuando Supabase esté configurado. Mientras tanto podés jugar como Invitado.
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={disabled || busy}
+                    className="btn-primary w-full py-3.5 text-xs font-bold tracking-widest uppercase font-sport rounded-2xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    {busy ? "..." : mode === "signup" ? "CREAR CUENTA" : "INICIAR SESIÓN"}
+                  </button>
+                </form>
 
                 <button
-                  type="button"
-                  disabled={!isSupabaseConfigured}
-                  onClick={() => signInWithProvider("google")}
-                  title={isSupabaseConfigured ? undefined : "Configura Supabase para habilitar login social"}
-                  className="w-full flex items-center justify-center gap-3 py-3.5 rounded-2xl bg-white text-slate-900 text-sm font-bold font-sport shadow-lg transition-all hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                  onClick={() => { setMode(mode === "signup" ? "login" : "signup"); setFeedback(null) }}
+                  className="w-full text-center text-[11px] text-slate-400 hover:text-white font-sport transition-colors"
                 >
-                  <FcGoogle className="text-xl" />
-                  Continuar con Google
+                  {mode === "signup" ? "¿Ya tenés cuenta? Iniciá sesión" : "¿No tenés cuenta? Registrate"}
                 </button>
-
-                <button
-                  type="button"
-                  disabled={!isSupabaseConfigured}
-                  onClick={() => signInWithProvider("twitter")}
-                  title={isSupabaseConfigured ? undefined : "Configura Supabase para habilitar login social"}
-                  className="w-full flex items-center justify-center gap-3 py-3.5 rounded-2xl bg-black border border-slate-700 text-white text-sm font-bold font-sport shadow-lg transition-all hover:bg-slate-900 disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  <FaXTwitter className="text-lg" />
-                  Continuar con X
-                </button>
-
-                {!isSupabaseConfigured && (
-                  <p className="text-center text-[10px] text-amber-400/80 leading-relaxed">
-                    Login social deshabilitado: falta configurar Supabase (ver .env.local.example).
-                  </p>
-                )}
               </div>
             )}
           </motion.div>
