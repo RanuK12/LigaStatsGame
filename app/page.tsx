@@ -143,10 +143,10 @@ function WorldCupBanner() {
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/img/mundial_banner.jpg')" }}
+          style={{ backgroundImage: "url('/mundial_2026_banner.jpg')" }}
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#020813]/92 via-[#050f21]/80 to-[#020813]/92" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020813]/92 via-[#050f21]/75 to-[#020813]/92" />
         
         {/* Flag borders */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#74ACDF] via-white to-[#74ACDF]" />
@@ -213,13 +213,13 @@ function WorldCupBanner() {
             </Link>
           </div>
 
-          {/* Right: stats */}
+          {/* Right: stats (unificadas y sin duplicar) */}
           <div className="grid grid-cols-2 gap-3 w-full max-w-xs shrink-0">
             {[
-              { label: 'Años de Gloria', value: '3', sub: 'Mundiales ganados' },
-              { label: 'Mejor Jugador', value: '#10', sub: 'Diego y Lionel' },
-              { label: 'Clubes en DB', value: `${clubs.length}`, sub: '100% Reales' },
-              { label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas oficiales' },
+              { label: 'Jugadores en DB', value: '4.095', sub: 'Estadísticas Reales' },
+              { label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas Oficiales' },
+              { label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
+              { label: 'Mundiales', value: '3', sub: 'Ganados por Argentina' },
             ].map((s, i) => (
               <motion.div
                 key={i}
@@ -231,7 +231,7 @@ function WorldCupBanner() {
               >
                 <div className="text-2xl font-black gradient-text-gold font-display">{s.value}</div>
                 <div className="text-[9px] text-[#D4AF37] font-bold mt-0.5 uppercase tracking-wider font-sport">{s.label}</div>
-                <div className="text-[9px] text-slate-500 mt-0.5 font-medium">{s.sub}</div>
+                <div className="text-[9px] text-slate-400 mt-0.5 font-medium">{s.sub}</div>
               </motion.div>
             ))}
           </div>
