@@ -113,9 +113,9 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
       </div>
 
       {/* FOOTER WATERMARK */}
-      <div className="pt-3 border-t border-white/5 flex justify-between items-center text-[9px] text-slate-500 font-sport font-bold uppercase tracking-wider">
-        <span>Modo Carrera</span>
-        <span className="text-[#74ACDF]/70">ranuk12.github.io/LigaStatsGame</span>
+      <div className="pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-sport font-bold uppercase tracking-wider">
+        <span className="font-malvinas text-white text-[11px] tracking-[0.1em]">GAMBETA</span>
+        <span className="text-[#74ACDF]/70">El juego del fútbol argentino</span>
       </div>
     </div>
   )

@@ -17,13 +17,13 @@ function getDivisionOutcome(result: TournamentResult) {
   if (result.type === "copa") {
     if (result.isChampion) {
       return {
-        text: "CAMPEÓN DE LA COPA ARGENTINA",
+        text: "CAMPEÃN DE LA COPA ARGENTINA",
         bg: [212, 175, 55], // Gold
         fg: [10, 14, 27]
       }
     }
     return {
-      text: result.eliminated ? `COPA ARGENTINA: ELIMINADO EN ${(result.eliminatedRound ?? "fase de eliminatoria").toUpperCase()}` : "SUBCAMPEÓN DE LA COPA ARGENTINA",
+      text: result.eliminated ? `COPA ARGENTINA: ELIMINADO EN ${(result.eliminatedRound ?? "fase de eliminatoria").toUpperCase()}` : "SUBCAMPEÃN DE LA COPA ARGENTINA",
       bg: [51, 65, 85], // Slate
       fg: [255, 255, 255]
     }
@@ -39,14 +39,14 @@ function getDivisionOutcome(result: TournamentResult) {
   }
   if (result.isChampion) {
     return {
-      text: "CAMPEÓN DE LA LIGA PROFESIONAL DE FÚTBOL",
+      text: "CAMPEÃN DE LA LIGA PROFESIONAL DE FÃTBOL",
       bg: [212, 175, 55], // Gold
       fg: [10, 14, 27]
     }
   }
   if (result.playerPos && result.playerPos <= 3) {
     return {
-      text: "CLASIFICADO A LA COPA LIBERTADORES DE AMÉRICA",
+      text: "CLASIFICADO A LA COPA LIBERTADORES DE AMÃRICA",
       bg: [59, 130, 246], // Blue
       fg: [255, 255, 255]
     }
@@ -59,7 +59,7 @@ function getDivisionOutcome(result: TournamentResult) {
     }
   }
   return {
-    text: "PERMANENCIA ASEGURADA EN PRIMERA DIVISIÓN",
+    text: "PERMANENCIA ASEGURADA EN PRIMERA DIVISIÃN",
     bg: [71, 85, 105], // Slate
     fg: [255, 255, 255]
   }
@@ -112,17 +112,17 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setTextColor(255, 255, 255)
   doc.setFontSize(18)
   doc.setFont("helvetica", "bold")
-  doc.text("DRAFT TRES ESTRELLAS", W / 2, 13, { align: "center" })
+  doc.text("GAMBETA ⭐⭐⭐", W / 2, 13, { align: "center" })
 
   doc.setTextColor(116, 172, 223)
   doc.setFontSize(8)
   doc.setFont("helvetica", "bold")
-  doc.text("EL JUEGO DEL FÚTBOL ARGENTINO", W / 2, 18, { align: "center" })
+  doc.text("EL JUEGO DEL FÃTBOL ARGENTINO", W / 2, 18, { align: "center" })
 
   doc.setTextColor(100, 116, 139)
   doc.setFontSize(7)
   doc.setFont("helvetica", "normal")
-  doc.text(`Generado el ${new Date().toLocaleDateString("es-AR")} · draft3estrellas.com`, W / 2, 25, { align: "center" })
+  doc.text(`Generado el ${new Date().toLocaleDateString("es-AR")} Â· draft3estrellas.com`, W / 2, 25, { align: "center" })
 
   // 3. Division Outcome Banner
   const outcome = getDivisionOutcome(result)
@@ -144,7 +144,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setTextColor(148, 163, 184)
   doc.setFontSize(8.5)
   doc.setFont("helvetica", "normal")
-  doc.text(`Táctica: ${result.formation}   ·   Score: ${result.teamScore} pts`, W - pad - 6, 60.5, { align: "right" })
+  doc.text(`TÃ¡ctica: ${result.formation}   Â·   Score: ${result.teamScore} pts`, W - pad - 6, 60.5, { align: "right" })
 
   // 5. Two-Column Layout (y = 73)
   const colY = 73
@@ -152,7 +152,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   const colGap = 10
   const col2X = pad + colW + colGap
 
-  // ── LEFT COLUMN: DRAFTED TEAM LINEUP ──
+  // ââ LEFT COLUMN: DRAFTED TEAM LINEUP ââ
   doc.setTextColor(116, 172, 223)
   doc.setFontSize(10.5)
   doc.setFont("helvetica", "bold")
@@ -207,7 +207,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
     rowY += 8.2
   })
 
-  // ── RIGHT COLUMN: TOURNAMENT RESULTS ──
+  // ââ RIGHT COLUMN: TOURNAMENT RESULTS ââ
   doc.setTextColor(116, 172, 223)
   doc.setFontSize(10.5)
   doc.setFont("helvetica", "bold")
@@ -336,7 +336,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setTextColor(116, 172, 223)
   doc.setFontSize(10.5)
   doc.setFont("helvetica", "bold")
-  doc.text("ESTADÍSTICAS DEL TORNEO", pad + 6, statsY + 7.5)
+  doc.text("ESTADÃSTICAS DEL TORNEO", pad + 6, statsY + 7.5)
 
   doc.setFillColor(116, 172, 223, 0.15)
   doc.rect(pad + 6, statsY + 9.5, W - pad * 2 - 12, 0.5, "F")
@@ -375,7 +375,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setTextColor(71, 85, 105)
   doc.setFontSize(7.5)
   doc.setFont("helvetica", "bold")
-  doc.text("DRAFT TRES ESTRELLAS · UN PROYECTO DE HINCHAS PARA HINCHAS", W / 2, 290, { align: "center" })
+  doc.text("GAMBETA - EL JUEGO DEL FUTBOL ARGENTINO", W / 2, 290, { align: "center" })
 
   doc.save(`Draft3Estrellas_${result.teamLabel.replace(/\s+/g, "_")}_${result.type}.pdf`)
 }
