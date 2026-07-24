@@ -15,7 +15,7 @@ const REFERENCED = new Set()
 for (const s of sq) for (const pid of s.playerIds || []) REFERENCED.add(pid)
 
 const slug = (s) =>
-  s.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+  s.toLowerCase().normalize('NFD').replace(/[^\x00-\x7f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 const clubs = (arr) => arr.map(([name, years]) => ({ id: slug(name), name, years }))
 
 // ── 1) DEDUP por nombre + fecha, preservando el id referenciado por squads ──
@@ -64,15 +64,17 @@ const LEGENDS = [
     clubs: clubs([['Sampdoria', '2012-2013'], ['Inter Milan', '2013-2019'], ['Paris Saint-Germain', '2019-2022'], ['Galatasaray', '2022-2025'], ['Argentina', '2013-2018']]) },
 ]
 
-const legendNames = new Set(LEGENDS.map((l) => l.name))
-// Reusar el id existente (preferir el referenciado por squads) para no romper refs.
+// Matchea aunque el registro original use el nombre completo (ej. "Diego Armando
+// Maradona" vs "Diego Maradona") para no dejar duplicados.
+const matchesLegend = (p, l) =>
+  p.name === l.name || p.fullName === l.fullName || p.name === l.fullName || p.fullName === l.name
 const reuseId = {}
 for (const l of LEGENDS) {
-  const rows = deduped.filter((p) => p.name === l.name)
+  const rows = deduped.filter((p) => matchesLegend(p, l))
   const ref = rows.find((p) => REFERENCED.has(p.id))
   reuseId[l.name] = ref?.id || rows[0]?.id || `${slug(l.name)}-${(l.birthDate || '').slice(0, 4)}`
 }
-deduped = deduped.filter((p) => !legendNames.has(p.name))
+deduped = deduped.filter((p) => !LEGENDS.some((l) => matchesLegend(p, l)))
 
 for (const l of LEGENDS) {
   deduped.push({
