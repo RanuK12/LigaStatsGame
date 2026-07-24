@@ -1,7 +1,7 @@
 {
   "totals": {
     "clubs": 34,
-    "players": 4089,
+    "players": 4088,
     "squads": 170
   },
   "players": {
@@ -15,19 +15,38 @@
   },
   "squads": {
     "missingClub": [],
-    "lessThan11": [],
+    "lessThan11": [
+      "san-lorenzo-2024 - San Lorenzo 2024 (10)"
+    ],
     "brokenPlayerRefs": [],
-    "withoutGoalkeeper": [],
+    "withoutGoalkeeper": [
+      "banfield-2017 - Banfield 2017",
+      "belgrano-2022 - Belgrano 2022",
+      "belgrano-2017 - Belgrano 2017",
+      "godoy-cruz-2023 - Godoy Cruz 2023",
+      "godoy-cruz-2018 - Godoy Cruz 2018",
+      "huracan-2020 - Huracán 2020",
+      "independiente-2021 - Independiente 2021",
+      "newells-2022 - Newell's Old Boys 2022",
+      "newells-2018 - Newell's Old Boys 2018",
+      "racing-club-2024 - Racing Club 2024",
+      "racing-club-2022 - Racing Club 2022",
+      "rosario-central-2024 - Rosario Central 2024",
+      "rosario-central-2023 - Rosario Central 2023",
+      "rosario-central-2018 - Rosario Central 2018",
+      "san-lorenzo-2024 - San Lorenzo 2024",
+      "san-lorenzo-2016 - San Lorenzo 2016"
+    ],
     "withoutEnoughDefenders": [],
     "withoutEnoughMidfielders": [],
     "withoutAttackers": [],
     "duplicatedPlayerRefs": []
   },
   "coverage": {
-    "playersWithRating": 4089,
-    "playersWithClubs": 4089,
-    "playersWithValidPosition": 4089,
-    "squadsPlayable": 170,
+    "playersWithRating": 4088,
+    "playersWithClubs": 4088,
+    "playersWithValidPosition": 4088,
+    "squadsPlayable": 154,
     "squadsByClub": {
       "aldosivi": 2,
       "argentinos-jrs": 2,
@@ -65,19 +84,19 @@
       "atlanta": 1,
       "gimnasia": 233,
       "union": 12,
-      "boca-juniors": 394,
+      "boca-juniors": 393,
       "quilmes": 4,
       "racing-club": 251,
-      "argentinos-jrs": 76,
+      "argentinos-jrs": 75,
       "flamengo": 1,
-      "atletico-madrid": 4,
+      "atletico-madrid": 5,
       "velez": 376,
       "real-betis": 2,
       "defensores-belgrano": 3,
       "brest": 1,
       "cerro-porteno": 1,
       "olimpia": 1,
-      "newells": 247,
+      "newells": 246,
       "ferro": 3,
       "mallorca": 1,
       "rosario-central": 292,
@@ -138,7 +157,6 @@
       "lazio": 3,
       "parma": 3,
       "chelsea": 3,
-      "argentina": 13,
       "instituto": 19,
       "hercules": 1,
       "alaves": 1,
@@ -193,12 +211,12 @@
       "gimnasia-lp": 2,
       "fc-barcelona": 4,
       "inter-miami": 2,
+      "argentina": 12,
       "argentinos-juniors": 2,
       "newell-s-old-boys": 2,
       "espanyol": 1,
       "as-roma": 2,
       "inter-milan": 3,
-      "atle-tico-madrid": 1,
       "ac-milan": 1,
       "zaragoza": 1,
       "leicester-city": 1,
@@ -210,7 +228,7 @@
       "1950s": 6,
       "1960s": 6,
       "1970s": 9,
-      "1980s": 9,
+      "1980s": 8,
       "1990s": 804,
       "2000s": 910,
       "2010s": 1306,
@@ -222,7 +240,7 @@
       "RB": 289,
       "LB": 301,
       "CDM": 349,
-      "CM": 576,
+      "CM": 575,
       "CAM": 346,
       "ST": 599,
       "RW": 252,
@@ -233,9 +251,11 @@
     }
   },
   "summary": {
-    "healthScore": 100,
-    "criticalIssues": 0,
+    "healthScore": 90,
+    "criticalIssues": 17,
     "warnings": 0,
-    "recommendations": []
+    "recommendations": [
+      "Ensure every squad has at least one goalkeeper."
+    ]
   }
 }

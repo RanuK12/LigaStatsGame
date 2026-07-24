@@ -357,7 +357,6 @@
     "competition": "Liga Profesional",
     "label": "Banfield 2017",
     "playerIds": [
-      "enrique-bologna",
       "emanuel-coronel",
       "danilo-ortiz",
       "adrian-calello",
@@ -563,7 +562,6 @@
     "competition": "Liga Profesional",
     "label": "Belgrano 2022",
     "playerIds": [
-      "nahuel-losada",
       "franco-jara",
       "jeremias-lucco",
       "andres-amaya",
@@ -649,7 +647,6 @@
     "competition": "Liga Profesional",
     "label": "Belgrano 2017",
     "playerIds": [
-      "nahuel-losada",
       "romero-cristian-1998",
       "erik-godoy",
       "tobias-ostchega",
@@ -1693,7 +1690,6 @@
     "competition": "Liga Profesional",
     "label": "Godoy Cruz 2023",
     "playerIds": [
-      "rodrigo-rey",
       "juan-perez",
       "juan-moran",
       "luciano-pascual",
@@ -1779,7 +1775,6 @@
     "competition": "Liga Profesional",
     "label": "Godoy Cruz 2018",
     "playerIds": [
-      "rodrigo-rey",
       "kevin-gutierrez",
       "juan-martin-lucero",
       "ezequiel-bullaude",
@@ -1980,7 +1975,6 @@
     "competition": "Liga Profesional",
     "label": "Huracán 2020",
     "playerIds": [
-      "hernan-galindez",
       "jhonatan-candia",
       "jonas-acevedo",
       "enrique-triverio",
@@ -2282,7 +2276,6 @@
     "competition": "Liga Profesional",
     "label": "Independiente 2021",
     "playerIds": [
-      "martinez-emiliano-1992",
       "rodrigo-atencio",
       "alex-vigo",
       "hachen-gabriel-2000",
@@ -2806,7 +2799,6 @@
     "competition": "Liga Profesional",
     "label": "Newell's Old Boys 2022",
     "playerIds": [
-      "sergio-goycochea",
       "angelo-martino",
       "bruno-pitton",
       "jonathan-menendez",
@@ -2858,7 +2850,6 @@
     "competition": "Liga Profesional",
     "label": "Newell's Old Boys 2018",
     "playerIds": [
-      "sergio-goycochea",
       "lisandro-cabrera",
       "juan-pablo-freytes",
       "lisandro-alzugaray",
@@ -3048,7 +3039,6 @@
     "competition": "Liga Profesional",
     "label": "Racing Club 2024",
     "playerIds": [
-      "ubaldo-fillol",
       "franco-pardo",
       "adrian-balboa",
       "elias-torres",
@@ -3073,7 +3063,6 @@
     "competition": "Liga Profesional",
     "label": "Racing Club 2022",
     "playerIds": [
-      "ubaldo-fillol",
       "juan-fernando-quintero",
       "agustin-almendra",
       "tobias-rubio",
@@ -3563,7 +3552,6 @@
     "competition": "Liga Profesional",
     "label": "Rosario Central 2024",
     "playerIds": [
-      "roberto-abbondanzieri",
       "federico-navarro",
       "ferreira-sebastian-2004",
       "gonzalez-gonzalo-2004",
@@ -3593,7 +3581,6 @@
     "competition": "Liga Profesional",
     "label": "Rosario Central 2023",
     "playerIds": [
-      "roberto-abbondanzieri",
       "enzo-copetti",
       "franco-ibarra",
       "jonatan-gomez",
@@ -3743,7 +3730,6 @@
     "competition": "Liga Profesional",
     "label": "Rosario Central 2018",
     "playerIds": [
-      "roberto-abbondanzieri",
       "rodrigo-villagra",
       "fouley-quentin-1998",
       "duvan-vergara",
@@ -3905,7 +3891,6 @@
     "competition": "Liga Profesional",
     "label": "San Lorenzo 2024",
     "playerIds": [
-      "jose-luis-chilavert",
       "jaime-peralta",
       "branco-salinardi",
       "alejo-rivas",
@@ -4054,7 +4039,6 @@
     "competition": "Liga Profesional",
     "label": "San Lorenzo 2016",
     "playerIds": [
-      "jose-luis-chilavert",
       "ruben-botta",
       "nahuel-barrios",
       "abel-luciatti",

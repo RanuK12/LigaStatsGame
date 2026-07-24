@@ -385,6 +385,7 @@ function CareerDashboard() {
           const m = career.milestones || { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false }
           const rating = typeof last.rating === "number" ? last.rating : 7
           const highlights = last.highlights || []
+          const cronica = last.cronica || ""
           return (
             <div className="card-gradient rounded-3xl p-5 border border-amber-400/20 space-y-3">
               <div className="flex items-center justify-between">
@@ -393,6 +394,11 @@ function CareerDashboard() {
                   Nota {rating.toFixed(1)}
                 </span>
               </div>
+              {cronica && (
+                <p className="text-[13px] text-slate-200 italic leading-relaxed border-l-2 border-[#74ACDF]/50 pl-3 font-sans">
+                  {cronica}
+                </p>
+              )}
               {highlights.length > 0 ? (
                 <ul className="space-y-1.5">
                   {highlights.map((h, i) => (

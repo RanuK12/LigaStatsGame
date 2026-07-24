@@ -2,31 +2,31 @@
 
 ## Totals
 - Clubs: 34
-- Players: 4089
+- Players: 4088
 - Squads: 170
 
 ## Health Score
-- Score: 100
-- Critical issues: 0
+- Score: 90
+- Critical issues: 17
 - Warnings: 0
 
 ## Critical Issues
 - Missing club: 0
-- Less than 11 players: 0
+- Less than 11 players: 1
 - Broken player refs: 0
-- Without goalkeeper: 0
+- Without goalkeeper: 16
 - Invalid rating: 0
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 4089
-- Players with clubs: 4089
-- Players with valid position: 4089
-- Playable squads: 170
+- Players with rating: 4088
+- Players with clubs: 4088
+- Players with valid position: 4088
+- Playable squads: 154
 
 ## Players by club
 - independiente: 436
-- boca-juniors: 394
+- boca-juniors: 393
 - banfield: 390
 - lanus: 379
 - velez: 376
@@ -35,13 +35,13 @@
 - rosario-central: 292
 - talleres: 261
 - racing-club: 251
-- newells: 247
+- newells: 246
 - san-lorenzo: 235
 - gimnasia: 233
 - belgrano: 211
 - estudiantes: 204
 - godoy-cruz: 198
-- argentinos-jrs: 76
+- argentinos-jrs: 75
 - defensa-y-justicia: 68
 - colon: 65
 - tigre: 25
@@ -51,10 +51,10 @@
 - aldosivi: 17
 - atl-tucuman: 14
 - union-sf: 14
-- argentina: 13
 - barracas-central: 13
 - independiente-rivadavia: 13
 - sarmiento-j: 13
+- argentina: 12
 - union: 12
 - riestra: 11
 - arsenal: 9
@@ -63,11 +63,11 @@
 - atletico-rafaela: 6
 - internazionale: 6
 - patronato: 6
+- atletico-madrid: 5
 - atletico-tucuman: 5
 - juventus: 5
 - paris-saint-germain: 5
 - valencia: 5
-- atletico-madrid: 4
 - benfica: 4
 - fc-barcelona: 4
 - manchester-united: 4
@@ -120,7 +120,6 @@
 - aston-villa: 1
 - atalanta: 1
 - atlanta: 1
-- atle-tico-madrid: 1
 - az-alkmaar: 1
 - brest: 1
 - cagliari: 1
@@ -175,13 +174,14 @@
 - 2000s: 910
 - 1990s: 804
 - 1970s: 9
-- 1980s: 9
+- 1980s: 8
 - 1950s: 6
 - 1960s: 6
 - 1940s: 2
 - 1920s: 1
 
 ## Top Recommendations
+- Ensure every squad has at least one goalkeeper.
 
 ## Player Problems
 - Missing rating: 0
@@ -191,9 +191,9 @@
 
 ## Squad Problems
 - Missing club: 0
-- Less than 11 players: 0
+- Less than 11 players: 1
 - Broken player refs: 0
-- Without goalkeeper: 0
+- Without goalkeeper: 16
 - Without enough defenders: 0
 - Without enough midfielders: 0
 - Without attackers: 0
