@@ -200,15 +200,14 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
   return (
     <div className="min-h-screen gradient-bg arg-stripe-bg text-white px-4 py-8">
       <div className="max-w-2xl mx-auto">
-        <AnimatePresence mode="wait">
-          
+        <AnimatePresence>
+
           {/* 1. INTRO SCREEN: SELECT SIMULATION SPEED */}
           {simState === "intro" && (
             <motion.div
               key="intro"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
               className="card-gradient rounded-3xl p-6 sm:p-10 border border-white/5 text-center"
             >
               <div className="relative w-[50px] h-[70px] mx-auto mb-6">
@@ -240,7 +239,6 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               key="interactive"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
               className="space-y-5"
             >
               {/* Round Header */}
@@ -332,7 +330,6 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               key="animating"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               className="space-y-4"
             >
               <div className="card-gradient rounded-2xl p-6 border border-slate-900">

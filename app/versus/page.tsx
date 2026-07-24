@@ -423,7 +423,7 @@ export default function VersusPage() {
           </p>
         </div>
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
 
           {/* ───────────────────────────────────────────────────────────
              1. SETUP PHASE: NAMES & FORMATIONS
@@ -433,7 +433,6 @@ export default function VersusPage() {
               key="setup"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
               className="card-gradient rounded-3xl p-6 sm:p-8 border border-white/5"
             >
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sport mb-6 text-center">Configurá a los Directores Técnicos</h3>
@@ -515,7 +514,6 @@ export default function VersusPage() {
               key="draft"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-6"
             >
               {/* Left Column: Tactic Board & Score Card */}
@@ -738,7 +736,6 @@ export default function VersusPage() {
               key="transition"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
               className="card-gradient rounded-2xl p-8 sm:p-12 border border-slate-900 text-center"
             >
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#74ACDF]/30 bg-[#74ACDF]/10 text-xs font-black text-[#74ACDF] font-sport uppercase tracking-widest animate-pulse">
@@ -771,7 +768,6 @@ export default function VersusPage() {
               key="complete"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               className="space-y-6"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -853,7 +849,6 @@ export default function VersusPage() {
               key="simulation"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               className="space-y-5"
             >
               <div className="card-gradient rounded-2xl p-6 border border-slate-900">
