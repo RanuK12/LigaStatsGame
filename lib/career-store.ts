@@ -168,7 +168,7 @@ export function buildCareerCardData(state: CareerState): CareerCardData {
     return {
       id,
       name: c?.name ?? id,
-      logoUrl: c ? `/LigaStatsGame/logos/clubs/${id}.png` : undefined,
+      logoUrl: c ? `/logos/clubs/${id}.png` : undefined,
     }
   })
 

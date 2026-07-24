@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /$
+Allow: /draft
+Allow: /carrera
+Allow: /ruleta
+Allow: /records
+Allow: /leaderboard
+# No indexar/scrapear la base de datos ni los internals
+Disallow: /data/
+Disallow: /_next/
+
+Sitemap: https://gambetafutbol.games/sitemap.xml

@@ -10,7 +10,7 @@ export type OAuthProvider = 'google' | 'twitter'
  */
 function redirectTo(): string {
   if (typeof window === 'undefined') return ''
-  return `${window.location.origin}/LigaStatsGame/`
+  return `${window.location.origin}/`
 }
 
 /** Start the OAuth redirect flow. No-op (returns false) when Supabase is not configured. */

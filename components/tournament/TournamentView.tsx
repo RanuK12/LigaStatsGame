@@ -212,7 +212,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               className="card-gradient rounded-3xl p-6 sm:p-10 border border-white/5 text-center"
             >
               <div className="relative w-[50px] h-[70px] mx-auto mb-6">
-                <Image src="/LigaStatsGame/logos/afa.png" alt="AFA" fill className="object-contain animate-pulse drop-shadow-lg" />
+                <Image src="/logos/afa.png" alt="AFA" fill className="object-contain animate-pulse drop-shadow-lg" />
               </div>
               <h2 className="font-bandera text-2xl sm:text-4xl text-white mb-3 uppercase tracking-[0.14em]">
                 MODO DE SIMULACIÓN
@@ -386,7 +386,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                 {/* LPF logo on the tournament final view if it's Liga */}
                 {result.type === "liga" && (
                   <div className="absolute top-4 right-4 w-7 h-10 opacity-30">
-                    <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
+                    <Image src="/logos/lpf.png" alt="LPF" fill className="object-contain" />
                   </div>
                 )}
 

@@ -143,7 +143,7 @@ function WorldCupBanner() {
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/LigaStatsGame/img/mundial_banner.jpg')" }}
+          style={{ backgroundImage: "url('/img/mundial_banner.jpg')" }}
         />
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#020813]/92 via-[#050f21]/80 to-[#020813]/92" />
@@ -287,7 +287,7 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
               </div>
               {mode.id === 'liga' && (
                 <div className="relative w-7 h-10 shrink-0">
-                  <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
+                  <Image src="/logos/lpf.png" alt="LPF" fill className="object-contain" />
                 </div>
               )}
             </div>
@@ -338,7 +338,7 @@ function HeroSection() {
           className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#74ACDF]/15 via-blue-500/10 to-[#74ACDF]/15 border border-[#74ACDF]/30 rounded-full px-5 py-2 mb-6 shadow-[0_0_20px_rgba(116,172,223,0.15)]"
         >
           <span className="relative w-4 h-5 inline-block shrink-0">
-            <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
+            <Image src="/logos/lpf.png" alt="LPF" fill className="object-contain" />
           </span>
           <span className="text-[11px] font-bold text-white uppercase tracking-[0.2em] font-sport">
             GAMBETA · EL JUEGO DEL FÚTBOL ARGENTINO
@@ -362,7 +362,7 @@ function HeroSection() {
           </Link>
           <Link href="/draft?mode=liga" className="btn-secondary px-8 py-4 text-xs font-bold tracking-widest uppercase flex items-center gap-2.5 hover:scale-[1.02] transition-transform">
             <span className="relative w-4 h-5 inline-block shrink-0">
-              <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
+              <Image src="/logos/lpf.png" alt="LPF" fill className="object-contain" />
             </span>
             JUGAR LIGA ARGENTINA
           </Link>
@@ -453,7 +453,7 @@ function ClubGrid() {
             }`}>
               <div className="relative w-10 h-10 sm:w-11 sm:h-11 mb-2">
                 <Image
-                  src={`/LigaStatsGame/logos/clubs/${club.id}.png`}
+                  src={`/logos/clubs/${club.id}.png`}
                   alt={club.name}
                   fill
                   className="object-contain"
@@ -755,7 +755,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <div className="relative w-8 h-8">
-                <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-full h-full opacity-40 object-contain" />
+                <img src="/logos/afa.png" alt="AFA" className="w-full h-full opacity-40 object-contain" />
               </div>
               <div>
                 <span className="text-[#74ACDF]/40 text-xs font-sport font-bold block tracking-wider">

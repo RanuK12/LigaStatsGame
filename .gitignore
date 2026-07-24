@@ -25,3 +25,7 @@ data/*.log
 # generados por scripts/data/build-public-data.mjs (prebuild)
 public/data/
 data/derived/
+
+# Secrets (nunca commitear)
+.env
+.env*.local

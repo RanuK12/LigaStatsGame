@@ -640,7 +640,7 @@ export default function VersusPage() {
                       {activeDT.currentSquad ? (
                         <div className="relative w-12 h-12">
                           <Image
-                            src={`/LigaStatsGame/logos/clubs/${activeDT.currentSquad.id.replace(/-20\d\ds$/, "")}.png`}
+                            src={`/logos/clubs/${activeDT.currentSquad.id.replace(/-20\d\ds$/, "")}.png`}
                             alt="Logo"
                             fill
                             className="object-contain"

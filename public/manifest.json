@@ -1,0 +1,13 @@
+{
+  "name": "Gambeta - El Juego del Fútbol Argentino",
+  "short_name": "Gambeta",
+  "description": "Armá tu 11 ideal, viví tu carrera de crack y competí por el ranking.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020813",
+  "theme_color": "#020813",
+  "icons": [
+    { "src": "/logos/afa.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logos/afa.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

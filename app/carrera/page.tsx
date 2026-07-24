@@ -264,7 +264,7 @@ function ClubGroup({
             onClick={() => onSelect(c.id)}
             className={`flex items-center gap-2 px-2.5 py-2 rounded-xl border text-left transition-all ${selected === c.id ? "bg-[#74ACDF]/20 border-[#74ACDF]" : "bg-slate-950/50 border-white/5 hover:border-white/20"}`}
           >
-            <img src={`/LigaStatsGame/logos/clubs/${c.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+            <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
             <span className="text-[11px] font-bold text-white truncate flex-1">{c.name}</span>
             <span className="text-[9px] font-sport text-amber-400 shrink-0">{c.strength}</span>
           </button>
@@ -324,7 +324,7 @@ function CareerDashboard() {
               <p className="text-xs font-bold text-[#74ACDF] font-sport uppercase tracking-wider">📩 Ofertas de transferencia</p>
               {career.pendingOffers.map((o) => (
                 <div key={o.clubId} className="flex items-center gap-2 bg-slate-950/60 border border-white/5 rounded-xl p-2.5">
-                  <img src={`/LigaStatsGame/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                  <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-bold text-white truncate">{o.clubName}</div>
                     <div className="text-[10px] text-slate-400 font-sport">Fuerza {o.strength} · Oferta €{o.valueM}M</div>
