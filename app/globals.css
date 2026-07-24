@@ -505,3 +505,7 @@ button, input, select, textarea {
   outline: 2px solid rgba(116, 172, 223, 0.85);
   outline-offset: 3px;
 }
+
+/* Animaciones de modales (sin framer-motion, robustas) */
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.94) translateY(12px) } to { opacity: 1; transform: none } }

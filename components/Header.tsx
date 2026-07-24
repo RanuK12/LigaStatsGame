@@ -8,8 +8,6 @@ import Image from 'next/image'
 import { useUserStore } from '@/lib/user-store'
 import { supabase } from '@/lib/supabase'
 import { profileFromSupabaseUser } from '@/lib/auth'
-import AuthModal from './AuthModal'
-import UserProfileModal from './UserProfileModal'
 import TierBadge from './TierBadge'
 
 const NAV_ITEMS = [
@@ -148,10 +146,6 @@ export default function Header() {
           </button>
         </div>
       </div>
-
-      {/* Modals */}
-      <AuthModal />
-      <UserProfileModal />
 
       {/* Mobile Navigation */}
       <AnimatePresence>

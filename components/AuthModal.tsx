@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { FcGoogle } from "react-icons/fc"
 import { FaXTwitter } from "react-icons/fa6"
 import { useUserStore } from "@/lib/user-store"
@@ -53,24 +52,17 @@ export default function AuthModal() {
 
   const disabled = !isSupabaseConfigured
 
+  if (!isAuthModalOpen) return null
+
   return (
-    <AnimatePresence>
-      {isAuthModalOpen && (
-        <motion.div
-          key="auth-backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={closeAuthModal}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md cursor-pointer overflow-y-auto"
-        >
-          <motion.div
-            onClick={(e) => e.stopPropagation()}
-            initial={{ opacity: 0, scale: 0.9, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 15 }}
-            className="card-gradient rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_0_50px_rgba(116,172,223,0.15)] relative overflow-y-auto max-h-[90vh] cursor-default my-auto"
-          >
+    <div
+      onClick={closeAuthModal}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md cursor-pointer overflow-y-auto animate-[fadeIn_0.15s_ease-out]"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_20px_60px_rgba(0,0,0,0.7)] relative overflow-y-auto max-h-[90vh] cursor-default bg-gradient-to-b from-[#0c1526] to-[#060b16] animate-[popIn_0.18s_ease-out]"
+      >
             <button
               onClick={closeAuthModal}
               aria-label="Cerrar"
@@ -222,9 +214,7 @@ export default function AuthModal() {
                 </button>
               </div>
             )}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </div>
+      </div>
   )
 }
