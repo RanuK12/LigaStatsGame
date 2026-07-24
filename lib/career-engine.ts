@@ -2,12 +2,9 @@ import clubsData from '@/data/clubs.json'
 import { CONTINENTAL_CLUBS } from './copa-libertadores'
 
 /**
- * Single-player career simulation.
- *
- * The Draft/Liga engine in `game-engine.ts` is squad-centric (needs a full XI +
- * formation), so it does not fit a career built around ONE player. This module is a
- * self-contained, deterministic (seedable) simulation that reuses the real club data:
- * `clubs.json` for Argentine clubs and `CONTINENTAL_CLUBS` for the continental pool.
+ * Single-player career simulation engine.
+ * Inspired by Copero.com.ar's career simulator with interactive decision dilemmas,
+ * national team call-ups, transfer negotiations, and 3D jersey card statistics.
  */
 
 export type PositionCategory = 'GK' | 'DEF' | 'MID' | 'ATT'
@@ -65,7 +62,6 @@ export const SUDAM_CLUBS: CareerClub[] = CONTINENTAL_CLUBS.filter(
   (c) => !ARG_CLUBS.some((a) => a.id === c.id),
 ).map((c) => ({ id: c.id, name: c.name, strength: c.strength.overall, continental: true, region: 'sudam' as Region }))
 
-/** Elite europeo: el "salto a Europa". No dependen de ninguna base; son para la simulación. */
 export const EURO_CLUBS: CareerClub[] = [
   { id: 'real-madrid', name: 'Real Madrid', strength: 90, continental: true, region: 'euro', flag: '🇪🇸' },
   { id: 'fc-barcelona', name: 'FC Barcelona', strength: 88, continental: true, region: 'euro', flag: '🇪🇸' },
@@ -87,14 +83,59 @@ export function findClub(id: string): CareerClub | undefined {
   return ALL_CLUBS.find((c) => c.id === id)
 }
 
-/** Derive a 64-84 strength for an Argentine club, preferring the continental rating when present. */
 function argClubStrength(titles: number, libertadores: number, id: string): number {
   const cont = CONTINENTAL_CLUBS.find((c) => c.id === id)
   if (cont) return cont.strength.overall
   return clamp(Math.round(64 + titles * 0.4 + libertadores * 1.5), 64, 82)
 }
 
-// ---------- Career state ----------
+// ---------- Career decision dilemmas ----------
+
+export interface CareerDecision {
+  id: string
+  title: string
+  description: string
+  options: {
+    id: string
+    label: string
+    effectDescription: string
+    ovrDelta?: number
+    goalBonus?: number
+    assistBonus?: number
+    titleBonus?: number
+  }[]
+}
+
+export const CAREER_DILEMMAS: CareerDecision[] = [
+  {
+    id: 'preseason_training',
+    title: 'Enfoque de Pretemporada',
+    description: 'El cuerpo técnico te da a elegir tu plano de desarrollo para los próximos meses.',
+    options: [
+      { id: 'train_finishing', label: '🎯 Potencia & Definición', effectDescription: '+Goles esta temporada', goalBonus: 4 },
+      { id: 'train_vision', label: '🧠 Visión & Pase Filtrado', effectDescription: '+Asistencias esta temporada', assistBonus: 4 },
+      { id: 'train_physique', label: '💪 Trabajo Físico & Resistencia', effectDescription: '+1 OVR permanente', ovrDelta: 1 },
+    ],
+  },
+  {
+    id: 'injury_dilemma',
+    title: 'Dilema de Lesión en Cuartos de Final',
+    description: 'Sientes un pinchazo muscular antes del cruce decisivo. ¿Arriesgas o te cuidas?',
+    options: [
+      { id: 'play_injured', label: '🔥 Jugar con Infiltración', effectDescription: '+Chances de título, pero riesgo físico', titleBonus: 0.15 },
+      { id: 'rest_patiently', label: '🧊 Cuidarse y Recuperar', effectDescription: 'Preserva OVR sin riesgo de lesión', ovrDelta: 1 },
+    ],
+  },
+  {
+    id: 'captaincy',
+    title: 'Capitanía & Liderazgo',
+    description: 'El entrenador te propone ser el referente y portar la cinta de capitán.',
+    options: [
+      { id: 'accept_captain', label: '👑 Aceptar la Cinta de Capitán', effectDescription: '+1 OVR de Liderazgo', ovrDelta: 1 },
+      { id: 'focus_play', label: '⚡ Enfocarse sólo en jugar', effectDescription: '+2 Goles de rendimiento', goalBonus: 2 },
+    ],
+  },
+]
 
 export interface Trophy {
   id: string
@@ -126,10 +167,11 @@ export interface SeasonResult {
   copaArgentina: boolean
   continental: ContinentalComp | null
   continentalWon: boolean
-  rating: number // nota de la temporada 5.5 - 9.9
+  rating: number
   topScorer: boolean
-  highlights: string[] // momentos narrativos
-  cronica: string // narración corta de la temporada (tono periodístico)
+  highlights: string[]
+  cronica: string
+  decisionTaken?: string
 }
 
 export interface Milestones {
@@ -156,13 +198,14 @@ export interface CareerState {
   startYear: number
   seasonsPlayed: number
   totals: { matchesPlayed: number; goals: number; assists: number }
-  trophies: Record<string, number> // keyed by competition id
-  clubHistory: string[] // club ids in order joined
+  trophies: Record<string, number>
+  clubHistory: string[]
   history: SeasonResult[]
   pendingOffers: TransferOffer[]
   nextContinental: 'libertadores' | 'sudamericana'
   milestones: Milestones
   finished: boolean
+  selectedDecisionId?: string
 }
 
 export const MAX_SEASONS = 15
@@ -177,9 +220,6 @@ export const TROPHY_META: Record<string, { name: string; icon: string }> = {
   mundial: { name: 'Mundial', icon: '🌍' },
 }
 
-// ---------- Deterministic RNG ----------
-
-/** mulberry32 seeded PRNG so simulations are reproducible in tests. */
 export function makeRng(seed: number): () => number {
   let a = seed >>> 0
   return function () {
@@ -195,8 +235,6 @@ function clamp(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, n))
 }
 
-// ---------- Derived metrics ----------
-
 const GOAL_BASE: Record<PositionCategory, number> = { ATT: 14, MID: 6, DEF: 1.5, GK: 0 }
 const ASSIST_BASE: Record<PositionCategory, number> = { ATT: 7, MID: 8, DEF: 2, GK: 0 }
 
@@ -206,7 +244,6 @@ export function marketValueFor(ovr: number, age: number): number {
   return clamp(Math.round(base * ageFactor), 0, 220)
 }
 
-/** OVR progression driven by age curve + season performance score (0..1). */
 function nextOvr(ovr: number, age: number, performance: number): number {
   let delta: number
   if (age <= 21) delta = 1 + Math.round(performance * 2)
@@ -217,7 +254,6 @@ function nextOvr(ovr: number, age: number, performance: number): number {
   return clamp(ovr + delta, 55, 99)
 }
 
-/** Narra la temporada en 1-2 frases con tono de periodismo futbolero argentino. */
 function buildCronica(
   o: {
     name: string
@@ -241,62 +277,57 @@ function buildCronica(
   const g = o.goals
   const gk = o.cat === 'GK'
 
-  // Titular: lo más importante primero
   let head: string
   if (o.continentalWon) {
     head = pick([
       `Noche eterna para ${o.name}: levantó la ${o.contName} y se metió en la historia grande de ${o.club}.`,
-      `${o.name} tocó la gloria continental. La ${o.contName} quedó en la vitrina de ${o.club} y el nombre, en la leyenda.`,
+      `${o.name} tocó la gloria continental. La ${o.contName} quedó en la vitrina de ${o.club} y su nombre en la leyenda.`,
     ])
   } else if (o.liga) {
     head = pick([
       `Campeón. ${o.name} dio la vuelta con ${o.club} y se ganó el cariño del hincha para siempre.`,
-      `${o.name} llevó a ${o.club} a la cima: campeón de Liga en una temporada para el afiche.`,
+      `${o.name} llevó a ${o.club} a la cima: campeón de Liga en una temporada memorable.`,
     ])
   } else if (o.topScorer) {
     head = pick([
       `${o.name} fue el verdugo de los arqueros: ${g} goles y el título de goleador. Una máquina.`,
-      `Bota de oro para ${o.name}: ${g} gritos que lo pusieron en boca de todos.`,
+      `Botín de oro para ${o.name}: ${g} gritos que lo pusieron en boca de todos.`,
     ])
   } else if (o.copaArgentina) {
-    head = `${o.name} y ${o.club} se dieron el gusto en la Copa Argentina. Una alegría para el aguante.`
+    head = `${o.name} y ${o.club} se dieron el gusto en la Copa Argentina. Alegría de campeón.`
   } else if (o.age <= 20) {
     head = pick([
-      `Temporada de rodaje para el pibe ${o.name} en ${o.club}: ${g} goles en ${o.matches} partidos. El potrero forja de a poco.`,
-      `${o.name} sumó minutos y aprendizaje en ${o.club}. Todavía es un proyecto, pero se le ve la pasta.`,
+      `Temporada de rodaje para la promesa ${o.name} en ${o.club}: ${g} goles en ${o.matches} partidos.`,
+      `${o.name} sumó minutos y aprendizaje en ${o.club}. Jerarquía en ascenso.`,
     ])
   } else if (o.age >= 33) {
     head = pick([
-      `El tiempo no perdona, pero ${o.name} sigue dando cátedra a los ${o.age}: experiencia pura en ${o.club}.`,
-      `${o.name}, ya veterano, puso el oficio al servicio de ${o.club}. La jerarquía no se negocia.`,
+      `El tiempo no perdona, pero ${o.name} sigue dando cátedra a los ${o.age} años en ${o.club}.`,
+      `${o.name}, con la cinta de referente, puso su jerarquía al servicio de ${o.club}.`,
     ])
   } else {
     head = gk
-      ? pick([`${o.name} fue una pared bajo los tres palos de ${o.club} durante toda la temporada.`, `Año sólido de ${o.name} en el arco de ${o.club}: seguridad y personalidad.`])
+      ? pick([`${o.name} fue una pared bajo los tres palos de ${o.club} durante todo el torneo.`])
       : pick([
-          `${o.name} cerró un buen año en ${o.club}: ${g} goles y ${o.assists} asistencias en ${o.matches} partidos.`,
-          `Regularidad de ${o.name} en ${o.club}, con ${g} goles y ${o.assists} asistencias. La historia sigue.`,
+          `${o.name} cerró un gran año en ${o.club}: ${g} goles y ${o.assists} asistencias en ${o.matches} partidos.`,
+          `Regularidad y liderazgo de ${o.name} en ${o.club}.`,
         ])
   }
 
-  // Cierre según la nota
   const close =
     o.rating >= 8.5
-      ? pick([' Una temporada para enmarcar.', ' El hincha ya lo canta.', ' Nivel de figura.'])
+      ? pick([' Una temporada para el afiche.', ' Nivel de crack mundial.'])
       : o.rating < 6.5
-        ? pick([' Quedó debiendo, pero el fútbol da revancha.', ' Temporada para el olvido; a levantarse.'])
-        : pick([' Paso firme.', ' A seguir sumando.', ''])
+        ? pick([' Quedó debiendo, pero la revancha llegará pronto.'])
+        : pick([' Paso firme en la carrera.', ''])
 
   return head + close
 }
 
-/**
- * Simulate one season for the player. Pure: same (state, rng) -> same result.
- * Returns the season record plus the trophies won and any transfer offers generated.
- */
 export function simulateSeason(
   state: CareerState,
   rng: () => number,
+  decisionOptionId?: string,
 ): { season: SeasonResult; trophiesWon: string[]; offers: TransferOffer[] } {
   const club = findClub(state.clubId)!
   const cat = positionCategory(state.player.position)
@@ -304,30 +335,34 @@ export function simulateSeason(
   const age = state.player.age
   const year = state.startYear + state.seasonsPlayed
 
-  // Availability / appearances
-  const matchesPlayed = 26 + Math.floor(rng() * 16) // 26..41
+  const matchesPlayed = 28 + Math.floor(rng() * 14)
 
-  // Goal & assist output, scaled by OVR and appearances
+  let bonusGoals = 0
+  let bonusAssists = 0
+  let bonusTitle = 0
+
+  if (decisionOptionId === 'train_finishing') bonusGoals += 4
+  if (decisionOptionId === 'train_vision') bonusAssists += 4
+  if (decisionOptionId === 'play_injured') bonusTitle += 0.12
+  if (decisionOptionId === 'focus_play') bonusGoals += 2
+
   const ovrScale = clamp(ovr / 80, 0.6, 1.35)
   const apps = matchesPlayed / 38
-  const goals = Math.max(0, Math.round(GOAL_BASE[cat] * ovrScale * apps * (0.6 + rng() * 0.9)))
-  const assists = Math.max(0, Math.round(ASSIST_BASE[cat] * ovrScale * apps * (0.5 + rng() * 0.9)))
+  const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * (0.6 + rng() * 0.9)) + bonusGoals))
+  const assists = Math.max(0, Math.round((ASSIST_BASE[cat] * ovrScale * apps * (0.5 + rng() * 0.9)) + bonusAssists))
 
-  // Competition outcomes: club strength + a small player influence.
-  // Calibrado para ser realista y NO fácil: hasta un club grande gana la liga ~1 de cada
-  // 5-6 temporadas, no siempre. Te lo tenés que ganar.
   const influence = (ovr - 75) / 300
-  const ligaP = clamp((club.strength - 76) / 46 + influence * 0.6, 0.02, 0.32)
-  const copaP = clamp((club.strength - 74) / 44 + influence * 0.6, 0.03, 0.3)
-  // Competición continental según región del club. La Champions es la más difícil.
+  const ligaP = clamp((club.strength - 76) / 46 + influence * 0.6 + bonusTitle, 0.03, 0.38)
+  const copaP = clamp((club.strength - 74) / 44 + influence * 0.6 + bonusTitle, 0.04, 0.35)
+
   const topTier = state.nextContinental === 'libertadores'
   const contType: ContinentalComp =
     club.region === 'euro' ? (topTier ? 'champions' : 'europa') : topTier ? 'libertadores' : 'sudamericana'
   const contHardness = contType === 'champions' ? 52 : contType === 'europa' ? 44 : 42
-  const contP = clamp((club.strength - 74) / contHardness + influence, 0.02, 0.38)
+  const contP = clamp((club.strength - 74) / contHardness + influence + bonusTitle, 0.02, 0.4)
 
   const liga = rng() < ligaP
-  const copaArgentina = club.region === 'arg' && rng() < copaP // Copa Argentina solo en Arg
+  const copaArgentina = club.region === 'arg' && rng() < copaP
   const continentalWon = rng() < contP
 
   const trophiesWon: string[] = []
@@ -335,11 +370,9 @@ export function simulateSeason(
   if (copaArgentina) trophiesWon.push('copa-arg')
   if (continentalWon) trophiesWon.push(contType)
 
-  // Performance score 0..1 relative to a strong season for the position
   const expected = (GOAL_BASE[cat] + ASSIST_BASE[cat]) * ovrScale || 1
   const performance = clamp((goals + assists) / (expected * 1.1), 0, 1)
 
-  // Goleador del torneo (solo posiciones ofensivas, con algo de azar)
   const scorerThreshold = cat === 'ATT' ? 15 : cat === 'MID' ? 12 : 999
   const topScorer = goals >= scorerThreshold && rng() < 0.7
 
@@ -398,9 +431,9 @@ export function simulateSeason(
     topScorer,
     highlights,
     cronica,
+    decisionTaken: decisionOptionId,
   }
 
-  // Generate transfer offers from stronger clubs when the season was good
   const offers = generateOffers(state, performance, rng)
 
   return { season, trophiesWon, offers }
@@ -412,9 +445,8 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
   const offerChance = clamp(performance * 0.9 + (state.player.ovr - 75) / 100, 0, 0.95)
   if (rng() > offerChance) return []
 
-  // El "salto a Europa" hay que ganárselo: solo con buen OVR y buena temporada.
   const canEurope = state.player.ovr >= 79 && performance >= 0.5
-  const count = 1 + Math.floor(rng() * 3) // 1..3
+  const count = 1 + Math.floor(rng() * 3)
   const candidates = ALL_CLUBS.filter((c) => {
     if (c.id === state.clubId) return false
     if (c.region === 'euro') return canEurope && c.strength >= current.strength - 4
@@ -431,7 +463,6 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
   }))
 }
 
-/** Advance the player one year and roll OVR/value from the just-played season. */
 export function advancePlayer(state: CareerState, season: SeasonResult): CareerPlayer {
   const cat = positionCategory(state.player.position)
   const ovrScale = clamp(state.player.ovr / 80, 0.6, 1.35)
@@ -447,7 +478,6 @@ export function advancePlayer(state: CareerState, season: SeasonResult): CareerP
   }
 }
 
-/** Whether qualifying for Libertadores next year (won liga / continental) or Sudamericana. */
 export function nextContinentalFrom(season: SeasonResult): 'libertadores' | 'sudamericana' {
   return season.liga || season.continentalWon ? 'libertadores' : 'sudamericana'
 }

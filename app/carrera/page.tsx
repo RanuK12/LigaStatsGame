@@ -11,6 +11,7 @@ import {
   findClub,
   MAX_SEASONS,
   marketValueFor,
+  CAREER_DILEMMAS,
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
@@ -46,13 +47,13 @@ export default function CarreraPage() {
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="card-gradient rounded-3xl p-6 sm:p-8 border border-[#74ACDF]/20 text-center relative overflow-hidden">
           <span className="text-[10px] font-bold text-[#74ACDF] tracking-widest uppercase font-sport block mb-1">
-            MODO CARRERA / LEYENDA
+            MODO CARRERA INTERACTIVO · COPERO ENGINE
           </span>
           <h1 className="font-display text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
             TU CAMINO A LA GLORIA
           </h1>
-          <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed">
-            Personalizá tu camiseta, elegí tu club de inicio y simulación paso a paso en la Liga Argentina, Copa Libertadores y Sudamericana.
+          <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed font-sans">
+            Creá tu crack con camiseta 3D, tomá decisiones estratégicas de pretemporada y traspasos, y ganate todo hasta colgar los botines.
           </p>
         </div>
 
@@ -71,13 +72,12 @@ export default function CarreraPage() {
   )
 }
 
-// ---------------- SETUP WIZARD WITH JERSEY SELECTION ----------------
+// ---------------- SETUP WIZARD ----------------
 
 function CareerSetupWizard() {
   const startCareer = useCareerStore((s) => s.startCareer)
   const [mode, setMode] = useState<"create" | "real">("create")
 
-  // create-player form
   const [name, setName] = useState("Emilio Ranucoli")
   const [number, setNumber] = useState(12)
   const [position, setPosition] = useState("CAM")
@@ -87,7 +87,6 @@ function CareerSetupWizard() {
   const [jerseyPattern, setJerseyPattern] = useState("sash")
   const [jerseyColor, setJerseyColor] = useState("#74ACDF")
 
-  // real-player selection
   const { players, error } = usePlayersCore()
   const [query, setQuery] = useState("")
   const results = useMemo(() => {
@@ -124,11 +123,11 @@ function CareerSetupWizard() {
 
   return (
     <div className="space-y-6">
-      {/* STEP 1: player & jersey */}
+      {/* STEP 1: player & 3D jersey */}
       <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-5">
         <div className="flex items-center gap-2">
-          <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm">1</span>
-          <h3 className="font-display text-xl font-black uppercase">Tu Jugador y Camiseta</h3>
+          <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm font-sport">1</span>
+          <h3 className="font-display text-xl font-black uppercase">Tu Jugador y Camiseta 3D</h3>
         </div>
 
         <div className="flex gap-2 font-sport">
@@ -148,35 +147,35 @@ function CareerSetupWizard() {
 
         {mode === "create" && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            {/* JERSEY VISUAL PREVIEW */}
+            {/* 3D JERSEY PREVIEW */}
             <div className="card-glass p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center justify-center space-y-3">
               <span className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">
-                VISTA PREVIA CAMISETA
+                VISTA PREVIA CAMISETA 3D
               </span>
 
-              <div className="relative w-28 h-32 flex items-center justify-center filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]">
-                {/* SVG Jersey Graphic */}
+              <div className="relative w-28 h-32 flex items-center justify-center filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)]">
                 <svg viewBox="0 0 100 120" className="w-full h-full">
                   <path
                     d="M 20 20 L 35 10 L 65 10 L 80 20 L 95 35 L 85 50 L 75 42 L 75 110 L 25 110 L 25 42 L 15 50 L 5 35 Z"
                     fill={jerseyColor}
                     stroke="#ffffff"
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                   />
                   {jerseyPattern === "sash" && (
-                    <path d="M 20 20 L 75 110 L 60 110 L 20 40 Z" fill="#ffffff" opacity="0.85" />
+                    <path d="M 20 20 L 75 110 L 60 110 L 20 40 Z" fill="#ffffff" opacity="0.9" />
                   )}
                   {jerseyPattern === "stripes" && (
                     <>
-                      <rect x="35" y="10" width="10" height="100" fill="#ffffff" opacity="0.8" />
-                      <rect x="55" y="10" width="10" height="100" fill="#ffffff" opacity="0.8" />
+                      <rect x="35" y="10" width="10" height="100" fill="#ffffff" opacity="0.85" />
+                      <rect x="55" y="10" width="10" height="100" fill="#ffffff" opacity="0.85" />
                     </>
                   )}
                   {jerseyPattern === "hoops" && (
-                    <rect x="25" y="50" width="50" height="20" fill="#ffffff" opacity="0.85" />
+                    <rect x="25" y="50" width="50" height="20" fill="#ffffff" opacity="0.9" />
                   )}
-                  {/* Number text on shirt */}
-                  <text x="50" y="75" textAnchor="middle" fill="#ffffff" fontSize="26" fontWeight="900" fontFamily="sans-serif">
+                  <polygon points="35,10 50,22 65,10" fill="#050A14" />
+                  <polygon points="35,10 50,22 65,10" fill="none" stroke="#ffffff" strokeWidth="1.5" />
+                  <text x="50" y="75" textAnchor="middle" fill="#ffffff" stroke="#000000" strokeWidth="1" fontSize="26" fontWeight="900" fontFamily="sans-serif">
                     {number}
                   </text>
                 </svg>
@@ -222,14 +221,14 @@ function CareerSetupWizard() {
                   ))}
                 </select>
               </Field>
-              <Field label="Estilo de Camiseta">
+              <Field label="Diseño de Camiseta">
                 <select value={jerseyPattern} onChange={(e) => setJerseyPattern(e.target.value)} className="input-dark">
                   {JERSEY_PATTERNS.map((pattern) => (
                     <option key={pattern.id} value={pattern.id}>{pattern.name}</option>
                   ))}
                 </select>
               </Field>
-              <Field label="Color Principal de Camiseta">
+              <Field label="Color de Camiseta">
                 <input
                   type="color"
                   value={jerseyColor}
@@ -277,7 +276,7 @@ function CareerSetupWizard() {
       {/* STEP 2: club */}
       <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-4">
         <div className="flex items-center gap-2">
-          <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm">2</span>
+          <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm font-sport">2</span>
           <h3 className="font-display text-xl font-black uppercase">Club de Inicio</h3>
         </div>
         <ClubPicker selected={clubId} onSelect={setClubId} />
@@ -335,17 +334,21 @@ function ClubGroup({
   )
 }
 
-// ---------------- DASHBOARD & HD EXPORT ----------------
+// ---------------- DASHBOARD & DECISION SYSTEM ----------------
 
 function CareerDashboard() {
   const { career, simulateNextSeason, acceptOffer, declineOffers, resetCareer } = useCareerStore()
   const fichaRef = useRef<HTMLDivElement>(null)
   const [exporting, setExporting] = useState(false)
 
+  // Decision Dilemma State
+  const [selectedOptionId, setSelectedOptionId] = useState<string>("train_finishing")
+
   if (!career) return null
   const cardData = buildCareerCardData(career)
   const club = findClub(career.clubId)
   const hasOffers = career.pendingOffers.length > 0
+  const dilemma = CAREER_DILEMMAS[career.seasonsPlayed % CAREER_DILEMMAS.length]
 
   async function handleExport(kind: "png" | "jpg" | "pdf") {
     if (!fichaRef.current) return
@@ -359,31 +362,72 @@ function CareerDashboard() {
     }
   }
 
+  function handleSimulate(yearsCount = 1) {
+    for (let i = 0; i < yearsCount; i++) {
+      const cur = useCareerStore.getState().career
+      if (!cur || cur.finished || cur.pendingOffers.length > 0) break
+      simulateNextSeason(selectedOptionId)
+    }
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-      {/* FICHA HD */}
+      {/* FICHA HD DE CARRERA CON CAMISETA 3D */}
       <div ref={fichaRef} className="rounded-[32px] overflow-hidden shadow-2xl">
         <CareerCardView data={cardData} />
       </div>
 
-      {/* CONTROLS */}
+      {/* PANEL DE CONTROL DE CARRERA & DECISIONES */}
       <div className="space-y-4">
+        {/* PROGRESSION CARD */}
         <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-4">
           <div>
             <span className="text-[10px] font-bold text-amber-400 tracking-widest uppercase font-sport block mb-1">
               TEMPORADA {career.seasonsPlayed + (career.finished ? 0 : 1)} / {MAX_SEASONS} · {club?.name}
             </span>
             <h3 className="font-display text-2xl font-black uppercase text-white">
-              {career.finished ? "CARRERA COMPLETA" : "DESARROLLO DE CARRERA"}
+              {career.finished ? "CARRERA FINALIZADA 🏁" : "DESARROLLO DE CARRERA"}
             </h3>
             <p className="text-xs text-slate-400 mt-1">
               {career.player.age} años · {career.player.ovr} OVR · €{career.player.marketValueM}M
             </p>
           </div>
 
+          {/* INTERACTIVE DECISION DILEMMA */}
+          {!career.finished && !hasOffers && dilemma && (
+            <div className="card-glass rounded-2xl p-4 border border-[#74ACDF]/30 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider">
+                  🧠 DECISIÓN DE CARRERA
+                </span>
+                <span className="text-[9px] text-amber-400 font-bold font-sport">ENFOQUE DE TEMPORADA</span>
+              </div>
+              <h4 className="text-sm font-bold text-white font-display">{dilemma.title}</h4>
+              <p className="text-xs text-slate-300 font-sans leading-relaxed">{dilemma.description}</p>
+
+              <div className="space-y-2 pt-1 font-sport">
+                {dilemma.options.map((opt) => (
+                  <button
+                    key={opt.id}
+                    onClick={() => setSelectedOptionId(opt.id)}
+                    className={`w-full p-2.5 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
+                      selectedOptionId === opt.id
+                        ? "bg-[#74ACDF]/20 border-[#74ACDF] text-white"
+                        : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <span>{opt.label}</span>
+                    <span className="text-[10px] text-amber-300 font-bold">{opt.effectDescription}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TRANSFERS OFFERS */}
           {hasOffers ? (
             <div className="space-y-3">
-              <p className="text-xs font-bold text-[#74ACDF] font-sport uppercase tracking-wider">📩 Ofertas de transferencia</p>
+              <p className="text-xs font-bold text-[#74ACDF] font-sport uppercase tracking-wider">📩 OFERTAS DE TRANSFERENCIA</p>
               {career.pendingOffers.map((o) => {
                 const euro = o.region === "euro"
                 return (
@@ -394,13 +438,13 @@ function CareerDashboard() {
                       <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                     )}
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm font-bold text-white truncate flex items-center gap-1.5">
+                      <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
                         {o.clubName}
-                        {euro && <span className="text-[8px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase tracking-wider">Europa</span>}
+                        {euro && <span className="text-[8px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase tracking-wider font-sport">Europa</span>}
                       </div>
                       <div className="text-[10px] text-slate-400 font-sport">Fuerza {o.strength} · Oferta €{o.valueM}M</div>
                     </div>
-                    <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">Fichar</button>
+                    <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg font-sport">Fichar</button>
                   </div>
                 )
               })}
@@ -410,24 +454,41 @@ function CareerDashboard() {
             </div>
           ) : career.finished ? (
             <div className="card-glass rounded-xl p-3 border border-amber-400/20 text-center">
-              <p className="text-sm font-black text-amber-400 font-display">🏁 {MAX_SEASONS} temporadas jugadas</p>
+              <p className="text-sm font-black text-amber-400 font-display">🏁 {MAX_SEASONS} temporadas completadas</p>
               <p className="text-[11px] text-slate-400 mt-1">
                 {cardData.trophies.reduce((a, t) => a + t.count, 0)} títulos · {career.totals.goals} goles · {career.totals.assists} asistencias
               </p>
             </div>
           ) : (
-            <button
-              onClick={simulateNextSeason}
-              className="btn-primary w-full py-4 text-xs font-bold tracking-widest uppercase font-sport rounded-2xl shadow-lg"
-            >
-              SIMULAR SIGUIENTE TEMPORADA ⏩
-            </button>
+            /* SIMULATION SPEED BUTTONS */
+            <div className="space-y-2 font-sport">
+              <button
+                onClick={() => handleSimulate(1)}
+                className="btn-primary w-full py-3.5 text-xs font-bold tracking-widest uppercase rounded-2xl shadow-lg"
+              >
+                SIMULAR TEMPORADA {career.seasonsPlayed + 1} ⏩
+              </button>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => handleSimulate(5)}
+                  className="py-2.5 bg-slate-900 border border-slate-800 text-slate-300 hover:text-white rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors"
+                >
+                  ⚡ Simular 5 Años
+                </button>
+                <button
+                  onClick={() => handleSimulate(15)}
+                  className="py-2.5 bg-slate-900 border border-slate-800 text-amber-300 hover:text-amber-200 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors"
+                >
+                  🏁 Simular Completa
+                </button>
+              </div>
+            </div>
           )}
 
           {/* EXPORT BUTTONS HD */}
-          <div className="space-y-2 pt-2 font-sport">
+          <div className="space-y-2 pt-2 font-sport border-t border-white/10">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-center">
-              DESCARGAR FICHA DE CARRERA HD
+              DESCARGAR FICHA COPERO-STYLE HD
             </span>
             <div className="grid grid-cols-3 gap-2">
               <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">
@@ -450,17 +511,18 @@ function CareerDashboard() {
           </button>
         </div>
 
-        {/* MOMENTOS DE LA TEMPORADA */}
+        {/* HISTORIAL Y MOMENTOS NARRATIVOS */}
         {career.history.length > 0 && (() => {
           const last = career.history[career.history.length - 1]
-          const m = career.milestones || { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false }
           const rating = typeof last.rating === "number" ? last.rating : 7
           const highlights = last.highlights || []
           const cronica = last.cronica || ""
           return (
             <div className="card-gradient rounded-3xl p-5 border border-amber-400/20 space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="text-[10px] font-bold text-amber-400 font-sport uppercase tracking-[0.2em]">Temporada {last.year} · Momentos</h4>
+                <h4 className="text-[10px] font-bold text-amber-400 font-sport uppercase tracking-[0.2em]">
+                  Temporada {last.year} · Momentos
+                </h4>
                 <span className={`px-2.5 py-1 rounded-lg text-xs font-black font-display ${rating >= 8 ? "bg-emerald-500/20 text-emerald-300" : rating >= 6.8 ? "bg-amber-500/20 text-amber-300" : "bg-slate-800 text-slate-300"}`}>
                   Nota {rating.toFixed(1)}
                 </span>
@@ -470,7 +532,7 @@ function CareerDashboard() {
                   {cronica}
                 </p>
               )}
-              {highlights.length > 0 ? (
+              {highlights.length > 0 && (
                 <ul className="space-y-1.5">
                   {highlights.map((h, i) => (
                     <li key={i} className="text-xs text-slate-200 leading-snug flex gap-2">
@@ -478,8 +540,6 @@ function CareerDashboard() {
                     </li>
                   ))}
                 </ul>
-              ) : (
-                <p className="text-xs text-slate-500">Temporada realizada con éxito.</p>
               )}
             </div>
           )

@@ -29,7 +29,7 @@ export interface CareerSetup {
 interface CareerStore {
   career: CareerState | null
   startCareer: (setup: CareerSetup) => void
-  simulateNextSeason: () => void
+  simulateNextSeason: (decisionOptionId?: string) => void
   acceptOffer: (clubId: string) => void
   declineOffers: () => void
   resetCareer: () => void
@@ -71,12 +71,12 @@ export const useCareerStore = create<CareerStore>()(
         })
       },
 
-      simulateNextSeason: () => {
+      simulateNextSeason: (decisionOptionId) => {
         const state = get().career
         if (!state || state.finished || state.pendingOffers.length > 0) return
 
         const rng = makeRng(Math.floor(Math.random() * 1_000_000_000))
-        const { season, trophiesWon, offers } = simulateSeason(state, rng)
+        const { season, trophiesWon, offers } = simulateSeason(state, rng, decisionOptionId)
 
         const trophies = { ...state.trophies }
         trophiesWon.forEach((id) => {
