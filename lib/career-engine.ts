@@ -129,6 +129,7 @@ export interface SeasonResult {
   rating: number // nota de la temporada 5.5 - 9.9
   topScorer: boolean
   highlights: string[] // momentos narrativos
+  cronica: string // narración corta de la temporada (tono periodístico)
 }
 
 export interface Milestones {
@@ -216,6 +217,79 @@ function nextOvr(ovr: number, age: number, performance: number): number {
   return clamp(ovr + delta, 55, 99)
 }
 
+/** Narra la temporada en 1-2 frases con tono de periodismo futbolero argentino. */
+function buildCronica(
+  o: {
+    name: string
+    club: string
+    year: number
+    age: number
+    goals: number
+    assists: number
+    matches: number
+    cat: PositionCategory
+    liga: boolean
+    copaArgentina: boolean
+    continentalWon: boolean
+    contName: string
+    topScorer: boolean
+    rating: number
+  },
+  rng: () => number,
+): string {
+  const pick = <T>(arr: T[]): T => arr[Math.floor(rng() * arr.length)]
+  const g = o.goals
+  const gk = o.cat === 'GK'
+
+  // Titular: lo más importante primero
+  let head: string
+  if (o.continentalWon) {
+    head = pick([
+      `Noche eterna para ${o.name}: levantó la ${o.contName} y se metió en la historia grande de ${o.club}.`,
+      `${o.name} tocó la gloria continental. La ${o.contName} quedó en la vitrina de ${o.club} y el nombre, en la leyenda.`,
+    ])
+  } else if (o.liga) {
+    head = pick([
+      `Campeón. ${o.name} dio la vuelta con ${o.club} y se ganó el cariño del hincha para siempre.`,
+      `${o.name} llevó a ${o.club} a la cima: campeón de Liga en una temporada para el afiche.`,
+    ])
+  } else if (o.topScorer) {
+    head = pick([
+      `${o.name} fue el verdugo de los arqueros: ${g} goles y el título de goleador. Una máquina.`,
+      `Bota de oro para ${o.name}: ${g} gritos que lo pusieron en boca de todos.`,
+    ])
+  } else if (o.copaArgentina) {
+    head = `${o.name} y ${o.club} se dieron el gusto en la Copa Argentina. Una alegría para el aguante.`
+  } else if (o.age <= 20) {
+    head = pick([
+      `Temporada de rodaje para el pibe ${o.name} en ${o.club}: ${g} goles en ${o.matches} partidos. El potrero forja de a poco.`,
+      `${o.name} sumó minutos y aprendizaje en ${o.club}. Todavía es un proyecto, pero se le ve la pasta.`,
+    ])
+  } else if (o.age >= 33) {
+    head = pick([
+      `El tiempo no perdona, pero ${o.name} sigue dando cátedra a los ${o.age}: experiencia pura en ${o.club}.`,
+      `${o.name}, ya veterano, puso el oficio al servicio de ${o.club}. La jerarquía no se negocia.`,
+    ])
+  } else {
+    head = gk
+      ? pick([`${o.name} fue una pared bajo los tres palos de ${o.club} durante toda la temporada.`, `Año sólido de ${o.name} en el arco de ${o.club}: seguridad y personalidad.`])
+      : pick([
+          `${o.name} cerró un buen año en ${o.club}: ${g} goles y ${o.assists} asistencias en ${o.matches} partidos.`,
+          `Regularidad de ${o.name} en ${o.club}, con ${g} goles y ${o.assists} asistencias. La historia sigue.`,
+        ])
+  }
+
+  // Cierre según la nota
+  const close =
+    o.rating >= 8.5
+      ? pick([' Una temporada para enmarcar.', ' El hincha ya lo canta.', ' Nivel de figura.'])
+      : o.rating < 6.5
+        ? pick([' Quedó debiendo, pero el fútbol da revancha.', ' Temporada para el olvido; a levantarse.'])
+        : pick([' Paso firme.', ' A seguir sumando.', ''])
+
+  return head + close
+}
+
 /**
  * Simulate one season for the player. Pure: same (state, rng) -> same result.
  * Returns the season record plus the trophies won and any transfer offers generated.
@@ -286,6 +360,26 @@ export function simulateSeason(
   if (cat !== 'ATT' && assists >= 10) highlights.push(`🎯 Temporada de ${assists} asistencias`)
   if (rating >= 9) highlights.push(`⭐ Figura del año (nota ${rating.toFixed(1)})`)
 
+  const cronica = buildCronica(
+    {
+      name: state.player.name,
+      club: club.name,
+      year,
+      age,
+      goals,
+      assists,
+      matches: matchesPlayed,
+      cat,
+      liga,
+      copaArgentina,
+      continentalWon,
+      contName: CONT_NAME[contType],
+      topScorer,
+      rating,
+    },
+    rng,
+  )
+
   const season: SeasonResult = {
     year,
     age,
@@ -303,6 +397,7 @@ export function simulateSeason(
     rating,
     topScorer,
     highlights,
+    cronica,
   }
 
   // Generate transfer offers from stronger clubs when the season was good
