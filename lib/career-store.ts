@@ -95,6 +95,12 @@ export const useCareerStore = create<CareerStore>()(
           milestones.balonDeOro += 1
           season.highlights.unshift(`🏅 Ganaste el Balón de Oro`)
         }
+        // Mundial con la Selección: crack consagrado, cada tanto
+        if (!milestones.worldCup && milestones.nationalTeam && season.ovr >= 86 && rng() < 0.18) {
+          milestones.worldCup = true
+          trophies['mundial'] = (trophies['mundial'] || 0) + 1
+          season.highlights.unshift(`🌍 ¡CAMPEÓN DEL MUNDO con ${nation}!`)
+        }
 
         const player = advancePlayer(state, season)
         const seasonsPlayed = state.seasonsPlayed + 1
@@ -124,6 +130,18 @@ export const useCareerStore = create<CareerStore>()(
         if (!state) return
         const offer = state.pendingOffers.find((o) => o.clubId === clubId)
         if (!offer) return
+        // Momento del fichaje: si es el salto a Europa, queda marcado en la temporada.
+        const history = [...state.history]
+        const fromRegion = findClub(state.clubId)?.region
+        if (history.length > 0) {
+          const last = { ...history[history.length - 1], highlights: [...history[history.length - 1].highlights] }
+          if (offer.region === 'euro' && fromRegion !== 'euro') {
+            last.highlights.unshift(`${offer.flag || '🌍'} ¡EL SALTO A EUROPA! Te fichó el ${offer.clubName} por €${offer.valueM}M`)
+          } else {
+            last.highlights.unshift(`✍️ Fichaste por el ${offer.clubName} (€${offer.valueM}M)`)
+          }
+          history[history.length - 1] = last
+        }
         set({
           career: {
             ...state,
@@ -132,6 +150,7 @@ export const useCareerStore = create<CareerStore>()(
               ? state.clubHistory
               : [...state.clubHistory, offer.clubId],
             player: { ...state.player, marketValueM: Math.max(state.player.marketValueM, offer.valueM) },
+            history,
             pendingOffers: [],
           },
         })
@@ -165,10 +184,12 @@ export const useCareerStore = create<CareerStore>()(
 export function buildCareerCardData(state: CareerState): CareerCardData {
   const clubs = state.clubHistory.map((id) => {
     const c = findClub(id)
+    // Solo los clubes locales/sudamericanos tienen escudo en /logos; los europeos
+    // (fichaje) muestran bandera/sigla en la ficha.
     return {
       id,
       name: c?.name ?? id,
-      logoUrl: c ? `/logos/clubs/${id}.png` : undefined,
+      logoUrl: c && c.region !== 'euro' ? `/logos/clubs/${id}.png` : undefined,
     }
   })
 

@@ -36,11 +36,16 @@ export function positionCategory(code: string): PositionCategory {
   return POSITIONS.find((p) => p.code === code)?.category ?? 'MID'
 }
 
+export type Region = 'arg' | 'sudam' | 'euro'
+export type ContinentalComp = 'libertadores' | 'sudamericana' | 'champions' | 'europa'
+
 export interface CareerClub {
   id: string
   name: string
   strength: number
   continental: boolean
+  region: Region
+  flag?: string
   colors?: string[]
 }
 
@@ -52,14 +57,31 @@ export const ARG_CLUBS: CareerClub[] = (clubsData as any[])
     name: c.name,
     strength: argClubStrength(c.titles ?? 0, c.Libertadores ?? 0, c.id),
     continental: false,
+    region: 'arg' as Region,
     colors: c.colors,
   }))
 
 export const SUDAM_CLUBS: CareerClub[] = CONTINENTAL_CLUBS.filter(
   (c) => !ARG_CLUBS.some((a) => a.id === c.id),
-).map((c) => ({ id: c.id, name: c.name, strength: c.strength.overall, continental: true }))
+).map((c) => ({ id: c.id, name: c.name, strength: c.strength.overall, continental: true, region: 'sudam' as Region }))
 
-export const ALL_CLUBS: CareerClub[] = [...ARG_CLUBS, ...SUDAM_CLUBS]
+/** Elite europeo: el "salto a Europa". No dependen de ninguna base; son para la simulación. */
+export const EURO_CLUBS: CareerClub[] = [
+  { id: 'real-madrid', name: 'Real Madrid', strength: 90, continental: true, region: 'euro', flag: '🇪🇸' },
+  { id: 'fc-barcelona', name: 'FC Barcelona', strength: 88, continental: true, region: 'euro', flag: '🇪🇸' },
+  { id: 'manchester-city', name: 'Manchester City', strength: 90, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'liverpool', name: 'Liverpool', strength: 88, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'bayern-munich', name: 'Bayern Múnich', strength: 89, continental: true, region: 'euro', flag: '🇩🇪' },
+  { id: 'paris-saint-germain', name: 'Paris Saint-Germain', strength: 87, continental: true, region: 'euro', flag: '🇫🇷' },
+  { id: 'inter-milan', name: 'Inter de Milán', strength: 85, continental: true, region: 'euro', flag: '🇮🇹' },
+  { id: 'juventus', name: 'Juventus', strength: 84, continental: true, region: 'euro', flag: '🇮🇹' },
+  { id: 'manchester-united', name: 'Manchester United', strength: 83, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'atletico-madrid', name: 'Atlético Madrid', strength: 84, continental: true, region: 'euro', flag: '🇪🇸' },
+  { id: 'chelsea', name: 'Chelsea', strength: 83, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'borussia-dortmund', name: 'Borussia Dortmund', strength: 82, continental: true, region: 'euro', flag: '🇩🇪' },
+]
+
+export const ALL_CLUBS: CareerClub[] = [...ARG_CLUBS, ...SUDAM_CLUBS, ...EURO_CLUBS]
 
 export function findClub(id: string): CareerClub | undefined {
   return ALL_CLUBS.find((c) => c.id === id)
@@ -86,6 +108,8 @@ export interface TransferOffer {
   clubName: string
   valueM: number
   strength: number
+  region: Region
+  flag?: string
 }
 
 export interface SeasonResult {
@@ -100,7 +124,7 @@ export interface SeasonResult {
   marketValueM: number
   liga: boolean
   copaArgentina: boolean
-  continental: 'libertadores' | 'sudamericana' | null
+  continental: ContinentalComp | null
   continentalWon: boolean
   rating: number // nota de la temporada 5.5 - 9.9
   topScorer: boolean
@@ -143,10 +167,13 @@ export interface CareerState {
 export const MAX_SEASONS = 15
 
 export const TROPHY_META: Record<string, { name: string; icon: string }> = {
-  lpf: { name: 'Liga Profesional', icon: '⭐' },
+  lpf: { name: 'Liga', icon: '⭐' },
   'copa-arg': { name: 'Copa Argentina', icon: '🥛' },
   libertadores: { name: 'Libertadores', icon: '🏆' },
   sudamericana: { name: 'Sudamericana', icon: '🥇' },
+  champions: { name: 'Champions League', icon: '🌟' },
+  europa: { name: 'Europa League', icon: '🎖️' },
+  mundial: { name: 'Mundial', icon: '🌍' },
 }
 
 // ---------- Deterministic RNG ----------
@@ -216,11 +243,15 @@ export function simulateSeason(
   const influence = (ovr - 75) / 300
   const ligaP = clamp((club.strength - 70) / 30 + influence, 0.03, 0.55)
   const copaP = clamp((club.strength - 68) / 34 + influence, 0.04, 0.5)
-  const contType = state.nextContinental
-  const contP = clamp((club.strength - 74) / 42 + influence, 0.02, 0.4)
+  // Competición continental según región del club. La Champions es la más difícil.
+  const topTier = state.nextContinental === 'libertadores'
+  const contType: ContinentalComp =
+    club.region === 'euro' ? (topTier ? 'champions' : 'europa') : topTier ? 'libertadores' : 'sudamericana'
+  const contHardness = contType === 'champions' ? 52 : contType === 'europa' ? 44 : 42
+  const contP = clamp((club.strength - 74) / contHardness + influence, 0.02, 0.38)
 
   const liga = rng() < ligaP
-  const copaArgentina = rng() < copaP
+  const copaArgentina = club.region === 'arg' && rng() < copaP // Copa Argentina solo en Arg
   const continentalWon = rng() < contP
 
   const trophiesWon: string[] = []
@@ -238,9 +269,15 @@ export function simulateSeason(
 
   const rating = clamp(Math.round((5.5 + performance * 3.6 + trophiesWon.length * 0.25) * 10) / 10, 5.5, 9.9)
 
+  const CONT_NAME: Record<ContinentalComp, string> = {
+    libertadores: 'Copa Libertadores',
+    sudamericana: 'Copa Sudamericana',
+    champions: 'Champions League',
+    europa: 'Europa League',
+  }
   const highlights: string[] = []
-  if (liga) highlights.push(`🏆 Campeón de la Liga Profesional con ${club.name}`)
-  if (continentalWon) highlights.push(`🌎 Levantaste la ${contType === 'libertadores' ? 'Copa Libertadores' : 'Copa Sudamericana'}`)
+  if (liga) highlights.push(`🏆 Campeón de la Liga con ${club.name}`)
+  if (continentalWon) highlights.push(`${TROPHY_META[contType]?.icon || '🌎'} Levantaste la ${CONT_NAME[contType]}`)
   if (copaArgentina) highlights.push(`🥛 Campeón de la Copa Argentina`)
   if (topScorer) highlights.push(`🥇 Goleador del torneo con ${goals} goles`)
   else if (goals >= 10 && cat === 'ATT') highlights.push(`⚽ Gran temporada: ${goals} goles`)
@@ -278,16 +315,22 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
   const offerChance = clamp(performance * 0.9 + (state.player.ovr - 75) / 100, 0, 0.95)
   if (rng() > offerChance) return []
 
+  // El "salto a Europa" hay que ganárselo: solo con buen OVR y buena temporada.
+  const canEurope = state.player.ovr >= 79 && performance >= 0.5
   const count = 1 + Math.floor(rng() * 3) // 1..3
-  const candidates = ALL_CLUBS.filter(
-    (c) => c.id !== state.clubId && c.strength >= current.strength - 1,
-  ).sort(() => rng() - 0.5)
+  const candidates = ALL_CLUBS.filter((c) => {
+    if (c.id === state.clubId) return false
+    if (c.region === 'euro') return canEurope && c.strength >= current.strength - 4
+    return c.strength >= current.strength - 1
+  }).sort(() => rng() - 0.5)
 
   return candidates.slice(0, count).map((c) => ({
     clubId: c.id,
     clubName: c.name,
     strength: c.strength,
-    valueM: Math.max(1, Math.round(value * (1.1 + rng() * 0.6))),
+    region: c.region,
+    flag: c.flag,
+    valueM: Math.max(1, Math.round(value * (1.1 + rng() * 0.6) * (c.region === 'euro' ? 1.4 : 1))),
   }))
 }
 
