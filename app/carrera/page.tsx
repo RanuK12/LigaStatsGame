@@ -13,7 +13,7 @@ import {
   marketValueFor,
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
-import { downloadFichaPng, downloadFichaPdf } from "@/lib/career-pdf"
+import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
 
 const NATIONALITIES: { name: string; flag: string }[] = [
   { name: "Argentina", flag: "🇦🇷" },
@@ -26,6 +26,13 @@ const NATIONALITIES: { name: string; flag: string }[] = [
   { name: "Italia", flag: "🇮🇹" },
   { name: "Francia", flag: "🇫🇷" },
   { name: "México", flag: "🇲🇽" },
+]
+
+const JERSEY_PATTERNS = [
+  { id: "solid", name: "Sólida Tradicional" },
+  { id: "sash", name: "Banda Diagonal" },
+  { id: "stripes", name: "Bastones Verticales" },
+  { id: "hoops", name: "Franja Horizontal" },
 ]
 
 function flagFor(nationality: string): string {
@@ -45,8 +52,7 @@ export default function CarreraPage() {
             TU CAMINO A LA GLORIA
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed">
-            Empezá como promesa y ganate todo: la Liga, la Libertadores, el salto a Europa,
-            la Champions y el Mundial con la Selección. Nada es fácil — te lo tenés que ganar.
+            Personalizá tu camiseta, elegí tu club de inicio y simulación paso a paso en la Liga Argentina, Copa Libertadores y Sudamericana.
           </p>
         </div>
 
@@ -65,19 +71,21 @@ export default function CarreraPage() {
   )
 }
 
-// ---------------- SETUP WIZARD ----------------
+// ---------------- SETUP WIZARD WITH JERSEY SELECTION ----------------
 
 function CareerSetupWizard() {
   const startCareer = useCareerStore((s) => s.startCareer)
   const [mode, setMode] = useState<"create" | "real">("create")
 
   // create-player form
-  const [name, setName] = useState("")
-  const [number, setNumber] = useState(10)
-  const [position, setPosition] = useState("ST")
+  const [name, setName] = useState("Emilio Ranucoli")
+  const [number, setNumber] = useState(12)
+  const [position, setPosition] = useState("CAM")
   const [nationality, setNationality] = useState("Argentina")
-  const [ovr, setOvr] = useState(64)
-  const [age, setAge] = useState(17)
+  const [ovr, setOvr] = useState(72)
+  const [age, setAge] = useState(18)
+  const [jerseyPattern, setJerseyPattern] = useState("sash")
+  const [jerseyColor, setJerseyColor] = useState("#74ACDF")
 
   // real-player selection
   const { players, error } = usePlayersCore()
@@ -88,7 +96,7 @@ function CareerSetupWizard() {
     return players.filter((p) => p.name.toLowerCase().includes(q)).slice(0, 12)
   }, [players, query])
 
-  const [clubId, setClubId] = useState("")
+  const [clubId, setClubId] = useState("gimnasia-lp")
 
   const setup: CareerSetup | null = clubId
     ? {
@@ -111,16 +119,16 @@ function CareerSetupWizard() {
     setOvr(p.rating)
     setNationality(p.nationality || "Argentina")
     setAge(20)
-    setMode("create") // fall through to review the prefilled fields
+    setMode("create")
   }
 
   return (
     <div className="space-y-6">
-      {/* STEP 1: player */}
+      {/* STEP 1: player & jersey */}
       <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-5">
         <div className="flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm">1</span>
-          <h3 className="font-display text-xl font-black uppercase">Tu Jugador</h3>
+          <h3 className="font-display text-xl font-black uppercase">Tu Jugador y Camiseta</h3>
         </div>
 
         <div className="flex gap-2 font-sport">
@@ -128,7 +136,7 @@ function CareerSetupWizard() {
             onClick={() => setMode("create")}
             className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${mode === "create" ? "bg-[#74ACDF] text-white" : "bg-slate-900 text-slate-400 border border-slate-800"}`}
           >
-            Crear Jugador
+            Crear Jugador & Camiseta
           </button>
           <button
             onClick={() => setMode("real")}
@@ -139,46 +147,103 @@ function CareerSetupWizard() {
         </div>
 
         {mode === "create" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Field label="Nombre">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Ej: Franco Ordoñes"
-                className="input-dark"
-              />
-            </Field>
-            <Field label="Dorsal">
-              <input
-                type="number"
-                min={1}
-                max={99}
-                value={number}
-                onChange={(e) => setNumber(clampNum(parseInt(e.target.value) || 1, 1, 99))}
-                className="input-dark"
-              />
-            </Field>
-            <Field label="Posición">
-              <select value={position} onChange={(e) => setPosition(e.target.value)} className="input-dark">
-                {POSITIONS.map((p) => (
-                  <option key={p.code} value={p.code}>{p.code} · {p.label}</option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Nacionalidad">
-              <select value={nationality} onChange={(e) => setNationality(e.target.value)} className="input-dark">
-                {NATIONALITIES.map((n) => (
-                  <option key={n.name} value={n.name}>{n.flag} {n.name}</option>
-                ))}
-              </select>
-            </Field>
-            <Field label={`OVR inicial: ${ovr} ${ovr < 66 ? "(promesa)" : ovr < 74 ? "(joven proyecto)" : "(figura)"}`}>
-              <input type="range" min={55} max={80} value={ovr} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
-            </Field>
-            <Field label={`Edad: ${age} · Valor ~€${previewValue}M`}>
-              <input type="range" min={16} max={30} value={age} onChange={(e) => setAge(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
-            </Field>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            {/* JERSEY VISUAL PREVIEW */}
+            <div className="card-glass p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center justify-center space-y-3">
+              <span className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">
+                VISTA PREVIA CAMISETA
+              </span>
+
+              <div className="relative w-28 h-32 flex items-center justify-center filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]">
+                {/* SVG Jersey Graphic */}
+                <svg viewBox="0 0 100 120" className="w-full h-full">
+                  <path
+                    d="M 20 20 L 35 10 L 65 10 L 80 20 L 95 35 L 85 50 L 75 42 L 75 110 L 25 110 L 25 42 L 15 50 L 5 35 Z"
+                    fill={jerseyColor}
+                    stroke="#ffffff"
+                    strokeWidth="2"
+                  />
+                  {jerseyPattern === "sash" && (
+                    <path d="M 20 20 L 75 110 L 60 110 L 20 40 Z" fill="#ffffff" opacity="0.85" />
+                  )}
+                  {jerseyPattern === "stripes" && (
+                    <>
+                      <rect x="35" y="10" width="10" height="100" fill="#ffffff" opacity="0.8" />
+                      <rect x="55" y="10" width="10" height="100" fill="#ffffff" opacity="0.8" />
+                    </>
+                  )}
+                  {jerseyPattern === "hoops" && (
+                    <rect x="25" y="50" width="50" height="20" fill="#ffffff" opacity="0.85" />
+                  )}
+                  {/* Number text on shirt */}
+                  <text x="50" y="75" textAnchor="middle" fill="#ffffff" fontSize="26" fontWeight="900" fontFamily="sans-serif">
+                    {number}
+                  </text>
+                </svg>
+              </div>
+
+              <div className="text-xs font-bold text-white font-display uppercase tracking-wider">
+                #{number} · {name || "JUGADOR"}
+              </div>
+            </div>
+
+            {/* INPUT FIELDS */}
+            <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Field label="Nombre del Jugador">
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Ej: Emilio Ranucoli"
+                  className="input-dark"
+                />
+              </Field>
+              <Field label="Dorsal / Camiseta">
+                <input
+                  type="number"
+                  min={1}
+                  max={99}
+                  value={number}
+                  onChange={(e) => setNumber(clampNum(parseInt(e.target.value) || 1, 1, 99))}
+                  className="input-dark"
+                />
+              </Field>
+              <Field label="Posición">
+                <select value={position} onChange={(e) => setPosition(e.target.value)} className="input-dark">
+                  {POSITIONS.map((p) => (
+                    <option key={p.code} value={p.code}>{p.code} · {p.label}</option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Nacionalidad">
+                <select value={nationality} onChange={(e) => setNationality(e.target.value)} className="input-dark">
+                  {NATIONALITIES.map((n) => (
+                    <option key={n.name} value={n.name}>{n.flag} {n.name}</option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Estilo de Camiseta">
+                <select value={jerseyPattern} onChange={(e) => setJerseyPattern(e.target.value)} className="input-dark">
+                  {JERSEY_PATTERNS.map((pattern) => (
+                    <option key={pattern.id} value={pattern.id}>{pattern.name}</option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Color Principal de Camiseta">
+                <input
+                  type="color"
+                  value={jerseyColor}
+                  onChange={(e) => setJerseyColor(e.target.value)}
+                  className="w-full h-11 bg-slate-950 border border-slate-800 rounded-xl p-1 cursor-pointer"
+                />
+              </Field>
+              <Field label={`OVR inicial: ${ovr}`}>
+                <input type="range" min={55} max={80} value={ovr} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
+              </Field>
+              <Field label={`Edad: ${age} · Valor ~€${previewValue}M`}>
+                <input type="range" min={16} max={30} value={age} onChange={(e) => setAge(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
+              </Field>
+            </div>
           </div>
         )}
 
@@ -204,11 +269,7 @@ function CareerSetupWizard() {
                   <span className="text-[10px] font-sport text-slate-400 shrink-0 ml-2">{p.position} · {p.rating} OVR</span>
                 </button>
               ))}
-              {query.trim().length >= 2 && results.length === 0 && players && (
-                <p className="text-xs text-slate-500">Sin resultados. Probá otro nombre.</p>
-              )}
             </div>
-            <p className="text-[10px] text-slate-500">Al elegir uno se cargan sus datos y podés ajustarlos en "Crear Jugador".</p>
           </div>
         )}
       </div>
@@ -274,7 +335,7 @@ function ClubGroup({
   )
 }
 
-// ---------------- DASHBOARD ----------------
+// ---------------- DASHBOARD & HD EXPORT ----------------
 
 function CareerDashboard() {
   const { career, simulateNextSeason, acceptOffer, declineOffers, resetCareer } = useCareerStore()
@@ -286,11 +347,12 @@ function CareerDashboard() {
   const club = findClub(career.clubId)
   const hasOffers = career.pendingOffers.length > 0
 
-  async function handleExport(kind: "png" | "pdf") {
+  async function handleExport(kind: "png" | "jpg" | "pdf") {
     if (!fichaRef.current) return
     setExporting(true)
     try {
       if (kind === "png") await downloadFichaPng(fichaRef.current, career!.player.name)
+      else if (kind === "jpg") await downloadFichaJpg(fichaRef.current, career!.player.name)
       else await downloadFichaPdf(fichaRef.current, career!.player.name)
     } finally {
       setExporting(false)
@@ -299,8 +361,8 @@ function CareerDashboard() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-      {/* FICHA */}
-      <div ref={fichaRef}>
+      {/* FICHA HD */}
+      <div ref={fichaRef} className="rounded-[32px] overflow-hidden shadow-2xl">
         <CareerCardView data={cardData} />
       </div>
 
@@ -362,24 +424,33 @@ function CareerDashboard() {
             </button>
           )}
 
-          <div className="grid grid-cols-2 gap-3 font-sport">
-            <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-3 text-[11px] font-bold tracking-widest uppercase rounded-2xl shadow-lg disabled:opacity-50">
-              {exporting ? "..." : "FICHA PDF"}
-            </button>
-            <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-3 text-[11px] font-bold tracking-widest uppercase rounded-2xl shadow-lg disabled:opacity-50">
-              {exporting ? "..." : "FICHA PNG"}
-            </button>
+          {/* EXPORT BUTTONS HD */}
+          <div className="space-y-2 pt-2 font-sport">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-center">
+              DESCARGAR FICHA DE CARRERA HD
+            </span>
+            <div className="grid grid-cols-3 gap-2">
+              <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">
+                {exporting ? "..." : "PNG HD"}
+              </button>
+              <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">
+                {exporting ? "..." : "JPG HD"}
+              </button>
+              <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">
+                {exporting ? "..." : "PDF HD"}
+              </button>
+            </div>
           </div>
 
           <button
             onClick={() => { if (confirmReset()) resetCareer() }}
-            className="w-full py-2.5 bg-red-600/10 border border-red-500/20 text-red-300/80 rounded-xl text-[11px] font-bold font-sport uppercase tracking-wider hover:bg-red-600/20 transition-colors"
+            className="w-full py-2.5 bg-red-600/10 border border-red-500/20 text-red-300/80 rounded-xl text-[11px] font-bold font-sport uppercase tracking-wider hover:bg-red-600/20 transition-colors mt-2"
           >
             Reiniciar carrera
           </button>
         </div>
 
-        {/* MOMENTOS + PREMIOS */}
+        {/* MOMENTOS DE LA TEMPORADA */}
         {career.history.length > 0 && (() => {
           const last = career.history[career.history.length - 1]
           const m = career.milestones || { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false }
@@ -408,61 +479,15 @@ function CareerDashboard() {
                   ))}
                 </ul>
               ) : (
-                <p className="text-xs text-slate-500">Temporada tranquila. A meterle para la próxima. 💪</p>
-              )}
-              {(m.balonDeOro > 0 || m.goldenBoots > 0 || m.nationalTeam) && (
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {m.balonDeOro > 0 && <Award icon="🏅" label={`Balón de Oro ×${m.balonDeOro}`} />}
-                  {m.goldenBoots > 0 && <Award icon="👟" label={`Botín de Oro ×${m.goldenBoots}`} />}
-                  {m.nationalTeam && <Award icon={career.player.flag} label="Selección" />}
-                </div>
+                <p className="text-xs text-slate-500">Temporada realizada con éxito.</p>
               )}
             </div>
           )
         })()}
-
-        {/* HISTORY */}
-        {career.history.length > 0 && (
-          <div className="card-gradient rounded-3xl p-5 border border-white/10">
-            <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.2em] mb-3">Historial</h4>
-            <div className="overflow-x-auto">
-              <table className="w-full text-[11px] text-left">
-                <thead className="text-slate-500 font-sport uppercase">
-                  <tr>
-                    <th className="py-1 pr-2">Año</th>
-                    <th className="py-1 pr-2">Club</th>
-                    <th className="py-1 pr-2 text-center">PJ</th>
-                    <th className="py-1 pr-2 text-center">G</th>
-                    <th className="py-1 pr-2 text-center">A</th>
-                    <th className="py-1 pr-2 text-center">Nota</th>
-                    <th className="py-1 text-right">Títulos</th>
-                  </tr>
-                </thead>
-                <tbody className="text-slate-300">
-                  {career.history.map((s, i) => (
-                    <tr key={i} className="border-t border-white/5">
-                      <td className="py-1.5 pr-2 font-bold text-white">{s.year}</td>
-                      <td className="py-1.5 pr-2 truncate max-w-[90px]">{s.clubName}</td>
-                      <td className="py-1.5 pr-2 text-center">{s.matchesPlayed}</td>
-                      <td className="py-1.5 pr-2 text-center text-green-400">{s.goals}</td>
-                      <td className="py-1.5 pr-2 text-center text-blue-400">{s.assists}</td>
-                      <td className={`py-1.5 pr-2 text-center font-bold ${(s.rating ?? 7) >= 8 ? "text-emerald-400" : (s.rating ?? 7) >= 6.8 ? "text-amber-400" : "text-slate-400"}`}>{(s.rating ?? 7).toFixed(1)}</td>
-                      <td className="py-1.5 text-right">
-                        {[s.liga && "⭐", s.copaArgentina && "🥛", s.continentalWon && (s.continental ? ({ libertadores: "🏆", sudamericana: "🥇", champions: "🌟", europa: "🎖️" }[s.continental] || "🏆") : "")].filter(Boolean).join(" ") || "—"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )
 }
-
-// ---------------- helpers ----------------
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -475,15 +500,6 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 function clampNum(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, n))
-}
-
-function Award({ icon, label }: { icon: string; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-950/60 border border-amber-400/30 text-[10px] font-bold font-sport text-amber-200">
-      <span className="text-sm">{icon}</span>
-      {label}
-    </span>
-  )
 }
 
 function confirmReset(): boolean {
