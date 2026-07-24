@@ -139,9 +139,16 @@ button, input, select, textarea {
   background-clip: text;
 }
 
-.font-bandera, .font-malvinas {
+.font-bandera {
   font-family: var(--font-bandera), var(--font-display), sans-serif;
   letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Malvinas Sans: solo A-Z/0-9 (sin acentos). Cae a Bebas/Archivo para lo que no cubra. */
+.font-malvinas {
+  font-family: var(--font-malvinas), var(--font-bandera), var(--font-display), sans-serif;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 

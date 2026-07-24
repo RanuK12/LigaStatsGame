@@ -8,6 +8,10 @@ import squadsData from "@/data/squads.json"
 import type { Player, Squad, TournamentResult } from "@/lib/types"
 import { normalizeSquads } from "@/lib/data-normalizers"
 import { usePlayersCore } from "@/lib/data-loader"
+import { useUserStore } from "@/lib/user-store"
+import { calculateElo, submitOnlineScore } from "@/lib/supabase"
+import { tournamentPoints } from "@/lib/ranking"
+import { saveLocalScore, type GameScore } from "@/lib/scores"
 import {
   formations,
   canPlayHere,
@@ -168,6 +172,7 @@ function DraftInner() {
   const { players: playersCore, error: playersError } = usePlayersCore()
   const allP = useMemo(() => playersCore ?? [], [playersCore])
   const allS = useMemo(() => normalizeSquads(squadsData), [])
+  const { user, updateElo, addTitle } = useUserStore()
 
   // ── Game State ──
   const [started, setStarted] = useState(false)
@@ -327,7 +332,33 @@ function DraftInner() {
       label: virtualSquad.label, score, formation: f.id,
       players: players.map(p => ({ name: p.name, rating: p.rating, position: p.position })),
     })
-  }, [drafted, allS, allP, f, teamScore, partialScore])
+
+    // ── RANKING: ELO + Tabla de Líderes ──
+    const total = r.table?.length || 28
+    const pos = r.playerPos ?? (r.isChampion ? 1 : Math.round(total / 2))
+    const pts = tournamentPoints({ type, pos, totalTeams: total, isChampion: r.isChampion })
+    const currentElo = user?.elo ?? 1000
+    const { newElo, delta } = calculateElo(currentElo, pos, total)
+    if (user?.isLoggedIn) {
+      updateElo(delta)
+      if (r.isChampion) addTitle()
+    }
+    const entry: GameScore = {
+      id: `${Date.now()}`,
+      username: user?.username || "Invitado",
+      club: "mi-11",
+      clubName: virtualSquad.label,
+      rating: score,
+      players: players.length,
+      pts,
+      pos,
+      elo: newElo,
+      date: new Date().toISOString(),
+    }
+    saveLocalScore(entry)
+    const { id: _omit, ...online } = entry
+    void submitOnlineScore(online) // fire & forget (no-op sin Supabase)
+  }, [drafted, allS, allP, f, teamScore, partialScore, user, updateElo, addTitle])
 
   // ── RESET ──
   const resetGame = useCallback(() => {

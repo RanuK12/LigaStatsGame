@@ -2,130 +2,99 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { loadLocalScores, type GameScore } from '@/lib/scores'
+import { fetchOnlineScores } from '@/lib/supabase'
+import TierBadge from '@/components/TierBadge'
 
-interface Score { id: string; club: string; clubName: string; rating: number; players: number; pts: number; pos: number; date: string }
-
-const MOCK_SCORES: Score[] = [
-  { id: '1', club: 'river-plate', clubName: 'River Plate', rating: 82, players: 11, pts: 85, pos: 1, date: '2026-06-01' },
-  { id: '2', club: 'boca-juniors', clubName: 'Boca Juniors', rating: 79, players: 11, pts: 80, pos: 2, date: '2026-06-02' },
-  { id: '3', club: 'independiente', clubName: 'Independiente', rating: 76, players: 10, pts: 74, pos: 3, date: '2026-06-03' },
-  { id: '4', club: 'racing', clubName: 'Racing Club', rating: 74, players: 11, pts: 72, pos: 5, date: '2026-06-04' },
-  { id: '5', club: 'san-lorenzo', clubName: 'San Lorenzo', rating: 71, players: 9, pts: 65, pos: 7, date: '2026-06-04' },
-  { id: '6', club: 'velez', clubName: 'Vélez Sarsfield', rating: 68, players: 11, pts: 60, pos: 10, date: '2026-06-05' },
-  { id: '7', club: 'newells', clubName: "Newell's Old Boys", rating: 65, players: 8, pts: 52, pos: 14, date: '2026-06-05' },
-  { id: '8', club: 'estudiantes-lp', clubName: 'Estudiantes', rating: 62, players: 11, pts: 48, pos: 16, date: '2026-06-05' },
-]
-
-function LeaderboardRow({ rank, clubName, rating, players, pts, pos, isTopThree }: {
-  rank: number
-  clubName: string
-  rating: number
-  players: number
-  pts: number
-  pos: number
-  isTopThree: boolean
-}) {
-  const medal = (i: number) => `${i + 1}°`
+function LeaderboardRow({ rank, s }: { rank: number; s: GameScore }) {
+  const top3 = rank < 3
+  const medal = ['🥇', '🥈', '🥉'][rank] || `${rank + 1}°`
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: rank * 0.05 }}
-      className={`card-gradient rounded-xl p-4 flex items-center gap-4 ${isTopThree ? 'border border-yellow-500/20' : ''}`}
+      transition={{ delay: Math.min(rank, 12) * 0.04 }}
+      className={`card-gradient rounded-xl p-3.5 flex items-center gap-3 ${top3 ? 'border border-amber-400/30' : 'border border-white/5'}`}
     >
-      <div className="text-2xl w-10 text-center font-display">{medal(rank)}</div>
+      <div className="text-xl w-9 text-center font-display shrink-0">{medal}</div>
       <div className="flex-1 min-w-0">
-        <div className="font-bold text-sm truncate">{clubName}</div>
-        <div className="text-xs text-slate-400">Rating: {rating} • {players}/11</div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-bold text-sm truncate max-w-[140px]">{s.username}</span>
+          <TierBadge elo={s.elo} />
+        </div>
+        <div className="text-[11px] text-slate-400 mt-0.5">Rating {s.rating} • {s.players}/11 • {s.pos}° pos</div>
       </div>
       <div className="text-right shrink-0">
-        <div className="text-xl font-black text-green-400">{pts}</div>
-        <div className="text-[10px] text-slate-500">{pos}° pos</div>
+        <div className="text-lg font-black text-green-400 font-display leading-none">{s.pts}</div>
+        <div className="text-[10px] text-[#74ACDF] font-bold">⚡{s.elo}</div>
       </div>
     </motion.div>
   )
 }
 
 export default function LeaderboardPage() {
-  const [scores, setScores] = useState<Score[]>([])
-  const [tab, setTab] = useState<'global'|'club'>('global')
+  const [scores, setScores] = useState<GameScore[]>([])
+  const [tab, setTab] = useState<'global' | 'online'>('global')
+  const [loadingOnline, setLoadingOnline] = useState(false)
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem('ligastats_scores')
-      const saved: Score[] = raw ? JSON.parse(raw) : []
-      if (!Array.isArray(saved)) throw new Error('invalid format')
-      if (saved.length > 0) {
-        setScores([...saved].sort((a, b) => b.pts - a.pts))
-      } else {
-        setScores([...MOCK_SCORES].sort((a, b) => b.pts - a.pts))
-      }
-    } catch {
-      setScores([...MOCK_SCORES].sort((a, b) => b.pts - a.pts))
-    }
+    setScores(loadLocalScores())
   }, [])
 
-  const clubStats = useMemo(() => {
-    return scores.reduce((acc: Record<string, { club: string; count: number; avgRating: number; bestPts: number }>, s) => {
-      if (!acc[s.club]) acc[s.club] = { club: s.clubName, count: 0, avgRating: 0, bestPts: 0 }
-      acc[s.club].count++
-      acc[s.club].avgRating += s.rating
-      acc[s.club].bestPts = Math.max(acc[s.club].bestPts, s.pts)
-      return acc
-    }, {})
-  }, [scores])
+  useEffect(() => {
+    if (tab !== 'online') return
+    setLoadingOnline(true)
+    fetchOnlineScores(50)
+      .then((online) => {
+        setScores(
+          online.map((o, i) => ({
+            id: o.id || `online-${i}`,
+            username: o.username,
+            club: o.club,
+            clubName: o.clubName,
+            rating: o.rating,
+            players: o.players,
+            pts: o.pts,
+            pos: o.pos,
+            elo: o.elo,
+            date: o.date,
+          })),
+        )
+      })
+      .finally(() => setLoadingOnline(false))
+  }, [tab])
 
-  const clubList = useMemo(() => {
-    return Object.entries(clubStats)
-      .map(([k, v]) => ({ id: k, ...v, avgRating: Math.round(v.avgRating / v.count) }))
-      .sort((a, b) => b.bestPts - a.bestPts)
-  }, [clubStats])
+  const ranked = useMemo(() => [...scores].sort((a, b) => b.elo - a.elo || b.pts - a.pts), [scores])
 
   return (
     <div className="min-h-screen gradient-bg">
       <header className="pt-12 pb-6 px-4 text-center">
-        <motion.div initial={{opacity:0,y:-30}} animate={{opacity:1,y:0}} transition={{duration:0.6}}>
+        <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <h1 className="text-4xl md:text-5xl font-black tracking-wider font-display uppercase"><span className="gradient-text">TABLA DE LÍDERES</span></h1>
-          <p className="mt-3 text-sm text-slate-400">Los mejores once ideales de Draft Tres Estrellas</p>
+          <p className="mt-3 text-sm text-slate-400">Rankeá tu ELO y peleá por llegar a Leyenda</p>
         </motion.div>
       </header>
       <main className="max-w-3xl mx-auto px-4 pb-20">
-        <div className="flex gap-2.5 mb-8 justify-center">
-          <button onClick={()=>setTab('global')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all font-sport ${tab==='global'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>GLOBAL</button>
-          <button onClick={()=>setTab('club')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all font-sport ${tab==='club'?'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20':'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>POR CLUB</button>
+        <div className="flex gap-2.5 mb-8 justify-center font-sport">
+          <button onClick={() => setTab('global')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all ${tab === 'global' ? 'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>MIS PARTIDAS</button>
+          <button onClick={() => setTab('online')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all ${tab === 'online' ? 'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>GLOBAL ONLINE</button>
         </div>
 
-        {tab==='global'?(
-          <div className="space-y-2">
-            {scores.map((s,i)=>(
-              <LeaderboardRow
-                key={s.id}
-                rank={i}
-                clubName={s.clubName}
-                rating={s.rating}
-                players={s.players}
-                pts={s.pts}
-                pos={s.pos}
-                isTopThree={i < 3}
-              />
-            ))}
+        {loadingOnline ? (
+          <p className="text-center text-sm text-slate-400 py-10">Cargando ranking global...</p>
+        ) : ranked.length === 0 ? (
+          <div className="text-center py-14">
+            <p className="text-slate-300 font-bold">{tab === 'online' ? 'Todavía no hay ranking global.' : 'Jugá tu primera temporada para entrar al ranking.'}</p>
+            <Link href="/draft?mode=liga" className="btn-primary inline-block mt-5 px-7 py-3 text-xs">JUGAR AHORA</Link>
           </div>
-        ):(
+        ) : (
           <div className="space-y-2">
-            {clubList.map((c,i)=>(
-              <motion.div key={c.id} initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{delay:i*0.05}}
-                className="card-gradient rounded-xl p-4 flex items-center gap-4">
-                <div className="text-2xl w-10 text-center font-display">{i+1}°</div>
-                <div className="flex-1"><div className="font-bold text-sm">{c.club}</div><div className="text-xs text-slate-400">{c.count} drafts</div></div>
-                <div className="text-right"><div className="text-lg font-black text-blue-400">{c.avgRating}</div><div className="text-[10px] text-slate-500">avg rating</div></div>
-                <div className="text-right"><div className="text-lg font-black text-green-400">{c.bestPts}</div><div className="text-[10px] text-slate-500">best pts</div></div>
-              </motion.div>
-            ))}
+            {ranked.map((s, i) => <LeaderboardRow key={s.id} rank={i} s={s} />)}
           </div>
         )}
-        <div className="text-center mt-8 text-sm text-slate-500">
-          <p>{scores.length} drafts registrados</p>
-          <p className="mt-1">Los scores se guardan localmente cuando simulás una temporada</p>
+
+        <div className="text-center mt-8 text-xs text-slate-500">
+          <p>{tab === 'online' ? 'Ranking global (requiere iniciar sesión para sumar ELO)' : `${ranked.length} partidas registradas en este dispositivo`}</p>
         </div>
       </main>
       <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm py-2.5 px-4 inline-block">← Volver al inicio</Link></div>

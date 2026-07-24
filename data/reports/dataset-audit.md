@@ -2,7 +2,7 @@
 
 ## Totals
 - Clubs: 34
-- Players: 4095
+- Players: 4089
 - Squads: 170
 
 ## Health Score
@@ -19,87 +19,97 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 4095
-- Players with clubs: 4095
-- Players with valid position: 4095
+- Players with rating: 4089
+- Players with clubs: 4089
+- Players with valid position: 4089
 - Playable squads: 170
 
 ## Players by club
-- independiente: 434
+- independiente: 436
 - boca-juniors: 394
 - banfield: 390
-- lanus: 380
-- velez: 378
-- river-plate: 362
-- huracan: 308
-- rosario-central: 294
-- talleres: 262
+- lanus: 379
+- velez: 376
+- river-plate: 365
+- huracan: 306
+- rosario-central: 292
+- talleres: 261
 - racing-club: 251
-- newells: 250
+- newells: 247
 - san-lorenzo: 235
-- gimnasia: 234
-- belgrano: 212
+- gimnasia: 233
+- belgrano: 211
 - estudiantes: 204
 - godoy-cruz: 198
-- argentinos-jrs: 77
+- argentinos-jrs: 76
 - defensa-y-justicia: 68
 - colon: 65
 - tigre: 25
 - central-cordoba: 19
-- instituto: 18
+- instituto: 19
 - platense: 18
 - aldosivi: 17
 - atl-tucuman: 14
-- independiente-rivadavia: 14
 - union-sf: 14
+- argentina: 13
 - barracas-central: 13
+- independiente-rivadavia: 13
 - sarmiento-j: 13
 - union: 12
 - riestra: 11
 - arsenal: 9
 - aa-argentinos-juniors: 7
+- real-madrid: 7
 - atletico-rafaela: 6
 - internazionale: 6
 - patronato: 6
 - atletico-tucuman: 5
-- argentina: 4
+- juventus: 5
+- paris-saint-germain: 5
+- valencia: 5
 - atletico-madrid: 4
+- benfica: 4
+- fc-barcelona: 4
 - manchester-united: 4
-- newells-old-boys: 4
 - olympo: 4
 - quilmes: 4
-- real-madrid: 4
-- valencia: 4
-- barcelona: 3
-- benfica: 3
+- chelsea: 3
 - defensores-belgrano: 3
 - estudiantes-lp: 3
 - estudiantes-rc: 3
 - ferro: 3
 - gimnasia-mendoza: 3
-- juventus: 3
+- inter-milan: 3
 - lazio: 3
+- manchester-city: 3
 - milan: 3
+- millonarios: 3
+- napoli: 3
 - parma: 3
+- sampdoria: 3
 - villarreal: 3
+- argentinos-juniors: 2
+- as-roma: 2
+- barcelona: 2
 - chacarita: 2
-- chelsea: 2
 - corinthians: 2
 - cruzeiro: 2
+- fiorentina: 2
 - genoa: 2
 - gimnasia-lp: 2
+- inter-miami: 2
 - internacional: 2
 - los-andes: 2
-- manchester-city: 2
-- millonarios: 2
-- paris-saint-germain: 2
+- newell-s-old-boys: 2
+- palermo: 2
 - real-betis: 2
 - real-zaragoza: 2
 - roma: 2
-- sampdoria: 2
 - santamarina: 2
 - sarmiento: 2
+- sevilla: 2
 - west-ham: 2
+- ac-milan: 1
 - ajax: 1
 - al-ain: 1
 - alaves: 1
@@ -110,6 +120,7 @@
 - aston-villa: 1
 - atalanta: 1
 - atlanta: 1
+- atle-tico-madrid: 1
 - az-alkmaar: 1
 - brest: 1
 - cagliari: 1
@@ -119,33 +130,32 @@
 - deportivo-madryn: 1
 - deportivo-maipu: 1
 - elche: 1
+- espanyol: 1
 - fc-basel: 1
-- fiorentina: 1
 - flamengo: 1
+- galatasaray: 1
 - getafe: 1
 - guarani: 1
 - hamburg: 1
 - hebei: 1
 - hercules: 1
+- leicester-city: 1
 - libertad: 1
 - liverpool: 1
 - logrones: 1
 - lyon: 1
 - mallorca: 1
 - marseille: 1
-- napoli: 1
+- newells-old-boys: 1
 - olimpia: 1
-- palermo: 1
 - palestino: 1
 - penarol: 1
 - pisa: 1
 - porto: 1
-- psg: 1
 - racing-paris: 1
 - real-murcia: 1
 - san-martin-sj: 1
 - san-martin-tucuman: 1
-- sevilla: 1
 - sportivo-luqueno: 1
 - strasbourg: 1
 - talleres-re: 1
@@ -157,16 +167,17 @@
 - vasco-da-gama: 1
 - venezia: 1
 - wanderers: 1
+- zaragoza: 1
 
 ## Players by decade
-- 2010s: 1304
-- 2020s: 1045
-- 2000s: 906
-- 1990s: 807
-- 1980s: 10
+- 2010s: 1306
+- 2020s: 1036
+- 2000s: 910
+- 1990s: 804
 - 1970s: 9
+- 1980s: 9
+- 1950s: 6
 - 1960s: 6
-- 1950s: 5
 - 1940s: 2
 - 1920s: 1
 
