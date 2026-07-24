@@ -19,61 +19,70 @@ export interface CareerCardData {
 
 export default function CareerCardView({ data }: { data: CareerCardData }) {
   return (
-    <div className="w-full max-w-md mx-auto rounded-3xl p-6 sm:p-7 border border-amber-400/20 shadow-[0_20px_60px_rgba(0,0,0,0.7)] font-sans relative text-white overflow-hidden bg-gradient-to-b from-[#0c1526] via-[#0a1220] to-[#060b16]">
-      {/* Gold top accent + ambient glow */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-500 via-yellow-300 to-amber-500" />
-      <div className="absolute -top-16 -right-10 w-52 h-52 rounded-full bg-amber-400/10 blur-3xl pointer-events-none" />
+    <div className="w-full max-w-md mx-auto rounded-[32px] p-6 sm:p-8 border border-amber-400/25 shadow-[0_25px_70px_rgba(0,0,0,0.85)] font-sans relative text-white overflow-hidden bg-gradient-to-b from-[#091122] via-[#060b18] to-[#03060d]">
+      {/* Background subtle radial ambient highlight */}
+      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-gradient-to-br from-amber-400/10 via-amber-500/5 to-transparent blur-3xl pointer-events-none" />
 
-      {/* HEADER: OVR + NAME */}
-      <div className="flex items-center gap-4 mb-5 relative">
-        {/* OVR BADGE (dorado 3D) */}
+      {/* HEADER SECTION */}
+      <div className="flex items-start gap-5 mb-6 relative z-10">
+        {/* OVR BADGE (Fondo beige claro + cuadrado degradado dorado) */}
         <div className="relative shrink-0">
-          <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-yellow-200 via-amber-400 to-amber-600 shadow-[0_6px_20px_rgba(245,158,11,0.45),inset_0_2px_4px_rgba(255,255,255,0.6)] flex flex-col items-center justify-center text-slate-950">
-            <span className="text-[9px] font-black tracking-[0.2em] uppercase font-sport opacity-70 -mb-1">OVR</span>
-            <span className="text-5xl font-black font-display leading-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">{data.overall}</span>
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] bg-[#FFF8E7] p-3 shadow-[0_8px_25px_rgba(0,0,0,0.4)] flex items-center justify-center">
+            <div className="w-full h-full rounded-2xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 flex flex-col items-center justify-center text-slate-950 shadow-inner">
+              <span className="text-[10px] font-black tracking-[0.2em] uppercase font-sport opacity-75">OVR</span>
+              <span className="text-5xl sm:text-6xl font-black font-display leading-none text-slate-950 mt-0.5">
+                {data.overall}
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1.5">
+        {/* DETAILS */}
+        <div className="flex-1 min-w-0 pt-1">
+          <div className="flex items-center gap-2.5 mb-2">
             <span className="text-2xl leading-none">{data.nationalityFlag || "🇦🇷"}</span>
-            <span className="px-2.5 py-1 rounded-lg bg-amber-400/15 border border-amber-400/30 text-[11px] font-black tracking-wider uppercase font-sport text-amber-300">
+            <div className="px-3 py-1 rounded-xl bg-[#050A14] border border-amber-400/40 text-[11px] font-black tracking-wider uppercase font-sport text-amber-300 shadow-sm">
               {data.marketValue}
-            </span>
+            </div>
           </div>
-          <h3 className="font-display font-black text-white uppercase leading-tight text-xl sm:text-2xl truncate">
+
+          <h3 className="font-display font-black text-white uppercase leading-tight text-2xl sm:text-3xl tracking-tight truncate drop-shadow-sm">
             {data.playerName}
           </h3>
-          <p className="text-[11px] font-bold text-slate-400 font-sport uppercase tracking-wider mt-0.5">
+          <p className="text-xs font-bold text-slate-400 font-sport uppercase tracking-wider mt-1">
             #{data.number} · {data.position}
           </p>
         </div>
       </div>
 
-      {/* STATS ROW: PJ, GLS, AST */}
-      <div className="grid grid-cols-3 gap-2 bg-slate-950/70 border border-white/5 rounded-2xl p-3 text-center mb-6">
+      {/* STATS BOX: PJ, GLS, AST */}
+      <div className="grid grid-cols-3 gap-2 bg-[#050A14] border border-white/5 rounded-2xl p-4 sm:p-5 text-center my-6 shadow-inner relative z-10">
         <div>
-          <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">PJ</div>
-          <div className="text-xl font-black text-white font-display">{data.matchesPlayed}</div>
+          <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">PJ</div>
+          <div className="text-3xl sm:text-4xl font-black text-white font-display mt-1">{data.matchesPlayed}</div>
         </div>
-        <div className="border-x border-white/5">
-          <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">GLS</div>
-          <div className="text-xl font-black text-green-400 font-display">{data.goals}</div>
+        <div className="border-x border-white/10">
+          <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">GLS</div>
+          <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-display mt-1">{data.goals}</div>
         </div>
         <div>
-          <div className="text-[8px] font-bold text-slate-400 font-sport uppercase tracking-wider">AST</div>
-          <div className="text-xl font-black text-blue-400 font-display">{data.assists}</div>
+          <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">AST</div>
+          <div className="text-3xl sm:text-4xl font-black text-sky-400 font-display mt-1">{data.assists}</div>
         </div>
       </div>
 
-      {/* TRAYECTORIA (CLUB LOGOS) */}
-      <div className="mb-6">
-        <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.2em] text-center mb-3">
-          TRAYECTORIA
+      {/* TRAYECTORIA */}
+      <div className="mb-6 relative z-10">
+        <h4 className="text-[11px] font-bold text-slate-400 font-sport uppercase tracking-[0.35em] text-center mb-4">
+          T R A Y E C T O R I A
         </h4>
         <div className="flex items-center justify-center gap-4 flex-wrap">
           {data.clubs.map((c, i) => (
-            <div key={i} className="w-12 h-12 rounded-2xl bg-slate-950/80 border border-white/10 p-2 flex items-center justify-center shadow-md hover:scale-105 transition-transform" title={c.name}>
+            <div
+              key={i}
+              className="w-14 h-14 rounded-2xl bg-[#050A14] border border-white/10 p-2.5 flex items-center justify-center shadow-md hover:scale-105 transition-transform"
+              title={c.name}
+            >
               {c.logoUrl ? (
                 <img src={c.logoUrl} alt={c.name} className="w-full h-full object-contain" />
               ) : (
@@ -84,27 +93,25 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
         </div>
       </div>
 
-      {/* TÍTULOS (TROPHY ICONS WITH COUNTERS) */}
-      <div className="mb-6">
-        <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.2em] text-center mb-3">
-          TÍTULOS
+      {/* TÍTULOS */}
+      <div className="mb-6 relative z-10">
+        <h4 className="text-[11px] font-bold text-slate-400 font-sport uppercase tracking-[0.35em] text-center mb-4">
+          T Í T U L O S
         </h4>
-        <div className="flex items-center justify-center gap-5 flex-wrap">
+        <div className="flex items-center justify-center gap-6 flex-wrap">
           {data.trophies.map((t, i) => (
             <div key={i} className="flex flex-col items-center group relative">
               <div className="relative w-12 h-14 flex items-center justify-center">
-                {/* 3D trophy rendered icon */}
-                <div className="text-3xl filter drop-shadow-[0_4px_8px_rgba(245,158,11,0.3)] group-hover:scale-110 transition-transform">
+                <div className="text-3xl filter drop-shadow-[0_4px_10px_rgba(245,158,11,0.4)] group-hover:scale-110 transition-transform">
                   {t.icon}
                 </div>
-                {/* Badge count */}
                 {t.count > 1 && (
-                  <span className="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-full bg-slate-900 border border-amber-400 text-[9px] font-black font-sport text-amber-300 shadow-md">
+                  <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-slate-950 border border-amber-400 text-[9px] font-black font-sport text-amber-300 shadow-md">
                     ×{t.count}
                   </span>
                 )}
               </div>
-              <span className="text-[9px] font-bold text-slate-400 font-sport uppercase mt-1 tracking-wider text-center max-w-[80px] truncate">
+              <span className="text-[9px] font-bold text-slate-400 font-sport uppercase mt-1 tracking-wider text-center max-w-[85px] truncate">
                 {t.name}
               </span>
             </div>
@@ -113,9 +120,9 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
       </div>
 
       {/* FOOTER WATERMARK */}
-      <div className="pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-sport font-bold uppercase tracking-wider">
-        <span className="font-malvinas text-white text-[11px] tracking-[0.1em]">GAMBETA</span>
-        <span className="text-[#74ACDF]/70">El juego del fútbol argentino</span>
+      <div className="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-sport font-bold uppercase tracking-wider relative z-10">
+        <span className="font-display font-black text-white tracking-[0.15em]">GAMBETA</span>
+        <span className="text-[#74ACDF] text-[10px] tracking-[0.2em]">EL JUEGO DEL FÚTBOL ARGENTINO</span>
       </div>
     </div>
   )
