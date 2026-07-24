@@ -322,16 +322,26 @@ function CareerDashboard() {
           {hasOffers ? (
             <div className="space-y-3">
               <p className="text-xs font-bold text-[#74ACDF] font-sport uppercase tracking-wider">📩 Ofertas de transferencia</p>
-              {career.pendingOffers.map((o) => (
-                <div key={o.clubId} className="flex items-center gap-2 bg-slate-950/60 border border-white/5 rounded-xl p-2.5">
-                  <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-bold text-white truncate">{o.clubName}</div>
-                    <div className="text-[10px] text-slate-400 font-sport">Fuerza {o.strength} · Oferta €{o.valueM}M</div>
+              {career.pendingOffers.map((o) => {
+                const euro = o.region === "euro"
+                return (
+                  <div key={o.clubId} className={`flex items-center gap-2 rounded-xl p-2.5 border ${euro ? "bg-amber-400/10 border-amber-400/40" : "bg-slate-950/60 border-white/5"}`}>
+                    {euro ? (
+                      <span className="w-8 h-8 shrink-0 flex items-center justify-center text-2xl">{o.flag || "🌍"}</span>
+                    ) : (
+                      <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-bold text-white truncate flex items-center gap-1.5">
+                        {o.clubName}
+                        {euro && <span className="text-[8px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase tracking-wider">Europa</span>}
+                      </div>
+                      <div className="text-[10px] text-slate-400 font-sport">Fuerza {o.strength} · Oferta €{o.valueM}M</div>
+                    </div>
+                    <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">Fichar</button>
                   </div>
-                  <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">Fichar</button>
-                </div>
-              ))}
+                )
+              })}
               <button onClick={declineOffers} className="w-full py-2.5 bg-slate-900 border border-white/10 text-slate-300 rounded-xl text-xs font-bold font-sport uppercase tracking-wider hover:bg-slate-800 transition-colors">
                 Quedarme en {club?.name}
               </button>
@@ -432,7 +442,7 @@ function CareerDashboard() {
                       <td className="py-1.5 pr-2 text-center text-blue-400">{s.assists}</td>
                       <td className={`py-1.5 pr-2 text-center font-bold ${(s.rating ?? 7) >= 8 ? "text-emerald-400" : (s.rating ?? 7) >= 6.8 ? "text-amber-400" : "text-slate-400"}`}>{(s.rating ?? 7).toFixed(1)}</td>
                       <td className="py-1.5 text-right">
-                        {[s.liga && "⭐", s.copaArgentina && "🥛", s.continentalWon && (s.continental === "libertadores" ? "🏆" : "🥇")].filter(Boolean).join(" ") || "—"}
+                        {[s.liga && "⭐", s.copaArgentina && "🥛", s.continentalWon && (s.continental ? ({ libertadores: "🏆", sudamericana: "🥇", champions: "🌟", europa: "🎖️" }[s.continental] || "🏆") : "")].filter(Boolean).join(" ") || "—"}
                       </td>
                     </tr>
                   ))}
