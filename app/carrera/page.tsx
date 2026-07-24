@@ -510,6 +510,7 @@ function CareerDashboard() {
                     const euro = o.region === "euro"
                     return (
                       <div key={o.clubId} className={`flex items-center gap-2 rounded-xl p-3 border ${euro ? "bg-amber-400/10 border-amber-400/40" : "bg-slate-950/60 border-white/5"}`}>
+                        <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
                             {o.clubName}
