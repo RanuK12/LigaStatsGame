@@ -10,6 +10,7 @@ import { supabase } from '@/lib/supabase'
 import { profileFromSupabaseUser } from '@/lib/auth'
 import AuthModal from './AuthModal'
 import UserProfileModal from './UserProfileModal'
+import TierBadge from './TierBadge'
 
 const NAV_ITEMS = [
   { href: '/', label: 'INICIO', match: '/' },
@@ -56,7 +57,7 @@ export default function Header() {
             />
           </div>
           <div className="flex flex-col justify-center gap-1">
-            <span className="font-bandera text-sm sm:text-base text-white flex items-center gap-1.5 leading-none uppercase tracking-[0.14em]">
+            <span className="font-malvinas text-sm sm:text-base text-white flex items-center gap-1.5 leading-none uppercase tracking-[0.14em]" title="Tipografía Malvinas Sans">
               DRAFT TRES ESTRELLAS
               <span className="inline-flex gap-0.5 ml-1 animate-pulse shrink-0">
                 {[1, 2, 3].map(n => (
@@ -120,6 +121,7 @@ export default function Header() {
               )}
               <span className="font-bold max-w-[90px] truncate">{user.username}</span>
               <span className="text-[10px] text-[#74ACDF] font-bold">⚡{user.elo}</span>
+              <span className="hidden sm:inline-flex"><TierBadge elo={user.elo} /></span>
             </button>
           ) : (
             <button

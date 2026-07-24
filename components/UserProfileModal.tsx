@@ -2,6 +2,8 @@
 import { useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useUserStore } from "@/lib/user-store"
+import { rankFromElo } from "@/lib/ranking"
+import TierBadge from "./TierBadge"
 
 export default function UserProfileModal() {
   const { user, isProfileModalOpen, closeProfileModal, logout } = useUserStore()
@@ -58,9 +60,24 @@ export default function UserProfileModal() {
             <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight">
               {user.username}
             </h3>
-            <p className="text-slate-400 text-xs font-sport uppercase tracking-wider mt-0.5">
-              {user.elo >= 1200 ? "⭐ DIRECTOR TÉCNICO ÉLITE" : "⚡ DIRECTOR TÉCNICO EN PROGRESO"}
-            </p>
+            <div className="flex justify-center mt-2">
+              <TierBadge elo={user.elo} showElo />
+            </div>
+            {(() => {
+              const r = rankFromElo(user.elo)
+              return r.toNext > 0 ? (
+                <div className="mt-3 px-2">
+                  <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: `${r.progressPct}%`, background: r.tier.color }} />
+                  </div>
+                  <p className="text-[10px] text-slate-400 mt-1.5 font-sport uppercase tracking-wider">
+                    Faltan {r.toNext} ELO para {r.nextLabel}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-[10px] text-amber-400 mt-2 font-sport uppercase tracking-wider">👑 Cima del ranking</p>
+              )
+            })()}
 
             <div className="grid grid-cols-3 gap-3 my-6">
               <div className="card-glass p-3 rounded-2xl border border-white/5">

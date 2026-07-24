@@ -1,7 +1,16 @@
 import type { Metadata, Viewport } from 'next'
 import { Archivo, Inter, Bebas_Neue } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/components/Header'
+
+// Malvinas Sans: tipografía creada a raíz de la bandera de Malvinas. Guiño indirecto:
+// solo cubre A-Z/0-9 (sin acentos), por eso se usa en el wordmark sin acentos.
+const malvinas = localFont({
+  src: './fonts/MalvinasSans-Regular.otf',
+  variable: '--font-malvinas',
+  display: 'swap',
+})
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -40,7 +49,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${archivo.variable} ${inter.variable} ${bebas.variable}`}>
+    <html lang="es" className={`${archivo.variable} ${inter.variable} ${bebas.variable} ${malvinas.variable}`}>
       <head>
         <link rel="icon" href="/LigaStatsGame/logos/afa.png" />
       </head>
