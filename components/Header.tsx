@@ -46,26 +46,28 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020813]/72 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
+        <Link href="/" className="flex items-center gap-2.5 group -ml-2 sm:-ml-3 transition-transform">
+          <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0">
             <img
               src="/logos/gambeta.svg"
-              alt="Gambeta"
-              className="w-full h-full object-contain drop-shadow-[0_2px_10px_rgba(116,172,223,0.3)] group-hover:scale-105 transition-transform"
+              alt="Gambeta Logo"
+              className="w-full h-full object-contain drop-shadow-[0_2px_12px_rgba(116,172,223,0.4)] group-hover:scale-105 transition-transform"
             />
           </div>
-          <div className="flex flex-col justify-center gap-1">
-            <span className="font-malvinas text-lg sm:text-xl text-white flex items-center gap-1.5 leading-none uppercase tracking-[0.12em]" title="Tipografía Malvinas Sans">
-              GAMBETA
+          <div className="flex flex-col justify-center">
+            <div className="flex items-center gap-1.5 leading-none">
+              <span className="font-malvinas text-xl sm:text-2xl text-white uppercase tracking-[0.14em]" title="Gambeta">
+                GAMBETA
+              </span>
               <span className="inline-flex gap-0.5 ml-1 animate-pulse shrink-0">
                 {[1, 2, 3].map(n => (
-                  <svg key={n} className="w-2.5 h-2.5 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
+                  <svg key={n} className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#D4AF37] fill-current drop-shadow-[0_0_6px_rgba(212,175,55,0.6)]" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                   </svg>
                 ))}
               </span>
-            </span>
-            <span className="text-[9px] sm:text-[10px] text-[#74ACDF]/80 font-bold tracking-[0.2em] leading-none font-sport uppercase whitespace-nowrap">
+            </div>
+            <span className="text-[9px] sm:text-[10px] text-[#74ACDF] font-bold tracking-[0.22em] leading-none font-sport uppercase whitespace-nowrap mt-1">
               EL JUEGO DEL FÚTBOL ARGENTINO
             </span>
           </div>
