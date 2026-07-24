@@ -3,6 +3,8 @@ import { Archivo, Inter, Bebas_Neue, Anton } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/components/Header'
+import AuthModal from '@/components/AuthModal'
+import UserProfileModal from '@/components/UserProfileModal'
 
 // Anton: display condensada de alto impacto para titulares (estilo estadio).
 const anton = Anton({
@@ -65,6 +67,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="w-full">
           {children}
         </main>
+        {/* Modales a nivel body: fixed inset-0 relativo al viewport (no recortado por el header) */}
+        <AuthModal />
+        <UserProfileModal />
       </body>
     </html>
   )

@@ -1,6 +1,5 @@
 "use client"
 import { useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { useUserStore } from "@/lib/user-store"
 import { rankFromElo } from "@/lib/ranking"
 import TierBadge from "./TierBadge"
@@ -18,24 +17,17 @@ export default function UserProfileModal() {
     return () => window.removeEventListener("keydown", onKey)
   }, [isProfileModalOpen, closeProfileModal])
 
+  if (!isProfileModalOpen || !user) return null
+
   return (
-    <AnimatePresence>
-      {isProfileModalOpen && user && (
-        <motion.div
-          key="profile-backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={closeProfileModal}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md cursor-pointer"
-        >
-          <motion.div
-            onClick={(e) => e.stopPropagation()}
-            initial={{ opacity: 0, scale: 0.9, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 15 }}
-            className="card-gradient rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_0_50px_rgba(116,172,223,0.15)] relative overflow-hidden text-center cursor-default"
-          >
+    <div
+      onClick={closeProfileModal}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md cursor-pointer overflow-y-auto animate-[fadeIn_0.15s_ease-out]"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="rounded-3xl p-6 sm:p-8 max-w-md w-full border border-[#74ACDF]/30 shadow-[0_20px_60px_rgba(0,0,0,0.7)] relative overflow-hidden text-center cursor-default max-h-[90vh] overflow-y-auto bg-gradient-to-b from-[#0c1526] to-[#060b16] animate-[popIn_0.18s_ease-out]"
+      >
             <button
               onClick={closeProfileModal}
               aria-label="Cerrar"
@@ -103,9 +95,7 @@ export default function UserProfileModal() {
             >
               Cerrar Sesión
             </button>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      </div>
+    </div>
   )
 }
