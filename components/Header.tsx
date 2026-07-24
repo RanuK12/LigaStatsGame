@@ -57,8 +57,8 @@ export default function Header() {
             />
           </div>
           <div className="flex flex-col justify-center gap-1">
-            <span className="font-malvinas text-sm sm:text-base text-white flex items-center gap-1.5 leading-none uppercase tracking-[0.14em]" title="Tipografía Malvinas Sans">
-              DRAFT TRES ESTRELLAS
+            <span className="font-malvinas text-lg sm:text-xl text-white flex items-center gap-1.5 leading-none uppercase tracking-[0.12em]" title="Tipografía Malvinas Sans">
+              GAMBETA
               <span className="inline-flex gap-0.5 ml-1 animate-pulse shrink-0">
                 {[1, 2, 3].map(n => (
                   <svg key={n} className="w-2.5 h-2.5 text-[#D4AF37] fill-current" viewBox="0 0 20 20">

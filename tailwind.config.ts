@@ -20,6 +20,7 @@ const config: Config = {
       fontFamily: {
         sport: ['var(--font-sport)'],
         display: ['var(--font-display)'],
+        impact: ['var(--font-impact)', 'var(--font-bandera)', 'sans-serif'],
         sans: ['var(--font-sans)'],
         bandera: ['var(--font-bandera)', 'var(--font-display)', 'sans-serif'],
         malvinas: ['var(--font-malvinas)', 'var(--font-bandera)', 'var(--font-display)', 'sans-serif'],

@@ -86,7 +86,7 @@ const MODES = [
 const TICKER_ITEMS = [
   "MUNDIAL 2026 — ARGENTINA BUSCA LA 4TA ESTRELLA",
   "LIGA PROFESIONAL TEMPORADA 2026 — ACTUALIZADO",
-  "DRAFT TRES ESTRELLAS — ARMÁ TU MEJOR ONCE HISTÓRICO",
+  "GAMBETA — ARMÁ TU MEJOR ONCE HISTÓRICO",
   "CAMPEONES DE AMÉRICA Y DEL MUNDO EN LA BASE",
   "COPA ARGENTINA — MODO DE ELIMINACIÓN DIRECTA ACTIVADO",
   "+3600 JUGADORES REALES · 168 PLANTELES FILTRADOS",
@@ -341,13 +341,13 @@ function HeroSection() {
             <Image src="/LigaStatsGame/logos/lpf.png" alt="LPF" fill className="object-contain" />
           </span>
           <span className="text-[11px] font-bold text-white uppercase tracking-[0.2em] font-sport">
-            EL GAME DRAFT DEL FÚTBOL ARGENTINO
+            GAMBETA · EL JUEGO DEL FÚTBOL ARGENTINO
           </span>
         </motion.div>
 
         {/* Hero Title */}
-        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.02] mb-6 uppercase tracking-tight">
-          ARMÁ TU <span className="gradient-text drop-shadow-[0_4px_25px_rgba(116,172,223,0.3)]">EQUIPO SOÑADO</span>
+        <h1 className="font-impact text-6xl sm:text-7xl lg:text-8xl text-white leading-[0.92] mb-6 tracking-tight">
+          ARMÁ TU <span className="gradient-text drop-shadow-[0_4px_25px_rgba(116,172,223,0.35)]">EQUIPO SOÑADO</span>
         </h1>
 
         <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium">
@@ -759,7 +759,7 @@ export default function HomePage() {
               </div>
               <div>
                 <span className="text-[#74ACDF]/40 text-xs font-sport font-bold block tracking-wider">
-                  DRAFT TRES ESTRELLAS
+                  GAMBETA
                 </span>
                 <span className="text-slate-600 text-[10px] font-medium font-sans">© 2026 · El Draft del Fútbol Argentino</span>
               </div>

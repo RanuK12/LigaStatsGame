@@ -56,6 +56,12 @@ h1, h2, h3, h4, .font-display {
   letter-spacing: -0.035em;
 }
 
+/* Titulares grandes de página en display de impacto condensada (estilo estadio) */
+h1, h2 {
+  font-family: var(--font-impact), var(--font-bandera), 'Impact', sans-serif;
+  letter-spacing: 0.005em;
+}
+
 button, input, select, textarea {
   font: inherit;
 }
@@ -150,6 +156,18 @@ button, input, select, textarea {
   font-family: var(--font-malvinas), var(--font-bandera), var(--font-display), sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+/* Anton: display de impacto condensada para titulares grandes. */
+.font-impact {
+  font-family: var(--font-impact), var(--font-bandera), 'Impact', sans-serif;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+/* Eyebrow (rótulo chico celeste arriba de un título) */
+.eyebrow {
+  @apply inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.28em] text-[#74ACDF] font-sport;
 }
 
 .banner-malvinas {
