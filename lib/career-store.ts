@@ -95,11 +95,18 @@ export const useCareerStore = create<CareerStore>()(
           milestones.balonDeOro += 1
           season.highlights.unshift(`🏅 Ganaste el Balón de Oro`)
         }
-        // Mundial con la Selección: crack consagrado, cada tanto
-        if (!milestones.worldCup && milestones.nationalTeam && season.ovr >= 86 && rng() < 0.18) {
-          milestones.worldCup = true
-          trophies['mundial'] = (trophies['mundial'] || 0) + 1
-          season.highlights.unshift(`🌍 ¡CAMPEÓN DEL MUNDO con ${nation}!`)
+        // Mundial SOLO en años reales (2026, 2030, 2034...) y hay que ser un crack en la
+        // Selección. No está garantizado: la Selección puede no ganarlo.
+        const isWorldCupYear = season.year % 4 === 2
+        if (isWorldCupYear && milestones.nationalTeam && season.ovr >= 83) {
+          const wcChance = Math.max(0.08, Math.min(0.4, (season.ovr - 82) / 30))
+          if (rng() < wcChance) {
+            trophies['mundial'] = (trophies['mundial'] || 0) + 1
+            milestones.worldCup = true
+            season.highlights.unshift(`🌍 ¡CAMPEÓN DEL MUNDO ${season.year} con ${nation}!`)
+          } else {
+            season.highlights.push(`🌎 Jugaste el Mundial ${season.year} con ${nation}`)
+          }
         }
 
         const player = advancePlayer(state, season)

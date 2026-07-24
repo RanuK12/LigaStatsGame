@@ -45,8 +45,8 @@ export default function CarreraPage() {
             TU CAMINO A LA GLORIA
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed">
-            Creá o elegí tu jugador, sumá temporadas en la Liga, Copa Argentina, Libertadores y
-            Sudamericana, recibí ofertas y armá tu ficha de leyenda.
+            Empezá como promesa y ganate todo: la Liga, la Libertadores, el salto a Europa,
+            la Champions y el Mundial con la Selección. Nada es fácil — te lo tenés que ganar.
           </p>
         </div>
 
@@ -76,8 +76,8 @@ function CareerSetupWizard() {
   const [number, setNumber] = useState(10)
   const [position, setPosition] = useState("ST")
   const [nationality, setNationality] = useState("Argentina")
-  const [ovr, setOvr] = useState(72)
-  const [age, setAge] = useState(18)
+  const [ovr, setOvr] = useState(64)
+  const [age, setAge] = useState(17)
 
   // real-player selection
   const { players, error } = usePlayersCore()
@@ -173,8 +173,8 @@ function CareerSetupWizard() {
                 ))}
               </select>
             </Field>
-            <Field label={`OVR inicial: ${ovr}`}>
-              <input type="range" min={60} max={85} value={ovr} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
+            <Field label={`OVR inicial: ${ovr} ${ovr < 66 ? "(promesa)" : ovr < 74 ? "(joven proyecto)" : "(figura)"}`}>
+              <input type="range" min={55} max={80} value={ovr} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
             </Field>
             <Field label={`Edad: ${age} · Valor ~€${previewValue}M`}>
               <input type="range" min={16} max={30} value={age} onChange={(e) => setAge(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
