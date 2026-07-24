@@ -279,14 +279,12 @@ export function calculateTeamScore(team: (Player | null)[], formation: Formation
 export function calculateFullTeamScore(team: (Player | null)[], formation: FormationConfig): number {
   const valid = team.filter(isPlayer);
   if (valid.length < 11) return 0;
-  let score = 0;
-  valid.forEach(p => { score += p.rating || 50; });
-  // Chemistry bonus for having correct positions
-  let chemBonus = 0;
-  team.forEach((p, i) => {
-    if (p && formation.positions[i] && p.position === formation.positions[i].pos) chemBonus += 2;
-  });
-  return Math.round(score / 11 + chemBonus);
+  const avg = valid.reduce((s, p) => s + (p.rating || 50), 0) / 11;
+  // La química REAL (mismo club, nacionalidad, jugadores en su puesto) modifica el score:
+  // premia armar con lógica y castiga la desprolijidad. Difícil llegar a 90+ = competitivo.
+  const chem = calculateChemistry(team, formation).total; // 0-100
+  const chemMod = ((chem - 55) / 45) * 8; // chem 100 -> +8, 55 -> 0, 0 -> ~-9.8
+  return Math.max(0, Math.min(99, Math.round(avg + chemMod)));
 }
 
 // ═══════════════════════════════════════════════════════════════

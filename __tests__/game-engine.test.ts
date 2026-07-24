@@ -143,31 +143,31 @@ describe('calculateFullTeamScore()', () => {
     expect(calculateFullTeamScore(team, formation433)).toBe(0)
   })
 
-  it('suma chemistry bonus por posición correcta', () => {
-    // 11 jugadores todos en posición correcta (CM en slot CM)
-    const team = formation433.positions.map((slot, i) => {
-      // El primer slot (GK) necesita un GK
-      if (i === 0) return makePlayer({ position: 'GK', rating: 80, positions: ['GK'] })
-      if (i === 1) return makePlayer({ position: 'LB', rating: 80, positions: ['LB'] })
-      if (i === 2) return makePlayer({ position: 'CB', rating: 80, positions: ['CB'] })
-      if (i === 3) return makePlayer({ position: 'CB', rating: 80, positions: ['CB'] })
-      if (i === 4) return makePlayer({ position: 'RB', rating: 80, positions: ['RB'] })
-      return makePlayer({ position: slot.pos, rating: 80, positions: [slot.pos] })
-    })
-    const avg = 80
-    const chem = 11 * 2 // 11 slots en posición correcta
-    expect(calculateFullTeamScore(team, formation433)).toBe(Math.round(avg + chem))
+  it('un equipo bien armado da un score competitivo y nunca imposible (>99)', () => {
+    const team = formation433.positions.map((slot, i) =>
+      i === 0
+        ? makePlayer({ position: 'GK', rating: 80, positions: ['GK'] })
+        : makePlayer({ position: slot.pos, rating: 80, positions: [slot.pos] }),
+    )
+    const score = calculateFullTeamScore(team, formation433)
+    expect(score).toBeGreaterThanOrEqual(80) // buena química suma sobre el promedio
+    expect(score).toBeLessThanOrEqual(99) // nunca supera 99 (antes daba 102)
   })
 
-  it('da chemistry bonus solo por posiciones exactas (GK y ST coinciden)', () => {
-    const team = formation433.positions.map((slot, i) => {
-      if (i === 0) return makePlayer({ position: 'GK', rating: 80, positions: ['GK'] })
-      // Ponemos LW en todos los slots no-GK — LW no coincide con ningún slot excepto LW
-      return makePlayer({ position: 'LW', rating: 80, positions: ['LW'] })
-    })
-    // Coincidencias exactas: GK (slot 0) → +2, LW (slot 8, el slot LW) → +2
-    // Total chem = 4, avg = 80, score = 84
-    expect(calculateFullTeamScore(team, formation433)).toBe(84)
+  it('la química importa: mejor fit posicional puntúa más que todos fuera de puesto', () => {
+    const bien = formation433.positions.map((slot, i) =>
+      i === 0
+        ? makePlayer({ position: 'GK', rating: 80, positions: ['GK'] })
+        : makePlayer({ position: slot.pos, rating: 80, positions: [slot.pos] }),
+    )
+    const mal = formation433.positions.map((slot, i) =>
+      i === 0
+        ? makePlayer({ position: 'GK', rating: 80, positions: ['GK'] })
+        : makePlayer({ position: 'LW', rating: 80, positions: ['LW'] }),
+    )
+    expect(calculateFullTeamScore(bien, formation433)).toBeGreaterThan(
+      calculateFullTeamScore(mal, formation433),
+    )
   })
 })
 

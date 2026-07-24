@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${archivo.variable} ${inter.variable} ${bebas.variable} ${malvinas.variable} ${anton.variable}`}>
       <head>
-        <link rel="icon" href="/logos/afa.png" />
+        <link rel="icon" href="/logos/gambeta.svg" />
       </head>
       <body className="bg-[#020813] text-white min-h-screen antialiased font-sans">
         <Header />

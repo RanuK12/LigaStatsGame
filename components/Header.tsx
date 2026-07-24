@@ -47,10 +47,10 @@ export default function Header() {
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-[26px] h-[36px] sm:w-[29px] sm:h-[40px] shrink-0">
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0">
             <img
-              src="/logos/afa.png"
-              alt="AFA Logo"
+              src="/logos/gambeta.svg"
+              alt="Gambeta"
               className="w-full h-full object-contain drop-shadow-[0_2px_10px_rgba(116,172,223,0.3)] group-hover:scale-105 transition-transform"
             />
           </div>

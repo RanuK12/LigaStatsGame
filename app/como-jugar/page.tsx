@@ -74,6 +74,32 @@ export default function ComoJugarPage() {
         ))}
       </section>
 
+      <section className="mx-auto mt-10 max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
+        <h2 className="font-display text-2xl font-black text-white text-center mb-5">
+          Puntaje y Química
+        </h2>
+        <div className="space-y-4 text-sm text-slate-300 leading-relaxed">
+          <p>
+            <span className="font-bold text-[#74ACDF]">El puntaje de tu equipo</span> combina el
+            promedio de rating de tus 11 con la <span className="font-bold text-amber-300">química</span>.
+            No alcanza con juntar cracks sueltos: armar con lógica es lo que te hace competitivo. Llegar
+            a 90+ es difícil a propósito.
+          </p>
+          <p>
+            <span className="font-bold text-amber-300">La química</span> premia tres cosas entre jugadores
+            cercanos en la cancha: que hayan compartido <span className="text-white">club</span>, que sean de
+            la misma <span className="text-white">nacionalidad</span>, y que cada uno juegue en su
+            <span className="text-white"> puesto natural</span>. Un jugador fuera de posición baja la química
+            (y el rendimiento).
+          </p>
+          <p>
+            La química no es decorativa: <span className="font-bold text-white">afecta de verdad la simulación</span>.
+            Un equipo con buena química ataca y defiende mejor, y gana más partidos. Fijate el panel de química
+            (las líneas entre jugadores) mientras armás.
+          </p>
+        </div>
+      </section>
+
       <section className="mx-auto mt-10 max-w-3xl rounded-3xl border border-[#75AADB]/15 bg-[#75AADB]/5 p-6 text-center">
         <h2 className="font-display text-2xl font-black text-white">
           Modos principales
