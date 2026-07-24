@@ -64,6 +64,22 @@ const LEGENDS = [
     clubs: clubs([['Sampdoria', '2012-2013'], ['Inter Milan', '2013-2019'], ['Paris Saint-Germain', '2019-2022'], ['Galatasaray', '2022-2025'], ['Argentina', '2013-2018']]) },
 ]
 
+// Stats reales (aprox) por leyenda: [capsSeleccion, golesSeleccion, capsClub, golesClub, asistencias]
+const STATS = {
+  'Lionel Messi': [191, 112, 1050, 750, 350],
+  'Diego Maradona': [91, 34, 490, 259, 120],
+  'Alfredo Di Stéfano': [37, 29, 520, 376, 100],
+  'Juan Román Riquelme': [51, 17, 550, 158, 180],
+  'Gabriel Batistuta': [78, 56, 556, 332, 60],
+  'Sergio Agüero': [101, 42, 680, 427, 120],
+  'Ángel Di María': [145, 31, 780, 175, 210],
+  'Gonzalo Higuaín': [75, 31, 640, 348, 90],
+  'Pablo Aimar': [52, 8, 520, 88, 150],
+  'Esteban Cambiasso': [52, 5, 690, 52, 60],
+  'Paulo Dybala': [41, 5, 520, 168, 90],
+  'Mauro Icardi': [10, 0, 470, 264, 40],
+}
+
 // Matchea aunque el registro original use el nombre completo (ej. "Diego Armando
 // Maradona" vs "Diego Maradona") para no dejar duplicados.
 const matchesLegend = (p, l) =>
@@ -89,11 +105,11 @@ for (const l of LEGENDS) {
     weight: 74,
     preferredFoot: 'Derecho',
     clubs: l.clubs,
-    capsNationalTeam: 50,
-    goalsNationalTeam: 15,
-    capsClub: 400,
-    goalsClub: l.position === 'ST' || l.position === 'CF' ? 200 : 60,
-    assistsClub: 80,
+    capsNationalTeam: (STATS[l.name] || [50, 15, 400, 120, 60])[0],
+    goalsNationalTeam: (STATS[l.name] || [50, 15, 400, 120, 60])[1],
+    capsClub: (STATS[l.name] || [50, 15, 400, 120, 60])[2],
+    goalsClub: (STATS[l.name] || [50, 15, 400, 120, 60])[3],
+    assistsClub: (STATS[l.name] || [50, 15, 400, 120, 60])[4],
     trophies: [],
     image: '',
     marketValue: '0',

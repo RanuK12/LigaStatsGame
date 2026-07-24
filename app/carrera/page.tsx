@@ -372,18 +372,20 @@ function CareerDashboard() {
         {/* MOMENTOS + PREMIOS */}
         {career.history.length > 0 && (() => {
           const last = career.history[career.history.length - 1]
-          const m = career.milestones
+          const m = career.milestones || { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false }
+          const rating = typeof last.rating === "number" ? last.rating : 7
+          const highlights = last.highlights || []
           return (
             <div className="card-gradient rounded-3xl p-5 border border-amber-400/20 space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-[10px] font-bold text-amber-400 font-sport uppercase tracking-[0.2em]">Temporada {last.year} · Momentos</h4>
-                <span className={`px-2.5 py-1 rounded-lg text-xs font-black font-display ${last.rating >= 8 ? "bg-emerald-500/20 text-emerald-300" : last.rating >= 6.8 ? "bg-amber-500/20 text-amber-300" : "bg-slate-800 text-slate-300"}`}>
-                  Nota {last.rating.toFixed(1)}
+                <span className={`px-2.5 py-1 rounded-lg text-xs font-black font-display ${rating >= 8 ? "bg-emerald-500/20 text-emerald-300" : rating >= 6.8 ? "bg-amber-500/20 text-amber-300" : "bg-slate-800 text-slate-300"}`}>
+                  Nota {rating.toFixed(1)}
                 </span>
               </div>
-              {last.highlights.length > 0 ? (
+              {highlights.length > 0 ? (
                 <ul className="space-y-1.5">
-                  {last.highlights.map((h, i) => (
+                  {highlights.map((h, i) => (
                     <li key={i} className="text-xs text-slate-200 leading-snug flex gap-2">
                       <span className="text-amber-400 mt-0.5">›</span>{h}
                     </li>
@@ -428,7 +430,7 @@ function CareerDashboard() {
                       <td className="py-1.5 pr-2 text-center">{s.matchesPlayed}</td>
                       <td className="py-1.5 pr-2 text-center text-green-400">{s.goals}</td>
                       <td className="py-1.5 pr-2 text-center text-blue-400">{s.assists}</td>
-                      <td className={`py-1.5 pr-2 text-center font-bold ${s.rating >= 8 ? "text-emerald-400" : s.rating >= 6.8 ? "text-amber-400" : "text-slate-400"}`}>{s.rating.toFixed(1)}</td>
+                      <td className={`py-1.5 pr-2 text-center font-bold ${(s.rating ?? 7) >= 8 ? "text-emerald-400" : (s.rating ?? 7) >= 6.8 ? "text-amber-400" : "text-slate-400"}`}>{(s.rating ?? 7).toFixed(1)}</td>
                       <td className="py-1.5 text-right">
                         {[s.liga && "⭐", s.copaArgentina && "🥛", s.continentalWon && (s.continental === "libertadores" ? "🏆" : "🥇")].filter(Boolean).join(" ") || "—"}
                       </td>

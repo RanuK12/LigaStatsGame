@@ -145,7 +145,19 @@ export const useCareerStore = create<CareerStore>()(
 
       resetCareer: () => set({ career: null }),
     }),
-    { name: 'ligastats_career_v1' },
+    {
+      name: 'ligastats_career_v1',
+      version: 2,
+      // Carreras guardadas por versiones previas no tienen milestones/rating/highlights.
+      migrate: (persisted: any) => {
+        const s = persisted
+        if (s?.career) {
+          s.career.milestones = s.career.milestones || { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false }
+          s.career.history = (s.career.history || []).map((h: any) => ({ rating: 7, topScorer: false, highlights: [], ...h }))
+        }
+        return s
+      },
+    },
   ),
 )
 
