@@ -54,6 +54,23 @@ for (const [, group] of Object.entries(byName)) {
     const rep =
       cl.find((p) => REFERENCED.has(p.id)) ||
       [...cl].sort((a, b) => completeness(b) - completeness(a))[0]
+    // UNIR la info de las copias en el representante (no perder años de club ni rating)
+    const seenClub = new Set((rep.clubs || []).map((c) => `${c.id}|${c.years}`))
+    for (const p of cl) {
+      if (p.id === rep.id) continue
+      for (const c of p.clubs || []) {
+        const k = `${c.id}|${c.years}`
+        if (!seenClub.has(k)) {
+          seenClub.add(k)
+          ;(rep.clubs ||= []).push(c)
+        }
+      }
+      rep.rating = Math.max(rep.rating || 0, p.rating || 0)
+      // completar campos vacíos del rep con los de la copia
+      for (const f of ['birthDate', 'image', 'fullName', 'nationality', 'activeYears']) {
+        if (!rep[f] && p[f]) rep[f] = p[f]
+      }
+    }
     keep.add(rep.id)
     for (const p of cl) if (p.id !== rep.id) remap[p.id] = rep.id
   }
@@ -94,8 +111,8 @@ for (const s of squads) {
     .filter((p) => p.position === 'GK' && stintIncludes(p, s.clubId, year) && !(s.playerIds || []).includes(p.id))
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
   const best = candidates[0]
-  // agregar si no hay GK, o si el mejor candidato supera claramente al que hay (titular real)
-  if (best && (gks.length === 0 || best.rating > bestExisting + 1)) {
+  // agregar el mejor arquero real elegible si no está y es al menos tan bueno como el que hay
+  if (best && (gks.length === 0 || best.rating >= bestExisting)) {
     s.playerIds.push(best.id)
     gkAdded++
   }
