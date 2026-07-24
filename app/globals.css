@@ -9,7 +9,9 @@
   /* Google Fonts Custom Setup */
   --font-sans: var(--font-sans), 'Inter', system-ui, sans-serif;
   --font-display: var(--font-display), 'Outfit', system-ui, sans-serif;
-  --font-sport: var(--font-display);
+  --font-sport: var(--font-sport), 'Space Grotesk', system-ui, sans-serif;
+  --font-bandera: var(--font-bandera), 'Bebas Neue', sans-serif;
+  --font-malvinas: var(--font-malvinas), 'Outfit', sans-serif;
 
   /* Brand Palette: Argentine Pride */
   --afa-celeste: #74ACDF;        /* Official Celeste */
@@ -50,10 +52,15 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, .font-display {
+.font-display {
   font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: -0.035em;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.font-sport {
+  font-family: var(--font-sport);
+  letter-spacing: 0.05em;
 }
 
 /* Titulares grandes de página en display de impacto condensada (estilo estadio) */
