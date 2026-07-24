@@ -239,10 +239,12 @@ export function simulateSeason(
   const goals = Math.max(0, Math.round(GOAL_BASE[cat] * ovrScale * apps * (0.6 + rng() * 0.9)))
   const assists = Math.max(0, Math.round(ASSIST_BASE[cat] * ovrScale * apps * (0.5 + rng() * 0.9)))
 
-  // Competition outcomes: club strength + a small player influence
+  // Competition outcomes: club strength + a small player influence.
+  // Calibrado para ser realista y NO fácil: hasta un club grande gana la liga ~1 de cada
+  // 5-6 temporadas, no siempre. Te lo tenés que ganar.
   const influence = (ovr - 75) / 300
-  const ligaP = clamp((club.strength - 70) / 30 + influence, 0.03, 0.55)
-  const copaP = clamp((club.strength - 68) / 34 + influence, 0.04, 0.5)
+  const ligaP = clamp((club.strength - 76) / 46 + influence * 0.6, 0.02, 0.32)
+  const copaP = clamp((club.strength - 74) / 44 + influence * 0.6, 0.03, 0.3)
   // Competición continental según región del club. La Champions es la más difícil.
   const topTier = state.nextContinental === 'libertadores'
   const contType: ContinentalComp =
