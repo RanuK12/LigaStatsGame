@@ -7,7 +7,7 @@ import type { Player } from './types'
 import { normalizePlayers } from './data-normalizers'
 
 // Debe coincidir con basePath de next.config.js (aplica también en `next dev`).
-export const BASE_PATH = '/LigaStatsGame'
+export const BASE_PATH = ''
 
 let playersPromise: Promise<Player[]> | null = null
 

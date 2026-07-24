@@ -389,7 +389,7 @@ function DraftInner() {
     return (
       <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg w-full text-center">
-          <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
+          <img src="/logos/afa.png" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
           <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">Liga Argentina Fans</h1>
           <p className="text-slate-400 mb-6">{mode.icon} {mode.name}</p>
           <div className="card-gradient rounded-3xl p-6 mb-6">
@@ -462,7 +462,7 @@ function DraftInner() {
       {/* Header */}
       <header className="pt-6 pb-4 px-4 text-center">
         <div className="flex items-center justify-center gap-2 mb-1.5">
-          <img src="/LigaStatsGame/logos/afa.png" alt="AFA" className="w-[18px] h-[25px] object-contain drop-shadow" />
+          <img src="/logos/afa.png" alt="AFA" className="w-[18px] h-[25px] object-contain drop-shadow" />
           <span className="text-[10px] font-bold text-slate-500 tracking-widest font-sport uppercase">{mode.name}</span>
         </div>
         <h1 className="font-bandera text-2xl md:text-4xl text-white tracking-[0.14em] uppercase">ARMÁ TU 11 DE SELECCIÓN</h1>
@@ -568,7 +568,7 @@ function DraftInner() {
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
             <div className="card-gradient rounded-2xl p-4 mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <img src={`/LigaStatsGame/logos/clubs/${currentSquad.clubId}.png`} alt=""
+                <img src={`/logos/clubs/${currentSquad.clubId}.png`} alt=""
                   className="w-12 h-12 rounded-lg object-contain"
                   onError={e => { (e.target as HTMLImageElement).style.display = "none" }} />
                 <div>

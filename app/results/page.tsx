@@ -69,7 +69,7 @@ export default function ResultsPage() {
   const score = team.score ?? (players.length ? Math.round(players.reduce((s, p) => s + (p.rating || 50), 0) / players.length) : 0)
   const best = [...players].sort((a, b) => (b.rating || 0) - (a.rating || 0))[0]
   const shareText = `Mi 11 ${team.label ? 'de ' + team.label : ''} | ${team.formation || ''} | Score: ${score}/99 — Liga Argentina Fans`
-  const shareUrl = "https://ranuk12.github.io/LigaStatsGame/"
+  const shareUrl = "https://gambetafutbol.games/"
 
   const share = () => {
     if (navigator.share) navigator.share({ title: "Liga Argentina Fans", text: shareText, url: shareUrl }).catch(() => {})

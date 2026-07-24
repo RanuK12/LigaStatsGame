@@ -88,7 +88,7 @@ async function main() {
   for (const d of dates) {
     try {
       const res = await fetch(`${API}?date=${d}&utc=2`, {
-        headers: { 'User-Agent': 'LigaStatsGame/1.0 (+https://ranuk12.github.io/LigaStatsGame)' },
+        headers: { 'User-Agent': 'Gambeta/1.0 (+https://gambetafutbol.games)' },
       })
       if (!res.ok) {
         console.warn(`skip ${d}: HTTP ${res.status}`)
