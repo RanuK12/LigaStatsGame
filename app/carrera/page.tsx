@@ -20,6 +20,9 @@ import {
   MAX_SEASONS,
   marketValueFor,
   CAREER_DILEMMAS,
+  SUBSTANCE_DECISION,
+  academyInterest,
+  LEGEND_CAREERS,
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
@@ -129,6 +132,22 @@ function CareerSetupWizard() {
     setMode("create")
   }
 
+  function loadLegend(key: "messi" | "maradona") {
+    const l = LEGEND_CAREERS[key]
+    setName(l.name)
+    setNumber(l.number)
+    setPosition(l.position)
+    setNationality(l.nationality)
+    setOvr(l.ovr)
+    setAge(l.age)
+    setClubId(l.clubId)
+    setMode("create")
+  }
+
+  // Interés de la cantera al arrancar (mismo seed => estable durante la creación).
+  const academySeed = (name.length * 31 + ovr * 7 + 13) >>> 0
+  const academyClubs = academyInterest(ovr, academySeed)
+
   return (
     <div className="space-y-6">
       {/* STEP 1: PLAYER & 3D JERSEY */}
@@ -150,6 +169,17 @@ function CareerSetupWizard() {
             className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${mode === "real" ? "bg-[#74ACDF] text-white shadow-lg" : "bg-slate-900 text-slate-400 border border-slate-800"}`}
           >
             Elegir Real
+          </button>
+        </div>
+
+        {/* Modo debug: cargar carrera de leyenda (valores aproximados). */}
+        <div className="flex items-center gap-2 text-[10px] font-sport">
+          <span className="text-slate-500 uppercase tracking-wider">Debug:</span>
+          <button onClick={() => loadLegend("messi")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 hover:text-white hover:border-[#74ACDF]/40 transition-all">
+            🐐 Carrera de Messi
+          </button>
+          <button onClick={() => loadLegend("maradona")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 hover:text-white hover:border-[#D4AF37]/40 transition-all">
+            🏆 Carrera de Maradona
           </button>
         </div>
 
@@ -264,6 +294,26 @@ function CareerSetupWizard() {
           <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm font-sport">2</span>
           <h3 className="font-display text-xl font-black uppercase">Club de Inicio</h3>
         </div>
+
+        {/* Interés de la cantera: clubes que te quieren desde las inferiores. */}
+        <div className="rounded-2xl border border-[#74ACDF]/20 bg-[#74ACDF]/5 p-3">
+          <div className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider mb-2">
+            👀 {academyClubs.length} clubes te siguen desde la cantera
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {academyClubs.map((c) => (
+              <button
+                key={c.id}
+                onClick={() => setClubId(c.id)}
+                className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-slate-950/60 px-2.5 py-1.5 text-[11px] font-bold text-slate-300 hover:text-white hover:border-[#74ACDF]/50 transition-all font-sport"
+              >
+                <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-4 h-4 object-contain" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                {c.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <ClubPicker selected={clubId} onSelect={setClubId} />
       </div>
 
@@ -479,6 +529,29 @@ function CareerDashboard() {
                     <span className="text-[10px] text-amber-300 font-bold">{opt.effectDescription}</span>
                   </button>
                 ))}
+              </div>
+
+              {/* Sustancia misteriosa: el truco Copero. Elegir una u otra decisión. */}
+              <div className="pt-3 mt-2 border-t border-white/10">
+                <div className="text-[10px] font-bold text-purple-300 font-sport uppercase tracking-wider mb-2">
+                  {SUBSTANCE_DECISION.title}
+                </div>
+                <div className="space-y-2 font-sport">
+                  {SUBSTANCE_DECISION.options.map((opt) => (
+                    <button
+                      key={opt.id}
+                      onClick={() => setSelectedOptionId(opt.id)}
+                      className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
+                        selectedOptionId === opt.id
+                          ? "bg-purple-500/20 border-purple-400 text-white shadow-md"
+                          : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      <span>{opt.label}</span>
+                      <span className="text-[10px] text-purple-300 font-bold">{opt.effectDescription}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           )}
