@@ -216,7 +216,7 @@ function WorldCupBanner() {
           {/* Right: stats (unificadas y sin duplicar) */}
           <div className="grid grid-cols-2 gap-3 w-full max-w-xs shrink-0">
             {[
-              { label: 'Jugadores en DB', value: '4.095', sub: 'Estadísticas Reales' },
+              { label: 'Jugadores en DB', value: '2.995', sub: 'Estadísticas Reales' },
               { label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas Oficiales' },
               { label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
               { label: 'Mundiales', value: '3', sub: 'Ganados por Argentina' },
@@ -368,30 +368,7 @@ function HeroSection() {
           </Link>
         </div>
 
-        {/* Hero Key Metrics */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto"
-        >
-          {[
-            { val: "3.949", label: "Jugadores Reales", sub: "100% Auditados" },
-            { val: `${clubs.length}`, label: "Clubes Oficiales", sub: "Liga Profesional" },
-            { val: `${squads.length}`, label: "Planteles", sub: "Nóminas Históricas" },
-            { val: "5", label: "Modos de Juego", sub: "Liga, Copa & 1v1" },
-          ].map((s, i) => (
-            <motion.div
-              key={i}
-              variants={item}
-              className="card-gradient rounded-2xl py-5 px-4 text-center border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md hover:border-[#74ACDF]/40 transition-colors"
-            >
-              <div className="text-3xl sm:text-4xl font-display font-black text-white">{s.val}</div>
-              <div className="text-[#74ACDF] text-[10px] mt-1.5 font-bold uppercase tracking-widest font-sport">{s.label}</div>
-              <div className="text-[9px] text-slate-400 mt-0.5 font-sans font-medium">{s.sub}</div>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Métricas: se muestran una sola vez en el World Cup Banner (evita duplicar stats). */}
       </motion.div>
     </section>
   )

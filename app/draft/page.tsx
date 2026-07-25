@@ -389,7 +389,7 @@ function DraftInner() {
     return (
       <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg w-full text-center">
-          <img src="/logos/afa.png" alt="AFA" className="w-16 h-16 mx-auto mb-6 opacity-80" />
+          <img src="/logos/afa.png" alt="AFA" className="h-20 w-auto object-contain mx-auto block mb-6 opacity-80" />
           <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">Liga Argentina Fans</h1>
           <p className="text-slate-400 mb-6">{mode.icon} {mode.name}</p>
           <div className="card-gradient rounded-3xl p-6 mb-6">

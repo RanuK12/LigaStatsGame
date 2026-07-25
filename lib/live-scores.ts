@@ -110,6 +110,27 @@ function ymd(offsetDays: number): string {
  * Fetch soccer events for yesterday+today and map the tracked leagues.
  * Returns [] on any failure so the caller can use the cached fallback.
  */
+/** Fetch and map the tracked-league events for ONE specific date (YYYY-MM-DD). */
+export async function fetchScoresForDate(date: string, key?: string): Promise<Match[]> {
+  const apiKey = key || process.env.NEXT_PUBLIC_SPORTSDB_KEY || '3'
+  try {
+    const r = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsday.php?d=${date}&s=Soccer`)
+    if (!r.ok) return []
+    const batch = await r.json()
+    const events: SportsDbEvent[] = batch?.events || []
+    const seen = new Set<string>()
+    const matches: Match[] = []
+    for (const ev of events) {
+      const m = mapEvent(ev)
+      if (m && !seen.has(m.id)) { seen.add(m.id); matches.push(m) }
+    }
+    matches.sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
+    return matches
+  } catch {
+    return []
+  }
+}
+
 export async function fetchLiveScores(key?: string): Promise<Match[]> {
   const apiKey = key || process.env.NEXT_PUBLIC_SPORTSDB_KEY || '3'
   const days = [ymd(-1), ymd(0)]
