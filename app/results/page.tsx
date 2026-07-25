@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { appendScore } from '@/lib/storage'
+import { shareImage, downloadShareImage, downloadSharePDF, type ShareData } from '@/lib/share-card'
 
 interface ResPlayer { name?: string; rating?: number; position?: string; club?: string }
 interface ResTeam { label?: string; score?: number; formation?: string; players?: ResPlayer[] }
@@ -12,6 +13,7 @@ export default function ResultsPage() {
   const [team, setTeam] = useState<ResTeam | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [busy, setBusy] = useState(false)
 
   useEffect(() => {
     try {
@@ -71,10 +73,15 @@ export default function ResultsPage() {
   const shareText = `Mi 11 ${team.label ? 'de ' + team.label : ''} | ${team.formation || ''} | Score: ${score}/99 — Liga Argentina Fans`
   const shareUrl = "https://gambetafutbol.games/"
 
-  const share = () => {
-    if (navigator.share) navigator.share({ title: "Liga Argentina Fans", text: shareText, url: shareUrl }).catch(() => {})
-    else window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, "_blank")
+  const shareData: ShareData = { label: team.label, score, formation: team.formation, players }
+
+  const shareVisual = async () => {
+    setBusy(true)
+    try { await shareImage(shareData, shareText) } finally { setBusy(false) }
   }
+  const dlImage = async () => { setBusy(true); try { await downloadShareImage(shareData) } finally { setBusy(false) } }
+  const dlPdf = async () => { setBusy(true); try { await downloadSharePDF(shareData) } finally { setBusy(false) } }
+  const shareX = () => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, "_blank")
 
   return (
     <div className="min-h-screen gradient-bg py-10 px-4 font-sans">
@@ -96,10 +103,21 @@ export default function ResultsPage() {
         </div>
 
         <div className="flex flex-wrap gap-3 justify-center font-sport uppercase tracking-wider text-xs">
-          <button onClick={share} className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-emerald-600 rounded-xl font-bold hover:scale-[1.03] transition-transform text-white">
-            COMPARTIR RESULTADO
+          <button onClick={shareVisual} disabled={busy} className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-emerald-600 rounded-xl font-bold hover:scale-[1.03] transition-transform text-white disabled:opacity-50">
+            {busy ? "GENERANDO…" : "📲 COMPARTIR IMAGEN"}
           </button>
-          <Link href="/draft" className="px-6 py-3 bg-slate-700 rounded-xl font-bold hover:bg-slate-600 transition-colors text-white">
+          <button onClick={dlImage} disabled={busy} className="px-5 py-3 bg-slate-700 rounded-xl font-bold hover:bg-slate-600 transition-colors text-white disabled:opacity-50">
+            ⬇ PNG
+          </button>
+          <button onClick={dlPdf} disabled={busy} className="px-5 py-3 bg-slate-700 rounded-xl font-bold hover:bg-slate-600 transition-colors text-white disabled:opacity-50">
+            ⬇ PDF
+          </button>
+          <button onClick={shareX} className="px-5 py-3 bg-slate-700 rounded-xl font-bold hover:bg-slate-600 transition-colors text-white">
+            𝕏
+          </button>
+        </div>
+        <div className="flex flex-wrap gap-3 justify-center mt-3 font-sport uppercase tracking-wider text-xs">
+          <Link href="/draft" className="px-6 py-3 bg-slate-800 rounded-xl font-bold hover:bg-slate-700 transition-colors text-slate-300">
             JUGAR DE NUEVO
           </Link>
           <Link href="/" className="px-6 py-3 bg-slate-800 rounded-xl hover:bg-slate-700 transition-colors text-slate-300">
