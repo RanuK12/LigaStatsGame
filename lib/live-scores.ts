@@ -100,6 +100,72 @@ export function mapEvent(ev: SportsDbEvent): Match | null {
 
 const STATUS_ORDER: Record<Match['status'], number> = { LIVE: 0, UPCOMING: 1, FINAL: 2 }
 
+// Partido de agenda con el nombre real de su liga (sin filtrar a un set fijo).
+export interface AgendaMatch {
+  id: string
+  homeTeam: string
+  awayTeam: string
+  homeLogo?: string
+  awayLogo?: string
+  homeScore?: number
+  awayScore?: number
+  status: 'FINAL' | 'LIVE' | 'UPCOMING'
+  minute?: string
+  time?: string
+  leagueName: string
+}
+
+function mapAnyEvent(ev: SportsDbEvent): AgendaMatch | null {
+  if (!ev.strHomeTeam || !ev.strAwayTeam) return null
+  const status = ev.strStatus ?? ''
+  const progress = ev.strProgress ?? ''
+  let matchStatus: AgendaMatch['status']
+  let minute: string | undefined
+  let time: string | undefined
+  if (FINISHED.has(status)) matchStatus = 'FINAL'
+  else if (LIVE.has(status) || /^\d+/.test(progress)) {
+    matchStatus = 'LIVE'
+    minute = /^\d+/.test(progress) ? `${progress.replace(/'+$/, '')}'` : status || 'EN VIVO'
+  } else {
+    matchStatus = 'UPCOMING'
+    time = ev.strTime ? ev.strTime.slice(0, 5) : undefined
+  }
+  return {
+    id: ev.idEvent || `${ev.strHomeTeam}-${ev.strAwayTeam}`,
+    homeTeam: ev.strHomeTeam,
+    awayTeam: ev.strAwayTeam,
+    homeLogo: ev.strHomeTeamBadge || undefined,
+    awayLogo: ev.strAwayTeamBadge || undefined,
+    homeScore: toScore(ev.intHomeScore),
+    awayScore: toScore(ev.intAwayScore),
+    status: matchStatus,
+    minute,
+    time,
+    leagueName: ev.strLeague || 'Fútbol',
+  }
+}
+
+// TODOS los partidos de fútbol de una fecha (cualquier liga). Reactivo de verdad al cambiar el día.
+export async function fetchDayAll(date: string, key?: string): Promise<AgendaMatch[]> {
+  const apiKey = key || process.env.NEXT_PUBLIC_SPORTSDB_KEY || '3'
+  try {
+    const r = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsday.php?d=${date}&s=Soccer`)
+    if (!r.ok) return []
+    const batch = await r.json()
+    const events: SportsDbEvent[] = batch?.events || []
+    const seen = new Set<string>()
+    const out: AgendaMatch[] = []
+    for (const ev of events) {
+      const m = mapAnyEvent(ev)
+      if (m && !seen.has(m.id)) { seen.add(m.id); out.push(m) }
+    }
+    out.sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
+    return out
+  } catch {
+    return []
+  }
+}
+
 function ymd(offsetDays: number): string {
   const d = new Date()
   d.setDate(d.getDate() + offsetDays)

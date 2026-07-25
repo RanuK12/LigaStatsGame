@@ -11,6 +11,8 @@ const Jersey3D = dynamic(() => import("@/components/career/Jersey3D"), {
   loading: () => <div className="h-full w-full animate-pulse rounded-xl bg-slate-800/50" />,
 })
 import CareerCardView from "@/components/pitch/CareerCardView"
+import SeasonReveal from "@/components/career/SeasonReveal"
+import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
   POSITIONS,
@@ -378,6 +380,7 @@ function CareerDashboard() {
   const [activeTab, setActiveTab] = useState<"ficha" | "historial" | "decisiones" | "mercado">("ficha")
 
   const [selectedOptionId, setSelectedOptionId] = useState<string>("train_finishing")
+  const [revealSeason, setRevealSeason] = useState<SeasonResult | null>(null)
 
   if (!career) return null
   const cardData = buildCareerCardData(career)
@@ -402,6 +405,11 @@ function CareerDashboard() {
       const cur = useCareerStore.getState().career
       if (!cur || cur.finished || cur.pendingOffers.length > 0) break
       simulateNextSeason(selectedOptionId)
+    }
+    // Reveal animado solo al simular de a una temporada (el momento dramático).
+    if (yearsCount === 1) {
+      const h = useCareerStore.getState().career?.history
+      if (h && h.length) setRevealSeason(h[h.length - 1])
     }
   }
 
@@ -622,6 +630,8 @@ function CareerDashboard() {
           )}
         </div>
       </div>
+
+      <SeasonReveal season={revealSeason} onClose={() => setRevealSeason(null)} />
     </div>
   )
 }
