@@ -137,6 +137,40 @@ export const CAREER_DILEMMAS: CareerDecision[] = [
   },
 ]
 
+// Sustancia misteriosa: disponible TODA temporada (el truco es consumirla siempre).
+export const SUBSTANCE_DECISION: CareerDecision = {
+  id: 'substance',
+  title: 'Sustancia Misteriosa 🧪',
+  description: 'El utilero te ofrece la famosa sustancia misteriosa. Riesgo y recompensa.',
+  options: [
+    { id: 'take_substance', label: '🧪 Consumir', effectDescription: '75% de chance de +5 OVR permanente' },
+    { id: 'skip_substance', label: '🚱 No arriesgar', effectDescription: 'Sin efecto ni riesgo' },
+  ],
+}
+
+// Interés de la cantera al arrancar: a mayor OVR inicial, más y mejores clubes te buscan.
+export function academyInterest(ovr: number, seed: number): CareerClub[] {
+  const rng = makeRng(seed >>> 0 || 1)
+  const n = ovr >= 74 ? 4 : ovr >= 68 ? 3 : 2
+  return [...ARG_CLUBS].sort(() => rng() - 0.5).slice(0, n)
+}
+
+// Carreras de leyenda (modo debug). Valores de arranque aproximados, no oficiales.
+export interface LegendPreset {
+  name: string
+  number: number
+  position: string
+  nationality: string
+  flag: string
+  ovr: number
+  age: number
+  clubId: string
+}
+export const LEGEND_CAREERS: Record<string, LegendPreset> = {
+  messi: { name: 'Lionel Messi', number: 10, position: 'RW', nationality: 'Argentina', flag: '🇦🇷', ovr: 74, age: 17, clubId: 'newells' },
+  maradona: { name: 'Diego Maradona', number: 10, position: 'CAM', nationality: 'Argentina', flag: '🇦🇷', ovr: 75, age: 16, clubId: 'argentinos-jrs' },
+}
+
 export interface Trophy {
   id: string
   name: string
@@ -172,6 +206,9 @@ export interface SeasonResult {
   highlights: string[]
   cronica: string
   decisionTaken?: string
+  nextOvr?: number // OVR ya evolucionado para la próxima temporada (edad + suerte)
+  substanceHit?: boolean // consumió la sustancia y pegó el +5
+  euroScout?: boolean // lo vino a buscar un club de Europa (plus de OVR)
 }
 
 export interface Milestones {
@@ -244,13 +281,24 @@ export function marketValueFor(ovr: number, age: number): number {
   return clamp(Math.round(base * ageFactor), 0, 220)
 }
 
-function nextOvr(ovr: number, age: number, performance: number): number {
+// Crecimiento estilo Copero: 100% edad + suerte (el club no influye). El pico es a los 26
+// y después solo baja. La sustancia misteriosa suma +5 y un ojeo europeo da un plus.
+function nextOvr(
+  ovr: number,
+  age: number,
+  rng: () => number,
+  substanceHit = false,
+  euroBonus = 0,
+): number {
+  const luck = rng()
   let delta: number
-  if (age <= 21) delta = 1 + Math.round(performance * 2)
-  else if (age <= 26) delta = Math.round(performance * 2)
-  else if (age <= 29) delta = performance > 0.7 ? 1 : 0
-  else if (age <= 32) delta = performance > 0.85 ? 0 : -1
-  else delta = -2
+  if (age < 24) delta = luck < 0.12 ? 0 : luck < 0.55 ? 2 : 3 // joven: sube fuerte
+  else if (age <= 26) delta = luck < 0.28 ? 0 : luck < 0.78 ? 1 : 2 // pico a los 26
+  else if (age <= 29) delta = luck < 0.55 ? -1 : 0 // empieza a bajar
+  else if (age <= 32) delta = luck < 0.35 ? -1 : -2
+  else delta = -3 // veterano
+  if (substanceHit) delta += 5
+  delta += euroBonus
   return clamp(ovr + delta, 55, 99)
 }
 
@@ -351,15 +399,27 @@ export function simulateSeason(
   const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * (0.6 + rng() * 0.9)) + bonusGoals))
   const assists = Math.max(0, Math.round((ASSIST_BASE[cat] * ovrScale * apps * (0.5 + rng() * 0.9)) + bonusAssists))
 
-  const influence = (ovr - 75) / 300
-  const ligaP = clamp((club.strength - 76) / 46 + influence * 0.6 + bonusTitle, 0.03, 0.38)
-  const copaP = clamp((club.strength - 74) / 44 + influence * 0.6 + bonusTitle, 0.04, 0.35)
+  // --- Probabilidades de título estilo Copero (del tweet) ---
+  // Efecto Maradona: con 90+ de OVR el juego sube un nivel la reputación del club.
+  const maradona = ovr >= 90 ? 6 : 0
+  const str = clamp(club.strength + maradona, 60, 92)
+  // Margen de OVR: si superás en +10 lo que pide el club, todo x1.6.
+  const margin = ovr >= club.strength + 10 ? 1.6 : 1
+  // Un club grande gana la liga ~70%, uno chico ~1%.
+  const ligaP = clamp(((str - 64) / 19) * 0.7 * margin + 0.005 + bonusTitle, 0.005, 0.9)
+  const copaP = clamp(((str - 64) / 19) * 0.45 * margin + 0.04 + bonusTitle, 0.04, 0.55)
 
   const topTier = state.nextContinental === 'libertadores'
   const contType: ContinentalComp =
     club.region === 'euro' ? (topTier ? 'champions' : 'europa') : topTier ? 'libertadores' : 'sudamericana'
-  const contHardness = contType === 'champions' ? 52 : contType === 'europa' ? 44 : 42
-  const contP = clamp((club.strength - 74) / contHardness + influence + bonusTitle, 0.02, 0.4)
+  // Sudamericana / Europa League: solo la ganan los clubes del montón; los grandes 0%.
+  // Libertadores / Champions: reservada para los grandes.
+  let contP: number
+  if (contType === 'sudamericana' || contType === 'europa') {
+    contP = club.strength >= 79 ? 0 : clamp(((str - 64) / 15) * 0.35 * margin + 0.05, 0.02, 0.42)
+  } else {
+    contP = clamp(((str - 70) / 20) * 0.4 * margin + bonusTitle, 0.01, 0.55)
+  }
 
   const liga = rng() < ligaP
   const copaArgentina = club.region === 'arg' && rng() < copaP
@@ -413,6 +473,18 @@ export function simulateSeason(
     rng,
   )
 
+  // Sustancia misteriosa: 75% de +5 OVR (consumila siempre, dice el tweet).
+  const substanceHit = decisionOptionId === 'take_substance' && rng() < 0.75
+  if (decisionOptionId === 'take_substance') {
+    highlights.push(substanceHit ? '🧪 La sustancia misteriosa pegó: +5 OVR' : '🧪 La sustancia no hizo efecto esta vez')
+  }
+  // Fortuna europea: cada tanto te vienen a buscar de Europa y te da un plus de OVR.
+  const euroScout = club.region !== 'euro' && ovr >= 78 && rng() < 0.1
+  const euroBonus = euroScout ? 2 : 0
+  if (euroScout) highlights.push('✈️ Un grande de Europa puso el ojo en vos: +2 OVR de proyección')
+
+  const grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus)
+
   const season: SeasonResult = {
     year,
     age,
@@ -432,6 +504,9 @@ export function simulateSeason(
     highlights,
     cronica,
     decisionTaken: decisionOptionId,
+    nextOvr: grownOvr,
+    substanceHit,
+    euroScout,
   }
 
   const offers = generateOffers(state, performance, rng)
@@ -464,12 +539,9 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
 }
 
 export function advancePlayer(state: CareerState, season: SeasonResult): CareerPlayer {
-  const cat = positionCategory(state.player.position)
-  const ovrScale = clamp(state.player.ovr / 80, 0.6, 1.35)
-  const expected = (GOAL_BASE[cat] + ASSIST_BASE[cat]) * ovrScale || 1
-  const performance = clamp((season.goals + season.assists) / (expected * 1.1), 0, 1)
   const age = state.player.age + 1
-  const ovr = nextOvr(state.player.ovr, state.player.age, performance)
+  // El OVR ya se evolucionó en simulateSeason (edad + suerte + sustancia + Europa).
+  const ovr = season.nextOvr ?? clamp(state.player.ovr, 55, 99)
   return {
     ...state.player,
     age,
