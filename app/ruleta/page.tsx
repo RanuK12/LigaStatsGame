@@ -7,6 +7,7 @@ import wheelData from '@/data/derived/ruleta-wheel.json'
 import clubsData from '@/data/clubs.json'
 import type { Player, Club } from '@/lib/types'
 import { normalizePlayers, normalizeClubs } from '@/lib/data-normalizers'
+import LegendCardReveal from '@/components/roulette/LegendCardReveal'
 
 const posColors: Record<string, string> = {
   GK: '#f59e0b',
@@ -67,6 +68,7 @@ export default function RuletaPage() {
   const [history, setHistory] = useState<Player[]>([])
   const [rotation, setRotation] = useState(0)
   const [targetIndex, setTargetIndex] = useState<number | null>(null)
+  const [legendReveal, setLegendReveal] = useState<Player | null>(null)
 
   const wheelPlayers = useMemo(() => {
     const sorted = [...allPlayers]
@@ -101,6 +103,10 @@ export default function RuletaPage() {
       setSpinning(false)
       setSpinCount((count) => count + 1)
       setHistory((current) => [player, ...current].slice(0, 10))
+      // Leyendas y íconos: walkout animado con carta premium.
+      if (player.legendary || ICONS.has(player.id) || (player.rating || 0) >= 90) {
+        setLegendReveal(player)
+      }
     }, ANIMATION_DURATION_MS)
   }
 
@@ -423,6 +429,14 @@ export default function RuletaPage() {
           </Link>
         </div>
       </main>
+
+      <LegendCardReveal
+        player={legendReveal}
+        club={legendReveal ? getClubInfo(legendReveal) : undefined}
+        isIcon={legendReveal ? ICONS.has(legendReveal.id) : false}
+        biography={legendReveal ? LEGEND_BIOGRAPHIES[legendReveal.id] : undefined}
+        onClose={() => setLegendReveal(null)}
+      />
     </div>
   )
 }

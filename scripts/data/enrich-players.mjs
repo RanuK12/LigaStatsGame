@@ -88,7 +88,13 @@ function needsWork(p) {
 const touched = []
 let processed = 0
 
-for (const p of players) {
+// --cracks: priorizar fotos de estrellas (legendary + mayor rating) sin alterar el orden
+// del archivo (se itera una copia ordenada; se escribe el array original).
+const order = has('--cracks')
+  ? [...players].sort((a, b) => (Number(b.legendary || 0) - Number(a.legendary || 0)) || ((b.rating || 0) - (a.rating || 0)))
+  : players
+
+for (const p of order) {
   if (processed >= limit) break
   if (!needsWork(p)) continue
   processed++
