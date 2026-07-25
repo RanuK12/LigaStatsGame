@@ -173,7 +173,8 @@ export default function RuletaPage() {
                   const midRad = ((startAngle + endAngle) / 2 - 90) * Math.PI / 180
                   const textX = 50 + 31 * Math.cos(midRad)
                   const textY = 50 + 31 * Math.sin(midRad)
-                  const colors = ['#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b']
+                  // Paleta celeste/navy visible sobre el fondo oscuro (el texto es blanco).
+                  const colors = ['#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73']
                   const textAngle = (startAngle + endAngle) / 2
                   const selected = targetIndex === i && spinning
 
