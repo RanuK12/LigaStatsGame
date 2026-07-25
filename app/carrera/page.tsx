@@ -2,7 +2,14 @@
 
 import { useState, useRef, useMemo } from "react"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import { motion, AnimatePresence } from "framer-motion"
+
+// Camiseta 3D (WebGL) solo en cliente: R3F no soporta SSR y el sitio es export estático.
+const Jersey3D = dynamic(() => import("@/components/career/Jersey3D"), {
+  ssr: false,
+  loading: () => <div className="h-full w-full animate-pulse rounded-xl bg-slate-800/50" />,
+})
 import CareerCardView from "@/components/pitch/CareerCardView"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
@@ -154,33 +161,10 @@ function CareerSetupWizard() {
                 VISTA PREVIA CAMISETA 3D
               </span>
 
-              <div className="relative w-32 h-36 flex items-center justify-center filter drop-shadow-[0_16px_28px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform">
-                <svg viewBox="0 0 100 120" className="w-full h-full">
-                  <path
-                    d="M 20 20 L 35 10 L 65 10 L 80 20 L 95 35 L 85 50 L 75 42 L 75 110 L 25 110 L 25 42 L 15 50 L 5 35 Z"
-                    fill={jerseyColor}
-                    stroke="#ffffff"
-                    strokeWidth="2.5"
-                  />
-                  {jerseyPattern === "sash" && (
-                    <path d="M 20 20 L 75 110 L 60 110 L 20 40 Z" fill="#ffffff" opacity="0.9" />
-                  )}
-                  {jerseyPattern === "stripes" && (
-                    <>
-                      <rect x="35" y="10" width="10" height="100" fill="#ffffff" opacity="0.85" />
-                      <rect x="55" y="10" width="10" height="100" fill="#ffffff" opacity="0.85" />
-                    </>
-                  )}
-                  {jerseyPattern === "hoops" && (
-                    <rect x="25" y="50" width="50" height="20" fill="#ffffff" opacity="0.9" />
-                  )}
-                  <polygon points="35,10 50,24 65,10" fill="#030712" />
-                  <polygon points="35,10 50,24 65,10" fill="none" stroke="#ffffff" strokeWidth="2" />
-                  <text x="50" y="76" textAnchor="middle" fill="#ffffff" stroke="#000000" strokeWidth="1.5" fontSize="26" fontWeight="900" fontFamily="sans-serif">
-                    {number}
-                  </text>
-                </svg>
+              <div className="relative h-44 w-40 filter drop-shadow-[0_16px_28px_rgba(0,0,0,0.85)]">
+                <Jersey3D color={jerseyColor} pattern={jerseyPattern} number={number} name={name} />
               </div>
+              <span className="text-[9px] text-slate-500 font-sans">Arrastrá para girar</span>
 
               <div className="text-xs font-bold text-white font-display uppercase tracking-wider">
                 #{number} · {name || "JUGADOR"}
