@@ -30,6 +30,22 @@ async function captureNodeHD(node: HTMLElement): Promise<HTMLCanvasElement> {
     allowTaint: true,
     logging: false,
     imageTimeout: 15000,
+    // La ficha usa efecto 3D (preserve-3d, rotateX/Y, translateZ). html2canvas NO soporta
+    // 3D y lo captura desfasado. Aplanamos todos los transforms en el CLON antes de rasterizar.
+    onclone: (clonedDoc: Document) => {
+      clonedDoc.querySelectorAll<HTMLElement>('*').forEach((el) => {
+        const t = el.style.transform
+        if (t && /rotate|translatez|perspective|scale3d/i.test(t)) el.style.transform = 'none'
+        el.style.transformStyle = 'flat'
+        el.style.perspective = 'none'
+        el.style.transition = 'none'
+        el.style.animation = 'none'
+      })
+      clonedDoc.querySelectorAll<HTMLElement>('.perspective-1000, [class*="perspective"]').forEach((el) => {
+        el.style.perspective = 'none'
+        el.style.transform = 'none'
+      })
+    },
   })
 }
 
