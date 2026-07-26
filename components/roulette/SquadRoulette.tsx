@@ -18,23 +18,28 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
   const completedRef = useRef(false)
   const reducedMotion = useReducedMotion()
 
+  // Un plantel POR CLUB: antes entraban Boca 2019, Boca 2021, Boca 2022... y la rueda se
+  // veía con el mismo escudo repetido. El resultado siempre entra (reserva su club).
   const visible = useMemo(() => {
-    if (!result) return squads.slice(0, 18)
-    const sliced = squads.slice(0, 17)
-    // Guarantee that result is always in the visible list for the wheel animation to spin correctly
-    if (!sliced.some(s => s.id === result.id)) {
-      sliced.push(result)
-    } else {
-      if (squads.length > 17) {
-        const extra = squads.find(s => s.id !== result.id && !sliced.some(x => x.id === s.id))
-        if (extra) sliced.push(extra)
+    const porClub = new Map<string, Squad>()
+    if (result) porClub.set(result.clubId, result)
+    for (const s of squads) {
+      if (porClub.size >= 18) break
+      if (!porClub.has(s.clubId)) porClub.set(s.clubId, s)
+    }
+    const out = [...porClub.values()]
+    // Si hay pocos clubes distintos, se completa con los planteles que haya para que la rueda
+    // no quede con dos o tres gajos enormes.
+    if (out.length < 8) {
+      for (const s of squads) {
+        if (out.length >= 8) break
+        if (!out.some((x) => x.id === s.id)) out.push(s)
       }
     }
-    return sliced
+    return out
   }, [squads, result])
 
   const segAngle = visible.length > 0 ? 360 / visible.length : 360
-  const abbrev = (label: string) => label.replace(/['']/g, "").split(/\s+/).filter(Boolean).map(w => w[0]).join("").slice(0, 4).toUpperCase()
   const colors = ['#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b','#0f172a','#1e293b']
 
   useEffect(() => {
@@ -105,9 +110,19 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
                   <path d={`M50,50 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`}
                     fill={spinning && result?.id === sq.id ? "#74ACDF" : colors[idx % colors.length]}
                     stroke="#94a3b8" strokeWidth="0.25" />
-                  <text x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="3.1" fontWeight="900"
+                  {/* Escudo del club + año: se reconoce de una, mucho mejor que la sigla */}
+                  <image
+                    href={`/logos/clubs/${sq.clubId}.png`}
+                    x={tx - 5.4}
+                    y={ty - 6.6}
+                    width="10.8"
+                    height="10.8"
+                    preserveAspectRatio="xMidYMid meet"
+                    transform={`rotate(${(s + e) / 2}, ${tx}, ${ty})`}
+                  />
+                  <text x={tx} y={ty + 6.6} textAnchor="middle" dominantBaseline="middle" fill="#cbd5e1" fontSize="2.6" fontWeight="900"
                     transform={`rotate(${(s + e) / 2}, ${tx}, ${ty})`}>
-                    {abbrev(sq.label)}
+                    {sq.season}
                   </text>
                 </g>
               )
@@ -122,6 +137,32 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
       </div>
       {/* Sombra elíptica bajo el disco */}
       <div className="mx-auto mt-2 h-4 w-44 rounded-[50%] bg-black/50 blur-md" />
+
+      {/* En el bombo: los planteles que se están sorteando, con escudo */}
+      <div className="mx-auto mt-4 w-[min(92vw,30rem)]">
+        <div className="text-center text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 font-sport">
+          En el bombo
+        </div>
+        <div className="mt-2 flex flex-wrap justify-center gap-1.5">
+          {visible.slice(0, 12).map((sq) => (
+            <span
+              key={`chip-${sq.id}`}
+              className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-1 text-[10px] font-bold transition-colors ${
+                spinning ? "border-white/5 bg-slate-950/50 text-slate-400" : "border-white/10 bg-slate-900/60 text-slate-300"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/logos/clubs/${sq.clubId}.png`}
+                alt=""
+                className="h-3.5 w-3.5 object-contain"
+                onError={(ev) => ((ev.target as HTMLImageElement).style.visibility = "hidden")}
+              />
+              {sq.label}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

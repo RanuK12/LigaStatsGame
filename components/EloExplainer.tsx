@@ -1,6 +1,8 @@
 "use client"
 
+import Link from "next/link"
 import { TIERS } from "@/lib/ranking"
+import { DAILY_BASE_ELO, DAILY_MAX_ELO } from "@/lib/daily-progress"
 import SolDeMayo from "@/components/ui/SolDeMayo"
 
 /**
@@ -61,6 +63,23 @@ export default function EloExplainer() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Reto diario: el atajo para sumar todos los días */}
+        <div className="mt-4 rounded-2xl border border-orange-400/30 bg-orange-500/[0.07] p-3.5 flex items-start gap-3">
+          <span className="text-lg leading-none">🔥</span>
+          <div>
+            <div className="font-sport text-[11px] font-black uppercase tracking-wider text-orange-300">
+              Reto diario: +{DAILY_BASE_ELO} a +{DAILY_MAX_ELO} ELO
+            </div>
+            <div className="text-[11px] text-slate-400 mt-0.5 font-sans">
+              Completá el reto del día y sumás ELO extra; la racha lo agranda hasta {DAILY_MAX_ELO}. Hay que estar
+              registrado para que impacte en el ranking.{' '}
+              <Link href="/daily" className="text-[#74ACDF] font-bold hover:text-white transition-colors">
+                Ir al reto de hoy →
+              </Link>
+            </div>
+          </div>
         </div>
 
         <p className="text-[10px] text-slate-500 mt-4 font-sport uppercase tracking-wider">

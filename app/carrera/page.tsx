@@ -467,22 +467,48 @@ function CareerDashboard() {
 
       {/* PANEL DE JUEGO — todo en un flujo, sin pestañas */}
       <div className="space-y-4">
-          {/* Estado de la temporada */}
-          <div className="card-gradient rounded-3xl p-6 border border-white/10 shadow-2xl flex items-center gap-4">
+          {/* Estado de la temporada: cabecera de diario deportivo */}
+          <div className="relative card-gradient rounded-3xl p-6 border border-white/10 shadow-2xl overflow-hidden">
+            <div className="banda-argentina absolute inset-x-0 top-0 h-1.5 opacity-90" />
             {club && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={`/logos/clubs/${club.id}.png`} alt="" className="w-14 h-14 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+              <img
+                src={`/logos/clubs/${club.id}.png`}
+                alt=""
+                className="pointer-events-none absolute -right-6 -bottom-8 w-40 h-40 object-contain opacity-[0.07]"
+                onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")}
+              />
             )}
-            <div className="min-w-0">
-              <span className="text-[10px] font-bold text-amber-400 tracking-widest uppercase font-sport block mb-0.5">
-                TEMPORADA {career.seasonsPlayed + (career.finished ? 0 : 1)} / {MAX_SEASONS}
-              </span>
-              <h3 className="font-impact text-2xl font-black uppercase text-white leading-none truncate">
-                {career.finished ? "Carrera finalizada 🏁" : club?.name}
-              </h3>
-              <p className="text-xs text-slate-400 mt-1 font-sport">
-                {career.player.age} años · {career.player.ovr} OVR · {formatMarketValue(career.player.marketValueM)}
-              </p>
+            <div className="relative flex items-center gap-4">
+              {club && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={`/logos/clubs/${club.id}.png`} alt="" className="w-16 h-16 object-contain shrink-0 drop-shadow-[0_4px_18px_rgba(0,0,0,0.6)]" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+              )}
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-0.5 text-[9px] font-black tracking-[0.2em] uppercase text-amber-300 font-sport">
+                    Temporada {career.seasonsPlayed + (career.finished ? 0 : 1)} / {MAX_SEASONS}
+                  </span>
+                  <span className="text-[9px] font-black tracking-[0.2em] uppercase text-slate-500 font-sport">
+                    {career.startYear + career.seasonsPlayed}
+                  </span>
+                </div>
+                <h3 className="font-impact text-3xl font-black uppercase text-white leading-[0.95] truncate mt-1.5">
+                  {career.finished ? "Carrera finalizada 🏁" : club?.name}
+                </h3>
+                <div className="mt-2 flex flex-wrap items-center gap-1.5 font-sport">
+                  {[
+                    { l: "Edad", v: `${career.player.age}` },
+                    { l: "OVR", v: `${career.player.ovr}` },
+                    { l: "Valor", v: formatMarketValue(career.player.marketValueM) },
+                  ].map((chip) => (
+                    <span key={chip.l} className="rounded-lg border border-white/10 bg-slate-950/60 px-2.5 py-1 text-[10px] font-bold text-slate-300">
+                      <span className="text-slate-500 uppercase tracking-wider">{chip.l} </span>
+                      <span className="text-white">{chip.v}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -549,21 +575,36 @@ function CareerDashboard() {
               <h4 className="text-sm font-bold text-white font-display">{dilemma.title}</h4>
               <p className="text-xs text-slate-300 font-sans leading-relaxed">{dilemma.description}</p>
 
-              <div className="space-y-2 pt-1 font-sport">
-                {dilemma.options.map((opt) => (
-                  <button
-                    key={opt.id}
-                    onClick={() => setSelectedOptionId(opt.id)}
-                    className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
-                      selectedOptionId === opt.id
-                        ? "bg-[#74ACDF]/20 border-[#74ACDF] text-white shadow-md"
-                        : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <span>{opt.label}</span>
-                    <span className="text-[10px] text-amber-300 font-bold">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
-                  </button>
-                ))}
+              <div className="space-y-2.5 pt-1 font-sport">
+                {dilemma.options.map((opt, i) => {
+                  const elegida = selectedOptionId === opt.id
+                  return (
+                    <button
+                      key={opt.id}
+                      onClick={() => setSelectedOptionId(opt.id)}
+                      style={{ animationDelay: `${i * 70}ms` }}
+                      className={`cartel-in w-full rounded-2xl border p-3.5 text-left text-xs font-bold transition-all duration-300 flex items-center justify-between gap-3 hover:-translate-y-0.5 ${
+                        elegida
+                          ? "border-[#74ACDF] bg-[#74ACDF]/15 text-white shadow-[0_0_24px_rgba(116,172,223,0.25)]"
+                          : "border-white/5 bg-slate-950/60 text-slate-400 hover:border-[#74ACDF]/40 hover:text-white"
+                      }`}
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <span
+                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] transition-colors ${
+                            elegida ? "border-[#74ACDF] bg-[#74ACDF] text-slate-950" : "border-slate-700 text-transparent"
+                          }`}
+                        >
+                          ✓
+                        </span>
+                        {opt.label}
+                      </span>
+                      <span className="shrink-0 text-right text-[10px] font-bold text-amber-300">
+                        {effectLabelFor(opt.effectDescription, career.player.position)}
+                      </span>
+                    </button>
+                  )
+                })}
               </div>
 
               {/* Sustancia misteriosa: NO todas las temporadas — evento ocasional (cada ~3). */}
@@ -635,8 +676,19 @@ function CareerDashboard() {
                 if (s.continentalWon) trophies.push(`${TROPHY_META[s.continental || ""]?.icon || "🌎"} ${TROPHY_META[s.continental || ""]?.name || "Continental"}`)
                 const delta = (s.nextOvr ?? s.ovr) - s.ovr
                 return (
-                  <div key={i} className="card-gradient rounded-2xl p-4 border border-white/10 shadow-lg">
-                    <div className="flex items-center gap-2.5 mb-2">
+                  <div
+                    key={i}
+                    style={{ animationDelay: `${Math.min(i, 6) * 80}ms` }}
+                    className="cartel-in relative overflow-hidden card-gradient rounded-2xl p-4 border border-white/10 shadow-lg transition-transform duration-300 hover:-translate-y-0.5"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/logos/clubs/${s.clubId}.png`}
+                      alt=""
+                      className="pointer-events-none absolute -right-4 -bottom-6 w-28 h-28 object-contain opacity-[0.06]"
+                      onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")}
+                    />
+                    <div className="relative flex items-center gap-2.5 mb-2">
                       <img src={`/logos/clubs/${s.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-black text-white font-display truncate">{s.year} · {s.clubName}</div>

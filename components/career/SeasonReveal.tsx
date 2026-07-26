@@ -86,11 +86,13 @@ export default function SeasonReveal({ season, position, onClose }: Props) {
             ))}
 
           <motion.div
-            className="relative w-[400px] max-w-[92vw] rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/90 to-slate-950/95 p-6 shadow-2xl"
+            className="relative w-[400px] max-w-[92vw] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/90 to-slate-950/95 p-6 pt-7 shadow-2xl"
             initial={{ scale: 0.85, y: 24, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 160, damping: 18 }}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Banda celeste y blanca: el sello de la casa */}
+            <div className="banda-argentina absolute inset-x-0 top-0 h-1.5 opacity-90" />
             {/* Header */}
             <div className="flex items-center gap-3 border-b border-white/10 pb-4">
               {season.clubId && (

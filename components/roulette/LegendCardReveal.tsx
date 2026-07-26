@@ -55,7 +55,7 @@ export default function LegendCardReveal({ player, club, isIcon, biography, onCl
     <AnimatePresence>
       {player && (
         <motion.div
-          className="fixed inset-0 z-[120] flex items-center justify-center p-4"
+          className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-5 overflow-y-auto p-4 py-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -182,9 +182,9 @@ export default function LegendCardReveal({ player, club, isIcon, biography, onCl
           {/* Continuar */}
           {phase >= 3 && (
             <motion.button
-              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 10 }} animate={{ y: 0 }}
               onClick={onClose}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border px-8 py-2.5 text-xs font-bold uppercase tracking-[0.3em] text-white transition-colors hover:bg-white/10"
+              className="relative z-10 shrink-0 rounded-full border bg-slate-950/70 px-8 py-2.5 text-xs font-bold uppercase tracking-[0.3em] text-white transition-colors hover:bg-white/10"
               style={{ borderColor: `${gold}66` }}
             >
               Continuar

@@ -10,6 +10,8 @@ import {
   msUntilNextDay,
   type Difficulty,
 } from "@/lib/daily-challenge"
+import { loadDaily, completadoHoy, bonusForStreak, DAILY_BASE_ELO, DAILY_MAX_ELO } from "@/lib/daily-progress"
+import { useUserStore } from "@/lib/user-store"
 
 const DIFF_STYLE: Record<Difficulty, string> = {
   Fácil: "text-emerald-300 border-emerald-400/40 bg-emerald-500/10",
@@ -32,10 +34,17 @@ export default function DailyPage() {
   const challenge = challengeForDate(today)
   const number = challengeNumber()
   const [countdown, setCountdown] = useState(() => msUntilNextDay())
+  const user = useUserStore((s) => s.user)
+  const [progreso, setProgreso] = useState<{ hecho: boolean; streak: number }>({ hecho: false, streak: 0 })
 
   useEffect(() => {
     const t = setInterval(() => setCountdown(msUntilNextDay()), 1000)
     return () => clearInterval(t)
+  }, [])
+
+  useEffect(() => {
+    const p = loadDaily()
+    setProgreso({ hecho: completadoHoy(p), streak: p.streak })
   }, [])
 
   const fecha = new Date().toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })
@@ -95,12 +104,45 @@ export default function DailyPage() {
           <h2 className="mt-4 font-display text-3xl font-black uppercase tracking-wide text-white">{challenge.title}</h2>
           <p className="mx-auto mt-3 max-w-md text-slate-300 leading-relaxed font-sans">{challenge.rule}</p>
 
-          <Link
-            href={`/draft?mode=clasico&reto=${challenge.id}`}
-            className="btn-primary mt-7 inline-block px-10 py-4 text-xs font-black uppercase tracking-widest"
-          >
-            Jugar el reto
-          </Link>
+          {/* Premio: el reto suma al ranking */}
+          <div className="mx-auto mt-6 flex max-w-md flex-wrap items-center justify-center gap-2">
+            <span className="rounded-full border border-[#74ACDF]/40 bg-[#74ACDF]/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#74ACDF] font-sport">
+              ⚡ +{bonusForStreak(progreso.streak + (progreso.hecho ? 0 : 1))} ELO al completarlo
+            </span>
+            {progreso.streak > 0 && (
+              <span className="rounded-full border border-orange-400/40 bg-orange-500/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-orange-300 font-sport">
+                🔥 Racha de {progreso.streak} {progreso.streak === 1 ? "día" : "días"}
+              </span>
+            )}
+          </div>
+
+          {progreso.hecho ? (
+            <div className="mt-6">
+              <div className="inline-flex items-center gap-2 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 px-5 py-3 text-emerald-300">
+                <span className="text-lg">✅</span>
+                <span className="font-sport text-[11px] font-black uppercase tracking-widest">Reto de hoy completado</span>
+              </div>
+              <Link
+                href={`/draft?mode=clasico&reto=${challenge.id}`}
+                className="btn-secondary mt-4 block px-10 py-3 text-xs font-black uppercase tracking-widest"
+              >
+                Volver a jugarlo (sin bono)
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href={`/draft?mode=clasico&reto=${challenge.id}`}
+              className="btn-primary mt-6 inline-block px-10 py-4 text-xs font-black uppercase tracking-widest"
+            >
+              Jugar el reto
+            </Link>
+          )}
+
+          {!user?.isLoggedIn && (
+            <p className="mt-4 text-[11px] text-amber-300/90 font-sport uppercase tracking-wider">
+              Ingresá para que el bono sume a tu ELO del ranking
+            </p>
+          )}
         </motion.div>
 
         {/* countdown al próximo reto */}
@@ -117,6 +159,30 @@ export default function DailyPage() {
             {fmt(countdown)}
           </span>
         </motion.div>
+
+        {/* Cómo suma al ranking */}
+        <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+          <h3 className="font-sport text-[11px] font-black uppercase tracking-widest text-[#74ACDF]">
+            Cómo suma al ranking
+          </h3>
+          <ul className="mt-3 space-y-2 text-[12px] text-slate-300 font-sans leading-relaxed">
+            <li>
+              <strong className="text-white">+{DAILY_BASE_ELO} ELO</strong> la primera vez que completás el reto del día
+              (armás el 11 con la consigna y simulás el torneo).
+            </li>
+            <li>
+              <strong className="text-white">+3 ELO por cada día de racha</strong>, hasta {DAILY_MAX_ELO} ELO. Si te
+              salteás un día, la racha vuelve a empezar.
+            </li>
+            <li>El bono es uno por día y se suma a los puntos que ya deja el torneo en la tabla de líderes.</li>
+          </ul>
+          <Link
+            href="/leaderboard"
+            className="mt-4 inline-block text-[11px] font-black uppercase tracking-widest text-[#74ACDF] font-sport hover:text-white transition-colors"
+          >
+            Ver la tabla de líderes →
+          </Link>
+        </div>
 
         <p className="mt-6 text-center text-xs text-slate-500 font-sans">
           Un reto nuevo cada día · el mismo para todos · a las 00:00 rota solo.

@@ -70,12 +70,13 @@ export default function RuletaPage() {
   const [targetIndex, setTargetIndex] = useState<number | null>(null)
   const [legendReveal, setLegendReveal] = useState<Player | null>(null)
 
+  // 12 sectores: con 16 los nombres no entraban en el sector y se pisaban entre sí.
   const wheelPlayers = useMemo(() => {
     const sorted = [...allPlayers]
       .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-      .slice(0, 16)
+      .slice(0, 12)
 
-    return sorted.length > 0 ? sorted : allPlayers.slice(0, 16)
+    return sorted.length > 0 ? sorted : allPlayers.slice(0, 12)
   }, [allPlayers])
 
   const sectorAngle = wheelPlayers.length > 0 ? 360 / wheelPlayers.length : 360
@@ -190,8 +191,8 @@ export default function RuletaPage() {
                   const x2 = 50 + 50 * Math.cos(endRad)
                   const y2 = 50 + 50 * Math.sin(endRad)
                   const midRad = ((startAngle + endAngle) / 2 - 90) * Math.PI / 180
-                  const textX = 50 + 31 * Math.cos(midRad)
-                  const textY = 50 + 31 * Math.sin(midRad)
+                  const textX = 50 + 34 * Math.cos(midRad)
+                  const textY = 50 + 34 * Math.sin(midRad)
                   // Paleta celeste/navy visible sobre el fondo oscuro (el texto es blanco).
                   const colors = ['#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73']
                   const textAngle = (startAngle + endAngle) / 2
@@ -213,9 +214,10 @@ export default function RuletaPage() {
                         fill="white"
                         fontSize="3"
                         fontWeight="900"
-                        transform={`rotate(${textAngle}, ${textX}, ${textY})`}
+                        letterSpacing="0.1"
+                        transform={`rotate(${textAngle + (textAngle > 90 && textAngle < 270 ? 180 : 0)}, ${textX}, ${textY})`}
                       >
-                        {player.name.split(' ').pop()?.slice(0, 10)}
+                        {player.name.split(' ').pop()?.slice(0, 9).toUpperCase()}
                       </text>
                     </g>
                   )

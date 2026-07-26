@@ -28,6 +28,8 @@ import {
   PITY_LOW_THRESHOLD,
 } from "@/lib/game-engine"
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
+import { challengeForDate, localYmd } from "@/lib/daily-challenge"
+import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
 import { calculateChemistry } from "@/lib/chemistry"
 import ChemistryPanel from "@/components/ChemistryPanel"
 import TournamentView from "@/components/tournament/TournamentView"
@@ -169,6 +171,8 @@ function DraftInner() {
   const sp = useSearchParams()
   const modeId = (sp.get("mode") || "clasico") as string
   const mode = GAME_MODES[modeId] || GAME_MODES.clasico
+  // Si venís del Reto Diario, terminar el torneo suma ELO extra (una vez por día).
+  const retoId = sp.get("reto")
 
   const { players: playersCore, error: playersError } = usePlayersCore()
   const allP = useMemo(() => playersCore ?? [], [playersCore])
@@ -189,6 +193,7 @@ function DraftInner() {
   const [simResult, setSimResult] = useState<TournamentResult | null>(null)
   const [confetti, setConfetti] = useState(false)
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
+  const [retoGanado, setRetoGanado] = useState<{ elo: number; streak: number } | null>(null)
   const [spinNotice, setSpinNotice] = useState<string | null>(null)
   const [showPosSelector, setShowPosSelector] = useState(false)
   const [pity, setPity] = useState<PityState>({ consecutiveLow: 0, lastRatings: [], pityActive: false })
@@ -372,7 +377,17 @@ function DraftInner() {
     saveLocalScore(entry)
     const { id: _omit, ...online } = entry
     void submitOnlineScore(online) // fire & forget (no-op sin Supabase)
-  }, [drafted, allS, allP, f, teamScore, partialScore, user, updateElo, addTitle])
+
+    // ── RETO DIARIO: bono de ELO al completarlo (uno por día, con racha) ──
+    if (retoId && retoId === challengeForDate(localYmd()).id && !completadoHoy()) {
+      const premio = claimDailyBonus()
+      if (premio) {
+        if (user?.isLoggedIn) updateElo(premio.elo)
+        setBurst({ label: `¡RETO DIARIO! +${premio.elo} ELO`, tone: "celeste" })
+        setRetoGanado(premio)
+      }
+    }
+  }, [drafted, allS, allP, f, teamScore, partialScore, user, updateElo, addTitle, retoId])
 
   // ── RESET ──
   const resetGame = useCallback(() => {
@@ -445,12 +460,25 @@ function DraftInner() {
   /* ── RENDER: SIM RESULTS ── */
   if (phase === "sim" && simResult) {
     return (
-      <TournamentView
+      <>
+        {retoGanado && (
+          <div className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 cartel-in cartel-shine rounded-2xl border border-[#74ACDF]/40 bg-[#0b1526] px-5 py-3 text-center shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+            <div className="font-sport text-[10px] font-black uppercase tracking-widest text-[#74ACDF]">Reto diario completado</div>
+            <div className="font-display text-lg font-black text-white">
+              +{retoGanado.elo} ELO · racha de {retoGanado.streak} {retoGanado.streak === 1 ? "día" : "días"}
+            </div>
+            {!user?.isLoggedIn && (
+              <div className="mt-1 text-[10px] text-amber-300 font-sport uppercase tracking-wider">Ingresá para que sume a tu ranking</div>
+            )}
+          </div>
+        )}
+        <TournamentView
         result={simResult}
         onBack={() => { setPhase("done"); setSimResult(null) }}
         onReset={resetGame}
         onDownloadPDF={() => generatePDF(simResult, drafted, f)}
-      />
+        />
+      </>
     )
   }
 
