@@ -534,28 +534,30 @@ function CareerDashboard() {
                 ))}
               </div>
 
-              {/* Sustancia misteriosa: el truco Copero. Elegir una u otra decisión. */}
-              <div className="pt-3 mt-2 border-t border-white/10">
-                <div className="text-[10px] font-bold text-purple-300 font-sport uppercase tracking-wider mb-2">
-                  {SUBSTANCE_DECISION.title}
+              {/* Sustancia misteriosa: NO todas las temporadas — evento ocasional (cada ~3). */}
+              {career.seasonsPlayed % 3 === 1 && (
+                <div className="pt-3 mt-2 border-t border-white/10">
+                  <div className="text-[10px] font-bold text-purple-300 font-sport uppercase tracking-wider mb-2">
+                    {SUBSTANCE_DECISION.title}
+                  </div>
+                  <div className="space-y-2 font-sport">
+                    {SUBSTANCE_DECISION.options.map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => setSelectedOptionId(opt.id)}
+                        className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
+                          selectedOptionId === opt.id
+                            ? "bg-purple-500/20 border-purple-400 text-white shadow-md"
+                            : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
+                        }`}
+                      >
+                        <span>{opt.label}</span>
+                        <span className="text-[10px] text-purple-300 font-bold">{opt.effectDescription}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="space-y-2 font-sport">
-                  {SUBSTANCE_DECISION.options.map((opt) => (
-                    <button
-                      key={opt.id}
-                      onClick={() => setSelectedOptionId(opt.id)}
-                      className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
-                        selectedOptionId === opt.id
-                          ? "bg-purple-500/20 border-purple-400 text-white shadow-md"
-                          : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
-                      }`}
-                    >
-                      <span>{opt.label}</span>
-                      <span className="text-[10px] text-purple-300 font-bold">{opt.effectDescription}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+              )}
             </div>
           )}
 
