@@ -13,6 +13,8 @@ export interface CareerCardData {
   matchesPlayed: number
   goals: number
   assists: number
+  cleanSheets?: number
+  penaltiesSaved?: number
   clubs: { id: string; name: string; logoUrl?: string }[]
   trophies: { id: string; name: string; count: number; icon: string }[]
   jerseyPattern?: string
@@ -24,6 +26,10 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50, opacity: 0 })
+
+  // Un arquero no se luce con goles: su ficha muestra vallas invictas y penales atajados.
+  const isGK = ["GK", "POR", "Arquero", "Portero"].includes(data.position)
+  const isDEF = ["CB", "LB", "RB", "LWB", "RWB", "DEF", "LI", "LD"].includes(data.position)
 
   const kitColor = data.jerseyColor || "#74ACDF"
   const pattern = data.jerseyPattern || "sash"
@@ -191,7 +197,7 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
           </div>
         </div>
 
-        {/* STATS BOX: PJ, GLS, AST (TranslateZ 30px) */}
+        {/* STATS BOX: las dos métricas que importan según el puesto (TranslateZ 30px) */}
         <div
           className="grid grid-cols-3 gap-2 bg-[#050A14] border border-white/10 rounded-2xl p-4 text-center mb-6 shadow-inner relative z-10"
           style={{ transform: "translateZ(30px)" }}
@@ -200,14 +206,40 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">PJ</div>
             <div className="text-3xl font-black text-white font-display mt-0.5">{data.matchesPlayed}</div>
           </div>
-          <div className="border-x border-white/10">
-            <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">GLS</div>
-            <div className="text-3xl font-black text-emerald-400 font-display mt-0.5">{data.goals}</div>
-          </div>
-          <div>
-            <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">AST</div>
-            <div className="text-3xl font-black text-sky-400 font-display mt-0.5">{data.assists}</div>
-          </div>
+          {isGK ? (
+            <>
+              <div className="border-x border-white/10">
+                <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">V. INV.</div>
+                <div className="text-3xl font-black text-emerald-400 font-display mt-0.5">{data.cleanSheets ?? 0}</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">PEN. ATAJ.</div>
+                <div className="text-3xl font-black text-sky-400 font-display mt-0.5">{data.penaltiesSaved ?? 0}</div>
+              </div>
+            </>
+          ) : isDEF ? (
+            <>
+              <div className="border-x border-white/10">
+                <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">V. INV.</div>
+                <div className="text-3xl font-black text-emerald-400 font-display mt-0.5">{data.cleanSheets ?? 0}</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">GLS+AST</div>
+                <div className="text-3xl font-black text-sky-400 font-display mt-0.5">{data.goals + data.assists}</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="border-x border-white/10">
+                <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">GLS</div>
+                <div className="text-3xl font-black text-emerald-400 font-display mt-0.5">{data.goals}</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-wider">AST</div>
+                <div className="text-3xl font-black text-sky-400 font-display mt-0.5">{data.assists}</div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* TRAYECTORIA (TranslateZ 25px) */}

@@ -115,10 +115,18 @@ export default function RuletaPage() {
     }, ANIMATION_DURATION_MS)
   }
 
+  // El club de la carta es con el que se lo identifica: donde más tiempo estuvo, no el
+  // primero que aparece en clubs.json (Verón salía como "Xeneizes" por sus 6 meses en Boca).
   const getClubInfo = (player: Player): Club | undefined => {
-    return allClubs.find((club) =>
-      player.clubs?.some((playerClub) => playerClub.id === club.id || playerClub.name === club.name)
-    )
+    const anios = new Map<string, number>()
+    for (const c of player.clubs || []) {
+      const years = String(c.years || '').match(/\d{4}/g)?.map(Number) || []
+      const span = years.length >= 2 ? Math.max(1, Math.max(...years) - Math.min(...years)) : 1
+      const club = allClubs.find((x) => x.id === c.id || x.name === c.name)
+      if (club) anios.set(club.id, (anios.get(club.id) || 0) + span)
+    }
+    const mejor = [...anios.entries()].sort((a, b) => b[1] - a[1])[0]
+    return mejor ? allClubs.find((c) => c.id === mejor[0]) : undefined
   }
 
   const resultClub = result ? getClubInfo(result) : undefined

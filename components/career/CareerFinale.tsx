@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { TROPHY_META, retirementStory, type CareerState } from "@/lib/career-engine"
+import { TROPHY_META, retirementStory, positionCategory, type CareerState } from "@/lib/career-engine"
 
 function useCountUp(to: number, ms: number, start: boolean) {
   const [v, setV] = useState(0)
@@ -54,6 +54,7 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
     ? Object.entries(career.trophies).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1])
     : []
   const clubCount = career ? new Set(career.history.map((s) => s.clubId)).size : 0
+  const esArquero = positionCategory(career?.player.position || "CM") === "GK"
 
   const milestones: { icon: string; label: string }[] = []
   if (career?.milestones.worldCup) milestones.push({ icon: "🌍", label: "Campeón del Mundo" })
@@ -119,7 +120,9 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
               {[
                 { v: career.seasonsPlayed, l: "Temporadas" },
                 { v: career.totals.matchesPlayed, l: "PJ" },
-                { v: career.totals.goals, l: "Goles" },
+                esArquero
+                  ? { v: career!.history.reduce((a, h) => a + (h.cleanSheets || 0), 0), l: "V. invictas" }
+                  : { v: career.totals.goals, l: "Goles" },
                 { v: clubCount, l: "Clubes" },
               ].map((s, i) => (
                 <div key={i} className="rounded-xl border border-white/5 bg-white/5 py-2">

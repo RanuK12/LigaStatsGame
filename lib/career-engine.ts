@@ -106,6 +106,23 @@ export interface CareerDecision {
   }[]
 }
 
+/**
+ * Cómo se le describe el efecto de una decisión según el puesto: prometerle goles a un
+ * arquero (o a un central) no tiene sentido — su premio son las vallas invictas.
+ */
+export function effectLabelFor(effectDescription: string, position: string): string {
+  const cat = positionCategory(position)
+  if (cat === 'GK') {
+    if (effectDescription.includes('Goles')) return '+Vallas invictas'
+    if (effectDescription.includes('Asistencias')) return '+Seguridad bajo los tres palos'
+  }
+  if (cat === 'DEF') {
+    if (effectDescription.includes('Goles')) return '+Goles de pelota parada'
+    if (effectDescription.includes('Asistencias')) return '+Vallas invictas'
+  }
+  return effectDescription
+}
+
 export const CAREER_DILEMMAS: CareerDecision[] = [
   {
     id: 'preseason_training',
@@ -535,6 +552,9 @@ export interface SeasonResult {
   performance?: number // 0..1, rendimiento de la temporada (para selección/eventos)
   barrabravas?: boolean // temporada floja en Argentina: te apretaron los barras
   cleanSheets?: number // vallas invictas (arqueros/defensores)
+  penaltiesSaved?: number // penales atajados (arqueros)
+  yellowCards?: number
+  redCards?: number
   ballonDor?: boolean // ganaste el Balón de Oro esa temporada
 }
 
@@ -603,6 +623,9 @@ function clamp(n: number, lo: number, hi: number): number {
 
 const GOAL_BASE: Record<PositionCategory, number> = { ATT: 14, MID: 6, DEF: 1.5, GK: 0 }
 const ASSIST_BASE: Record<PositionCategory, number> = { ATT: 7, MID: 8, DEF: 2, GK: 0 }
+// Tarjetas por temporada completa: el que marca y corta es el que se llena de amarillas.
+const YELLOW_BASE: Record<PositionCategory, number> = { ATT: 3.5, MID: 6.5, DEF: 8, GK: 1.5 }
+const RED_CHANCE: Record<PositionCategory, number> = { ATT: 0.08, MID: 0.16, DEF: 0.26, GK: 0.07 }
 
 // Valor de mercado realista (€M). Curva exponencial por OVR + curva de edad con pico 23-27
 // y castigo a los muy jóvenes (potencial sin confirmar). Ej: 59/18≈0, 72/18≈8, 80/24≈50,
@@ -705,10 +728,15 @@ function buildCronica(
   } else if (o.copaArgentina) {
     head = `${o.name} y ${o.club} se dieron el gusto en la Copa Argentina. Alegría de campeón.`
   } else if (o.age <= 20) {
-    head = pick([
-      `Temporada de rodaje para la promesa ${o.name} en ${o.club}: ${g} goles en ${o.matches} partidos.`,
-      `${o.name} sumó minutos y aprendizaje en ${o.club}. Jerarquía en ascenso.`,
-    ])
+    head = gk || o.cat === 'DEF'
+      ? pick([
+          `Temporada de rodaje para la promesa ${o.name} en ${o.club}: ${o.matches} partidos y personalidad de grande.`,
+          `${o.name} sumó minutos en el fondo de ${o.club} y se ganó la confianza del técnico.`,
+        ])
+      : pick([
+          `Temporada de rodaje para la promesa ${o.name} en ${o.club}: ${g} goles en ${o.matches} partidos.`,
+          `${o.name} sumó minutos y aprendizaje en ${o.club}. Jerarquía en ascenso.`,
+        ])
   } else if (o.age >= 33) {
     head = pick([
       `El tiempo no perdona, pero ${o.name} sigue dando cátedra a los ${o.age} años en ${o.club}.`,
@@ -716,7 +744,15 @@ function buildCronica(
     ])
   } else {
     head = gk
-      ? pick([`${o.name} fue una pared bajo los tres palos de ${o.club} durante todo el torneo.`])
+      ? pick([
+          `${o.name} fue una pared bajo los tres palos de ${o.club} durante todo el torneo.`,
+          `Seguridad y manos firmes: ${o.name} sostuvo a ${o.club} en las noches bravas.`,
+        ])
+      : o.cat === 'DEF'
+      ? pick([
+          `${o.name} fue el mariscal del fondo de ${o.club}: quite, salida limpia y liderazgo.`,
+          `Nadie pasó por su lado: temporada seria de ${o.name} en la última línea de ${o.club}.`,
+        ])
       : pick([
           `${o.name} cerró un gran año en ${o.club}: ${g} goles y ${o.assists} asistencias en ${o.matches} partidos.`,
           `Regularidad y liderazgo de ${o.name} en ${o.club}.`,
@@ -761,6 +797,19 @@ export function simulateSeason(
   if (TITLE_OPTS.has(opt)) bonusTitle += opt === 'barra_stay' ? 0.06 : 0.1
   if (OVR_OPTS.has(opt)) bonusOvr += 1
 
+  // Un arquero no se vuelve goleador por entrenar definición: sus bonus van a la valla
+  // invicta, y en un defensor pesan la mitad. Antes un arquero terminaba con goles.
+  let bonusCleanSheets = 0
+  if (cat === 'GK') {
+    bonusCleanSheets += bonusGoals + bonusAssists
+    bonusGoals = 0
+    bonusAssists = 0
+  } else if (cat === 'DEF') {
+    bonusCleanSheets += Math.round((bonusGoals + bonusAssists) / 2)
+    bonusGoals = Math.round(bonusGoals / 2)
+    bonusAssists = Math.round(bonusAssists / 2)
+  }
+
   const ovrScale = clamp(ovr / 80, 0.6, 1.35)
   const apps = matchesPlayed / 38
   const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * (0.6 + rng() * 0.9)) + bonusGoals))
@@ -768,7 +817,19 @@ export function simulateSeason(
   // Vallas invictas (arqueros/defensores): dependen del OVR y la fuerza del club.
   const keepsCleanSheets = cat === 'GK' || cat === 'DEF'
   const csRate = keepsCleanSheets ? clamp(0.12 + (ovr - 70) / 120 + (club.strength - 72) / 130, 0.05, 0.55) : 0
-  const cleanSheets = Math.round(matchesPlayed * csRate * (0.7 + rng() * 0.6))
+  const cleanSheets = Math.min(
+    matchesPlayed,
+    Math.round(matchesPlayed * csRate * (0.7 + rng() * 0.6)) + bonusCleanSheets,
+  )
+  // Penales: el arquero enfrenta un puñado por año y ataja según su nivel.
+  const penaltiesFaced = cat === 'GK' ? 2 + Math.floor(rng() * 6) : 0
+  const penaltiesSaved = Math.min(
+    penaltiesFaced,
+    Math.round(penaltiesFaced * clamp(0.18 + (ovr - 70) / 250, 0.08, 0.45) + (rng() < 0.25 ? 1 : 0)),
+  )
+  // Tarjetas: el defensor vive al límite, el arquero casi no ve amarillas.
+  const yellowCards = Math.max(0, Math.round(YELLOW_BASE[cat] * apps * (0.5 + rng())))
+  const redCards = rng() < RED_CHANCE[cat] * (0.6 + apps) ? 1 : 0
 
   // --- Probabilidades de título estilo Copero (del tweet) ---
   // Efecto Maradona: con 90+ de OVR el juego sube un nivel la reputación del club.
@@ -840,6 +901,16 @@ export function simulateSeason(
   // Arqueros y defensores: carteles por vallas invictas (no por goles).
   if (goldenGlove) highlights.push(`🧤 Arquero menos vencido: ${cleanSheets} vallas invictas`)
   else if (keepsCleanSheets && cleanSheets >= 8) highlights.push(`🧤 ${cleanSheets} vallas invictas`)
+  if (cat === 'GK') {
+    if (penaltiesSaved >= 1) highlights.push(`🖐️ ${penaltiesSaved} ${penaltiesSaved === 1 ? 'penal atajado' : 'penales atajados'}`)
+    if (penaltiesSaved >= 1 && (liga || copaArgentina || continentalWon) && rng() < 0.55)
+      highlights.push(`🧤 Héroe en la definición: le atajaste el penal decisivo al rival en la final`)
+    if (cleanSheets >= matchesPlayed * 0.5 && rng() < 0.5)
+      highlights.push(`🧱 Racha histórica: dejaste el arco en cero en más de la mitad del torneo`)
+  }
+  if (cat === 'DEF' && goals >= 4) highlights.push(`🎯 ${goals} goles de pelota parada: un lujo para un defensor`)
+  if (yellowCards >= 10) highlights.push(`🟨 ${yellowCards} amarillas: te perdiste fechas por acumulación`)
+  if (redCards > 0) highlights.push(cat === 'GK' ? `🟥 Expulsado por salir a destiempo fuera del área` : `🟥 Te fuiste expulsado y dejaste al equipo con diez`)
   // Jugador del mes: chance según la nota (podés ganarlo varias veces al año).
   const potm = Math.round(clamp((rating - 7) * (0.4 + rng()) * 2.2, 0, 4))
   if (potm >= 1) highlights.push(`🏅 Jugador del Mes ×${potm}`)
@@ -927,6 +998,9 @@ export function simulateSeason(
     performance,
     barrabravas,
     cleanSheets,
+    penaltiesSaved,
+    yellowCards,
+    redCards,
   }
 
   const offers = generateOffers(state, performance, rng, decisionOptionId)

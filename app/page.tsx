@@ -9,6 +9,8 @@ import squadsData from '@/data/squads.json'
 import type { Club, Squad } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
 import DonationSection from '@/components/DonationSection'
+import SolDeMayo from '@/components/ui/SolDeMayo'
+import dbStats from '@/data/derived/stats.json'
 
 const clubs: Club[] = clubsData as Club[]
 const squads: Squad[] = squadsData as Squad[]
@@ -89,7 +91,7 @@ const TICKER_ITEMS = [
   "GAMBETA — ARMÁ TU MEJOR ONCE HISTÓRICO",
   "CAMPEONES DE AMÉRICA Y DEL MUNDO EN LA BASE",
   "COPA ARGENTINA — MODO DE ELIMINACIÓN DIRECTA ACTIVADO",
-  "+3600 JUGADORES REALES · 168 PLANTELES FILTRADOS",
+  `+${dbStats.players} JUGADORES REALES · ${dbStats.squads} PLANTELES FILTRADOS`,
 ]
 
 /* ─── FRAMER VARIANTS ────────────────────────────────────────── */
@@ -147,6 +149,7 @@ function WorldCupBanner() {
         <div className="absolute -top-24 left-[15%] w-[520px] h-[320px] rounded-full bg-[#74ACDF]/12 blur-3xl pointer-events-none" />
         {/* Sol de mayo / glow dorado detrás de los stats (derecha) */}
         <div className="absolute right-[-40px] top-1/2 -translate-y-1/2 w-[440px] h-[440px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.22), transparent 62%)' }} />
+        <SolDeMayo spin opacity={0.22} className="absolute right-[-60px] top-1/2 -translate-y-1/2 w-[380px] h-[380px] pointer-events-none" />
         {/* Líneas de cancha sutiles, difuminadas hacia la derecha */}
         <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #74ACDF 0 1px, transparent 1px 84px), repeating-linear-gradient(0deg, #74ACDF 0 1px, transparent 1px 84px)', maskImage: 'radial-gradient(ellipse 80% 90% at 75% 50%, black, transparent 78%)', WebkitMaskImage: 'radial-gradient(ellipse 80% 90% at 75% 50%, black, transparent 78%)' }} />
         {/* Overlay para legibilidad: bien oscuro a la izquierda (donde va el texto) */}
@@ -221,7 +224,7 @@ function WorldCupBanner() {
           {/* Right: stats de la base, integradas con la estética argentina */}
           <div className="grid grid-cols-2 gap-3 w-full max-w-xs shrink-0">
             {[
-              { icon: '⚽', label: 'Jugadores', value: '2.956', sub: 'Reales, auditados' },
+              { icon: '⚽', label: 'Jugadores', value: dbStats.players.toLocaleString('es-AR'), sub: 'Reales, auditados' },
               { icon: '📋', label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas oficiales' },
               { icon: '🛡️', label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
               { icon: '🏆', label: 'Mundiales', value: '3', sub: '78 · 86 · 22' },
@@ -341,6 +344,12 @@ function HeroSection() {
       {/* Glows animados por CSS (no compiten con la RAF de framer-motion). */}
       <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[620px] h-[300px] bg-gradient-to-b from-[#74ACDF]/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10 anim-glow" />
       <div className="absolute top-20 right-10 w-72 h-72 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none -z-10 anim-glow-slow" />
+      {/* Sol de Mayo gigante girando detrás del título: el sello de la bandera */}
+      <SolDeMayo
+        spin
+        opacity={0.13}
+        className="absolute left-1/2 top-[-90px] -translate-x-1/2 w-[560px] h-[560px] pointer-events-none -z-10 sm:w-[680px] sm:h-[680px]"
+      />
 
       <motion.div
         initial={{ y: -16 }}
@@ -366,7 +375,12 @@ function HeroSection() {
         {/* Hero Title */}
         <h1 className="font-impact text-[3.4rem] leading-[0.95] sm:text-7xl lg:text-[7.5rem] lg:leading-[0.9] mb-6 tracking-[-0.02em] font-black">
           <span className="block text-white drop-shadow-[0_2px_30px_rgba(255,255,255,0.15)]">ARMÁ TU</span>
-          <span className="hero-title-grad block">EQUIPO SOÑADO</span>
+          <span
+            className="block bg-clip-text text-transparent drop-shadow-[0_2px_30px_rgba(116,172,223,0.35)]"
+            style={{ backgroundImage: 'linear-gradient(180deg, #9CCBF0 0%, #FFFFFF 48%, #74ACDF 100%)' }}
+          >
+            EQUIPO SOÑADO
+          </span>
         </h1>
 
         <p className="text-slate-300/90 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium">
@@ -385,6 +399,12 @@ function HeroSection() {
             </span>
             JUGAR LIGA ARGENTINA
           </Link>
+        </div>
+
+        {/* Bandera: franja celeste-blanca-celeste con el sol en el centro */}
+        <div className="relative mx-auto max-w-2xl h-8 rounded-full overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(116,172,223,0.18)]">
+          <div className="banda-argentina absolute inset-0 opacity-90" />
+          <SolDeMayo className="absolute left-1/2 top-1/2 w-9 h-9 -translate-x-1/2 -translate-y-1/2 drop-shadow" spin />
         </div>
 
         {/* Métricas: se muestran una sola vez en el World Cup Banner (evita duplicar stats). */}

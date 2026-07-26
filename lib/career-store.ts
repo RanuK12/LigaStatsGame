@@ -244,6 +244,9 @@ export function buildCareerCardData(state: CareerState): CareerCardData {
     matchesPlayed: state.totals.matchesPlayed,
     goals: state.totals.goals,
     assists: state.totals.assists,
+    // Se derivan del historial (no están en totals, que viene de carreras ya guardadas).
+    cleanSheets: state.history.reduce((acc, h) => acc + (h.cleanSheets || 0), 0),
+    penaltiesSaved: state.history.reduce((acc, h) => acc + (h.penaltiesSaved || 0), 0),
     clubs,
     trophies,
   }

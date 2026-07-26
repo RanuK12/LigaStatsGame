@@ -5,8 +5,10 @@
     "awayTeam": "Independiente",
     "homeLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/estudiantes-de-la-plata.svg",
     "awayLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/independiente.svg",
-    "status": "UPCOMING",
-    "time": "17:15",
+    "homeScore": 0,
+    "awayScore": 0,
+    "status": "LIVE",
+    "minute": "EN VIVO",
     "league": "lpf",
     "competition": "LPF Arg"
   },

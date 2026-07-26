@@ -1,65 +1,85 @@
 import { describe, it, expect } from 'vitest'
-import { leagueTab, mapEvent } from '@/lib/live-scores'
+import { mapEspnEvent, LEAGUES } from '@/lib/live-scores'
 
-describe('live-scores mapping', () => {
-  it('maps league names to tabs', () => {
-    expect(leagueTab('Argentinian Primera División')).toBe('lpf')
-    expect(leagueTab('Argentinian Liga Profesional')).toBe('lpf')
-    expect(leagueTab('Copa Libertadores')).toBe('libertadores')
-    expect(leagueTab('Copa Sudamericana')).toBe('libertadores')
-    expect(leagueTab('Spanish La Liga')).toBe('europe')
-    expect(leagueTab('English Premier League')).toBe('europe')
-    expect(leagueTab('UEFA Champions League')).toBe('europe')
-    expect(leagueTab('American USL Championship')).toBeNull()
-    expect(leagueTab(null)).toBeNull()
-  })
+const lpf = { name: 'Primera División Argentina', icon: '🇦🇷', rank: 0 }
 
-  it('ignores events from untracked leagues', () => {
-    expect(mapEvent({ strLeague: 'MLS', strHomeTeam: 'A', strAwayTeam: 'B' })).toBeNull()
-  })
-
-  it('maps a finished event', () => {
-    const m = mapEvent({
-      idEvent: '1',
-      strLeague: 'Spanish La Liga',
-      strHomeTeam: 'Real Madrid',
-      strAwayTeam: 'Barcelona',
-      intHomeScore: '2',
-      intAwayScore: '1',
-      strStatus: 'FT',
-    })!
+describe('live-scores (ESPN)', () => {
+  it('mapea un partido terminado con su resultado', () => {
+    const m = mapEspnEvent(
+      {
+        id: '1',
+        date: '2026-07-25T22:15Z',
+        competitions: [
+          {
+            competitors: [
+              { homeAway: 'home', score: '0', team: { displayName: 'River Plate', logo: 'r.png' } },
+              { homeAway: 'away', score: '1', team: { displayName: 'Barracas Central' } },
+            ],
+            status: { type: { state: 'post', shortDetail: 'FT' } },
+          },
+        ],
+      },
+      lpf,
+    )!
     expect(m.status).toBe('FINAL')
-    expect(m.homeScore).toBe(2)
+    expect(m.homeTeam).toBe('River Plate')
+    expect(m.homeScore).toBe(0)
     expect(m.awayScore).toBe(1)
-    expect(m.league).toBe('europe')
+    expect(m.leagueName).toBe('Primera División Argentina')
   })
 
-  it('maps a live event with minute from progress', () => {
-    const m = mapEvent({
-      strLeague: 'Copa Libertadores',
-      strHomeTeam: 'Flamengo',
-      strAwayTeam: 'River Plate',
-      intHomeScore: '1',
-      intAwayScore: '0',
-      strStatus: '2H',
-      strProgress: '67',
-    })!
+  it('mapea un partido en vivo con el minuto', () => {
+    const m = mapEspnEvent(
+      {
+        id: '2',
+        competitions: [
+          {
+            competitors: [
+              { homeAway: 'home', score: '1', team: { displayName: 'Estudiantes' } },
+              { homeAway: 'away', score: '0', team: { displayName: 'Independiente' } },
+            ],
+            status: { displayClock: "28'", type: { state: 'in', shortDetail: "28'" } },
+          },
+        ],
+      },
+      lpf,
+    )!
     expect(m.status).toBe('LIVE')
-    expect(m.minute).toBe("67'")
+    expect(m.minute).toBe("28'")
   })
 
-  it('maps an upcoming event with time', () => {
-    const m = mapEvent({
-      strLeague: 'Argentinian Primera División',
-      strHomeTeam: 'Boca',
-      strAwayTeam: 'River',
-      intHomeScore: null,
-      intAwayScore: null,
-      strStatus: 'NS',
-      strTime: '21:30:00',
-    })!
+  it('mapea un partido por jugar con horario y sin resultado', () => {
+    const m = mapEspnEvent(
+      {
+        id: '3',
+        date: '2026-07-28T22:00Z',
+        competitions: [
+          {
+            competitors: [
+              { homeAway: 'home', team: { displayName: 'Banfield' } },
+              { homeAway: 'away', team: { displayName: 'Sarmiento' } },
+            ],
+            status: { type: { state: 'pre', shortDetail: 'Scheduled' } },
+          },
+        ],
+      },
+      lpf,
+    )!
     expect(m.status).toBe('UPCOMING')
-    expect(m.time).toBe('21:30')
     expect(m.homeScore).toBeUndefined()
+    expect(m.time).toMatch(/^\d{2}:\d{2}$/)
+  })
+
+  it('descarta eventos sin los dos equipos', () => {
+    expect(mapEspnEvent({ id: '4', competitions: [{ competitors: [] }] }, lpf)).toBeNull()
+  })
+
+  it('sigue las ligas que le importan al hincha argentino', () => {
+    const slugs = LEAGUES.map((l) => l.slug)
+    expect(slugs).toContain('arg.1')
+    expect(slugs).toContain('conmebol.libertadores')
+    expect(slugs).toContain('uefa.champions')
+    // La Primera División argentina va primera en la agenda
+    expect(LEAGUES.find((l) => l.slug === 'arg.1')!.rank).toBe(0)
   })
 })

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import type { SeasonResult } from "@/lib/career-engine"
+import { positionCategory, type SeasonResult } from "@/lib/career-engine"
 
 // Cuenta un número desde `from` hasta `to` en `ms`.
 function useCountUp(to: number, ms: number, start: boolean, from = 0) {
@@ -24,10 +24,16 @@ function useCountUp(to: number, ms: number, start: boolean, from = 0) {
 
 interface Props {
   season: (SeasonResult & { clubId?: string }) | null
+  position?: string
   onClose: () => void
 }
 
-export default function SeasonReveal({ season, onClose }: Props) {
+export default function SeasonReveal({ season, position, onClose }: Props) {
+  // El resumen de la temporada muestra lo que corresponde al puesto: un arquero no
+  // se luce con goles sino con vallas invictas y penales atajados.
+  const cat = positionCategory(position || "CM")
+  const esArquero = cat === "GK"
+  const esDefensor = cat === "DEF"
   const [phase, setPhase] = useState(0)
   useEffect(() => {
     if (!season) { setPhase(0); return }
@@ -43,6 +49,8 @@ export default function SeasonReveal({ season, onClose }: Props) {
   const goals = useCountUp(season?.goals ?? 0, 700, phase >= 1)
   const assists = useCountUp(season?.assists ?? 0, 700, phase >= 1)
   const matches = useCountUp(season?.matchesPlayed ?? 0, 700, phase >= 1)
+  const cleanSheets = useCountUp(season?.cleanSheets ?? 0, 700, phase >= 1)
+  const penaltiesSaved = useCountUp(season?.penaltiesSaved ?? 0, 700, phase >= 1)
   const ovrShown = useCountUp(next, 900, phase >= 3, prev)
 
   const trophies: { icon: string; label: string }[] = []
@@ -98,7 +106,12 @@ export default function SeasonReveal({ season, onClose }: Props) {
 
             {/* Stats */}
             <div className="mt-4 grid grid-cols-3 gap-2 text-center font-sport">
-              {[{ v: matches, l: "PJ", c: "#60a5fa" }, { v: goals, l: "Goles", c: "#34d399" }, { v: assists, l: "Asist.", c: "#fb923c" }].map((s, i) => (
+              {(esArquero
+                ? [{ v: matches, l: "PJ", c: "#60a5fa" }, { v: cleanSheets, l: "V. invictas", c: "#34d399" }, { v: penaltiesSaved, l: "Pen. atajados", c: "#fb923c" }]
+                : esDefensor
+                ? [{ v: matches, l: "PJ", c: "#60a5fa" }, { v: cleanSheets, l: "V. invictas", c: "#34d399" }, { v: goals + assists, l: "G+A", c: "#fb923c" }]
+                : [{ v: matches, l: "PJ", c: "#60a5fa" }, { v: goals, l: "Goles", c: "#34d399" }, { v: assists, l: "Asist.", c: "#fb923c" }]
+              ).map((s, i) => (
                 <div key={i} className="rounded-xl border border-white/5 bg-white/5 py-2.5">
                   <div className="font-display text-2xl font-black" style={{ color: s.c }}>{s.v}</div>
                   <div className="text-[9px] uppercase tracking-wider text-slate-400">{s.l}</div>

@@ -1,11 +1,21 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useUserStore } from "@/lib/user-store"
 import { rankFromElo } from "@/lib/ranking"
+import { SEED_RIVALS } from "@/lib/leaderboard-seed"
+import { loadLocalScores } from "@/lib/scores"
 import TierBadge from "./TierBadge"
 
 export default function UserProfileModal() {
   const { user, isProfileModalOpen, closeProfileModal, logout } = useUserStore()
+  // Puesto en la tabla: contra los DTs de la casa + tus propias partidas.
+  const [puesto, setPuesto] = useState<{ n: number; total: number } | null>(null)
+  useEffect(() => {
+    if (!isProfileModalOpen || !user) return
+    const tabla = [...SEED_RIVALS.map((r) => r.elo), ...loadLocalScores().map((s) => s.elo)]
+    const porEncima = tabla.filter((e) => e > user.elo).length
+    setPuesto({ n: porEncima + 1, total: tabla.length + 1 })
+  }, [isProfileModalOpen, user])
 
   // Close on ESC while the modal is open.
   useEffect(() => {
@@ -70,6 +80,18 @@ export default function UserProfileModal() {
                 <p className="text-[10px] text-amber-400 mt-2 font-sport uppercase tracking-wider">👑 Cima del ranking</p>
               )
             })()}
+
+            {puesto && (
+              <div className="mt-5 rounded-2xl border border-[#74ACDF]/30 bg-[#74ACDF]/[0.07] p-3.5">
+                <div className="text-[9px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">Puesto en el ranking</div>
+                <div className="font-display text-3xl font-black text-white leading-none mt-1">
+                  #{puesto.n} <span className="text-slate-500 text-base">de {puesto.total}</span>
+                </div>
+                <div className="text-[10px] text-slate-400 mt-1 font-sport uppercase tracking-wider">
+                  {puesto.n === 1 ? '👑 Número uno' : puesto.n <= 3 ? '🔥 En el podio' : puesto.n <= 10 ? '💪 Top 10' : 'Jugá más torneos para escalar'}
+                </div>
+              </div>
+            )}
 
             <div className="grid grid-cols-3 gap-3 my-6">
               <div className="card-glass p-3 rounded-2xl border border-white/5">

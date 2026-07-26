@@ -1,6 +1,6 @@
 "use client"
 
-import { TROPHY_META, findClub, retirementStory, formatMarketValue, type CareerState } from "@/lib/career-engine"
+import { TROPHY_META, findClub, retirementStory, formatMarketValue, positionCategory, type CareerState } from "@/lib/career-engine"
 
 // Abreviatura de posición en español (estilo Copero: ED, DC, ARQ...).
 const POS_ES: Record<string, string> = {
@@ -51,6 +51,10 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
   const value = formatMarketValue(player.marketValueM)
   const ntCaps = career.milestones.ntCaps || 0
   const chips = palmares(career)
+  // Las columnas cambian según el puesto: un arquero no se mide por goles.
+  const cat = positionCategory(player.position)
+  const esArquero = cat === "GK"
+  const esDefensor = cat === "DEF"
 
   return (
     <div className="w-full rounded-[28px] overflow-hidden bg-gradient-to-b from-[#100a12] via-[#0b0710] to-[#050308] border border-white/10 text-white font-sans p-5 sm:p-6">
@@ -96,7 +100,9 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
       {/* COLUMNAS */}
       <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-x-2 sm:gap-x-3 items-center px-1 pt-4 pb-2 text-[9px] font-black text-slate-500 font-sport uppercase tracking-widest">
         <span>Edad</span><span>Club</span><span className="text-center">OVR</span>
-        <span className="text-center">🟩 PJ</span><span className="text-center">⚽ G</span><span className="text-center">👟 A</span>
+        <span className="text-center">🟩 PJ</span>
+        <span className="text-center">{esArquero || esDefensor ? "🧤 VI" : "⚽ G"}</span>
+        <span className="text-center">{esArquero ? "🖐️ PA" : esDefensor ? "⚽ G" : "👟 A"}</span>
       </div>
 
       {/* FILAS (timeline) */}
@@ -116,8 +122,12 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
               </div>
               <span className="w-9 h-7 rounded-md flex items-center justify-center font-impact font-black text-base shrink-0" style={{ background: roc.bg, color: roc.text }}>{rowOvr}</span>
               <span className="text-center font-bold text-sm text-slate-200 min-w-[28px] font-sport">{s.matchesPlayed}</span>
-              <span className="text-center font-bold text-sm text-emerald-400 min-w-[24px] font-sport">{s.goals}</span>
-              <span className="text-center font-bold text-sm text-orange-400 min-w-[24px] font-sport">{s.assists}</span>
+              <span className="text-center font-bold text-sm text-emerald-400 min-w-[24px] font-sport">
+                {esArquero || esDefensor ? s.cleanSheets ?? 0 : s.goals}
+              </span>
+              <span className="text-center font-bold text-sm text-orange-400 min-w-[24px] font-sport">
+                {esArquero ? s.penaltiesSaved ?? 0 : esDefensor ? s.goals : s.assists}
+              </span>
             </div>
           )
         })}

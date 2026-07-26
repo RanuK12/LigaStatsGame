@@ -15,6 +15,7 @@ import SeasonReveal from "@/components/career/SeasonReveal"
 import CareerFinale from "@/components/career/CareerFinale"
 import CareerTimelineCard from "@/components/career/CareerTimelineCard"
 import BallonDorReveal from "@/components/career/BallonDorReveal"
+import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
@@ -32,6 +33,8 @@ import {
   BARRABRAVAS_DECISION,
   academyInterest,
   LEGEND_CAREERS,
+  positionCategory,
+  effectLabelFor,
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
@@ -402,6 +405,7 @@ function CareerDashboard() {
   const [revealSeason, setRevealSeason] = useState<SeasonResult | null>(null)
   const [ballonDorData, setBallonDorData] = useState<{ year: number; playerName: string; flag: string; ovr: number } | null>(null)
   const [showFinale, setShowFinale] = useState(false)
+  const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
 
   if (!career) return null
   const cardData = buildCareerCardData(career)
@@ -426,6 +430,16 @@ function CareerDashboard() {
     }
   }
 
+  // El momento que merece pantalla completa: título, Balón de Oro o Mundial.
+  function bigMoment(s: SeasonResult): { label: string; tone: BurstTone } | null {
+    if (s.ballonDor) return { label: "¡Balón de Oro!", tone: "oro" }
+    if (s.continentalWon) return { label: "¡Campeón de América!", tone: "oro" }
+    if (s.liga) return { label: "¡Campeón!", tone: "oro" }
+    if (s.copaArgentina) return { label: "¡Copa Argentina!", tone: "celeste" }
+    if ((s.nextOvr ?? s.ovr) - s.ovr >= 4) return { label: "¡Explotaste de nivel!", tone: "celeste" }
+    return null
+  }
+
   function handleSimulate(yearsCount = 1) {
     for (let i = 0; i < yearsCount; i++) {
       const cur = useCareerStore.getState().career
@@ -435,7 +449,9 @@ function CareerDashboard() {
     const fin = useCareerStore.getState().career
     // Reveal animado solo al simular de a una temporada (el momento dramático).
     if (yearsCount === 1 && fin?.history.length) {
-      setRevealSeason(fin.history[fin.history.length - 1])
+      const ultima = fin.history[fin.history.length - 1]
+      setRevealSeason(ultima)
+      setBurst(bigMoment(ultima))
     } else if (fin?.finished) {
       // Simulación en lote que llegó al final: finale directo.
       setShowFinale(true)
@@ -515,7 +531,7 @@ function CareerDashboard() {
                     }`}
                   >
                     <span>{opt.label}</span>
-                    <span className="text-[10px] text-red-300 font-bold text-right ml-2">{opt.effectDescription}</span>
+                    <span className="text-[10px] text-red-300 font-bold text-right ml-2">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
                   </button>
                 ))}
               </div>
@@ -545,7 +561,7 @@ function CareerDashboard() {
                     }`}
                   >
                     <span>{opt.label}</span>
-                    <span className="text-[10px] text-amber-300 font-bold">{opt.effectDescription}</span>
+                    <span className="text-[10px] text-amber-300 font-bold">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
                   </button>
                 ))}
               </div>
@@ -568,7 +584,7 @@ function CareerDashboard() {
                         }`}
                       >
                         <span>{opt.label}</span>
-                        <span className="text-[10px] text-purple-300 font-bold">{opt.effectDescription}</span>
+                        <span className="text-[10px] text-purple-300 font-bold">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
                       </button>
                     ))}
                   </div>
@@ -604,11 +620,15 @@ function CareerDashboard() {
             </button>
           )}
 
-          {/* FEED DE TEMPORADAS — la narrativa dinámica, en la misma pantalla */}
+          {/* FEED DE TEMPORADAS — la narrativa dinámica, en la misma pantalla.
+              Cada puesto muestra lo suyo: el arquero vallas invictas y penales atajados. */}
           {career.history.length > 0 && (
             <div className="space-y-3 pt-2">
               <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.3em] px-1">Tu historia</h4>
               {[...career.history].reverse().map((s, i) => {
+                const cat = positionCategory(career.player.position)
+                const esArquero = cat === "GK"
+                const esDefensor = cat === "DEF"
                 const trophies: string[] = []
                 if (s.liga) trophies.push("⭐ Liga")
                 if (s.copaArgentina) trophies.push("🥛 Copa Argentina")
@@ -624,8 +644,22 @@ function CareerDashboard() {
                       </div>
                       <div className="flex items-center gap-2 shrink-0 font-sport text-[11px]">
                         <span className="text-blue-300">{s.matchesPlayed} PJ</span>
-                        <span className="text-green-400">{s.goals} G</span>
-                        <span className="text-orange-400">{s.assists} A</span>
+                        {esArquero ? (
+                          <>
+                            <span className="text-green-400">{s.cleanSheets ?? 0} VI</span>
+                            <span className="text-orange-400">{s.penaltiesSaved ?? 0} PA</span>
+                          </>
+                        ) : esDefensor ? (
+                          <>
+                            <span className="text-green-400">{s.cleanSheets ?? 0} VI</span>
+                            <span className="text-orange-400">{s.goals}G {s.assists}A</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-green-400">{s.goals} G</span>
+                            <span className="text-orange-400">{s.assists} A</span>
+                          </>
+                        )}
                         {delta !== 0 && <span className={`px-1.5 py-0.5 rounded font-black ${delta > 0 ? "bg-emerald-500/20 text-emerald-300" : "bg-red-500/20 text-red-300"}`}>{delta > 0 ? "+" : ""}{delta}</span>}
                       </div>
                     </div>
@@ -638,10 +672,23 @@ function CareerDashboard() {
                     )}
                     {s.cronica && <p className="text-[11px] italic text-slate-300 leading-snug font-sans">{s.cronica}</p>}
                     {s.highlights && s.highlights.length > 0 && (
-                      <ul className="mt-1.5 space-y-0.5">
-                        {s.highlights.slice(0, 3).map((h, j) => (
-                          <li key={j} className="text-[10px] text-slate-400 font-sans">{h}</li>
-                        ))}
+                      <ul className="mt-2 space-y-1.5">
+                        {s.highlights.map((h, j) => {
+                          const grande = /🏆|🥇|🌍|🏅|⭐|🧤 Héroe|BALÓN DE ORO|EUROPA/.test(h)
+                          return (
+                            <li
+                              key={j}
+                              className={`cartel-in text-[11px] font-sans rounded-xl px-2.5 py-1.5 border ${
+                                grande
+                                  ? "cartel-shine text-[#FFE9A8] bg-[#D4AF37]/10 border-[#D4AF37]/40 font-bold shadow-[0_0_18px_rgba(212,175,55,0.15)]"
+                                  : "text-slate-300 bg-white/[0.03] border-white/5"
+                              }`}
+                              style={{ animationDelay: `${j * 90}ms` }}
+                            >
+                              {h}
+                            </li>
+                          )
+                        })}
                       </ul>
                     )}
                   </div>
@@ -681,8 +728,16 @@ function CareerDashboard() {
           </div>
       </div>
 
+      <EventBurst
+        show={burst !== null}
+        label={burst?.label}
+        tone={burst?.tone || "oro"}
+        onDone={() => setBurst(null)}
+      />
+
       <SeasonReveal
         season={revealSeason}
+        position={career.player.position}
         onClose={() => {
           const s = revealSeason
           setRevealSeason(null)

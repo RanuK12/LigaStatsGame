@@ -33,7 +33,15 @@ const topScorers = [...players].sort((a, b) => b.goalsClub - a.goalsClub).slice(
 fs.mkdirSync(DERIVED_DIR, { recursive: true })
 fs.writeFileSync(path.join(DERIVED_DIR, 'records.json'), JSON.stringify({ topRated, topScorers }, null, 2))
 
-// 3) ruleta: top-16 completos (la página muestra clubs/trofeos/caps del ganador)
+// 3) stats: los números que muestra el Home (para que no queden hardcodeados y envejezcan)
+const squads = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'squads.json'), 'utf8'))
+const clubs = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'clubs.json'), 'utf8'))
+fs.writeFileSync(
+  path.join(DERIVED_DIR, 'stats.json'),
+  JSON.stringify({ players: players.length, squads: squads.length, clubs: clubs.length, legends: players.filter((p) => p.legendary).length }, null, 2),
+)
+
+// 4) ruleta: top-16 completos (la página muestra clubs/trofeos/caps del ganador)
 const wheel = [...players].sort((a, b) => b.rating - a.rating).slice(0, 16)
 fs.writeFileSync(path.join(DERIVED_DIR, 'ruleta-wheel.json'), JSON.stringify(wheel, null, 2))
 

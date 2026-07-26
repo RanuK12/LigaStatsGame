@@ -1,13 +1,36 @@
 /**
- * Real match data for the Home widget, client-side (static export friendly).
+ * Partidos reales para la agenda del Home, 100% del lado del cliente (export estático).
  *
- * Source: TheSportsDB `eventsday.php?d=<date>&s=Soccer`, mapped by LEAGUE NAME
- * (not fabricated league IDs). The free/test key ('3') is heavily scoped and returns
- * little; set NEXT_PUBLIC_SPORTSDB_KEY to a real key for full data. Any failure or
- * empty result falls back to the cached JSON in public/data/live-scores.json.
+ * Fuente: scoreboard público de ESPN
+ * (`site.api.espn.com/apis/site/v2/sports/soccer/<liga>/scoreboard?dates=YYYYMMDD`).
+ * Es gratis, no pide API key y responde con CORS abierto. Reemplaza a TheSportsDB, que con
+ * la key libre '3' devolvía apenas un puñado de partidos y se comía fechas enteras de la
+ * Liga Profesional (faltaban River, Talleres y compañía).
+ *
+ * ESPN agrupa por el día LOCAL de la competencia, que es lo que espera el hincha
+ * ("los partidos de anoche"), y trae estado en vivo con minuto.
  */
 
 export type LeagueTab = 'lpf' | 'libertadores' | 'europe'
+
+/** Ligas que seguimos: slug de ESPN + cómo se muestran en la agenda. */
+export const LEAGUES: { slug: string; name: string; icon: string; rank: number; tab: LeagueTab }[] = [
+  { slug: 'arg.1', name: 'Primera División Argentina', icon: '🇦🇷', rank: 0, tab: 'lpf' },
+  { slug: 'arg.copa_lpf', name: 'Copa de la Liga Profesional', icon: '🇦🇷', rank: 0, tab: 'lpf' },
+  { slug: 'arg.copa', name: 'Copa Argentina', icon: '🏅', rank: 1, tab: 'lpf' },
+  { slug: 'arg.2', name: 'Primera Nacional', icon: '🇦🇷', rank: 6, tab: 'lpf' },
+  { slug: 'conmebol.libertadores', name: 'Copa Libertadores', icon: '🏆', rank: 1, tab: 'libertadores' },
+  { slug: 'conmebol.sudamericana', name: 'Copa Sudamericana', icon: '🥇', rank: 2, tab: 'libertadores' },
+  { slug: 'bra.1', name: 'Brasileirão', icon: '🇧🇷', rank: 5, tab: 'libertadores' },
+  { slug: 'uefa.champions', name: 'Champions League', icon: '⭐', rank: 2, tab: 'europe' },
+  { slug: 'uefa.europa', name: 'Europa League', icon: '🎖️', rank: 4, tab: 'europe' },
+  { slug: 'esp.1', name: 'LaLiga', icon: '🇪🇸', rank: 3, tab: 'europe' },
+  { slug: 'eng.1', name: 'Premier League', icon: '🏴', rank: 3, tab: 'europe' },
+  { slug: 'ita.1', name: 'Serie A', icon: '🇮🇹', rank: 4, tab: 'europe' },
+  { slug: 'ger.1', name: 'Bundesliga', icon: '🇩🇪', rank: 4, tab: 'europe' },
+  { slug: 'fra.1', name: 'Ligue 1', icon: '🇫🇷', rank: 4, tab: 'europe' },
+  { slug: 'fifa.world', name: 'Copa del Mundo', icon: '🌍', rank: 0, tab: 'europe' },
+]
 
 export interface Match {
   id: string
@@ -24,83 +47,7 @@ export interface Match {
   competition?: string
 }
 
-interface SportsDbEvent {
-  idEvent?: string
-  strLeague?: string
-  strHomeTeam?: string
-  strAwayTeam?: string
-  strHomeTeamBadge?: string
-  strAwayTeamBadge?: string
-  intHomeScore?: string | null
-  intAwayScore?: string | null
-  strStatus?: string | null
-  strProgress?: string | null
-  strTime?: string | null
-}
-
-const TAB_MATCHERS: { tab: LeagueTab; re: RegExp }[] = [
-  { tab: 'lpf', re: /argentin.*(primera|liga profesional|liga argentina)/i },
-  { tab: 'libertadores', re: /libertadores|sudamericana/i },
-  { tab: 'europe', re: /(spanish )?la liga|english premier league|uefa champions league/i },
-]
-
-/** Map a TheSportsDB league name to one of our tabs, or null if not a tracked league. */
-export function leagueTab(leagueName: string | undefined | null): LeagueTab | null {
-  if (!leagueName) return null
-  return TAB_MATCHERS.find((m) => m.re.test(leagueName))?.tab ?? null
-}
-
-const FINISHED = new Set(['FT', 'AET', 'PEN', 'Match Finished', 'Finished', 'AP'])
-const LIVE = new Set(['1H', '2H', 'HT', 'ET', 'BT', 'P', 'Live', 'In Play'])
-
-function toScore(v: string | null | undefined): number | undefined {
-  if (v === null || v === undefined || v === '') return undefined
-  const n = parseInt(v, 10)
-  return Number.isNaN(n) ? undefined : n
-}
-
-/** Map a raw event to a Match, or null when it is not a tracked league. */
-export function mapEvent(ev: SportsDbEvent): Match | null {
-  const tab = leagueTab(ev.strLeague)
-  if (!tab || !ev.strHomeTeam || !ev.strAwayTeam) return null
-
-  const homeScore = toScore(ev.intHomeScore)
-  const awayScore = toScore(ev.intAwayScore)
-  const status = ev.strStatus ?? ''
-  const progress = ev.strProgress ?? ''
-
-  let matchStatus: Match['status']
-  let minute: string | undefined
-  let time: string | undefined
-
-  if (FINISHED.has(status)) {
-    matchStatus = 'FINAL'
-  } else if (LIVE.has(status) || /^\d+/.test(progress)) {
-    matchStatus = 'LIVE'
-    minute = /^\d+/.test(progress) ? `${progress.replace(/'+$/, '')}'` : status || 'EN VIVO'
-  } else {
-    matchStatus = 'UPCOMING'
-    time = ev.strTime ? ev.strTime.slice(0, 5) : undefined
-  }
-
-  return {
-    id: ev.idEvent || `${ev.strHomeTeam}-${ev.strAwayTeam}`,
-    homeTeam: ev.strHomeTeam,
-    awayTeam: ev.strAwayTeam,
-    homeLogo: ev.strHomeTeamBadge || undefined,
-    awayLogo: ev.strAwayTeamBadge || undefined,
-    homeScore,
-    awayScore,
-    status: matchStatus,
-    minute,
-    time,
-    league: tab,
-  }
-}
-
-const STATUS_ORDER: Record<Match['status'], number> = { LIVE: 0, UPCOMING: 1, FINAL: 2 }
-
-// Partido de agenda con el nombre real de su liga (sin filtrar a un set fijo).
+/** Partido de agenda: además del cruce, cómo y dónde mostrar su liga. */
 export interface AgendaMatch {
   id: string
   homeTeam: string
@@ -113,116 +60,157 @@ export interface AgendaMatch {
   minute?: string
   time?: string
   leagueName: string
+  leagueIcon: string
+  leagueRank: number
+  kickoff?: string
 }
 
-function mapAnyEvent(ev: SportsDbEvent): AgendaMatch | null {
-  if (!ev.strHomeTeam || !ev.strAwayTeam) return null
-  const status = ev.strStatus ?? ''
-  const progress = ev.strProgress ?? ''
-  let matchStatus: AgendaMatch['status']
-  let minute: string | undefined
-  let time: string | undefined
-  if (FINISHED.has(status)) matchStatus = 'FINAL'
-  else if (LIVE.has(status) || /^\d+/.test(progress)) {
-    matchStatus = 'LIVE'
-    minute = /^\d+/.test(progress) ? `${progress.replace(/'+$/, '')}'` : status || 'EN VIVO'
-  } else {
-    matchStatus = 'UPCOMING'
-    time = ev.strTime ? ev.strTime.slice(0, 5) : undefined
-  }
+interface EspnCompetitor {
+  homeAway?: string
+  score?: string
+  team?: { displayName?: string; shortDisplayName?: string; name?: string; logo?: string }
+}
+interface EspnEvent {
+  id?: string
+  date?: string
+  competitions?: {
+    competitors?: EspnCompetitor[]
+    status?: { displayClock?: string; type?: { state?: string; shortDetail?: string; detail?: string } }
+  }[]
+}
+
+const STATUS_ORDER: Record<Match['status'], number> = { LIVE: 0, UPCOMING: 1, FINAL: 2 }
+
+function toScore(v: string | null | undefined): number | undefined {
+  if (v === null || v === undefined || v === '') return undefined
+  const n = parseInt(v, 10)
+  return Number.isNaN(n) ? undefined : n
+}
+
+function localTime(iso: string | undefined): string | undefined {
+  if (!iso) return undefined
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return undefined
+  return d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })
+}
+
+/** Traduce un evento de ESPN a nuestro partido de agenda. */
+export function mapEspnEvent(
+  ev: EspnEvent,
+  league: { name: string; icon: string; rank: number },
+): AgendaMatch | null {
+  const comp = ev.competitions?.[0]
+  const home = comp?.competitors?.find((c) => c.homeAway === 'home') || comp?.competitors?.[0]
+  const away = comp?.competitors?.find((c) => c.homeAway === 'away') || comp?.competitors?.[1]
+  const homeName = home?.team?.displayName || home?.team?.name
+  const awayName = away?.team?.displayName || away?.team?.name
+  if (!homeName || !awayName) return null
+
+  const state = comp?.status?.type?.state // 'pre' | 'in' | 'post'
+  const status: AgendaMatch['status'] = state === 'post' ? 'FINAL' : state === 'in' ? 'LIVE' : 'UPCOMING'
+
   return {
-    id: ev.idEvent || `${ev.strHomeTeam}-${ev.strAwayTeam}`,
-    homeTeam: ev.strHomeTeam,
-    awayTeam: ev.strAwayTeam,
-    homeLogo: ev.strHomeTeamBadge || undefined,
-    awayLogo: ev.strAwayTeamBadge || undefined,
-    homeScore: toScore(ev.intHomeScore),
-    awayScore: toScore(ev.intAwayScore),
-    status: matchStatus,
-    minute,
-    time,
-    leagueName: ev.strLeague || 'Fútbol',
+    id: ev.id || `${homeName}-${awayName}-${ev.date ?? ''}`,
+    homeTeam: homeName,
+    awayTeam: awayName,
+    homeLogo: home?.team?.logo,
+    awayLogo: away?.team?.logo,
+    homeScore: toScore(home?.score),
+    awayScore: toScore(away?.score),
+    status,
+    minute: status === 'LIVE' ? comp?.status?.displayClock || comp?.status?.type?.shortDetail : undefined,
+    time: status === 'UPCOMING' ? localTime(ev.date) : undefined,
+    leagueName: league.name,
+    leagueIcon: league.icon,
+    leagueRank: league.rank,
+    kickoff: ev.date,
   }
 }
 
-// TODOS los partidos de fútbol de una fecha (cualquier liga). Reactivo de verdad al cambiar el día.
-export async function fetchDayAll(date: string, key?: string): Promise<AgendaMatch[]> {
-  const apiKey = key || process.env.NEXT_PUBLIC_SPORTSDB_KEY || '3'
+async function fetchLeagueDay(
+  league: (typeof LEAGUES)[number],
+  date: string,
+): Promise<AgendaMatch[]> {
+  const day = date.replace(/-/g, '')
   try {
-    const r = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsday.php?d=${date}&s=Soccer`)
+    const r = await fetch(
+      `https://site.api.espn.com/apis/site/v2/sports/soccer/${league.slug}/scoreboard?dates=${day}`,
+    )
     if (!r.ok) return []
-    const batch = await r.json()
-    const events: SportsDbEvent[] = batch?.events || []
-    const seen = new Set<string>()
-    const out: AgendaMatch[] = []
-    for (const ev of events) {
-      const m = mapAnyEvent(ev)
-      if (m && !seen.has(m.id)) { seen.add(m.id); out.push(m) }
-    }
-    out.sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
-    return out
+    const json = await r.json()
+    const events: EspnEvent[] = json?.events || []
+    return events.map((ev) => mapEspnEvent(ev, league)).filter((m): m is AgendaMatch => m !== null)
   } catch {
     return []
   }
+}
+
+/** Todos los partidos de una fecha (YYYY-MM-DD) en las ligas que seguimos. */
+export async function fetchDayAll(date: string): Promise<AgendaMatch[]> {
+  const perLeague = await Promise.all(LEAGUES.map((l) => fetchLeagueDay(l, date)))
+  const seen = new Set<string>()
+  const out: AgendaMatch[] = []
+  for (const list of perLeague) {
+    for (const m of list) {
+      if (seen.has(m.id)) continue
+      seen.add(m.id)
+      out.push(m)
+    }
+  }
+  out.sort(
+    (a, b) =>
+      STATUS_ORDER[a.status] - STATUS_ORDER[b.status] ||
+      (a.kickoff || '').localeCompare(b.kickoff || ''),
+  )
+  return out
+}
+
+function toMatch(m: AgendaMatch, tab: LeagueTab): Match {
+  return {
+    id: m.id,
+    homeTeam: m.homeTeam,
+    awayTeam: m.awayTeam,
+    homeLogo: m.homeLogo,
+    awayLogo: m.awayLogo,
+    homeScore: m.homeScore,
+    awayScore: m.awayScore,
+    status: m.status,
+    minute: m.minute,
+    time: m.time,
+    league: tab,
+    competition: m.leagueName,
+  }
+}
+
+/** Partidos de UNA fecha, ya clasificados por pestaña (lpf / libertadores / europa). */
+export async function fetchScoresForDate(date: string): Promise<Match[]> {
+  const perLeague = await Promise.all(
+    LEAGUES.map(async (l) => (await fetchLeagueDay(l, date)).map((m) => toMatch(m, l.tab))),
+  )
+  const matches = perLeague.flat()
+  matches.sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
+  return matches
 }
 
 function ymd(offsetDays: number): string {
   const d = new Date()
   d.setDate(d.getDate() + offsetDays)
-  return d.toISOString().slice(0, 10)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
-/**
- * Fetch soccer events for yesterday+today and map the tracked leagues.
- * Returns [] on any failure so the caller can use the cached fallback.
- */
-/** Fetch and map the tracked-league events for ONE specific date (YYYY-MM-DD). */
-export async function fetchScoresForDate(date: string, key?: string): Promise<Match[]> {
-  const apiKey = key || process.env.NEXT_PUBLIC_SPORTSDB_KEY || '3'
-  try {
-    const r = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsday.php?d=${date}&s=Soccer`)
-    if (!r.ok) return []
-    const batch = await r.json()
-    const events: SportsDbEvent[] = batch?.events || []
-    const seen = new Set<string>()
-    const matches: Match[] = []
-    for (const ev of events) {
-      const m = mapEvent(ev)
-      if (m && !seen.has(m.id)) { seen.add(m.id); matches.push(m) }
-    }
-    matches.sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
-    return matches
-  } catch {
-    return []
-  }
-}
-
-export async function fetchLiveScores(key?: string): Promise<Match[]> {
-  const apiKey = key || process.env.NEXT_PUBLIC_SPORTSDB_KEY || '3'
+/** Ayer + hoy: lo que va arriba de todo en el Home. */
+export async function fetchLiveScores(): Promise<Match[]> {
   const days = [ymd(-1), ymd(0)]
-  try {
-    const batches = await Promise.all(
-      days.map((d) =>
-        fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsday.php?d=${d}&s=Soccer`)
-          .then((r) => (r.ok ? r.json() : null))
-          .catch(() => null),
-      ),
-    )
-    const seen = new Set<string>()
-    const matches: Match[] = []
-    for (const batch of batches) {
-      const events: SportsDbEvent[] = batch?.events || []
-      for (const ev of events) {
-        const m = mapEvent(ev)
-        if (m && !seen.has(m.id)) {
-          seen.add(m.id)
-          matches.push(m)
-        }
-      }
+  const batches = await Promise.all(days.map((d) => fetchScoresForDate(d)))
+  const seen = new Set<string>()
+  const matches: Match[] = []
+  for (const batch of batches) {
+    for (const m of batch) {
+      if (seen.has(m.id)) continue
+      seen.add(m.id)
+      matches.push(m)
     }
-    matches.sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
-    return matches
-  } catch {
-    return []
   }
+  matches.sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
+  return matches
 }

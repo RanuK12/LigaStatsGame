@@ -38,6 +38,7 @@ import PlayerTradingCard from "@/components/pitch/PlayerTradingCard"
 import { generatePDF } from "@/lib/pdf"
 import { getPC, POS_GROUPS } from "@/lib/ui-constants"
 import MagneticButton from "@/components/ui/MagneticButton"
+import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
 
 /* ═══════════════════════════════════════════════════════════════
    CONSTANTS & HELPERS
@@ -187,6 +188,7 @@ function DraftInner() {
   const [search, setSearch] = useState("")
   const [simResult, setSimResult] = useState<TournamentResult | null>(null)
   const [confetti, setConfetti] = useState(false)
+  const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
   const [spinNotice, setSpinNotice] = useState<string | null>(null)
   const [showPosSelector, setShowPosSelector] = useState(false)
   const [pity, setPity] = useState<PityState>({ consecutiveLow: 0, lastRatings: [], pityActive: false })
@@ -271,6 +273,13 @@ function DraftInner() {
     const newPity = updatePity(pity, player.rating || 60)
     setPity(newPity)
 
+    // Fichaje de campanillas: estallido en pantalla (leyenda / 85+ / 80+).
+    if (player.legendary || (player.rating || 0) >= 85) {
+      setBurst({ label: player.legendary ? "¡LEYENDA!" : "¡FICHAJE BOMBA!", tone: "oro" })
+    } else if ((player.rating || 0) >= 80) {
+      setBurst({ label: "¡GRAN REFUERZO!", tone: "celeste" })
+    }
+
     const isTeamComplete = newDrafted.filter(Boolean).length === totalSlots
     if (!isTeamComplete) {
       let nextIdx = (slotIdx + 1) % totalSlots
@@ -279,7 +288,12 @@ function DraftInner() {
       }
       setTimeout(() => { setActiveSlotIdx(nextIdx); setCurrentSquad(null); setPhase("ready"); setSearch("") }, 300)
     } else {
-      setTimeout(() => { setConfetti(true); setTimeout(() => setConfetti(false), 4000); setPhase("done") }, 300)
+      setTimeout(() => {
+        setConfetti(true)
+        setBurst({ label: "¡EQUIPO ARMADO!", tone: "celeste" })
+        setTimeout(() => setConfetti(false), 4000)
+        setPhase("done")
+      }, 300)
     }
   }, [drafted, draftedIds, f, pity, totalSlots])
 
@@ -443,6 +457,13 @@ function DraftInner() {
   /* ── RENDER: MAIN GAME ── */
   return (
     <div className="min-h-screen gradient-bg">
+      <EventBurst
+        show={burst !== null}
+        label={burst?.label}
+        tone={burst?.tone || "oro"}
+        onDone={() => setBurst(null)}
+      />
+
       {/* Position Selector Modal */}
       <AnimatePresence>
         {showPosSelector && (
