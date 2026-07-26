@@ -12,18 +12,30 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   })
 }
 
+// jsPDF no embebe SVG: el logo se rasteriza en un canvas y se inserta como PNG.
+async function loadRaster(src: string, size = 256): Promise<string> {
+  const img = await loadImage(src)
+  const canvas = document.createElement("canvas")
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext("2d")
+  if (!ctx) throw new Error("sin canvas 2d")
+  ctx.drawImage(img, 0, 0, size, size)
+  return canvas.toDataURL("image/png")
+}
+
 // Helper to determine division outcome text and colors
 function getDivisionOutcome(result: TournamentResult) {
   if (result.type === "copa") {
     if (result.isChampion) {
       return {
-        text: "CAMPEÃN DE LA COPA ARGENTINA",
+        text: "CAMPEÓN DE LA COPA ARGENTINA",
         bg: [212, 175, 55], // Gold
         fg: [10, 14, 27]
       }
     }
     return {
-      text: result.eliminated ? `COPA ARGENTINA: ELIMINADO EN ${(result.eliminatedRound ?? "fase de eliminatoria").toUpperCase()}` : "SUBCAMPEÃN DE LA COPA ARGENTINA",
+      text: result.eliminated ? `COPA ARGENTINA: ELIMINADO EN ${(result.eliminatedRound ?? "fase de eliminatoria").toUpperCase()}` : "SUBCAMPEÓN DE LA COPA ARGENTINA",
       bg: [51, 65, 85], // Slate
       fg: [255, 255, 255]
     }
@@ -39,14 +51,14 @@ function getDivisionOutcome(result: TournamentResult) {
   }
   if (result.isChampion) {
     return {
-      text: "CAMPEÃN DE LA LIGA PROFESIONAL DE FÃTBOL",
+      text: "CAMPEÓN DE LA LIGA PROFESIONAL DE FÚTBOL",
       bg: [212, 175, 55], // Gold
       fg: [10, 14, 27]
     }
   }
   if (result.playerPos && result.playerPos <= 3) {
     return {
-      text: "CLASIFICADO A LA COPA LIBERTADORES DE AMÃRICA",
+      text: "CLASIFICADO A LA COPA LIBERTADORES DE AMÉRICA",
       bg: [59, 130, 246], // Blue
       fg: [255, 255, 255]
     }
@@ -59,7 +71,7 @@ function getDivisionOutcome(result: TournamentResult) {
     }
   }
   return {
-    text: "PERMANENCIA ASEGURADA EN PRIMERA DIVISIÃN",
+    text: "PERMANENCIA ASEGURADA EN PRIMERA DIVISIÓN",
     bg: [71, 85, 105], // Slate
     fg: [255, 255, 255]
   }
@@ -73,6 +85,12 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   // Load logos asynchronously
   let afaLogo: HTMLImageElement | null = null
   let lpfLogo: HTMLImageElement | null = null
+  let gambetaLogo: string | null = null
+  try {
+    gambetaLogo = await loadRaster(`${BASE_PATH}/logos/gambeta.svg`)
+  } catch (e) {
+    console.warn("Could not load Gambeta logo in PDF", e)
+  }
   try {
     afaLogo = await loadImage(`${BASE_PATH}/logos/afa.png`)
   } catch (e) {
@@ -108,21 +126,35 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
     } catch (_) {}
   }
 
-  // Header Titles
+  // Header Titles: logo de Gambeta + nombre, centrados como bloque
   doc.setTextColor(255, 255, 255)
   doc.setFontSize(18)
   doc.setFont("helvetica", "bold")
-  doc.text("GAMBETA ⭐⭐⭐", W / 2, 13, { align: "center" })
+  const title = "GAMBETA"
+  const titleW = doc.getTextWidth(title)
+  if (gambetaLogo) {
+    const logoW = 11
+    const gap = 3
+    const startX = (W - (logoW + gap + titleW)) / 2
+    try {
+      doc.addImage(gambetaLogo, "PNG", startX, 5.5, logoW, logoW)
+      doc.text(title, startX + logoW + gap, 14)
+    } catch (_) {
+      doc.text(title, W / 2, 13, { align: "center" })
+    }
+  } else {
+    doc.text(title, W / 2, 13, { align: "center" })
+  }
 
   doc.setTextColor(116, 172, 223)
   doc.setFontSize(8)
   doc.setFont("helvetica", "bold")
-  doc.text("EL JUEGO DEL FÃTBOL ARGENTINO", W / 2, 18, { align: "center" })
+  doc.text("EL JUEGO DEL FÚTBOL ARGENTINO", W / 2, 18, { align: "center" })
 
   doc.setTextColor(100, 116, 139)
   doc.setFontSize(7)
   doc.setFont("helvetica", "normal")
-  doc.text(`Generado el ${new Date().toLocaleDateString("es-AR")} Â· draft3estrellas.com`, W / 2, 25, { align: "center" })
+  doc.text(`Generado el ${new Date().toLocaleDateString("es-AR")} · gambetafutbol.games`, W / 2, 25, { align: "center" })
 
   // 3. Division Outcome Banner
   const outcome = getDivisionOutcome(result)
@@ -144,7 +176,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setTextColor(148, 163, 184)
   doc.setFontSize(8.5)
   doc.setFont("helvetica", "normal")
-  doc.text(`TÃ¡ctica: ${result.formation}   Â·   Score: ${result.teamScore} pts`, W - pad - 6, 60.5, { align: "right" })
+  doc.text(`Táctica: ${result.formation}   ·   Score: ${result.teamScore} pts`, W - pad - 6, 60.5, { align: "right" })
 
   // 5. Two-Column Layout (y = 73)
   const colY = 73
@@ -336,7 +368,7 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setTextColor(116, 172, 223)
   doc.setFontSize(10.5)
   doc.setFont("helvetica", "bold")
-  doc.text("ESTADÃSTICAS DEL TORNEO", pad + 6, statsY + 7.5)
+  doc.text("ESTADÍSTICAS DEL TORNEO", pad + 6, statsY + 7.5)
 
   doc.setFillColor(116, 172, 223, 0.15)
   doc.rect(pad + 6, statsY + 9.5, W - pad * 2 - 12, 0.5, "F")
@@ -377,5 +409,5 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
   doc.setFont("helvetica", "bold")
   doc.text("GAMBETA - EL JUEGO DEL FUTBOL ARGENTINO", W / 2, 290, { align: "center" })
 
-  doc.save(`Draft3Estrellas_${result.teamLabel.replace(/\s+/g, "_")}_${result.type}.pdf`)
+  doc.save(`Gambeta_${result.teamLabel.replace(/\s+/g, "_")}_${result.type}.pdf`)
 }

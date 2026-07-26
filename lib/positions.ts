@@ -11,14 +11,14 @@ export const positionCompatibility: Record<string, string[]> = {
   LWB: ['LWB', 'LB'],
   RWB: ['RWB', 'RB'],
   CDM: ['CDM', 'CM'],
-  CM: ['CM', 'CDM', 'CAM', 'LM', 'RM'],
-  CAM: ['CAM', 'CM', 'CF', 'ST'],
-  LM: ['LM', 'LW', 'LB', 'CM'],
-  RM: ['RM', 'RW', 'RB', 'CM'],
-  LW: ['LW', 'LM', 'ST'],
-  RW: ['RW', 'RM', 'ST'],
-  ST: ['ST', 'CF', 'CAM'],
-  CF: ['CF', 'ST', 'CAM'],
+  CM: ['CM', 'CDM', 'CAM'],
+  CAM: ['CAM', 'CM'],
+  LM: ['LM', 'LW', 'CM'],
+  RM: ['RM', 'RW', 'CM'],
+  LW: ['LW', 'LM'],
+  RW: ['RW', 'RM'],
+  ST: ['ST', 'CF'],
+  CF: ['CF', 'ST'],
 };
 
 // Normaliza etiquetas de posición en español a los códigos enum (defensa: datos viejos/scrapeados a

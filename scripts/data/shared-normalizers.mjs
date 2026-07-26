@@ -116,14 +116,20 @@ function normalizePlayer(input) {
   const rawPositions = toArrayValue(player.positions).map((value) => normalizePosition(value))
   const filteredPositions = uniqueStrings(rawPositions.filter((value) => isValidPosition(value)))
   const positionCandidate = normalizePosition(player.position || filteredPositions[0] || 'CM')
+  const primary = isValidPosition(positionCandidate) ? positionCandidate : 'CM'
+  // Coherencia de posiciones: el arquero es excluyente (había delanteros con positions:["GK"]
+  // que aparecían elegibles para el arco) y la posición principal siempre entra en la lista.
+  const coherentPositions = primary === 'GK'
+    ? ['GK']
+    : uniqueStrings([primary, ...filteredPositions.filter((value) => value !== 'GK')])
 
   return {
     id: toStringValue(player.id, ''),
     name,
     fullName,
     birthDate: toStringValue(player.birthDate, ''),
-    position: isValidPosition(positionCandidate) ? positionCandidate : 'CM',
-    positions: filteredPositions.length > 0 ? filteredPositions : [isValidPosition(positionCandidate) ? positionCandidate : 'CM'],
+    position: primary,
+    positions: coherentPositions,
     nationality: toStringValue(player.nationality, 'Argentina'),
     height: toNumberValue(player.height, 175),
     weight: toNumberValue(player.weight, 75),

@@ -86,7 +86,12 @@ export default function RuletaPage() {
     setSpinning(true)
     setResult(null)
 
-    const randomIdx = Math.floor(Math.random() * wheelPlayers.length)
+    // Sin repetidos cercanos: con 16 sectores, un sorteo uniforme repite muchísimo (en 7
+    // giros la chance de repetir es ~78%). Excluimos los últimos resultados del bombo.
+    const evitar = new Set(history.slice(0, Math.min(6, wheelPlayers.length - 1)).map((p) => p.id))
+    const candidatos = wheelPlayers.map((_, i) => i).filter((i) => !evitar.has(wheelPlayers[i].id))
+    const pool = candidatos.length > 0 ? candidatos : wheelPlayers.map((_, i) => i)
+    const randomIdx = pool[Math.floor(Math.random() * pool.length)]
     const player = wheelPlayers[randomIdx]
     const sectorCenter = randomIdx * sectorAngle + sectorAngle / 2
     const targetAngle = (360 - sectorCenter) % 360

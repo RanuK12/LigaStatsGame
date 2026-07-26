@@ -192,6 +192,18 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
     }
   }
 
+  // Saltar de a 5 fechas sin perder la tabla ni las estadísticas en vivo
+  const handleSkipFive = () => {
+    setChroniclePlaying(null)
+    const nextStep = currentStep + 5
+    if (nextStep >= totalRounds) {
+      setSimState("done")
+    } else {
+      setCurrentStep(nextStep)
+      setSimState("interactive")
+    }
+  }
+
   const finalTabs = result.type === "liga"
     ? [{ id: "table", label: "Tabla" }, { id: "stats", label: "Goleadores" }, { id: "assisters", label: "Asistencias" }]
     : [{ id: "stats", label: "Goles" }, { id: "assisters", label: "Asistencias" }]
@@ -251,9 +263,14 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                     {activeRound.round}
                   </h3>
                 </div>
-                 <button onClick={handleStartFullSim} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
-                  Saltar simulación ⏩
-                </button>
+                <div className="flex items-center gap-3">
+                  <button onClick={handleSkipFive} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
+                    +5 fechas
+                  </button>
+                  <button onClick={handleStartFullSim} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
+                    Saltar simulación ⏩
+                  </button>
+                </div>
               </div>
 
               {/* User Match Banner */}
@@ -288,23 +305,27 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                 </div>
               </div>
 
-              {/* Dynamic Standing Table Preview (only for Liga) */}
+              {/* Dynamic Standing Table (only for Liga) — tabla COMPLETA, scrolleable */}
               {result.type === "liga" && (
                 <div className="card-gradient rounded-xl p-4 border border-slate-900">
-                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">TABLA DE POSICIONES EN VIVO</h4>
-                  <div className="overflow-x-auto">
-                      <table className="w-full text-xs">
+                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">
+                    TABLA DE POSICIONES EN VIVO · {intermediateTable.length} EQUIPOS
+                  </h4>
+                  <div className="overflow-auto max-h-[380px]">
+                    <table className="w-full text-xs">
                       <thead>
-                        <tr className="text-slate-600 border-b border-white/5 font-bold uppercase">
+                        <tr className="table-header-sticky text-slate-600 border-b border-white/5 font-bold uppercase">
                           <th className="py-1 text-left">#</th>
                           <th className="py-1 text-left">Equipo</th>
                           <th className="py-1 text-center">Pts</th>
                           <th className="py-1 text-center">PJ</th>
+                          <th className="py-1 text-center">DG</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {intermediateTable.slice(0, 6).map((t: any, idx: number) => {
+                        {intermediateTable.map((t: any, idx: number) => {
                           const isMe = t.name === result.teamLabel
+                          const dg = t.gf - t.ga
                           return (
                             <tr key={idx} className={`table-row-soft ${isMe ? "table-row-highlight font-bold" : ""}`}>
                               <td className="py-1.5 text-slate-500">{idx + 1}</td>
@@ -313,6 +334,9 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                               </td>
                               <td className="py-1.5 text-center text-[#74ACDF] font-bold">{t.pts}</td>
                               <td className="py-1.5 text-center text-slate-500">{t.w + t.d + t.l}</td>
+                              <td className={`py-1.5 text-center ${dg > 0 ? "text-green-400" : dg < 0 ? "text-red-400" : "text-slate-500"}`}>
+                                {dg > 0 ? "+" : ""}{dg}
+                              </td>
                             </tr>
                           )
                         })}
@@ -321,6 +345,32 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                   </div>
                 </div>
               )}
+
+              {/* Goleadores y asistidores del plantel, actualizados fecha a fecha */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="card-gradient rounded-xl p-4 border border-slate-900">
+                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">GOLEADORES</h4>
+                  <div className="space-y-1.5">
+                    {intermediatePlayerStats.topScorers.slice(0, 5).map((p: any) => (
+                      <div key={p.playerId} className="flex items-center justify-between text-xs">
+                        <span className="truncate max-w-[150px] text-slate-300">{p.playerName}</span>
+                        <span className="font-black text-green-400 font-display">{p.goals}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="card-gradient rounded-xl p-4 border border-slate-900">
+                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">ASISTIDORES</h4>
+                  <div className="space-y-1.5">
+                    {intermediatePlayerStats.topAssisters.slice(0, 5).map((p: any) => (
+                      <div key={p.playerId} className="flex items-center justify-between text-xs">
+                        <span className="truncate max-w-[150px] text-slate-300">{p.playerName}</span>
+                        <span className="font-black text-blue-400 font-display">{p.assists}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </motion.div>
           )}
 

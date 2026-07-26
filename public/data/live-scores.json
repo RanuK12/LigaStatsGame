@@ -1,18 +1,5 @@
 [
   {
-    "id": "2442",
-    "homeTeam": "Atlético Tucumán",
-    "awayTeam": "Ind. Rivadavia",
-    "homeLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/atletico-tucuman.svg",
-    "awayLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/independiente-rivadavia.svg",
-    "homeScore": 0,
-    "awayScore": 0,
-    "status": "LIVE",
-    "minute": "EN VIVO",
-    "league": "lpf",
-    "competition": "LPF Arg"
-  },
-  {
     "id": "2446",
     "homeTeam": "Estudiantes (LP)",
     "awayTeam": "Independiente",
@@ -125,6 +112,18 @@
     "homeLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/lanus.svg",
     "awayLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/san-lorenzo.svg",
     "homeScore": 1,
+    "awayScore": 0,
+    "status": "FINAL",
+    "league": "lpf",
+    "competition": "LPF Arg"
+  },
+  {
+    "id": "2442",
+    "homeTeam": "Atlético Tucumán",
+    "awayTeam": "Ind. Rivadavia",
+    "homeLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/atletico-tucuman.svg",
+    "awayLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/independiente-rivadavia.svg",
+    "homeScore": 0,
     "awayScore": 0,
     "status": "FINAL",
     "league": "lpf",

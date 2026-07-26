@@ -56,7 +56,7 @@
       },
       {
         "id": "chancalay-tomas-1990",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "1990-06-15",
         "clubs": [
           "colon"
@@ -71,7 +71,7 @@
     "jugadores": [
       {
         "id": "conti-german-1999",
-        "rating": 71,
+        "rating": 73,
         "birthDate": "1999-06-15",
         "clubs": [
           "san-lorenzo"
@@ -80,7 +80,7 @@
       },
       {
         "id": "german-conti-glp",
-        "rating": 70,
+        "rating": 73,
         "clubs": [
           "gimnasia-lp"
         ],
@@ -94,7 +94,7 @@
     "jugadores": [
       {
         "id": "ramirez-juan-1993",
-        "rating": 70,
+        "rating": 73,
         "birthDate": "1993-06-15",
         "clubs": [
           "san-lorenzo"
@@ -103,7 +103,7 @@
       },
       {
         "id": "ramirez-juan-1999",
-        "rating": 74,
+        "rating": 76,
         "birthDate": "1993-05-25",
         "clubs": [
           "boca-juniors",
@@ -119,7 +119,7 @@
     "jugadores": [
       {
         "id": "cubero-fabian-1992",
-        "rating": 71,
+        "rating": 73,
         "birthDate": "1992-06-15",
         "clubs": [
           "san-lorenzo"
@@ -128,7 +128,7 @@
       },
       {
         "id": "cubero-fabian-1995",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "1978-12-21",
         "clubs": [
           "velez"
@@ -143,7 +143,7 @@
     "jugadores": [
       {
         "id": "lopez-lautaro-1991",
-        "rating": 64,
+        "rating": 67,
         "birthDate": "2001-01-24",
         "clubs": [
           "san-lorenzo",
@@ -153,7 +153,7 @@
       },
       {
         "id": "lopez-lautaro-2002",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "2002-06-15",
         "clubs": [
           "velez"
@@ -168,7 +168,7 @@
     "jugadores": [
       {
         "id": "rodriguez-lucas-2003",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "2003-06-15",
         "clubs": [
           "estudiantes-lp"
@@ -177,7 +177,7 @@
       },
       {
         "id": "rodriguez-lucas-1999",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "1993-09-27",
         "clubs": [
           "independiente",
@@ -193,7 +193,7 @@
     "jugadores": [
       {
         "id": "alvarez-ricardo-1997",
-        "rating": 71,
+        "rating": 73,
         "birthDate": "1997-06-15",
         "clubs": [
           "banfield"
@@ -202,7 +202,7 @@
       },
       {
         "id": "alvarez-ricardo-1999",
-        "rating": 77,
+        "rating": 79,
         "birthDate": "1988-04-12",
         "clubs": [
           "velez"
@@ -217,7 +217,7 @@
     "jugadores": [
       {
         "id": "insua-emanuel-1990",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "1990-06-15",
         "clubs": [
           "banfield"
@@ -226,7 +226,7 @@
       },
       {
         "id": "insua-emanuel-2001",
-        "rating": 70,
+        "rating": 73,
         "birthDate": "1991-04-10",
         "clubs": [
           "velez"
@@ -241,7 +241,7 @@
     "jugadores": [
       {
         "id": "hernandez-abel-1992",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "1992-06-15",
         "clubs": [
           "velez"
@@ -250,7 +250,7 @@
       },
       {
         "id": "hernandez-abel-2003",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "2003-06-15",
         "clubs": [
           "rosario-central"
@@ -265,7 +265,7 @@
     "jugadores": [
       {
         "id": "fernandez-nicolas-1999",
-        "rating": 74,
+        "rating": 76,
         "birthDate": "1996-02-08",
         "clubs": [
           "defensa-y-justicia"
@@ -274,7 +274,7 @@
       },
       {
         "id": "nicolas-fernandez-gc",
-        "rating": 71,
+        "rating": 73,
         "clubs": [
           "godoy-cruz"
         ],
@@ -288,7 +288,7 @@
     "jugadores": [
       {
         "id": "vazquez-kevin-1992",
-        "rating": 68,
+        "rating": 71,
         "birthDate": "1992-06-15",
         "clubs": [
           "talleres-cba"
@@ -297,7 +297,7 @@
       },
       {
         "id": "vazquez-kevin-2004",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "2004-06-15",
         "clubs": [
           "velez"
@@ -312,7 +312,7 @@
     "jugadores": [
       {
         "id": "herrera-jonathan-1999",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "1999-06-15",
         "clubs": [
           "independiente",
@@ -322,7 +322,7 @@
       },
       {
         "id": "jonathan-herrera-rie",
-        "rating": 69,
+        "rating": 72,
         "clubs": [
           "riestra"
         ],
@@ -336,7 +336,7 @@
     "jugadores": [
       {
         "id": "rodriguez-alan-2002",
-        "rating": 70,
+        "rating": 73,
         "birthDate": "2002-06-15",
         "clubs": [
           "rosario-central"
@@ -345,7 +345,7 @@
       },
       {
         "id": "alan-rodriguez-arg",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "2000-01-25",
         "clubs": [
           "argentinos-jrs"
@@ -360,7 +360,7 @@
     "jugadores": [
       {
         "id": "centurion-ezequiel-1998",
-        "rating": 71,
+        "rating": 73,
         "birthDate": "1997-05-20",
         "clubs": [
           "river-plate"
@@ -369,7 +369,7 @@
       },
       {
         "id": "ezequiel-centurion",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "1993-06-15",
         "clubs": [
           "defensa-y-justicia",
@@ -385,7 +385,7 @@
     "jugadores": [
       {
         "id": "fernandez-pol-1999",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "1999-06-15",
         "clubs": [
           "boca-juniors",
@@ -397,7 +397,7 @@
       },
       {
         "id": "pol-fernandez-rc",
-        "rating": 71,
+        "rating": 73,
         "clubs": [
           "colon"
         ],
@@ -411,7 +411,7 @@
     "jugadores": [
       {
         "id": "soto-alexis-2005",
-        "rating": 70,
+        "rating": 73,
         "birthDate": "1993-10-20",
         "clubs": [
           "rosario-central",
@@ -423,7 +423,7 @@
       },
       {
         "id": "alexis-soto-rc",
-        "rating": 71,
+        "rating": 73,
         "clubs": [
           "colon"
         ],
@@ -437,7 +437,7 @@
     "jugadores": [
       {
         "id": "dominguez-nery-1996",
-        "rating": 72,
+        "rating": 74,
         "birthDate": "1996-06-15",
         "clubs": [
           "independiente"
@@ -446,7 +446,7 @@
       },
       {
         "id": "nery-dominguez",
-        "rating": 72,
+        "rating": 74,
         "birthDate": "1990-04-09",
         "clubs": [
           "racing-club",
@@ -463,7 +463,7 @@
     "jugadores": [
       {
         "id": "fernandez-damian-1999-cb",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "2001-01-02",
         "clubs": [
           "velez",
@@ -475,7 +475,7 @@
       },
       {
         "id": "damian-fernandez-dyj",
-        "rating": 71,
+        "rating": 73,
         "clubs": [
           "defensa-y-justicia"
         ],
@@ -489,7 +489,7 @@
     "jugadores": [
       {
         "id": "zalazar-maximiliano-2001",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "2001-06-15",
         "clubs": [
           "boca-juniors",
@@ -499,7 +499,7 @@
       },
       {
         "id": "maximiliano-zalazar-bar",
-        "rating": 69,
+        "rating": 72,
         "clubs": [
           "barracas-central"
         ],
@@ -513,7 +513,7 @@
     "jugadores": [
       {
         "id": "acosta-lucas-1999",
-        "rating": 70,
+        "rating": 73,
         "birthDate": "1999-06-15",
         "clubs": [
           "lanus"
@@ -522,7 +522,7 @@
       },
       {
         "id": "lucas-acosta-sar",
-        "rating": 68,
+        "rating": 71,
         "birthDate": "1995-03-12",
         "clubs": [
           "sarmiento-j"
@@ -537,7 +537,7 @@
     "jugadores": [
       {
         "id": "eric-ramirez",
-        "rating": 70,
+        "rating": 73,
         "birthDate": "1996-09-21",
         "clubs": [
           "gimnasia-lp",
@@ -548,7 +548,7 @@
       },
       {
         "id": "eric-ramirez-tig",
-        "rating": 67,
+        "rating": 70,
         "clubs": [
           "tigre"
         ],
@@ -562,7 +562,7 @@
     "jugadores": [
       {
         "id": "alan-cantero",
-        "rating": 68,
+        "rating": 71,
         "birthDate": "",
         "clubs": [
           "godoy-cruz"
@@ -571,7 +571,7 @@
       },
       {
         "id": "sirino-alan",
-        "rating": 69,
+        "rating": 72,
         "clubs": [
           "barracas-central"
         ],
@@ -585,7 +585,7 @@
     "jugadores": [
       {
         "id": "manuel-garcia",
-        "rating": 73,
+        "rating": 75,
         "birthDate": "",
         "clubs": [
           "rosario-central",
@@ -596,7 +596,7 @@
       },
       {
         "id": "manuel-garcia-sar",
-        "rating": 67,
+        "rating": 70,
         "birthDate": "1999-06-11",
         "clubs": [
           "sarmiento-j"
@@ -611,7 +611,7 @@
     "jugadores": [
       {
         "id": "rodrigo-gonzalez",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "2000-04-14",
         "clubs": [
           "rosario-central",
@@ -621,7 +621,7 @@
       },
       {
         "id": "rodrigo-gonzalez-ald",
-        "rating": 68,
+        "rating": 71,
         "clubs": [
           "aldosivi"
         ],
@@ -635,7 +635,7 @@
     "jugadores": [
       {
         "id": "bautista-barros-schelotto",
-        "rating": 69,
+        "rating": 72,
         "birthDate": "",
         "clubs": [
           "gimnasia-lp"
@@ -644,7 +644,7 @@
       },
       {
         "id": "bautista-barros-schelotto-pla",
-        "rating": 68,
+        "rating": 71,
         "clubs": [
           "platense"
         ],
@@ -658,7 +658,7 @@
     "jugadores": [
       {
         "id": "alan-sosa-ald",
-        "rating": 68,
+        "rating": 71,
         "clubs": [
           "aldosivi"
         ],
@@ -666,7 +666,7 @@
       },
       {
         "id": "alan-sosa-tig",
-        "rating": 67,
+        "rating": 70,
         "clubs": [
           "tigre"
         ],
@@ -697,7 +697,7 @@
       },
       {
         "id": "angel-di-maria-rc",
-        "rating": 76,
+        "rating": 78,
         "clubs": [
           "colon"
         ],

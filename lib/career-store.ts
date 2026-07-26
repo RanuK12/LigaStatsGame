@@ -167,7 +167,16 @@ export const useCareerStore = create<CareerStore>()(
             clubHistory: state.clubHistory.includes(offer.clubId)
               ? state.clubHistory
               : [...state.clubHistory, offer.clubId],
-            player: { ...state.player, marketValueM: Math.max(state.player.marketValueM, offer.valueM) },
+            // El traspaso es lo que PAGA el club, no lo que vale el jugador: guardar el máximo
+            // inflaba el precio fichaje tras fichaje hasta valores absurdos. El valor sigue la
+            // curva de OVR/edad, con un plus del 25% por el pase.
+            player: {
+              ...state.player,
+              marketValueM: Math.min(
+                Math.max(state.player.marketValueM, offer.valueM),
+                Math.round(marketValueFor(state.player.ovr, state.player.age) * 1.25 * 100) / 100,
+              ),
+            },
             history,
             pendingOffers: [],
           },

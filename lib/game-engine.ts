@@ -522,6 +522,47 @@ export function distributeGoalsAmongPlayers(
   return { goals, assists };
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  const out = [...arr];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/**
+ * Elige los rivales del torneo rotando entre TODOS los planteles de la base y sesgando
+ * hacia el nivel del equipo del usuario, para que la liga sea pareja. El viejo
+ * `sort(() => Math.random() - 0.5)` no baraja de verdad (comparador inconsistente) y
+ * terminaba repitiendo siempre los mismos rivales.
+ */
+function pickOpponents(
+  allSquads: Squad[], allPlayers: Player[], excludeId: string, count: number, targetRating: number
+): Squad[] {
+  const pool = allSquads.filter(s => s.id !== excludeId && s.playerIds.length >= 11);
+  if (pool.length <= count) return shuffle(pool);
+
+  const byId: Record<string, Player> = {};
+  allPlayers.forEach(p => { byId[p.id] = p; });
+  const avgOf = new Map<string, number>();
+  pool.forEach(s => {
+    const ratings = s.playerIds.map(id => byId[id]?.rating || 0).filter(Boolean).sort((a, b) => b - a).slice(0, 11);
+    avgOf.set(s.id, ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : 60);
+  });
+
+  // 2/3 de rivales cercanos a nuestro nivel (elegidos al azar entre los más parecidos,
+  // así rotan entre temporadas) + 1/3 completamente al azar para que la tabla varíe.
+  const nearCount = Math.round(count * 0.66);
+  const closest = [...pool].sort(
+    (a, b) => Math.abs(avgOf.get(a.id)! - targetRating) - Math.abs(avgOf.get(b.id)! - targetRating)
+  );
+  const near = shuffle(closest.slice(0, Math.min(closest.length, nearCount * 3))).slice(0, nearCount);
+  const nearIds = new Set(near.map(s => s.id));
+  const rest = shuffle(pool.filter(s => !nearIds.has(s.id))).slice(0, count - near.length);
+  return shuffle([...near, ...rest]);
+}
+
 function initPlayerStats(players: Player[]): TournamentPlayerStats[] {
   return players.map(p => ({
     playerId: p.id,
@@ -538,9 +579,7 @@ export function simulateSeasonWithStats(
   formation: FormationConfig, teamScore: number
 ): TournamentResult {
   const playerStrength = teamToStrength(playerTeam, formation, 'liga');
-  const opponents = allSquads
-    .filter(s => s.id !== squad.id && s.playerIds.length >= 11)
-    .sort(() => Math.random() - 0.5).slice(0, 27); // 28 equipos totales (Liga Profesional)
+  const opponents = pickOpponents(allSquads, allPlayers, squad.id, 27, teamScore); // 28 equipos (Liga Profesional)
   const allNames = [squad.label, ...opponents.map(o => o.label)];
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;
@@ -658,8 +697,7 @@ export function simulateCopaWithStats(
   formation: FormationConfig, teamScore: number
 ): TournamentResult {
   const playerStrength = teamToStrength(playerTeam, formation, 'copa');
-  const opponents = allSquads.filter(s => s.id !== squad.id && s.playerIds.length >= 11)
-    .sort(() => Math.random() - 0.5).slice(0, 31);
+  const opponents = pickOpponents(allSquads, allPlayers, squad.id, 31, teamScore);
   const names = [squad.label, ...opponents.map(o => o.label)];
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;

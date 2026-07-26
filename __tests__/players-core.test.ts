@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { normalizePlayers } from '@/lib/data-normalizers'
+import { canPlayHere } from '@/lib/positions'
 import { playerSchema } from '@/lib/types'
 import playersData from '@/data/players.json'
 
@@ -21,5 +22,15 @@ describe('players-core pipeline', () => {
       const parsed = playerSchema.safeParse(player)
       expect(parsed.success, JSON.stringify(parsed.success ? '' : parsed.error.issues[0])).toBe(true)
     }
+  })
+
+  // El arco es excluyente: había delanteros con positions:["GK"] que la ruleta ofrecía
+  // para el arco (y arqueros elegibles en otros puestos).
+  it('ningún jugador de campo queda elegible para el arco', () => {
+    const all = normalizePlayers(playersData as unknown[])
+    const intrusos = all.filter(p => p.position !== 'GK' && canPlayHere(p, 'GK'))
+    const arquerosFueraDelArco = all.filter(p => p.position === 'GK' && canPlayHere(p, 'CB'))
+    expect(intrusos).toHaveLength(0)
+    expect(arquerosFueraDelArco).toHaveLength(0)
   })
 })

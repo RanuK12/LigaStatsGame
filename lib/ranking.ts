@@ -60,6 +60,9 @@ export function rankFromElo(elo: number): Rank {
 /**
  * Puntos de tabla por torneo, ponderados por dificultad (Liga completa vale más
  * que una Copa corta) y por el rendimiento (posición final).
+ *
+ * El rendimiento va de +1 (campeón) a -1 (último): un draft flojo RESTA puntos.
+ * Antes hasta el peor torneo posible sumaba, así que cualquier partida engordaba la tabla.
  */
 export function tournamentPoints(opts: {
   type: 'liga' | 'copa'
@@ -69,7 +72,8 @@ export function tournamentPoints(opts: {
 }): number {
   const { type, pos, totalTeams, isChampion } = opts
   const base = type === 'liga' ? 100 : 70
-  const placing = Math.max(0, (totalTeams - pos + 1) / totalTeams) // 1.0 primero -> ~0 último
+  const perf = totalTeams > 1 ? 1 - (2 * (pos - 1)) / (totalTeams - 1) : 0 // 1º = +1, mitad = 0, último = -1
   const champ = isChampion ? 40 : 0
-  return Math.round(base * placing + champ)
+  const descenso = pos > totalTeams - 4 ? -20 : 0 // terminar en zona de descenso duele
+  return Math.round(base * perf + champ + descenso)
 }

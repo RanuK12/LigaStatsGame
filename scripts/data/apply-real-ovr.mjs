@@ -75,6 +75,11 @@ function calibrado(r) {
   return mapa[cercana] + (b - cercana) * 0.5
 }
 
+// ---------- Piso competitivo ----------
+// Tras la deflación, el grueso del plantel quedó en 65-74 y un draft de jugadores comunes
+// casi no podía sumar. Los que quedan por debajo de 78 suben 2-3 puntos (pedido de Emilio).
+const pisoCompetitivo = (r) => (r <= 70 ? r + 3 : r <= 77 ? r + 2 : r)
+
 // ---------- Aplicar ----------
 const via = { leyenda: 0, directo: 0, proyectado: 0, pico: 0, calibrado: 0 }
 const cambios = []
@@ -101,6 +106,7 @@ for (const p of players) {
     to = Math.round(clamp(calibrado(from || 0), 50, 84)) // un desconocido sin fuente no es top mundial
     via.calibrado++
   }
+  if (!p.legendary) to = pisoCompetitivo(to)
   nuevo[p.id] = to
   if (!DRY) p.rating = to
   despues[band(to)] = (despues[band(to)] || 0) + 1

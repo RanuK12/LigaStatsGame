@@ -37,4 +37,11 @@ describe('ranking', () => {
     expect(champ).toBeGreaterThan(mid)
     expect(champ).toBeGreaterThan(copaChamp) // Liga vale más que Copa
   })
+
+  it('resta puntos cuando el torneo sale mal', () => {
+    const ultimo = tournamentPoints({ type: 'liga', pos: 28, totalTeams: 28, isChampion: false })
+    const mitad = tournamentPoints({ type: 'liga', pos: 14, totalTeams: 28, isChampion: false })
+    expect(ultimo).toBeLessThan(0)
+    expect(Math.abs(mitad)).toBeLessThanOrEqual(10) // mitad de tabla: casi neutro
+  })
 })

@@ -25,7 +25,9 @@ function LeaderboardRow({ rank, s }: { rank: number; s: GameScore }) {
         <div className="text-[11px] text-slate-400 mt-0.5">Rating {s.rating} • {s.players}/11 • {s.pos}° pos</div>
       </div>
       <div className="text-right shrink-0">
-        <div className="text-lg font-black text-green-400 font-display leading-none">{s.pts}</div>
+        <div className={`text-lg font-black font-display leading-none ${s.pts < 0 ? "text-red-400" : "text-green-400"}`}>
+          {s.pts > 0 ? "+" : ""}{s.pts}
+        </div>
         <div className="text-[10px] text-[#74ACDF] font-bold">⚡{s.elo}</div>
       </div>
     </motion.div>
