@@ -13,6 +13,7 @@ const Jersey3D = dynamic(() => import("@/components/career/Jersey3D"), {
 import CareerCardView from "@/components/pitch/CareerCardView"
 import SeasonReveal from "@/components/career/SeasonReveal"
 import CareerFinale from "@/components/career/CareerFinale"
+import CareerTimelineCard from "@/components/career/CareerTimelineCard"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
@@ -427,9 +428,9 @@ function CareerDashboard() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-5">
-      {/* FICHA DEL JUGADOR */}
+      {/* FICHA — durante la carrera: player card; al terminar: timeline estilo Copero */}
       <div ref={fichaRef} className="rounded-[36px] overflow-hidden">
-        <CareerCardView data={cardData} />
+        {career.finished ? <CareerTimelineCard career={career} /> : <CareerCardView data={cardData} />}
       </div>
 
       {/* PANEL DE JUEGO — todo en un flujo, sin pestañas */}
