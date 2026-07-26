@@ -117,82 +117,107 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
           </div>
         </div>
 
-        {/* REALISTIC 3D JERSEY RENDERING CONTAINER (TranslateZ 45px) */}
+        {/* CAMISETA: SVG con corte real (hombros, mangas, cuello ribeteado) y tela sombreada */}
         <div
-          className="relative w-full py-5 mb-5 rounded-2xl bg-gradient-to-b from-slate-950/80 to-slate-950 border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl z-10"
+          className="relative w-full py-6 mb-5 rounded-2xl bg-gradient-to-b from-slate-950/80 to-slate-950 border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl z-10"
           style={{ transform: "translateZ(45px)" }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-400/15 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(circle at 50% 35%, ${kitColor}22, transparent 62%)` }} />
+          {/* Halo detrás de la camiseta */}
+          <div className="absolute h-32 w-32 rounded-full blur-2xl opacity-40" style={{ background: kitColor }} />
 
-          {/* 3D JERSEY GRAPHIC */}
-          <div className="relative w-32 h-36 flex items-center justify-center filter drop-shadow-[0_16px_28px_rgba(0,0,0,0.85)]">
-            <svg viewBox="0 0 100 120" className="w-full h-full">
+          <div className="relative w-36 h-40 flex items-center justify-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.85)]">
+            <svg viewBox="0 0 120 130" className="w-full h-full">
               <defs>
-                <linearGradient id="jerseyShadow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.3" />
-                  <stop offset="50%" stopColor="#000000" stopOpacity="0" />
-                  <stop offset="100%" stopColor="#000000" stopOpacity="0.4" />
+                <linearGradient id="telaLuz" x1="15%" y1="0%" x2="85%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.28" />
+                  <stop offset="45%" stopColor="#ffffff" stopOpacity="0.04" />
+                  <stop offset="100%" stopColor="#000000" stopOpacity="0.45" />
                 </linearGradient>
-                <linearGradient id="goldNum" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FFF3B0" />
-                  <stop offset="50%" stopColor="#F59E0B" />
-                  <stop offset="100%" stopColor="#D4AF37" />
+                <linearGradient id="mangaSombra" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.14" />
+                  <stop offset="100%" stopColor="#000000" stopOpacity="0.38" />
                 </linearGradient>
+                <linearGradient id="numeroOro" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#FFF6C9" />
+                  <stop offset="48%" stopColor="#F3C14B" />
+                  <stop offset="100%" stopColor="#C9911F" />
+                </linearGradient>
+                {/* La tela recorta patrones y brillos para que nada se salga de la prenda */}
+                <clipPath id="cuerpoCamiseta">
+                  <path d="M42,16 C42,26 78,26 78,16 L92,21 C99,24 105,31 108,39 L112,50 C113,54 111,57 107,58 L96,61 C93,62 90,60 90,57 L90,49 L90,112 C90,117 87,120 82,120 L38,120 C33,120 30,117 30,112 L30,49 L30,57 C30,60 27,62 24,61 L13,58 C9,57 7,54 8,50 L12,39 C15,31 21,24 28,21 Z" />
+                </clipPath>
               </defs>
 
-              {/* Base Jersey Body */}
+              {/* Cuerpo + mangas en una silueta continua */}
               <path
-                d="M 20 20 L 35 10 L 65 10 L 80 20 L 95 35 L 85 50 L 75 42 L 75 110 L 25 110 L 25 42 L 15 50 L 5 35 Z"
+                d="M42,16 C42,26 78,26 78,16 L92,21 C99,24 105,31 108,39 L112,50 C113,54 111,57 107,58 L96,61 C93,62 90,60 90,57 L90,49 L90,112 C90,117 87,120 82,120 L38,120 C33,120 30,117 30,112 L30,49 L30,57 C30,60 27,62 24,61 L13,58 C9,57 7,54 8,50 L12,39 C15,31 21,24 28,21 Z"
                 fill={kitColor}
-                stroke="#ffffff"
-                strokeWidth="2.5"
               />
 
-              {/* 3D Shading Overlay */}
-              <path
-                d="M 20 20 L 35 10 L 65 10 L 80 20 L 95 35 L 85 50 L 75 42 L 75 110 L 25 110 L 25 42 L 15 50 L 5 35 Z"
-                fill="url(#jerseyShadow)"
-              />
+              <g clipPath="url(#cuerpoCamiseta)">
+                {/* Diseño de la camiseta */}
+                {pattern === "sash" && (
+                  <path d="M18,18 L104,120 L84,120 L8,34 Z" fill="#ffffff" opacity="0.92" />
+                )}
+                {pattern === "stripes" && (
+                  <>
+                    {[36, 52, 68, 84].map((x) => (
+                      <rect key={x} x={x} y="8" width="8" height="120" fill="#ffffff" opacity="0.9" />
+                    ))}
+                  </>
+                )}
+                {pattern === "hoops" && (
+                  <>
+                    {[40, 66, 92].map((y) => (
+                      <rect key={y} x="0" y={y} width="120" height="13" fill="#ffffff" opacity="0.9" />
+                    ))}
+                  </>
+                )}
 
-              {/* Patterns */}
-              {pattern === "sash" && (
-                <path d="M 20 20 L 75 110 L 60 110 L 20 40 Z" fill="#ffffff" opacity="0.9" />
-              )}
-              {pattern === "stripes" && (
-                <>
-                  <rect x="35" y="10" width="10" height="100" fill="#ffffff" opacity="0.85" />
-                  <rect x="55" y="10" width="10" height="100" fill="#ffffff" opacity="0.85" />
-                </>
-              )}
-              {pattern === "hoops" && (
-                <rect x="25" y="50" width="50" height="20" fill="#ffffff" opacity="0.9" />
-              )}
-
-              {/* Collar 3D V-Neck */}
-              <polygon points="35,10 50,24 65,10" fill="#030712" />
-              <polygon points="35,10 50,24 65,10" fill="none" stroke="#ffffff" strokeWidth="2" />
-
-              {/* AFA Gold Stars & Crest */}
-              <g transform="translate(28, 28) scale(0.6)">
-                <circle cx="10" cy="10" r="8" fill="#F59E0B" />
-                <path d="M10 4 L12 8 L16 8 L13 11 L14 15 L10 12 L6 15 L7 11 L4 8 L8 8 Z" fill="#ffffff" />
+                {/* Textura de tela + volumen */}
+                <rect x="0" y="0" width="120" height="130" fill="url(#telaLuz)" />
+                <rect x="0" y="0" width="120" height="130" fill="url(#mangaSombra)" opacity="0.35" />
+                {/* Pliegues */}
+                <path d="M44,60 C48,80 46,100 43,118" stroke="#000" strokeOpacity="0.16" strokeWidth="2.5" fill="none" />
+                <path d="M76,58 C72,78 74,98 77,118" stroke="#000" strokeOpacity="0.16" strokeWidth="2.5" fill="none" />
+                {/* Brillo especular del hombro izquierdo */}
+                <ellipse cx="40" cy="34" rx="16" ry="9" fill="#ffffff" opacity="0.12" />
               </g>
 
-              {/* 3D Gold Dorsal Number */}
+              {/* Costuras de las mangas */}
+              <path d="M30,49 L30,57" stroke="#000" strokeOpacity="0.25" strokeWidth="2" />
+              <path d="M90,49 L90,57" stroke="#000" strokeOpacity="0.25" strokeWidth="2" />
+
+              {/* Cuello redondo con ribete */}
+              <path d="M42,16 C42,27 78,27 78,16" fill="none" stroke="#050b16" strokeWidth="6" strokeLinecap="round" />
+              <path d="M42,16 C42,27 78,27 78,16" fill="none" stroke="#ffffff" strokeOpacity="0.75" strokeWidth="2" strokeLinecap="round" />
+
+              {/* Escudito y estrellas de campeón */}
+              <g transform="translate(36,40)">
+                <circle cx="0" cy="0" r="6" fill="#0b1220" stroke="#F3C14B" strokeWidth="1.2" />
+                <path d="M0,-3.4 L1,-1 L3.6,-1 L1.5,0.6 L2.3,3.1 L0,1.6 L-2.3,3.1 L-1.5,0.6 L-3.6,-1 L-1,-1 Z" fill="#F3C14B" />
+              </g>
+
+              {/* Dorsal */}
               <text
-                x="50"
-                y="76"
+                x="60"
+                y="92"
                 textAnchor="middle"
-                fill="url(#goldNum)"
-                stroke="#000000"
-                strokeWidth="1.5"
-                fontSize="26"
+                fill="url(#numeroOro)"
+                stroke="#05070d"
+                strokeWidth="1.6"
+                paintOrder="stroke"
+                fontSize="34"
                 fontWeight="900"
-                fontFamily="sans-serif"
-                className="drop-shadow-lg"
+                fontFamily="var(--font-impact, Impact, sans-serif)"
+                letterSpacing="-1"
               >
                 {data.number}
               </text>
+
+              {/* Sombra al piso */}
+              <ellipse cx="60" cy="125" rx="30" ry="4" fill="#000" opacity="0.45" />
             </svg>
           </div>
         </div>

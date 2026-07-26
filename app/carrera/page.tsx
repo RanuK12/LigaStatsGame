@@ -406,6 +406,7 @@ function CareerDashboard() {
   const [ballonDorData, setBallonDorData] = useState<{ year: number; playerName: string; flag: string; ovr: number } | null>(null)
   const [showFinale, setShowFinale] = useState(false)
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
+  const [lote, setLote] = useState<{ temporadas: number } | null>(null)
 
   if (!career) return null
   const cardData = buildCareerCardData(career)
@@ -441,21 +442,35 @@ function CareerDashboard() {
   }
 
   function handleSimulate(yearsCount = 1) {
+    let simuladas = 0
     for (let i = 0; i < yearsCount; i++) {
       const cur = useCareerStore.getState().career
-      if (!cur || cur.finished || cur.pendingOffers.length > 0) break
+      if (!cur || cur.finished) break
+      // Las ofertas BLOQUEAN la simulación. En lote se resuelven solas (si no, "simular 5
+      // años" terminaba simulando una sola temporada): te vas si el club que te busca es
+      // mejor que el actual, y si no te quedás.
+      if (cur.pendingOffers.length > 0) {
+        if (yearsCount === 1) break
+        const actual = findClub(cur.clubId)
+        const mejor = [...cur.pendingOffers].sort((a, b) => b.strength - a.strength)[0]
+        if (mejor && actual && mejor.strength > actual.strength) acceptOffer(mejor.clubId)
+        else declineOffers()
+      }
       simulateNextSeason(selectedOptionId)
+      simuladas++
     }
     const fin = useCareerStore.getState().career
-    // Reveal animado solo al simular de a una temporada (el momento dramático).
-    if (yearsCount === 1 && fin?.history.length) {
-      const ultima = fin.history[fin.history.length - 1]
-      setRevealSeason(ultima)
-      setBurst(bigMoment(ultima))
-    } else if (fin?.finished) {
-      // Simulación en lote que llegó al final: finale directo.
+    if (fin?.finished) {
+      // Llegó al final de la carrera: ficha final directo.
       setShowFinale(true)
+      return
     }
+    if (!fin?.history.length) return
+    const ultima = fin.history[fin.history.length - 1]
+    // De a una: el momento dramático. En lote: resumen de dónde quedaste + cuántas jugaste.
+    setRevealSeason(ultima)
+    if (yearsCount === 1) setBurst(bigMoment(ultima))
+    else setLote({ temporadas: simuladas })
   }
 
   return (
@@ -787,12 +802,22 @@ function CareerDashboard() {
         onDone={() => setBurst(null)}
       />
 
+      {lote && (
+        <div className="fixed bottom-5 left-1/2 z-[130] -translate-x-1/2 cartel-in rounded-2xl border border-[#74ACDF]/40 bg-[#0b1526] px-5 py-3 text-center shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+          <div className="font-sport text-[10px] font-black uppercase tracking-widest text-[#74ACDF]">Simulación rápida</div>
+          <div className="font-display text-lg font-black text-white">
+            {lote.temporadas} {lote.temporadas === 1 ? "temporada jugada" : "temporadas jugadas"}
+          </div>
+        </div>
+      )}
+
       <SeasonReveal
         season={revealSeason}
         position={career.player.position}
         onClose={() => {
           const s = revealSeason
           setRevealSeason(null)
+          setLote(null)
           if (s?.ballonDor) {
             setBallonDorData({ year: s.year, playerName: career.player.name, flag: career.player.flag, ovr: s.nextOvr ?? s.ovr })
           } else if (useCareerStore.getState().career?.finished) {
