@@ -29,10 +29,10 @@ function ymdLocal(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
 }
 
-// Agenda dinámica anclada al día real: ayer-2 ... hoy ... +7. Rota sola cada día.
+// Agenda dinámica anclada al día real: ayer-3 ... hoy ... +30 (un mes). Rota sola cada día.
 function buildDates() {
   const out: { dateStr: string; label: string; isToday: boolean }[] = []
-  for (let i = -2; i <= 7; i++) {
+  for (let i = -3; i <= 30; i++) {
     const d = new Date()
     d.setDate(d.getDate() + i)
     const label =
@@ -51,14 +51,21 @@ export default function LiveScoresWidget() {
   const [matches, setMatches] = useState<AgendaMatch[] | null>(null) // null = cargando
 
   // Reactivo: cada cambio de fecha trae TODOS los partidos de ESE día (cualquier liga).
+  // + auto-refresh en vivo cada 45s para que los resultados se ajusten solos.
   useEffect(() => {
     let cancelled = false
     setMatches(null)
-    fetchDayAll(selectedDate).then((res) => {
-      if (!cancelled) setMatches(res)
-    })
+    const load = (showLoading: boolean) => {
+      if (showLoading) setMatches(null)
+      fetchDayAll(selectedDate).then((res) => {
+        if (!cancelled) setMatches(res)
+      })
+    }
+    load(true)
+    const id = setInterval(() => load(false), 45000)
     return () => {
       cancelled = true
+      clearInterval(id)
     }
   }, [selectedDate])
 

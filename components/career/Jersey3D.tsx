@@ -1,7 +1,7 @@
 "use client"
 
-import { useMemo, useRef } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
+import { useMemo } from "react"
+import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import * as THREE from "three"
 
@@ -109,24 +109,21 @@ function JerseyMesh({ color, pattern, number, name }: Props) {
   const w = (95 - 5) * SC
   const h = (110 - 10) * SC
 
-  useFrame((_, dt) => {
-    if (group.current) group.current.rotation.y += dt * 0.5
-  })
-
+  // La rotación la maneja OrbitControls (autoRotate) => giro fluido + arrastrable, sin jitter.
   return (
-    <group ref={group}>
+    <group>
       <mesh geometry={geo} castShadow>
         <meshStandardMaterial color={color} roughness={0.45} metalness={0.15} />
       </mesh>
-      {/* Decal frontal con patrón + dorsal + nombre */}
-      <mesh position={[0, 0, 0.25]}>
+      {/* Decal frontal: polygonOffset + depthWrite=false eliminan el z-fighting (parpadeo). */}
+      <mesh position={[0, 0, 0.3]} renderOrder={1}>
         <planeGeometry args={[w, h]} />
-        <meshStandardMaterial map={decal} transparent roughness={0.5} />
+        <meshStandardMaterial map={decal} transparent depthWrite={false} polygonOffset polygonOffsetFactor={-4} polygonOffsetUnits={-4} roughness={0.5} />
       </mesh>
       {/* Dorso: mismo decal para que la espalda no quede vacía al girar */}
-      <mesh position={[0, 0, -0.25]} rotation={[0, Math.PI, 0]}>
+      <mesh position={[0, 0, -0.3]} rotation={[0, Math.PI, 0]} renderOrder={1}>
         <planeGeometry args={[w, h]} />
-        <meshStandardMaterial map={decal} transparent roughness={0.5} />
+        <meshStandardMaterial map={decal} transparent depthWrite={false} polygonOffset polygonOffsetFactor={-4} polygonOffsetUnits={-4} roughness={0.5} />
       </mesh>
     </group>
   )
@@ -139,7 +136,16 @@ export default function Jersey3D(props: Props) {
       <directionalLight position={[3, 4, 5]} intensity={1.1} />
       <directionalLight position={[-4, 2, -3]} intensity={0.4} color="#74ACDF" />
       <JerseyMesh {...props} />
-      <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI / 2.6} maxPolarAngle={Math.PI / 1.7} />
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        autoRotate
+        autoRotateSpeed={2.4}
+        enableDamping
+        dampingFactor={0.08}
+        minPolarAngle={Math.PI / 2.6}
+        maxPolarAngle={Math.PI / 1.7}
+      />
     </Canvas>
   )
 }

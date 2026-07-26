@@ -320,13 +320,25 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
    ═══════════════════════════════════════════════════════════════ */
 function HeroSection() {
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-12 pb-14">
-      {/* Ambient glow spotlight */}
-      <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-[600px] h-[280px] bg-gradient-to-b from-[#74ACDF]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-16 sm:pt-20">
+      {/* Fondo: grid de cancha sutil + glows pulsantes */}
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none opacity-[0.12]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(116,172,223,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(116,172,223,0.5) 1px, transparent 1px)',
+          backgroundSize: '54px 54px',
+          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent)',
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent)',
+        }}
+      />
+      {/* Glows animados por CSS (no compiten con la RAF de framer-motion). */}
+      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[620px] h-[300px] bg-gradient-to-b from-[#74ACDF]/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10 anim-glow" />
+      <div className="absolute top-20 right-10 w-72 h-72 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none -z-10 anim-glow-slow" />
 
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ y: -16 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="text-center relative"
       >
@@ -346,13 +358,14 @@ function HeroSection() {
         </motion.div>
 
         {/* Hero Title */}
-        <h1 className="font-impact text-6xl sm:text-7xl lg:text-8xl text-white leading-[0.92] mb-6 tracking-tight">
-          ARMÁ TU <span className="gradient-text drop-shadow-[0_4px_25px_rgba(116,172,223,0.35)]">EQUIPO SOÑADO</span>
+        <h1 className="font-impact text-[3.4rem] leading-[0.95] sm:text-7xl lg:text-[7.5rem] lg:leading-[0.9] mb-6 tracking-[-0.02em] font-black">
+          <span className="block text-white drop-shadow-[0_2px_30px_rgba(255,255,255,0.15)]">ARMÁ TU</span>
+          <span className="hero-title-grad block">EQUIPO SOÑADO</span>
         </h1>
 
-        <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium">
-          Drafteá los mejores planteles del fútbol argentino temporada por temporada. 
-          Simulá la Liga Profesional y Copa Argentina con estadísticas reales y química de equipo.
+        <p className="text-slate-300/90 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium">
+          Drafteá los mejores planteles del fútbol argentino, simulá tu carrera y competí con
+          <span className="text-white font-semibold"> estadísticas reales</span> temporada por temporada.
         </p>
 
         {/* Primary Action Buttons */}

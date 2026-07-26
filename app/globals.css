@@ -6,12 +6,10 @@
    DESIGN TOKENS & SYSTEM VARIABLES
    ═══════════════════════════════════════════════════════════════ */
 :root {
-  /* Google Fonts Custom Setup */
-  --font-sans: var(--font-sans), 'Inter', system-ui, sans-serif;
-  --font-display: var(--font-display), 'Outfit', system-ui, sans-serif;
-  --font-sport: var(--font-sport), 'Space Grotesk', system-ui, sans-serif;
-  --font-bandera: var(--font-bandera), 'Bebas Neue', sans-serif;
-  --font-malvinas: var(--font-malvinas), 'Outfit', sans-serif;
+  /* Las variables de fuente (--font-sans, --font-display, --font-sport, --font-bandera,
+     --font-malvinas, --font-impact) las setea next/font en el <html> con sus propios
+     fallbacks. NO redefinirlas acá con var(--font-X) autorreferenciado: genera un ciclo
+     CSS inválido que hace caer TODO a Times (se veía tosco por esto). */
 
   /* Brand Palette: Argentine Pride */
   --afa-celeste: #74ACDF;        /* Official Celeste */
@@ -138,11 +136,36 @@ button, input, select, textarea {
    TEXT GRADIENTS
    ═══════════════════════════════════════════════════════════════ */
 .gradient-text {
-  background: linear-gradient(135deg, #74ACDF 0%, #ffffff 40%, #74ACDF 80%);
-  background-size: 200% 100%;
+  background: linear-gradient(110deg, #74ACDF 0%, #ffffff 35%, #cfe6ff 55%, #74ACDF 100%);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: text-shimmer 6s ease-in-out infinite;
+}
+@keyframes text-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.9; transform: translateX(-50%) scale(1.08); }
+}
+@keyframes glow-pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+.anim-glow { animation: glow-pulse 6s ease-in-out infinite; }
+.anim-glow-slow { animation: glow-pulse-slow 7s ease-in-out infinite; }
+/* Título del hero: celeste -> blanco -> dorado animado, con glow */
+.hero-title-grad {
+  background: linear-gradient(105deg, #74ACDF 0%, #eaf4ff 30%, #ffffff 45%, #FFE7A0 70%, #D4AF37 100%);
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 7s ease-in-out infinite;
+  filter: drop-shadow(0 4px 30px rgba(116, 172, 223, 0.28));
 }
 
 .gradient-text-gold {

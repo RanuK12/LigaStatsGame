@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from 'next'
-import { Outfit, Space_Grotesk, Inter, Bebas_Neue, Anton } from 'next/font/google'
+import { Sora, Space_Grotesk, Inter, Bebas_Neue, Kanit } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/components/Header'
 import AuthModal from '@/components/AuthModal'
 import UserProfileModal from '@/components/UserProfileModal'
 
-// Outfit: tipografía moderna geométrica de alto impacto para títulos y displays
-const outfit = Outfit({
+// Sora: tipografía moderna, geométrica y premium para títulos y displays
+const sora = Sora({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-display',
 })
 
@@ -27,10 +27,10 @@ const inter = Inter({
   variable: '--font-sans',
 })
 
-// Anton: display condensado estilo estadio
-const anton = Anton({
+// Kanit: display deportivo/gaming moderno para los grandes títulos de impacto
+const kanit = Kanit({
   subsets: ['latin'],
-  weight: ['400'],
+  weight: ['600', '700', '800', '900'],
   variable: '--font-impact',
 })
 
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="es"
-      className={`${outfit.variable} ${spaceGrotesk.variable} ${inter.variable} ${bebas.variable} ${malvinas.variable} ${anton.variable}`}
+      className={`${sora.variable} ${spaceGrotesk.variable} ${inter.variable} ${bebas.variable} ${malvinas.variable} ${kanit.variable}`}
     >
       <head>
         <link rel="icon" href="/logos/gambeta.svg" />
