@@ -171,48 +171,169 @@ export const LEGEND_CAREERS: Record<string, LegendPreset> = {
   maradona: { name: 'Diego Maradona', number: 10, position: 'CAM', nationality: 'Argentina', flag: '🇦🇷', ovr: 75, age: 16, clubId: 'argentinos-jrs' },
 }
 
-// Mini-historia de retiro, distinta según la carrera (ligada o no al fútbol).
+// Historias de retiro: 130+ variantes que rotan. {n}=nombre, {c}=último club. El nivel de
+// la carrera cambia el pool base (gloria para leyendas, humilde para el montón) y las
+// UNIVERSALES agregan giros WOW o caídas (adicciones, estafa piramidal, imperio de comida)
+// que pueden tocarle a cualquiera. Es el gag para viralizar.
+const RETIRE_UNIVERSAL = [
+  '{n} formó una familia enorme, se alejó de los flashes y hoy vive tranquilo en el campo.',
+  '{n} cayó en las adicciones, tocó fondo y hoy da charlas de recuperación que llenan estadios.',
+  '{n} metió toda su plata en una estafa piramidal y lo perdió todo. Volvió a empezar de cero.',
+  '{n} abrió una cadena de comida rápida y se hizo diez veces más rico que jugando.',
+  '{n} se aisló del mundo, se compró una isla y no atiende el teléfono desde entonces.',
+  '{n} se metió en las cripto, lo rugpullearon y hoy vende sus medallas por Marketplace.',
+  '{n} se hizo influencer fitness y tiene más seguidores que cuando jugaba.',
+  '{n} puso un boliche que se volvió el más top del país. La joda nunca termina.',
+  '{n} se recibió de abogado a los 40 y hoy defiende a otros jugadores.',
+  '{n} montó una bodega de vinos y su etiqueta ya gana premios internacionales.',
+  '{n} entró en política, prometió mucho y no cumplió nada. Clásico.',
+  '{n} se hizo youtuber de reacciones y factura más que en su mejor contrato.',
+  '{n} apostó todo al casino una noche y salió sin nada. Hoy labura de lo que puede.',
+  '{n} abrió una escuelita de fútbol gratuita para pibes de bajos recursos. Un fenómeno.',
+  '{n} se hizo pastor y hoy predica en canchas llenas.',
+  '{n} se compró una estancia, cría vacas y jura que es más feliz que nunca.',
+  '{n} se separó, se fundió en la división de bienes y arrancó de nuevo con un food truck.',
+  '{n} escribió su autobiografía, fue best-seller y ahora la están por hacer serie.',
+  '{n} invirtió en el boom del pádel, la pegó y hoy tiene treinta canchas.',
+  '{n} desapareció del mapa. Algunos dicen que lo vieron pescando en el sur.',
+  '{n} abrió una parrilla que se hizo viral en las redes: hay tres horas de cola.',
+  '{n} donó casi toda su fortuna y hoy dirige una fundación enorme.',
+  '{n} se metió en un quilombo judicial por evasión y estuvo cerca de perder todo.',
+  '{n} se hizo actor, hizo una novela y no lo hizo nada mal.',
+  '{n} se compró un club de la B y quiere subirlo a Primera sí o sí.',
+  '{n} se hizo DJ, gira por Ibiza y ya nadie se acuerda que jugaba.',
+  '{n} tuvo mellizos, se dedicó a la familia y baja fotos zen desde el jardín.',
+  '{n} se volvió monje, dejó todo lo material y hoy vive en las montañas.',
+  '{n} la pegó con una app de fútbol amateur que usan millones.',
+  '{n} se metió a vender autos de lujo y resultó el mejor vendedor del país.',
+]
+const RETIRE_LEGEND = [
+  '{n} se retiró como ídolo eterno. Le hicieron una estatua afuera de la cancha de {c}.',
+  '{n} colgó los botines y agarró la Selección. El país entero sueña con él.',
+  '{n} es dueño de {c} y lo maneja como un imperio. Nadie discute su palabra.',
+  'Hicieron una película sobre {n} y arrasó en los cines de todo el mundo.',
+  '{n} se hizo senador con más votos que nadie. Del potrero al Congreso.',
+  '{n} montó un imperio gastronómico global. Hoy es diez veces más rico que jugando.',
+  '{n} es embajador del fútbol mundial y viaja por el planeta dando cátedra.',
+  '{n} compró tres clubes en tres países y armó su propio multiclub.',
+  '{n} dirige la Selección y ya la metió en otra final. La historia continúa.',
+  '{n} tiene su propia marca deportiva que le compite a las grandes.',
+  '{n} abrió un museo con todos sus títulos: visita obligada para los turistas.',
+  'Netflix hizo una serie sobre {n} y batió récords de reproducciones.',
+  '{n} donó un hospital entero a su ciudad. Lo bautizaron con su nombre.',
+  'Le pusieron el nombre de {n} a una calle y hasta a un aeropuerto.',
+  '{n} maneja una fundación que saca pibes de la calle a través del fútbol.',
+  '{n} es la cara de una campaña mundial y factura millones solo con su imagen.',
+  '{n} armó una academia de élite que ya exporta cracks a Europa.',
+  'Pese a toda la gloria, {n} lo perdió casi todo en un mal negocio... y se volvió a levantar.',
+  '{n} escribió el libro más vendido del año contando su carrera de leyenda.',
+  '{n} se retiró en la cima y el mundo del fútbol se paró a aplaudirlo.',
+  '{n} se convirtió en el presidente más querido de {c}: reelecto sin oposición.',
+  '{n} es comentarista estrella y su palabra mueve el mercado de pases.',
+  'Declararon feriado en su ciudad el día que {n} se retiró.',
+  '{n} es mentor de las próximas estrellas: todos quieren aprender del maestro.',
+  '{n} inauguró un estadio con su nombre, financiado enteramente por él.',
+]
+const RETIRE_CRACK = [
+  '{n} se retiró como gran figura y hoy es ayudante técnico camino a ser DT.',
+  '{n} montó una escuela de fútbol que ya llena tres sedes.',
+  '{n} lanzó su marca de botines y explota en ventas.',
+  '{n} se metió en la dirigencia de {c} y pelea la presidencia.',
+  '{n} es panelista estrella y arma quilombo cada domingo.',
+  '{n} invirtió bien y hoy vive de sus rentas, tranquilo y feliz.',
+  '{n} abrió una cadena de gimnasios que se expandió a todo el país.',
+  '{n} se hizo representante de jugadores y maneja varias joyitas.',
+  '{n} tuvo su momento de gloria pero se enredó en malas juntas y se fundió.',
+  '{n} dirige las inferiores de {c} y ya sacó dos cracks.',
+  '{n} se hizo influencer y monetiza cada jugada de su carrera.',
+  '{n} puso un complejo de fútbol 5 que nunca está vacío.',
+  '{n} se recibió de kinesiólogo y hoy recupera a los que fueron sus rivales.',
+  '{n} probó suerte en la música, sacó un tema y sorprendió a todos.',
+  '{n} tuvo problemas con el juego pero se recuperó y hoy ayuda a otros.',
+  '{n} abrió un restó temático de su carrera y es furor entre los hinchas.',
+  '{n} se metió a comentar en la radio y su voz ya es un clásico.',
+  '{n} se hizo DT y lo contrató un club del exterior.',
+  '{n} lanzó una línea de ropa urbana que la rompe.',
+  '{n} se metió en cripto, la pegó justo y salió a tiempo.',
+  '{n} fue figura, pero una lesión mal curada lo bajó antes de tiempo. Igual dejó huella.',
+  '{n} organiza torneos benéficos que juntan a las viejas glorias.',
+  '{n} se retiró querido por todos y hoy da charlas motivacionales.',
+  '{n} armó una app de scouting que usan clubes de medio mundo.',
+  '{n} vive entre el campo y la ciudad, disfrutando todo lo que ganó.',
+]
+const RETIRE_SOLID = [
+  '{n} abrió un restaurante que se llenó de hinchas, camisetas y anécdotas.',
+  '{n} dirige inferiores en un club de ascenso, formando pibes con humildad.',
+  '{n} se metió en negocios inmobiliarios y le fue bárbaro.',
+  '{n} se hizo relator de radio: su voz narra los goles de otros.',
+  '{n} puso una cancha de fútbol 5 y organiza el torneo del barrio.',
+  '{n} sorprendió a todos: abrió una hamburguesería viral y se hizo millonario.',
+  '{n} se metió en el juego y las apuestas y la pasó mal un tiempo.',
+  '{n} se recibió de profe de educación física y da clases en su barrio.',
+  '{n} montó un lavadero de autos que ya tiene tres sucursales.',
+  '{n} se hizo youtuber de fútbol y de a poco creció un montón.',
+  '{n} abrió una distribuidora y dejó el fútbol atrás sin dramas.',
+  '{n} se aisló en el sur, pesca y no quiere saber nada de flashes.',
+  '{n} invirtió en un food truck de choripán y no para de vender.',
+  '{n} tuvo un problema de adicciones pero salió adelante y hoy lo cuenta sin filtros.',
+  '{n} se volvió al pueblo, puso un almacén y es el ídolo de la cuadra.',
+  '{n} se metió a vender seguros y resultó un fenómeno de las ventas.',
+  '{n} montó una escuelita de arqueros única en la zona.',
+  '{n} abrió un bar deportivo donde pasan sus mejores partidos en loop.',
+  '{n} la pegó con una app y se reinventó como emprendedor.',
+  '{n} se dedicó a criar a sus hijos y baja fotos felices del asado.',
+  '{n} intentó un negocio que fracasó, pero se levantó con un kiosco que la rompe.',
+  '{n} se hizo taxista de día y técnico de baby fútbol de noche.',
+  '{n} probó ser DT amateur y le tomó el gusto.',
+  '{n} formó su familia, se compró una casa y vive una vida simple y feliz.',
+  '{n} se metió en la construcción y hoy tiene su propia empresa chica.',
+]
+const RETIRE_JOURNEY = [
+  '{n} se retiró sin grandes luces pero con dignidad. Tiene un kiosco y juega los picados del domingo.',
+  '{n} maneja un remís, con la camiseta colgada en el living como recuerdo.',
+  '{n} volvió al pueblo, puso una cancha de fútbol 5 y organiza el torneo del barrio.',
+  'Contra todo pronóstico, {n} abrió una cadena de comida y se hizo millonario.',
+  '{n} cayó en una estafa piramidal y perdió lo poco que había juntado.',
+  '{n} se hizo profe de educación física, querido por todos sus alumnos.',
+  '{n} puso una verdulería y se convirtió en el personaje del barrio.',
+  '{n} tuvo problemas con el juego y la pasó fea, pero de a poco se recompuso.',
+  '{n} se hizo albañil, construyó su propia casa y está orgulloso de eso.',
+  '{n} vende choripán afuera de la cancha donde debutó. Un clásico.',
+  '{n} se ganó la lotería un martes cualquiera y cambió su vida entera.',
+  '{n} se metió a repartidor y sueña con volver como DT de las inferiores.',
+  '{n} montó un taller mecánico y hoy vive tranquilo con lo justo.',
+  '{n} se hizo viral por un video bailando y ahora es influencer sin querer.',
+  '{n} formó una familia numerosa y dejó el fútbol sin mirar atrás.',
+  '{n} abrió una parrilla de barrio que se llenó por el boca a boca.',
+  '{n} se aisló, se fue a vivir al monte y cultiva su propia huerta.',
+  '{n} probó suerte con las cripto, lo estafaron y aprendió a los golpes.',
+  '{n} da clases de fútbol gratis a los pibes de la villa todos los sábados.',
+  '{n} puso un lavadero y jura que labura menos que entrenando.',
+  '{n} se metió a cantante de cumbia y sorprendió con un hit.',
+  '{n} intentó mil negocios, fundió varios, pero nunca bajó los brazos.',
+  '{n} maneja un colectivo y cuenta sus anécdotas a cada pasajero.',
+  '{n} se hizo entrenador personal y tiene la agenda llena.',
+  '{n} volvió a jugar en la liga del pueblo y es la estrella indiscutida.',
+]
+
 export function retirementStory(career: CareerState): string {
   const { player } = career
   const peak = Math.max(player.ovr, ...career.history.map((s) => s.nextOvr ?? s.ovr))
   const titles = Object.values(career.trophies).reduce((a, b) => a + b, 0)
   const wc = career.milestones.worldCup
-  const name = player.name
   const lastClub = findClub(career.clubId)?.name || 'su último club'
-  const seed = (peak * 131 + titles * 977 + career.startYear + name.length) >>> 0
+  const seed = (peak * 131 + titles * 977 + career.startYear * 7 + player.name.length * 13) >>> 0
   const rng = makeRng(seed || 1)
-  const pick = (arr: string[]) => arr[Math.floor(rng() * arr.length)]
 
-  if (peak >= 93 || (wc && titles >= 5)) {
-    return pick([
-      `${name} se retiró como ídolo absoluto, entre lágrimas y una ovación eterna. Hoy dirige a ${lastClub} y sueña con la Selección.`,
-      `Colgó los botines convertido en leyenda. Ahora es dirigente y ya tiene una tribuna con su nombre.`,
-      `Tras una carrera de época, ${name} abrió una academia que ya parió a las nuevas joyas del país.`,
-      `${name} dejó el fútbol y saltó a la TV: es el analista más escuchado del continente y llena estadios con sus charlas.`,
-    ])
-  }
-  if (peak >= 87 || titles >= 3) {
-    return pick([
-      `${name} se retiró con el deber cumplido. Es ayudante de campo y estudia para ser DT.`,
-      `Dejó la cancha y montó una escuela de fútbol en su barrio, siempre a sala llena.`,
-      `Tras el retiro, ${name} se dedicó a comentar partidos y a lanzar su propia marca de botines.`,
-      `${name} se metió en la política de su club y hoy pelea por la presidencia.`,
-    ])
-  }
-  if (peak >= 80) {
-    return pick([
-      `${name} se retiró y abrió un restaurante que se llenó de hinchas, camisetas y anécdotas.`,
-      `Colgó los botines y hoy dirige las inferiores de un club de ascenso, formando pibes.`,
-      `Se metió en los negocios inmobiliarios, lejos de las canchas pero con la plata bien puesta.`,
-      `${name} se hizo relator de radio: su voz ahora narra los goles de otros.`,
-    ])
-  }
-  return pick([
-    `${name} se retiró sin grandes luces pero con dignidad. Tiene un kiosco y juega los picados del domingo.`,
-    `Tras una carrera de sacrificio, se recibió de profe de educación física.`,
-    `${name} dejó el fútbol y maneja un remís, con la camiseta colgada en el living como recuerdo.`,
-    `Se volvió al pueblo, puso una cancha de fútbol 5 y organiza el torneo del barrio.`,
-  ])
+  let tier: string[]
+  if (peak >= 92 || (wc && titles >= 5)) tier = RETIRE_LEGEND
+  else if (peak >= 87 || titles >= 3) tier = RETIRE_CRACK
+  else if (peak >= 80) tier = RETIRE_SOLID
+  else tier = RETIRE_JOURNEY
+
+  const pool = [...tier, ...RETIRE_UNIVERSAL]
+  const t = pool[Math.floor(rng() * pool.length)]
+  return t.replace(/\{n\}/g, player.name).replace(/\{c\}/g, lastClub)
 }
 
 export interface Trophy {

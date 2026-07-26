@@ -66,13 +66,16 @@ export async function downloadFichaPng(node: HTMLElement, playerName: string): P
 
 export async function downloadFichaJpg(node: HTMLElement, playerName: string): Promise<void> {
   const canvas = await captureNodeHD(node)
-  const dataUrl = canvas.toDataURL('image/jpeg', 0.95)
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.98) // máxima calidad JPG
   triggerDownload(dataUrl, `ficha-${slug(playerName)}.jpg`)
 }
 
+const SITE_URL = 'https://gambetafutbol.games/'
+
 export async function downloadFichaPdf(node: HTMLElement, playerName: string): Promise<void> {
   const canvas = await captureNodeHD(node)
-  const imgData = canvas.toDataURL('image/jpeg', 0.95)
+  // PNG lossless: texto y escudos nítidos (JPEG artefactaba los bordes del OVR).
+  const imgData = canvas.toDataURL('image/png', 1.0)
   const { jsPDF } = await import('jspdf')
 
   const pdf = new jsPDF({
@@ -82,7 +85,9 @@ export async function downloadFichaPdf(node: HTMLElement, playerName: string): P
     compress: true,
   })
 
-  pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height, undefined, 'FAST')
+  pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height, undefined, 'SLOW')
+  // Hotspot invisible: toda la ficha es clickeable y lleva al sitio.
+  pdf.link(0, 0, canvas.width, canvas.height, { url: SITE_URL })
   pdf.save(`ficha-${slug(playerName)}.pdf`)
 }
 

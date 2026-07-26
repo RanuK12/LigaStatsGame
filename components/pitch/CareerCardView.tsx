@@ -123,14 +123,14 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             <svg viewBox="0 0 100 120" className="w-full h-full">
               <defs>
                 <linearGradient id="jerseyShadow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff" stopOpacity="0.3" />
-                  <stop offset="50%" stop-color="#000000" stopOpacity="0" />
-                  <stop offset="100%" stop-color="#000000" stopOpacity="0.4" />
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.3" />
+                  <stop offset="50%" stopColor="#000000" stopOpacity="0" />
+                  <stop offset="100%" stopColor="#000000" stopOpacity="0.4" />
                 </linearGradient>
                 <linearGradient id="goldNum" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFF3B0" />
-                  <stop offset="50%" stop-color="#F59E0B" />
-                  <stop offset="100%" stop-color="#D4AF37" />
+                  <stop offset="0%" stopColor="#FFF3B0" />
+                  <stop offset="50%" stopColor="#F59E0B" />
+                  <stop offset="100%" stopColor="#D4AF37" />
                 </linearGradient>
               </defs>
 
@@ -264,7 +264,7 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
           style={{ transform: "translateZ(20px)" }}
         >
           <span className="font-display font-black text-white tracking-[0.15em]">GAMBETA</span>
-          <span className="text-[#74ACDF] text-[9px] tracking-[0.2em]">EL JUEGO DEL FÚTBOL ARGENTINO</span>
+          <span className="text-[#74ACDF] text-[9px] tracking-[0.2em]">GAMBETAFUTBOL.GAMES</span>
         </div>
       </motion.div>
     </div>
