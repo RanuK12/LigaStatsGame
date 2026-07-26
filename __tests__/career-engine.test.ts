@@ -8,6 +8,7 @@ import {
   findClub,
   ALL_CLUBS,
   ARG_CLUBS,
+  nationalTeamSeason,
   type CareerState,
 } from '@/lib/career-engine'
 
@@ -84,5 +85,34 @@ describe('career-engine', () => {
   it('winning the liga qualifies for Libertadores next year', () => {
     expect(nextContinentalFrom({ liga: true, continentalWon: false } as any)).toBe('libertadores')
     expect(nextContinentalFrom({ liga: false, continentalWon: false } as any)).toBe('sudamericana')
+  })
+})
+
+describe('national team system', () => {
+  const nt = (nationality: string, ovr: number, seed: number, wc = false) =>
+    nationalTeamSeason({ nationality, ovr, performance: 0.7, year: wc ? 2026 : 2027, wasCalledUp: false, position: 'ST', rng: makeRng(seed) })
+
+  it('a weak NT calls low-OVR players; a strong NT does not', () => {
+    // Paraguay (débil): un 65 entra. Argentina (fuerte): un 65 no.
+    let paraCalled = 0, argCalled = 0
+    for (let i = 1; i <= 200; i++) {
+      if (nt('Paraguay', 65, i).called) paraCalled++
+      if (nt('Argentina', 65, i).called) argCalled++
+    }
+    expect(paraCalled).toBeGreaterThan(100)
+    expect(argCalled).toBe(0)
+  })
+
+  it('caps and goals are non-negative and bounded', () => {
+    const r = nt('Argentina', 88, 5, true)
+    expect(r.caps).toBeGreaterThanOrEqual(0)
+    expect(r.caps).toBeLessThan(40)
+    expect(r.goals).toBeGreaterThanOrEqual(0)
+  })
+
+  it('World Cup year produces a WC highlight when called up', () => {
+    const withWc = Array.from({ length: 30 }, (_, i) => nt('Argentina', 88, i + 1, true))
+      .some((r) => r.highlights.some((h) => /Mundial|CAMPEÓN/.test(h)))
+    expect(withWc).toBe(true)
   })
 })

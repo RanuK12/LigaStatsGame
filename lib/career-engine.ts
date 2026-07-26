@@ -148,6 +148,17 @@ export const SUBSTANCE_DECISION: CareerDecision = {
   ],
 }
 
+// Evento barrabravas: aparece cuando la temporada anterior en Argentina fue floja.
+export const BARRABRAVAS_DECISION: CareerDecision = {
+  id: 'barrabravas',
+  title: 'Te apretaron los barrabravas 😰',
+  description: 'Tras una temporada floja, la barra te fue a apretar al vestuario. ¿Qué hacés?',
+  options: [
+    { id: 'barra_rescind', label: '🚪 Rescindir contrato', effectDescription: 'Salís del quilombo, pero perdés valor y 2 OVR' },
+    { id: 'barra_stay', label: '💪 Bancar y demostrar', effectDescription: 'Si la rompés, salto a un grande de Europa' },
+  ],
+}
+
 // Interés de la cantera al arrancar: a mayor OVR inicial, más y mejores clubes te buscan.
 export function academyInterest(ovr: number, seed: number): CareerClub[] {
   const rng = makeRng(seed >>> 0 || 1)
@@ -316,6 +327,98 @@ const RETIRE_JOURNEY = [
   '{n} volvió a jugar en la liga del pueblo y es la estrella indiscutida.',
 ]
 
+// ---------- Selección nacional (atada a la nacionalidad del jugador) ----------
+// strength = nivel de la selección (fuerte cuesta más entrar); wcFreq = con qué frecuencia
+// clasifica al Mundial. Una selección débil te llama antes (umbral bajo) y va poco al Mundial.
+export interface NationTier { strength: number; wcFreq: number }
+export const NATIONALITY_TIERS: Record<string, NationTier> = {
+  Argentina: { strength: 90, wcFreq: 0.97 },
+  Brasil: { strength: 91, wcFreq: 0.98 },
+  Francia: { strength: 89, wcFreq: 0.95 },
+  España: { strength: 87, wcFreq: 0.92 },
+  Italia: { strength: 84, wcFreq: 0.55 }, // fuerte pero falló clasificaciones recientes
+  Uruguay: { strength: 82, wcFreq: 0.85 },
+  Colombia: { strength: 80, wcFreq: 0.6 },
+  México: { strength: 79, wcFreq: 0.9 },
+  Chile: { strength: 78, wcFreq: 0.45 },
+  Paraguay: { strength: 74, wcFreq: 0.4 },
+}
+const DEFAULT_TIER: NationTier = { strength: 76, wcFreq: 0.5 }
+const WC_ELIMINATORS = ['Brasil', 'Francia', 'Alemania', 'España', 'Países Bajos', 'Inglaterra', 'Portugal', 'Croacia', 'Italia', 'Marruecos']
+
+export interface NTSeason {
+  called: boolean
+  debut: boolean
+  caps: number
+  goals: number
+  highlights: string[]
+  worldCupChampion: boolean
+}
+
+/** Simula la temporada de selección de un jugador según su nacionalidad, OVR y rendimiento. */
+export function nationalTeamSeason(o: {
+  nationality: string
+  ovr: number
+  performance: number
+  year: number
+  wasCalledUp: boolean
+  position: string
+  rng: () => number
+}): NTSeason {
+  const tier = NATIONALITY_TIERS[o.nationality] || DEFAULT_TIER
+  const threshold = tier.strength - 13 // selección fuerte => más OVR para entrar
+  const out: NTSeason = { called: false, debut: false, caps: 0, goals: 0, highlights: [], worldCupChampion: false }
+
+  const meets = o.ovr >= threshold && o.performance >= 0.5
+  if (!o.wasCalledUp) {
+    if (meets && o.rng() < 0.85) {
+      out.called = true
+      out.debut = true
+      out.highlights.push(`🎽 Debutaste en la Selección de ${o.nationality}`)
+    } else {
+      return out
+    }
+  } else if (o.ovr >= threshold - 5) {
+    out.called = true // seguís en consideración
+  } else {
+    out.highlights.push(`😔 Te quedaste afuera de la Selección de ${o.nationality} esta temporada`)
+    return out
+  }
+
+  // Partidos según cuánto superás el umbral (titular vs suplente)
+  const starterness = clamp((o.ovr - threshold) / 16, 0.12, 1)
+  out.caps = Math.round(2 + starterness * 8 + o.rng() * 2)
+  const cat = positionCategory(o.position)
+  const gpg = cat === 'ATT' ? 0.42 : cat === 'MID' ? 0.2 : cat === 'GK' ? 0 : 0.05
+  out.goals = Math.round(out.caps * gpg * starterness * (0.5 + o.rng()))
+
+  // Mundial: años reales (2026, 2030, 2034...) => year % 4 === 2
+  if (o.year % 4 === 2) {
+    if (o.rng() < tier.wcFreq) {
+      const wcMatches = Math.round(2 + starterness * 5 + o.rng())
+      const roundIdx = clamp(Math.round((tier.strength - 74) / 5 + (o.rng() - 0.35) * 2.5), 0, 4)
+      if (roundIdx === 4 && o.rng() < 0.5) {
+        out.worldCupChampion = true
+        out.highlights.push(`🌍🏆 ¡CAMPEÓN DEL MUNDO ${o.year} con ${o.nationality}! (${wcMatches} partidos)`)
+      } else {
+        const others = WC_ELIMINATORS.filter((e) => e !== o.nationality)
+        const elim = others[Math.floor(o.rng() * others.length)]
+        const roundName =
+          roundIdx === 4 ? 'la final' : roundIdx === 3 ? 'semifinal' : roundIdx === 2 ? 'cuartos de final' : roundIdx === 1 ? 'octavos' : 'fase de grupos'
+        out.highlights.push(
+          roundIdx === 0
+            ? `🌎 Mundial ${o.year}: ${wcMatches} partidos con ${o.nationality}. Quedaron eliminados en ${roundName}.`
+            : `🌎 Mundial ${o.year}: ${wcMatches} partidos con ${o.nationality}. Llegaron a ${roundName}, perdieron con ${elim}.`,
+        )
+      }
+      out.caps += wcMatches
+    } else {
+      out.highlights.push(`😞 ${o.nationality} no clasificó al Mundial ${o.year}`)
+    }
+  }
+  return out
+}
+
 export function retirementStory(career: CareerState): string {
   const { player } = career
   const peak = Math.max(player.ovr, ...career.history.map((s) => s.nextOvr ?? s.ovr))
@@ -374,6 +477,8 @@ export interface SeasonResult {
   nextOvr?: number // OVR ya evolucionado para la próxima temporada (edad + suerte)
   substanceHit?: boolean // consumió la sustancia y pegó el +5
   euroScout?: boolean // lo vino a buscar un club de Europa (plus de OVR)
+  performance?: number // 0..1, rendimiento de la temporada (para selección/eventos)
+  barrabravas?: boolean // temporada floja en Argentina: te apretaron los barras
 }
 
 export interface Milestones {
@@ -381,6 +486,8 @@ export interface Milestones {
   balonDeOro: number
   goldenBoots: number
   worldCup: boolean
+  ntCaps?: number // partidos jugados en la Selección
+  ntGoals?: number // goles en la Selección
 }
 
 export interface CareerPlayer {
@@ -558,6 +665,8 @@ export function simulateSeason(
   if (decisionOptionId === 'train_vision') bonusAssists += 4
   if (decisionOptionId === 'play_injured') bonusTitle += 0.12
   if (decisionOptionId === 'focus_play') bonusGoals += 2
+  // Barrabravas: bancar da un empujón a la chance de romperla (y saltar a Europa).
+  if (decisionOptionId === 'barra_stay') bonusTitle += 0.06
 
   const ovrScale = clamp(ovr / 80, 0.6, 1.35)
   const apps = matchesPlayed / 38
@@ -648,7 +757,19 @@ export function simulateSeason(
   const euroBonus = euroScout ? 2 : 0
   if (euroScout) highlights.push('✈️ Un grande de Europa puso el ojo en vos: +2 OVR de proyección')
 
-  const grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus)
+  let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus)
+  // Barrabravas: efecto de la decisión tomada.
+  if (decisionOptionId === 'barra_rescind') {
+    grownOvr = clamp(grownOvr - 2, 55, 99)
+    highlights.push('📉 Rescindiste el contrato para salir del quilombo: perdiste valor y nivel.')
+  } else if (decisionOptionId === 'barra_stay') {
+    highlights.push(performance >= 0.6 ? '💪 Bancaste la presión y la rompiste: un grande te tiene en la mira.' : '😬 Bancaste, pero la temporada no acompañó.')
+  }
+
+  // Trigger de barrabravas: temporada floja jugando en Argentina.
+  const badSeason = trophiesWon.length === 0 && rating < 6.4
+  const barrabravas = club.region === 'arg' && badSeason && rng() < 0.4
+  if (barrabravas) highlights.push('😰 Los barrabravas te apretaron tras una temporada floja. Tenés que decidir.')
 
   const season: SeasonResult = {
     year,
@@ -672,16 +793,28 @@ export function simulateSeason(
     nextOvr: grownOvr,
     substanceHit,
     euroScout,
+    performance,
+    barrabravas,
   }
 
-  const offers = generateOffers(state, performance, rng)
+  const offers = generateOffers(state, performance, rng, decisionOptionId)
 
   return { season, trophiesWon, offers }
 }
 
-function generateOffers(state: CareerState, performance: number, rng: () => number): TransferOffer[] {
+function generateOffers(state: CareerState, performance: number, rng: () => number, decisionOptionId?: string): TransferOffer[] {
   const current = findClub(state.clubId)!
   const value = state.player.marketValueM
+  // Bancar a los barras y romperla => un grande de Europa te viene a buscar (salto asegurado).
+  if (decisionOptionId === 'barra_stay' && performance >= 0.6) {
+    const bigEuro = EURO_CLUBS.filter((c) => c.strength >= 84).sort(() => rng() - 0.5)[0]
+    if (bigEuro) {
+      return [{
+        clubId: bigEuro.id, clubName: bigEuro.name, strength: bigEuro.strength, region: bigEuro.region,
+        flag: bigEuro.flag, valueM: Math.max(20, Math.round(value * (1.8 + rng() * 0.8))),
+      }]
+    }
+  }
   const offerChance = clamp(performance * 0.9 + (state.player.ovr - 75) / 100, 0, 0.95)
   if (rng() > offerChance) return []
 

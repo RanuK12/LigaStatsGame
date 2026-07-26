@@ -59,7 +59,11 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
   if (career?.milestones.worldCup) milestones.push({ icon: "🌍", label: "Campeón del Mundo" })
   if (career?.milestones.balonDeOro) milestones.push({ icon: "🏅", label: `Balón de Oro ×${career.milestones.balonDeOro}` })
   if (career?.milestones.goldenBoots) milestones.push({ icon: "👟", label: `Bota de Oro ×${career.milestones.goldenBoots}` })
-  if (career?.milestones.nationalTeam) milestones.push({ icon: career.player.flag, label: "Internacional" })
+  if (career?.milestones.nationalTeam) {
+    const caps = career.milestones.ntCaps || 0
+    const g = career.milestones.ntGoals || 0
+    milestones.push({ icon: career.player.flag, label: `Selección · ${caps} PJ${g ? ` · ${g} goles` : ""}` })
+  }
 
   return (
     <AnimatePresence>

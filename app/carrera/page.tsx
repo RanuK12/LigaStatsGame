@@ -24,6 +24,7 @@ import {
   marketValueFor,
   CAREER_DILEMMAS,
   SUBSTANCE_DECISION,
+  BARRABRAVAS_DECISION,
   academyInterest,
   LEGEND_CAREERS,
 } from "@/lib/career-engine"
@@ -389,6 +390,7 @@ function CareerDashboard() {
   const club = findClub(career.clubId)
   const hasOffers = career.pendingOffers.length > 0
   const dilemma = CAREER_DILEMMAS[career.seasonsPlayed % CAREER_DILEMMAS.length]
+  const barraActive = career.history[career.history.length - 1]?.barrabravas === true
 
   async function handleExport(kind: "png" | "jpg" | "pdf") {
     if (!fichaRef.current) return
@@ -463,6 +465,16 @@ function CareerDashboard() {
                 {career.player.age} años · {career.player.ovr} OVR · €{career.player.marketValueM}M
               </p>
             </div>
+
+            {/* Aviso de barrabravas: hay que decidir en el tab Decisiones */}
+            {barraActive && !career.finished && (
+              <button
+                onClick={() => setActiveTab("decisiones")}
+                className="w-full py-3 rounded-xl border border-red-500/40 bg-red-500/15 text-red-200 text-[11px] font-bold uppercase tracking-wider font-sport animate-pulse"
+              >
+                😰 Te apretaron los barrabravas · Decidí →
+              </button>
+            )}
 
             {/* SIMULATION SPEED CONTROLS */}
             {!career.finished && !hasOffers && (
@@ -541,6 +553,30 @@ function CareerDashboard() {
           </div>
 
           {/* TAB DETAILED PANELS */}
+          {activeTab === "decisiones" && barraActive && (
+            <div className="card-gradient rounded-3xl p-5 border border-red-500/40 space-y-3 shadow-2xl mb-4">
+              <h4 className="text-sm font-black text-red-300 font-display">{BARRABRAVAS_DECISION.title}</h4>
+              <p className="text-xs text-slate-300 font-sans leading-relaxed">{BARRABRAVAS_DECISION.description}</p>
+              <div className="space-y-2 pt-1 font-sport">
+                {BARRABRAVAS_DECISION.options.map((opt) => (
+                  <button
+                    key={opt.id}
+                    onClick={() => setSelectedOptionId(opt.id)}
+                    className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
+                      selectedOptionId === opt.id
+                        ? "bg-red-500/20 border-red-400 text-white shadow-md"
+                        : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    <span>{opt.label}</span>
+                    <span className="text-[10px] text-red-300 font-bold text-right ml-2">{opt.effectDescription}</span>
+                  </button>
+                ))}
+              </div>
+              <p className="text-[10px] text-slate-500 font-sans">Elegí y simulá la próxima temporada para resolverlo.</p>
+            </div>
+          )}
+
           {activeTab === "decisiones" && dilemma && (
             <div className="card-gradient rounded-3xl p-5 border border-[#74ACDF]/30 space-y-3 shadow-2xl">
               <div className="flex items-center justify-between">

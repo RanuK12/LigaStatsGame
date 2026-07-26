@@ -13,6 +13,7 @@ import {
   simulateSeason,
   advancePlayer,
   nextContinentalFrom,
+  nationalTeamSeason,
 } from './career-engine'
 
 export interface CareerSetup {
@@ -84,30 +85,31 @@ export const useCareerStore = create<CareerStore>()(
           trophies[id] = (trophies[id] || 0) + 1
         })
 
-        // Hitos de carrera (debut en Selección, Balón de Oro, botines de oro)
+        // Selección nacional: atada a la nacionalidad (convocatoria, partidos, Mundial real).
         const milestones = { ...state.milestones }
-        const nation = state.player.nationality === 'Argentina' ? 'Argentina' : state.player.nationality
-        if (!milestones.nationalTeam && season.ovr >= 80) {
-          milestones.nationalTeam = true
-          season.highlights.unshift(`${state.player.flag} Debutaste en la Selección de ${nation}`)
+        const nt = nationalTeamSeason({
+          nationality: state.player.nationality,
+          ovr: season.ovr,
+          performance: season.performance ?? 0.5,
+          year: season.year,
+          wasCalledUp: milestones.nationalTeam,
+          position: state.player.position,
+          rng,
+        })
+        if (nt.debut) milestones.nationalTeam = true
+        milestones.ntCaps = (milestones.ntCaps || 0) + nt.caps
+        milestones.ntGoals = (milestones.ntGoals || 0) + nt.goals
+        if (nt.worldCupChampion) {
+          milestones.worldCup = true
+          trophies['mundial'] = (trophies['mundial'] || 0) + 1
         }
+        nt.highlights.forEach((h) => season.highlights.push(h))
+
+        // Otros hitos
         if (season.topScorer) milestones.goldenBoots += 1
         if (season.ovr >= 88 && (season.liga || season.continentalWon) && rng() < 0.6) {
           milestones.balonDeOro += 1
           season.highlights.unshift(`🏅 Ganaste el Balón de Oro`)
-        }
-        // Mundial SOLO en años reales (2026, 2030, 2034...) y hay que ser un crack en la
-        // Selección. No está garantizado: la Selección puede no ganarlo.
-        const isWorldCupYear = season.year % 4 === 2
-        if (isWorldCupYear && milestones.nationalTeam && season.ovr >= 83) {
-          const wcChance = Math.max(0.08, Math.min(0.4, (season.ovr - 82) / 30))
-          if (rng() < wcChance) {
-            trophies['mundial'] = (trophies['mundial'] || 0) + 1
-            milestones.worldCup = true
-            season.highlights.unshift(`🌍 ¡CAMPEÓN DEL MUNDO ${season.year} con ${nation}!`)
-          } else {
-            season.highlights.push(`🌎 Jugaste el Mundial ${season.year} con ${nation}`)
-          }
         }
 
         const player = advancePlayer(state, season)
