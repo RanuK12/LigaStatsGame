@@ -5,8 +5,10 @@
     "awayTeam": "Ind. Rivadavia",
     "homeLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/atletico-tucuman.svg",
     "awayLogo": "https://media.copero.com.ar/logos/football/teams/ARG/L/independiente-rivadavia.svg",
-    "status": "UPCOMING",
-    "time": "15:00",
+    "homeScore": 0,
+    "awayScore": 0,
+    "status": "LIVE",
+    "minute": "EN VIVO",
     "league": "lpf",
     "competition": "LPF Arg"
   },

@@ -1,7 +1,6 @@
 // Arreglos de calidad del draft:
 //  1) Dedup insensible a acentos (Kevin Zenón == Kevin Zenon) uniendo clubes.
 //  2) Re-poda de squads SIN la tolerancia +1 de año (evita jugadores en clubes que ya dejaron).
-//  3) Desinfla el top de OVRs no-legendarios (había demasiados 85+), protegiendo leyendas.
 //   node scripts/data/fix-draft-quality.mjs
 import fs from 'node:fs'
 import path from 'node:path'
@@ -48,16 +47,6 @@ players = players.filter((p) => !removed.has(p.id))
 // remap refs en squads
 for (const s of arr) s.playerIds = [...new Set((s.playerIds || []).map((id) => remap[id] || id))]
 
-// ---------- 3) Desinflar OVRs no-legendarios (top comprimido) ----------
-let deflated = 0
-for (const p of players) {
-  if (p.legendary) continue
-  if ((p.rating || 0) > 80) {
-    const nr = Math.round(80 + (p.rating - 80) * 0.5)
-    if (nr !== p.rating) { p.rating = nr; deflated++ }
-  }
-}
-
 // ---------- 2) Re-poda de squads sin tolerancia +1 (jugador debe pertenecer ese año) ----------
 const byId = {}
 players.forEach((p) => (byId[p.id] = p))
@@ -95,8 +84,6 @@ const sizes = arr.map((s) => (s.playerIds || []).length)
 let broken = 0
 for (const s of arr) for (const pid of s.playerIds || []) if (!byId[pid]) broken++
 console.log(`Dedup por acento: ${merged} fusionados (${players.length} jugadores)`)
-console.log(`OVR desinflados: ${deflated}`)
 console.log(`Refs de squad podadas (sin +1): ${pruned}`)
 console.log(`Squad min/prom/max: ${Math.min(...sizes)}/${(sizes.reduce((a, b) => a + b, 0) / sizes.length).toFixed(0)}/${Math.max(...sizes)} | refs rotas: ${broken}`)
-const hi = players.filter((p) => p.rating >= 85).length
-console.log(`Jugadores >=85 ahora: ${hi} (antes 100)`)
+console.log(`Jugadores >=85: ${players.filter((p) => p.rating >= 85).length}`)

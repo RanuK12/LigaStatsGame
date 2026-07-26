@@ -29,3 +29,8 @@ data/derived/
 # Secrets (nunca commitear)
 .env
 .env*.local
+
+# dataset FIFA (bajado por scripts/data/fetch-fifa-dataset.mjs, regenerable)
+data/raw/fifa-legacy.csv
+data/fifa-index.json
+data/*.json.bak

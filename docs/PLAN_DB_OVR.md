@@ -1,5 +1,26 @@
 # Plan: script de mejora de la base de datos y OVR real
 
+## Estado (2026-07-26): fase 1 HECHA
+
+Fuente cableada: dataset FIFA 15-23 (el de Kaggle) desde un mirror público de HuggingFace sin
+auth. Pipeline, en orden:
+
+```
+node scripts/data/fetch-fifa-dataset.mjs   # CSV 87 MB -> data/fifa-index.json (49.699 jugadores)
+node scripts/data/match-fifa.mjs           # matching con score -> data/ovr-source-cache.json
+node scripts/data/apply-real-ovr.mjs       # OVR + birthDate + valor (backup .bak)
+node scripts/data/dedupe-by-fifa.mjs       # fusiona los dups que la fuente confirma
+node scripts/data/fix-draft-quality.mjs && npm run build:data
+```
+
+Resultado: 1.134 jugadores anclados a FIFA (de 2.956), 1.797 deflactados con el mapeo
+calibrado, 17 duplicados fusionados por identidad, 944 fechas de nacimiento corregidas.
+Distribución: 24 con 88+, banda 80-84 de 488 → 23, masa en 65-74. Pendiente (fase 2):
+Transfermarkt para club actual/valor de los que FIFA no cubre, y los 27 grupos de mismo
+nombre que quedaron en `data/reports/dupes-review.json`.
+
+---
+
 Objetivo: que cada jugador tenga un **OVR que corresponda a su nivel real** y que la base
 esté **limpia y actualizada** (club actual correcto, sin duplicados, sin anacronismos,
 planteles completos). Hoy los OVR salen del scraping original (inflados) + un boost de

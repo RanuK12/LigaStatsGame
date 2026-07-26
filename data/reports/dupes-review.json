@@ -1,0 +1,708 @@
+[
+  {
+    "motivo": "nombre-no-coincide-con-la-fuente",
+    "fifa": "Jorge Luis Velázquez",
+    "fifaId": "215261",
+    "descartados": [
+      {
+        "id": "juan-velazquez",
+        "name": "Juan Velázquez"
+      }
+    ],
+    "fusionados": [
+      "Jorge Velázquez"
+    ]
+  },
+  {
+    "motivo": "nombre-no-coincide-con-la-fuente",
+    "fifa": "Ángel Emanuel Gonzalez",
+    "fifaId": "226086",
+    "descartados": [
+      {
+        "id": "alexis-gonzalez",
+        "name": "Alexis González"
+      }
+    ],
+    "fusionados": [
+      "Angel Gonzalez"
+    ]
+  },
+  {
+    "motivo": "nombre-no-coincide-con-la-fuente",
+    "fifa": "Michael Steven López",
+    "fifaId": "240962",
+    "descartados": [
+      {
+        "id": "marcos-lopez-ban",
+        "name": "Marcos López"
+      }
+    ],
+    "fusionados": [
+      "Michael López"
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "tomas chancalay",
+    "jugadores": [
+      {
+        "id": "chancalay-tomas-2004",
+        "rating": 81,
+        "birthDate": "2004-06-15",
+        "clubs": [
+          "racing-club"
+        ],
+        "fifa": "Tomás Alejandro Chancalay"
+      },
+      {
+        "id": "chancalay-tomas-1990",
+        "rating": 69,
+        "birthDate": "1990-06-15",
+        "clubs": [
+          "colon"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "german conti",
+    "jugadores": [
+      {
+        "id": "conti-german-1999",
+        "rating": 71,
+        "birthDate": "1999-06-15",
+        "clubs": [
+          "san-lorenzo"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "german-conti-glp",
+        "rating": 70,
+        "clubs": [
+          "gimnasia-lp"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "juan ramirez",
+    "jugadores": [
+      {
+        "id": "ramirez-juan-1993",
+        "rating": 70,
+        "birthDate": "1993-06-15",
+        "clubs": [
+          "san-lorenzo"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "ramirez-juan-1999",
+        "rating": 74,
+        "birthDate": "1993-05-25",
+        "clubs": [
+          "boca-juniors",
+          "lanus"
+        ],
+        "fifa": "Juan Edgardo Ramírez"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "fabian cubero",
+    "jugadores": [
+      {
+        "id": "cubero-fabian-1992",
+        "rating": 71,
+        "birthDate": "1992-06-15",
+        "clubs": [
+          "san-lorenzo"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "cubero-fabian-1995",
+        "rating": 73,
+        "birthDate": "1978-12-21",
+        "clubs": [
+          "velez"
+        ],
+        "fifa": "Fabián Alberto Cubero"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "lautaro lopez",
+    "jugadores": [
+      {
+        "id": "lopez-lautaro-1991",
+        "rating": 64,
+        "birthDate": "2001-01-24",
+        "clubs": [
+          "san-lorenzo",
+          "san-lorenzo"
+        ],
+        "fifa": "Lautaro Mario Nahuel López Kaleniuk"
+      },
+      {
+        "id": "lopez-lautaro-2002",
+        "rating": 69,
+        "birthDate": "2002-06-15",
+        "clubs": [
+          "velez"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "lucas rodriguez",
+    "jugadores": [
+      {
+        "id": "rodriguez-lucas-2003",
+        "rating": 69,
+        "birthDate": "2003-06-15",
+        "clubs": [
+          "estudiantes-lp"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "rodriguez-lucas-1999",
+        "rating": 69,
+        "birthDate": "1993-09-27",
+        "clubs": [
+          "independiente",
+          "rosario-central"
+        ],
+        "fifa": "Lucas Nahuel Rodríguez"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "ricardo alvarez",
+    "jugadores": [
+      {
+        "id": "alvarez-ricardo-1997",
+        "rating": 71,
+        "birthDate": "1997-06-15",
+        "clubs": [
+          "banfield"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "alvarez-ricardo-1999",
+        "rating": 77,
+        "birthDate": "1988-04-12",
+        "clubs": [
+          "velez"
+        ],
+        "fifa": "Ricardo Gabriel Álvarez"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "emanuel insua",
+    "jugadores": [
+      {
+        "id": "insua-emanuel-1990",
+        "rating": 69,
+        "birthDate": "1990-06-15",
+        "clubs": [
+          "banfield"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "insua-emanuel-2001",
+        "rating": 70,
+        "birthDate": "1991-04-10",
+        "clubs": [
+          "velez"
+        ],
+        "fifa": "Emanuel Mariano Insúa Zapata"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "abel hernandez",
+    "jugadores": [
+      {
+        "id": "hernandez-abel-1992",
+        "rating": 73,
+        "birthDate": "1992-06-15",
+        "clubs": [
+          "velez"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "hernandez-abel-2003",
+        "rating": 73,
+        "birthDate": "2003-06-15",
+        "clubs": [
+          "rosario-central"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "nicolas fernandez",
+    "jugadores": [
+      {
+        "id": "fernandez-nicolas-1999",
+        "rating": 74,
+        "birthDate": "1996-02-08",
+        "clubs": [
+          "defensa-y-justicia"
+        ],
+        "fifa": "Nicolás Emanuel Fernández"
+      },
+      {
+        "id": "nicolas-fernandez-gc",
+        "rating": 71,
+        "clubs": [
+          "godoy-cruz"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "kevin vazquez",
+    "jugadores": [
+      {
+        "id": "vazquez-kevin-1992",
+        "rating": 68,
+        "birthDate": "1992-06-15",
+        "clubs": [
+          "talleres-cba"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "vazquez-kevin-2004",
+        "rating": 73,
+        "birthDate": "2004-06-15",
+        "clubs": [
+          "velez"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "jonathan herrera",
+    "jugadores": [
+      {
+        "id": "herrera-jonathan-1999",
+        "rating": 73,
+        "birthDate": "1999-06-15",
+        "clubs": [
+          "independiente",
+          "san-lorenzo"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "jonathan-herrera-rie",
+        "rating": 69,
+        "clubs": [
+          "riestra"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "alan rodriguez",
+    "jugadores": [
+      {
+        "id": "rodriguez-alan-2002",
+        "rating": 70,
+        "birthDate": "2002-06-15",
+        "clubs": [
+          "rosario-central"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "alan-rodriguez-arg",
+        "rating": 73,
+        "birthDate": "2000-01-25",
+        "clubs": [
+          "argentinos-jrs"
+        ],
+        "fifa": "Alan Rodríguez"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "ezequiel centurion",
+    "jugadores": [
+      {
+        "id": "centurion-ezequiel-1998",
+        "rating": 71,
+        "birthDate": "1997-05-20",
+        "clubs": [
+          "river-plate"
+        ],
+        "fifa": "Ezequiel Ignacio Centurión"
+      },
+      {
+        "id": "ezequiel-centurion",
+        "rating": 69,
+        "birthDate": "1993-06-15",
+        "clubs": [
+          "defensa-y-justicia",
+          "independiente-rivadavia"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "pol fernandez",
+    "jugadores": [
+      {
+        "id": "fernandez-pol-1999",
+        "rating": 73,
+        "birthDate": "1999-06-15",
+        "clubs": [
+          "boca-juniors",
+          "rosario-central",
+          "boca-juniors",
+          "boca-juniors"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "pol-fernandez-rc",
+        "rating": 71,
+        "clubs": [
+          "colon"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "alexis soto",
+    "jugadores": [
+      {
+        "id": "soto-alexis-2005",
+        "rating": 70,
+        "birthDate": "1993-10-20",
+        "clubs": [
+          "rosario-central",
+          "racing-club",
+          "banfield",
+          "defensa-y-justicia"
+        ],
+        "fifa": "Alexis Nahuel Soto"
+      },
+      {
+        "id": "alexis-soto-rc",
+        "rating": 71,
+        "clubs": [
+          "colon"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "nery dominguez",
+    "jugadores": [
+      {
+        "id": "dominguez-nery-1996",
+        "rating": 72,
+        "birthDate": "1996-06-15",
+        "clubs": [
+          "independiente"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "nery-dominguez",
+        "rating": 72,
+        "birthDate": "1990-04-09",
+        "clubs": [
+          "racing-club",
+          "lanus",
+          "rosario-central"
+        ],
+        "fifa": "Nery Andrés Domínguez"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "damian fernandez",
+    "jugadores": [
+      {
+        "id": "fernandez-damian-1999-cb",
+        "rating": 69,
+        "birthDate": "2001-01-02",
+        "clubs": [
+          "velez",
+          "rosario-central",
+          "velez",
+          "velez"
+        ],
+        "fifa": "Damián Ariel Fernández"
+      },
+      {
+        "id": "damian-fernandez-dyj",
+        "rating": 71,
+        "clubs": [
+          "defensa-y-justicia"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "maximiliano zalazar",
+    "jugadores": [
+      {
+        "id": "zalazar-maximiliano-2001",
+        "rating": 73,
+        "birthDate": "2001-06-15",
+        "clubs": [
+          "boca-juniors",
+          "gimnasia-lp"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "maximiliano-zalazar-bar",
+        "rating": 69,
+        "clubs": [
+          "barracas-central"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "lucas acosta",
+    "jugadores": [
+      {
+        "id": "acosta-lucas-1999",
+        "rating": 70,
+        "birthDate": "1999-06-15",
+        "clubs": [
+          "lanus"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "lucas-acosta-sar",
+        "rating": 68,
+        "birthDate": "1995-03-12",
+        "clubs": [
+          "sarmiento-j"
+        ],
+        "fifa": "Lucas Mauricio Acosta"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "eric ramirez",
+    "jugadores": [
+      {
+        "id": "eric-ramirez",
+        "rating": 70,
+        "birthDate": "1996-09-21",
+        "clubs": [
+          "gimnasia-lp",
+          "huracan",
+          "huracan"
+        ],
+        "fifa": "Eric Iván Jesús Ramírez"
+      },
+      {
+        "id": "eric-ramirez-tig",
+        "rating": 67,
+        "clubs": [
+          "tigre"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "alan cantero",
+    "jugadores": [
+      {
+        "id": "alan-cantero",
+        "rating": 68,
+        "birthDate": "",
+        "clubs": [
+          "godoy-cruz"
+        ],
+        "fifa": "Alan Martín Cantero"
+      },
+      {
+        "id": "sirino-alan",
+        "rating": 69,
+        "clubs": [
+          "barracas-central"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "manuel garcia",
+    "jugadores": [
+      {
+        "id": "manuel-garcia",
+        "rating": 73,
+        "birthDate": "",
+        "clubs": [
+          "rosario-central",
+          "gimnasia-lp",
+          "huracan"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "manuel-garcia-sar",
+        "rating": 67,
+        "birthDate": "1999-06-11",
+        "clubs": [
+          "sarmiento-j"
+        ],
+        "fifa": "Manuel García"
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "rodrigo gonzalez",
+    "jugadores": [
+      {
+        "id": "rodrigo-gonzalez",
+        "rating": 69,
+        "birthDate": "2000-04-14",
+        "clubs": [
+          "rosario-central",
+          "belgrano"
+        ],
+        "fifa": "Rodrigo Iván González"
+      },
+      {
+        "id": "rodrigo-gonzalez-ald",
+        "rating": 68,
+        "clubs": [
+          "aldosivi"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "bautista barros schelotto",
+    "jugadores": [
+      {
+        "id": "bautista-barros-schelotto",
+        "rating": 69,
+        "birthDate": "",
+        "clubs": [
+          "gimnasia-lp"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "bautista-barros-schelotto-pla",
+        "rating": 68,
+        "clubs": [
+          "platense"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "alan sosa",
+    "jugadores": [
+      {
+        "id": "alan-sosa-ald",
+        "rating": 68,
+        "clubs": [
+          "aldosivi"
+        ],
+        "fifa": null
+      },
+      {
+        "id": "alan-sosa-tig",
+        "rating": 67,
+        "clubs": [
+          "tigre"
+        ],
+        "fifa": null
+      }
+    ]
+  },
+  {
+    "motivo": "sin-evidencia",
+    "nombre": "angel di maria",
+    "jugadores": [
+      {
+        "id": "angel-di-maria",
+        "rating": 88,
+        "birthDate": "1988-02-14",
+        "clubs": [
+          "rosario-central",
+          "benfica",
+          "real-madrid",
+          "manchester-united",
+          "paris-saint-germain",
+          "juventus",
+          "benfica",
+          "rosario-central",
+          "argentina"
+        ],
+        "fifa": "Ángel Fabián Di María Hernández"
+      },
+      {
+        "id": "angel-di-maria-rc",
+        "rating": 76,
+        "clubs": [
+          "colon"
+        ],
+        "fifa": null
+      }
+    ]
+  }
+]

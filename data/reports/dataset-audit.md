@@ -2,60 +2,59 @@
 
 ## Totals
 - Clubs: 34
-- Players: 4088
+- Players: 2939
 - Squads: 170
 
 ## Health Score
 - Score: 90
-- Critical issues: 17
+- Critical issues: 5
 - Warnings: 0
 
 ## Critical Issues
 - Missing club: 0
-- Less than 11 players: 1
+- Less than 11 players: 0
 - Broken player refs: 0
-- Without goalkeeper: 16
+- Without goalkeeper: 5
 - Invalid rating: 0
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 4088
-- Players with clubs: 4088
-- Players with valid position: 4088
-- Playable squads: 154
+- Players with rating: 2939
+- Players with clubs: 2939
+- Players with valid position: 2939
+- Playable squads: 165
 
 ## Players by club
-- independiente: 436
-- boca-juniors: 393
-- banfield: 390
-- lanus: 379
-- velez: 376
-- river-plate: 365
+- banfield: 372
 - huracan: 306
-- rosario-central: 292
-- talleres: 261
-- racing-club: 251
-- newells: 246
-- san-lorenzo: 235
-- gimnasia: 233
+- independiente: 254
+- rosario-central: 254
+- talleres-cba: 247
+- lanus: 244
+- boca-juniors: 242
+- racing-club: 240
+- river-plate: 236
+- newells: 227
+- velez: 225
+- san-lorenzo: 216
+- gimnasia-lp: 215
 - belgrano: 211
-- estudiantes: 204
 - godoy-cruz: 198
-- argentinos-jrs: 75
-- defensa-y-justicia: 68
-- colon: 65
+- estudiantes-lp: 189
+- argentinos-jrs: 56
+- defensa-y-justicia: 50
+- colon: 46
+- union-sf: 26
 - tigre: 25
+- atl-tucuman: 19
 - central-cordoba: 19
 - instituto: 19
 - platense: 18
 - aldosivi: 17
-- atl-tucuman: 14
-- union-sf: 14
+- sarmiento-j: 15
 - barracas-central: 13
 - independiente-rivadavia: 13
-- sarmiento-j: 13
 - argentina: 12
-- union: 12
 - riestra: 11
 - arsenal: 9
 - aa-argentinos-juniors: 7
@@ -64,7 +63,6 @@
 - internazionale: 6
 - patronato: 6
 - atletico-madrid: 5
-- atletico-tucuman: 5
 - juventus: 5
 - paris-saint-germain: 5
 - valencia: 5
@@ -75,7 +73,6 @@
 - quilmes: 4
 - chelsea: 3
 - defensores-belgrano: 3
-- estudiantes-lp: 3
 - estudiantes-rc: 3
 - ferro: 3
 - gimnasia-mendoza: 3
@@ -96,7 +93,6 @@
 - cruzeiro: 2
 - fiorentina: 2
 - genoa: 2
-- gimnasia-lp: 2
 - inter-miami: 2
 - internacional: 2
 - los-andes: 2
@@ -106,7 +102,6 @@
 - real-zaragoza: 2
 - roma: 2
 - santamarina: 2
-- sarmiento: 2
 - sevilla: 2
 - west-ham: 2
 - ac-milan: 1
@@ -169,10 +164,10 @@
 - zaragoza: 1
 
 ## Players by decade
-- 2010s: 1306
-- 2020s: 1036
-- 2000s: 910
-- 1990s: 804
+- 2010s: 974
+- 2020s: 766
+- 1990s: 606
+- 2000s: 561
 - 1970s: 9
 - 1980s: 8
 - 1950s: 6
@@ -191,9 +186,9 @@
 
 ## Squad Problems
 - Missing club: 0
-- Less than 11 players: 1
+- Less than 11 players: 0
 - Broken player refs: 0
-- Without goalkeeper: 16
+- Without goalkeeper: 5
 - Without enough defenders: 0
 - Without enough midfielders: 0
 - Without attackers: 0
