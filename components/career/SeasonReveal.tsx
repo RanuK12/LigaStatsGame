@@ -58,7 +58,7 @@ export default function SeasonReveal({ season, onClose }: Props) {
       {season && (
         <motion.div
           className="fixed inset-0 z-[120] flex items-center justify-center p-4"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           onClick={onClose}
           style={{ background: "radial-gradient(circle at center, rgba(6,12,24,0.9), rgba(2,4,10,0.98))", backdropFilter: "blur(6px)" }}
         >
