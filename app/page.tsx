@@ -164,14 +164,15 @@ function WorldCupBanner() {
                 </span>
                 <span className="text-[9px] font-black uppercase tracking-widest text-red-400 font-sport">MUNDIAL 2026</span>
               </div>
-              <div className="inline-flex items-center bg-[#74ACDF]/15 border border-[#74ACDF]/30 px-3 py-1 rounded-full">
-                <span className="text-[9px] font-bandera tracking-[0.16em] text-white">LAS MALVINAS SON ARGENTINAS</span>
+              <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#74ACDF]/20 via-white/10 to-[#74ACDF]/20 border border-[#74ACDF]/40 px-3 py-1 rounded-full">
+                <span className="text-sm leading-none">🇦🇷</span>
+                <span className="text-[11px] font-malvinas tracking-[0.14em] text-white">Las Malvinas son Argentinas</span>
               </div>
             </div>
 
-            <h2 className="font-bandera text-4xl sm:text-5xl lg:text-6xl text-white leading-none mb-2 uppercase tracking-[0.12em]">
-              VAMOS{' '}
-              <span className="gradient-text-gold">ARGENTINA</span>
+            <h2 className="font-malvinas text-5xl sm:text-6xl lg:text-7xl text-white leading-[0.95] mb-2 tracking-[0.04em] drop-shadow-[0_2px_20px_rgba(116,172,223,0.3)]">
+              Vamos{' '}
+              <span className="gradient-text-gold">Argentina</span>
             </h2>
             <p className="text-[#74ACDF] text-lg sm:text-xl font-bold mb-6 tracking-wide uppercase font-sport">
               Por la 4ta Copa del Mundo
@@ -213,24 +214,25 @@ function WorldCupBanner() {
             </Link>
           </div>
 
-          {/* Right: stats (unificadas y sin duplicar) */}
+          {/* Right: stats de la base, integradas con la estética argentina */}
           <div className="grid grid-cols-2 gap-3 w-full max-w-xs shrink-0">
             {[
-              { label: 'Jugadores en DB', value: '2.995', sub: 'Estadísticas Reales' },
-              { label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas Oficiales' },
-              { label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
-              { label: 'Mundiales', value: '3', sub: 'Ganados por Argentina' },
+              { icon: '⚽', label: 'Jugadores', value: '2.956', sub: 'Reales, auditados' },
+              { icon: '📋', label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas oficiales' },
+              { icon: '🛡️', label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
+              { icon: '🏆', label: 'Mundiales', value: '3', sub: '78 · 86 · 22' },
             ].map((s, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ scale: 0.9, y: 8 }}
+                whileInView={{ scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                className="card-gold rounded-2xl p-4 text-center border border-[#ffd700]/15"
+                transition={{ delay: 0.15 + i * 0.08, type: 'spring', stiffness: 180 }}
+                className="card-gold rounded-2xl p-4 text-center border border-[#ffd700]/20 shadow-[0_6px_24px_rgba(0,0,0,0.4)]"
               >
-                <div className="text-2xl font-black gradient-text-gold font-display">{s.value}</div>
-                <div className="text-[9px] text-[#D4AF37] font-bold mt-0.5 uppercase tracking-wider font-sport">{s.label}</div>
+                <div className="text-lg mb-0.5">{s.icon}</div>
+                <div className="text-2xl font-black gradient-text-gold font-display leading-none">{s.value}</div>
+                <div className="text-[9px] text-[#D4AF37] font-bold mt-1 uppercase tracking-wider font-sport">{s.label}</div>
                 <div className="text-[9px] text-slate-400 mt-0.5 font-medium">{s.sub}</div>
               </motion.div>
             ))}
