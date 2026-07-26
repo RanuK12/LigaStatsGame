@@ -480,6 +480,7 @@ export interface SeasonResult {
   performance?: number // 0..1, rendimiento de la temporada (para selección/eventos)
   barrabravas?: boolean // temporada floja en Argentina: te apretaron los barras
   cleanSheets?: number // vallas invictas (arqueros/defensores)
+  ballonDor?: boolean // ganaste el Balón de Oro esa temporada
 }
 
 export interface Milestones {

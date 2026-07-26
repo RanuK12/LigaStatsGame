@@ -107,9 +107,17 @@ export const useCareerStore = create<CareerStore>()(
 
         // Otros hitos
         if (season.topScorer) milestones.goldenBoots += 1
-        if (season.ovr >= 88 && (season.liga || season.continentalWon) && rng() < 0.6) {
+        // Balón de Oro: la competencia entre los mejores del mundo. Hace falta un OVR de élite
+        // (90+) y una temporada consagratoria (Champions/Libertadores, campeón del mundo, o
+        // liga en Europa, o un año descomunal). No garantizado: es EL premio.
+        const euroClub = findClub(state.clubId)?.region === 'euro'
+        const bdoEligible =
+          season.ovr >= 90 &&
+          (nt.worldCupChampion || season.continentalWon || (euroClub && season.liga) || season.rating >= 9.3)
+        if (bdoEligible && rng() < 0.45) {
           milestones.balonDeOro += 1
-          season.highlights.unshift(`🏅 Ganaste el Balón de Oro`)
+          season.ballonDor = true
+          season.highlights.unshift(`🏆🥇 ¡Ganaste el BALÓN DE ORO ${season.year}!`)
         }
 
         const player = advancePlayer(state, season)

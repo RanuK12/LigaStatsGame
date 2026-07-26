@@ -14,6 +14,7 @@ import CareerCardView from "@/components/pitch/CareerCardView"
 import SeasonReveal from "@/components/career/SeasonReveal"
 import CareerFinale from "@/components/career/CareerFinale"
 import CareerTimelineCard from "@/components/career/CareerTimelineCard"
+import BallonDorReveal from "@/components/career/BallonDorReveal"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
@@ -385,6 +386,7 @@ function CareerDashboard() {
 
   const [selectedOptionId, setSelectedOptionId] = useState<string>("train_finishing")
   const [revealSeason, setRevealSeason] = useState<SeasonResult | null>(null)
+  const [ballonDorData, setBallonDorData] = useState<{ year: number; playerName: string; flag: string; ovr: number } | null>(null)
   const [showFinale, setShowFinale] = useState(false)
 
   if (!career) return null
@@ -668,7 +670,19 @@ function CareerDashboard() {
       <SeasonReveal
         season={revealSeason}
         onClose={() => {
+          const s = revealSeason
           setRevealSeason(null)
+          if (s?.ballonDor) {
+            setBallonDorData({ year: s.year, playerName: career.player.name, flag: career.player.flag, ovr: s.nextOvr ?? s.ovr })
+          } else if (useCareerStore.getState().career?.finished) {
+            setShowFinale(true)
+          }
+        }}
+      />
+      <BallonDorReveal
+        data={ballonDorData}
+        onClose={() => {
+          setBallonDorData(null)
           if (useCareerStore.getState().career?.finished) setShowFinale(true)
         }}
       />
