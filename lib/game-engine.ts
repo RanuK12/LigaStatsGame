@@ -537,6 +537,8 @@ function shuffle<T>(arr: T[]): T[] {
  * `sort(() => Math.random() - 0.5)` no baraja de verdad (comparador inconsistente) y
  * terminaba repitiendo siempre los mismos rivales.
  */
+const TEMPORADA_RECIENTE = 2025;
+
 function pickOpponents(
   allSquads: Squad[], allPlayers: Player[], excludeId: string, count: number, targetRating: number
 ): Squad[] {
@@ -551,16 +553,42 @@ function pickOpponents(
     avgOf.set(s.id, ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : 60);
   });
 
-  // 2/3 de rivales cercanos a nuestro nivel (elegidos al azar entre los más parecidos,
-  // así rotan entre temporadas) + 1/3 completamente al azar para que la tabla varíe.
-  const nearCount = Math.round(count * 0.66);
-  const closest = [...pool].sort(
-    (a, b) => Math.abs(avgOf.get(a.id)! - targetRating) - Math.abs(avgOf.get(b.id)! - targetRating)
-  );
-  const near = shuffle(closest.slice(0, Math.min(closest.length, nearCount * 3))).slice(0, nearCount);
-  const nearIds = new Set(near.map(s => s.id));
-  const rest = shuffle(pool.filter(s => !nearIds.has(s.id))).slice(0, count - near.length);
-  return shuffle([...near, ...rest]);
+  // Dentro de cada época: 2/3 cercanos a nuestro nivel (al azar entre los más parecidos, así
+  // rotan) + 1/3 al azar para que la tabla varíe.
+  const elegir = (desde: Squad[], cuantos: number): Squad[] => {
+    if (cuantos <= 0 || desde.length === 0) return [];
+    const cerca = Math.round(cuantos * 0.66);
+    const ordenados = [...desde].sort(
+      (a, b) => Math.abs(avgOf.get(a.id)! - targetRating) - Math.abs(avgOf.get(b.id)! - targetRating)
+    );
+    const near = shuffle(ordenados.slice(0, Math.min(ordenados.length, cerca * 3))).slice(0, cerca);
+    const usados = new Set(near.map(s => s.id));
+    const resto = shuffle(desde.filter(s => !usados.has(s.id))).slice(0, cuantos - near.length);
+    return [...near, ...resto];
+  };
+
+  // La liga mezcla épocas: ~40% de planteles actuales y el resto históricos (si no, siempre
+  // competías contra los mismos equipos de los últimos dos años).
+  const recientes = pool.filter(s => Number(s.season) >= TEMPORADA_RECIENTE);
+  const historicos = pool.filter(s => Number(s.season) < TEMPORADA_RECIENTE);
+  const elegidos = elegir(recientes, Math.round(count * 0.4));
+  elegidos.push(...elegir(historicos, count - elegidos.length));
+  if (elegidos.length < count) {
+    const usados = new Set(elegidos.map(s => s.id));
+    elegidos.push(...shuffle(pool.filter(s => !usados.has(s.id))).slice(0, count - elegidos.length));
+  }
+  return shuffle(elegidos);
+}
+
+/** Nivel medio de los rivales (top 11 de cada plantel): alimenta el cartel de dificultad. */
+function promedioDeRivales(opponents: Squad[], allPlayers: Player[]): number {
+  const byId: Record<string, Player> = {};
+  allPlayers.forEach(p => { byId[p.id] = p; });
+  const medias = opponents.map(s => {
+    const r = s.playerIds.map(id => byId[id]?.rating || 0).filter(Boolean).sort((a, b) => b - a).slice(0, 11);
+    return r.length ? r.reduce((a, b) => a + b, 0) / r.length : 60;
+  });
+  return medias.length ? Math.round(medias.reduce((a, b) => a + b, 0) / medias.length) : 0;
 }
 
 function initPlayerStats(players: Player[]): TournamentPlayerStats[] {
@@ -580,6 +608,7 @@ export function simulateSeasonWithStats(
 ): TournamentResult {
   const playerStrength = teamToStrength(playerTeam, formation, 'liga');
   const opponents = pickOpponents(allSquads, allPlayers, squad.id, 27, teamScore); // 28 equipos (Liga Profesional)
+  const rivalAvg = promedioDeRivales(opponents, allPlayers);
   const allNames = [squad.label, ...opponents.map(o => o.label)];
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;
@@ -688,6 +717,7 @@ export function simulateSeasonWithStats(
     formation: formation.id,
     teamScore,
     chronicle: chronicles,
+    rivalAvg,
   };
 }
 
@@ -698,6 +728,7 @@ export function simulateCopaWithStats(
 ): TournamentResult {
   const playerStrength = teamToStrength(playerTeam, formation, 'copa');
   const opponents = pickOpponents(allSquads, allPlayers, squad.id, 31, teamScore);
+  const rivalAvg = promedioDeRivales(opponents, allPlayers);
   const names = [squad.label, ...opponents.map(o => o.label)];
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;
@@ -792,6 +823,7 @@ export function simulateCopaWithStats(
     formation: formation.id,
     teamScore,
     chronicle: chronicles,
+    rivalAvg,
   };
 }
 
@@ -801,16 +833,47 @@ export function simulateCopaWithStats(
 export const PITY_LOW_THRESHOLD = 60;   // rating considered "low"
 export const PITY_GOOD_THRESHOLD = 72;  // rating considered "good" for pity
 
+// ── Estrellas: Tevez, Riquelme, Mascherano y compañía ──
+// Solo 18 de 170 planteles tienen una, así que al azar casi nunca salían. Cada giro tiene una
+// chance base de caer en un plantel con estrella DISPONIBLE para el puesto, y si pasan varios
+// giros sin ninguna, el siguiente la garantiza. Es el gancho del draft.
+export const STAR_RATING = 84;
+export const STAR_BASE_CHANCE = 0.18;
+export const STAR_PITY_SPINS = 6;
+
+const esEstrella = (p: Player) => Boolean(p.legendary) || (p.rating || 0) >= STAR_RATING;
+
+/** ¿Este plantel tiene una estrella libre que pueda jugar en el puesto pedido? */
+export function squadHasStarFor(squad: Squad, allPlayers: Player[], slotPosition: string, drafted: Set<string>): boolean {
+  return allPlayers.some(
+    (p) => squad.playerIds.includes(p.id) && !drafted.has(p.id) && esEstrella(p) && canPlayHere(p, slotPosition),
+  );
+}
+
 /**
  * Given a list of eligible squads and the current pity state,
  * returns a squad with boosted probability towards high-rated squads
  * when pity is active.
  */
 export function spinSquadWithPity(
-  eligible: Squad[], allPlayers: Player[], pity: { consecutiveLow: number; pityActive: boolean }
+  eligible: Squad[],
+  allPlayers: Player[],
+  pity: { consecutiveLow: number; pityActive: boolean; spinsSinEstrella?: number },
+  slot?: { position: string; drafted: Set<string> },
 ): Squad {
   if (eligible.length === 0) throw new Error('No eligible squads');
   if (eligible.length === 1) return eligible[0];
+
+  // Estrella: chance base y garantía tras varios giros secos
+  if (slot) {
+    const conEstrella = eligible.filter((sq) => squadHasStarFor(sq, allPlayers, slot.position, slot.drafted));
+    if (conEstrella.length > 0) {
+      const garantizada = (pity.spinsSinEstrella ?? 0) >= STAR_PITY_SPINS;
+      if (garantizada || Math.random() < STAR_BASE_CHANCE) {
+        return conEstrella[Math.floor(Math.random() * conEstrella.length)];
+      }
+    }
+  }
 
   // Compute avg squad rating for each eligible squad
   const withRating = eligible.map(sq => {
@@ -844,16 +907,19 @@ export function spinSquadWithPity(
 
 /** Update pity state after a player is picked */
 export function updatePity(
-  current: { consecutiveLow: number; lastRatings: number[]; pityActive: boolean },
-  pickedRating: number
-): { consecutiveLow: number; lastRatings: number[]; pityActive: boolean } {
+  current: { consecutiveLow: number; lastRatings: number[]; pityActive: boolean; spinsSinEstrella?: number },
+  pickedRating: number,
+  pickedIsStar = false,
+): { consecutiveLow: number; lastRatings: number[]; pityActive: boolean; spinsSinEstrella: number } {
   const newLast = [pickedRating, ...current.lastRatings].slice(0, 5);
   const isLow = pickedRating <= PITY_LOW_THRESHOLD;
   const newConsec = isLow ? current.consecutiveLow + 1 : 0;
+  const spinsSinEstrella = pickedIsStar ? 0 : (current.spinsSinEstrella ?? 0) + 1;
   return {
     consecutiveLow: newConsec,
     lastRatings: newLast,
     pityActive: newConsec >= 2,
+    spinsSinEstrella,
   };
 }
 

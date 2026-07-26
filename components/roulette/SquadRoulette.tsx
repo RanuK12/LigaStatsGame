@@ -11,6 +11,15 @@ export const SPIN_DURATION_MS = 4200
  * El resultado viene pre-decidido (spinSquadWithPity); la rueda cae en su segmento.
  * onSpinComplete se dispara al frenar (onAnimationComplete + fallback de seguridad).
  */
+function shuffle<T>(arr: T[]): T[] {
+  const out = [...arr]
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[out[i], out[j]] = [out[j], out[i]]
+  }
+  return out
+}
+
 export default function SquadRoulette({ squads, spinning, result, onSpinComplete }: {
   squads: Squad[]; spinning: boolean; result: Squad | null; onSpinComplete: () => void
 }) {
@@ -18,25 +27,50 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
   const completedRef = useRef(false)
   const reducedMotion = useReducedMotion()
 
-  // Un plantel POR CLUB: antes entraban Boca 2019, Boca 2021, Boca 2022... y la rueda se
-  // veía con el mismo escudo repetido. El resultado siempre entra (reserva su club).
+  // La rueda: un plantel POR CLUB (antes se repetía el mismo escudo con Boca 2019/2021/2022) y
+  // con épocas balanceadas — ~40% de planteles actuales (2025/26) y el resto históricos, porque
+  // si no salían casi siempre los últimos dos años.
   const visible = useMemo(() => {
-    const porClub = new Map<string, Squad>()
-    if (result) porClub.set(result.clubId, result)
+    const CUPO = 18
+    const RECIENTE = 2025
+    const esReciente = (s: Squad) => Number(s.season) >= RECIENTE
+
+    const porClub = new Map<string, Squad[]>()
     for (const s of squads) {
-      if (porClub.size >= 18) break
-      if (!porClub.has(s.clubId)) porClub.set(s.clubId, s)
+      const arr = porClub.get(s.clubId)
+      if (arr) arr.push(s)
+      else porClub.set(s.clubId, [s])
     }
-    const out = [...porClub.values()]
-    // Si hay pocos clubes distintos, se completa con los planteles que haya para que la rueda
-    // no quede con dos o tres gajos enormes.
-    if (out.length < 8) {
-      for (const s of squads) {
-        if (out.length >= 8) break
-        if (!out.some((x) => x.id === s.id)) out.push(s)
+
+    const elegidos: Squad[] = []
+    const clubesUsados = new Set<string>()
+    if (result) {
+      elegidos.push(result)
+      clubesUsados.add(result.clubId)
+    }
+
+    const alAzar = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]
+    const tomar = (quiero: number, filtro: (s: Squad) => boolean) => {
+      const clubes = shuffle([...porClub.keys()].filter((c) => !clubesUsados.has(c)))
+      for (const club of clubes) {
+        if (quiero <= 0) break
+        const opciones = porClub.get(club)!.filter(filtro)
+        if (opciones.length === 0) continue
+        elegidos.push(alAzar(opciones))
+        clubesUsados.add(club)
+        quiero--
       }
+      return quiero // cuántos quedaron sin cubrir
     }
-    return out
+
+    const cupoReciente = Math.round(CUPO * 0.4)
+    const faltanRecientes = tomar(cupoReciente - (result && esReciente(result) ? 1 : 0), esReciente)
+    // Los históricos cubren su cuota + lo que no se pudo llenar con planteles actuales
+    const faltanViejos = tomar(CUPO - elegidos.length + faltanRecientes, (s) => !esReciente(s))
+    // Último relleno: cualquier club que quede (si a la posición la cubren pocos planteles)
+    if (faltanViejos > 0 || elegidos.length < 8) tomar(CUPO - elegidos.length, () => true)
+
+    return shuffle(elegidos)
   }, [squads, result])
 
   const segAngle = visible.length > 0 ? 360 / visible.length : 360

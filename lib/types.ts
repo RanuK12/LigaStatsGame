@@ -233,6 +233,8 @@ export interface TournamentResult {
   teamScore: number;
   /** Relatos de los partidos del usuario (opcional: resultados viejos no lo traen) */
   chronicle?: import('./chronicle').MatchChronicle[];
+  /** Nivel medio de los rivales que tocaron (para mostrar la dificultad de la liga) */
+  rivalAvg?: number;
 }
 
 // ═══════════════════════════════════════════════════════════════

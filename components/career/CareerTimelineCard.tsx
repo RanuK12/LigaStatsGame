@@ -58,6 +58,22 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
 
   return (
     <div className="w-full rounded-[28px] overflow-hidden bg-gradient-to-b from-[#100a12] via-[#0b0710] to-[#050308] border border-white/10 text-white font-sans p-5 sm:p-6">
+      {/* MARCA: la ficha se comparte, así que lleva el sello de la casa */}
+      <div className="flex items-center gap-3 pb-4 mb-1 border-b border-white/10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logos/gambeta.svg" alt="Gambeta" className="h-9 w-9 shrink-0" />
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5">
+            <span className="font-impact text-lg font-black tracking-[0.14em] text-white leading-none">GAMBETA</span>
+            <span className="text-[#F6C750] text-[11px] leading-none tracking-[0.15em]">★★★</span>
+          </div>
+          <div className="text-[8.5px] font-sport font-bold uppercase tracking-[0.28em] text-[#74ACDF] mt-1">
+            El juego del fútbol argentino
+          </div>
+        </div>
+        <div className="ml-auto banda-argentina h-8 w-16 rounded-md opacity-80" />
+      </div>
+
       {/* HEADER */}
       <div className="flex items-center gap-4 pb-5 border-b border-white/10">
         <div className="shrink-0 w-24 h-24 rounded-[22px] flex flex-col items-center justify-center shadow-lg" style={{ background: oc.bg, color: oc.text }}>
@@ -158,7 +174,12 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
 
       {/* FOOTER marca */}
       <div className="mt-4 pt-3 border-t border-white/10 flex justify-between items-center text-[10px] font-sport font-bold uppercase tracking-wider">
-        <span className="font-impact font-black text-white tracking-[0.15em]">GAMBETA</span>
+        <span className="flex items-center gap-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logos/gambeta.svg" alt="" className="h-4 w-4" />
+          <span className="font-impact font-black text-white tracking-[0.15em]">GAMBETA</span>
+          <span className="text-[#F6C750] text-[9px]">★★★</span>
+        </span>
         <span className="text-[#74ACDF] text-[9px] tracking-[0.2em]">GAMBETAFUTBOL.GAMES</span>
       </div>
     </div>

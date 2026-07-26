@@ -10,6 +10,15 @@ const TIER_STYLE: Record<SquadTier, { border: string; glow: string; label: strin
   legendario: { border: "border-[#D4AF37]", glow: "shadow-[0_0_70px_rgba(212,175,55,0.55)]", label: "¡PLANTEL LEGENDARIO!" },
 }
 
+// Época del plantel: el hincha quiere saber si le tocó un equipo de antes.
+function epoca(season: string): { label: string; clase: string } | null {
+  const anio = Number(season)
+  if (!anio) return null
+  if (anio <= 2018) return { label: "PLANTEL HISTÓRICO", clase: "text-[#E7C27D] border-[#E7C27D]/40 bg-[#E7C27D]/10" }
+  if (anio <= 2023) return { label: "PLANTEL CLÁSICO", clase: "text-[#9CCBF0] border-[#9CCBF0]/40 bg-[#9CCBF0]/10" }
+  return { label: "PLANTEL ACTUAL", clase: "text-emerald-300 border-emerald-400/40 bg-emerald-500/10" }
+}
+
 /** Reveal estilo pack-opening tras el giro: flip + rayos dorados si el plantel es histórico */
 export default function PackReveal({ squad, tier, avg, onContinue }: {
   squad: Squad; tier: SquadTier; avg: number; onContinue: () => void
@@ -18,6 +27,7 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
   const style = TIER_STYLE[tier]
   const isGold = tier === "legendario"
   const isSpecial = tier !== "comun"
+  const era = epoca(squad.season)
 
   return (
     <motion.div
@@ -90,7 +100,12 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
           </div>
         </div>
         <h2 className="font-display text-3xl font-black text-white mb-1">{squad.label}</h2>
-        <p className="text-sm text-slate-400 mb-5">{squad.competition} · Temporada {squad.season}</p>
+        <p className="text-sm text-slate-400 mb-3">{squad.competition} · Temporada {squad.season}</p>
+        {era && (
+          <div className={`mb-5 inline-block rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] font-sport ${era.clase}`}>
+            {era.label}
+          </div>
+        )}
         <div className="flex justify-center gap-6 mb-6 text-sm">
           <div>
             <div className={`font-display text-2xl font-black ${isGold ? "text-[#FFD700]" : "text-[#75AADB]"}`}>{avg}</div>

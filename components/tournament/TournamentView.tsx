@@ -228,9 +228,33 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
               <h2 className="font-bandera text-2xl sm:text-4xl text-white mb-3 uppercase tracking-[0.14em]">
                 MODO DE SIMULACIÓN
               </h2>
-              <p className="text-slate-400 text-xs sm:text-sm mb-10 max-w-sm mx-auto font-sans leading-relaxed">
+              <p className="text-slate-400 text-xs sm:text-sm mb-6 max-w-sm mx-auto font-sans leading-relaxed">
                 Elegí cómo querés vivir el torneo de tu 11 ideal en la {result.type === "liga" ? "Liga Profesional" : "Copa Argentina"}.
               </p>
+
+              {/* Dificultad: sale del nivel real de los rivales que tocaron */}
+              {typeof result.rivalAvg === "number" && result.rivalAvg > 0 && (() => {
+                const d = result.teamScore - result.rivalAvg
+                const nivel =
+                  d >= 6
+                    ? { label: "Dificultad baja", detalle: "Sos favorito del torneo", color: "#34D399" }
+                    : d >= -2
+                    ? { label: "Dificultad pareja", detalle: "Liga peleada de arriba a abajo", color: "#9CCBF0" }
+                    : d >= -8
+                    ? { label: "Dificultad alta", detalle: "Hay planteles más fuertes que el tuyo", color: "#FBBF24" }
+                    : { label: "Dificultad durísima", detalle: "Te tocó un torneo de época", color: "#F87171" }
+                return (
+                  <div className="mb-8 inline-flex flex-col items-center gap-1 rounded-2xl border px-5 py-3" style={{ borderColor: `${nivel.color}55`, background: `${nivel.color}12` }}>
+                    <span className="font-sport text-[11px] font-black uppercase tracking-widest" style={{ color: nivel.color }}>
+                      {nivel.label}
+                    </span>
+                    <span className="text-[11px] text-slate-400 font-sans">{nivel.detalle}</span>
+                    <span className="text-[10px] text-slate-500 font-sport uppercase tracking-wider">
+                      Tu 11: {result.teamScore} · Rivales: {result.rivalAvg}
+                    </span>
+                  </div>
+                )
+              })()}
               <div className="flex flex-col gap-3.5 max-w-xs mx-auto font-sport">
                 <button onClick={handleStartStepSim} className="btn-primary py-4 text-xs font-bold tracking-widest uppercase">
                   Partido a Partido

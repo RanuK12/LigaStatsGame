@@ -24,6 +24,7 @@ import {
   simulateCopaWithStats,
   spinSquadWithPity,
   getSquadTier,
+  STAR_RATING,
   updatePity,
   PITY_LOW_THRESHOLD,
 } from "@/lib/game-engine"
@@ -66,6 +67,7 @@ interface PityState {
   consecutiveLow: number
   lastRatings: number[]
   pityActive: boolean
+  spinsSinEstrella: number
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -196,7 +198,7 @@ function DraftInner() {
   const [retoGanado, setRetoGanado] = useState<{ elo: number; streak: number } | null>(null)
   const [spinNotice, setSpinNotice] = useState<string | null>(null)
   const [showPosSelector, setShowPosSelector] = useState(false)
-  const [pity, setPity] = useState<PityState>({ consecutiveLow: 0, lastRatings: [], pityActive: false })
+  const [pity, setPity] = useState<PityState>({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
 
   const f = formations[fm as keyof typeof formations] || formations["4-3-3"]
   const totalSlots = f.positions.length
@@ -228,7 +230,7 @@ function DraftInner() {
     setSimResult(null)
     setSpinNotice(null)
     setStarted(true)
-    setPity({ consecutiveLow: 0, lastRatings: [], pityActive: false })
+    setPity({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
     setPhase("ready")
   }, [totalSlots, mode])
 
@@ -248,8 +250,8 @@ function DraftInner() {
       setPhase("ready")
       return
     }
-    // Apply pity system
-    const result = spinSquadWithPity(eligible, allP, pity)
+    // Apply pity system (incluye la chance de que salga un plantel con estrella para el puesto)
+    const result = spinSquadWithPity(eligible, allP, pity, { position: posToUse, drafted: draftedIds })
     setSpinNotice(null)
     setCurrentSquad(result)
     setSpinning(true)
@@ -275,7 +277,8 @@ function DraftInner() {
     setDraftedIds(prev => new Set(prev).add(player.id))
 
     // Update pity state based on picked player rating
-    const newPity = updatePity(pity, player.rating || 60)
+    const esEstrella = Boolean(player.legendary) || (player.rating || 0) >= STAR_RATING
+    const newPity = updatePity(pity, player.rating || 60, esEstrella)
     setPity(newPity)
 
     // Fichaje de campanillas: estallido en pantalla (leyenda / 85+ / 80+).
@@ -393,7 +396,7 @@ function DraftInner() {
   const resetGame = useCallback(() => {
     setStarted(false); setPhase("start"); setDrafted([]); setDraftedIds(new Set())
     setCurrentSquad(null); setSimResult(null); setSpinNotice(null); setActiveSlotIdx(0)
-    setPity({ consecutiveLow: 0, lastRatings: [], pityActive: false })
+    setPity({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
   }, [])
 
   // ── PICKER PLAYERS ──

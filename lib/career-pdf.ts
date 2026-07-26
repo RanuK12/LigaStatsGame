@@ -1,24 +1,25 @@
 "use client"
 
 /**
- * Export the career "ficha" DOM node to ultra-crisp HD PNG or PDF (300 DPI / 3x Retina).
- * Uses html2canvas (DOM -> canvas) and jsPDF.
+ * Exporta la ficha de carrera a PNG / JPG / PDF en alta.
+ *
+ * Se usa `html-to-image` (SVG + foreignObject) y NO html2canvas: html2canvas reimplementa el
+ * layout de texto y con la tipografía de impacto corría los números hacia abajo y los cortaba
+ * (el OVR y la columna de OVR por temporada salían desfasados). Con foreignObject dibuja el
+ * navegador, así que lo exportado es idéntico a lo que se ve en pantalla.
  */
 
-async function captureNodeHD(node: HTMLElement): Promise<HTMLCanvasElement> {
-  const html2canvas = (await import('html2canvas')).default
+const BG = '#03060d'
 
-  // Esperar a que las fuentes custom terminen de cargar (evita métricas de fallback)
+async function esperarRecursos(node: HTMLElement): Promise<void> {
   try {
     await (document as Document & { fonts?: FontFaceSet }).fonts?.ready
   } catch {
     /* noop */
   }
-
-  // Wait for all images inside the node to load fully before capturing
-  const images = Array.from(node.querySelectorAll('img'))
+  const imgs = Array.from(node.querySelectorAll('img'))
   await Promise.all(
-    images.map(
+    imgs.map(
       (img) =>
         new Promise<void>((resolve) => {
           if (img.complete) resolve()
@@ -26,50 +27,40 @@ async function captureNodeHD(node: HTMLElement): Promise<HTMLCanvasElement> {
             img.onload = () => resolve()
             img.onerror = () => resolve()
           }
-        })
-    )
+        }),
+    ),
   )
+}
 
-  return html2canvas(node, {
-    scale: 3, // 3x Retina resolution for ultra-crisp HD rendering
-    backgroundColor: '#03060d',
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    imageTimeout: 15000,
-    // La ficha usa efecto 3D (preserve-3d, rotateX/Y, translateZ). html2canvas NO soporta
-    // 3D y lo captura desfasado. Aplanamos todos los transforms en el CLON antes de rasterizar.
-    onclone: (clonedDoc: Document) => {
-      clonedDoc.querySelectorAll<HTMLElement>('*').forEach((el) => {
-        const t = el.style.transform
-        if (t && /rotate|translatez|perspective|scale3d/i.test(t)) el.style.transform = 'none'
-        el.style.transformStyle = 'flat'
-        el.style.perspective = 'none'
-        el.style.transition = 'none'
-        el.style.animation = 'none'
-      })
-      clonedDoc.querySelectorAll<HTMLElement>('.perspective-1000, [class*="perspective"]').forEach((el) => {
-        el.style.perspective = 'none'
-        el.style.transform = 'none'
-      })
-      // html2canvas recorta el texto cuando line-height es < que la caja del glifo (leading-none)
-      // y hay overflow:hidden. Damos aire vertical y evitamos el recorte en todos los textos.
-      clonedDoc.querySelectorAll<HTMLElement>('h1,h2,h3,h4,h5,h6,p,span,div').forEach((el) => {
-        const cs = clonedDoc.defaultView?.getComputedStyle(el)
-        const lh = cs ? parseFloat(cs.lineHeight) : NaN
-        const fs = cs ? parseFloat(cs.fontSize) : NaN
-        // solo tocar elementos-hoja de texto (sin hijos elemento) para no romper layouts
-        const isLeaf = el.children.length === 0 && (el.textContent || '').trim().length > 0
-        if (isLeaf) {
-          if (!Number.isNaN(lh) && !Number.isNaN(fs) && lh < fs * 1.2) el.style.lineHeight = '1.25'
-          el.style.overflow = 'visible'
-          el.style.textOverflow = 'clip'
-          el.style.paddingTop = '0.06em'
-          el.style.paddingBottom = '0.06em'
-        }
-      })
-    },
-  })
+async function capturar(node: HTMLElement, tipo: 'png' | 'jpeg'): Promise<{ dataUrl: string; width: number; height: number }> {
+  const { toPng, toJpeg } = await import('html-to-image')
+  await esperarRecursos(node)
+
+  const rect = node.getBoundingClientRect()
+  const opciones = {
+    pixelRatio: 3, // retina: nítido para imprimir o compartir
+    backgroundColor: BG,
+    cacheBust: true,
+    width: Math.ceil(rect.width),
+    height: Math.ceil(rect.height),
+    style: {
+      // El efecto 3D de la tarjeta no aporta nada en una imagen fija y desalinea el recorte.
+      transform: 'none',
+      transformStyle: 'flat',
+      perspective: 'none',
+      animation: 'none',
+      transition: 'none',
+      margin: '0',
+    } as Partial<CSSStyleDeclaration>,
+    filter: (el: HTMLElement) => !(el.dataset && el.dataset.exportar === 'no'),
+  }
+
+  const dataUrl = tipo === 'png' ? await toPng(node, opciones) : await toJpeg(node, { ...opciones, quality: 0.98 })
+  return {
+    dataUrl,
+    width: Math.ceil(rect.width * 3),
+    height: Math.ceil(rect.height * 3),
+  }
 }
 
 function triggerDownload(dataUrl: string, filename: string) {
@@ -82,35 +73,31 @@ function triggerDownload(dataUrl: string, filename: string) {
 }
 
 export async function downloadFichaPng(node: HTMLElement, playerName: string): Promise<void> {
-  const canvas = await captureNodeHD(node)
-  const dataUrl = canvas.toDataURL('image/png', 1.0)
+  const { dataUrl } = await capturar(node, 'png')
   triggerDownload(dataUrl, `ficha-${slug(playerName)}.png`)
 }
 
 export async function downloadFichaJpg(node: HTMLElement, playerName: string): Promise<void> {
-  const canvas = await captureNodeHD(node)
-  const dataUrl = canvas.toDataURL('image/jpeg', 0.98) // máxima calidad JPG
+  const { dataUrl } = await capturar(node, 'jpeg')
   triggerDownload(dataUrl, `ficha-${slug(playerName)}.jpg`)
 }
 
 const SITE_URL = 'https://gambetafutbol.games/'
 
 export async function downloadFichaPdf(node: HTMLElement, playerName: string): Promise<void> {
-  const canvas = await captureNodeHD(node)
-  // PNG lossless: texto y escudos nítidos (JPEG artefactaba los bordes del OVR).
-  const imgData = canvas.toDataURL('image/png', 1.0)
+  const { dataUrl, width, height } = await capturar(node, 'png')
   const { jsPDF } = await import('jspdf')
 
   const pdf = new jsPDF({
-    orientation: canvas.height >= canvas.width ? 'portrait' : 'landscape',
+    orientation: height >= width ? 'portrait' : 'landscape',
     unit: 'px',
-    format: [canvas.width, canvas.height],
+    format: [width, height],
     compress: true,
   })
 
-  pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height, undefined, 'SLOW')
+  pdf.addImage(dataUrl, 'PNG', 0, 0, width, height, undefined, 'SLOW')
   // Hotspot invisible: toda la ficha es clickeable y lleva al sitio.
-  pdf.link(0, 0, canvas.width, canvas.height, { url: SITE_URL })
+  pdf.link(0, 0, width, height, { url: SITE_URL })
   pdf.save(`ficha-${slug(playerName)}.pdf`)
 }
 
