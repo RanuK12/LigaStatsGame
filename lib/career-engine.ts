@@ -135,6 +135,60 @@ export const CAREER_DILEMMAS: CareerDecision[] = [
       { id: 'focus_play', label: '⚡ Enfocarse sólo en jugar', effectDescription: '+2 Goles de rendimiento', goalBonus: 2 },
     ],
   },
+  {
+    id: 'position_change',
+    title: 'El DT te pide cambiar de posición',
+    description: 'El entrenador ve que podés rendir en otra zona de la cancha. ¿Te adaptás?',
+    options: [
+      { id: 'adapt_position', label: '🧠 Adaptarme y aprender', effectDescription: '+1 OVR de versatilidad', ovrDelta: 1 },
+      { id: 'refuse_position', label: '📌 Quedarme en lo mío', effectDescription: '+Goles en tu posición', goalBonus: 2 },
+    ],
+  },
+  {
+    id: 'mentor',
+    title: 'Un juvenil te pide una mano',
+    description: 'Una joya de las inferiores te ve como referente. ¿Lo guiás o te enfocás en vos?',
+    options: [
+      { id: 'mentor_youth', label: '🤝 Ser su mentor', effectDescription: '+1 OVR de liderazgo', ovrDelta: 1 },
+      { id: 'focus_self', label: '🎯 Enfocarme en mí', effectDescription: '+Goles esta temporada', goalBonus: 2 },
+    ],
+  },
+  {
+    id: 'renewal',
+    title: 'El club te ofrece renovar',
+    description: 'Te ponen un contrato largo sobre la mesa. ¿Firmás por lealtad o empujás para salir?',
+    options: [
+      { id: 'renew_loyalty', label: '✍️ Renovar y ganarme al hincha', effectDescription: '+1 OVR de confianza', ovrDelta: 1 },
+      { id: 'push_transfer', label: '🧳 Empujar una transferencia', effectDescription: '+Chances de ofertas', titleBonus: 0 },
+    ],
+  },
+  {
+    id: 'media',
+    title: 'Se te viene la prensa encima',
+    description: 'Una polémica en las redes te tiene en el ojo de la tormenta. ¿Cómo lo manejás?',
+    options: [
+      { id: 'focus_football', label: '🎧 Aislarme y jugar', effectDescription: '+Chances de título', titleBonus: 0.1 },
+      { id: 'take_sponsor', label: '💸 Aprovechar y firmar un sponsor', effectDescription: 'Plata extra, sin impacto deportivo' },
+    ],
+  },
+  {
+    id: 'workload',
+    title: 'Doble turno o descanso',
+    description: 'El preparador físico te ofrece intensificar. ¿Doble sesión o cuidar el cuerpo?',
+    options: [
+      { id: 'double_session', label: '🔥 Doble sesión', effectDescription: '+1 OVR permanente', ovrDelta: 1 },
+      { id: 'balanced_train', label: '🧘 Entrenamiento equilibrado', effectDescription: '+Asistencias', assistBonus: 2 },
+    ],
+  },
+  {
+    id: 'vestuario',
+    title: 'Vestuario: liderazgo o sociedad',
+    description: 'El grupo está dividido. ¿Tomás las riendas o armás sociedad con la figura del equipo?',
+    options: [
+      { id: 'team_leader', label: '🗣️ Poner orden en el grupo', effectDescription: '+Chances de título', titleBonus: 0.1 },
+      { id: 'link_up', label: '🤝 Sociedad con el crack', effectDescription: '+Asistencias', assistBonus: 2 },
+    ],
+  },
 ]
 
 // Sustancia misteriosa: disponible TODA temporada (el truco es consumirla siempre).
@@ -687,13 +741,17 @@ export function simulateSeason(
   let bonusGoals = 0
   let bonusAssists = 0
   let bonusTitle = 0
-
-  if (decisionOptionId === 'train_finishing') bonusGoals += 4
-  if (decisionOptionId === 'train_vision') bonusAssists += 4
-  if (decisionOptionId === 'play_injured') bonusTitle += 0.12
-  if (decisionOptionId === 'focus_play') bonusGoals += 2
-  // Barrabravas: bancar da un empujón a la chance de romperla (y saltar a Europa).
-  if (decisionOptionId === 'barra_stay') bonusTitle += 0.06
+  let bonusOvr = 0
+  const opt = decisionOptionId || ''
+  // Efectos de las decisiones (agrupados por tipo).
+  const GOAL_OPTS = new Set(['train_finishing', 'focus_play', 'refuse_position', 'focus_self'])
+  const ASSIST_OPTS = new Set(['train_vision', 'balanced_train', 'link_up'])
+  const TITLE_OPTS = new Set(['play_injured', 'focus_football', 'team_leader', 'barra_stay'])
+  const OVR_OPTS = new Set(['train_physique', 'rest_patiently', 'accept_captain', 'adapt_position', 'mentor_youth', 'double_session', 'renew_loyalty'])
+  if (GOAL_OPTS.has(opt)) bonusGoals += opt === 'train_finishing' ? 4 : 2
+  if (ASSIST_OPTS.has(opt)) bonusAssists += opt === 'train_vision' ? 4 : 2
+  if (TITLE_OPTS.has(opt)) bonusTitle += opt === 'barra_stay' ? 0.06 : 0.1
+  if (OVR_OPTS.has(opt)) bonusOvr += 1
 
   const ovrScale = clamp(ovr / 80, 0.6, 1.35)
   const apps = matchesPlayed / 38
@@ -813,6 +871,8 @@ export function simulateSeason(
   if (euroScout) highlights.push('✈️ Un grande de Europa puso el ojo en vos: +2 OVR de proyección')
 
   let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus)
+  // Bonus de OVR de la decisión (trabajo físico, capitanía, adaptarse, mentor, renovar...).
+  if (bonusOvr) grownOvr = clamp(grownOvr + bonusOvr, 55, ovrCapForAge(age + 1))
   // Barrabravas: efecto de la decisión tomada.
   if (decisionOptionId === 'barra_rescind') {
     grownOvr = clamp(grownOvr - 2, 55, 99)
@@ -871,7 +931,8 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
       }]
     }
   }
-  const offerChance = clamp(performance * 0.9 + (state.player.ovr - 75) / 100, 0, 0.95)
+  const pushBonus = decisionOptionId === 'push_transfer' ? 0.35 : 0
+  const offerChance = clamp(performance * 0.9 + (state.player.ovr - 75) / 100 + pushBonus, 0, 0.97)
   if (rng() > offerChance) return []
 
   const ovr = state.player.ovr
