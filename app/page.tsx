@@ -430,14 +430,13 @@ function ClubGrid() {
         </div>
       </motion.div>
 
-      <motion.div
-        variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }}
-        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2.5"
-      >
+      {/* Grid siempre visible: es una lista filtrable, así que NO gateamos por opacity/
+          whileInView (al filtrar, los clubes re-montados quedaban en opacity 0 e
+          invisibles porque el whileInView once ya había disparado). */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2.5">
         {filtered.map((club) => (
           <motion.div
             key={club.id}
-            variants={item}
             whileHover={{ scale: 1.1, zIndex: 10 }}
             onMouseEnter={() => setHovered(club.id)}
             onMouseLeave={() => setHovered(null)}
@@ -478,7 +477,7 @@ function ClubGrid() {
             </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
 
       {filtered.length === 0 && (
         <p className="text-center text-xs text-slate-600 py-8 font-sans font-medium">No se encontró ningún club con ese nombre</p>

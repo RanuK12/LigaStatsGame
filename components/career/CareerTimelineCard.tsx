@@ -1,6 +1,6 @@
 "use client"
 
-import { TROPHY_META, findClub, type CareerState } from "@/lib/career-engine"
+import { TROPHY_META, findClub, retirementStory, formatMarketValue, type CareerState } from "@/lib/career-engine"
 
 // Abreviatura de posición en español (estilo Copero: ED, DC, ARQ...).
 const POS_ES: Record<string, string> = {
@@ -30,13 +30,27 @@ function seasonTrophies(s: CareerState["history"][number]): string[] {
   return t
 }
 
+// Palmarés: chips resumen (Mundial, copas por tipo con contador, Balón de Oro, Bota de Oro).
+function palmares(career: CareerState): { icon: string; label: string }[] {
+  const chips: { icon: string; label: string }[] = []
+  if (career.milestones.worldCup) chips.push({ icon: "🌍", label: "Campeón del Mundo" })
+  if (career.milestones.balonDeOro > 0) chips.push({ icon: "🏅", label: `Balón de Oro ×${career.milestones.balonDeOro}` })
+  // Copas ganadas por tipo (liga, copa argentina, libertadores, sudamericana...).
+  for (const [comp, n] of Object.entries(career.trophies).sort((a, b) => b[1] - a[1])) {
+    if (n > 0) chips.push({ icon: TROPHY_META[comp]?.icon || "🏆", label: `${TROPHY_META[comp]?.name || comp} ×${n}` })
+  }
+  if (career.milestones.goldenBoots > 0) chips.push({ icon: "👟", label: `Bota de Oro ×${career.milestones.goldenBoots}` })
+  return chips
+}
+
 export default function CareerTimelineCard({ career }: { career: CareerState }) {
   const { player } = career
   const club = findClub(career.clubId)
   const oc = ovrColor(player.ovr)
   const pos = POS_ES[player.position] || player.position
-  const value = player.marketValueM >= 1 ? `€${player.marketValueM}M` : `€${Math.round(player.marketValueM * 1000)}K`
+  const value = formatMarketValue(player.marketValueM)
   const ntCaps = career.milestones.ntCaps || 0
+  const chips = palmares(career)
 
   return (
     <div className="w-full rounded-[28px] overflow-hidden bg-gradient-to-b from-[#100a12] via-[#0b0710] to-[#050308] border border-white/10 text-white font-sans p-5 sm:p-6">
@@ -47,16 +61,17 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
           <span className="font-impact text-5xl font-black leading-none">{player.ovr}</span>
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1.5">
+          <div className="flex items-center gap-2 mb-1">
             <span className="text-xl leading-none">{player.flag}</span>
             <span className="rounded-md bg-[#3a1020] border border-white/10 px-2 py-0.5 text-[11px] font-black tracking-wider font-sport">#{player.number} {pos}</span>
           </div>
-          <div className="flex items-center gap-2.5">
+          <h3 className="font-impact text-3xl sm:text-[2rem] font-black uppercase leading-none truncate">{player.name}</h3>
+          <div className="flex items-center gap-2 mt-1.5">
             {club && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={`/logos/clubs/${club.id}.png`} alt="" className="w-9 h-9 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+              <img src={`/logos/clubs/${club.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
             )}
-            <h3 className="font-impact text-3xl font-black uppercase leading-none truncate">{club?.name || "Libre"}</h3>
+            <span className="font-bold text-base text-slate-300 truncate">{club?.name || "Libre / retirado"}</span>
           </div>
         </div>
         <div className="text-right shrink-0">
@@ -66,6 +81,17 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
           <div className="font-impact text-xl font-black leading-none">{value}</div>
         </div>
       </div>
+
+      {/* PALMARÉS (Mundial, copas, Balón de Oro) */}
+      {chips.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 pt-4">
+          {chips.map((c, i) => (
+            <span key={i} className="inline-flex items-center gap-1 rounded-full bg-white/[0.06] border border-white/10 px-2.5 py-1 text-[11px] font-bold text-slate-100">
+              <span className="text-sm leading-none">{c.icon}</span>{c.label}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* COLUMNAS */}
       <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-x-2 sm:gap-x-3 items-center px-1 pt-4 pb-2 text-[9px] font-black text-slate-500 font-sport uppercase tracking-widest">
@@ -111,6 +137,14 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
           </div>
         )}
       </div>
+
+      {/* MINI-HISTORIA DE RETIRO */}
+      {career.finished && (
+        <div className="mt-4 rounded-xl bg-white/[0.03] border border-white/[0.07] px-4 py-3">
+          <div className="text-[9px] font-black text-slate-500 font-sport uppercase tracking-widest mb-1">Tras el retiro</div>
+          <p className="text-[13px] leading-snug text-slate-200">📖 {retirementStory(career)}</p>
+        </div>
+      )}
 
       {/* FOOTER marca */}
       <div className="mt-4 pt-3 border-t border-white/10 flex justify-between items-center text-[10px] font-sport font-bold uppercase tracking-wider">

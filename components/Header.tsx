@@ -24,23 +24,27 @@ const NAV_ITEMS = [
 export default function Header() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const { user, openAuthModal, openProfileModal, setUser } = useUserStore()
+  const { user, openAuthModal, openProfileModal, setUser, closeAuthModal } = useUserStore()
 
   // Hydrate the local store from Supabase Auth (OAuth redirect + persisted session).
+  // Al detectar sesión también cerramos el modal: sin esto, tras el login con Google
+  // el recuadro seguía abierto y se repetía en loop aunque el usuario ya estaba logueado.
   useEffect(() => {
     if (!supabase) return
     supabase.auth.getSession().then(({ data }) => {
       if (data.session?.user) {
         setUser(profileFromSupabaseUser(data.session.user, useUserStore.getState().user))
+        closeAuthModal()
       }
     })
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         setUser(profileFromSupabaseUser(session.user, useUserStore.getState().user))
+        closeAuthModal()
       }
     })
     return () => sub.subscription.unsubscribe()
-  }, [setUser])
+  }, [setUser, closeAuthModal])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020813]/72 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">

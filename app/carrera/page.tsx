@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useMemo } from "react"
+import { useState, useRef, useMemo, useEffect } from "react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import { motion, AnimatePresence } from "framer-motion"
@@ -24,6 +24,7 @@ import {
   findClub,
   MAX_SEASONS,
   marketValueFor,
+  formatMarketValue,
   ovrCapForAge,
   TROPHY_META,
   CAREER_DILEMMAS,
@@ -93,15 +94,28 @@ export default function CarreraPage() {
 
 // ---------------- SETUP WIZARD WITH 3D JERSEY CREATOR ----------------
 
+// Nombres genéricos para el default (el usuario puede cambiarlo); evita el fijo "Ranucoli".
+const RANDOM_PLAYER_NAMES = [
+  "Juan Gómez", "Mateo Fernández", "Thiago Sosa", "Lucas Romero", "Bruno Díaz",
+  "Nico Herrera", "Santiago Ruiz", "Valentín Silva", "Tomás Acosta", "Facundo Molina",
+  "Joaquín Ríos", "Benja Cabrera", "Ciro Ledesma", "Álvaro Núñez", "Ramiro Vega",
+]
+
 function CareerSetupWizard() {
   const startCareer = useCareerStore((s) => s.startCareer)
   const [mode, setMode] = useState<"create" | "real">("create")
 
-  const [name, setName] = useState("Emilio Ranucoli")
-  const [number, setNumber] = useState(12)
+  const [name, setName] = useState("")
+  const [number, setNumber] = useState(10)
+  // Nombre random básico al iniciar (como Copero), no uno fijo. Se hace en mount para
+  // no romper la hidratación del static export.
+  useEffect(() => {
+    setName((n) => n || RANDOM_PLAYER_NAMES[Math.floor(Math.random() * RANDOM_PLAYER_NAMES.length)])
+    setNumber(Math.floor(Math.random() * 25) + 1)
+  }, [])
   const [position, setPosition] = useState("CAM")
   const [nationality, setNationality] = useState("Argentina")
-  const [ovr, setOvr] = useState(72)
+  const [ovr, setOvr] = useState(60) // canterano básico (~€300K); sube con el slider hasta el tope por edad
   const [age, setAge] = useState(18)
   const [jerseyPattern, setJerseyPattern] = useState("sash")
   const [jerseyColor, setJerseyColor] = useState("#74ACDF")
@@ -216,7 +230,7 @@ function CareerSetupWizard() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Ej: Emilio Ranucoli"
+                  placeholder="Tu nombre de crack"
                   className="input-dark"
                 />
               </Field>
@@ -262,7 +276,7 @@ function CareerSetupWizard() {
               <Field label={`OVR inicial: ${ovr} (máx ${ovrCapForAge(age)} a los ${age})`}>
                 <input type="range" min={55} max={ovrCapForAge(age)} value={Math.min(ovr, ovrCapForAge(age))} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
               </Field>
-              <Field label={`Edad: ${age} · Valor ~€${previewValue}M`}>
+              <Field label={`Edad: ${age} · Valor ~${formatMarketValue(previewValue)}`}>
                 <input type="range" min={16} max={30} value={age} onChange={(e) => { const a = parseInt(e.target.value); setAge(a); setOvr((o) => Math.min(o, ovrCapForAge(a))) }} className="w-full accent-[#74ACDF]" />
               </Field>
             </div>
@@ -451,7 +465,7 @@ function CareerDashboard() {
                 {career.finished ? "Carrera finalizada 🏁" : club?.name}
               </h3>
               <p className="text-xs text-slate-400 mt-1 font-sport">
-                {career.player.age} años · {career.player.ovr} OVR · €{career.player.marketValueM}M
+                {career.player.age} años · {career.player.ovr} OVR · {formatMarketValue(career.player.marketValueM)}
               </p>
             </div>
           </div>
@@ -471,7 +485,7 @@ function CareerDashboard() {
                           {o.clubName}
                           {euro && <span className="text-[8px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase">Europa</span>}
                         </div>
-                        <div className="text-[10px] text-slate-400 font-sport">Oferta €{o.valueM}M</div>
+                        <div className="text-[10px] text-slate-400 font-sport">Oferta {formatMarketValue(o.valueM)}</div>
                       </div>
                       <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">Fichar</button>
                     </div>

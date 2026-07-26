@@ -530,6 +530,7 @@ export interface SeasonResult {
   decisionTaken?: string
   nextOvr?: number // OVR ya evolucionado para la próxima temporada (edad + suerte)
   substanceHit?: boolean // consumió la sustancia y pegó el +5
+  substanceBad?: boolean // mala reacción a la sustancia (-2 OVR)
   euroScout?: boolean // lo vino a buscar un club de Europa (plus de OVR)
   performance?: number // 0..1, rendimiento de la temporada (para selección/eventos)
   barrabravas?: boolean // temporada floja en Argentina: te apretaron los barras
@@ -607,17 +608,24 @@ const ASSIST_BASE: Record<PositionCategory, number> = { ATT: 7, MID: 8, DEF: 2, 
 // y castigo a los muy jóvenes (potencial sin confirmar). Ej: 59/18≈0, 72/18≈8, 80/24≈50,
 // 88/26≈115, 95/25≈200.
 export function marketValueFor(ovr: number, age: number): number {
-  const q = clamp((ovr - 55) / 40, 0, 1)
-  const base = Math.pow(q, 3.2) * 230
+  const q = clamp((ovr - 53) / 42, 0, 1)
+  const base = Math.pow(q, 3.3) * 240
   let ageF: number
-  if (age <= 17) ageF = 0.45
+  if (age <= 17) ageF = 0.5
   else if (age <= 19) ageF = 0.62
   else if (age <= 21) ageF = 0.82
   else if (age <= 27) ageF = 1
   else if (age <= 30) ageF = 0.72
   else if (age <= 33) ageF = 0.42
   else ageF = 0.18
-  return clamp(Math.round(base * ageF), 0, 220)
+  const v = base * ageF
+  // Devolvemos con decimales cuando es chico (canteranos ~0.2-0.3M = 200-300k).
+  return clamp(v < 1 ? Math.round(v * 100) / 100 : Math.round(v), 0.05, 220)
+}
+
+// Formato de valor: K para <1M, M para el resto (ej: 280 -> "€280K", 45 -> "€45M").
+export function formatMarketValue(m: number): string {
+  return m >= 1 ? `€${Math.round(m)}M` : `€${Math.round(m * 1000)}K`
 }
 
 // Tope de OVR por edad (categórico, por escala): un pibe de <19 no puede pasar de 72; el
@@ -860,10 +868,15 @@ export function simulateSeason(
     rng,
   )
 
-  // Sustancia misteriosa: 75% de +5 OVR (consumila siempre, dice el tweet).
-  const substanceHit = decisionOptionId === 'take_substance' && rng() < 0.75
+  // Sustancia misteriosa: un VERDADERO riesgo (antes casi siempre +5, te hacía crack solo).
+  // 40% pega (+5), 30% nada, 30% mala reacción (-2 OVR). Apostás.
+  let substanceHit = false
+  let substanceBad = false
   if (decisionOptionId === 'take_substance') {
-    highlights.push(substanceHit ? '🧪 La sustancia misteriosa pegó: +5 OVR' : '🧪 La sustancia no hizo efecto esta vez')
+    const r = rng()
+    if (r < 0.4) { substanceHit = true; highlights.push('🧪 La sustancia pegó fuerte: +5 OVR') }
+    else if (r < 0.7) highlights.push('🧪 La sustancia no hizo nada esta vez')
+    else { substanceBad = true; highlights.push('🧪 Mala reacción a la sustancia: -2 OVR') }
   }
   // Fortuna europea: cada tanto te vienen a buscar de Europa y te da un plus de OVR.
   const euroScout = club.region !== 'euro' && ovr >= 78 && rng() < 0.1
@@ -873,6 +886,8 @@ export function simulateSeason(
   let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus)
   // Bonus de OVR de la decisión (trabajo físico, capitanía, adaptarse, mentor, renovar...).
   if (bonusOvr) grownOvr = clamp(grownOvr + bonusOvr, 55, ovrCapForAge(age + 1))
+  // Mala reacción a la sustancia: -2 OVR (el riesgo real de apostar).
+  if (substanceBad) grownOvr = clamp(grownOvr - 2, 55, ovrCapForAge(age + 1))
   // Barrabravas: efecto de la decisión tomada.
   if (decisionOptionId === 'barra_rescind') {
     grownOvr = clamp(grownOvr - 2, 55, 99)
@@ -907,6 +922,7 @@ export function simulateSeason(
     decisionTaken: decisionOptionId,
     nextOvr: grownOvr,
     substanceHit,
+    substanceBad,
     euroScout,
     performance,
     barrabravas,

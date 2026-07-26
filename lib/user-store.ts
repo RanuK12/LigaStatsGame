@@ -85,6 +85,10 @@ export const useUserStore = create<UserStore>()(
     }),
     {
       name: 'ligastats_user_profile_v1',
+      // Solo persistir el perfil. Si persistíamos isAuthModalOpen, tras el redirect de
+      // OAuth (que recarga la página con el modal abierto) quedaba true y el recuadro
+      // reaparecía en loop aunque el usuario ya estuviera logueado.
+      partialize: (state) => ({ user: state.user }),
     }
   )
 )
