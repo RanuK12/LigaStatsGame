@@ -12,6 +12,7 @@ const Jersey3D = dynamic(() => import("@/components/career/Jersey3D"), {
 })
 import CareerCardView from "@/components/pitch/CareerCardView"
 import SeasonReveal from "@/components/career/SeasonReveal"
+import CareerFinale from "@/components/career/CareerFinale"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
@@ -374,13 +375,14 @@ function ClubGroup({
 // ---------------- DASHBOARD MULTI-TAB ----------------
 
 function CareerDashboard() {
-  const { career, simulateNextSeason, acceptOffer, declineOffers, resetCareer } = useCareerStore()
+  const { career, simulateNextSeason, acceptOffer, declineOffers, retire, resetCareer } = useCareerStore()
   const fichaRef = useRef<HTMLDivElement>(null)
   const [exporting, setExporting] = useState(false)
   const [activeTab, setActiveTab] = useState<"ficha" | "historial" | "decisiones" | "mercado">("ficha")
 
   const [selectedOptionId, setSelectedOptionId] = useState<string>("train_finishing")
   const [revealSeason, setRevealSeason] = useState<SeasonResult | null>(null)
+  const [showFinale, setShowFinale] = useState(false)
 
   if (!career) return null
   const cardData = buildCareerCardData(career)
@@ -406,10 +408,13 @@ function CareerDashboard() {
       if (!cur || cur.finished || cur.pendingOffers.length > 0) break
       simulateNextSeason(selectedOptionId)
     }
+    const fin = useCareerStore.getState().career
     // Reveal animado solo al simular de a una temporada (el momento dramático).
-    if (yearsCount === 1) {
-      const h = useCareerStore.getState().career?.history
-      if (h && h.length) setRevealSeason(h[h.length - 1])
+    if (yearsCount === 1 && fin?.history.length) {
+      setRevealSeason(fin.history[fin.history.length - 1])
+    } else if (fin?.finished) {
+      // Simulación en lote que llegó al final: finale directo.
+      setShowFinale(true)
     }
   }
 
@@ -483,6 +488,30 @@ function CareerDashboard() {
                   </button>
                 </div>
               </div>
+            )}
+
+            {/* RETIRO: siempre disponible mientras la carrera esté activa */}
+            {!career.finished && (
+              <button
+                onClick={() => {
+                  retire()
+                  setRevealSeason(null)
+                  setShowFinale(true)
+                }}
+                className="w-full py-3 mt-2 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 hover:text-red-200 hover:bg-red-500/20 text-[11px] font-bold uppercase tracking-wider transition-all font-sport"
+              >
+                🎬 Retirarme del fútbol
+              </button>
+            )}
+
+            {/* Carrera terminada: ver el resumen otra vez */}
+            {career.finished && (
+              <button
+                onClick={() => setShowFinale(true)}
+                className="btn-gold w-full py-3 mt-2 rounded-xl text-[11px] font-bold uppercase tracking-wider"
+              >
+                🏆 Ver resumen de carrera
+              </button>
             )}
 
             {/* EXPORT BUTTONS HD */}
@@ -631,7 +660,21 @@ function CareerDashboard() {
         </div>
       </div>
 
-      <SeasonReveal season={revealSeason} onClose={() => setRevealSeason(null)} />
+      <SeasonReveal
+        season={revealSeason}
+        onClose={() => {
+          setRevealSeason(null)
+          if (useCareerStore.getState().career?.finished) setShowFinale(true)
+        }}
+      />
+      <CareerFinale
+        career={showFinale ? career : null}
+        onClose={() => setShowFinale(false)}
+        onNewCareer={() => {
+          setShowFinale(false)
+          resetCareer()
+        }}
+      />
     </div>
   )
 }

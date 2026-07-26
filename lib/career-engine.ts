@@ -171,6 +171,50 @@ export const LEGEND_CAREERS: Record<string, LegendPreset> = {
   maradona: { name: 'Diego Maradona', number: 10, position: 'CAM', nationality: 'Argentina', flag: '🇦🇷', ovr: 75, age: 16, clubId: 'argentinos-jrs' },
 }
 
+// Mini-historia de retiro, distinta según la carrera (ligada o no al fútbol).
+export function retirementStory(career: CareerState): string {
+  const { player } = career
+  const peak = Math.max(player.ovr, ...career.history.map((s) => s.nextOvr ?? s.ovr))
+  const titles = Object.values(career.trophies).reduce((a, b) => a + b, 0)
+  const wc = career.milestones.worldCup
+  const name = player.name
+  const lastClub = findClub(career.clubId)?.name || 'su último club'
+  const seed = (peak * 131 + titles * 977 + career.startYear + name.length) >>> 0
+  const rng = makeRng(seed || 1)
+  const pick = (arr: string[]) => arr[Math.floor(rng() * arr.length)]
+
+  if (peak >= 93 || (wc && titles >= 5)) {
+    return pick([
+      `${name} se retiró como ídolo absoluto, entre lágrimas y una ovación eterna. Hoy dirige a ${lastClub} y sueña con la Selección.`,
+      `Colgó los botines convertido en leyenda. Ahora es dirigente y ya tiene una tribuna con su nombre.`,
+      `Tras una carrera de época, ${name} abrió una academia que ya parió a las nuevas joyas del país.`,
+      `${name} dejó el fútbol y saltó a la TV: es el analista más escuchado del continente y llena estadios con sus charlas.`,
+    ])
+  }
+  if (peak >= 87 || titles >= 3) {
+    return pick([
+      `${name} se retiró con el deber cumplido. Es ayudante de campo y estudia para ser DT.`,
+      `Dejó la cancha y montó una escuela de fútbol en su barrio, siempre a sala llena.`,
+      `Tras el retiro, ${name} se dedicó a comentar partidos y a lanzar su propia marca de botines.`,
+      `${name} se metió en la política de su club y hoy pelea por la presidencia.`,
+    ])
+  }
+  if (peak >= 80) {
+    return pick([
+      `${name} se retiró y abrió un restaurante que se llenó de hinchas, camisetas y anécdotas.`,
+      `Colgó los botines y hoy dirige las inferiores de un club de ascenso, formando pibes.`,
+      `Se metió en los negocios inmobiliarios, lejos de las canchas pero con la plata bien puesta.`,
+      `${name} se hizo relator de radio: su voz ahora narra los goles de otros.`,
+    ])
+  }
+  return pick([
+    `${name} se retiró sin grandes luces pero con dignidad. Tiene un kiosco y juega los picados del domingo.`,
+    `Tras una carrera de sacrificio, se recibió de profe de educación física.`,
+    `${name} dejó el fútbol y maneja un remís, con la camiseta colgada en el living como recuerdo.`,
+    `Se volvió al pueblo, puso una cancha de fútbol 5 y organiza el torneo del barrio.`,
+  ])
+}
+
 export interface Trophy {
   id: string
   name: string

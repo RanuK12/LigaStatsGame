@@ -32,6 +32,7 @@ interface CareerStore {
   simulateNextSeason: (decisionOptionId?: string) => void
   acceptOffer: (clubId: string) => void
   declineOffers: () => void
+  retire: () => void
   resetCareer: () => void
 }
 
@@ -167,6 +168,12 @@ export const useCareerStore = create<CareerStore>()(
         const state = get().career
         if (!state) return
         set({ career: { ...state, pendingOffers: [] } })
+      },
+
+      retire: () => {
+        const state = get().career
+        if (!state) return
+        set({ career: { ...state, finished: true, pendingOffers: [] } })
       },
 
       resetCareer: () => set({ career: null }),
