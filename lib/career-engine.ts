@@ -479,6 +479,7 @@ export interface SeasonResult {
   euroScout?: boolean // lo vino a buscar un club de Europa (plus de OVR)
   performance?: number // 0..1, rendimiento de la temporada (para selección/eventos)
   barrabravas?: boolean // temporada floja en Argentina: te apretaron los barras
+  cleanSheets?: number // vallas invictas (arqueros/defensores)
 }
 
 export interface Milestones {
@@ -697,6 +698,10 @@ export function simulateSeason(
   const apps = matchesPlayed / 38
   const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * (0.6 + rng() * 0.9)) + bonusGoals))
   const assists = Math.max(0, Math.round((ASSIST_BASE[cat] * ovrScale * apps * (0.5 + rng() * 0.9)) + bonusAssists))
+  // Vallas invictas (arqueros/defensores): dependen del OVR y la fuerza del club.
+  const keepsCleanSheets = cat === 'GK' || cat === 'DEF'
+  const csRate = keepsCleanSheets ? clamp(0.12 + (ovr - 70) / 120 + (club.strength - 72) / 130, 0.05, 0.55) : 0
+  const cleanSheets = Math.round(matchesPlayed * csRate * (0.7 + rng() * 0.6))
 
   // --- Probabilidades de título estilo Copero (del tweet) ---
   // Efecto Maradona: con 90+ de OVR el juego sube un nivel la reputación del club.
@@ -729,11 +734,20 @@ export function simulateSeason(
   if (copaArgentina) trophiesWon.push('copa-arg')
   if (continentalWon) trophiesWon.push(contType)
 
-  const expected = (GOAL_BASE[cat] + ASSIST_BASE[cat]) * ovrScale || 1
-  const performance = clamp((goals + assists) / (expected * 1.1), 0, 1)
+  // Rendimiento por posición: arquero/defensor rinden por vallas invictas, no por goles.
+  let performance: number
+  if (keepsCleanSheets) {
+    const csRatio = matchesPlayed > 0 ? cleanSheets / matchesPlayed : 0
+    performance = clamp((csRatio / 0.45) * 0.85 + ((goals + assists) / 8) * 0.15, 0, 1)
+  } else {
+    const expected = (GOAL_BASE[cat] + ASSIST_BASE[cat]) * ovrScale || 1
+    performance = clamp((goals + assists) / (expected * 1.1), 0, 1)
+  }
 
   const scorerThreshold = cat === 'ATT' ? 15 : cat === 'MID' ? 12 : 999
   const topScorer = goals >= scorerThreshold && rng() < 0.7
+  // Premio a la valla menos vencida (arqueros con muchas vallas invictas).
+  const goldenGlove = cat === 'GK' && cleanSheets >= Math.round(matchesPlayed * 0.4) && rng() < 0.6
 
   // Nota realista: el OVR marca el techo (un 59 no puede sacar 9). Rinde = OVR + rendimiento.
   const ratingBase = 4.8 + (clamp(ovr, 55, 98) - 55) / 43 * 4.2 // 55->4.8, 98->9.0
@@ -756,6 +770,15 @@ export function simulateSeason(
   if (topScorer) highlights.push(`🥇 Goleador del torneo con ${goals} goles`)
   else if (goals >= 10 && cat === 'ATT') highlights.push(`⚽ Gran temporada: ${goals} goles`)
   if (cat !== 'ATT' && assists >= 10) highlights.push(`🎯 Temporada de ${assists} asistencias`)
+  // Arqueros y defensores: carteles por vallas invictas (no por goles).
+  if (goldenGlove) highlights.push(`🧤 Arquero menos vencido: ${cleanSheets} vallas invictas`)
+  else if (keepsCleanSheets && cleanSheets >= 8) highlights.push(`🧤 ${cleanSheets} vallas invictas`)
+  // Jugador del mes: chance según la nota (podés ganarlo varias veces al año).
+  const potm = Math.round(clamp((rating - 7) * (0.4 + rng()) * 2.2, 0, 4))
+  if (potm >= 1) highlights.push(`🏅 Jugador del Mes ×${potm}`)
+  // Jugador del Año de la Liga: solo con una temporada de crack.
+  if (rating >= 8.9 && (liga || topScorer || goldenGlove) && rng() < 0.45)
+    highlights.push(`🏆 Mejor Jugador del Año de la Liga`)
   if (rating >= 9) highlights.push(`⭐ Figura del año (nota ${rating.toFixed(1)})`)
 
   const cronica = buildCronica(
@@ -826,6 +849,7 @@ export function simulateSeason(
     euroScout,
     performance,
     barrabravas,
+    cleanSheets,
   }
 
   const offers = generateOffers(state, performance, rng, decisionOptionId)
