@@ -219,7 +219,7 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             {data.clubs.map((c, i) => (
               <div
                 key={i}
-                className="w-13 h-13 rounded-2xl bg-[#050A14] border border-white/10 p-2 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+                className="w-14 h-14 shrink-0 rounded-2xl bg-[#050A14] border border-white/10 p-2 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
                 title={c.name}
               >
                 {c.logoUrl ? (

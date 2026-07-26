@@ -22,6 +22,7 @@ import {
   findClub,
   MAX_SEASONS,
   marketValueFor,
+  TROPHY_META,
   CAREER_DILEMMAS,
   SUBSTANCE_DECISION,
   BARRABRAVAS_DECISION,
@@ -379,7 +380,6 @@ function CareerDashboard() {
   const { career, simulateNextSeason, acceptOffer, declineOffers, retire, resetCareer } = useCareerStore()
   const fichaRef = useRef<HTMLDivElement>(null)
   const [exporting, setExporting] = useState(false)
-  const [activeTab, setActiveTab] = useState<"ficha" | "historial" | "decisiones" | "mercado">("ficha")
 
   const [selectedOptionId, setSelectedOptionId] = useState<string>("train_finishing")
   const [revealSeason, setRevealSeason] = useState<SeasonResult | null>(null)
@@ -389,7 +389,11 @@ function CareerDashboard() {
   const cardData = buildCareerCardData(career)
   const club = findClub(career.clubId)
   const hasOffers = career.pendingOffers.length > 0
-  const dilemma = CAREER_DILEMMAS[career.seasonsPlayed % CAREER_DILEMMAS.length]
+  // La capitanía solo aparece cuando ya sos un referente (edad/OVR), no en tu 2da temporada.
+  const eligibleDilemmas = CAREER_DILEMMAS.filter(
+    (d) => d.id !== "captaincy" || career.player.age >= 25 || career.player.ovr >= 79,
+  )
+  const dilemma = eligibleDilemmas[career.seasonsPlayed % eligibleDilemmas.length]
   const barraActive = career.history[career.history.length - 1]?.barrabravas === true
 
   async function handleExport(kind: "png" | "jpg" | "pdf") {
@@ -421,140 +425,64 @@ function CareerDashboard() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* TOP NAVIGATION TABS (COPERO STYLE) */}
-      <div className="card-gradient rounded-2xl p-2 border border-white/10 flex items-center justify-between gap-1 overflow-x-auto font-sport">
-        {[
-          { id: "ficha", label: "🎴 Ficha 3D" },
-          { id: "historial", label: "📊 Historial & Stats" },
-          { id: "decisiones", label: "🧠 Decisiones" },
-          { id: "mercado", label: `📩 Mercado ${hasOffers ? "🔴" : ""}` },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
-            className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
-              activeTab === tab.id
-                ? "bg-[#74ACDF] text-white shadow-lg font-black"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+    <div className="max-w-2xl mx-auto space-y-5">
+      {/* FICHA DEL JUGADOR */}
+      <div ref={fichaRef} className="rounded-[36px] overflow-hidden">
+        <CareerCardView data={cardData} />
       </div>
 
-      {/* MAIN CONTENT AREA */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-        {/* TAB 1: FICHA 3D INTERACTIVA */}
-        <div ref={fichaRef} className="rounded-[36px] overflow-hidden">
-          <CareerCardView data={cardData} />
-        </div>
-
-        {/* TAB RIGHT PANEL CONTROL */}
-        <div className="space-y-4">
-          <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-4 shadow-2xl">
-            <div>
-              <span className="text-[10px] font-bold text-amber-400 tracking-widest uppercase font-sport block mb-1">
-                TEMPORADA {career.seasonsPlayed + (career.finished ? 0 : 1)} / {MAX_SEASONS} · {club?.name}
+      {/* PANEL DE JUEGO — todo en un flujo, sin pestañas */}
+      <div className="space-y-4">
+          {/* Estado de la temporada */}
+          <div className="card-gradient rounded-3xl p-6 border border-white/10 shadow-2xl flex items-center gap-4">
+            {club && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={`/logos/clubs/${club.id}.png`} alt="" className="w-14 h-14 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+            )}
+            <div className="min-w-0">
+              <span className="text-[10px] font-bold text-amber-400 tracking-widest uppercase font-sport block mb-0.5">
+                TEMPORADA {career.seasonsPlayed + (career.finished ? 0 : 1)} / {MAX_SEASONS}
               </span>
-              <h3 className="font-display text-2xl font-black uppercase text-white">
-                {career.finished ? "CARRERA FINALIZADA 🏁" : "AVANCE DE CARRERA"}
+              <h3 className="font-impact text-2xl font-black uppercase text-white leading-none truncate">
+                {career.finished ? "Carrera finalizada 🏁" : club?.name}
               </h3>
               <p className="text-xs text-slate-400 mt-1 font-sport">
                 {career.player.age} años · {career.player.ovr} OVR · €{career.player.marketValueM}M
               </p>
             </div>
+          </div>
 
-            {/* Aviso de barrabravas: hay que decidir en el tab Decisiones */}
-            {barraActive && !career.finished && (
-              <button
-                onClick={() => setActiveTab("decisiones")}
-                className="w-full py-3 rounded-xl border border-red-500/40 bg-red-500/15 text-red-200 text-[11px] font-bold uppercase tracking-wider font-sport animate-pulse"
-              >
-                😰 Te apretaron los barrabravas · Decidí →
-              </button>
-            )}
-
-            {/* SIMULATION SPEED CONTROLS */}
-            {!career.finished && !hasOffers && (
-              <div className="space-y-2 font-sport pt-2">
-                <button
-                  onClick={() => handleSimulate(1)}
-                  className="btn-primary w-full py-4 text-xs font-bold tracking-widest uppercase rounded-2xl shadow-xl"
-                >
-                  SIMULAR TEMPORADA {career.seasonsPlayed + 1} ⏩
-                </button>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => handleSimulate(5)}
-                    className="py-2.5 bg-slate-900 border border-slate-800 text-slate-300 hover:text-white rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors"
-                  >
-                    ⚡ Simular 5 Años
-                  </button>
-                  <button
-                    onClick={() => handleSimulate(15)}
-                    className="py-2.5 bg-slate-900 border border-slate-800 text-amber-300 hover:text-amber-200 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors"
-                  >
-                    🏁 Simular Completa
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* RETIRO: siempre disponible mientras la carrera esté activa */}
-            {!career.finished && (
-              <button
-                onClick={() => {
-                  retire()
-                  setRevealSeason(null)
-                  setShowFinale(true)
-                }}
-                className="w-full py-3 mt-2 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 hover:text-red-200 hover:bg-red-500/20 text-[11px] font-bold uppercase tracking-wider transition-all font-sport"
-              >
-                🎬 Retirarme del fútbol
-              </button>
-            )}
-
-            {/* Carrera terminada: ver el resumen otra vez */}
-            {career.finished && (
-              <button
-                onClick={() => setShowFinale(true)}
-                className="btn-gold w-full py-3 mt-2 rounded-xl text-[11px] font-bold uppercase tracking-wider"
-              >
-                🏆 Ver resumen de carrera
-              </button>
-            )}
-
-            {/* EXPORT BUTTONS HD */}
-            <div className="space-y-2 pt-3 font-sport border-t border-white/10">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-center">
-                DESCARGAR FICHA COPERO-STYLE HD
-              </span>
-              <div className="grid grid-cols-3 gap-2">
-                <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">
-                  {exporting ? "..." : "PNG HD"}
-                </button>
-                <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">
-                  {exporting ? "..." : "JPG HD"}
-                </button>
-                <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">
-                  {exporting ? "..." : "PDF HD"}
+          {/* OFERTAS: si hay, se resuelven primero (bloquean la simulación) */}
+          {!career.finished && hasOffers && (
+            <div className="card-gradient rounded-3xl p-5 border border-[#74ACDF]/40 space-y-3 shadow-2xl">
+              <h4 className="text-xs font-black text-[#74ACDF] font-sport uppercase tracking-wider">📩 Te llegaron ofertas</h4>
+              <div className="space-y-2.5 font-sport">
+                {career.pendingOffers.map((o) => {
+                  const euro = o.region === "euro"
+                  return (
+                    <div key={o.clubId} className={`flex items-center gap-2 rounded-xl p-3 border ${euro ? "bg-amber-400/10 border-amber-400/40" : "bg-slate-950/60 border-white/5"}`}>
+                      <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
+                          {o.clubName}
+                          {euro && <span className="text-[8px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase">Europa</span>}
+                        </div>
+                        <div className="text-[10px] text-slate-400 font-sport">Oferta €{o.valueM}M</div>
+                      </div>
+                      <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">Fichar</button>
+                    </div>
+                  )
+                })}
+                <button onClick={declineOffers} className="w-full py-2 bg-slate-900 border border-white/10 text-slate-300 rounded-xl text-xs font-bold font-sport uppercase">
+                  Quedarme en {club?.name}
                 </button>
               </div>
             </div>
+          )}
 
-            <button
-              onClick={() => { if (confirmReset()) resetCareer() }}
-              className="w-full py-2.5 bg-red-600/10 border border-red-500/20 text-red-300/80 rounded-xl text-[11px] font-bold font-sport uppercase tracking-wider hover:bg-red-600/20 transition-colors mt-2"
-            >
-              Reiniciar carrera
-            </button>
-          </div>
-
-          {/* TAB DETAILED PANELS */}
-          {activeTab === "decisiones" && barraActive && (
-            <div className="card-gradient rounded-3xl p-5 border border-red-500/40 space-y-3 shadow-2xl mb-4">
+          {/* DECISIONES (inline, antes de simular) */}
+          {!career.finished && !hasOffers && barraActive && (
+            <div className="card-gradient rounded-3xl p-5 border border-red-500/40 space-y-3 shadow-2xl">
               <h4 className="text-sm font-black text-red-300 font-display">{BARRABRAVAS_DECISION.title}</h4>
               <p className="text-xs text-slate-300 font-sans leading-relaxed">{BARRABRAVAS_DECISION.description}</p>
               <div className="space-y-2 pt-1 font-sport">
@@ -577,7 +505,7 @@ function CareerDashboard() {
             </div>
           )}
 
-          {activeTab === "decisiones" && dilemma && (
+          {!career.finished && !hasOffers && dilemma && (
             <div className="card-gradient rounded-3xl p-5 border border-[#74ACDF]/30 space-y-3 shadow-2xl">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider">
@@ -629,71 +557,102 @@ function CareerDashboard() {
             </div>
           )}
 
-          {activeTab === "mercado" && (
-            <div className="card-gradient rounded-3xl p-5 border border-white/10 space-y-3 shadow-2xl">
-              <h4 className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider">
-                📩 OFERTAS DE TRANSFERENCIA
-              </h4>
-              {hasOffers ? (
-                <div className="space-y-2.5 font-sport">
-                  {career.pendingOffers.map((o) => {
-                    const euro = o.region === "euro"
-                    return (
-                      <div key={o.clubId} className={`flex items-center gap-2 rounded-xl p-3 border ${euro ? "bg-amber-400/10 border-amber-400/40" : "bg-slate-950/60 border-white/5"}`}>
-                        <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
-                            {o.clubName}
-                            {euro && <span className="text-[8px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase">Europa</span>}
-                          </div>
-                          <div className="text-[10px] text-slate-400 font-sport">Oferta €{o.valueM}M</div>
-                        </div>
-                        <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">Fichar</button>
-                      </div>
-                    )
-                  })}
-                  <button onClick={declineOffers} className="w-full py-2 bg-slate-900 border border-white/10 text-slate-300 rounded-xl text-xs font-bold font-sport uppercase">
-                    Rechazar y continuar en {club?.name}
-                  </button>
-                </div>
-              ) : (
-                <p className="text-xs text-slate-400 font-sans">Sin ofertas pendientes en este momento. Mantené un buen nivel para atraer clubes europeos.</p>
-              )}
-            </div>
-          )}
-
-          {activeTab === "historial" && career.history.length > 0 && (
-            <div className="card-gradient rounded-3xl p-5 border border-white/10 shadow-2xl">
-              <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.2em] mb-3">Historial Año a Año</h4>
-              <div className="overflow-x-auto">
-                <table className="w-full text-[11px] text-left">
-                  <thead className="text-slate-500 font-sport uppercase">
-                    <tr>
-                      <th className="py-1 pr-2">Año</th>
-                      <th className="py-1 pr-2">Club</th>
-                      <th className="py-1 pr-2 text-center">PJ</th>
-                      <th className="py-1 pr-2 text-center">G</th>
-                      <th className="py-1 pr-2 text-center">A</th>
-                      <th className="py-1 pr-2 text-center">Nota</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-slate-300">
-                    {career.history.map((s, i) => (
-                      <tr key={i} className="border-t border-white/5">
-                        <td className="py-1.5 pr-2 font-bold text-white">{s.year}</td>
-                        <td className="py-1.5 pr-2 truncate max-w-[90px]">{s.clubName}</td>
-                        <td className="py-1.5 pr-2 text-center">{s.matchesPlayed}</td>
-                        <td className="py-1.5 pr-2 text-center text-green-400">{s.goals}</td>
-                        <td className="py-1.5 pr-2 text-center text-blue-400">{s.assists}</td>
-                        <td className="py-1.5 pr-2 text-center font-bold text-amber-400">{(s.rating ?? 7).toFixed(1)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+          {/* SIMULAR — botón principal, siempre visible cuando toca */}
+          {!career.finished && !hasOffers && (
+            <div className="space-y-2 font-sport">
+              <button
+                onClick={() => handleSimulate(1)}
+                className="btn-primary w-full py-5 text-sm font-black tracking-widest uppercase rounded-2xl shadow-xl"
+              >
+                ▶ Simular Temporada {career.seasonsPlayed + 1}
+              </button>
+              <div className="grid grid-cols-2 gap-2">
+                <button onClick={() => handleSimulate(5)} className="py-2.5 bg-slate-900 border border-slate-800 text-slate-300 hover:text-white rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors">
+                  ⚡ Simular 5 años
+                </button>
+                <button onClick={() => handleSimulate(15)} className="py-2.5 bg-slate-900 border border-slate-800 text-amber-300 hover:text-amber-200 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-colors">
+                  🏁 Simular completa
+                </button>
               </div>
             </div>
           )}
-        </div>
+
+          {/* Carrera terminada */}
+          {career.finished && (
+            <button onClick={() => setShowFinale(true)} className="btn-gold w-full py-4 rounded-2xl text-xs font-black uppercase tracking-widest">
+              🏆 Ver resumen de carrera
+            </button>
+          )}
+
+          {/* FEED DE TEMPORADAS — la narrativa dinámica, en la misma pantalla */}
+          {career.history.length > 0 && (
+            <div className="space-y-3 pt-2">
+              <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.3em] px-1">Tu historia</h4>
+              {[...career.history].reverse().map((s, i) => {
+                const trophies: string[] = []
+                if (s.liga) trophies.push("⭐ Liga")
+                if (s.copaArgentina) trophies.push("🥛 Copa Argentina")
+                if (s.continentalWon) trophies.push(`${TROPHY_META[s.continental || ""]?.icon || "🌎"} ${TROPHY_META[s.continental || ""]?.name || "Continental"}`)
+                const delta = (s.nextOvr ?? s.ovr) - s.ovr
+                return (
+                  <div key={i} className="card-gradient rounded-2xl p-4 border border-white/10 shadow-lg">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <img src={`/logos/clubs/${s.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-black text-white font-display truncate">{s.year} · {s.clubName}</div>
+                        <div className="text-[10px] text-slate-400 font-sport">{s.age} años · Nota {(s.rating ?? 7).toFixed(1)}</div>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0 font-sport text-[11px]">
+                        <span className="text-blue-300">{s.matchesPlayed} PJ</span>
+                        <span className="text-green-400">{s.goals} G</span>
+                        <span className="text-orange-400">{s.assists} A</span>
+                        {delta !== 0 && <span className={`px-1.5 py-0.5 rounded font-black ${delta > 0 ? "bg-emerald-500/20 text-emerald-300" : "bg-red-500/20 text-red-300"}`}>{delta > 0 ? "+" : ""}{delta}</span>}
+                      </div>
+                    </div>
+                    {trophies.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        {trophies.map((t, j) => (
+                          <span key={j} className="text-[10px] font-bold text-[#D4AF37] bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full px-2 py-0.5 font-sport">{t}</span>
+                        ))}
+                      </div>
+                    )}
+                    {s.cronica && <p className="text-[11px] italic text-slate-300 leading-snug font-sans">{s.cronica}</p>}
+                    {s.highlights && s.highlights.length > 0 && (
+                      <ul className="mt-1.5 space-y-0.5">
+                        {s.highlights.slice(0, 3).map((h, j) => (
+                          <li key={j} className="text-[10px] text-slate-400 font-sans">{h}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          {/* ACCIONES: descargar ficha, retiro, reset */}
+          <div className="card-gradient rounded-3xl p-5 border border-white/10 space-y-3 shadow-xl">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-center font-sport">Descargar tu ficha HD</span>
+            <div className="grid grid-cols-3 gap-2 font-sport">
+              <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PNG HD"}</button>
+              <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "JPG HD"}</button>
+              <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PDF HD"}</button>
+            </div>
+            {!career.finished && (
+              <button
+                onClick={() => { retire(); setRevealSeason(null); setShowFinale(true) }}
+                className="w-full py-3 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 hover:text-red-200 hover:bg-red-500/20 text-[11px] font-bold uppercase tracking-wider transition-all font-sport"
+              >
+                🎬 Retirarme del fútbol
+              </button>
+            )}
+            <button
+              onClick={() => { if (confirmReset()) resetCareer() }}
+              className="w-full py-2.5 bg-red-600/10 border border-red-500/20 text-red-300/80 rounded-xl text-[11px] font-bold font-sport uppercase tracking-wider hover:bg-red-600/20 transition-colors"
+            >
+              Reiniciar carrera
+            </button>
+          </div>
       </div>
 
       <SeasonReveal
