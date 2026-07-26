@@ -92,7 +92,6 @@ function buildDecal(pattern: string, number: number, name: string): THREE.Canvas
 }
 
 function JerseyMesh({ color, pattern, number, name }: Props) {
-  const group = useRef<THREE.Group>(null)
   const geo = useMemo(() => {
     const g = new THREE.ExtrudeGeometry(jerseyShape(), {
       depth: 0.38,
