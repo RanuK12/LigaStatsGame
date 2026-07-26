@@ -8,6 +8,13 @@
 async function captureNodeHD(node: HTMLElement): Promise<HTMLCanvasElement> {
   const html2canvas = (await import('html2canvas')).default
 
+  // Esperar a que las fuentes custom terminen de cargar (evita métricas de fallback)
+  try {
+    await (document as Document & { fonts?: FontFaceSet }).fonts?.ready
+  } catch {
+    /* noop */
+  }
+
   // Wait for all images inside the node to load fully before capturing
   const images = Array.from(node.querySelectorAll('img'))
   await Promise.all(
@@ -44,6 +51,22 @@ async function captureNodeHD(node: HTMLElement): Promise<HTMLCanvasElement> {
       clonedDoc.querySelectorAll<HTMLElement>('.perspective-1000, [class*="perspective"]').forEach((el) => {
         el.style.perspective = 'none'
         el.style.transform = 'none'
+      })
+      // html2canvas recorta el texto cuando line-height es < que la caja del glifo (leading-none)
+      // y hay overflow:hidden. Damos aire vertical y evitamos el recorte en todos los textos.
+      clonedDoc.querySelectorAll<HTMLElement>('h1,h2,h3,h4,h5,h6,p,span,div').forEach((el) => {
+        const cs = clonedDoc.defaultView?.getComputedStyle(el)
+        const lh = cs ? parseFloat(cs.lineHeight) : NaN
+        const fs = cs ? parseFloat(cs.fontSize) : NaN
+        // solo tocar elementos-hoja de texto (sin hijos elemento) para no romper layouts
+        const isLeaf = el.children.length === 0 && (el.textContent || '').trim().length > 0
+        if (isLeaf) {
+          if (!Number.isNaN(lh) && !Number.isNaN(fs) && lh < fs * 1.2) el.style.lineHeight = '1.25'
+          el.style.overflow = 'visible'
+          el.style.textOverflow = 'clip'
+          el.style.paddingTop = '0.06em'
+          el.style.paddingBottom = '0.06em'
+        }
       })
     },
   })
