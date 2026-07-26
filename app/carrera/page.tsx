@@ -22,6 +22,7 @@ import {
   findClub,
   MAX_SEASONS,
   marketValueFor,
+  ovrCapForAge,
   TROPHY_META,
   CAREER_DILEMMAS,
   SUBSTANCE_DECISION,
@@ -256,11 +257,11 @@ function CareerSetupWizard() {
                   className="w-full h-11 bg-slate-950 border border-slate-800 rounded-xl p-1 cursor-pointer"
                 />
               </Field>
-              <Field label={`OVR inicial: ${ovr}`}>
-                <input type="range" min={55} max={80} value={ovr} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
+              <Field label={`OVR inicial: ${ovr} (máx ${ovrCapForAge(age)} a los ${age})`}>
+                <input type="range" min={55} max={ovrCapForAge(age)} value={Math.min(ovr, ovrCapForAge(age))} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
               </Field>
               <Field label={`Edad: ${age} · Valor ~€${previewValue}M`}>
-                <input type="range" min={16} max={30} value={age} onChange={(e) => setAge(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
+                <input type="range" min={16} max={30} value={age} onChange={(e) => { const a = parseInt(e.target.value); setAge(a); setOvr((o) => Math.min(o, ovrCapForAge(a))) }} className="w-full accent-[#74ACDF]" />
               </Field>
             </div>
           </div>
@@ -630,14 +631,20 @@ function CareerDashboard() {
             </div>
           )}
 
-          {/* ACCIONES: descargar ficha, retiro, reset */}
+          {/* ACCIONES: descargar ficha (SOLO al terminar/retirarse), retiro, reset */}
           <div className="card-gradient rounded-3xl p-5 border border-white/10 space-y-3 shadow-xl">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block text-center font-sport">Descargar tu ficha HD</span>
-            <div className="grid grid-cols-3 gap-2 font-sport">
-              <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PNG HD"}</button>
-              <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "JPG HD"}</button>
-              <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PDF HD"}</button>
-            </div>
+            {career.finished ? (
+              <>
+                <span className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider block text-center font-sport">Descargá tu ficha final HD</span>
+                <div className="grid grid-cols-3 gap-2 font-sport">
+                  <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PNG HD"}</button>
+                  <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "JPG HD"}</button>
+                  <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PDF HD"}</button>
+                </div>
+              </>
+            ) : (
+              <p className="text-[10px] text-slate-500 text-center font-sans">📥 Vas a poder descargar tu ficha HD cuando termines o te retires.</p>
+            )}
             {!career.finished && (
               <button
                 onClick={() => { retire(); setRevealSeason(null); setShowFinale(true) }}

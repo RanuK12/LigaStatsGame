@@ -4,25 +4,36 @@ import { useState, useEffect, useMemo } from "react"
 import { motion } from "framer-motion"
 import { fetchDayAll, type AgendaMatch } from "@/lib/live-scores"
 
-// Ligas destacadas primero (argentinas y continentales), el resto después.
-const PRIORITY: RegExp[] = [
-  /argentin|liga profesional/i,
-  /libertadores|sudamericana|conmebol/i,
-  /la liga|premier|serie a|bundesliga|ligue 1|champions|europa league|eredivisie|primeira|mls|brasil|brazil|liga mx/i,
+// Solo ligas que le importan al mundo del fútbol: nombre en español, ícono y prioridad.
+// Las que no están acá (ej: USL 2da de EEUU, ligas menores) se ESCONDEN.
+interface LeagueMeta { rank: number; es: string; icon: string }
+const LEAGUE_TABLE: { re: RegExp; meta: LeagueMeta }[] = [
+  { re: /argentin.*(primera|liga profesional)|liga profesional argentina/i, meta: { rank: 0, es: "Primera División Argentina", icon: "🇦🇷" } },
+  { re: /copa libertadores|conmebol libertadores/i, meta: { rank: 1, es: "Copa Libertadores", icon: "🏆" } },
+  { re: /copa sudamericana|conmebol sudamericana/i, meta: { rank: 1, es: "Copa Sudamericana", icon: "🥇" } },
+  { re: /uefa champions/i, meta: { rank: 2, es: "Champions League", icon: "⭐" } },
+  { re: /uefa europa conference/i, meta: { rank: 3, es: "Conference League", icon: "🎖️" } },
+  { re: /uefa europa/i, meta: { rank: 3, es: "Europa League", icon: "🎖️" } },
+  { re: /english premier league/i, meta: { rank: 4, es: "Premier League", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" } },
+  { re: /spanish la liga$|spanish la liga\b(?!.*2)/i, meta: { rank: 4, es: "LaLiga", icon: "🇪🇸" } },
+  { re: /italian serie a/i, meta: { rank: 4, es: "Serie A", icon: "🇮🇹" } },
+  { re: /german bundesliga/i, meta: { rank: 4, es: "Bundesliga", icon: "🇩🇪" } },
+  { re: /french ligue 1/i, meta: { rank: 4, es: "Ligue 1", icon: "🇫🇷" } },
+  { re: /brazilian.*(serie a|campeonato)/i, meta: { rank: 5, es: "Brasileirão", icon: "🇧🇷" } },
+  { re: /portuguese primeira/i, meta: { rank: 6, es: "Primeira Liga", icon: "🇵🇹" } },
+  { re: /dutch eredivisie/i, meta: { rank: 6, es: "Eredivisie", icon: "🇳🇱" } },
+  { re: /mexican.*(primera|liga mx)|liga mx/i, meta: { rank: 6, es: "Liga MX", icon: "🇲🇽" } },
+  { re: /saudi/i, meta: { rank: 7, es: "Liga de Arabia Saudita", icon: "🇸🇦" } },
+  { re: /english league championship/i, meta: { rank: 7, es: "Championship (Inglaterra)", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" } },
+  { re: /american major league soccer|(^|\b)mls\b/i, meta: { rank: 8, es: "MLS", icon: "🇺🇸" } },
+  { re: /copa del rey/i, meta: { rank: 5, es: "Copa del Rey", icon: "🇪🇸" } },
+  { re: /coppa italia/i, meta: { rank: 5, es: "Copa Italia", icon: "🇮🇹" } },
+  { re: /fa cup/i, meta: { rank: 5, es: "FA Cup", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" } },
+  { re: /copa argentina/i, meta: { rank: 1, es: "Copa Argentina", icon: "🇦🇷" } },
+  { re: /fifa world cup|copa mundial/i, meta: { rank: 0, es: "Copa del Mundo", icon: "🌍" } },
 ]
-function leagueRank(name: string): number {
-  for (let i = 0; i < PRIORITY.length; i++) if (PRIORITY[i].test(name)) return i
-  return PRIORITY.length
-}
-function leagueIcon(name: string): string {
-  if (/argentin|liga profesional/i.test(name)) return "🇦🇷"
-  if (/libertadores|sudamericana|conmebol|brasil|brazil/i.test(name)) return "🏆"
-  if (/premier/i.test(name)) return "🏴"
-  if (/la liga|españa|spanish/i.test(name)) return "🇪🇸"
-  if (/serie a|italian|italy/i.test(name)) return "🇮🇹"
-  if (/bundesliga|german/i.test(name)) return "🇩🇪"
-  if (/mls|american|usa/i.test(name)) return "🇺🇸"
-  return "⚽"
+function leagueMeta(name: string): LeagueMeta | null {
+  return LEAGUE_TABLE.find((l) => l.re.test(name))?.meta ?? null
 }
 
 function ymdLocal(d: Date): string {
@@ -71,15 +82,17 @@ export default function LiveScoresWidget() {
 
   const groups = useMemo(() => {
     if (!matches) return []
-    const byLeague = new Map<string, AgendaMatch[]>()
+    // Solo ligas relevantes (traducidas al español); las menores se descartan.
+    const byLeague = new Map<string, { es: string; icon: string; rank: number; matches: AgendaMatch[] }>()
     for (const m of matches) {
-      const arr = byLeague.get(m.leagueName) || []
-      arr.push(m)
-      byLeague.set(m.leagueName, arr)
+      const meta = leagueMeta(m.leagueName)
+      if (!meta) continue
+      const g = byLeague.get(meta.es) || { es: meta.es, icon: meta.icon, rank: meta.rank, matches: [] }
+      g.matches.push(m)
+      byLeague.set(meta.es, g)
     }
-    return [...byLeague.entries()]
-      .map(([name, ms]) => ({ name, matches: ms }))
-      .sort((a, b) => leagueRank(a.name) - leagueRank(b.name) || b.matches.length - a.matches.length)
+    return [...byLeague.values()]
+      .sort((a, b) => a.rank - b.rank || b.matches.length - a.matches.length)
       .slice(0, 6)
   }, [matches])
 
@@ -132,14 +145,14 @@ export default function LiveScoresWidget() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {groups.map((group) => (
             <motion.div
-              key={group.name}
+              key={group.es}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               className="card-gradient rounded-2xl p-4 sm:p-5 border border-white/10 shadow-lg flex flex-col"
             >
               <div className="flex items-center gap-2.5 pb-3 mb-3 border-b border-white/10">
-                <span className="text-xl">{leagueIcon(group.name)}</span>
-                <h4 className="font-sport font-black text-xs text-white uppercase tracking-wider truncate">{group.name}</h4>
+                <span className="text-xl">{group.icon}</span>
+                <h4 className="font-sport font-black text-xs text-white uppercase tracking-wider truncate">{group.es}</h4>
               </div>
 
               <div className="space-y-3.5 flex-1">

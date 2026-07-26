@@ -547,10 +547,34 @@ function clamp(n: number, lo: number, hi: number): number {
 const GOAL_BASE: Record<PositionCategory, number> = { ATT: 14, MID: 6, DEF: 1.5, GK: 0 }
 const ASSIST_BASE: Record<PositionCategory, number> = { ATT: 7, MID: 8, DEF: 2, GK: 0 }
 
+// Valor de mercado realista (€M). Curva exponencial por OVR + curva de edad con pico 23-27
+// y castigo a los muy jóvenes (potencial sin confirmar). Ej: 59/18≈0, 72/18≈8, 80/24≈50,
+// 88/26≈115, 95/25≈200.
 export function marketValueFor(ovr: number, age: number): number {
-  const base = Math.pow(clamp(ovr - 59, 1, 41) / 40, 2) * 180
-  const ageFactor = age <= 27 ? 1 : Math.max(0.25, 1 - (age - 27) * 0.13)
-  return clamp(Math.round(base * ageFactor), 0, 220)
+  const q = clamp((ovr - 55) / 40, 0, 1)
+  const base = Math.pow(q, 3.2) * 230
+  let ageF: number
+  if (age <= 17) ageF = 0.45
+  else if (age <= 19) ageF = 0.62
+  else if (age <= 21) ageF = 0.82
+  else if (age <= 27) ageF = 1
+  else if (age <= 30) ageF = 0.72
+  else if (age <= 33) ageF = 0.42
+  else ageF = 0.18
+  return clamp(Math.round(base * ageF), 0, 220)
+}
+
+// Tope de OVR por edad (categórico, por escala): un pibe de <19 no puede pasar de 72; el
+// techo sube con la edad hasta el máximo. Aplica en la creación y en el crecimiento.
+export function ovrCapForAge(age: number): number {
+  if (age < 19) return 72
+  if (age === 19) return 76
+  if (age === 20) return 80
+  if (age === 21) return 84
+  if (age === 22) return 88
+  if (age === 23) return 92
+  if (age === 24) return 95
+  return 99
 }
 
 // Crecimiento estilo Copero: 100% edad + suerte (el club no influye). El pico es a los 26
@@ -571,7 +595,8 @@ function nextOvr(
   else delta = -3 // veterano
   if (substanceHit) delta += 5
   delta += euroBonus
-  return clamp(ovr + delta, 55, 99)
+  // El OVR de la próxima temporada respeta el techo por edad (age+1).
+  return clamp(ovr + delta, 55, ovrCapForAge(age + 1))
 }
 
 function buildCronica(
@@ -710,7 +735,13 @@ export function simulateSeason(
   const scorerThreshold = cat === 'ATT' ? 15 : cat === 'MID' ? 12 : 999
   const topScorer = goals >= scorerThreshold && rng() < 0.7
 
-  const rating = clamp(Math.round((5.5 + performance * 3.6 + trophiesWon.length * 0.25) * 10) / 10, 5.5, 9.9)
+  // Nota realista: el OVR marca el techo (un 59 no puede sacar 9). Rinde = OVR + rendimiento.
+  const ratingBase = 4.8 + (clamp(ovr, 55, 98) - 55) / 43 * 4.2 // 55->4.8, 98->9.0
+  const rating = clamp(
+    Math.round((ratingBase * 0.6 + (5 + performance * 4) * 0.4 + trophiesWon.length * 0.15) * 10) / 10,
+    4.5,
+    9.9,
+  )
 
   const CONT_NAME: Record<ContinentalComp, string> = {
     libertadores: 'Copa Libertadores',
@@ -818,12 +849,15 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
   const offerChance = clamp(performance * 0.9 + (state.player.ovr - 75) / 100, 0, 0.95)
   if (rng() > offerChance) return []
 
-  const canEurope = state.player.ovr >= 79 && performance >= 0.5
+  const ovr = state.player.ovr
   const count = 1 + Math.floor(rng() * 3)
   const candidates = ALL_CLUBS.filter((c) => {
     if (c.id === state.clubId) return false
-    if (c.region === 'euro') return canEurope && c.strength >= current.strength - 4
-    return c.strength >= current.strength - 1
+    // Un club NO ficha a alguien muy por debajo de su nivel (nada de River con un OVR bajo).
+    if (ovr < c.strength - 7) return false
+    if (c.region === 'euro') return ovr >= 78 && performance >= 0.5 && c.strength >= current.strength - 3
+    // Tiene que ser un paso adelante (o lateral), no un club peor.
+    return c.strength >= current.strength - 2
   }).sort(() => rng() - 0.5)
 
   return candidates.slice(0, count).map((c) => ({
