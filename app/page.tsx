@@ -133,20 +133,24 @@ function TickerStrip() {
 function WorldCupBanner() {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 20 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
       className="relative z-10 max-w-6xl mx-auto px-4 mb-14"
     >
       <div className="relative card-glass overflow-hidden">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/mundial_2026_banner.jpg')" }}
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#020813]/92 via-[#050f21]/75 to-[#020813]/92" />
+        {/* Fondo DISEÑADO (acorde a la página, texto legible): degradado argentino,
+            sol de mayo dorado a la derecha, líneas de cancha sutiles. */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a2246] via-[#071528] to-[#0a1020]" />
+        {/* Glow celeste arriba-izquierda */}
+        <div className="absolute -top-24 left-[15%] w-[520px] h-[320px] rounded-full bg-[#74ACDF]/12 blur-3xl pointer-events-none" />
+        {/* Sol de mayo / glow dorado detrás de los stats (derecha) */}
+        <div className="absolute right-[-40px] top-1/2 -translate-y-1/2 w-[440px] h-[440px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.22), transparent 62%)' }} />
+        {/* Líneas de cancha sutiles, difuminadas hacia la derecha */}
+        <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #74ACDF 0 1px, transparent 1px 84px), repeating-linear-gradient(0deg, #74ACDF 0 1px, transparent 1px 84px)', maskImage: 'radial-gradient(ellipse 80% 90% at 75% 50%, black, transparent 78%)', WebkitMaskImage: 'radial-gradient(ellipse 80% 90% at 75% 50%, black, transparent 78%)' }} />
+        {/* Overlay para legibilidad: bien oscuro a la izquierda (donde va el texto) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020813]/92 via-[#020813]/60 to-[#020813]/25 pointer-events-none" />
         
         {/* Flag borders */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#74ACDF] via-white to-[#74ACDF]" />
