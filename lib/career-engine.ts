@@ -556,6 +556,8 @@ export interface SeasonResult {
   yellowCards?: number
   redCards?: number
   ballonDor?: boolean // ganaste el Balón de Oro esa temporada
+  ntDebut?: boolean // te llamaron por primera vez a la Selección
+  euroOffer?: boolean // te llegó la primera oferta de Europa
 }
 
 export interface Milestones {
@@ -592,6 +594,8 @@ export interface CareerState {
   milestones: Milestones
   finished: boolean
   selectedDecisionId?: string
+  /** Techo de nacimiento del jugador. Sorteado al crear la carrera, fijo el resto. */
+  talento?: Talento
 }
 
 export const MAX_SEASONS = 15
@@ -666,12 +670,36 @@ export function ovrCapForAge(age: number): number {
 
 // Crecimiento estilo Copero: 100% edad + suerte (el club no influye). El pico es a los 26
 // y después solo baja. La sustancia misteriosa suma +5 y un ojeo europeo da un plus.
+/**
+ * Talento de nacimiento, sorteado UNA vez por carrera y estable el resto (se deriva del nombre
+ * y el año de arranque, así no cambia entre temporadas).
+ *
+ * Sin esto todas las carreras terminaban igual: en 200 simulaciones el pico iba de 71 a 85 y
+ * NINGUNA llegaba a 90+, o sea que ser leyenda era imposible. Ahora la mayoría sigue siendo
+ * un jugador de liga normal, pero cada tanto sale un fuera de serie — que es lo que hace que
+ * valga la pena volver a jugar.
+ */
+export type Talento = 'normal' | 'destacado' | 'generacional'
+
+/** Se sortea UNA vez al crear la carrera y queda guardado; no se recalcula por temporada. */
+export function sortearTalento(rng: () => number = Math.random): Talento {
+  const r = rng()
+  if (r < 0.04) return 'generacional' // ~1 de cada 25 carreras
+  if (r < 0.22) return 'destacado'
+  return 'normal'
+}
+
+// Cuánto más rápido crece de joven cada talento, y hasta dónde puede llegar.
+const CRECIMIENTO_TALENTO: Record<Talento, number> = { normal: 0, destacado: 0.75, generacional: 1.5 }
+const TECHO_TALENTO: Record<Talento, number> = { normal: 85, destacado: 89, generacional: 97 }
+
 function nextOvr(
   ovr: number,
   age: number,
   rng: () => number,
   substanceHit = false,
   euroBonus = 0,
+  talento: Talento = 'normal',
 ): number {
   const luck = rng()
   let delta: number
@@ -680,10 +708,15 @@ function nextOvr(
   else if (age <= 29) delta = luck < 0.55 ? -1 : 0 // empieza a bajar
   else if (age <= 32) delta = luck < 0.35 ? -1 : -2
   else delta = -3 // veterano
+  // El talento SOLO acelera la subida de joven. No frena el declive: si también amortiguaba
+  // la caída, un "destacado" no bajaba nunca y terminaba de leyenda (20% de las carreras
+  // llegaban a 90+ en la auditoría, que es cualquier cosa).
+  if (delta > 0) delta += CRECIMIENTO_TALENTO[talento]
   if (substanceHit) delta += 5
   delta += euroBonus
-  // El OVR de la próxima temporada respeta el techo por edad (age+1).
-  return clamp(ovr + delta, 55, ovrCapForAge(age + 1))
+  // Respeta el techo por edad Y el techo de nacimiento: un jugador normal no llega a 90 ni
+  // jugando cien temporadas, y ahí está la gracia de que salga un generacional.
+  return clamp(Math.round(ovr + delta), 55, Math.min(ovrCapForAge(age + 1), TECHO_TALENTO[talento]))
 }
 
 function buildCronica(
@@ -954,7 +987,9 @@ export function simulateSeason(
   const euroBonus = euroScout ? 2 : 0
   if (euroScout) highlights.push('✈️ Un grande de Europa puso el ojo en vos: +2 OVR de proyección')
 
-  let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus)
+  // Carreras guardadas de antes no traen talento: se tratan como normales.
+  const talento = state.talento ?? 'normal'
+  let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus, talento)
   // Bonus de OVR de la decisión (trabajo físico, capitanía, adaptarse, mentor, renovar...).
   if (bonusOvr) grownOvr = clamp(grownOvr + bonusOvr, 55, ovrCapForAge(age + 1))
   // Mala reacción a la sustancia: -2 OVR (el riesgo real de apostar).
@@ -1008,6 +1043,26 @@ export function simulateSeason(
   return { season, trophiesWon, offers }
 }
 
+/**
+ * Lo máximo que ese club puede pagar por un pase, en millones.
+ *
+ * Sin esto salían cosas como "Boca Juniors te ofrece €146M" o "Aldosivi €60M": el valor se
+ * calculaba solo desde el jugador, sin mirar quién pagaba. En el fútbol real el techo de un
+ * club argentino son unos pocos millones, y las cifras grandes solo existen en Europa.
+ */
+export function topeTraspaso(club: CareerClub): number {
+  if (club.region === 'euro') {
+    if (club.strength >= 88) return 180
+    if (club.strength >= 84) return 110
+    return 65
+  }
+  if (club.region === 'sudam') return club.strength >= 80 ? 22 : 10
+  // Argentina: los grandes se estiran, el resto compra barato o a préstamo
+  if (club.strength >= 80) return 12
+  if (club.strength >= 72) return 5
+  return 2
+}
+
 function generateOffers(state: CareerState, performance: number, rng: () => number, decisionOptionId?: string): TransferOffer[] {
   const current = findClub(state.clubId)!
   const value = state.player.marketValueM
@@ -1017,7 +1072,8 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
     if (bigEuro) {
       return [{
         clubId: bigEuro.id, clubName: bigEuro.name, strength: bigEuro.strength, region: bigEuro.region,
-        flag: bigEuro.flag, valueM: Math.max(20, Math.round(value * (1.8 + rng() * 0.8))),
+        flag: bigEuro.flag,
+        valueM: Math.max(20, Math.round(Math.min(value * (1.8 + rng() * 0.8), topeTraspaso(bigEuro)))),
       }]
     }
   }
@@ -1031,19 +1087,29 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
     if (c.id === state.clubId) return false
     // Un club NO ficha a alguien muy por debajo de su nivel (nada de River con un OVR bajo).
     if (ovr < c.strength - 7) return false
+    // Ni muy por encima: un club chico no compra a una figura, no le da el bolsillo.
+    if (c.region !== 'euro' && ovr > c.strength + 8) return false
     if (c.region === 'euro') return ovr >= 78 && performance >= 0.5 && c.strength >= current.strength - 3
     // Tiene que ser un paso adelante (o lateral), no un club peor.
     return c.strength >= current.strength - 2
   }).sort(() => rng() - 0.5)
 
-  return candidates.slice(0, count).map((c) => ({
-    clubId: c.id,
-    clubName: c.name,
-    strength: c.strength,
-    region: c.region,
-    flag: c.flag,
-    valueM: Math.max(1, Math.round(value * (1.1 + rng() * 0.6) * (c.region === 'euro' ? 1.4 : 1))),
-  }))
+  return candidates.slice(0, count).map((c) => {
+    const bruto = value * (1.1 + rng() * 0.6) * (c.region === 'euro' ? 1.4 : 1)
+    const pagado = Math.min(bruto, topeTraspaso(c))
+    return {
+      clubId: c.id,
+      clubName: c.name,
+      strength: c.strength,
+      region: c.region,
+      flag: c.flag,
+      // Bajo 1M se muestra con decimal (un pase de ascenso son cientos de miles, no "1M").
+      // El redondeo nunca puede pasarse del tope del club.
+      valueM: pagado >= 1
+        ? Math.min(Math.round(pagado), topeTraspaso(c))
+        : Math.max(0.2, Math.round(pagado * 10) / 10),
+    }
+  })
 }
 
 export function advancePlayer(state: CareerState, season: SeasonResult): CareerPlayer {

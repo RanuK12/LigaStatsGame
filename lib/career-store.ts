@@ -10,6 +10,7 @@ import {
   findClub,
   marketValueFor,
   makeRng,
+  sortearTalento,
   simulateSeason,
   advancePlayer,
   nextContinentalFrom,
@@ -69,6 +70,9 @@ export const useCareerStore = create<CareerStore>()(
             nextContinental: 'sudamericana',
             milestones: { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false },
             finished: false,
+            // El techo del jugador se define al nacer: la mayoría llega a la liga, uno de cada
+            // ~25 tiene con qué ser leyenda. No se le muestra: se descubre jugando.
+            talento: sortearTalento(),
           },
         })
       },
@@ -97,6 +101,11 @@ export const useCareerStore = create<CareerStore>()(
           rng,
         })
         if (nt.debut) milestones.nationalTeam = true
+        season.ntDebut = nt.debut
+        // Primera vez que un club europeo te viene a buscar: es EL momento de la carrera.
+        const yaEstuvoEnEuropa = state.clubHistory.some((id) => findClub(id)?.region === 'euro')
+        const yaLoBuscaron = state.history.some((h) => h.euroOffer)
+        season.euroOffer = !yaEstuvoEnEuropa && !yaLoBuscaron && offers.some((o) => o.region === 'euro')
         milestones.ntCaps = (milestones.ntCaps || 0) + nt.caps
         milestones.ntGoals = (milestones.ntGoals || 0) + nt.goals
         if (nt.worldCupChampion) {

@@ -16,6 +16,7 @@ import CareerFinale from "@/components/career/CareerFinale"
 import CareerTimelineCard from "@/components/career/CareerTimelineCard"
 import BallonDorReveal from "@/components/career/BallonDorReveal"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
+import SeasonProgress, { SEASON_PROGRESS_MS } from "@/components/career/SeasonProgress"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
@@ -407,11 +408,13 @@ function CareerDashboard() {
   const [showFinale, setShowFinale] = useState(false)
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
   const [lote, setLote] = useState<{ temporadas: number } | null>(null)
+  const [simulando, setSimulando] = useState<{ temporadas: number } | null>(null)
 
   if (!career) return null
   const cardData = buildCareerCardData(career)
   const club = findClub(career.clubId)
   const hasOffers = career.pendingOffers.length > 0
+  const hayOfertaEuropea = career.pendingOffers.some((o) => o.region === "euro")
   // La capitanía solo aparece cuando ya sos un referente (edad/OVR), no en tu 2da temporada.
   const eligibleDilemmas = CAREER_DILEMMAS.filter(
     (d) => d.id !== "captaincy" || career.player.age >= 25 || career.player.ovr >= 79,
@@ -431,9 +434,12 @@ function CareerDashboard() {
     }
   }
 
-  // El momento que merece pantalla completa: título, Balón de Oro o Mundial.
+  // El momento que merece pantalla completa. Los hitos de carrera (Selección, Europa) van
+  // primero: pasan una sola vez y son los que el jugador se acuerda.
   function bigMoment(s: SeasonResult): { label: string; tone: BurstTone } | null {
     if (s.ballonDor) return { label: "¡Balón de Oro!", tone: "oro" }
+    if (s.ntDebut) return { label: "¡Te llamó la Selección!", tone: "celeste" }
+    if (s.euroOffer) return { label: "¡Te vienen a buscar de Europa!", tone: "oro" }
     if (s.continentalWon) return { label: "¡Campeón de América!", tone: "oro" }
     if (s.liga) return { label: "¡Campeón!", tone: "oro" }
     if (s.copaArgentina) return { label: "¡Copa Argentina!", tone: "celeste" }
@@ -442,6 +448,17 @@ function CareerDashboard() {
   }
 
   function handleSimulate(yearsCount = 1) {
+    // El cálculo es instantáneo: se corre igual, pero el resultado se revela después de que
+    // la temporada "se juegue" en pantalla. Si no, aparece todo de golpe y no se siente nada.
+    setSimulando({ temporadas: yearsCount })
+    const resultado = correrTemporadas(yearsCount)
+    window.setTimeout(() => {
+      setSimulando(null)
+      revelar(resultado, yearsCount)
+    }, SEASON_PROGRESS_MS + 120)
+  }
+
+  function correrTemporadas(yearsCount: number) {
     let simuladas = 0
     for (let i = 0; i < yearsCount; i++) {
       const cur = useCareerStore.getState().career
@@ -459,6 +476,10 @@ function CareerDashboard() {
       simulateNextSeason(selectedOptionId)
       simuladas++
     }
+    return simuladas
+  }
+
+  function revelar(simuladas: number, yearsCount: number) {
     const fin = useCareerStore.getState().career
     if (fin?.finished) {
       // Llegó al final de la carrera: ficha final directo.
@@ -548,7 +569,20 @@ function CareerDashboard() {
 
           {/* OFERTAS: si hay, se resuelven primero (bloquean la simulación) */}
           {!career.finished && hasOffers && (
-            <div className="panel-in card-gradient rounded-3xl p-5 border border-[#74ACDF]/40 space-y-3 shadow-2xl">
+            <div className={`panel-in card-gradient rounded-3xl p-5 space-y-3 shadow-2xl border ${
+              hayOfertaEuropea ? "border-[#F6C750]/50 shadow-[0_0_30px_rgba(246,199,80,0.15)]" : "border-[#74ACDF]/40"
+            }`}>
+              {/* Que te busquen de Europa no es una oferta más: se anuncia como lo que es */}
+              {hayOfertaEuropea && (
+                <div className="cartel-in cartel-shine -mx-1 mb-1 rounded-2xl border border-[#F6C750]/40 bg-gradient-to-r from-[#F6C750]/15 to-transparent px-4 py-3">
+                  <div className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#F6C750]">
+                    ✈️ Te vienen a buscar de Europa
+                  </div>
+                  <div className="mt-1 text-[12px] text-slate-300 font-sans leading-snug">
+                    Es el salto que cambia una carrera. Del otro lado del charco se juega otro fútbol.
+                  </div>
+                </div>
+              )}
               <h4 className="text-xs font-black text-[#74ACDF] font-sport uppercase tracking-wider">📩 Te llegaron ofertas</h4>
               <div className="space-y-2.5 font-sport">
                 {career.pendingOffers.map((o) => {
@@ -813,6 +847,13 @@ function CareerDashboard() {
             </button>
           </div>
       </div>
+
+      <SeasonProgress
+        activo={simulando !== null}
+        anio={career.startYear + career.seasonsPlayed}
+        club={club?.name}
+        temporadas={simulando?.temporadas ?? 1}
+      />
 
       <EventBurst
         show={burst !== null}
