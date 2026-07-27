@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { positionCategory, type SeasonResult } from "@/lib/career-engine"
+import WorldCupSummary from "./WorldCupSummary"
 
 // Cuenta un número desde `from` hasta `to` en `ms`.
 function useCountUp(to: number, ms: number, start: boolean, from = 0) {
@@ -127,6 +128,13 @@ export default function SeasonReveal({ season, position, onClose }: Props) {
                 </div>
               ))}
             </div>
+
+            {/* El Mundial, cuando toca */}
+            {season.worldCup && phase >= 2 && (
+              <div className="mt-4">
+                <WorldCupSummary wc={season.worldCup} categoria={cat} />
+              </div>
+            )}
 
             {/* Trofeos */}
             {trophies.length > 0 && (

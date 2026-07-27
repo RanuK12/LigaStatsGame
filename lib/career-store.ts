@@ -103,6 +103,16 @@ export const useCareerStore = create<CareerStore>()(
         })
         if (nt.debut) milestones.nationalTeam = true
         season.ntDebut = nt.debut
+        season.worldCup = nt.worldCup
+        // Un buen Mundial se nota: el mundo te vio jugar. Sube el OVR de la próxima temporada
+        // y con eso llegan mejores ofertas (generateOffers mira el OVR y el rendimiento).
+        if (nt.worldCup && nt.worldCup.puntaje >= 0.55) {
+          const plus = nt.worldCup.campeon ? 2 : nt.worldCup.puntaje >= 0.75 ? 2 : 1
+          season.nextOvr = Math.min(99, (season.nextOvr ?? season.ovr) + plus)
+          season.highlights.push(
+            `📈 Tu Mundial no pasó desapercibido: +${plus} OVR y Europa tomó nota`,
+          )
+        }
         // El cartel de "¡A la Libertadores!" solo cuando SUBÍS: si el club ya venía jugándola,
         // clasificar de nuevo es la rutina y no merece pantalla completa todos los años.
         season.clasificoLibertadores =

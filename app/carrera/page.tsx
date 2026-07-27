@@ -437,6 +437,7 @@ function CareerDashboard() {
   // El momento que merece pantalla completa. Los hitos de carrera (Selección, Europa) van
   // primero: pasan una sola vez y son los que el jugador se acuerda.
   function bigMoment(s: SeasonResult): { label: string; tone: BurstTone } | null {
+    if (s.worldCup?.campeon) return { label: "¡CAMPEÓN DEL MUNDO!", tone: "oro" }
     if (s.mundialClubesGanado) return { label: "¡Campeón del Mundo de Clubes!", tone: "oro" }
     if (s.ballonDor) return { label: "¡Balón de Oro!", tone: "oro" }
     if (s.ntDebut) return { label: "¡Te llamó la Selección!", tone: "celeste" }
@@ -863,6 +864,7 @@ function CareerDashboard() {
         }
         mundialClubes={Boolean(career.playsMundialClubes)}
         esArgentino={club?.region === "arg"}
+        mundial={(career.startYear + career.seasonsPlayed) % 4 === 2 && career.milestones.nationalTeam}
       />
 
       <EventBurst

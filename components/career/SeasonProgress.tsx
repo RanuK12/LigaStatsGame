@@ -15,7 +15,7 @@ interface Fase { icono: string; texto: string }
 const MS_POR_FASE = 620
 
 /** Las fases dependen de en qué torneos está metido el club esta temporada. */
-function fasesDe(continental: string | undefined, mundialClubes: boolean, esArgentino: boolean): Fase[] {
+function fasesDe(continental: string | undefined, mundialClubes: boolean, esArgentino: boolean, mundial = false): Fase[] {
   const nombreCont: Record<string, string> = {
     libertadores: "Copa Libertadores",
     sudamericana: "Copa Sudamericana",
@@ -32,12 +32,13 @@ function fasesDe(continental: string | undefined, mundialClubes: boolean, esArge
     })
   }
   if (mundialClubes) fases.push({ icono: "🌐", texto: "Mundial de Clubes" })
+  if (mundial) fases.push({ icono: "🌍", texto: "Copa del Mundo" })
   fases.push({ icono: "📋", texto: "Cierre de temporada" })
   return fases
 }
 
 /** Duración máxima (todas las fases posibles), para temporizar el reveal sin cortar nada. */
-export const SEASON_PROGRESS_MS = 7 * MS_POR_FASE
+export const SEASON_PROGRESS_MS = 8 * MS_POR_FASE
 
 export default function SeasonProgress({
   activo,
@@ -47,6 +48,7 @@ export default function SeasonProgress({
   continental,
   mundialClubes = false,
   esArgentino = true,
+  mundial = false,
 }: {
   activo: boolean
   anio: number
@@ -56,9 +58,10 @@ export default function SeasonProgress({
   continental?: string
   mundialClubes?: boolean
   esArgentino?: boolean
+  mundial?: boolean
 }) {
   const [fase, setFase] = useState(0)
-  const FASES = fasesDe(continental, mundialClubes, esArgentino)
+  const FASES = fasesDe(continental, mundialClubes, esArgentino, mundial)
 
   useEffect(() => {
     if (!activo) {
@@ -108,7 +111,7 @@ export default function SeasonProgress({
                 }`}
               >
                 <span className="text-base leading-none">{f.icono}</span>
-                {f.texto === "Mundial de Clubes" && !hecha && (
+                {(f.texto === "Mundial de Clubes" || f.texto === "Copa del Mundo") && !hecha && (
                   <span className="absolute -right-1 -top-1 h-1.5 w-1.5 animate-ping rounded-full bg-[#F6C750]" />
                 )}
                 <span

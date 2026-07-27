@@ -1,5 +1,6 @@
 import clubsData from '@/data/clubs.json'
 import { CONTINENTAL_CLUBS } from './copa-libertadores'
+import { simularMundial, resumenMundial, type WorldCupRun } from './world-cup'
 
 /**
  * Single-player career simulation engine.
@@ -424,6 +425,8 @@ export interface NTSeason {
   goals: number
   highlights: string[]
   worldCupChampion: boolean
+  /** El Mundial jugado partido por partido (solo en los años que toca y si estás convocado) */
+  worldCup?: WorldCupRun
 }
 
 /** Simula la temporada de selección de un jugador según su nacionalidad, OVR y rendimiento. */
@@ -463,26 +466,23 @@ export function nationalTeamSeason(o: {
   const gpg = cat === 'ATT' ? 0.42 : cat === 'MID' ? 0.2 : cat === 'GK' ? 0 : 0.05
   out.goals = Math.round(out.caps * gpg * starterness * (0.5 + o.rng()))
 
-  // Mundial: años reales (2026, 2030, 2034...) => year % 4 === 2
+  // Mundial: años reales (2026, 2030, 2034...) => year % 4 === 2. Ya no es un sorteo suelto:
+  // se juega el torneo entero y queda el recorrido para poder contarlo.
   if (o.year % 4 === 2) {
     if (o.rng() < tier.wcFreq) {
-      const wcMatches = Math.round(2 + starterness * 5 + o.rng())
-      const roundIdx = clamp(Math.round((tier.strength - 74) / 5 + (o.rng() - 0.35) * 2.5), 0, 4)
-      if (roundIdx === 4 && o.rng() < 0.5) {
-        out.worldCupChampion = true
-        out.highlights.push(`🌍🏆 ¡CAMPEÓN DEL MUNDO ${o.year} con ${o.nationality}! (${wcMatches} partidos)`)
-      } else {
-        const others = WC_ELIMINATORS.filter((e) => e !== o.nationality)
-        const elim = others[Math.floor(o.rng() * others.length)]
-        const roundName =
-          roundIdx === 4 ? 'la final' : roundIdx === 3 ? 'semifinal' : roundIdx === 2 ? 'cuartos de final' : roundIdx === 1 ? 'octavos' : 'fase de grupos'
-        out.highlights.push(
-          roundIdx === 0
-            ? `🌎 Mundial ${o.year}: ${wcMatches} partidos con ${o.nationality}. Quedaron eliminados en ${roundName}.`
-            : `🌎 Mundial ${o.year}: ${wcMatches} partidos con ${o.nationality}. Llegaron a ${roundName}, perdieron con ${elim}.`,
-        )
-      }
-      out.caps += wcMatches
+      const wc = simularMundial({
+        year: o.year,
+        seleccion: o.nationality,
+        fuerzaSeleccion: tier.strength,
+        ovrJugador: o.ovr,
+        categoria: cat,
+        rng: o.rng,
+      })
+      out.worldCup = wc
+      out.worldCupChampion = wc.campeon
+      out.caps += wc.caps
+      out.goals += wc.goles
+      out.highlights.push(resumenMundial(wc))
     } else {
       out.highlights.push(`😞 ${o.nationality} no clasificó al Mundial ${o.year}`)
     }
@@ -561,6 +561,7 @@ export interface SeasonResult {
   lesionado?: boolean
   lesionGrave?: boolean
   ganoTitularidad?: boolean // el año que te ganaste el puesto
+  worldCup?: WorldCupRun // el Mundial jugado ese año, partido por partido
   clasificoLibertadores?: boolean // el año que viene se juega la Copa grande
   mundialClubes?: boolean // el club jugó el Mundial de Clubes (por ganar la continental)
   mundialClubesGanado?: boolean
