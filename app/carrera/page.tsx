@@ -504,7 +504,7 @@ function CareerDashboard() {
                   <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-0.5 text-[9px] font-black tracking-[0.2em] uppercase text-amber-300 font-sport">
                     Temporada {career.seasonsPlayed + (career.finished ? 0 : 1)} / {MAX_SEASONS}
                   </span>
-                  <span className="text-[9px] font-black tracking-[0.2em] uppercase text-slate-500 font-sport">
+                  <span key={career.seasonsPlayed} className="contador-in text-[9px] font-black tracking-[0.2em] uppercase text-slate-500 font-sport">
                     {career.startYear + career.seasonsPlayed}
                   </span>
                 </div>
@@ -516,8 +516,12 @@ function CareerDashboard() {
                     { l: "Edad", v: `${career.player.age}` },
                     { l: "OVR", v: `${career.player.ovr}` },
                     { l: "Valor", v: formatMarketValue(career.player.marketValueM) },
-                  ].map((chip) => (
-                    <span key={chip.l} className="rounded-lg border border-white/10 bg-slate-950/60 px-2.5 py-1 text-[10px] font-bold text-slate-300">
+                  ].map((chip, i) => (
+                    <span
+                      key={chip.l}
+                      style={{ animationDelay: `${i * 70}ms` }}
+                      className="cartel-in rounded-lg border border-white/10 bg-slate-950/60 px-2.5 py-1 text-[10px] font-bold text-slate-300"
+                    >
                       <span className="text-slate-500 uppercase tracking-wider">{chip.l} </span>
                       <span className="text-white">{chip.v}</span>
                     </span>
@@ -525,11 +529,26 @@ function CareerDashboard() {
                 </div>
               </div>
             </div>
+
+            {/* Progreso de la carrera: se llena temporada a temporada */}
+            <div className="relative mt-4">
+              <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-slate-500 font-sport">
+                <span>Camino a la gloria</span>
+                <span className="text-[#74ACDF]">{career.seasonsPlayed}/{MAX_SEASONS}</span>
+              </div>
+              <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+                <div
+                  key={career.seasonsPlayed}
+                  className="barra-crece h-full rounded-full bg-gradient-to-r from-[#74ACDF] via-[#9CCBF0] to-[#F6C750]"
+                  style={{ width: `${Math.round((career.seasonsPlayed / MAX_SEASONS) * 100)}%` }}
+                />
+              </div>
+            </div>
           </div>
 
           {/* OFERTAS: si hay, se resuelven primero (bloquean la simulación) */}
           {!career.finished && hasOffers && (
-            <div className="card-gradient rounded-3xl p-5 border border-[#74ACDF]/40 space-y-3 shadow-2xl">
+            <div className="panel-in card-gradient rounded-3xl p-5 border border-[#74ACDF]/40 space-y-3 shadow-2xl">
               <h4 className="text-xs font-black text-[#74ACDF] font-sport uppercase tracking-wider">📩 Te llegaron ofertas</h4>
               <div className="space-y-2.5 font-sport">
                 {career.pendingOffers.map((o) => {
@@ -581,7 +600,7 @@ function CareerDashboard() {
           )}
 
           {!career.finished && !hasOffers && dilemma && (
-            <div className="card-gradient rounded-3xl p-5 border border-[#74ACDF]/30 space-y-3 shadow-2xl">
+            <div className="panel-in card-gradient rounded-3xl p-5 border border-[#74ACDF]/30 space-y-3 shadow-2xl">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider">
                   🧠 DECISIÓN DE PRETEMPORADA
@@ -654,7 +673,7 @@ function CareerDashboard() {
             <div className="space-y-2 font-sport">
               <button
                 onClick={() => handleSimulate(1)}
-                className="btn-primary w-full py-5 text-sm font-black tracking-widest uppercase rounded-2xl shadow-xl"
+                className="latido btn-primary w-full py-5 text-sm font-black tracking-widest uppercase rounded-2xl shadow-xl"
               >
                 ▶ Simular Temporada {career.seasonsPlayed + 1}
               </button>
