@@ -10,44 +10,69 @@ import SolDeMayo from "@/components/ui/SolDeMayo"
  * se sentía como abrir un archivo, no como jugar un año. Acá se muestran las fases con la
  * cadencia justa para que se lea, y recién al final se revela la temporada.
  */
-const FASES = [
-  { icono: "🏋️", texto: "Pretemporada" },
-  { icono: "🇦🇷", texto: "Liga Profesional" },
-  { icono: "🥛", texto: "Copa Argentina" },
-  { icono: "🌎", texto: "Copa continental" },
-  { icono: "📋", texto: "Cierre de temporada" },
-]
+interface Fase { icono: string; texto: string }
 
 const MS_POR_FASE = 380
 
-export const SEASON_PROGRESS_MS = FASES.length * MS_POR_FASE
+/** Las fases dependen de en qué torneos está metido el club esta temporada. */
+function fasesDe(continental: string | undefined, mundialClubes: boolean, esArgentino: boolean): Fase[] {
+  const nombreCont: Record<string, string> = {
+    libertadores: "Copa Libertadores",
+    sudamericana: "Copa Sudamericana",
+    champions: "Champions League",
+    europa: "Europa League",
+  }
+  const fases: Fase[] = [{ icono: "🏋️", texto: "Pretemporada" }]
+  fases.push({ icono: esArgentino ? "🇦🇷" : "🏟️", texto: esArgentino ? "Liga Profesional" : "Liga local" })
+  if (esArgentino) fases.push({ icono: "🥛", texto: "Copa Argentina" })
+  if (continental) {
+    fases.push({
+      icono: continental === "libertadores" ? "🏆" : continental === "champions" ? "🌟" : continental === "europa" ? "🎖️" : "🥇",
+      texto: nombreCont[continental] || "Copa continental",
+    })
+  }
+  if (mundialClubes) fases.push({ icono: "🌐", texto: "Mundial de Clubes" })
+  fases.push({ icono: "📋", texto: "Cierre de temporada" })
+  return fases
+}
+
+/** Duración máxima (todas las fases posibles), para temporizar el reveal sin cortar nada. */
+export const SEASON_PROGRESS_MS = 7 * MS_POR_FASE
 
 export default function SeasonProgress({
   activo,
   anio,
   club,
   temporadas = 1,
+  continental,
+  mundialClubes = false,
+  esArgentino = true,
 }: {
   activo: boolean
   anio: number
   club?: string
   /** Cuántas temporadas se están simulando de una (para el modo rápido) */
   temporadas?: number
+  continental?: string
+  mundialClubes?: boolean
+  esArgentino?: boolean
 }) {
   const [fase, setFase] = useState(0)
+  const FASES = fasesDe(continental, mundialClubes, esArgentino)
 
   useEffect(() => {
     if (!activo) {
       setFase(0)
       return
     }
-    const t = setInterval(() => setFase((f) => Math.min(f + 1, FASES.length)), MS_POR_FASE)
+    const t = setInterval(() => setFase((f) => f + 1), MS_POR_FASE)
     return () => clearInterval(t)
   }, [activo])
 
   if (!activo) return null
 
-  const pct = Math.round((fase / FASES.length) * 100)
+  const hechas = Math.min(fase, FASES.length)
+  const pct = Math.round((hechas / FASES.length) * 100)
 
   return (
     <div className="fixed inset-0 z-[115] flex items-center justify-center bg-[#02050d]/92 px-4 backdrop-blur-sm">
@@ -69,12 +94,12 @@ export default function SeasonProgress({
         {/* Fases */}
         <div className="mt-5 space-y-2">
           {FASES.map((f, i) => {
-            const hecha = i < fase
-            const actual = i === fase
+            const hecha = i < hechas
+            const actual = i === hechas
             return (
               <div
                 key={f.texto}
-                className={`flex items-center gap-3 rounded-xl border px-3 py-2 transition-all duration-300 ${
+                className={`relative flex items-center gap-3 rounded-xl border px-3 py-2 transition-all duration-300 ${
                   hecha
                     ? "border-emerald-400/25 bg-emerald-500/[0.07]"
                     : actual
@@ -83,6 +108,9 @@ export default function SeasonProgress({
                 }`}
               >
                 <span className="text-base leading-none">{f.icono}</span>
+                {f.texto === "Mundial de Clubes" && !hecha && (
+                  <span className="absolute -right-1 -top-1 h-1.5 w-1.5 animate-ping rounded-full bg-[#F6C750]" />
+                )}
                 <span
                   className={`flex-1 font-sport text-[11px] font-bold uppercase tracking-wider ${
                     hecha ? "text-emerald-300" : actual ? "text-white" : "text-slate-500"

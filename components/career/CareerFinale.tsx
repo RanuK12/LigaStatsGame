@@ -18,7 +18,13 @@ function useCountUp(to: number, ms: number, start: boolean) {
       if (p < 1) raf.current = requestAnimationFrame(tick)
     }
     raf.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf.current!)
+    // Si la pestaña pierde el foco, el navegador frena el requestAnimationFrame y el número
+    // se queda en 0. El timeout garantiza que llegue a su valor igual.
+    const fin = setTimeout(() => setV(to), ms + 60)
+    return () => {
+      cancelAnimationFrame(raf.current!)
+      clearTimeout(fin)
+    }
   }, [to, ms, start])
   return v
 }

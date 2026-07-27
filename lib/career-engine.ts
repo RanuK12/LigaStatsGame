@@ -558,6 +558,9 @@ export interface SeasonResult {
   ballonDor?: boolean // ganaste el Balón de Oro esa temporada
   ntDebut?: boolean // te llamaron por primera vez a la Selección
   euroOffer?: boolean // te llegó la primera oferta de Europa
+  clasificoLibertadores?: boolean // el año que viene se juega la Copa grande
+  mundialClubes?: boolean // el club jugó el Mundial de Clubes (por ganar la continental)
+  mundialClubesGanado?: boolean
 }
 
 export interface Milestones {
@@ -596,6 +599,8 @@ export interface CareerState {
   selectedDecisionId?: string
   /** Techo de nacimiento del jugador. Sorteado al crear la carrera, fijo el resto. */
   talento?: Talento
+  /** El club ganó la continental el año pasado: esta temporada juega el Mundial de Clubes. */
+  playsMundialClubes?: boolean
 }
 
 export const MAX_SEASONS = 15
@@ -608,6 +613,7 @@ export const TROPHY_META: Record<string, { name: string; icon: string }> = {
   champions: { name: 'Champions League', icon: '🌟' },
   europa: { name: 'Europa League', icon: '🎖️' },
   mundial: { name: 'Mundial', icon: '🌍' },
+  'mundial-clubes': { name: 'Mundial de Clubes', icon: '🌐' },
 }
 
 export function makeRng(seed: number): () => number {
@@ -870,9 +876,11 @@ export function simulateSeason(
   const str = clamp(club.strength + maradona, 60, 92)
   // Margen de OVR: si superás en +10 lo que pide el club, todo x1.6.
   const margin = ovr >= club.strength + 10 ? 1.6 : 1
-  // Un club grande gana la liga ~70%, uno chico ~1%.
-  const ligaP = clamp(((str - 64) / 19) * 0.7 * margin + 0.005 + bonusTitle, 0.005, 0.9)
-  const copaP = clamp(((str - 64) / 19) * 0.45 * margin + 0.04 + bonusTitle, 0.04, 0.55)
+  // Cuánto sale ganar cada torneo. Los valores viejos (70% la liga para un club grande) daban
+  // carreras con 10 ligas y 7 Libertadores en 15 años: los títulos dejaban de significar algo.
+  // En una liga de 28 equipos, hasta River o Boca ganan más o menos 1 de cada 3 torneos.
+  const ligaP = clamp(((str - 64) / 19) * 0.32 * margin + 0.005 + bonusTitle, 0.005, 0.45)
+  const copaP = clamp(((str - 64) / 19) * 0.26 * margin + 0.03 + bonusTitle, 0.03, 0.38)
 
   const topTier = state.nextContinental === 'libertadores'
   const contType: ContinentalComp =
@@ -881,9 +889,9 @@ export function simulateSeason(
   // Libertadores / Champions: reservada para los grandes.
   let contP: number
   if (contType === 'sudamericana' || contType === 'europa') {
-    contP = club.strength >= 79 ? 0 : clamp(((str - 64) / 15) * 0.35 * margin + 0.05, 0.02, 0.42)
+    contP = club.strength >= 79 ? 0 : clamp(((str - 64) / 15) * 0.22 * margin + 0.04, 0.02, 0.3)
   } else {
-    contP = clamp(((str - 70) / 20) * 0.4 * margin + bonusTitle, 0.01, 0.55)
+    contP = clamp(((str - 70) / 20) * 0.22 * margin + bonusTitle, 0.01, 0.32)
   }
 
   const liga = rng() < ligaP
@@ -894,6 +902,21 @@ export function simulateSeason(
   if (liga) trophiesWon.push('lpf')
   if (copaArgentina) trophiesWon.push('copa-arg')
   if (continentalWon) trophiesWon.push(contType)
+
+  // Mundial de Clubes: se entra por ser campeón de la Libertadores (o de la Champions). El
+  // torneo se juega al año siguiente, así que lo dispara el estado que dejó la temporada
+  // anterior. Ganarlo es difícil: el campeón de América llega de igual a igual con Europa,
+  // pero los europeos son favoritos.
+  const mundialClubes = Boolean(state.playsMundialClubes)
+  let mundialClubesGanado = false
+  if (mundialClubes) {
+    const chanceMundialito = contType === 'champions' || club.region === 'euro' ? 0.5 : 0.32
+    mundialClubesGanado = rng() < clamp(chanceMundialito + (ovr - 80) / 200, 0.12, 0.62)
+    if (mundialClubesGanado) trophiesWon.push('mundial-clubes')
+  }
+
+  // Clasificación a la Copa grande del año siguiente (lo que se anuncia con cartel)
+  const clasificoLibertadores = liga || continentalWon
 
   // Rendimiento por posición: arquero/defensor rinden por vallas invictas, no por goles.
   let performance: number
@@ -928,6 +951,9 @@ export function simulateSeason(
   if (liga) highlights.push(`🏆 Campeón de la Liga con ${club.name}`)
   if (continentalWon) highlights.push(`${TROPHY_META[contType]?.icon || '🌎'} Levantaste la ${CONT_NAME[contType]}`)
   if (copaArgentina) highlights.push(`🥛 Campeón de la Copa Argentina`)
+  if (mundialClubesGanado) highlights.push(`🌐 ¡CAMPEÓN DEL MUNDO DE CLUBES! Le ganaste a Europa`)
+  else if (mundialClubes) highlights.push(`🌐 Jugaste el Mundial de Clubes representando a Sudamérica`)
+  if (clasificoLibertadores) highlights.push(`🏆 Clasificaste a la próxima Copa Libertadores`)
   if (topScorer) highlights.push(`🥇 Goleador del torneo con ${goals} goles`)
   else if (goals >= 10 && cat === 'ATT') highlights.push(`⚽ Gran temporada: ${goals} goles`)
   if (cat !== 'ATT' && assists >= 10) highlights.push(`🎯 Temporada de ${assists} asistencias`)
@@ -1032,6 +1058,9 @@ export function simulateSeason(
     euroScout,
     performance,
     barrabravas,
+    clasificoLibertadores,
+    mundialClubes,
+    mundialClubesGanado,
     cleanSheets,
     penaltiesSaved,
     yellowCards,
@@ -1126,4 +1155,9 @@ export function advancePlayer(state: CareerState, season: SeasonResult): CareerP
 
 export function nextContinentalFrom(season: SeasonResult): 'libertadores' | 'sudamericana' {
   return season.liga || season.continentalWon ? 'libertadores' : 'sudamericana'
+}
+
+/** ¿El año que viene el club juega el Mundial de Clubes? Se entra ganando la continental. */
+export function playsMundialClubesFrom(season: SeasonResult): boolean {
+  return Boolean(season.continentalWon)
 }

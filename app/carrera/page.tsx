@@ -437,12 +437,14 @@ function CareerDashboard() {
   // El momento que merece pantalla completa. Los hitos de carrera (Selección, Europa) van
   // primero: pasan una sola vez y son los que el jugador se acuerda.
   function bigMoment(s: SeasonResult): { label: string; tone: BurstTone } | null {
+    if (s.mundialClubesGanado) return { label: "¡Campeón del Mundo de Clubes!", tone: "oro" }
     if (s.ballonDor) return { label: "¡Balón de Oro!", tone: "oro" }
     if (s.ntDebut) return { label: "¡Te llamó la Selección!", tone: "celeste" }
     if (s.euroOffer) return { label: "¡Te vienen a buscar de Europa!", tone: "oro" }
     if (s.continentalWon) return { label: "¡Campeón de América!", tone: "oro" }
     if (s.liga) return { label: "¡Campeón!", tone: "oro" }
     if (s.copaArgentina) return { label: "¡Copa Argentina!", tone: "celeste" }
+    if (s.clasificoLibertadores) return { label: "¡A la Libertadores!", tone: "celeste" }
     if ((s.nextOvr ?? s.ovr) - s.ovr >= 4) return { label: "¡Explotaste de nivel!", tone: "celeste" }
     return null
   }
@@ -741,6 +743,7 @@ function CareerDashboard() {
                 const trophies: string[] = []
                 if (s.liga) trophies.push("⭐ Liga")
                 if (s.copaArgentina) trophies.push("🥛 Copa Argentina")
+                if (s.mundialClubesGanado) trophies.push("🌐 Mundial de Clubes")
                 if (s.continentalWon) trophies.push(`${TROPHY_META[s.continental || ""]?.icon || "🌎"} ${TROPHY_META[s.continental || ""]?.name || "Continental"}`)
                 const delta = (s.nextOvr ?? s.ovr) - s.ovr
                 return (
@@ -853,6 +856,13 @@ function CareerDashboard() {
         anio={career.startYear + career.seasonsPlayed}
         club={club?.name}
         temporadas={simulando?.temporadas ?? 1}
+        continental={
+          club?.region === "euro"
+            ? career.nextContinental === "libertadores" ? "champions" : "europa"
+            : career.nextContinental
+        }
+        mundialClubes={Boolean(career.playsMundialClubes)}
+        esArgentino={club?.region === "arg"}
       />
 
       <EventBurst

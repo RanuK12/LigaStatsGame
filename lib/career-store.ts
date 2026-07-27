@@ -14,6 +14,7 @@ import {
   simulateSeason,
   advancePlayer,
   nextContinentalFrom,
+  playsMundialClubesFrom,
   nationalTeamSeason,
 } from './career-engine'
 
@@ -102,6 +103,10 @@ export const useCareerStore = create<CareerStore>()(
         })
         if (nt.debut) milestones.nationalTeam = true
         season.ntDebut = nt.debut
+        // El cartel de "¡A la Libertadores!" solo cuando SUBÍS: si el club ya venía jugándola,
+        // clasificar de nuevo es la rutina y no merece pantalla completa todos los años.
+        season.clasificoLibertadores =
+          state.nextContinental !== 'libertadores' && nextContinentalFrom(season) === 'libertadores'
         // Primera vez que un club europeo te viene a buscar: es EL momento de la carrera.
         const yaEstuvoEnEuropa = state.clubHistory.some((id) => findClub(id)?.region === 'euro')
         const yaLoBuscaron = state.history.some((h) => h.euroOffer)
@@ -146,6 +151,7 @@ export const useCareerStore = create<CareerStore>()(
             history: [...state.history, season],
             pendingOffers: offers,
             nextContinental: nextContinentalFrom(season),
+            playsMundialClubes: playsMundialClubesFrom(season),
             milestones,
             finished: seasonsPlayed >= MAX_SEASONS,
           },

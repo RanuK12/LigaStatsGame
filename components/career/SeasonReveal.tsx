@@ -17,7 +17,14 @@ function useCountUp(to: number, ms: number, start: boolean, from = 0) {
       if (p < 1) raf.current = requestAnimationFrame(tick)
     }
     raf.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf.current!)
+    // Red de seguridad: si la pestaña pierde el foco el navegador frena el
+    // requestAnimationFrame y la animación queda congelada en 0 — el jugador vuelve y ve
+    // "0 PJ, 0 goles". Pase lo que pase, al terminar el tiempo el número queda en su valor.
+    const fin = setTimeout(() => setV(to), ms + 60)
+    return () => {
+      cancelAnimationFrame(raf.current!)
+      clearTimeout(fin)
+    }
   }, [to, ms, start, from])
   return v
 }
