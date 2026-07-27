@@ -558,6 +558,9 @@ export interface SeasonResult {
   ballonDor?: boolean // ganaste el Balón de Oro esa temporada
   ntDebut?: boolean // te llamaron por primera vez a la Selección
   euroOffer?: boolean // te llegó la primera oferta de Europa
+  lesionado?: boolean
+  lesionGrave?: boolean
+  ganoTitularidad?: boolean // el año que te ganaste el puesto
   clasificoLibertadores?: boolean // el año que viene se juega la Copa grande
   mundialClubes?: boolean // el club jugó el Mundial de Clubes (por ganar la continental)
   mundialClubesGanado?: boolean
@@ -706,19 +709,22 @@ function nextOvr(
   substanceHit = false,
   euroBonus = 0,
   talento: Talento = 'normal',
+  lesionGrave = false,
 ): number {
   const luck = rng()
   let delta: number
   if (age < 24) delta = luck < 0.12 ? 0 : luck < 0.55 ? 2 : 3 // joven: sube fuerte
   else if (age <= 26) delta = luck < 0.28 ? 0 : luck < 0.78 ? 1 : 2 // pico a los 26
-  else if (age <= 29) delta = luck < 0.55 ? -1 : 0 // empieza a bajar
-  else if (age <= 32) delta = luck < 0.35 ? -1 : -2
-  else delta = -3 // veterano
+  else if (age <= 29) delta = luck < 0.55 ? -1 : 0 // se sostiene, empieza a aflojar
+  else if (age <= 31) delta = luck < 0.4 ? -1 : -2
+  else if (age <= 34) delta = luck < 0.35 ? -2 : -3 // a los 32 la caída se acelera
+  else delta = luck < 0.3 ? -3 : -4 // después de los 35 se cae a pedazos
   // El talento SOLO acelera la subida de joven. No frena el declive: si también amortiguaba
   // la caída, un "destacado" no bajaba nunca y terminaba de leyenda (20% de las carreras
   // llegaban a 90+ en la auditoría, que es cualquier cosa).
   if (delta > 0) delta += CRECIMIENTO_TALENTO[talento]
   if (substanceHit) delta += 5
+  if (lesionGrave) delta -= 2 // una lesión seria deja secuela
   delta += euroBonus
   // Respeta el techo por edad Y el techo de nacimiento: un jugador normal no llega a 90 ni
   // jugando cien temporadas, y ahí está la gracia de que salga un generacional.
@@ -819,7 +825,26 @@ export function simulateSeason(
   const age = state.player.age
   const year = state.startYear + state.seasonsPlayed
 
-  const matchesPlayed = 28 + Math.floor(rng() * 14)
+  // ── Cuánto jugás: la titularidad se gana ──
+  // Antes todos jugaban 28-42 partidos desde el primer año, incluso un pibe de 17 recién
+  // subido a un grande. Ahora depende de tu nivel contra el del club y de la edad: un juvenil
+  // arranca entrando desde el banco y se va ganando el puesto.
+  const brechaClub = ovr - club.strength // +: sos mejor que el promedio del plantel
+  const esCrack = ovr >= club.strength + 6
+  const primerAnioEnElClub = state.history.length === 0 || state.history[state.history.length - 1].clubId !== club.id
+  // brecha -15 → suplente (~13 partidos) · 0 → titular (~25) · +8 → indiscutido (~32)
+  let titularidad = clamp(0.75 + brechaClub / 40, 0.3, 1)
+  if (age <= 19) titularidad *= 0.62 // los pibes empiezan de a poco
+  else if (age <= 21) titularidad *= 0.82
+  if (age >= 34) titularidad *= 0.78 // al veterano lo dosifican
+  if (primerAnioEnElClub && !esCrack) titularidad *= 0.88 // adaptarse a un club nuevo cuesta
+  titularidad = clamp(titularidad, 0.22, 1)
+
+  const matchesPlayed = Math.max(4, Math.round((26 + rng() * 14) * titularidad))
+  const esTitular = titularidad >= 0.72
+  // Se avisa UNA sola vez, el año que pasás de suplente a titular: es un hito de la carrera.
+  const yaFueTitular = state.history.some((h) => (h.matchesPlayed ?? 0) >= 22)
+  const ganoTitularidad = esTitular && !yaFueTitular && state.history.length > 0
 
   let bonusGoals = 0
   let bonusAssists = 0
@@ -849,16 +874,29 @@ export function simulateSeason(
     bonusAssists = Math.round(bonusAssists / 2)
   }
 
+  // ── Lesiones ──
+  // Después de los 30 el cuerpo empieza a pasar factura; a los 34+ es habitual perderse medio
+  // año. Una lesión seria recorta partidos y deja secuela en el OVR.
+  const riesgoLesion = clamp(0.06 + Math.max(0, age - 28) * 0.035 + (decisionOptionId === 'play_injured' ? 0.18 : 0), 0.05, 0.55)
+  const lesionado = rng() < riesgoLesion
+  const lesionGrave = lesionado && rng() < clamp(0.2 + Math.max(0, age - 31) * 0.06, 0.2, 0.6)
+
   const ovrScale = clamp(ovr / 80, 0.6, 1.35)
-  const apps = matchesPlayed / 38
-  const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * (0.6 + rng() * 0.9)) + bonusGoals))
-  const assists = Math.max(0, Math.round((ASSIST_BASE[cat] * ovrScale * apps * (0.5 + rng() * 0.9)) + bonusAssists))
+  // La lesión te saca de la cancha: se descuentan partidos antes de repartir goles y vallas.
+  const partidosJugados = lesionado
+    ? Math.max(3, Math.round(matchesPlayed * (lesionGrave ? 0.45 : 0.75)))
+    : matchesPlayed
+  const apps = partidosJugados / 38
+  // Un equipo que ataca bien te deja más pelotas para empujar; en un club chico hacés menos.
+  const empujeClub = clamp(0.78 + (club.strength - 70) / 55, 0.7, 1.3)
+  const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * empujeClub * (0.6 + rng() * 0.9)) + bonusGoals))
+  const assists = Math.max(0, Math.round((ASSIST_BASE[cat] * ovrScale * apps * empujeClub * (0.5 + rng() * 0.9)) + bonusAssists))
   // Vallas invictas (arqueros/defensores): dependen del OVR y la fuerza del club.
   const keepsCleanSheets = cat === 'GK' || cat === 'DEF'
   const csRate = keepsCleanSheets ? clamp(0.12 + (ovr - 70) / 120 + (club.strength - 72) / 130, 0.05, 0.55) : 0
   const cleanSheets = Math.min(
-    matchesPlayed,
-    Math.round(matchesPlayed * csRate * (0.7 + rng() * 0.6)) + bonusCleanSheets,
+    partidosJugados,
+    Math.round(partidosJugados * csRate * (0.7 + rng() * 0.6)) + bonusCleanSheets,
   )
   // Penales: el arquero enfrenta un puñado por año y ataja según su nivel.
   const penaltiesFaced = cat === 'GK' ? 2 + Math.floor(rng() * 6) : 0
@@ -921,7 +959,7 @@ export function simulateSeason(
   // Rendimiento por posición: arquero/defensor rinden por vallas invictas, no por goles.
   let performance: number
   if (keepsCleanSheets) {
-    const csRatio = matchesPlayed > 0 ? cleanSheets / matchesPlayed : 0
+    const csRatio = partidosJugados > 0 ? cleanSheets / partidosJugados : 0
     performance = clamp((csRatio / 0.45) * 0.85 + ((goals + assists) / 8) * 0.15, 0, 1)
   } else {
     const expected = (GOAL_BASE[cat] + ASSIST_BASE[cat]) * ovrScale || 1
@@ -931,7 +969,7 @@ export function simulateSeason(
   const scorerThreshold = cat === 'ATT' ? 15 : cat === 'MID' ? 12 : 999
   const topScorer = goals >= scorerThreshold && rng() < 0.7
   // Premio a la valla menos vencida (arqueros con muchas vallas invictas).
-  const goldenGlove = cat === 'GK' && cleanSheets >= Math.round(matchesPlayed * 0.4) && rng() < 0.6
+  const goldenGlove = cat === 'GK' && cleanSheets >= Math.round(partidosJugados * 0.4) && rng() < 0.6
 
   // Nota realista: el OVR marca el techo (un 59 no puede sacar 9). Rinde = OVR + rendimiento.
   const ratingBase = 4.8 + (clamp(ovr, 55, 98) - 55) / 43 * 4.2 // 55->4.8, 98->9.0
@@ -964,10 +1002,13 @@ export function simulateSeason(
     if (penaltiesSaved >= 1) highlights.push(`🖐️ ${penaltiesSaved} ${penaltiesSaved === 1 ? 'penal atajado' : 'penales atajados'}`)
     if (penaltiesSaved >= 1 && (liga || copaArgentina || continentalWon) && rng() < 0.55)
       highlights.push(`🧤 Héroe en la definición: le atajaste el penal decisivo al rival en la final`)
-    if (cleanSheets >= matchesPlayed * 0.5 && rng() < 0.5)
+    if (cleanSheets >= partidosJugados * 0.5 && rng() < 0.5)
       highlights.push(`🧱 Racha histórica: dejaste el arco en cero en más de la mitad del torneo`)
   }
   if (cat === 'DEF' && goals >= 4) highlights.push(`🎯 ${goals} goles de pelota parada: un lujo para un defensor`)
+  if (ganoTitularidad) highlights.push(`🔥 Te ganaste la titularidad: el técnico ya no te saca`)
+  if (lesionGrave) highlights.push(`🏥 Lesión seria: te perdiste media temporada`)
+  else if (lesionado) highlights.push(`🤕 Te lesionaste y te perdiste varias fechas`)
   if (yellowCards >= 10) highlights.push(`🟨 ${yellowCards} amarillas: te perdiste fechas por acumulación`)
   if (redCards > 0) highlights.push(cat === 'GK' ? `🟥 Expulsado por salir a destiempo fuera del área` : `🟥 Te fuiste expulsado y dejaste al equipo con diez`)
   // Jugador del mes: chance según la nota (podés ganarlo varias veces al año).
@@ -986,7 +1027,7 @@ export function simulateSeason(
       age,
       goals,
       assists,
-      matches: matchesPlayed,
+      matches: partidosJugados,
       cat,
       liga,
       copaArgentina,
@@ -1015,7 +1056,7 @@ export function simulateSeason(
 
   // Carreras guardadas de antes no traen talento: se tratan como normales.
   const talento = state.talento ?? 'normal'
-  let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus, talento)
+  let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus, talento, lesionGrave)
   // Bonus de OVR de la decisión (trabajo físico, capitanía, adaptarse, mentor, renovar...).
   if (bonusOvr) grownOvr = clamp(grownOvr + bonusOvr, 55, ovrCapForAge(age + 1))
   // Mala reacción a la sustancia: -2 OVR (el riesgo real de apostar).
@@ -1038,7 +1079,7 @@ export function simulateSeason(
     age,
     clubId: club.id,
     clubName: club.name,
-    matchesPlayed,
+    matchesPlayed: partidosJugados,
     goals,
     assists,
     ovr,
@@ -1058,6 +1099,9 @@ export function simulateSeason(
     euroScout,
     performance,
     barrabravas,
+    lesionado,
+    lesionGrave,
+    ganoTitularidad,
     clasificoLibertadores,
     mundialClubes,
     mundialClubesGanado,

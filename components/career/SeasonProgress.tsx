@@ -12,7 +12,7 @@ import SolDeMayo from "@/components/ui/SolDeMayo"
  */
 interface Fase { icono: string; texto: string }
 
-const MS_POR_FASE = 380
+const MS_POR_FASE = 620
 
 /** Las fases dependen de en qué torneos está metido el club esta temporada. */
 function fasesDe(continental: string | undefined, mundialClubes: boolean, esArgentino: boolean): Fase[] {

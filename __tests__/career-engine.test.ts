@@ -52,7 +52,9 @@ describe('career-engine', () => {
 
   it('produces sane season stats', () => {
     const { season } = simulateSeason(baseState(), makeRng(7))
-    expect(season.matchesPlayed).toBeGreaterThanOrEqual(26)
+    // Los partidos ya no son fijos: dependen de la titularidad (nivel vs club, edad, si
+    // recién llegaste). Lo que sí tiene que cumplirse es que sea un número de temporada real.
+    expect(season.matchesPlayed).toBeGreaterThanOrEqual(4)
     expect(season.matchesPlayed).toBeLessThanOrEqual(41)
     expect(season.goals).toBeGreaterThanOrEqual(0)
     expect(season.assists).toBeGreaterThanOrEqual(0)

@@ -46,7 +46,10 @@ function palmares(career: CareerState): { icon: string; label: string }[] {
 export default function CareerTimelineCard({ career }: { career: CareerState }) {
   const { player } = career
   const club = findClub(career.clubId)
-  const oc = ovrColor(player.ovr)
+  // La carta muestra su MEJOR versión: el pico. El resumen de carrera mostraba el pico y la
+  // ficha el OVR con el que se retiraba, así que daban números distintos sin decir por qué.
+  const peak = Math.max(player.ovr, ...career.history.map((s) => s.nextOvr ?? s.ovr))
+  const oc = ovrColor(peak)
   const pos = POS_ES[player.position] || player.position
   const value = formatMarketValue(player.marketValueM)
   const ntCaps = career.milestones.ntCaps || 0
@@ -77,8 +80,11 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
       {/* HEADER */}
       <div className="flex items-center gap-4 pb-5 border-b border-white/10">
         <div className="shrink-0 w-24 h-24 rounded-[22px] flex flex-col items-center justify-center shadow-lg" style={{ background: oc.bg, color: oc.text }}>
-          <span className="text-[11px] font-black tracking-widest font-sport">OVR</span>
-          <span className="font-impact text-5xl font-black leading-none">{player.ovr}</span>
+          <span className="text-[10px] font-black tracking-widest font-sport">OVR PICO</span>
+          <span className="font-impact text-5xl font-black leading-none">{peak}</span>
+          {peak !== player.ovr && (
+            <span className="text-[9px] font-bold font-sport opacity-70">se retiró en {player.ovr}</span>
+          )}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
