@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { TROPHY_META, retirementStory, positionCategory, type CareerState } from "@/lib/career-engine"
+import ShareBar from "@/components/ShareBar"
+import { storyBlob } from "@/lib/story-card"
 
 function useCountUp(to: number, ms: number, start: boolean) {
   const [v, setV] = useState(0)
@@ -55,6 +57,10 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
     : []
   const clubCount = career ? new Set(career.history.map((s) => s.clubId)).size : 0
   const esArquero = positionCategory(career?.player.position || "CM") === "GK"
+  // Mensaje ya armado con lo mejor de la carrera
+  const textoCarrera = career
+    ? `Terminé mi carrera en Gambeta: ${career.seasonsPlayed} temporadas, OVR pico ${peak}, ${titlesTotal} ${titlesTotal === 1 ? "título" : "títulos"}${career.milestones.worldCup ? " y CAMPEÓN DEL MUNDO 🌍" : ""}${career.milestones.balonDeOro ? ` · ${career.milestones.balonDeOro} Balón de Oro` : ""}. Creá tu crack y contame hasta dónde llegás`
+    : ""
 
   const milestones: { icon: string; label: string }[] = []
   if (career?.milestones.worldCup) milestones.push({ icon: "🌍", label: "Campeón del Mundo" })
@@ -168,7 +174,33 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
               </motion.p>
             )}
 
-            <div className="mt-6 flex gap-2 font-sport">
+            {/* Compartir la carrera terminada */}
+            {career && (
+              <ShareBar
+                titulo="Contá tu carrera"
+                texto={textoCarrera}
+                imagen={() =>
+                  storyBlob({
+                    volanta: "Modo Carrera",
+                    titulo: `${career.player.name} colgó los botines`,
+                    subtitulo: `${career.seasonsPlayed} temporadas · OVR pico ${peak}`,
+                    stats: [
+                      { valor: `${titlesTotal}`, label: "Títulos" },
+                      { valor: `${career.totals.matchesPlayed}`, label: "Partidos" },
+                      esArquero
+                        ? { valor: `${career.history.reduce((a, h) => a + (h.cleanSheets || 0), 0)}`, label: "V. invictas" }
+                        : { valor: `${career.totals.goals}`, label: "Goles" },
+                      { valor: `${clubCount}`, label: "Clubes" },
+                    ],
+                    pie: retirementStory(career),
+                    acento: titlesTotal > 0 ? "#F6C750" : "#74ACDF",
+                  })
+                }
+                className="mt-5"
+              />
+            )}
+
+            <div className="mt-4 flex gap-2 font-sport">
               <button onClick={onClose} className="flex-1 rounded-2xl border border-white/10 bg-white/5 py-3 text-xs font-black uppercase tracking-widest text-slate-300 hover:text-white transition-colors">
                 Ver ficha
               </button>

@@ -7,6 +7,8 @@ import type { TournamentResult, RoundMatch, ScheduleMatch } from "@/lib/types"
 import { POS_LABELS } from "@/lib/game-engine"
 import { getPC } from "@/lib/ui-constants"
 import MatchChronicleFeed from "./MatchChronicleFeed"
+import ShareBar from "@/components/ShareBar"
+import { storyBlob } from "@/lib/story-card"
 import Image from "next/image"
 
 export default function TournamentView({ result, onBack, onReset, onDownloadPDF }: {
@@ -203,6 +205,14 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
       setSimState("interactive")
     }
   }
+
+  // Mensaje ya armado según lo que pasó en el torneo
+  const goles = result.playerStats.reduce((a, p) => a + p.goals, 0)
+  const textoParaCompartir = isChamp
+    ? `¡SALÍ CAMPEÓN en Gambeta! 🏆 Armé mi 11 con ${result.teamLabel} (OVR ${result.teamScore}) y me quedé con la ${result.type === "liga" ? "Liga Profesional" : "Copa Argentina"} con ${goles} goles. ¿Podés hacerlo mejor?`
+    : result.type === "liga"
+    ? `Terminé ${result.playerPos}° de ${result.table?.length ?? 28} en Gambeta con mi 11 (OVR ${result.teamScore}) y ${goles} goles. A ver si vos armás un equipo mejor 👀`
+    : `Jugué la Copa Argentina en Gambeta con mi 11 (OVR ${result.teamScore})${result.eliminated ? ` y quedé en ${result.eliminatedRound}` : ""}. Armá el tuyo y contame`
 
   const finalTabs = result.type === "liga"
     ? [{ id: "table", label: "Tabla" }, { id: "stats", label: "Goleadores" }, { id: "assisters", label: "Asistencias" }]
@@ -717,6 +727,28 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                   {currentChronicle && <MatchChronicleFeed chronicle={currentChronicle} />}
                 </div>
               )}
+
+              {/* Compartir el resultado */}
+              <ShareBar
+                titulo="Contá cómo te fue"
+                texto={textoParaCompartir}
+                imagen={() =>
+                  storyBlob({
+                    volanta: result.type === "liga" ? "Liga Profesional" : "Copa Argentina",
+                    titulo: isChamp ? "¡Campeón!" : result.type === "liga" ? `${result.playerPos}° puesto` : result.eliminated ? `Eliminado en ${result.eliminatedRound}` : "Subcampeón",
+                    subtitulo: `${result.teamLabel} · ${result.formation}`,
+                    stats: [
+                      { valor: `${result.teamScore}`, label: "OVR del 11" },
+                      { valor: `${result.playerStats.reduce((a, p) => a + p.goals, 0)}`, label: "Goles" },
+                      { valor: `${result.playerStats.reduce((a, p) => a + p.assists, 0)}`, label: "Asistencias" },
+                      { valor: result.topScorers[0]?.goals ? `${result.topScorers[0].goals}` : "0", label: "Goleador" },
+                    ],
+                    pie: result.topScorers[0]?.playerName ? `Goleador del plantel: ${result.topScorers[0].playerName}` : undefined,
+                    acento: isChamp ? "#F6C750" : "#74ACDF",
+                  })
+                }
+                className="mb-5"
+              />
 
               {/* Action buttons */}
               <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">
