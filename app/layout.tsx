@@ -5,6 +5,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import AuthModal from '@/components/AuthModal'
 import UserProfileModal from '@/components/UserProfileModal'
+import Analytics from '@/components/Analytics'
 
 // Sora: tipografía moderna, geométrica y premium para títulos y displays
 const sora = Sora({
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="w-full">{children}</main>
         <AuthModal />
         <UserProfileModal />
+        <Analytics />
       </body>
     </html>
   )
