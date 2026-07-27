@@ -89,9 +89,11 @@ function sortearRival(usados: Set<string>, propia: string, nivelObjetivo: number
 /** Qué papel juega el jugador dentro de SU selección. */
 export function rolEnLaSeleccion(ovrJugador: number, fuerzaSeleccion: number): RolMundial {
   const brecha = ovrJugador - fuerzaSeleccion
-  if (brecha >= -2) return 'figura'
-  if (brecha >= -8) return 'titular'
-  if (brecha >= -15) return 'alternativa'
+  // Figura es estar al nivel del equipo o por encima. Con 88 en una selección de 90 sos
+  // titular, no la estrella: la estrella es el que la levanta por encima de la media.
+  if (brecha >= 0) return 'figura'
+  if (brecha >= -7) return 'titular'
+  if (brecha >= -14) return 'alternativa'
   return 'convocado'
 }
 
