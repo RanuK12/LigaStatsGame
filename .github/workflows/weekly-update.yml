@@ -34,6 +34,34 @@ jobs:
           python3 scripts/build_data.py || echo "Data build finished with warnings"
         continue-on-error: true
 
+      # SALVAGUARDA: el 2026-07-27 este job commiteó una base de 285 jugadores sin leyendas
+      # (el scraper falló a medias y los scripts reescribieron players.json igual), borrando
+      # el OVR real, las fotos y los planteles. Si el resultado no supera estos mínimos, se
+      # descartan los cambios de datos y el workflow falla para que se vea.
+      - name: Validar la base antes de commitear
+        run: |
+          node -e "
+            const fs = require('fs');
+            const players = JSON.parse(fs.readFileSync('data/players.json', 'utf8'));
+            const squads = JSON.parse(fs.readFileSync('data/squads.json', 'utf8'));
+            const legends = players.filter((p) => p.legendary).length;
+            const problemas = [];
+            if (players.length < 2500) problemas.push('players.json bajó a ' + players.length + ' (mínimo 2500)');
+            if (squads.length < 150) problemas.push('squads.json bajó a ' + squads.length + ' (mínimo 150)');
+            if (legends < 30) problemas.push('leyendas: ' + legends + ' (mínimo 30)');
+            if (players.some((p) => !Number.isFinite(p.rating))) problemas.push('hay jugadores sin rating numérico');
+            if (problemas.length) {
+              console.error('Base inválida tras el scrape:\n - ' + problemas.join('\n - '));
+              process.exit(1);
+            }
+            console.log('Base OK: ' + players.length + ' jugadores, ' + squads.length + ' planteles, ' + legends + ' leyendas');
+          "
+        id: validar
+
+      - name: Descartar datos si la validación falló
+        if: failure() && steps.validar.conclusion == 'failure'
+        run: git checkout -- data/
+
       - name: Build app
         run: npm run build
 
