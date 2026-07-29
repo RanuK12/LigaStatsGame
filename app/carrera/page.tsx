@@ -401,6 +401,7 @@ function CareerDashboard() {
   const { career, simulateNextSeason, acceptOffer, declineOffers, retire, resetCareer } = useCareerStore()
   const fichaRef = useRef<HTMLDivElement>(null)
   const [exporting, setExporting] = useState(false)
+  const [exportError, setExportError] = useState<string | null>(null)
 
   const [selectedOptionId, setSelectedOptionId] = useState<string>("train_finishing")
   const [revealSeason, setRevealSeason] = useState<SeasonResult | null>(null)
@@ -425,10 +426,13 @@ function CareerDashboard() {
   async function handleExport(kind: "png" | "jpg" | "pdf") {
     if (!fichaRef.current) return
     setExporting(true)
+    setExportError(null)
     try {
       if (kind === "png") await downloadFichaPng(fichaRef.current, career!.player.name)
       else if (kind === "jpg") await downloadFichaJpg(fichaRef.current, career!.player.name)
       else await downloadFichaPdf(fichaRef.current, career!.player.name)
+    } catch (e) {
+      setExportError(e instanceof Error ? e.message : "No se pudo generar la ficha")
     } finally {
       setExporting(false)
     }
@@ -827,9 +831,14 @@ function CareerDashboard() {
               <>
                 <span className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider block text-center font-sport">Descargá tu ficha final HD</span>
                 <div className="grid grid-cols-3 gap-2 font-sport">
-                  <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PNG HD"}</button>
-                  <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "JPG HD"}</button>
-                  <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "..." : "PDF HD"}</button>
+                  <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "PNG HD"}</button>
+                  <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "JPG HD"}</button>
+                  <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "PDF HD"}</button>
+                </div>
+                {exportError && (
+                  <p className="text-center text-[10px] text-red-300 font-sport uppercase tracking-wider">{exportError}</p>
+                )}
+                <div className="hidden">
                 </div>
               </>
             ) : (

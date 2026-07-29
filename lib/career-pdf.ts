@@ -11,24 +11,36 @@
 
 const BG = '#03060d'
 
+/** Corre `p`, pero si tarda más de `ms` sigue de largo en vez de quedarse esperando. */
+function conLimite<T>(p: Promise<T>, ms: number, siFalla: T): Promise<T> {
+  return Promise.race([p, new Promise<T>((r) => setTimeout(() => r(siFalla), ms))])
+}
+
 async function esperarRecursos(node: HTMLElement): Promise<void> {
   try {
-    await (document as Document & { fonts?: FontFaceSet }).fonts?.ready
+    await conLimite((document as Document & { fonts?: FontFaceSet }).fonts?.ready ?? Promise.resolve(), 3000, undefined as never)
   } catch {
     /* noop */
   }
+  // Una ficha de 15 temporadas tiene ~17 escudos. Si alguno no dispara ni onload ni onerror
+  // (pasa con imágenes que quedan pendientes), la espera no terminaba nunca y el botón se
+  // quedaba en "..." para siempre. Con tope: la ficha sale, y a lo sumo sin ese escudo.
   const imgs = Array.from(node.querySelectorAll('img'))
-  await Promise.all(
-    imgs.map(
-      (img) =>
-        new Promise<void>((resolve) => {
-          if (img.complete) resolve()
-          else {
-            img.onload = () => resolve()
-            img.onerror = () => resolve()
-          }
-        }),
+  await conLimite(
+    Promise.all(
+      imgs.map(
+        (img) =>
+          new Promise<void>((resolve) => {
+            if (img.complete) resolve()
+            else {
+              img.onload = () => resolve()
+              img.onerror = () => resolve()
+            }
+          }),
+      ),
     ),
+    4000,
+    [] as never,
   )
 }
 
@@ -37,8 +49,12 @@ async function capturar(node: HTMLElement, tipo: 'png' | 'jpeg'): Promise<{ data
   await esperarRecursos(node)
 
   const rect = node.getBoundingClientRect()
+  // Escala adaptativa: una carrera de 15 temporadas da una ficha de ~1300px de alto, y a 3x
+  // son casi 8 megapíxeles — tardaba 36 segundos en generarse. A 2x sigue siendo nítida para
+  // compartir o imprimir y baja el tiempo a un tercio. Las fichas cortas mantienen el 3x.
+  const escala = rect.height > 900 ? 2 : 3
   const opciones = {
-    pixelRatio: 3, // retina: nítido para imprimir o compartir
+    pixelRatio: escala, // retina: nítido para imprimir o compartir
     backgroundColor: BG,
     cacheBust: true,
     width: Math.ceil(rect.width),
@@ -55,11 +71,16 @@ async function capturar(node: HTMLElement, tipo: 'png' | 'jpeg'): Promise<{ data
     filter: (el: HTMLElement) => !(el.dataset && el.dataset.exportar === 'no'),
   }
 
-  const dataUrl = tipo === 'png' ? await toPng(node, opciones) : await toJpeg(node, { ...opciones, quality: 0.98 })
+  const dataUrl = await conLimite(
+    tipo === 'png' ? toPng(node, opciones) : toJpeg(node, { ...opciones, quality: 0.98 }),
+    20000,
+    '',
+  )
+  if (!dataUrl) throw new Error('La exportación tardó demasiado. Probá de nuevo.')
   return {
     dataUrl,
-    width: Math.ceil(rect.width * 3),
-    height: Math.ceil(rect.height * 3),
+    width: Math.ceil(rect.width * escala),
+    height: Math.ceil(rect.height * escala),
   }
 }
 
