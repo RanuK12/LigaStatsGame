@@ -106,7 +106,6 @@ const saltados = []
 
 for (const eq of equipos) {
   const club = clubPorId.get(eq.clubId)
-  if (!eq.listo) { saltados.push(`${eq.clubId} ${eq.season}: plantel incompleto`); continue }
   if (!club) { saltados.push(`${eq.clubId} ${eq.season}: el club no está en clubs.json`); continue }
   if (temporadasOcupadas.has(`${eq.clubId}|${eq.season}`)) {
     saltados.push(`${eq.clubId} ${eq.season}: esa temporada ya está en el juego`)
