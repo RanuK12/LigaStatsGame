@@ -64,16 +64,38 @@ export function rankFromElo(elo: number): Rank {
  * El rendimiento va de +1 (campeón) a -1 (último): un draft flojo RESTA puntos.
  * Antes hasta el peor torneo posible sumaba, así que cualquier partida engordaba la tabla.
  */
+export type TorneoTipo = 'liga' | 'copa' | 'sudamericana' | 'libertadores'
+
+/**
+ * Cuánto vale cada torneo. Las copas continentales valen más porque no se eligen: hay que
+ * clasificar con la Liga para poder jugarlas, y jugás contra clubes de todo el continente.
+ */
+const BASE_POR_TORNEO: Record<TorneoTipo, number> = {
+  liga: 100,
+  copa: 70,
+  sudamericana: 120,
+  libertadores: 150,
+}
+
 export function tournamentPoints(opts: {
-  type: 'liga' | 'copa'
+  type: TorneoTipo
   pos: number
   totalTeams: number
   isChampion: boolean
 }): number {
   const { type, pos, totalTeams, isChampion } = opts
-  const base = type === 'liga' ? 100 : 70
+  const base = BASE_POR_TORNEO[type] ?? 70
   const perf = totalTeams > 1 ? 1 - (2 * (pos - 1)) / (totalTeams - 1) : 0 // 1º = +1, mitad = 0, último = -1
   const champ = isChampion ? 40 : 0
-  const descenso = pos > totalTeams - 4 ? -20 : 0 // terminar en zona de descenso duele
+  // El descenso es de la Liga. En una copa de eliminación directa terminar abajo es quedar
+  // afuera en primera ronda, no descender: no corresponde castigarlo dos veces.
+  const descenso = type === 'liga' && pos > totalTeams - 4 ? -20 : 0
   return Math.round(base * perf + champ + descenso)
+}
+
+/** Plaza continental que deja la Liga: 1° a 4° van a Libertadores, 5° a 8° a Sudamericana. */
+export function plazaPorPuesto(pos: number): 'libertadores' | 'sudamericana' | null {
+  if (pos >= 1 && pos <= 4) return 'libertadores'
+  if (pos >= 5 && pos <= 8) return 'sudamericana'
+  return null
 }
