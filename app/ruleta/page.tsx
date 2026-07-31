@@ -186,13 +186,17 @@ export default function RuletaPage() {
                   const endAngle = (i + 1) * sectorAngle
                   const startRad = (startAngle - 90) * Math.PI / 180
                   const endRad = (endAngle - 90) * Math.PI / 180
-                  const x1 = 50 + 50 * Math.cos(startRad)
-                  const y1 = 50 + 50 * Math.sin(startRad)
-                  const x2 = 50 + 50 * Math.cos(endRad)
-                  const y2 = 50 + 50 * Math.sin(endRad)
+                  // Redondeado a tres decimales: el último bit de un coseno puede diferir entre el
+                  // Node que genera el HTML y el navegador que lo hidrata, y React lo reporta como
+                  // que el atributo no coincide. A esta escala, tres decimales no se ven.
+                  const r3 = (n: number) => Number(n.toFixed(3))
+                  const x1 = r3(50 + 50 * Math.cos(startRad))
+                  const y1 = r3(50 + 50 * Math.sin(startRad))
+                  const x2 = r3(50 + 50 * Math.cos(endRad))
+                  const y2 = r3(50 + 50 * Math.sin(endRad))
                   const midRad = ((startAngle + endAngle) / 2 - 90) * Math.PI / 180
-                  const textX = 50 + 34 * Math.cos(midRad)
-                  const textY = 50 + 34 * Math.sin(midRad)
+                  const textX = r3(50 + 34 * Math.cos(midRad))
+                  const textY = r3(50 + 34 * Math.sin(midRad))
                   // Paleta celeste/navy visible sobre el fondo oscuro (el texto es blanco).
                   const colors = ['#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73']
                   const textAngle = (startAngle + endAngle) / 2

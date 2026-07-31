@@ -18,10 +18,16 @@ import { loadDaily, completadoHoy, bonusForStreak } from "@/lib/daily-progress"
 export default function DailyCard() {
   const [datos, setDatos] = useState<{ streak: number; hecho: boolean } | null>(null)
   const [faltan, setFaltan] = useState("")
+  // El reto del día y su número dependen de la fecha DEL USUARIO, y el sitio se genera estático
+  // desde un servidor que puede estar en otra zona horaria (o simplemente en otro día). Calcularlo
+  // durante el render hacía que el HTML del servidor no coincidiera con el del navegador: React
+  // tiraba los errores 418/423/425 y redibujaba la página entera del lado del cliente.
+  const [hoy, setHoy] = useState<string | null>(null)
 
   useEffect(() => {
     const p = loadDaily()
     setDatos({ streak: p.streak, hecho: completadoHoy(p) })
+    setHoy(localYmd())
   }, [])
 
   useEffect(() => {
@@ -36,9 +42,18 @@ export default function DailyCard() {
     return () => clearInterval(id)
   }, [])
 
-  const reto = challengeForDate(localYmd())
+  const reto = hoy ? challengeForDate(hoy) : null
   const streak = datos?.streak ?? 0
   const hecho = datos?.hecho ?? false
+
+  // Hasta que monte, el mismo hueco: nada que el servidor pueda escribir distinto.
+  if (!reto) {
+    return (
+      <section className="relative z-10 max-w-6xl mx-auto px-4 pt-6">
+        <div className="h-[168px] animate-pulse rounded-3xl border border-[#74ACDF]/20 bg-[#0c1728]/60 sm:h-[136px]" />
+      </section>
+    )
+  }
 
   return (
     <section className="relative z-10 max-w-6xl mx-auto px-4 pt-6">
