@@ -58,7 +58,9 @@ function LeaderboardRow({ rank, s, esVos, historial }: {
 
 export default function LeaderboardPage() {
   const [scores, setScores] = useState<GameScore[]>([])
-  const [tab, setTab] = useState<'global' | 'online'>('global')
+  // Se abre en el ranking global: el que entra a "Tabla de líderes" viene a ver quién va ganando,
+  // no su propio historial. Abrir en "mis partidas" con cero partidas jugadas es una pantalla vacía.
+  const [tab, setTab] = useState<'global' | 'online'>('online')
   const [loadingOnline, setLoadingOnline] = useState(false)
   // Puesto contado en la base, no dentro de las filas descargadas.
   const [rankGlobal, setRankGlobal] = useState<{ puesto: number; total: number } | null>(null)
@@ -102,8 +104,10 @@ export default function LeaderboardPage() {
     // "Mis partidas" es el historial: ahí TIENEN que estar todas, una por partida jugada, porque
     // es lo que el jugador viene a ver. La reducción a una fila por persona es del ranking global,
     // donde el que jugó veinte veces ocupaba veinte puestos y corría a todos los demás.
+    // "Mis partidas" es TU historial: una fila por partida jugada, la más reciente primero. Los DT
+    // de la casa no van acá, que no son partidas tuyas; su lugar es el ranking, como referencia.
     if (tab !== 'online') {
-      return [...SEED_RIVALS, ...scores].sort((a, b) => b.elo - a.elo || b.pts - a.pts)
+      return [...scores].sort((a, b) => (b.date || '').localeCompare(a.date || ''))
     }
     const mejorPorNombre = new Map<string, GameScore>()
     for (const f of scores) {
@@ -113,7 +117,11 @@ export default function LeaderboardPage() {
         mejorPorNombre.set(clave, f)
       }
     }
-    return [...mejorPorNombre.values()].sort((a, b) => b.elo - a.elo || b.pts - a.pts)
+    const reales = [...mejorPorNombre.values()]
+    // Mientras no haya jugadores reales, los DT de la casa dan contra quién medirse. En cuanto
+    // haya gente de verdad, se van: un ranking con rivales inventados no significa nada.
+    const filas = reales.length > 0 ? reales : SEED_RIVALS
+    return filas.sort((a, b) => b.elo - a.elo || b.pts - a.pts)
   }, [scores, tab])
   const miPuesto = useMemo(() => {
     if (!user?.isLoggedIn) return null
@@ -175,7 +183,8 @@ export default function LeaderboardPage() {
           <p className="text-center text-sm text-slate-400 py-10">Cargando ranking global...</p>
         ) : ranked.length === 0 ? (
           <div className="text-center py-14">
-            <p className="text-slate-300 font-bold">{tab === 'online' ? 'Todavía no hay ranking global.' : 'Jugá tu primera temporada para entrar al ranking.'}</p>
+            <p className="text-slate-300 font-bold">{tab === 'online' ? 'Todavía no hay ranking global.' : 'Todavía no jugaste ninguna partida.'}</p>
+            <p className="mt-1.5 text-xs text-slate-500">{tab === 'online' ? 'Sé el primero en entrar.' : 'Armá tu 11, simulá un torneo y acá te va a quedar el historial.'}</p>
             <Link href="/draft?mode=liga" className="btn-primary inline-block mt-5 px-7 py-3 text-xs">JUGAR AHORA</Link>
           </div>
         ) : (
@@ -198,7 +207,7 @@ export default function LeaderboardPage() {
         <div className="text-center mt-8 text-xs text-slate-500">
           <p>{tab === 'online'
             ? `Top ${Math.min(ranked.length, 50)} del ranking global${rankGlobal ? ` · ${rankGlobal.total} jugadores` : ''} · una fila por DT, con su mejor ELO`
-            : `${ranked.length} partidas registradas en este dispositivo`}</p>
+            : `${ranked.length} ${ranked.length === 1 ? 'partida jugada' : 'partidas jugadas'} en este dispositivo`}</p>
           {tab === 'online' && !user?.isLoggedIn && (
             <p className="mt-2 text-[11px] text-amber-300/80">
               Como invitado no entrás acá. Creá una cuenta para que tus torneos cuenten.
