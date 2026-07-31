@@ -61,7 +61,7 @@ export const ARG_CLUBS: CareerClub[] = (clubsData as any[])
 
 export const SUDAM_CLUBS: CareerClub[] = CONTINENTAL_CLUBS.filter(
   (c) => !ARG_CLUBS.some((a) => a.id === c.id),
-).map((c) => ({ id: c.id, name: c.name, strength: c.strength.overall, continental: true, region: 'sudam' as Region }))
+).map((c) => ({ id: c.id, name: c.name, strength: c.nivel, continental: true, region: 'sudam' as Region }))
 
 export const EURO_CLUBS: CareerClub[] = [
   { id: 'real-madrid', name: 'Real Madrid', strength: 90, continental: true, region: 'euro', flag: '🇪🇸' },
@@ -86,7 +86,7 @@ export function findClub(id: string): CareerClub | undefined {
 
 function argClubStrength(titles: number, libertadores: number, id: string): number {
   const cont = CONTINENTAL_CLUBS.find((c) => c.id === id)
-  if (cont) return cont.strength.overall
+  if (cont) return cont.nivel
   return clamp(Math.round(64 + titles * 0.4 + libertadores * 1.5), 64, 82)
 }
 

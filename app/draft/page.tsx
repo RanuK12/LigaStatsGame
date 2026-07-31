@@ -372,7 +372,9 @@ function DraftInner() {
     })
 
     // ── RANKING: ELO + Tabla de Líderes ──
-    const total = r.table?.length || 28
+    // Las copas continentales se juegan con 32 equipos: el puesto sale del motor y la escala tiene
+    // que ser la de la copa, no la de la liga de 28.
+    const total = continental ? 32 : (r.table?.length || 28)
     const pos = r.playerPos ?? (r.isChampion ? 1 : Math.round(total / 2))
     const pts = tournamentPoints({ type, pos, totalTeams: total, isChampion: r.isChampion })
     const currentElo = user?.elo ?? 1000

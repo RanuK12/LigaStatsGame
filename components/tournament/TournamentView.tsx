@@ -711,10 +711,37 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 </div>
               )}
 
+              {/* Tabla del grupo (solo copas continentales: la Copa Argentina no tiene grupos) */}
+              {result.type === "copa" && result.groupTable && tab === "stats" && (
+                <div className="card-gradient rounded-2xl p-4 border border-white/5 mt-4">
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">
+                    FASE DE GRUPOS · PASAN LOS DOS PRIMEROS
+                  </h3>
+                  <div className="space-y-1">
+                    {result.groupTable.map((row, i) => {
+                      const soyYo = row.name === result.teamLabel.replace(/ \(.*\)$/, "")
+                      return (
+                        <div key={row.name} className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-xs ${
+                          soyYo ? "bg-[#74ACDF]/10 border-[#74ACDF]/30" : i < 2 ? "bg-emerald-500/5 border-emerald-400/15" : "bg-slate-950/20 border-white/5"
+                        }`}>
+                          <span className={`w-5 text-center font-black font-sport ${i < 2 ? "text-emerald-300" : "text-slate-600"}`}>{i + 1}</span>
+                          <span className={`flex-1 truncate font-bold ${soyYo ? "text-white" : "text-slate-400"}`}>{row.name}</span>
+                          <span className="text-[10px] text-slate-500 font-sport">{row.w}-{row.d}-{row.l}</span>
+                          <span className="w-10 text-right text-[10px] text-slate-500 font-sport">{row.gf}:{row.ga}</span>
+                          <span className="w-7 text-right font-black text-white font-sport">{row.pts}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Copa rounds bracket (if Copa) */}
               {result.type === "copa" && result.rounds && tab === "stats" && (
                 <div className="card-gradient rounded-2xl p-4 border border-white/5 mt-4">
-                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">CRUCES DE LA COPA ARGENTINA</h3>
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">
+                    {result.groupTable ? `CAMINO EN LA ${result.teamLabel.replace(/^.*\(|\)$/g, "").toUpperCase()}` : "CRUCES DE LA COPA ARGENTINA"}
+                  </h3>
                   {result.rounds.map((round: any, ri: number) => (
                     <div key={ri} className="mb-5 last:mb-0">
                       <h4 className="text-[10px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport mb-2.5">{round.round}</h4>
@@ -725,12 +752,18 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                             <div key={mi} className={`flex items-center justify-between text-xs px-3 py-2 rounded-2xl border ${
                               isMe ? "bg-[#74ACDF]/8 border-[#74ACDF]/20 shadow-[0_0_12px_rgba(116,172,223,0.04)]" : "bg-slate-950/20 border-white/5"
                             }`}>
-                              <span className={`flex-1 text-right truncate max-w-[120px] font-bold ${m.homeGoals > m.awayGoals ? "text-white" : "text-slate-500"}`}>{m.home}</span>
+                              <span className={`flex flex-1 items-center justify-end gap-1.5 truncate font-bold ${m.homeGoals > m.awayGoals ? "text-white" : "text-slate-500"}`}>
+                                <span className="truncate max-w-[110px]">{m.home}</span>
+                                {m.homeId && <img src={`/logos/continental/${m.homeId}.svg`} alt="" className="h-5 w-5 shrink-0 object-contain" />}
+                              </span>
                               <span className="px-3.5 py-0.5 rounded-lg bg-slate-950 font-bold text-[10px] text-slate-300 font-sport">
                                 {m.homeGoals} - {m.awayGoals}
                                 {m.penalties && <span className="text-[#FFD700] ml-1">({m.penalties}p)</span>}
                               </span>
-                              <span className={`flex-1 truncate max-w-[120px] font-bold ${m.awayGoals > m.homeGoals ? "text-white" : "text-slate-500"}`}>{m.away}</span>
+                              <span className={`flex flex-1 items-center gap-1.5 truncate font-bold ${m.awayGoals > m.homeGoals ? "text-white" : "text-slate-500"}`}>
+                                {m.awayId && <img src={`/logos/continental/${m.awayId}.svg`} alt="" className="h-5 w-5 shrink-0 object-contain" />}
+                                <span className="truncate max-w-[110px]">{m.away}</span>
+                              </span>
                             </div>
                           )
                         })}

@@ -171,6 +171,9 @@ export interface SeasonResult {
 export interface ScheduleMatch {
   home: string;
   away: string;
+  /** Id del club continental, para mostrar su escudo. El equipo del usuario no lo lleva. */
+  homeId?: string;
+  awayId?: string;
   homeGoals: number;
   awayGoals: number;
   isPlayerHome: boolean;
@@ -230,6 +233,9 @@ export interface TournamentResult {
   topAssisters: TournamentPlayerStats[];
   schedule?: ScheduleMatch[];
   rounds?: RoundMatch[];
+  /** Copas continentales: la tabla del grupo y el puesto en el que quedaste */
+  groupTable?: LigaTeamRow[];
+  groupPos?: number;
   eliminated?: boolean;
   eliminatedRound?: string;
   teamLabel: string;
