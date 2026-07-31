@@ -10,7 +10,8 @@ import { normalizeSquads } from "@/lib/data-normalizers"
 import { usePlayersCore } from "@/lib/data-loader"
 import { useUserStore } from "@/lib/user-store"
 import { calculateElo, submitOnlineScore } from "@/lib/supabase"
-import { tournamentPoints } from "@/lib/ranking"
+import { tournamentPoints, plazaPorPuesto, type TorneoTipo } from "@/lib/ranking"
+import { simulateContinentalTournament } from "@/lib/copa-libertadores"
 import { saveLocalScore, type GameScore } from "@/lib/scores"
 import {
   formations,
@@ -180,7 +181,7 @@ function DraftInner() {
   const { players: playersCore, error: playersError } = usePlayersCore()
   const allP = useMemo(() => playersCore ?? [], [playersCore])
   const allS = useMemo(() => normalizeSquads(squadsData), [])
-  const { user, updateElo, addTitle } = useUserStore()
+  const { user, updateElo, addTitle, otorgarPlaza, usarPlaza } = useUserStore()
 
   // ── Game State ──
   const [started, setStarted] = useState(false)
@@ -342,7 +343,7 @@ function DraftInner() {
   }, [drafted])
 
   // ── SIMULATION ──
-  const startSim = useCallback((type: "liga" | "copa") => {
+  const startSim = useCallback((type: TorneoTipo) => {
     const isP = (x: any): x is Player => x && typeof x.id === "string"
     const players = drafted.filter(isP)
     if (players.length < 11) return
@@ -352,9 +353,14 @@ function DraftInner() {
       playerIds: players.map(p => p.id) as [string, ...string[]],
     }
     const score = teamScore || partialScore
-    const r = type === "liga"
+    const continental = type === "libertadores" || type === "sudamericana"
+    const r = continental
+      ? simulateContinentalTournament(players, virtualSquad, f, score, type)
+      : type === "liga"
       ? simulateSeasonWithStats(players, virtualSquad, allS, allP, f, score)
       : simulateCopaWithStats(players, virtualSquad, allS, allP, f, score)
+    // La plaza se gasta al jugarla: una clasificación, una copa.
+    if (continental) usarPlaza()
     setSimResult(r)
     setPhase("sim")
     trackEvent(EVENTOS.torneoSimulado, { tipo: type, puntaje: Math.round(score), campeon: !!r.isChampion })
@@ -388,6 +394,20 @@ function DraftInner() {
       date: new Date().toISOString(),
     }
     setEloTorneo({ nuevo: newElo, delta, pts })
+
+    // Clasificación continental: la deja SOLO la Liga, y hay que tener cuenta para guardarla.
+    // Es el mejor motivo para registrarse que tiene el juego: te la ganaste jugando.
+    if (type === "liga" && user?.isLoggedIn) {
+      const plaza = plazaPorPuesto(pos)
+      if (plaza) {
+        otorgarPlaza({ torneo: plaza, puesto: pos, equipo: virtualSquad.label, fecha: new Date().toISOString() })
+        setBurst({
+          label: plaza === "libertadores" ? "¡CLASIFICASTE A LA LIBERTADORES!" : "¡CLASIFICASTE A LA SUDAMERICANA!",
+          tone: "oro",
+        })
+      }
+    }
+
     saveLocalScore(entry)
     const { id: _omit, ...online } = entry
     void submitOnlineScore(online) // fire & forget (no-op sin Supabase)
@@ -733,12 +753,40 @@ function DraftInner() {
                 Tu <strong className="text-slate-200">ELO</strong> se mueve según en qué puesto termines: salir
                 campeón te catapulta, pelear el descenso te resta. La <strong className="text-slate-200">Liga</strong>{" "}
                 vale más que la <strong className="text-slate-200">Copa</strong> porque son 28 fechas contra 32
-                equipos de eliminación directa. Con el ELO subís de Bronce a Leyenda.{" "}
+                equipos de eliminación directa. Y si terminás entre los <strong className="text-slate-200">8
+                primeros</strong> de la Liga te ganás un lugar en la Libertadores o la Sudamericana, que valen
+                más que todo lo demás.{" "}
                 <Link href="/leaderboard" className="text-[#74ACDF] hover:text-white underline underline-offset-2">
                   Ver el ranking
                 </Link>
               </p>
             </div>
+
+            {/* La plaza que te ganaste clasificando con la Liga. No es un modo que se elige:
+                está acá porque saliste entre los primeros, y se gasta al jugarla. */}
+            {user?.plaza && (
+              <div className="max-w-xl mx-auto mb-5 rounded-2xl border border-amber-400/40 bg-gradient-to-b from-amber-400/10 to-slate-950/40 px-5 py-4 text-center">
+                <p className="text-[10px] font-black font-sport uppercase tracking-widest text-[#F6C750]">
+                  Clasificaste
+                </p>
+                <p className="mt-1.5 text-[12px] leading-relaxed text-slate-300 font-sans">
+                  Saliste <strong className="text-white">{user.plaza.puesto}°</strong> con{" "}
+                  {user.plaza.equipo}: te ganaste un lugar en la{" "}
+                  <strong className="text-white">
+                    {user.plaza.torneo === "libertadores" ? "Copa Libertadores" : "Copa Sudamericana"}
+                  </strong>
+                  . Se juega con el 11 que tengas armado ahora.
+                </p>
+                <MagneticButton>
+                  <button
+                    onClick={() => startSim(user.plaza!.torneo)}
+                    className="btn-gold mt-3 px-8 py-3 text-[11px] font-black uppercase tracking-widest font-sport rounded-2xl"
+                  >
+                    Jugar la {user.plaza.torneo === "libertadores" ? "Libertadores" : "Sudamericana"}
+                  </button>
+                </MagneticButton>
+              </div>
+            )}
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6 font-sport">
               <MagneticButton>

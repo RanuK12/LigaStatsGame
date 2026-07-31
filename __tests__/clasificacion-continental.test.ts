@@ -1,0 +1,47 @@
+import { describe, it, expect } from 'vitest'
+import { tournamentPoints, plazaPorPuesto } from '@/lib/ranking'
+
+describe('plaza continental por puesto en la Liga', () => {
+  it('1° a 4° van a Libertadores', () => {
+    expect([1, 2, 3, 4].map(plazaPorPuesto)).toEqual(
+      ['libertadores', 'libertadores', 'libertadores', 'libertadores'],
+    )
+  })
+
+  it('5° a 8° van a Sudamericana', () => {
+    expect([5, 6, 7, 8].map(plazaPorPuesto)).toEqual(
+      ['sudamericana', 'sudamericana', 'sudamericana', 'sudamericana'],
+    )
+  })
+
+  it('del 9° para abajo no clasifica nadie', () => {
+    expect([9, 14, 28].map(plazaPorPuesto)).toEqual([null, null, null])
+  })
+})
+
+describe('cuánto vale cada torneo', () => {
+  const campeon = (type: Parameters<typeof tournamentPoints>[0]['type']) =>
+    tournamentPoints({ type, pos: 1, totalTeams: 16, isChampion: true })
+
+  it('las copas continentales valen más que la liga, y la liga más que la copa local', () => {
+    expect(campeon('libertadores')).toBeGreaterThan(campeon('sudamericana'))
+    expect(campeon('sudamericana')).toBeGreaterThan(campeon('liga'))
+    expect(campeon('liga')).toBeGreaterThan(campeon('copa'))
+  })
+
+  it('un torneo flojo resta, también en las continentales', () => {
+    expect(tournamentPoints({ type: 'libertadores', pos: 16, totalTeams: 16, isChampion: false }))
+      .toBeLessThan(0)
+  })
+
+  it('el castigo por descenso es solo de la liga', () => {
+    // Mismo puesto y mismo total: la diferencia entre las dos bases no puede incluir el -20 del
+    // descenso, porque en una copa de eliminación directa terminar abajo es quedar afuera, no
+    // descender.
+    const liga = tournamentPoints({ type: 'liga', pos: 26, totalTeams: 28, isChampion: false })
+    const copa = tournamentPoints({ type: 'copa', pos: 26, totalTeams: 28, isChampion: false })
+    const perf = 1 - (2 * 25) / 27
+    expect(liga).toBe(Math.round(100 * perf - 20))
+    expect(copa).toBe(Math.round(70 * perf))
+  })
+})

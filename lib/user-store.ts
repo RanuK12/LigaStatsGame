@@ -3,6 +3,18 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { supabase } from './supabase'
 
+/**
+ * Plaza continental ganada con la Liga. Vive en el perfil, no en la partida: es lo que te
+ * quedaste para la próxima vez que entres, y por eso hace falta tener cuenta.
+ */
+export interface PlazaContinental {
+  torneo: 'libertadores' | 'sudamericana'
+  /** Con qué 11 y qué puesto la sacaste, para poder contarlo. */
+  puesto: number
+  equipo: string
+  fecha: string
+}
+
 export interface UserProfile {
   username: string
   email?: string
@@ -13,6 +25,8 @@ export interface UserProfile {
   favoriteClub?: string
   avatarUrl?: string
   isLoggedIn: boolean
+  /** Plaza pendiente de jugar. Se borra al usarla: una clasificación, una copa. */
+  plaza?: PlazaContinental
 }
 
 interface UserStore {
@@ -28,6 +42,8 @@ interface UserStore {
   loginGuest: (username: string) => void
   addTitle: () => void
   updateElo: (delta: number) => void
+  otorgarPlaza: (plaza: PlazaContinental) => void
+  usarPlaza: () => void
 }
 
 export const useUserStore = create<UserStore>()(
@@ -70,6 +86,21 @@ export const useUserStore = create<UserStore>()(
             },
           })
         }
+      },
+      otorgarPlaza: (plaza) => {
+        const current = get().user
+        // Si ya tenía una plaza sin jugar, gana la mejor: clasificar a Libertadores no puede
+        // pisarse con una Sudamericana sacada después.
+        if (!current) return
+        const previa = current.plaza
+        if (previa && previa.torneo === 'libertadores' && plaza.torneo === 'sudamericana') return
+        set({ user: { ...current, plaza } })
+      },
+      usarPlaza: () => {
+        const current = get().user
+        if (!current) return
+        const { plaza: _usada, ...resto } = current
+        set({ user: resto })
       },
       updateElo: (delta) => {
         const current = get().user
