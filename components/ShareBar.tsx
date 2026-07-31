@@ -4,6 +4,7 @@ import { useState } from "react"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 
 const SITE_URL = "https://gambetafutbol.games/"
+const CUENTA_X = "GambetafutbolAR"
 
 /**
  * Barra para compartir el resultado (draft o carrera) con un texto ya armado.
@@ -24,11 +25,14 @@ export default function ShareBar({
   className?: string
   titulo?: string
 }) {
-  const [estado, setEstado] = useState<"" | "generando" | "listo" | "error">("")
+  const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "error">("")
   const [copiado, setCopiado] = useState(false)
 
   const textoConLink = `${texto}\n\n🎮 ${SITE_URL}`
-  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(texto)}&url=${encodeURIComponent(SITE_URL)}&hashtags=Gambeta,FutbolArgentino`
+  // La mención es lo que convierte un compartido en un seguidor: sin ella el tweet no lleva a
+  // ninguna cuenta. Y sin hashtags: amontonados no traen a nadie y hacen ver la cuenta como marca.
+  const textoX = `${texto}\n\nvía @${CUENTA_X}`
+  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textoX)}&url=${encodeURIComponent(SITE_URL)}`
   const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}&quote=${encodeURIComponent(texto)}`
   const waUrl = `https://wa.me/?text=${encodeURIComponent(textoConLink)}`
 
@@ -71,6 +75,57 @@ export default function ShareBar({
     setEstado("listo")
   }
 
+  /**
+   * Compartir en X con la imagen.
+   *
+   * El intent de X no acepta adjuntos: solo texto y link. Un tweet con imagen rinde mucho más que
+   * uno con link pelado, así que se prepara la imagen antes de abrir el compositor. En el celular
+   * va por el share nativo (que sí adjunta); en escritorio se deja en el portapapeles para pegar
+   * con ⌘V, y si el navegador no lo permite, se descarga. Nunca se queda sin abrir el compositor.
+   */
+  async function compartirEnX(e: React.MouseEvent<HTMLAnchorElement>) {
+    trackEvent(EVENTOS.compartido, { red: "x" })
+    if (!imagen) return // sin imagen, el link abre normal
+
+    e.preventDefault()
+    setEstado("generando")
+    let blob: Blob
+    try {
+      blob = await imagen()
+    } catch {
+      setEstado("error")
+      window.open(xUrl, "_blank", "noopener,noreferrer")
+      return
+    }
+
+    const file = new File([blob], "gambeta.png", { type: "image/png" })
+    const nav = navigator as Navigator & { canShare?: (d: unknown) => boolean }
+    if (nav.share && nav.canShare?.({ files: [file] })) {
+      try {
+        await nav.share({ files: [file], text: `${textoX}\n\n${SITE_URL}`, title: "Gambeta" })
+        setEstado("listo")
+        return
+      } catch {
+        /* canceló o no se pudo: sigue por el compositor web */
+      }
+    }
+
+    try {
+      const CI = (window as unknown as { ClipboardItem?: typeof ClipboardItem }).ClipboardItem
+      if (CI && navigator.clipboard?.write) {
+        await navigator.clipboard.write([new CI({ "image/png": blob })])
+        setEstado("copiada")
+      } else {
+        descargar(blob)
+        setEstado("listo")
+      }
+    } catch {
+      descargar(blob)
+      setEstado("listo")
+    }
+    window.open(xUrl, "_blank", "noopener,noreferrer")
+  }
+
   async function copiarLink() {
     try {
       await navigator.clipboard.writeText(textoConLink)
@@ -109,13 +164,13 @@ export default function ShareBar({
             href={xUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent(EVENTOS.compartido, { red: "x" })}
+            onClick={compartirEnX}
             className={`${base} border-white/15 bg-[#0b0b0d] text-white hover:border-white/50`}
           >
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
-            Postear
+            {estado === "generando" ? "Preparando" : "Postear"}
           </a>
 
           {imagen && (
@@ -168,6 +223,11 @@ export default function ShareBar({
         {estado === "listo" && (
           <p className="mt-2 text-[10px] text-emerald-300 font-sport uppercase tracking-wider">
             Imagen lista: subila a tu historia
+          </p>
+        )}
+        {estado === "copiada" && (
+          <p className="mt-2 text-[10px] text-emerald-300 font-sport uppercase tracking-wider">
+            Imagen copiada: pegala en el tweet con ⌘V
           </p>
         )}
         {estado === "error" && (

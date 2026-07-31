@@ -5,7 +5,7 @@ import { trackEvent, EVENTOS } from "@/components/Analytics"
 import { motion } from "framer-motion"
 import { mpAlias, mpTiers } from "@/lib/donations"
 
-export default function DonationSection() {
+export default function DonationSection({ compacta = false }: { compacta?: boolean } = {}) {
   const [copied, setCopied] = useState(false)
 
   function copyAlias() {
@@ -17,7 +17,7 @@ export default function DonationSection() {
   }
 
   return (
-    <section id="apoyar" className="relative z-10 max-w-4xl mx-auto px-4 pb-20 scroll-mt-20">
+    <section id="apoyar" className={`relative z-10 mx-auto scroll-mt-20 ${compacta ? "max-w-2xl px-0 pt-6" : "max-w-4xl px-4 pb-20"}`}>
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -37,8 +37,13 @@ export default function DonationSection() {
           <h3 className="font-display text-2xl sm:text-3xl font-black text-white mb-2.5 uppercase tracking-tight">
             Bancá el proyecto ⚽
           </h3>
+          <p className="text-slate-400 text-xs sm:text-sm mb-2 max-w-lg mx-auto font-sans leading-relaxed">
+            Somos un grupo chico de programadores argentinos y a Gambeta lo pagamos de nuestro bolsillo.
+            No hay publicidad, no vendemos datos y no hay nada pago adentro del juego: lo hicimos para que
+            la gente se divierta.
+          </p>
           <p className="text-slate-400 text-xs sm:text-sm mb-7 max-w-md mx-auto font-sans leading-relaxed">
-            Cada aporte paga los servidores y libera funciones nuevas. Elegí tu forma de sumar: te lleva 10 segundos.
+            Lo que entra va a los servidores y a sumar jugadores y equipos nuevos. Te lleva 10 segundos.
           </p>
         </div>
 
