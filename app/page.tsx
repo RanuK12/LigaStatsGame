@@ -10,6 +10,7 @@ import type { Club, Squad } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
 import DonationSection from '@/components/DonationSection'
 import DailyCard from '@/components/DailyCard'
+import Novedades from '@/components/Novedades'
 import SuggestionBox from '@/components/SuggestionBox'
 import SolDeMayo from '@/components/ui/SolDeMayo'
 import dbStats from '@/data/derived/stats.json'
@@ -689,6 +690,9 @@ export default function HomePage() {
 
       {/* ── RETO DIARIO ── arriba de todo: es el único motivo para volver mañana */}
       <DailyCard />
+
+      {/* ── NOVEDADES ── lo que cambió esta semana: el home es donde la gente lee */}
+      <Novedades />
 
       {/* ── WORLD CUP BANNER ── */}
       <WorldCupBanner />

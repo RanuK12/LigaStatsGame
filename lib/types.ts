@@ -65,6 +65,10 @@ export const squadSchema = z.object({
   competition: z.string(),
   label: z.string(),
   playerIds: z.array(z.string()).min(1),
+  // Planteles históricos (1990-2014, scrapeados y cruzados contra tres fuentes): el hito es lo
+  // que se muestra cuando salen en la ruleta.
+  hito: z.string().optional(),
+  historico: z.boolean().optional(),
 });
 
 export const formatSchema = z.enum(['4-3-3', '4-4-2', '4-2-3-1', '3-5-2']);

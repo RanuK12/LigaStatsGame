@@ -16,6 +16,7 @@ const TARGET_IDS = [
   'riestra',
   'independiente-rivadavia',
   'aldosivi',
+  'arsenal',
 ]
 
 const OUT_DIRS = [path.join(ROOT, 'public', 'logos'), path.join(ROOT, 'public', 'logos', 'clubs')]

@@ -247,7 +247,9 @@ export function getSquadTier(squad: Squad, allPlayers: Player[]): { avg: number;
   const players = getSquadPlayers(squad, allPlayers);
   const avg = players.length === 0 ? 0 : players.reduce((s, p) => s + (p.rating || 60), 0) / players.length;
   const legendaryCount = players.filter(p => p.legendary).length;
-  const tier: SquadTier = avg >= 64 || legendaryCount >= 3 ? 'legendario' : avg >= 58 ? 'elite' : 'comun';
+  // Un plantel histórico (el Vélez del 94, el Boca de Bianchi) es legendario por lo que fue, no
+  // por el promedio: sale poco y tiene que sentirse un premio cuando sale.
+  const tier: SquadTier = squad.historico || avg >= 64 || legendaryCount >= 3 ? 'legendario' : avg >= 58 ? 'elite' : 'comun';
   return { avg: Math.round(avg), legendaryCount, tier };
 }
 
@@ -843,6 +845,24 @@ export const STAR_PITY_SPINS = 6;
 
 const esEstrella = (p: Player) => Boolean(p.legendary) || (p.rating || 0) >= STAR_RATING;
 
+// ── Planteles históricos: menos probables que los actuales ──
+// Salir el Boca de Bianchi tiene que ser un momento, y un momento que pasa siempre deja de
+// serlo. Entran al mismo bombo con menos peso, no por un camino aparte.
+export const HISTORICO_PESO = 0.4;
+
+const pesoDe = (sq: Squad) => (sq.historico ? HISTORICO_PESO : 1);
+
+/** Sorteo uniforme salvo por el peso de cada plantel. Con todos los pesos en 1 es el random de antes. */
+function sorteoPonderado(lista: Squad[]): Squad {
+  const total = lista.reduce((s, sq) => s + pesoDe(sq), 0);
+  let r = Math.random() * total;
+  for (const sq of lista) {
+    r -= pesoDe(sq);
+    if (r <= 0) return sq;
+  }
+  return lista[lista.length - 1];
+}
+
 /** ¿Este plantel tiene una estrella libre que pueda jugar en el puesto pedido? */
 export function squadHasStarFor(squad: Squad, allPlayers: Player[], slotPosition: string, drafted: Set<string>): boolean {
   return allPlayers.some(
@@ -882,7 +902,7 @@ export function spinSquadWithPity(
     if (conEstrella.length > 0) {
       const garantizada = (pity.spinsSinEstrella ?? 0) >= STAR_PITY_SPINS;
       if (garantizada || Math.random() < STAR_BASE_CHANCE) {
-        return conEstrella[Math.floor(Math.random() * conEstrella.length)];
+        return sorteoPonderado(conEstrella);
       }
     }
   }
@@ -901,20 +921,19 @@ export function spinSquadWithPity(
     if (goodSquads.length > 0) {
       // 65% chance to pick from good squads
       if (Math.random() < 0.65) {
-        const pick = goodSquads[Math.floor(Math.random() * goodSquads.length)];
-        return pick.sq;
+        return sorteoPonderado(goodSquads.map(x => x.sq));
       }
     }
   } else if (pity.consecutiveLow === 1) {
     // 1 consecutive low → 30% chance to get a decent squad
     const decentSquads = withRating.filter(x => x.avg >= 62);
     if (decentSquads.length > 0 && Math.random() < 0.30) {
-      return decentSquads[Math.floor(Math.random() * decentSquads.length)].sq;
+      return sorteoPonderado(decentSquads.map(x => x.sq));
     }
   }
 
   // Normal random pick
-  return eligible[Math.floor(Math.random() * eligible.length)];
+  return sorteoPonderado(eligible);
 }
 
 /** Update pity state after a player is picked */

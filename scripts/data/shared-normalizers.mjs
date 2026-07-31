@@ -204,6 +204,10 @@ function normalizeSquad(input) {
     competition: toStringValue(squad.competition, ''),
     label: toStringValue(squad.label, ''),
     playerIds: toArrayValue(squad.playerIds).map((playerId) => toStringValue(playerId, '')).filter(Boolean),
+    // Los planteles históricos traen su hito; el normalizador borraba todo campo que no
+    // conociera y el flag no llegaba nunca a la ruleta.
+    hito: toStringValue(squad.hito, ''),
+    historico: Boolean(squad.historico),
   }
 }
 
