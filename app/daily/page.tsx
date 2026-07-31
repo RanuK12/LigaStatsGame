@@ -29,15 +29,18 @@ function fmt(ms: number): string {
 }
 
 export default function DailyPage() {
-  // Se calcula en cliente para que ancle al día real del usuario y rote solo.
-  const [today] = useState(() => localYmd())
-  const challenge = challengeForDate(today)
-  const number = challengeNumber()
-  const [countdown, setCountdown] = useState(() => msUntilNextDay())
+  // TODO lo que depende de la fecha se calcula DESPUÉS de montar. El sitio se genera estático
+  // desde un servidor que puede estar en otro día que el usuario: calcularlo durante el render
+  // hacía que el HTML del servidor y el del navegador no coincidieran, y React redibujaba la
+  // página entera del lado del cliente (errores 418/423/425 en producción).
+  const [today, setToday] = useState<string | null>(null)
+  const [countdown, setCountdown] = useState(0)
   const user = useUserStore((s) => s.user)
   const [progreso, setProgreso] = useState<{ hecho: boolean; streak: number }>({ hecho: false, streak: 0 })
 
   useEffect(() => {
+    setToday(localYmd())
+    setCountdown(msUntilNextDay())
     const t = setInterval(() => setCountdown(msUntilNextDay()), 1000)
     return () => clearInterval(t)
   }, [])
@@ -47,6 +50,18 @@ export default function DailyPage() {
     setProgreso({ hecho: completadoHoy(p), streak: p.streak })
   }, [])
 
+  if (!today) {
+    return (
+      <div className="min-h-[calc(100vh-6rem)] px-4 py-10">
+        <section className="relative z-10 mx-auto max-w-2xl">
+          <div className="h-[420px] animate-pulse rounded-3xl border border-white/5 bg-slate-950/40" />
+        </section>
+      </div>
+    )
+  }
+
+  const challenge = challengeForDate(today)
+  const number = challengeNumber()
   const fecha = new Date().toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })
 
   return (
