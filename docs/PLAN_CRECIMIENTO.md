@@ -222,7 +222,27 @@ Cada torneo cierra con **su ficha**, igual que la carrera:
 Esto es lo que convierte "simulé un torneo" en "mirá cómo me fue", que es el único momento en que
 un jugador trae a otro.
 
-### 5.7 Libertadores y Sudamericana: se clasifica, no se elige
+### 5.7 Libertadores y Sudamericana: se clasifica, no se elige — HECHO, y después arreglado
+
+La clasificación salió en el PR #34: 1° a 4° Libertadores, 5° a 8° Sudamericana, la plaza vive en
+la cuenta, se gasta al jugarla y vale 150 y 120 contra los 100 de la Liga.
+
+Pero el torneo en sí estaba a medio hacer y **no se podía ganar**:
+
+- la "fase de grupos" eran tres partidos sueltos que no eliminaban a nadie;
+- los rivales estaban cargados en escala FIFA (72-84) y el motor de partidos usa otra: un once de
+  95 da 73 de overall. El equipo perfecto entraba último del grupo;
+- la Sudamericana era idéntica a la Libertadores, así que clasificar 5°-8° no cambiaba nada.
+
+Arreglado: grupo de cuatro ida y vuelta con tabla, llaves a doble partido con global y penales,
+final única, dos cuadros de 24 clubes con escudo propio, y el puesto en la copa entra al ranking
+(irse en el grupo ya no puntúa igual que perder la final). Con un once de 78, la Sudamericana se
+gana el 18 % de las veces y la Libertadores el 6 %.
+
+**Queda pendiente**: la plaza se guarda en el navegador (`ligastats_user_profile_v1`), no en
+Supabase. El login por Supabase sí es real, pero si cambiás de dispositivo, perdés la plaza.
+
+### 5.7 bis · Lo que decía el plan original
 
 La idea es que no sean un botón más sino **algo que te ganaste**, que es lo que hace que alguien
 vuelva al día siguiente:
@@ -335,6 +355,17 @@ Arreglo:
 
 ---
 
+## Lo que sigue, en orden
+
+1. **Álbum de figuritas** (§1.4). Es el gancho más fuerte de la lista y el que más trabajo pide.
+   Cada leyenda que sale en la ruleta queda en tu álbum. Coleccionar sin gastar plata, que es
+   cultura argentina pura.
+2. **¿Sabías que?** — datos curiosos que se *tiran* como un dado, con rareza y carta compartible.
+   Plan completo en `docs/PLAN_SABIAS_QUE.md`. Comparte mazo y mecánica con el álbum: conviene
+   construirlos juntos, no uno detrás del otro.
+3. **Páginas de contenido** por plantel histórico y por dato de rareza leyenda (§3.1). El dato ya
+   está cargado; falta escribir las páginas.
+
 ## Fase 6 — Consolidarnos en fútbol (más allá del trimestre)
 
 Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
@@ -377,6 +408,8 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 07-31 | Libertadores y Sudamericana por clasificación, con cuenta y puntos propios (PR #34) |
 | 07-31 | 38 planteles históricos en el bombo (1994-2021), cruzados contra tres fuentes (5.5) |
 | 07-31 | Card de novedades en el home, que se actualiza desde `data/novedades.json` |
+| 07-31 | Los ídolos de cada plantel histórico salen de nuestra base: Verón, Riquelme, Palermo |
+| 07-31 | La Libertadores y la Sudamericana con fases reales, escudos y dos cuadros distintos |
 
 ---
 
