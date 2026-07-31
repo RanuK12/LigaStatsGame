@@ -286,9 +286,9 @@ alguien vuelva a intentar con otro 11.
 
 ### 5.5 Los equipos históricos — HECHO
 
-**38 planteles históricos, de 1994 a 2021, ya están en el bombo.** El Vélez del 94 de Bianchi y
+**36 planteles históricos, de 1994 a 2021, ya están en el bombo.** El Vélez del 94 de Bianchi y
 Chilavert, el River del 96, los Boca de la era Bianchi (2000, 2001, 2003, 2007), el Estudiantes
-de Verón, el Huracán de Cappa. 17 clubes, 521 jugadores nuevos en la base.
+de Verón, el Huracán de Cappa. 17 clubes, 395 jugadores nuevos en la base.
 
 **Cómo se hizo (el pipeline queda, es reanudable y se puede volver a correr):**
 
@@ -310,16 +310,24 @@ de Verón, el Huracán de Cappa. 17 clubes, 521 jugadores nuevos en la base.
 6. En el bombo salen con **peso 0,4** contra 1 de los actuales (`HISTORICO_PESO`), con tier
    legendario y su hito en el reveal. Tres tests nuevos en `__tests__/draft-historicos.test.ts`.
 
-**Lo que se aprendió:** la etiqueta de Wikidata en español para el arco es «guardameta», y el
-mapa de posiciones no la tenía. Todos los arqueros nuevos se caían y equipos enteros quedaban
-afuera por "sin arquero". Un solo término faltante costaba la mitad del scrape.
+**Lo que se aprendió, en tres errores que valían la mitad del trabajo:**
+
+1. La etiqueta de Wikidata en español para el arco es «guardameta», y el mapa de posiciones no la
+   tenía. Todos los arqueros nuevos se caían y equipos enteros quedaban afuera por "sin arquero".
+2. Wikidata no tiene la carrera de clubes de Verón (su ítem no registra un solo P54), así que el
+   Estudiantes campeón de América se armaba sin Verón. Los ídolos hay que buscarlos en nuestra
+   propia base, que es la fuente más confiable que tenemos para eso.
+3. Wikidata tiene períodos de club abiertos, que empiezan y no terminan nunca. Arrastraban al
+   jugador a todas las temporadas siguientes: Rugilo, que jugó en los 40, aparecía en el Vélez
+   del 94, y Chividini (1930) en el San Lorenzo 2014. Una etapa sin cerrar de más de doce años no
+   es una etapa, es un dato incompleto.
 
 **Lo que no entró, y por qué (no se completa a ojo):**
 
 - 14 equipos porque **esa temporada ya estaba en el juego** con datos actuales, que le ganan al
   scrapeo: River 2015 y 2018, Boca 2015, 2020 y 2022, Racing 2019 y 2024, Independiente 2017,
   Rosario Central 2023, Estudiantes 2023, River 2023, Vélez 2024, Talleres 2024, Platense 2025.
-- 11 por **falta de respaldo**: Newell's 1991 y 2013, Independiente 2002 y 2010, Talleres 1999,
+- 13 por **falta de respaldo**: Newell's 1991 y 2013, Independiente 2002 y 2010, Talleres 1999,
   Gimnasia 1994, River 2004, Defensa y Justicia 2020 y 2021, Colón 2021, Racing 2001,
   Central Córdoba 2024. Wikidata no tiene el plantel entero de esas temporadas.
 - Pendiente: cada plantel histórico es además **una página de contenido** ("Boca 2001: el plantel

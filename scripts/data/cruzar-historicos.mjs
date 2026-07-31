@@ -274,6 +274,11 @@ for (const eq of aCruzar) {
   for (const p of eq.plantel) {
     if (vistos.has(p.qid)) continue
     vistos.add(p.qid)
+    // Período abierto en Wikidata (empieza y no termina nunca): arrastra al jugador a todas las
+    // temporadas siguientes de ese club. Así entraba Rugilo, que jugó en los 40, al Vélez del 94,
+    // y Chividini (1930) al San Lorenzo 2014. Una etapa sin cierre de más de doce años no es una
+    // etapa: es un dato incompleto.
+    if (!p.hasta && p.desde && Number(eq.season) - p.desde > 12) continue
     const d = datos[p.qid] || { posiciones: new Set(), apps: 0, goles: 0, caps: 0 }
     const mio = deNuestraBase(p.nombre, eq.season)
     const apellido = norm(p.nombre).split(' ').pop()

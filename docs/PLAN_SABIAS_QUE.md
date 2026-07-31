@@ -6,7 +6,7 @@ Plan, no implementación. Escrito el 2026-07-31 después de cerrar los equipos h
 
 Hoy Gambeta engancha 3 minutos y no da razón de volver. El reto diario es la razón *de mañana*;
 esto es la razón *de quedarse*: contenido de fútbol que se lee solo, que se comparte y que
-además es lo que Google indexa. La base ya tiene 3.347 jugadores, 209 planteles y 39 hitos
+además es lo que Google indexa. La base ya tiene 3.334 jugadores, 206 planteles y 36 hitos
 históricos verificados. El dato ya está: falta contarlo.
 
 ## La regla que no se rompe
@@ -19,7 +19,7 @@ históricos verificados. El dato ya está: falta contarlo.
      aparece en más."
    - "El Arsenal 2007 campeón de la Sudamericana es el plantel histórico más numeroso: 41
      jugadores."
-   - "De los 39 planteles históricos, 7 son de Boca. El que más."
+   - "De los 36 planteles históricos, 7 son de Boca. El que más."
    - "Hay 35 leyendas en el juego y 7 son arqueros: una de cada cinco."
 
    Los cuatro salieron de correr la consulta sobre la base, no de la memoria: los primeros que

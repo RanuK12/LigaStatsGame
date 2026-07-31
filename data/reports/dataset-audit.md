@@ -2,8 +2,8 @@
 
 ## Totals
 - Clubs: 35
-- Players: 3347
-- Squads: 209
+- Players: 3334
+- Squads: 206
 
 ## Health Score
 - Score: 90
@@ -19,33 +19,33 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 3347
-- Players with clubs: 3347
-- Players with valid position: 3347
-- Playable squads: 204
+- Players with rating: 3334
+- Players with clubs: 3334
+- Players with valid position: 3334
+- Playable squads: 201
 
 ## Players by club
-- banfield: 384
-- huracan: 327
-- boca-juniors: 309
-- rosario-central: 274
+- banfield: 386
+- huracan: 326
+- boca-juniors: 311
+- rosario-central: 273
 - lanus: 272
 - river-plate: 268
 - independiente: 265
-- velez: 258
+- velez: 251
 - talleres-cba: 247
+- newells: 246
 - racing-club: 246
-- newells: 245
-- san-lorenzo: 236
+- san-lorenzo: 235
 - belgrano: 219
-- estudiantes-lp: 215
 - gimnasia-lp: 215
 - godoy-cruz: 214
-- argentinos-jrs: 76
-- arsenal: 63
+- estudiantes-lp: 211
+- argentinos-jrs: 75
+- arsenal: 61
 - defensa-y-justicia: 50
 - colon: 46
-- tigre: 41
+- tigre: 40
 - union-sf: 26
 - atl-tucuman: 19
 - central-cordoba: 19
@@ -164,10 +164,10 @@
 - zaragoza: 1
 
 ## Players by decade
-- 2010s: 1096
+- 2010s: 1081
 - 2020s: 769
-- 2000s: 763
-- 1990s: 687
+- 2000s: 766
+- 1990s: 686
 - 1970s: 9
 - 1980s: 8
 - 1950s: 6
