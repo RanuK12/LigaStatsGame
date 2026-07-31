@@ -49,7 +49,7 @@ export default function Novedades() {
         {novedades.length > VISIBLES && (
           <button
             onClick={() => setAbierto((v) => !v)}
-            className="mt-4 text-[10px] font-black uppercase tracking-widest text-[#74ACDF] font-sport hover:text-white"
+            className="mt-4 -mx-2 min-h-[44px] rounded-xl px-2 py-2.5 text-[10px] font-black uppercase tracking-widest text-[#74ACDF] font-sport transition-colors hover:bg-white/5 hover:text-white"
           >
             {abierto ? "Ver menos" : `Ver las ${novedades.length} novedades`}
           </button>

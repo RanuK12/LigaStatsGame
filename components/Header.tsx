@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { href: '/ruleta', label: 'RULETA' },
   { href: '/records', label: 'RECORDS' },
   { href: '/daily', label: 'RETO DIARIO' },
+  { href: '/datos', label: 'DATOS' },
   { href: '/leaderboard', label: 'POSICIONES' },
 ]
 
