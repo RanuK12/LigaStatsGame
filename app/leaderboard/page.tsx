@@ -8,21 +8,29 @@ import { useUserStore } from '@/lib/user-store'
 import { SEED_RIVALS } from '@/lib/leaderboard-seed'
 import TierBadge from '@/components/TierBadge'
 import EloExplainer from '@/components/EloExplainer'
+import Podio from '@/components/leaderboard/Podio'
 import { trackEvent, EVENTOS } from '@/components/Analytics'
 
-function LeaderboardRow({ rank, s, esVos }: { rank: number; s: GameScore & { seed?: boolean; lema?: string }; esVos?: boolean }) {
-  const top3 = rank < 3
-  const medal = ['🥇', '🥈', '🥉'][rank] || `${rank + 1}°`
+function LeaderboardRow({ rank, s, esVos, historial }: {
+  rank: number
+  s: GameScore & { seed?: boolean; lema?: string }
+  esVos?: boolean
+  /** En "mis partidas" cada fila es una partida, no un puesto del ranking. */
+  historial?: boolean
+}) {
+  const top3 = !historial && rank < 3
+  const medal = historial ? `${rank + 1}` : ['🥇', '🥈', '🥉'][rank] || `${rank + 1}°`
+  const fecha = historial && s.date ? new Date(s.date).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' }) : null
   return (
     <motion.div
       initial={{ x: -20 }}
       animate={{ x: 0 }}
       transition={{ delay: Math.min(rank, 12) * 0.04 }}
-      className={`card-gradient rounded-xl p-3.5 flex items-center gap-3 ${
+      className={`card-gradient rounded-xl p-3.5 flex items-center gap-3 transition-colors hover:border-[#74ACDF]/30 ${
         esVos ? 'border border-[#74ACDF]/60 shadow-[0_0_20px_rgba(116,172,223,0.18)]' : top3 ? 'border border-amber-400/30' : 'border border-white/5'
       }`}
     >
-      <div className="text-xl w-9 text-center font-display shrink-0">{medal}</div>
+      <div className={`w-9 shrink-0 text-center font-display ${historial ? 'text-sm font-black text-slate-600' : 'text-xl'}`}>{medal}</div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-bold text-sm truncate max-w-[160px]">{s.username}</span>
@@ -31,7 +39,11 @@ function LeaderboardRow({ rank, s, esVos }: { rank: number; s: GameScore & { see
           <TierBadge elo={s.elo} />
         </div>
         <div className="text-[11px] text-slate-400 mt-0.5">
-          {s.lema ? s.lema : `Rating ${s.rating} • ${s.players}/11 • ${s.pos}° pos`}
+          {s.lema
+            ? s.lema
+            : historial
+            ? `${s.clubName || 'Mi 11'} · OVR ${s.rating} · salió ${s.pos}°${fecha ? ` · ${fecha}` : ''}`
+            : `Rating ${s.rating} • ${s.players}/11 • ${s.pos}° pos`}
         </div>
       </div>
       <div className="text-right shrink-0">
@@ -60,7 +72,7 @@ export default function LeaderboardPage() {
     if (tab !== 'online') return
     setLoadingOnline(true)
     trackEvent(EVENTOS.rankingVisto)
-    fetchOnlineScores(50)
+    fetchOnlineScores(200)
       .then((online) => {
         setScores(
           online.map((o, i) => ({
@@ -87,9 +99,14 @@ export default function LeaderboardPage() {
   // Y una fila por persona: la tabla guarda una por partida, así que el que jugó veinte veces
   // ocupaba veinte puestos y empujaba a todos los demás para abajo. Se queda su mejor ELO.
   const ranked = useMemo(() => {
-    const filas = tab === 'online' ? [...scores] : [...SEED_RIVALS, ...scores]
-    const mejorPorNombre = new Map<string, (typeof filas)[number]>()
-    for (const f of filas) {
+    // "Mis partidas" es el historial: ahí TIENEN que estar todas, una por partida jugada, porque
+    // es lo que el jugador viene a ver. La reducción a una fila por persona es del ranking global,
+    // donde el que jugó veinte veces ocupaba veinte puestos y corría a todos los demás.
+    if (tab !== 'online') {
+      return [...SEED_RIVALS, ...scores].sort((a, b) => b.elo - a.elo || b.pts - a.pts)
+    }
+    const mejorPorNombre = new Map<string, GameScore>()
+    for (const f of scores) {
       const clave = (f.username || '').trim().toLowerCase()
       const previa = mejorPorNombre.get(clave)
       if (!previa || f.elo > previa.elo || (f.elo === previa.elo && f.pts > previa.pts)) {
@@ -117,7 +134,6 @@ export default function LeaderboardPage() {
         </motion.div>
       </header>
       <main className="max-w-3xl mx-auto px-4 pb-20">
-        <EloExplainer />
 
         {miPuesto && (
           <div className="card-gradient rounded-2xl border border-[#74ACDF]/30 p-4 mb-6 flex items-center justify-between gap-4">
@@ -136,9 +152,23 @@ export default function LeaderboardPage() {
           </div>
         )}
 
-        <div className="flex gap-2.5 mb-8 justify-center font-sport">
-          <button onClick={() => setTab('global')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all ${tab === 'global' ? 'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>MIS PARTIDAS</button>
-          <button onClick={() => setTab('online')} className={`px-5 py-3 rounded-xl text-xs font-black tracking-widest transition-all ${tab === 'online' ? 'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-md shadow-[#74ACDF]/20' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}>GLOBAL ONLINE</button>
+        {/* Selector con forma de interruptor: se entiende de un vistazo cuál está activa */}
+        <div className="mx-auto mb-7 flex w-full max-w-sm rounded-2xl border border-white/10 bg-slate-950/60 p-1 font-sport">
+          {([
+            { id: 'online' as const, label: 'Ranking global', sub: 'los mejores' },
+            { id: 'global' as const, label: 'Mis partidas', sub: 'tu historial' },
+          ]).map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              className={`relative flex-1 rounded-xl px-3 py-3 text-center transition-all ${
+                tab === t.id ? 'bg-gradient-to-r from-[#74ACDF] to-blue-600 text-white shadow-lg shadow-[#74ACDF]/20' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <span className="block text-[11px] font-black uppercase tracking-widest">{t.label}</span>
+              <span className={`block text-[9px] uppercase tracking-wider ${tab === t.id ? 'text-white/70' : 'text-slate-600'}`}>{t.sub}</span>
+            </button>
+          ))}
         </div>
 
         {loadingOnline ? (
@@ -149,17 +179,36 @@ export default function LeaderboardPage() {
             <Link href="/draft?mode=liga" className="btn-primary inline-block mt-5 px-7 py-3 text-xs">JUGAR AHORA</Link>
           </div>
         ) : (
-          <div className="space-y-2">
-            {ranked.map((s, i) => (
-              <LeaderboardRow key={s.id} rank={i} s={s} esVos={!!user?.isLoggedIn && s.username === user.username} />
-            ))}
-          </div>
+          <>
+            {tab === 'online' && <Podio top={ranked.slice(0, 3)} usuario={user?.username} />}
+            <div className="space-y-2">
+              {(tab === 'online' ? ranked.slice(3, 50) : ranked).map((s, i) => (
+                <LeaderboardRow
+                  key={s.id}
+                  rank={tab === 'online' ? i + 3 : i}
+                  s={s}
+                  esVos={!!user?.isLoggedIn && s.username === user.username}
+                  historial={tab !== 'online'}
+                />
+              ))}
+            </div>
+          </>
         )}
 
         <div className="text-center mt-8 text-xs text-slate-500">
           <p>{tab === 'online'
-            ? `Top ${ranked.length} del ranking global${rankGlobal ? ` · ${rankGlobal.total} jugadores` : ''} (hay que iniciar sesión para sumar ELO)`
+            ? `Top ${Math.min(ranked.length, 50)} del ranking global${rankGlobal ? ` · ${rankGlobal.total} jugadores` : ''} · una fila por DT, con su mejor ELO`
             : `${ranked.length} partidas registradas en este dispositivo`}</p>
+          {tab === 'online' && !user?.isLoggedIn && (
+            <p className="mt-2 text-[11px] text-amber-300/80">
+              Como invitado no entrás acá. Creá una cuenta para que tus torneos cuenten.
+            </p>
+          )}
+        </div>
+
+        {/* Las reglas van DESPUÉS de la tabla: el que entra viene a ver puestos, no a leer. */}
+        <div className="mt-12">
+          <EloExplainer />
         </div>
       </main>
       <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm py-2.5 px-4 inline-block">← Volver al inicio</Link></div>

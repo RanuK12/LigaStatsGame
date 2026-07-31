@@ -24,14 +24,26 @@ function buildDates() {
 }
 
 export default function LiveScoresWidget() {
-  const dates = useMemo(buildDates, [])
-  const today = dates.find((d) => d.isToday)!.dateStr
-  const [selectedDate, setSelectedDate] = useState(today)
+  // La agenda se arma con el día del USUARIO, y el sitio se genera estático desde un servidor que
+  // está en otra zona horaria. Calcularla en el render hacía que el HTML del servidor y el del
+  // navegador no coincidieran: React tiraba los errores 418/423/425 y volvía a dibujar la página
+  // entera del lado del cliente. Por eso la agenda se arma DESPUÉS de montar.
+  const [montado, setMontado] = useState(false)
+  useEffect(() => setMontado(true), [])
+
+  const dates = useMemo(() => (montado ? buildDates() : []), [montado])
+  const today = dates.find((d) => d.isToday)?.dateStr ?? ''
+  const [selectedDate, setSelectedDate] = useState('')
   const [matches, setMatches] = useState<AgendaMatch[] | null>(null) // null = cargando
+
+  useEffect(() => {
+    if (today && !selectedDate) setSelectedDate(today)
+  }, [today, selectedDate])
 
   // Reactivo: cada cambio de fecha trae TODOS los partidos de ESE día (cualquier liga).
   // + auto-refresh en vivo cada 45s para que los resultados se ajusten solos.
   useEffect(() => {
+    if (!selectedDate) return
     let cancelled = false
     setMatches(null)
     const load = (showLoading: boolean) => {
@@ -59,6 +71,21 @@ export default function LiveScoresWidget() {
     }
     return [...byLeague.values()].sort((a, b) => a.rank - b.rank || b.matches.length - a.matches.length)
   }, [matches])
+
+  // Hasta que monte, un hueco del mismo tamaño: nada que el servidor pueda escribir distinto.
+  if (!montado) {
+    return (
+      <div className="w-full my-10 font-sans">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-xl">📅</span>
+          <h3 className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
+            AGENDA DE RESULTADOS
+          </h3>
+        </div>
+        <div className="h-40 animate-pulse rounded-2xl border border-white/5 bg-slate-950/40" />
+      </div>
+    )
+  }
 
   return (
     <div className="w-full my-10 font-sans">
