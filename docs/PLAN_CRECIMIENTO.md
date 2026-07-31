@@ -205,6 +205,43 @@ jugador sin tirar. Con test que reproduce la repetición sin el arreglo.
 Queda pendiente, opcional: balancear el dataset a 3–4 temporadas por club, priorizando las
 memorables. Con el filtro de club puesto ya no se nota, así que no es urgente.
 
+### 5.6 Los torneos tienen que dar algo al terminar
+
+Hoy la Copa termina en una tabla y ahí muere. El draft tiene ficha compartible pero los torneos
+no cierran con nada propio, y por eso no generan ni una vuelta ni un compartido.
+
+Cada torneo cierra con **su ficha**, igual que la carrera:
+
+- **Liga**: la tabla final con tu puesto, el campeón, tu goleador y tu asistidor.
+- **Copa**: el camino ronda por ronda —a quién eliminaste, dónde te quedaste—, que es lo que se
+  cuenta cuando alguien pregunta cómo te fue.
+- En las dos: el 11 que armaste, el escudo del club del bombo, tu ELO nuevo y cuánto sumaste.
+- Y el botón de compartir con la imagen adjunta y la mención a @GambetafutbolAR, igual que en
+  la sección 2.1. Sin imagen, un resultado no se comparte.
+
+Esto es lo que convierte "simulé un torneo" en "mirá cómo me fue", que es el único momento en que
+un jugador trae a otro.
+
+### 5.7 Libertadores y Sudamericana: se clasifica, no se elige
+
+La idea es que no sean un botón más sino **algo que te ganaste**, que es lo que hace que alguien
+vuelva al día siguiente:
+
+1. **Clasificás con tu draft.** Terminás la Liga en zona de Libertadores (1° a 4°) o de
+   Sudamericana (5° a 8°) y esa plaza te queda guardada.
+2. **Hay que estar registrado.** La plaza vive en tu cuenta, no en el navegador. Es, de paso, el
+   mejor motivo para crear cuenta que va a tener el juego: te la ganaste jugando, no te la
+   pidieron en la puerta.
+3. **Se juega con el mismo 11** con el que clasificaste. Si querés otro plantel, hay que volver a
+   clasificar.
+4. **Vale más en el ranking**: Sudamericana 120, Libertadores 150 sobre la base de 100 de la Liga
+   (`tournamentPoints`, `lib/ranking.ts:67`, hoy solo entiende `'liga' | 'copa'`).
+5. Ganarla deja algo permanente en el perfil: una estrella al lado del nombre en la tabla. El
+   ranking necesita cosas que se muestren, no solo un número.
+
+Lo que hay que escribir es poco: `simulateContinentalTournament` (`lib/copa-libertadores.ts`) ya
+existe y ya se usa en carrera. Lo nuevo es la plaza guardada en Supabase y el gate de sesión.
+
 ### 5.2 El código muerto: no revivirlo, reemplazarlo por torneos que faltan
 `simulateSeasonMatchByMatch` y `simulateCopaArgentinaMatchByMatch` (con el `sort(() =>
 Math.random() - 0.5)` que no baraja) no las llama nadie. Miradas de cerca, **son versiones
@@ -248,9 +285,16 @@ O sea: **el scrape nuevo hace falta**, y es sobre todo de jugadores, no de equip
 
 **Cómo hacerlo:**
 
-1. **Definir la lista desde el palmarés, no de memoria.** Campeones de Libertadores argentinos,
-   campeones de Intercontinental/Mundial de Clubes, y los hitos de época. Cada equipo de la lista
-   tiene que quedar respaldado por una fuente; si un año no se confirma, no entra. (Ojo con dos
+1. **Definir la lista desde el palmarés, no de memoria.** Exhaustiva, en este orden de prioridad:
+   - todos los **campeones argentinos de Libertadores** (Independiente ×7, Boca ×6, Estudiantes
+     ×4, River ×4, Racing, Vélez, Argentinos, San Lorenzo);
+   - los campeones de **Intercontinental / Mundial de Clubes**;
+   - campeones de **Sudamericana, Copa Conmebol y Supercopa**;
+   - los **campeones de liga** de cada club desde los 80;
+   - y los **hitos sin título**: el Huracán de Cappa, el Newell's de Bielsa, equipos que quedaron
+     en la memoria aunque no dieron la vuelta.
+
+   Cada equipo queda respaldado por una fuente; si un año no se confirma, no entra. (Ojo con dos
    del pedido: el hito continental de Talleres es la **Copa Conmebol 1999**, no 1996, y "el
    Belgrano campeón" hay que definir a cuál nos referimos. Lo resuelve la fuente, no nosotros.)
 2. **Scrapear el plantel** de cada temporada elegida con el pipeline que ya usa el repo:
@@ -326,10 +370,20 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 5 | Ficha en imagen + mención a @GambetafutbolAR (2.1, 2.2) | Convierte los 650 en tráfico nuevo |
 | 6 | Caja de sugerencias (4.1) | El backend ya existe; es media hora |
 | 7 | Donaciones reubicadas (4.2) | Después de un momento de disfrute, no en el footer |
-| 8 | Libertadores y Mundial de Clubes en el draft + puntos (5.2) | Motores ya escritos; le da varias formas de sumar al ranking |
-| 9 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
-| 10 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
-| 11 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
+| 8 | Ficha de cierre de Liga y Copa (5.6) | Hoy el torneo termina en una tabla y no genera ni un compartido |
+| 9 | Libertadores y Sudamericana con clasificación (5.7) | El mejor motivo para crear cuenta que va a tener el juego |
+| 10 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
+| 11 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
+| 12 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
+
+### Ya hecho
+
+| Cuándo | Qué |
+|---|---|
+| 07-31 | Fase 0: título y descripción por ruta, eventos del juego instrumentados (PR #30) |
+| 07-31 | El bombo no repite clubes, con test (PR #30) |
+| 07-31 | Ranking: top real por ELO, tu puesto contado en la base, sin rivales de la casa en global, y explicación en el draft (PR #31) |
+| 07-31 | Outreach en X a quienes juegan Copero / El Ídolo / 7a0, con la regla de contestar primero |
 
 ---
 
