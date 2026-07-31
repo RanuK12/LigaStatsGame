@@ -8,6 +8,7 @@ import { useUserStore } from '@/lib/user-store'
 import { SEED_RIVALS } from '@/lib/leaderboard-seed'
 import TierBadge from '@/components/TierBadge'
 import EloExplainer from '@/components/EloExplainer'
+import { trackEvent, EVENTOS } from '@/components/Analytics'
 
 function LeaderboardRow({ rank, s, esVos }: { rank: number; s: GameScore & { seed?: boolean; lema?: string }; esVos?: boolean }) {
   const top3 = rank < 3
@@ -56,6 +57,7 @@ export default function LeaderboardPage() {
   useEffect(() => {
     if (tab !== 'online') return
     setLoadingOnline(true)
+    trackEvent(EVENTOS.rankingVisto)
     fetchOnlineScores(50)
       .then((online) => {
         setScores(

@@ -39,6 +39,7 @@ import {
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
+import { trackEvent, EVENTOS } from "@/components/Analytics"
 
 const NATIONALITIES: { name: string; flag: string }[] = [
   { name: "Argentina", flag: "🇦🇷" },
@@ -346,7 +347,7 @@ function CareerSetupWizard() {
       {/* STEP 3: START */}
       <button
         disabled={!setup}
-        onClick={() => setup && startCareer(setup)}
+        onClick={() => { if (!setup) return; startCareer(setup); trackEvent(EVENTOS.carreraIniciada, { club: setup.clubId, posicion: setup.position }) }}
         className="btn-primary w-full py-4 text-sm font-bold tracking-widest uppercase font-sport rounded-2xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {setup ? "COMENZAR CARRERA ⚽" : "ELEGÍ UN CLUB PARA EMPEZAR"}
@@ -431,6 +432,7 @@ function CareerDashboard() {
       if (kind === "png") await downloadFichaPng(fichaRef.current, career!.player.name)
       else if (kind === "jpg") await downloadFichaJpg(fichaRef.current, career!.player.name)
       else await downloadFichaPdf(fichaRef.current, career!.player.name)
+      trackEvent(EVENTOS.fichaDescargada, { formato: kind })
     } catch (e) {
       setExportError(e instanceof Error ? e.message : "No se pudo generar la ficha")
     } finally {
@@ -846,7 +848,7 @@ function CareerDashboard() {
             )}
             {!career.finished && (
               <button
-                onClick={() => { retire(); setRevealSeason(null); setShowFinale(true) }}
+                onClick={() => { trackEvent(EVENTOS.carreraRetiro, { temporadas: career.history.length, edad: career.player.age }); retire(); setRevealSeason(null); setShowFinale(true) }}
                 className="w-full py-3 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 hover:text-red-200 hover:bg-red-500/20 text-[11px] font-bold uppercase tracking-wider transition-all font-sport"
               >
                 🎬 Retirarme del fútbol

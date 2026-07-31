@@ -860,8 +860,20 @@ export function spinSquadWithPity(
   allPlayers: Player[],
   pity: { consecutiveLow: number; pityActive: boolean; spinsSinEstrella?: number },
   slot?: { position: string; drafted: Set<string> },
+  clubesUsados?: Set<string>,
 ): Squad {
   if (eligible.length === 0) throw new Error('No eligible squads');
+  if (eligible.length === 1) return eligible[0];
+
+  // Un club por draft. El bombo tiene 170 planteles pero de solo 29 clubes: Boca entra con 12
+  // temporadas y Central Córdoba con 1, así que sorteando parejo salían dos y tres veces los
+  // mismos (Godoy Cruz 2019, después Godoy Cruz 2024...). Se descartan los clubes que ya
+  // salieron; si eso deja el bombo vacío para este puesto, se vuelve al bombo completo antes
+  // que dejar al jugador sin tirar.
+  if (clubesUsados && clubesUsados.size > 0) {
+    const frescos = eligible.filter(sq => !clubesUsados.has(sq.clubId));
+    if (frescos.length > 0) eligible = frescos;
+  }
   if (eligible.length === 1) return eligible[0];
 
   // Estrella: chance base y garantía tras varios giros secos
