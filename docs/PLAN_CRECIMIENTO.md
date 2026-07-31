@@ -366,15 +366,11 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 1 | Fase 0 completa (títulos, eventos, Search Console) | Sin esto no se puede decidir nada |
 | 2 | Dedupe del bombo + shuffle (5.1, 5.2) | Es el defecto que ya se nota jugando |
 | 3 | Ranking real (5.4) | Es el motivo de volver que ya está construido a medias |
-| 4 | Reto diario al frente + racha (1.1) | El mecanismo de retorno diario más barato |
-| 5 | Ficha en imagen + mención a @GambetafutbolAR (2.1, 2.2) | Convierte los 650 en tráfico nuevo |
-| 6 | Caja de sugerencias (4.1) | El backend ya existe; es media hora |
-| 7 | Donaciones reubicadas (4.2) | Después de un momento de disfrute, no en el footer |
-| 8 | Ficha de cierre de Liga y Copa (5.6) | Hoy el torneo termina en una tabla y no genera ni un compartido |
-| 9 | Libertadores y Sudamericana con clasificación (5.7) | El mejor motivo para crear cuenta que va a tener el juego |
-| 10 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
-| 11 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
-| 12 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
+| 4 | Ficha de cierre de Liga y Copa (5.6) | Hoy el torneo termina en una tabla y no genera ni un compartido |
+| 5 | Libertadores y Sudamericana con clasificación (5.7) | El mejor motivo para crear cuenta que va a tener el juego |
+| 6 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
+| 7 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
+| 8 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
 
 ### Ya hecho
 
@@ -384,6 +380,10 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 07-31 | El bombo no repite clubes, con test (PR #30) |
 | 07-31 | Ranking: top real por ELO, tu puesto contado en la base, sin rivales de la casa en global, y explicación en el draft (PR #31) |
 | 07-31 | Outreach en X a quienes juegan Copero / El Ídolo / 7a0, con la regla de contestar primero |
+| 07-31 | Reto diario al frente del home con la racha (PR #32) |
+| 07-31 | Compartir en X con la imagen preparada y mención a @GambetafutbolAR, sin hashtags (PR #32) |
+| 07-31 | Caja de sugerencias en el home, sobre el backend que ya existía (PR #32) |
+| 07-31 | Donaciones al terminar torneo y carrera, y explicando quiénes somos (PR #32) |
 
 ---
 
