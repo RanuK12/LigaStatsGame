@@ -67,3 +67,28 @@ export function trackEvent(name: string, params: Record<string, string | number 
   if (!GA_ID || typeof window === "undefined" || typeof window.gtag !== "function") return
   window.gtag("event", name, params)
 }
+
+/**
+ * Los momentos del juego que queremos medir, en un solo lugar.
+ *
+ * Sin esto Analytics solo veía page_view y scroll: 640 usuarios en 28 días y ni un dato de
+ * cuántos terminan un draft, juegan una carrera o comparten algo. Los nombres van en español
+ * porque es como se leen después en los informes.
+ *
+ * Los que marcamos como evento clave en GA: draft_completado, carrera_retiro, compartido y
+ * donacion_click.
+ */
+export const EVENTOS = {
+  draftIniciado: "draft_iniciado",
+  draftCompletado: "draft_completado",
+  torneoSimulado: "torneo_simulado",
+  carreraIniciada: "carrera_iniciada",
+  carreraTemporada: "carrera_temporada_fin",
+  carreraRetiro: "carrera_retiro",
+  fichaDescargada: "ficha_descargada",
+  compartido: "compartido",
+  retoDiario: "reto_diario_jugado",
+  rankingVisto: "ranking_visto",
+  sugerenciaEnviada: "sugerencia_enviada",
+  donacionClick: "donacion_click",
+} as const

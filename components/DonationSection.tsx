@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { trackEvent, EVENTOS } from "@/components/Analytics"
 import { motion } from "framer-motion"
 import { mpAlias, mpTiers } from "@/lib/donations"
 
@@ -51,6 +52,7 @@ export default function DonationSection() {
                 href={t.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent(EVENTOS.donacionClick, { via: "mercadopago", monto: t.ars })}
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className={`group relative flex flex-col items-center text-center rounded-2xl p-5 border transition-colors ${
@@ -89,7 +91,7 @@ export default function DonationSection() {
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
           <span className="text-[11px] text-slate-500 font-sans">o transferí al alias</span>
           <button
-            onClick={copyAlias}
+            onClick={() => { trackEvent(EVENTOS.donacionClick, { via: 'alias' }); copyAlias() }}
             className="inline-flex items-center gap-2 bg-slate-950/70 border border-white/10 rounded-xl px-3.5 py-2 hover:border-amber-400/50 transition-colors"
           >
             <span className="text-sm font-black text-white tracking-wide">{mpAlias}</span>

@@ -52,6 +52,38 @@ export async function fetchOnlineScores(limit: number = 50): Promise<OnlineScore
   }
 }
 
+export interface Suggestion {
+  mensaje: string
+  /** Cómo contactarlo si quiere respuesta. Opcional a propósito: pedir datos corta sugerencias. */
+  contacto?: string
+  /** De qué parte del juego habla, para poder agrupar lo que llega. */
+  tema?: string
+  pagina?: string
+  fecha?: string
+}
+
+/**
+ * Guarda una sugerencia. Devuelve false si no se pudo (sin Supabase, sin red o tabla caída);
+ * el formulario ofrece el mail como salida para que lo que escribió no se pierda.
+ */
+export async function submitSuggestion(s: Suggestion): Promise<boolean> {
+  if (!supabase) return false
+  try {
+    const { error } = await supabase.from('suggestions').insert([
+      {
+        mensaje: s.mensaje.slice(0, 2000),
+        contacto: s.contacto?.slice(0, 200) || null,
+        tema: s.tema || 'general',
+        pagina: s.pagina || null,
+        fecha: new Date().toISOString(),
+      },
+    ])
+    return !error
+  } catch {
+    return false
+  }
+}
+
 /** Submit a draft score entry to Supabase */
 export async function submitOnlineScore(entry: Omit<OnlineScore, 'id'>): Promise<boolean> {
   if (!supabase) return false

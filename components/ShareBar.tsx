@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { trackEvent, EVENTOS } from "@/components/Analytics"
 
 const SITE_URL = "https://gambetafutbol.games/"
 
@@ -45,6 +46,7 @@ export default function ShareBar({
   async function compartirHistoria() {
     if (!imagen) return
     setEstado("generando")
+    trackEvent(EVENTOS.compartido, { red: "instagram" })
     let blob: Blob
     try {
       blob = await imagen()
@@ -72,6 +74,7 @@ export default function ShareBar({
   async function copiarLink() {
     try {
       await navigator.clipboard.writeText(textoConLink)
+      trackEvent(EVENTOS.compartido, { red: "copiar" })
       setCopiado(true)
       setTimeout(() => setCopiado(false), 2000)
     } catch {
@@ -106,6 +109,7 @@ export default function ShareBar({
             href={xUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent(EVENTOS.compartido, { red: "x" })}
             className={`${base} border-white/15 bg-[#0b0b0d] text-white hover:border-white/50`}
           >
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
@@ -131,6 +135,7 @@ export default function ShareBar({
             href={fbUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent(EVENTOS.compartido, { red: "facebook" })}
             className={`${base} border-[#1877F2]/50 bg-[#1877F2]/15 text-[#A8CBF9] hover:border-[#1877F2]`}
           >
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
@@ -143,6 +148,7 @@ export default function ShareBar({
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent(EVENTOS.compartido, { red: "whatsapp" })}
             className={`${base} border-emerald-400/40 bg-emerald-500/15 text-emerald-200 hover:border-emerald-300/80`}
           >
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">

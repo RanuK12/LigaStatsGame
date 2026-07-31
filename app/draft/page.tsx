@@ -29,6 +29,7 @@ import {
   PITY_LOW_THRESHOLD,
 } from "@/lib/game-engine"
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
+import { trackEvent, EVENTOS } from "@/components/Analytics"
 import { challengeForDate, localYmd } from "@/lib/daily-challenge"
 import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
 import { calculateChemistry } from "@/lib/chemistry"
@@ -199,6 +200,8 @@ function DraftInner() {
   const [spinNotice, setSpinNotice] = useState<string | null>(null)
   const [showPosSelector, setShowPosSelector] = useState(false)
   const [pity, setPity] = useState<PityState>({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
+  // Clubes que ya salieron en este draft: el bombo no los repite mientras queden otros.
+  const [clubesUsados, setClubesUsados] = useState<Set<string>>(new Set())
 
   const f = formations[fm as keyof typeof formations] || formations["4-3-3"]
   const totalSlots = f.positions.length
@@ -223,6 +226,7 @@ function DraftInner() {
     const empty = new Array(totalSlots).fill(null)
     setDrafted(empty)
     setDraftedIds(new Set())
+    setClubesUsados(new Set())
     setActiveSlotIdx(0)
     setCurrentSquad(null)
     setWildcards(mode.rerolls || 3)
@@ -232,7 +236,8 @@ function DraftInner() {
     setStarted(true)
     setPity({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
     setPhase("ready")
-  }, [totalSlots, mode])
+    trackEvent(EVENTOS.draftIniciado, { modo: mode.id, formacion: f.id })
+  }, [totalSlots, mode, f.id])
 
   // ── SPIN WHEEL ──
   const spinWheel = useCallback((forcedPos?: string) => {
@@ -251,12 +256,13 @@ function DraftInner() {
       return
     }
     // Apply pity system (incluye la chance de que salga un plantel con estrella para el puesto)
-    const result = spinSquadWithPity(eligible, allP, pity, { position: posToUse, drafted: draftedIds })
+    const result = spinSquadWithPity(eligible, allP, pity, { position: posToUse, drafted: draftedIds }, clubesUsados)
     setSpinNotice(null)
     setCurrentSquad(result)
+    setClubesUsados(prev => new Set(prev).add(result.clubId))
     setSpinning(true)
     setPhase("spinning")
-  }, [spinning, allS, allP, currentPos.pos, draftedIds, pity, f, drafted])
+  }, [spinning, allS, allP, currentPos.pos, draftedIds, pity, f, drafted, clubesUsados])
 
   // ── REROLL ──
   const rerollTeam = useCallback(() => {
@@ -301,6 +307,7 @@ function DraftInner() {
         setBurst({ label: "¡EQUIPO ARMADO!", tone: "celeste" })
         setTimeout(() => setConfetti(false), 4000)
         setPhase("done")
+        trackEvent(EVENTOS.draftCompletado, { formacion: f.id, puntaje: Math.round(calculateFullTeamScore(newDrafted, f)) })
       }, 300)
     }
   }, [drafted, draftedIds, f, pity, totalSlots])
@@ -348,6 +355,7 @@ function DraftInner() {
       : simulateCopaWithStats(players, virtualSquad, allS, allP, f, score)
     setSimResult(r)
     setPhase("sim")
+    trackEvent(EVENTOS.torneoSimulado, { tipo: type, puntaje: Math.round(score), campeon: !!r.isChampion })
     // Récords de por vida + último equipo para /results
     saveLifetimeStats(applyTournament(applyDraftCompleted(loadLifetimeStats(), players, score), r))
     saveLastResult({
