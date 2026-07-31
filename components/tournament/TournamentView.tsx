@@ -223,7 +223,31 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
    * uno responde cuando le preguntan cómo le fue. En Liga, quién fue el goleador y el asistidor
    * del plantel, que es lo que mira un hincha.
    */
+  // La copa continental tiene nombre propio, color propio y una historia propia que contar: no es
+  // "la copa" genérica. Todo lo que la distingue sale de acá.
+  const copa = result.continental
+    ? result.continental === "libertadores"
+      ? { nombre: "Copa Libertadores", corto: "Libertadores", gentilicio: "CAMPEÓN DE AMÉRICA", color: "#F6C750", emoji: "🏆" }
+      : { nombre: "Copa Sudamericana", corto: "Sudamericana", gentilicio: "CAMPEÓN DE LA SUDAMERICANA", color: "#F0883E", emoji: "🥈" }
+    : null
+  // Hasta dónde llegaste, dicho como se dice en el fútbol. "Eliminado en Semifinal" es una derrota;
+  // "Semifinalista de la Libertadores" es algo que se cuenta.
+  const llegadaCopa = !copa ? null
+    : result.isChampion ? `Campeón de la ${copa.corto}`
+    : result.eliminatedRound === "Final" ? `Finalista de la ${copa.corto}`
+    : result.eliminatedRound === "Semifinal" ? `Semifinalista de la ${copa.corto}`
+    : result.eliminatedRound === "Cuartos de Final" ? `Cuartos de final de la ${copa.corto}`
+    : result.eliminatedRound === "Octavos de Final" ? `Octavos de final de la ${copa.corto}`
+    : `Fase de grupos de la ${copa.corto}`
+
   const cierreFicha = (() => {
+    if (copa) {
+      const partes = [llegadaCopa!]
+      if (result.groupPos) partes.push(`${result.groupPos}° del grupo`)
+      if (goleador?.playerName && goleador.goals > 0) partes.push(`${goleador.playerName}, ${goleador.goals} goles`)
+      if (!result.isChampion && result.champion) partes.push(`Campeón: ${result.champion}`)
+      return partes.join(" · ")
+    }
     if (result.type === "copa") {
       const rondas = result.rounds?.length ?? 0
       const llegada = result.isChampion
@@ -239,7 +263,11 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
     if (!result.isChampion && result.champion) partes.push(`Campeón: ${result.champion}`)
     return partes.join(" · ") || undefined
   })()
-  const textoParaCompartir = isChamp
+  const textoParaCompartir = copa
+    ? isChamp
+      ? `¡${copa.gentilicio}! ${copa.emoji} Clasifiqué con mi 11 (OVR ${result.teamScore}) y gané la ${copa.nombre} en Gambeta, con ${goles} goles. La plaza se gana jugando la Liga: a ver si llegás`
+      : `${llegadaCopa} en Gambeta con mi 11 (OVR ${result.teamScore}). La clasificación me la gané saliendo ${result.groupPos ? "" : ""}entre los primeros de la Liga. Armá el tuyo y contame hasta dónde llegás`
+    : isChamp
     ? `¡SALÍ CAMPEÓN en Gambeta! 🏆 Armé mi 11 con ${result.teamLabel} (OVR ${result.teamScore}) y me quedé con la ${result.type === "liga" ? "Liga Profesional" : "Copa Argentina"} con ${goles} goles. ¿Podés hacerlo mejor?`
     : result.type === "liga"
     ? `Terminé ${result.playerPos}° de ${result.table?.length ?? 28} en Gambeta con mi 11 (OVR ${result.teamScore}) y ${goles} goles. A ver si vos armás un equipo mejor 👀`
@@ -502,8 +530,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   </div>
                 )}
 
-                <h1 className="font-display text-3xl font-black mb-1 uppercase tracking-tight">
-                  {isChamp
+                <h1
+                  className="font-display text-3xl font-black mb-1 uppercase tracking-tight"
+                  style={copa && isChamp ? { color: copa.color } : undefined}
+                >
+                  {copa
+                    ? isChamp ? `¡${copa.gentilicio}!` : llegadaCopa
+                    : isChamp
                     ? "¡CAMPEÓN!"
                     : result.type === "copa" && result.eliminated
                     ? `Eliminado en ${result.eliminatedRound}`
@@ -511,17 +544,59 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     ? `Posición ${result.playerPos}° de ${result.table?.length}`
                     : "Subcampeón"}
                 </h1>
-                {isChamp && (
+                {isChamp && !copa && (
                   <p className="text-yellow-300 font-bold text-xs mb-2 font-sport tracking-widest uppercase">
                     ¡{result.teamLabel} ES CAMPEÓN DEL TORNEO!
                   </p>
                 )}
-                {!isChamp && (
+                {!isChamp && !copa && (
                   <p className="text-slate-400 text-xs mb-2 font-sport uppercase tracking-wider">
                     {result.type === "copa" && result.eliminated
                       ? "Seguí intentando, el próximo draft será mejor."
                       : `El campeón fue ${result.champion}. ¡Mejor suerte en el próximo draft!`}
                   </p>
+                )}
+
+                {/* ── La ficha de la copa continental ──
+                    Ganarla es lo más difícil que tiene el juego (con un once de 78 pasa una de cada
+                    seis veces en la Libertadores), así que la ficha tiene que estar a la altura. Y
+                    perderla tampoco es cualquier cosa: llegaste porque clasificaste jugando. */}
+                {copa && (
+                  <div
+                    className="mt-3 mb-3 rounded-2xl border px-4 py-3.5 text-center"
+                    style={{
+                      borderColor: isChamp ? `${copa.color}66` : "rgba(148,163,184,0.18)",
+                      background: isChamp
+                        ? `linear-gradient(180deg, ${copa.color}1f, rgba(2,8,19,0.5))`
+                        : "rgba(2,8,19,0.4)",
+                      boxShadow: isChamp ? `0 0 40px ${copa.color}33` : undefined,
+                    }}
+                  >
+                    <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: copa.color }}>
+                      {copa.nombre}
+                    </p>
+                    <p className="mt-1.5 text-[12px] leading-relaxed text-slate-300 font-sans">
+                      {isChamp ? (
+                        <>
+                          Diste la vuelta con <strong className="text-white">{result.teamLabel.replace(/ \(.*\)$/, "")}</strong>.
+                          No la elegiste de un menú: la clasificación te la ganaste en la Liga, la jugaste con este
+                          mismo once y lo ganaste todo.
+                        </>
+                      ) : (
+                        <>
+                          Llegaste hasta <strong className="text-white">{result.eliminatedRound}</strong> con un once
+                          que armaste vos y una plaza que te ganaste jugando. El campeón fue{" "}
+                          <strong className="text-white">{result.champion}</strong>.
+                        </>
+                      )}
+                    </p>
+                    {result.groupPos && (
+                      <p className="mt-2 text-[10px] font-sport uppercase tracking-wider text-slate-500">
+                        {result.groupPos}° en la fase de grupos · {result.rounds?.length ?? 0} partidos jugados
+                        {goles > 0 ? ` · ${goles} goles` : ""}
+                      </p>
+                    )}
+                  </div>
                 )}
 
                 {/* Division Outcome Banners for Liga */}

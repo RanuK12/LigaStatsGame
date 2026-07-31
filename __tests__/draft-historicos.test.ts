@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { spinSquadWithPity, getSquadTier, HISTORICO_PESO } from '@/lib/game-engine'
+import { spinSquadWithPity, getSquadTier, HISTORICO_CHANCE } from '@/lib/game-engine'
 import type { Player, Squad } from '@/lib/types'
 
 // Los planteles históricos (el Vélez del 94, el Boca de Bianchi) tienen que salir MENOS que los
@@ -17,22 +17,41 @@ const SIN_JUGADORES: Player[] = []
 const SIN_PITY = { consecutiveLow: 0, pityActive: false }
 
 describe('planteles históricos en el bombo', () => {
-  it('salen menos seguido que los actuales, en la proporción del peso', () => {
-    // Mitad y mitad en el bombo: con peso 0,4 el histórico tiene que quedar bien por debajo del
-    // 50 % que le tocaría sorteando parejo.
+  it('sale uno de cada cuatro giros, aunque sean pocos contra muchos', () => {
+    // La proporción real del juego: 36 históricos contra 170 actuales. Sorteando parejo saldrían
+    // en el 17 % de los giros, y con peso 0,4 caían al 8 %: en un draft de once no veías ninguno.
     const squads = [
-      ...Array.from({ length: 10 }, (_, i) => squad(`actual-${i}`, `club-${i}`, false)),
-      ...Array.from({ length: 10 }, (_, i) => squad(`hist-${i}`, `histclub-${i}`, true)),
+      ...Array.from({ length: 170 }, (_, i) => squad(`actual-${i}`, `club-${i}`, false)),
+      ...Array.from({ length: 36 }, (_, i) => squad(`hist-${i}`, `histclub-${i}`, true)),
     ]
-    const GIROS = 4000
+    const GIROS = 6000
     let historicos = 0
     for (let i = 0; i < GIROS; i++) {
       if (spinSquadWithPity(squads, SIN_JUGADORES, SIN_PITY).historico) historicos++
     }
     const proporcion = historicos / GIROS
-    const esperada = HISTORICO_PESO / (1 + HISTORICO_PESO) // 0,4 contra 1 → ~0,286
-    expect(proporcion).toBeGreaterThan(esperada - 0.05)
-    expect(proporcion).toBeLessThan(esperada + 0.05)
+    expect(proporcion).toBeGreaterThan(HISTORICO_CHANCE - 0.04)
+    expect(proporcion).toBeLessThan(HISTORICO_CHANCE + 0.06)
+  })
+
+  it('en un draft de once giros salen unos tres planteles históricos', () => {
+    const squads = [
+      ...Array.from({ length: 170 }, (_, i) => squad(`actual-${i}`, `club-${i}`, false)),
+      ...Array.from({ length: 36 }, (_, i) => squad(`hist-${i}`, `histclub-${i}`, true)),
+    ]
+    let total = 0
+    const DRAFTS = 500
+    for (let d = 0; d < DRAFTS; d++) {
+      const usados = new Set<string>()
+      for (let giro = 0; giro < 11; giro++) {
+        const sq = spinSquadWithPity(squads, SIN_JUGADORES, SIN_PITY, undefined, usados)
+        usados.add(sq.clubId)
+        if (sq.historico) total++
+      }
+    }
+    const porDraft = total / DRAFTS
+    expect(porDraft).toBeGreaterThan(2)
+    expect(porDraft).toBeLessThan(4.5)
   })
 
   it('pero salen: bajar la probabilidad no es sacarlos del bombo', () => {

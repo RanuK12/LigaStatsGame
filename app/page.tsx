@@ -788,7 +788,12 @@ export default function HomePage() {
                 <span className="text-[#74ACDF]/40 text-xs font-sport font-bold block tracking-wider">
                   GAMBETA
                 </span>
-                <span className="text-slate-600 text-[10px] font-medium font-sans">© 2026 · El Draft del Fútbol Argentino</span>
+                <span className="text-slate-600 text-[10px] font-medium font-sans">
+                  © 2026 Ranuk IT Solutions · El Draft del Fútbol Argentino ·{" "}
+                  <Link href="/legal" className="underline underline-offset-2 hover:text-slate-400">
+                    Legal
+                  </Link>
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-1">

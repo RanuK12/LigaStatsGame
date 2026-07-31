@@ -10,7 +10,7 @@ import { normalizeSquads } from "@/lib/data-normalizers"
 import { usePlayersCore } from "@/lib/data-loader"
 import { useUserStore } from "@/lib/user-store"
 import { calculateElo, submitOnlineScore } from "@/lib/supabase"
-import { tournamentPoints, plazaPorPuesto, type TorneoTipo } from "@/lib/ranking"
+import { tournamentPoints, plazaPorPuesto, BASE_POR_TORNEO, type TorneoTipo } from "@/lib/ranking"
 import { simulateContinentalTournament } from "@/lib/copa-libertadores"
 import { saveLocalScore, type GameScore } from "@/lib/scores"
 import {
@@ -411,8 +411,13 @@ function DraftInner() {
     }
 
     saveLocalScore(entry)
-    const { id: _omit, ...online } = entry
-    void submitOnlineScore(online) // fire & forget (no-op sin Supabase)
+    // Al ranking global entran SOLO los registrados. Antes subía todo el mundo como "Invitado", así
+    // que el podio lo peleaban filas sin dueño contra gente con cuenta, y el ranking dejaba de
+    // significar algo. El invitado sigue viendo sus partidas en "mis partidas", que es local.
+    if (user?.isLoggedIn) {
+      const { id: _omit, ...online } = entry
+      void submitOnlineScore(online) // fire & forget (no-op sin Supabase)
+    }
 
     // ── RETO DIARIO: bono de ELO al completarlo (uno por día, con racha) ──
     if (retoId && retoId === challengeForDate(localYmd()).id && !completadoHoy()) {
@@ -753,11 +758,36 @@ function DraftInner() {
               </p>
               <p className="mt-1.5 text-[11px] leading-relaxed text-slate-400 font-sans">
                 Tu <strong className="text-slate-200">ELO</strong> se mueve según en qué puesto termines: salir
-                campeón te catapulta, pelear el descenso te resta. La <strong className="text-slate-200">Liga</strong>{" "}
-                vale más que la <strong className="text-slate-200">Copa</strong> porque son 28 fechas contra 32
-                equipos de eliminación directa. Y si terminás entre los <strong className="text-slate-200">8
-                primeros</strong> de la Liga te ganás un lugar en la Libertadores o la Sudamericana, que valen
-                más que todo lo demás.{" "}
+                campeón te catapulta, pelear el descenso te resta.
+              </p>
+              {/* Los números salen de BASE_POR_TORNEO, no escritos a mano: si mañana se recalibran,
+                  el cartel se actualiza solo y no queda mintiendo. */}
+              <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+                {([
+                  { t: "copa" as const, label: "Copa", nota: "32 equipos, eliminación directa" },
+                  { t: "liga" as const, label: "Liga", nota: "28 fechas, la más larga" },
+                  { t: "sudamericana" as const, label: "Sudamericana", nota: "hay que clasificar" },
+                  { t: "libertadores" as const, label: "Libertadores", nota: "la que más vale" },
+                ]).map((x) => (
+                  <div key={x.t} className={`rounded-xl border px-2 py-2 ${
+                    x.t === "libertadores" ? "border-[#F6C750]/40 bg-[#F6C750]/[0.07]"
+                    : x.t === "sudamericana" ? "border-[#74ACDF]/30 bg-[#74ACDF]/[0.05]"
+                    : "border-white/5 bg-slate-950/40"}`}>
+                    <div className={`font-display text-base font-black leading-none ${
+                      x.t === "libertadores" ? "text-[#F6C750]" : x.t === "sudamericana" ? "text-[#9CCBF0]" : "text-white"}`}>
+                      {BASE_POR_TORNEO[x.t]}
+                    </div>
+                    <div className="mt-0.5 text-[9px] font-black uppercase tracking-wider text-slate-300 font-sport">{x.label}</div>
+                    <div className="text-[8px] leading-tight text-slate-500 font-sans">{x.nota}</div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2.5 text-[11px] leading-relaxed text-slate-400 font-sans">
+                Las dos copas continentales <strong className="text-slate-200">no se eligen</strong>: se clasifica
+                terminando entre los 8 primeros de la Liga, y la plaza queda guardada en tu cuenta.{" "}
+                {user?.isLoggedIn
+                  ? "Se juega con el 11 que tengas armado, y la plaza se gasta al usarla."
+                  : "Como invitado no se guarda: hay que tener cuenta para jugarlas y para entrar al ranking."}{" "}
                 <Link href="/leaderboard" className="text-[#74ACDF] hover:text-white underline underline-offset-2">
                   Ver el ranking
                 </Link>

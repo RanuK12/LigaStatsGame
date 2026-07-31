@@ -318,6 +318,7 @@ export function simulateContinentalTournament(
   const finalStats = Object.values(playerStatsMap)
   return {
     type: 'copa',
+    continental: type,
     playerPos,
     champion,
     isChampion,

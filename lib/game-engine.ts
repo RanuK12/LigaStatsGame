@@ -845,22 +845,16 @@ export const STAR_PITY_SPINS = 6;
 
 const esEstrella = (p: Player) => Boolean(p.legendary) || (p.rating || 0) >= STAR_RATING;
 
-// ── Planteles históricos: menos probables que los actuales ──
-// Salir el Boca de Bianchi tiene que ser un momento, y un momento que pasa siempre deja de
-// serlo. Entran al mismo bombo con menos peso, no por un camino aparte.
-export const HISTORICO_PESO = 0.4;
+// ── Planteles históricos: uno de cada cuatro giros ──
+// Son 36 contra 170 actuales. Sorteando por peso quedaban en el 8 % de los giros: en un draft de
+// once salías sin ver ninguno, y el trabajo de traerlos no se notaba. Va fijo: uno de cada cuatro
+// giros cae en un plantel histórico si hay alguno disponible, o sea unos tres por draft. Lo
+// suficiente para que estén y no tanto como para que dejen de ser un premio.
+export const HISTORICO_CHANCE = 0.25;
 
-const pesoDe = (sq: Squad) => (sq.historico ? HISTORICO_PESO : 1);
-
-/** Sorteo uniforme salvo por el peso de cada plantel. Con todos los pesos en 1 es el random de antes. */
-function sorteoPonderado(lista: Squad[]): Squad {
-  const total = lista.reduce((s, sq) => s + pesoDe(sq), 0);
-  let r = Math.random() * total;
-  for (const sq of lista) {
-    r -= pesoDe(sq);
-    if (r <= 0) return sq;
-  }
-  return lista[lista.length - 1];
+/** Sorteo uniforme. Existe para tener un solo lugar donde se elige al azar de una lista. */
+function sorteoUniforme(lista: Squad[]): Squad {
+  return lista[Math.floor(Math.random() * lista.length)];
 }
 
 /** ¿Este plantel tiene una estrella libre que pueda jugar en el puesto pedido? */
@@ -896,15 +890,40 @@ export function spinSquadWithPity(
   }
   if (eligible.length === 1) return eligible[0];
 
-  // Estrella: chance base y garantía tras varios giros secos
-  if (slot) {
-    const conEstrella = eligible.filter((sq) => squadHasStarFor(sq, allPlayers, slot.position, slot.drafted));
-    if (conEstrella.length > 0) {
-      const garantizada = (pity.spinsSinEstrella ?? 0) >= STAR_PITY_SPINS;
-      if (garantizada || Math.random() < STAR_BASE_CHANCE) {
-        return sorteoPonderado(conEstrella);
-      }
-    }
+  // Orden de prioridades del giro, y por qué:
+  //
+  //   1. La GARANTÍA de estrella manda sobre todo. Si el jugador lleva seis giros sin ver una
+  //      figura, el próximo se la trae sí o sí: es la promesa del sistema de pity y romperla se
+  //      siente como una estafa. Cuando está activa, el bombo se reduce a los que tienen estrella.
+  //   2. Dentro de lo que quede, el CUPO de históricos: uno de cada cuatro. Va antes que la
+  //      chance base de estrella porque si no, la mecánica de estrella elegiría primero y el uno
+  //      de cada cuatro no se cumpliría nunca.
+  //   3. Recién ahí, la chance base de estrella y el pity de siempre.
+  const conEstrella = slot
+    ? eligible.filter((sq) => squadHasStarFor(sq, allPlayers, slot.position, slot.drafted))
+    : [];
+  const garantizada = !!slot && conEstrella.length > 0 && (pity.spinsSinEstrella ?? 0) >= STAR_PITY_SPINS;
+  if (garantizada) eligible = conEstrella;
+
+  const historicos = eligible.filter(sq => sq.historico);
+  if (historicos.length > 0 && historicos.length < eligible.length && Math.random() < HISTORICO_CHANCE) {
+    // Si el puesto pide algo que ningún histórico puede cubrir, no se fuerza: se sigue de largo.
+    const utiles = slot
+      ? historicos.filter(sq => allPlayers.some(p => sq.playerIds.includes(p.id) && !slot.drafted.has(p.id) && canPlayHere(p, slot.position)))
+      : historicos;
+    if (utiles.length > 0) return sorteoUniforme(utiles);
+  }
+
+  // Si el cupo no salió, el giro se juega SOLO entre los actuales. Si los históricos siguieran en
+  // la bolsa del resto, sumarían su parte proporcional encima del cupo y terminarían saliendo el
+  // 38 % de las veces en vez del 25 %.
+  const actuales = eligible.filter(sq => !sq.historico);
+  if (actuales.length > 0) eligible = actuales;
+
+  if (garantizada) return sorteoUniforme(eligible);
+  if (slot && conEstrella.length > 0 && Math.random() < STAR_BASE_CHANCE) {
+    const vigentes = conEstrella.filter(sq => eligible.includes(sq));
+    return sorteoUniforme(vigentes.length > 0 ? vigentes : conEstrella);
   }
 
   // Compute avg squad rating for each eligible squad
@@ -921,19 +940,19 @@ export function spinSquadWithPity(
     if (goodSquads.length > 0) {
       // 65% chance to pick from good squads
       if (Math.random() < 0.65) {
-        return sorteoPonderado(goodSquads.map(x => x.sq));
+        return sorteoUniforme(goodSquads.map(x => x.sq));
       }
     }
   } else if (pity.consecutiveLow === 1) {
     // 1 consecutive low → 30% chance to get a decent squad
     const decentSquads = withRating.filter(x => x.avg >= 62);
     if (decentSquads.length > 0 && Math.random() < 0.30) {
-      return sorteoPonderado(decentSquads.map(x => x.sq));
+      return sorteoUniforme(decentSquads.map(x => x.sq));
     }
   }
 
   // Normal random pick
-  return sorteoPonderado(eligible);
+  return sorteoUniforme(eligible);
 }
 
 /** Update pity state after a player is picked */

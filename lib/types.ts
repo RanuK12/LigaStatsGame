@@ -233,7 +233,8 @@ export interface TournamentResult {
   topAssisters: TournamentPlayerStats[];
   schedule?: ScheduleMatch[];
   rounds?: RoundMatch[];
-  /** Copas continentales: la tabla del grupo y el puesto en el que quedaste */
+  /** Copas continentales: cuál es, la tabla del grupo y el puesto en el que quedaste */
+  continental?: 'libertadores' | 'sudamericana';
   groupTable?: LigaTeamRow[];
   groupPos?: number;
   eliminated?: boolean;

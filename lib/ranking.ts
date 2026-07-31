@@ -70,7 +70,7 @@ export type TorneoTipo = 'liga' | 'copa' | 'sudamericana' | 'libertadores'
  * Cuánto vale cada torneo. Las copas continentales valen más porque no se eligen: hay que
  * clasificar con la Liga para poder jugarlas, y jugás contra clubes de todo el continente.
  */
-const BASE_POR_TORNEO: Record<TorneoTipo, number> = {
+export const BASE_POR_TORNEO: Record<TorneoTipo, number> = {
   liga: 100,
   copa: 70,
   sudamericana: 120,

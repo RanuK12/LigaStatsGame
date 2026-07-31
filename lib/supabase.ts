@@ -112,6 +112,26 @@ export async function submitSuggestion(s: Suggestion): Promise<boolean> {
 }
 
 /** Submit a draft score entry to Supabase */
+/**
+ * ¿Ese nombre ya lo está usando alguien en el ranking?
+ *
+ * El ranking se muestra por nombre, así que dos personas con el mismo nombre son, en pantalla, la
+ * misma persona. Se chequea antes de dejar entrar como invitado.
+ */
+export async function nombreEnUso(username: string): Promise<boolean> {
+  if (!supabase) return false
+  try {
+    const { data, error } = await supabase
+      .from('leaderboard')
+      .select('username')
+      .ilike('username', username.trim())
+      .limit(1)
+    return !error && !!data && data.length > 0
+  } catch {
+    return false
+  }
+}
+
 export async function submitOnlineScore(entry: Omit<OnlineScore, 'id'>): Promise<boolean> {
   if (!supabase) return false
   try {
