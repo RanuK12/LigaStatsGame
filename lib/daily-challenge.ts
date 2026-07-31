@@ -1,6 +1,8 @@
 // Reto diario determinístico: todos ven el MISMO reto cada día y rota solo al cambiar el día.
 // La selección se deriva de la fecha (YYYY-MM-DD) con un hash estable, sin backend.
 
+import type { Player } from './types'
+
 export type Difficulty = "Fácil" | "Media" | "Difícil" | "Leyenda"
 
 export interface DailyChallenge {
@@ -9,24 +11,65 @@ export interface DailyChallenge {
   rule: string
   icon: string
   difficulty: Difficulty
+  /**
+   * El filtro que se aplica AL BOMBO. Sin esto el reto es un título y nada más: durante meses los
+   * catorce retos produjeron exactamente el mismo draft aleatorio, así que no había nada que
+   * comparar entre dos personas y compartir el resultado no significaba nada.
+   *
+   * Cada filtro de acá está medido contra data/players.json: tiene que poder llenar los once
+   * puestos de cualquier formación. Los retos que la base no puede sostener —campeones del mundo
+   * (10 jugadores con el trofeo cargado), campeones de Libertadores (11), década del 80 (8)— no
+   * están: prometer un plantel que no se puede armar es peor que no tener el reto.
+   */
+  filtro: (p: Player) => boolean
 }
 
-// Pool temático de retos del fútbol argentino. Agregar más solo amplía la variedad.
+const enClubes = (...ids: string[]) => (p: Player) =>
+  (p.clubs || []).some((c) => ids.includes(c.id))
+
+// Pool temático. Cada uno viene con su regla aplicable; agregar más solo amplía la variedad,
+// pero el filtro nuevo hay que medirlo antes: si no llena los once puestos, rompe el draft.
 export const CHALLENGES: DailyChallenge[] = [
-  { id: "campeones-mundo", title: "Campeones del Mundo", rule: "Armá tu XI usando solo jugadores campeones del mundo con Argentina.", icon: "🏆", difficulty: "Difícil" },
-  { id: "scaloneta", title: "La Scaloneta", rule: "Solo héroes de Qatar 2022. Reviví la tercera estrella.", icon: "⭐", difficulty: "Difícil" },
-  { id: "clasico-eterno", title: "Clásico Eterno", rule: "Solo jugadores de Boca Juniors y River Plate.", icon: "🔵🔴", difficulty: "Fácil" },
-  { id: "decada-80", title: "Década Dorada", rule: "Solo cracks que brillaron en los años 80.", icon: "📼", difficulty: "Media" },
-  { id: "zurdos", title: "Zurdos Mágicos", rule: "Solo jugadores de pie zurdo. La zurda manda.", icon: "🦵", difficulty: "Media" },
-  { id: "rosario", title: "Orgullo Rosarino", rule: "Solo Central y Newell's. La ciudad del gol.", icon: "🌟", difficulty: "Media" },
-  { id: "cordoba", title: "Furia Cordobesa", rule: "Solo clubes de Córdoba: Talleres, Belgrano, Instituto.", icon: "🏔️", difficulty: "Media" },
-  { id: "arco-invicto", title: "Arco Invicto", rule: "Elegí el mejor arquero y una línea de 4 defensores de fierro.", icon: "🧤", difficulty: "Fácil" },
-  { id: "goleadores", title: "Máquina de Goles", rule: "Armá el equipo con más goles sumados. A romper la red.", icon: "⚽", difficulty: "Fácil" },
-  { id: "enganches", title: "Los 10", rule: "Solo enganches y volantes creativos. Fútbol de otro planeta.", icon: "🎩", difficulty: "Media" },
-  { id: "ovr-90", title: "Élite Absoluta", rule: "Solo jugadores con OVR 88 o más. Nada de relleno.", icon: "💎", difficulty: "Leyenda" },
-  { id: "libertadores", title: "Gloria Continental", rule: "Solo campeones de Copa Libertadores.", icon: "🌎", difficulty: "Difícil" },
-  { id: "extranjeros", title: "Legionarios del Ascenso", rule: "Solo extranjeros que hicieron historia en el fútbol argentino.", icon: "✈️", difficulty: "Media" },
-  { id: "leyendas-arqueros", title: "Guardianes Eternos", rule: "Rendí homenaje: armá con los arqueros más grandes de la historia.", icon: "🥅", difficulty: "Media" },
+  {
+    id: "clasico-eterno", title: "Clásico Eterno", icon: "🔵🔴", difficulty: "Fácil",
+    rule: "Solo jugadores que pasaron por Boca o por River.",
+    filtro: enClubes("boca-juniors", "river-plate"),
+  },
+  {
+    id: "rosario", title: "Orgullo Rosarino", icon: "🌟", difficulty: "Media",
+    rule: "Solo Central y Newell's. La ciudad del gol.",
+    filtro: enClubes("rosario-central", "newells"),
+  },
+  {
+    id: "cordoba", title: "Furia Cordobesa", icon: "🏔️", difficulty: "Media",
+    rule: "Solo Talleres, Belgrano e Instituto. Córdoba manda.",
+    filtro: enClubes("talleres-cba", "belgrano", "instituto"),
+  },
+  {
+    id: "avellaneda", title: "Clásico de Avellaneda", icon: "🔴🔵", difficulty: "Media",
+    rule: "Solo Independiente y Racing. El barrio del rey de copas.",
+    filtro: enClubes("independiente", "racing-club"),
+  },
+  {
+    id: "zurdos", title: "Zurdos Mágicos", icon: "🦵", difficulty: "Difícil",
+    rule: "Solo jugadores de pie zurdo. La zurda manda.",
+    filtro: (p) => p.preferredFoot === "Izquierdo",
+  },
+  {
+    id: "extranjeros", title: "Los que Vinieron", icon: "✈️", difficulty: "Media",
+    rule: "Solo extranjeros que hicieron historia en el fútbol argentino.",
+    filtro: (p) => !!p.nationality && p.nationality !== "Argentina",
+  },
+  {
+    id: "noventas", title: "Puro Noventa", icon: "📼", difficulty: "Media",
+    rule: "Solo cracks de los años noventa. Fútbol de otra época.",
+    filtro: (p) => p.decade === "1990s",
+  },
+  {
+    id: "dosmiles", title: "Generación 2000", icon: "💿", difficulty: "Media",
+    rule: "Solo jugadores que brillaron en los 2000.",
+    filtro: (p) => p.decade === "2000s",
+  },
 ]
 
 // Epoch del juego para numerar los retos (Reto #N).

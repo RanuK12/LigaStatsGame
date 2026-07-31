@@ -31,7 +31,7 @@ import {
 } from "@/lib/game-engine"
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
-import { challengeForDate, localYmd } from "@/lib/daily-challenge"
+import { challengeForDate, localYmd, CHALLENGES } from "@/lib/daily-challenge"
 import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
 import { calculateChemistry } from "@/lib/chemistry"
 import ChemistryPanel from "@/components/ChemistryPanel"
@@ -179,7 +179,23 @@ function DraftInner() {
   const retoId = sp.get("reto")
 
   const { players: playersCore, error: playersError } = usePlayersCore()
-  const allP = useMemo(() => playersCore ?? [], [playersCore])
+    // ── EL RETO DIARIO FILTRA EL BOMBO DE VERDAD ──
+  // Antes el reto solo servía para cobrar el bono de ELO: los catorce retos producían el mismo
+  // draft aleatorio, cambiaba el título y nada más. Sin regla aplicada no hay resultado comparable
+  // entre dos personas, y sin eso compartir no significa nada. Ahora el bombo se recorta.
+  const retoDelDia = useMemo(() => {
+    if (!retoId) return null
+    return CHALLENGES.find((c) => c.id === retoId) ?? null
+  }, [retoId])
+
+  const allP = useMemo(() => {
+    const base = playersCore ?? []
+    if (!retoDelDia) return base
+    const filtrados = base.filter((pl) => retoDelDia.filtro(pl))
+    // Si el filtro dejara un bombo imposible de completar, se juega sin restricción antes que
+    // dejar al jugador trabado. No debería pasar: cada filtro está medido, pero la base cambia.
+    return filtrados.length >= 60 ? filtrados : base
+  }, [playersCore, retoDelDia])
   const allS = useMemo(() => normalizeSquads(squadsData), [])
   const { user, updateElo, addTitle, otorgarPlaza, usarPlaza } = useUserStore()
 
@@ -314,6 +330,47 @@ function DraftInner() {
       }, 300)
     }
   }, [drafted, draftedIds, f, pity, totalSlots])
+
+  // ── COMPLETAR EL RESTO ──
+  // El once completo son 22 toques: once giros con animación más once elecciones. Medido, el
+  // jugador promedio tiene 44 segundos dentro del juego, así que casi nadie llegaba a simular y
+  // todo lo que da ganas de volver —ELO, ranking, ficha, compartir— quedaba detrás de esa pared.
+  // Esto llena los puestos que falten con el mejor disponible y deja jugar. El once armado a mano
+  // sigue siendo la partida buena; esto es la puerta de entrada.
+  const completarEquipo = useCallback(() => {
+    const nuevos = [...drafted]
+    const ids = new Set(draftedIds)
+    let sumados = 0
+
+    f.positions.forEach((slot: any, i: number) => {
+      if (nuevos[i]) return
+      // Mismo bombo que el giro manual: solo planteles que tengan a alguien para ese puesto.
+      const elegibles = getEligibleSquadsForSlot(allS, allP, slot.pos, ids)
+      if (elegibles.length === 0) return
+      const sq = spinSquadWithPity(elegibles, allP, pity, { position: slot.pos, drafted: ids }, clubesUsados)
+      clubesUsados.add(sq.clubId)
+      const mejor = allP
+        .filter(pl => sq.playerIds.includes(pl.id) && !ids.has(pl.id) && canPlayHere(pl, slot.pos))
+        .sort((x, y) => (y.rating || 0) - (x.rating || 0))[0]
+      if (!mejor) return
+      nuevos[i] = mejor
+      ids.add(mejor.id)
+      sumados++
+    })
+
+    if (sumados === 0) return
+    setDrafted(nuevos)
+    setDraftedIds(ids)
+    setClubesUsados(new Set(clubesUsados))
+    setCurrentSquad(null)
+    setPhase("done")
+    setBurst({ label: "¡EQUIPO ARMADO!", tone: "celeste" })
+    trackEvent(EVENTOS.draftCompletado, {
+      formacion: f.id,
+      puntaje: Math.round(calculateFullTeamScore(nuevos, f)),
+      autocompletado: sumados,
+    })
+  }, [drafted, draftedIds, allS, allP, f, pity, clubesUsados])
 
   // ── SLOT CLICK ──
   const handleSlotClick = useCallback((idx: number) => {
@@ -628,6 +685,18 @@ function DraftInner() {
                 <span className="font-display font-bold text-xl text-white">{currentPos.label}</span>
               </div>
             </div>
+            {/* La regla del día, a la vista mientras jugás: si no se ve, no se siente un reto. */}
+            {retoDelDia && (
+              <div className="mb-4 rounded-2xl border border-orange-400/30 bg-orange-500/[0.07] px-4 py-3 text-center">
+                <p className="font-sport text-[10px] font-black uppercase tracking-[0.28em] text-orange-300">
+                  {retoDelDia.icon} Reto de hoy · {retoDelDia.title}
+                </p>
+                <p className="mt-1 font-sans text-[12px] leading-relaxed text-slate-300">{retoDelDia.rule}</p>
+                <p className="mt-1 font-sport text-[10px] uppercase tracking-wider text-slate-500">
+                  Bombo recortado: hoy todos juegan con los mismos jugadores
+                </p>
+              </div>
+            )}
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
             {filledCount >= 2 && <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>}
             <div className="flex gap-3 justify-center flex-wrap font-sport">
@@ -640,7 +709,24 @@ function DraftInner() {
                 Elegir posición
               </button>
             </div>
-            <p className="text-xs text-slate-400 mt-2 text-center">
+
+            {/* La salida rápida, desde el primer giro. Sin esto hay que dar 22 toques antes de que
+                exista cualquier resultado, y el jugador promedio tiene 44 segundos adentro. */}
+            {filledCount >= 1 && filledCount < totalSlots && (
+              <div className="mt-4 text-center">
+                <button
+                  onClick={completarEquipo}
+                  className="rounded-2xl border border-[#F6C750]/40 bg-[#F6C750]/[0.08] px-6 py-3 font-sport text-[11px] font-black uppercase tracking-[0.18em] text-[#F6C750] transition-colors hover:bg-[#F6C750]/15 hover:text-white"
+                >
+                  ⚡ Completar los {totalSlots - filledCount} que faltan y jugar
+                </button>
+                <p className="mt-1.5 font-sans text-[11px] text-slate-500">
+                  Te llena los puestos vacíos con lo mejor que haya y vas directo al torneo
+                </p>
+              </div>
+            )}
+
+            <p className="text-xs text-slate-400 mt-3 text-center">
               Girá para la posición actual · o elegí otra posición manualmente
             </p>
           </motion.div>
