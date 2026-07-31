@@ -366,11 +366,9 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 1 | Fase 0 completa (títulos, eventos, Search Console) | Sin esto no se puede decidir nada |
 | 2 | Dedupe del bombo + shuffle (5.1, 5.2) | Es el defecto que ya se nota jugando |
 | 3 | Ranking real (5.4) | Es el motivo de volver que ya está construido a medias |
-| 4 | Ficha de cierre de Liga y Copa (5.6) | Hoy el torneo termina en una tabla y no genera ni un compartido |
-| 5 | Libertadores y Sudamericana con clasificación (5.7) | El mejor motivo para crear cuenta que va a tener el juego |
-| 6 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
-| 7 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
-| 8 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
+| 4 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
+| 5 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
+| 6 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
 
 ### Ya hecho
 
@@ -384,6 +382,8 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 07-31 | Compartir en X con la imagen preparada y mención a @GambetafutbolAR, sin hashtags (PR #32) |
 | 07-31 | Caja de sugerencias en el home, sobre el backend que ya existía (PR #32) |
 | 07-31 | Donaciones al terminar torneo y carrera, y explicando quiénes somos (PR #32) |
+| 07-31 | Ficha de cierre de torneo: ELO ganado a la vista y camino de la Copa (PR #33) |
+| 07-31 | Libertadores y Sudamericana por clasificación, con cuenta y puntos propios (PR #34) |
 
 ---
 
