@@ -187,27 +187,89 @@ el home, o sea casi nadie.
 
 ## Fase 5 — Arreglos del juego que estaban mal
 
-### 5.1 El bombo repite equipos (confirmado, y peor de lo que parecía)
-`data/squads.json` (170) + `data/squads_historical.json` (187) = **357 planteles de solo 44
-clubes**. Y **134 planteles están duplicados literalmente** entre los dos archivos: el mismo
-club-temporada cargado con dos slugs distintos (`independiente` y `ca-independiente`,
-`banfield` y `ca-banfield`, ...). Godoy Cruz aparece 20 veces, con 2015, 2016, 2018, 2019, 2023,
-2024 y 2025 **repetidos dos veces cada uno**. Boca tiene 23 entradas.
+### 5.1 El bombo repite equipos — HECHO
+Corrección sobre la primera versión de este plan: los 134 planteles duplicados están entre
+`squads.json` y `squads_historical.json`, pero **el juego solo importa `squads.json`**
+(`app/draft/page.tsx:7`, `app/versus/page.tsx:8`, `app/page.tsx:8`). El histórico no lo carga
+nadie, así que esos duplicados nunca llegaron a la ruleta.
 
-Como `spinSquad()` (`lib/game-engine.ts:255`) elige uniforme sobre todos los planteles, Boca sale
-23 veces más seguido que un club con uno solo. Eso es exactamente lo que se ve jugando.
+La causa real es la desproporción: **170 planteles de solo 29 clubes**. Boca y Rosario Central
+entran con 12 temporadas cada uno, Godoy Cruz con 9, y trece clubes con 1 o 2. Como
+`spinSquadWithPity` sorteaba parejo sobre los 170, Boca salía 12 veces más seguido que Central
+Córdoba, y en 11 giros repetir club era casi seguro.
 
-Arreglo:
-1. Deduplicar por `clubId` normalizado + `season`, unificando los dos espacios de slugs.
-2. Que la ruleta **no repita club** dentro de una misma tanda: elegir club primero, después
-   temporada. Un bombo de 15 debería tener 15 clubes distintos.
-3. Balancear: como mucho 3–4 temporadas por club en el bombo, priorizando las memorables.
+Arreglado: el draft recuerda los clubes que ya salieron y los saca del bombo mientras queden
+otros; si para ese puesto no queda ninguno fresco, vuelve al bombo completo antes que dejar al
+jugador sin tirar. Con test que reproduce la repetición sin el arreglo.
 
-### 5.2 Bug de barajado
-`lib/game-engine.ts:333` y `:387` usan `sort(() => Math.random() - 0.5)` para elegir los 29
-rivales. **El propio archivo advierte en la línea 537 que ese comparador no baraja de verdad.**
-Los rivales salen sesgados hacia el orden del archivo. Usar el `shuffle()` que ya está escrito
-ahí abajo.
+Queda pendiente, opcional: balancear el dataset a 3–4 temporadas por club, priorizando las
+memorables. Con el filtro de club puesto ya no se nota, así que no es urgente.
+
+### 5.2 El código muerto: no revivirlo, reemplazarlo por torneos que faltan
+`simulateSeasonMatchByMatch` y `simulateCopaArgentinaMatchByMatch` (con el `sort(() =>
+Math.random() - 0.5)` que no baraja) no las llama nadie. Miradas de cerca, **son versiones
+viejas de las que ya corren**: `simulateSeasonWithStats` hace la misma liga y
+`simulateCopaWithStats` la misma copa de 32 equipos, las dos con `pickOpponents`, que sortea
+bien. Revivirlas no agregaría un modo nuevo: agregaría un duplicado peor del que ya está.
+
+Lo que sí falta, y es la idea buena detrás de esto: **el draft solo ofrece Liga y Copa**
+(`startSim(type: "liga" | "copa")`). Los motores de **Libertadores** (`lib/copa-libertadores.ts`,
+`simulateContinentalTournament`) y **Mundial de Clubes** (`lib/world-cup.ts`) ya existen y
+funcionan, pero solo se usan en el modo carrera. Llevarlos al draft da dos competencias nuevas
+de verdad, sin escribir motor nuevo:
+
+1. Agregar `libertadores` y `mundial-clubes` a `startSim`, con sus rivales continentales.
+2. Extender `tournamentPoints` (`lib/ranking.ts:67`), que hoy solo entiende `'liga' | 'copa'`
+   con base 100 y 70. La escala natural: Libertadores 130 y Mundial de Clubes 160, porque son
+   más difíciles y tienen que valer más en el ranking.
+3. Borrar las dos funciones muertas recién cuando los modos nuevos estén andando, no antes.
+
+Esto le da al ranking algo que hoy no tiene: **varias formas de sumar**, que es lo que hace que
+alguien vuelva a intentar con otro 11.
+
+### 5.5 Los equipos históricos (el pedido grande)
+
+Hoy el bombo arranca en 2015. Faltan los planteles que un hincha argentino reconoce al toque:
+los Boca de Bianchi, el River de Gallardo, el Vélez del 94, el Estudiantes de Verón, el Huracán
+de Cappa, el Independiente de Bochini. Son, además, el mejor material posible para la cuenta de X
+y para SEO.
+
+**Qué hay y qué falta (medido, no estimado):**
+
+- `data/players.json` tiene 2.939 jugadores con club y años (`clubs[].years`), 606 de los 90 y
+  561 de los 2000, y 35 marcados como leyenda.
+- Pero solo están **las figuras, no los planteles**. Probado: para Boca 2001 la base da 4
+  jugadores (Tevez, Riquelme, Palermo, Abbondanzieri); para Boca 2007, 2; para el River de
+  Gallardo 2015, **0**; para Talleres 1999, 0.
+- `data/squads_historical.json` **no sirve para esto**: a pesar del nombre, son los mismos
+  2015-2025 con otros slugs de club. Es un residuo de scraping, no planteles históricos.
+
+O sea: **el scrape nuevo hace falta**, y es sobre todo de jugadores, no de equipos.
+
+**Cómo hacerlo:**
+
+1. **Definir la lista desde el palmarés, no de memoria.** Campeones de Libertadores argentinos,
+   campeones de Intercontinental/Mundial de Clubes, y los hitos de época. Cada equipo de la lista
+   tiene que quedar respaldado por una fuente; si un año no se confirma, no entra. (Ojo con dos
+   del pedido: el hito continental de Talleres es la **Copa Conmebol 1999**, no 1996, y "el
+   Belgrano campeón" hay que definir a cuál nos referimos. Lo resuelve la fuente, no nosotros.)
+2. **Scrapear el plantel** de cada temporada elegida con el pipeline que ya usa el repo:
+   Wikidata + es.wikipedia.org, igual que `scripts/data/enrich-wikidata-stats.mjs` y
+   `verify-vs-wikidata.mjs`. Script nuevo: `scripts/data/scrape-squads-historicos.mjs`.
+3. **Fusionar sin romper**: los jugadores que ya existen se reusan por id; los nuevos se agregan
+   con su OVR calculado igual que el resto (`recompute-ovr.mjs`), no a ojo.
+4. **OVR un poco más alto**, como pediste, pero acotado: un bonus de época de +2/+3 sobre el
+   plantel, no más. Si un equipo histórico arrasa siempre, deja de ser un premio y rompe el
+   equilibrio del torneo.
+5. **Que se sientan un premio al salir**: estos planteles entran en la ruleta con menor
+   probabilidad que los actuales y con animación propia, como ya pasa con las cartas de leyenda.
+   Salir el Boca de Bianchi tiene que ser un momento.
+6. **Validar** con `npm run audit:data` (ya existe) antes de publicar: sin jugadores duplicados,
+   sin planteles de menos de 11, sin años inventados.
+
+Cada equipo histórico es además **una página de contenido** para la Fase 3 ("Boca 2001: el
+plantel campeón de América") y **un tweet** con la ruleta mostrándolo. El mismo trabajo sirve
+para las tres cosas.
 
 ### 5.3 Que el equipo bueno gane más seguido
 El OVR y la química **ya entran** en la simulación (`teamToStrength`, `simulateMatchGoals`), así
@@ -264,8 +326,10 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 5 | Ficha en imagen + mención a @GambetafutbolAR (2.1, 2.2) | Convierte los 650 en tráfico nuevo |
 | 6 | Caja de sugerencias (4.1) | El backend ya existe; es media hora |
 | 7 | Donaciones reubicadas (4.2) | Después de un momento de disfrute, no en el footer |
-| 8 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
-| 9 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
+| 8 | Libertadores y Mundial de Clubes en el draft + puntos (5.2) | Motores ya escritos; le da varias formas de sumar al ranking |
+| 9 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
+| 10 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
+| 11 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
 
 ---
 
