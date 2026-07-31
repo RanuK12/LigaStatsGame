@@ -161,7 +161,7 @@ export default function LegendCardReveal({ player, club, isIcon, biography, onCl
                   {stats.map((s, i) => (
                     <div key={i} className="rounded-lg border border-white/5 bg-white/5 py-1.5 text-center">
                       <div className="text-base font-black" style={{ color: s.c }}>{s.v}</div>
-                      <div className="text-[8px] uppercase tracking-wider text-slate-400">{s.l}</div>
+                      <div className="text-[10px] uppercase tracking-wider text-slate-400">{s.l}</div>
                     </div>
                   ))}
                 </motion.div>

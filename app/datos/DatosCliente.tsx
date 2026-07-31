@@ -78,7 +78,7 @@ export default function DatosCliente() {
         {/* Un día como hoy: contenido que cambia solo, sin generarlo */}
         {efemeride && (
           <section className="mt-7 rounded-3xl border border-[#E7C27D]/25 bg-gradient-to-r from-[#141026]/80 to-[#050a14]/80 p-4">
-            <p className="font-sport text-[9px] font-black uppercase tracking-[0.3em] text-[#E7C27D]">
+            <p className="font-sport text-[11px] font-black uppercase tracking-[0.3em] text-[#E7C27D]">
               Hace {efemeride.hace} años
             </p>
             <p className="mt-1.5 font-sans text-[13px] leading-relaxed text-slate-300">
@@ -154,7 +154,7 @@ export default function DatosCliente() {
               </div>
 
               {/* De dónde salió. Es la diferencia entre un dato y un rumor. */}
-              <p className="mt-4 font-sport text-[9px] uppercase tracking-wider text-slate-500">
+              <p className="mt-4 font-sport text-[11px] uppercase tracking-wider text-slate-500">
                 {dato.origen === "derivado" ? (
                   "Calculado sobre la base del juego"
                 ) : (

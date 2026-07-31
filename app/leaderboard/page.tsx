@@ -34,8 +34,8 @@ function LeaderboardRow({ rank, s, esVos, historial }: {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-bold text-sm truncate max-w-[160px]">{s.username}</span>
-          {esVos && <span className="text-[9px] font-black font-sport uppercase tracking-wider text-[#74ACDF] bg-[#74ACDF]/10 border border-[#74ACDF]/30 rounded px-1.5 py-0.5">VOS</span>}
-          {s.seed && <span className="text-[9px] font-black font-sport uppercase tracking-wider text-slate-500 border border-slate-700 rounded px-1.5 py-0.5">DT de la casa</span>}
+          {esVos && <span className="text-[11px] font-black font-sport uppercase tracking-wider text-[#74ACDF] bg-[#74ACDF]/10 border border-[#74ACDF]/30 rounded px-1.5 py-0.5">VOS</span>}
+          {s.seed && <span className="text-[11px] font-black font-sport uppercase tracking-wider text-slate-500 border border-slate-700 rounded px-1.5 py-0.5">DT de la casa</span>}
           <TierBadge elo={s.elo} />
         </div>
         <div className="text-[11px] text-slate-400 mt-0.5">
@@ -57,7 +57,11 @@ function LeaderboardRow({ rank, s, esVos, historial }: {
 }
 
 export default function LeaderboardPage() {
-  const [scores, setScores] = useState<GameScore[]>([])
+  // DOS estados, no uno. Compartían `scores`, así que al entrar (que ahora abre en el global) se
+  // llenaba con las filas de Supabase y al tocar "mis partidas" seguían ahí: el jugador veía 200
+  // partidas de gente que no era él. Cada pestaña tiene su fuente y no se pisan.
+  const [misPartidas, setMisPartidas] = useState<GameScore[]>([])
+  const [online, setOnline] = useState<GameScore[]>([])
   // Se abre en el ranking global: el que entra a "Tabla de líderes" viene a ver quién va ganando,
   // no su propio historial. Abrir en "mis partidas" con cero partidas jugadas es una pantalla vacía.
   const [tab, setTab] = useState<'global' | 'online'>('online')
@@ -67,7 +71,7 @@ export default function LeaderboardPage() {
   const user = useUserStore((s) => s.user)
 
   useEffect(() => {
-    setScores(loadLocalScores())
+    setMisPartidas(loadLocalScores())
   }, [])
 
   useEffect(() => {
@@ -75,9 +79,9 @@ export default function LeaderboardPage() {
     setLoadingOnline(true)
     trackEvent(EVENTOS.rankingVisto)
     fetchOnlineScores(200)
-      .then((online) => {
-        setScores(
-          online.map((o, i) => ({
+      .then((filas) => {
+        setOnline(
+          filas.map((o, i) => ({
             id: o.id || `online-${i}`,
             username: o.username,
             club: o.club,
@@ -95,22 +99,16 @@ export default function LeaderboardPage() {
     if (user?.isLoggedIn) fetchRankGlobal(user.elo).then(setRankGlobal)
   }, [tab, user])
 
-  // En "mis partidas" se suman los DTs de la casa para tener contra quién medirse. En el ranking
-  // global NO: son jugadores de mentira y correrían de puesto a los reales.
-  //
-  // Y una fila por persona: la tabla guarda una por partida, así que el que jugó veinte veces
-  // ocupaba veinte puestos y empujaba a todos los demás para abajo. Se queda su mejor ELO.
   const ranked = useMemo(() => {
-    // "Mis partidas" es el historial: ahí TIENEN que estar todas, una por partida jugada, porque
-    // es lo que el jugador viene a ver. La reducción a una fila por persona es del ranking global,
-    // donde el que jugó veinte veces ocupaba veinte puestos y corría a todos los demás.
-    // "Mis partidas" es TU historial: una fila por partida jugada, la más reciente primero. Los DT
-    // de la casa no van acá, que no son partidas tuyas; su lugar es el ranking, como referencia.
+    // "Mis partidas" es TU historial y sale de este dispositivo: una fila por partida jugada, la
+    // más reciente primero. Los DT de la casa no van acá, que no son partidas tuyas.
     if (tab !== 'online') {
-      return [...scores].sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+      return [...misPartidas].sort((a, b) => (b.date || '').localeCompare(a.date || ''))
     }
+    // El global sí se reduce a una fila por persona: la tabla guarda una por partida, así que el
+    // que jugó veinte veces ocupaba veinte puestos y corría a todos los demás para abajo.
     const mejorPorNombre = new Map<string, GameScore>()
-    for (const f of scores) {
+    for (const f of online) {
       const clave = (f.username || '').trim().toLowerCase()
       const previa = mejorPorNombre.get(clave)
       if (!previa || f.elo > previa.elo || (f.elo === previa.elo && f.pts > previa.pts)) {
@@ -122,7 +120,7 @@ export default function LeaderboardPage() {
     // haya gente de verdad, se van: un ranking con rivales inventados no significa nada.
     const filas = reales.length > 0 ? reales : SEED_RIVALS
     return filas.sort((a, b) => b.elo - a.elo || b.pts - a.pts)
-  }, [scores, tab])
+  }, [misPartidas, online, tab])
   const miPuesto = useMemo(() => {
     if (!user?.isLoggedIn) return null
     // Online: el puesto lo cuenta la base, así vale aunque estés fuera del top que se descargó.
@@ -174,7 +172,7 @@ export default function LeaderboardPage() {
               }`}
             >
               <span className="block text-[11px] font-black uppercase tracking-widest">{t.label}</span>
-              <span className={`block text-[9px] uppercase tracking-wider ${tab === t.id ? 'text-white/70' : 'text-slate-600'}`}>{t.sub}</span>
+              <span className={`block text-[11px] uppercase tracking-wider ${tab === t.id ? 'text-white/70' : 'text-slate-600'}`}>{t.sub}</span>
             </button>
           ))}
         </div>

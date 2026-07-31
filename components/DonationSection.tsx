@@ -67,7 +67,7 @@ export default function DonationSection({ compacta = false }: { compacta?: boole
                 }`}
               >
                 {popular && (
-                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black font-sport uppercase tracking-wider whitespace-nowrap shadow-md">
+                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[11px] font-black font-sport uppercase tracking-wider whitespace-nowrap shadow-md">
                     ★ El más elegido
                   </span>
                 )}

@@ -70,7 +70,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
             <span className="font-impact text-lg font-black tracking-[0.14em] text-white leading-none">GAMBETA</span>
             <span className="text-[#F6C750] text-[11px] leading-none tracking-[0.15em]">★★★</span>
           </div>
-          <div className="text-[8.5px] font-sport font-bold uppercase tracking-[0.28em] text-[#74ACDF] mt-1">
+          <div className="text-[10px] font-sport font-bold uppercase tracking-[0.28em] text-[#74ACDF] mt-1">
             El juego del fútbol argentino
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
           <span className="text-[10px] font-black tracking-widest font-sport">OVR PICO</span>
           <span className="font-impact text-5xl font-black leading-none">{peak}</span>
           {peak !== player.ovr && (
-            <span className="text-[9px] font-bold font-sport opacity-70">se retiró en {player.ovr}</span>
+            <span className="text-[11px] font-bold font-sport opacity-70">se retiró en {player.ovr}</span>
           )}
         </div>
         <div className="flex-1 min-w-0">
@@ -120,7 +120,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
       )}
 
       {/* COLUMNAS */}
-      <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-x-2 sm:gap-x-3 items-center px-1 pt-4 pb-2 text-[9px] font-black text-slate-500 font-sport uppercase tracking-widest">
+      <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-x-2 sm:gap-x-3 items-center px-1 pt-4 pb-2 text-[11px] font-black text-slate-500 font-sport uppercase tracking-widest">
         <span>Edad</span><span>Club</span><span className="text-center">OVR</span>
         <span className="text-center">🟩 PJ</span>
         <span className="text-center">{esArquero || esDefensor ? "🧤 VI" : "⚽ G"}</span>
@@ -173,7 +173,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
       {/* MINI-HISTORIA DE RETIRO */}
       {career.finished && (
         <div className="mt-4 rounded-xl bg-white/[0.03] border border-white/[0.07] px-4 py-3">
-          <div className="text-[9px] font-black text-slate-500 font-sport uppercase tracking-widest mb-1">Tras el retiro</div>
+          <div className="text-[11px] font-black text-slate-500 font-sport uppercase tracking-widest mb-1">Tras el retiro</div>
           <p className="text-[13px] leading-snug text-slate-200">📖 {retirementStory(career)}</p>
         </div>
       )}
@@ -184,9 +184,9 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logos/gambeta.svg" alt="" className="h-4 w-4" />
           <span className="font-impact font-black text-white tracking-[0.15em]">GAMBETA</span>
-          <span className="text-[#F6C750] text-[9px]">★★★</span>
+          <span className="text-[#F6C750] text-[11px]">★★★</span>
         </span>
-        <span className="text-[#74ACDF] text-[9px] tracking-[0.2em]">GAMBETAFUTBOL.GAMES</span>
+        <span className="text-[#74ACDF] text-[11px] tracking-[0.2em]">GAMBETAFUTBOL.GAMES</span>
       </div>
     </div>
   )

@@ -31,6 +31,7 @@ import {
 } from "@/lib/game-engine"
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import { tocar } from "@/lib/sonido"
 import { challengeForDate, localYmd, CHALLENGES } from "@/lib/daily-challenge"
 import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
 import { calculateChemistry } from "@/lib/chemistry"
@@ -149,7 +150,7 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
                           : "bg-slate-800 border-slate-600 text-slate-200 hover:border-[#75AADB]/60 hover:bg-slate-700"
                       }`}
                       style={{ borderColor: pos === currentPos ? undefined : getPC(pos) + "55" }}>
-                      <span className="inline-block w-5 h-5 rounded-full text-white text-[9px] font-black mr-1 leading-5 text-center" style={{ backgroundColor: getPC(pos) }}>
+                      <span className="inline-block w-5 h-5 rounded-full text-white text-[11px] font-black mr-1 leading-5 text-center" style={{ backgroundColor: getPC(pos) }}>
                         {POS_LABELS[pos]?.slice(0, 3) || pos.slice(0, 3)}
                       </span>
                       {POS_LABELS[pos] || pos}
@@ -279,6 +280,7 @@ function DraftInner() {
     setSpinNotice(null)
     setCurrentSquad(result)
     setClubesUsados(prev => new Set(prev).add(result.clubId))
+    tocar("giro")
     setSpinning(true)
     setPhase("spinning")
   }, [spinning, allS, allP, currentPos.pos, draftedIds, pity, f, drafted, clubesUsados])
@@ -841,8 +843,8 @@ function DraftInner() {
                   return (
                     <div key={i} className="flex items-center gap-1.5 bg-slate-800/50 rounded-lg px-2.5 py-1.5 border border-slate-700 group relative">
                       <button onClick={() => removePlayer(i)}
-                        className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[8px] flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center text-[7px] font-bold text-white"
+                        className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
                         style={{ backgroundColor: getPC(pos.pos) }}>
                         {pl ? pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase() : POS_LABELS[pos.pos]}
                       </div>
@@ -850,7 +852,7 @@ function DraftInner() {
                         <div className="text-[10px] font-semibold text-white truncate max-w-[80px]">
                           {pl ? pl.name.split(" ").pop() : <span className="text-slate-500 italic">vacío</span>}
                         </div>
-                        <div className="text-[8px] text-slate-500">{POS_LABELS[pos.pos] || pos.pos}</div>
+                        <div className="text-[10px] text-slate-500">{POS_LABELS[pos.pos] || pos.pos}</div>
                       </div>
                       {pl && mode.ratingsVisible && <span className="text-[10px] font-bold text-[#75AADB]">{pl.rating}</span>}
                     </div>
@@ -887,8 +889,8 @@ function DraftInner() {
                       x.t === "libertadores" ? "text-[#F6C750]" : x.t === "sudamericana" ? "text-[#9CCBF0]" : "text-white"}`}>
                       {BASE_POR_TORNEO[x.t]}
                     </div>
-                    <div className="mt-0.5 text-[9px] font-black uppercase tracking-wider text-slate-300 font-sport">{x.label}</div>
-                    <div className="text-[8px] leading-tight text-slate-500 font-sans">{x.nota}</div>
+                    <div className="mt-0.5 text-[11px] font-black uppercase tracking-wider text-slate-300 font-sport">{x.label}</div>
+                    <div className="text-[10px] leading-tight text-slate-500 font-sans">{x.nota}</div>
                   </div>
                 ))}
               </div>

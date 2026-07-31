@@ -124,7 +124,7 @@ export default function SeasonReveal({ season, position, onClose }: Props) {
               ).map((s, i) => (
                 <div key={i} className="rounded-xl border border-white/5 bg-white/5 py-2.5">
                   <div className="font-display text-2xl font-black" style={{ color: s.c }}>{s.v}</div>
-                  <div className="text-[9px] uppercase tracking-wider text-slate-400">{s.l}</div>
+                  <div className="text-[11px] uppercase tracking-wider text-slate-400">{s.l}</div>
                 </div>
               ))}
             </div>

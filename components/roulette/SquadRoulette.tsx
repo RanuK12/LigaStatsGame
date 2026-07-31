@@ -174,7 +174,7 @@ export default function SquadRoulette({ squads, spinning, result, onSpinComplete
 
       {/* En el bombo: los planteles que se están sorteando, con escudo */}
       <div className="mx-auto mt-4 w-[min(92vw,30rem)]">
-        <div className="text-center text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 font-sport">
+        <div className="text-center text-[11px] font-black uppercase tracking-[0.3em] text-slate-500 font-sport">
           En el bombo
         </div>
         <div className="mt-2 flex flex-wrap justify-center gap-1.5">

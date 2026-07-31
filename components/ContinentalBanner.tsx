@@ -83,14 +83,14 @@ export default function ContinentalBanner() {
                     <div className="font-display text-2xl font-black leading-none" style={{ color: c.color }}>
                       {c.puntos}
                     </div>
-                    <div className="font-sport text-[9px] uppercase tracking-wider text-slate-500">puntos base</div>
+                    <div className="font-sport text-[11px] uppercase tracking-wider text-slate-500">puntos base</div>
                   </div>
                   <div className="h-8 w-px bg-white/10" />
                   <div className="text-left">
                     <div className="font-sport text-[10px] font-black uppercase tracking-wider text-slate-300">
                       {c.como}
                     </div>
-                    <div className="font-sport text-[9px] uppercase tracking-wider text-slate-500">
+                    <div className="font-sport text-[11px] uppercase tracking-wider text-slate-500">
                       con cuenta, para guardarla
                     </div>
                   </div>

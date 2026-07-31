@@ -11,10 +11,13 @@ import TierBadge from "@/components/TierBadge"
  * El 1° va más grande y más alto, el 2° un escalón abajo, el 3° otro más. En pantalla chica se
  * apilan en el mismo orden, pero conservando el tamaño relativo.
  */
+// La diferencia tiene que verse desde lejos: con scale-95 y scale-90 el primero era apenas un 5%
+// más grande que el segundo, y un podio que no se lee como podio no da ganas de pelear el primer
+// puesto. El escalón también se agranda.
 const ESTILOS = [
   { color: "#F6C750", nombre: "Oro", medalla: "🥇", altura: "sm:mt-0", escala: "scale-100" },
-  { color: "#C6D2DE", nombre: "Plata", medalla: "🥈", altura: "sm:mt-10", escala: "scale-95" },
-  { color: "#CD7F32", nombre: "Bronce", medalla: "🥉", altura: "sm:mt-16", escala: "scale-90" },
+  { color: "#C6D2DE", nombre: "Plata", medalla: "🥈", altura: "sm:mt-14", escala: "sm:scale-[0.88]" },
+  { color: "#CD7F32", nombre: "Bronce", medalla: "🥉", altura: "sm:mt-24", escala: "sm:scale-[0.8]" },
 ]
 
 export default function Podio({
@@ -62,16 +65,16 @@ export default function Podio({
                 />
               )}
 
-              <div className={primero ? "text-5xl" : "text-4xl"}>{e.medalla}</div>
+              <div className={primero ? "text-6xl" : "text-4xl"}>{e.medalla}</div>
               <div
-                className="mt-1 font-sport text-[9px] font-black uppercase tracking-[0.3em]"
+                className="mt-1 font-sport text-[11px] font-black uppercase tracking-[0.22em]"
                 style={{ color: e.color }}
               >
                 {idx + 1}° · {e.nombre}
               </div>
 
               <p
-                className={`mt-2 truncate font-display font-black text-white ${primero ? "text-xl" : "text-base"}`}
+                className={`mt-2 truncate font-display font-black text-white ${primero ? "text-2xl" : "text-base"}`}
                 title={s.username}
               >
                 {s.username}
@@ -80,19 +83,19 @@ export default function Podio({
               <div className="mt-1.5 flex items-center justify-center gap-1.5">
                 <TierBadge elo={s.elo} />
                 {esVos && (
-                  <span className="rounded border border-[#74ACDF]/30 bg-[#74ACDF]/10 px-1.5 py-0.5 font-sport text-[9px] font-black uppercase tracking-wider text-[#74ACDF]">
+                  <span className="rounded border border-[#74ACDF]/30 bg-[#74ACDF]/10 px-1.5 py-0.5 font-sport text-[11px] font-black uppercase tracking-wider text-[#74ACDF]">
                     Vos
                   </span>
                 )}
               </div>
 
               <div
-                className={`mt-3 font-display font-black leading-none ${primero ? "text-4xl" : "text-3xl"}`}
+                className={`mt-3 font-display font-black leading-none ${primero ? "text-6xl" : "text-3xl"}`}
                 style={{ color: e.color }}
               >
                 {s.elo}
               </div>
-              <div className="font-sport text-[9px] uppercase tracking-widest text-slate-500">ELO</div>
+              <div className="font-sport text-[11px] uppercase tracking-widest text-slate-400">ELO</div>
 
               {s.lema && <p className="mt-2 truncate text-[11px] italic text-slate-400">{s.lema}</p>}
             </div>

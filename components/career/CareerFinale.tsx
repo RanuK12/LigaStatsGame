@@ -140,7 +140,7 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
               ].map((s, i) => (
                 <div key={i} className="rounded-xl border border-white/5 bg-white/5 py-2">
                   <div className="font-display text-xl font-black text-white">{s.v}</div>
-                  <div className="text-[8px] uppercase tracking-wider text-slate-400">{s.l}</div>
+                  <div className="text-[10px] uppercase tracking-wider text-slate-400">{s.l}</div>
                 </div>
               ))}
             </div>

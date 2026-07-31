@@ -176,7 +176,7 @@ function WorldCupBanner() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
-                <span className="text-[9px] font-black uppercase tracking-widest text-red-400 font-sport">MUNDIAL 2026</span>
+                <span className="text-[11px] font-black uppercase tracking-widest text-red-400 font-sport">MUNDIAL 2026</span>
               </div>
               <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#74ACDF]/20 via-white/10 to-[#74ACDF]/20 border border-[#74ACDF]/40 px-3 py-1 rounded-full">
                 <span className="text-sm leading-none">🇦🇷</span>
@@ -208,7 +208,7 @@ function WorldCupBanner() {
                     animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{ repeat: Infinity, duration: 4 + i, ease: 'easeInOut' }}
                   >★</motion.span>
-                  <span className="text-[9px] font-bold text-[#D4AF37] mt-1 font-sport">{y}</span>
+                  <span className="text-[11px] font-bold text-[#D4AF37] mt-1 font-sport">{y}</span>
                 </motion.div>
               ))}
               <motion.div
@@ -219,7 +219,7 @@ function WorldCupBanner() {
                 className="flex flex-col items-center opacity-30"
               >
                 <span className="text-2xl text-slate-400">★</span>
-                <span className="text-[9px] font-bold text-slate-400 mt-1 font-sport">2026</span>
+                <span className="text-[11px] font-bold text-slate-400 mt-1 font-sport">2026</span>
               </motion.div>
             </div>
 
@@ -246,8 +246,8 @@ function WorldCupBanner() {
               >
                 <div className="text-lg mb-0.5">{s.icon}</div>
                 <div className="text-2xl font-black gradient-text-gold font-display leading-none">{s.value}</div>
-                <div className="text-[9px] text-[#D4AF37] font-bold mt-1 uppercase tracking-wider font-sport">{s.label}</div>
-                <div className="text-[9px] text-slate-400 mt-0.5 font-medium">{s.sub}</div>
+                <div className="text-[11px] text-[#D4AF37] font-bold mt-1 uppercase tracking-wider font-sport">{s.label}</div>
+                <div className="text-[11px] text-slate-400 mt-0.5 font-medium">{s.sub}</div>
               </motion.div>
             ))}
           </div>
@@ -283,7 +283,7 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
           <div className="p-6 flex flex-col flex-1">
             {/* Badge row */}
             <div className="flex items-start justify-between mb-5">
-              <div className={`text-[9px] font-bold px-2 py-0.5 rounded border tracking-widest font-sport uppercase ${mode.badgeColor}`}>
+              <div className={`text-[11px] font-bold px-2 py-0.5 rounded border tracking-widest font-sport uppercase ${mode.badgeColor}`}>
                 {mode.badge}
               </div>
             </div>
@@ -316,7 +316,7 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
             </p>
 
             {/* CTA row */}
-            <div className="mt-6 flex items-center gap-1.5 text-[9px] font-bold tracking-widest font-sport uppercase" style={{ color: mode.accent }}>
+            <div className="mt-6 flex items-center gap-1.5 text-[11px] font-bold tracking-widest font-sport uppercase" style={{ color: mode.accent }}>
               <span>JUGAR AHORA</span>
               <motion.span
                 animate={hovered ? { x: 5 } : { x: 0 }}
@@ -485,7 +485,7 @@ function ClubGrid() {
                   sizes="(max-width: 640px) 40px, 44px"
                 />
               </div>
-              <span className="text-[9px] text-slate-400 text-center font-bold uppercase tracking-wider font-sport truncate w-full">
+              <span className="text-[11px] text-slate-400 text-center font-bold uppercase tracking-wider font-sport truncate w-full">
                 {club.shortName || club.name}
               </span>
               
@@ -500,7 +500,7 @@ function ClubGrid() {
                     className="absolute -top-12 left-1/2 -translate-x-1/2 z-20 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 whitespace-nowrap pointer-events-none shadow-xl text-center"
                   >
                     <p className="text-[10px] font-bold text-white font-sport uppercase tracking-wider">{club.name}</p>
-                    <p className="text-[9px] text-slate-500 font-sans mt-0.5">{club.titles} títulos · {club.stadium}</p>
+                    <p className="text-[11px] text-slate-500 font-sans mt-0.5">{club.titles} títulos · {club.stadium}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -607,7 +607,7 @@ export default function HomePage() {
                     {item.title}
                   </h4>
                   <p className="text-xs text-slate-400 leading-relaxed font-sans mb-4">{item.text}</p>
-                  <div className="text-[#74ACDF]/60 text-[9px] font-bold tracking-widest font-sport group-hover:text-[#74ACDF] transition-colors uppercase">
+                  <div className="text-[#74ACDF]/60 text-[11px] font-bold tracking-widest font-sport group-hover:text-[#74ACDF] transition-colors uppercase">
                     VER MÁS →
                   </div>
                 </div>
@@ -654,7 +654,7 @@ export default function HomePage() {
             <div className="flex items-center gap-1">
               <span className="text-slate-600 text-[10px] font-bold font-sport tracking-wider mr-2 uppercase">CAMPEONES MUNDIALES:</span>
               {['1978', '1986', '2022'].map((y, i) => (
-                <span key={i} className="badge-gold text-[9px] font-bold tracking-wider">{y}</span>
+                <span key={i} className="badge-gold text-[11px] font-bold tracking-wider">{y}</span>
               ))}
             </div>
             <div className="flex items-center gap-5">
@@ -665,7 +665,7 @@ export default function HomePage() {
                 { href: '/records', label: 'RECORDS' },
               ].map(l => (
                 <Link key={l.href} href={l.href}
-                  className="text-[#74ACDF]/40 hover:text-[#74ACDF] text-[9px] font-bold tracking-widest font-sport transition-colors">
+                  className="text-[#74ACDF]/40 hover:text-[#74ACDF] text-[11px] font-bold tracking-widest font-sport transition-colors">
                   {l.label}
                 </Link>
               ))}
@@ -674,37 +674,50 @@ export default function HomePage() {
           {/* Dónde encontrarnos. Sin esto, el que quiere seguir el proyecto no tiene a dónde ir:
               entra, juega tres minutos y se va sin dejar rastro. */}
           <div className="mt-6 pt-6 border-t border-slate-900 text-center">
-            <p className="font-sport text-[10px] font-black uppercase tracking-widest text-slate-500">
-              Seguinos
+            <p className="font-sport text-[11px] font-black uppercase tracking-[0.28em] text-slate-500">
+              Dónde encontrarnos
             </p>
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5">
+            {/* Tarjetas, no links pelados: con el logo real de cada cosa y una línea que explica
+                qué vas a encontrar. Antes eran tres pastillas grises indistinguibles entre sí. */}
+            <div className="mx-auto mt-4 grid max-w-2xl gap-2.5 sm:grid-cols-3">
               <a
                 href="https://x.com/GambetafutbolAR"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-2.5 transition-colors hover:border-[#74ACDF]/40 hover:bg-slate-900"
+                className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-4 transition-all hover:-translate-y-0.5 hover:border-[#74ACDF]/45 hover:bg-slate-900"
               >
-                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-white" aria-hidden="true">
+                <svg viewBox="0 0 24 24" className="h-6 w-6 fill-white transition-transform group-hover:scale-110" aria-hidden="true">
                   <path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8.1-9.3L1 2h7l4.8 6.3L18.9 2Zm-1.2 18h1.9L7.4 4H5.4l12.3 16Z" />
                 </svg>
                 <span className="font-sport text-[11px] font-black tracking-wider text-white">@GambetafutbolAR</span>
+                <span className="font-sans text-[11px] leading-tight text-slate-500">Novedades del juego y fútbol argentino</span>
               </a>
+
               <a
                 href="https://ranuk.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-2.5 transition-colors hover:border-[#74ACDF]/40 hover:bg-slate-900"
+                className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-4 transition-all hover:-translate-y-0.5 hover:border-[#64ffda]/45 hover:bg-slate-900"
               >
-                <span className="text-sm">🦊</span>
+                <img src="/logos/marca/ranuk.svg" alt="Ranuk" className="h-6 w-auto transition-transform group-hover:scale-110" />
                 <span className="font-sport text-[11px] font-black tracking-wider text-white">ranuk.dev</span>
+                <span className="font-sans text-[11px] leading-tight text-slate-500">Quiénes hacemos Gambeta</span>
               </a>
+
               <Link
                 href="/legal"
-                className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-2.5 transition-colors hover:border-[#74ACDF]/40 hover:bg-slate-900"
+                className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-4 transition-all hover:-translate-y-0.5 hover:border-white/25 hover:bg-slate-900"
               >
-                <span className="font-sport text-[11px] font-black tracking-wider text-slate-300">Legal</span>
+                <svg viewBox="0 0 24 24" className="h-6 w-6 text-slate-300 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6.5A2.5 2.5 0 0 1 4 17.5v-13Z" />
+                  <path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20" />
+                  <path d="M8 7h8M8 10.5h5" />
+                </svg>
+                <span className="font-sport text-[11px] font-black tracking-wider text-white">Aviso legal</span>
+                <span className="font-sans text-[11px] leading-tight text-slate-500">Titularidad y uso del nombre</span>
               </Link>
             </div>
+
             <p className="mt-5 text-slate-600 text-[10px] font-sans font-medium">
               Hecho con pasión para los hinchas del fútbol argentino · Temporada 2026
             </p>

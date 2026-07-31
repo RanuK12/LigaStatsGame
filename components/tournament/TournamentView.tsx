@@ -9,6 +9,9 @@ import { getPC } from "@/lib/ui-constants"
 import MatchChronicleFeed from "./MatchChronicleFeed"
 import ShareBar from "@/components/ShareBar"
 import DonationSection from "@/components/DonationSection"
+import GuardarProgreso from "@/components/GuardarProgreso"
+import EventBurst from "@/components/ui/EventBurst"
+import { tocar } from "@/lib/sonido"
 import { storyBlob } from "@/lib/story-card"
 import Image from "next/image"
 
@@ -30,6 +33,15 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
   const [chroniclePlaying, setChroniclePlaying] = useState<any | null>(null)
 
   const isChamp = result.isChampion
+  // El estallido de campeón. Ganar la Libertadores pasa una de cada veinte veces con un once
+  // bueno, y se festejaba con una estrellita de 28px que hacía un scale. EventBurst ya estaba
+  // escrito, ya respeta prefers-reduced-motion y ya es CSS puro: solo faltaba enchufarlo acá.
+  const [festejo, setFestejo] = useState(false)
+  useEffect(() => {
+    if (!isChamp) return
+    const t = setTimeout(() => { setFestejo(true); tocar("campeon") }, 350)
+    return () => clearTimeout(t)
+  }, [isChamp])
   const hasChronicle = (result.chronicle?.length ?? 0) > 0
   const totalRounds = result.rounds?.length ?? 0
   const currentChronicle = result.chronicle?.[matchIdx]
@@ -370,7 +382,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {userMatchInRound && (
                 <div className="card-gradient rounded-3xl p-6 border border-[#74ACDF]/20 shadow-[0_0_20px_rgba(116,172,223,0.06)] text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#74ACDF]/40 to-transparent" />
-                  <span className="text-[9px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport block mb-3">TU PARTIDO</span>
+                  <span className="text-[11px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport block mb-3">TU PARTIDO</span>
                   <div className="flex items-center justify-center gap-4 sm:gap-6">
                     <span className="font-display font-black text-sm sm:text-base text-white max-w-[140px] truncate">{userMatchInRound.home}</span>
                     <span className="px-3.5 py-1.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs font-black text-[#74ACDF] font-sport">VS</span>
@@ -480,7 +492,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
 
                 {/* Show score when feed concludes */}
                 <div className="mt-8 pt-6 border-t border-slate-900 text-center flex flex-col items-center">
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">RESULTADO FINAL</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">RESULTADO FINAL</span>
                   <div className="flex items-center gap-4 justify-center text-2xl font-black font-display mb-6">
                     <span className="text-white">{result.teamLabel}</span>
                     <span className="text-[#74ACDF]">{chroniclePlaying.myGoals} - {chroniclePlaying.oppGoals}</span>
@@ -512,17 +524,38 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               }`}>
                 {isChamp && (
                   <motion.div
-                    initial={{ scale: 0 }} animate={{ scale: [0, 1.3, 1] }}
-                    transition={{ duration: 0.6 }}
+                    initial={{ scale: 0 }} animate={{ scale: [0, 1.25, 1] }}
+                    transition={{ type: "spring", stiffness: 180, damping: 12, delay: 0.15 }}
                     className="flex justify-center mb-3">
-                    <div className="w-14 h-14 rounded-full border border-yellow-500/30 bg-yellow-500/10 flex items-center justify-center">
-                      <svg className="w-7 h-7 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                      </svg>
-                    </div>
+                    {/* La copa de verdad, no una estrella genérica de 28px. El SVG ya existe y ya
+                        se usa a 80px en el home; acá es el premio, así que va grande. */}
+                    {copa ? (
+                      <img
+                        src={`/logos/copas/${result.continental}.svg`}
+                        alt={copa.nombre}
+                        className="h-32 w-32 object-contain sm:h-40 sm:w-40"
+                        style={{ filter: `drop-shadow(0 0 28px ${copa.color}66)` }}
+                      />
+                    ) : (
+                      <div className="flex h-20 w-20 items-center justify-center rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10">
+                        <svg className="h-10 w-10 fill-current text-[#D4AF37]" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      </div>
+                    )}
                   </motion.div>
                 )}
                 
+                {/* El estallido de campeón: destello, rayos y Sol de Mayo. Es el momento más
+                    difícil del juego y hasta ahora se festejaba con un scale de medio segundo. */}
+                <EventBurst
+                  show={festejo}
+                  tone="oro"
+                  label={copa ? copa.gentilicio : "¡CAMPEÓN!"}
+                  duration={2400}
+                  onDone={() => setFestejo(false)}
+                />
+
                 {/* LPF logo on the tournament final view if it's Liga */}
                 {result.type === "liga" && (
                   <div className="absolute top-4 right-4 w-7 h-10 opacity-30">
@@ -634,15 +667,15 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               <div className="grid grid-cols-3 gap-3">
                 <div className="card-gradient rounded-xl p-3 text-center border border-slate-900">
                   <div className="text-2xl font-black text-green-400 font-display">{result.playerStats.reduce((s, p) => s + p.goals, 0)}</div>
-                  <div className="text-[9px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Goles</div>
+                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Goles</div>
                 </div>
                 <div className="card-gradient rounded-xl p-3 text-center border border-slate-900">
                   <div className="text-2xl font-black text-blue-400 font-display">{result.playerStats.reduce((s, p) => s + p.assists, 0)}</div>
-                  <div className="text-[9px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Asistencias</div>
+                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Asistencias</div>
                 </div>
                 <div className="card-gradient rounded-xl p-3 text-center border border-slate-900">
                   <div className="text-2xl font-black text-yellow-400 font-display">{result.playerStats[0]?.matchesPlayed || 0}</div>
-                  <div className="text-[9px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Partidos</div>
+                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Partidos</div>
                 </div>
               </div>
 
@@ -682,7 +715,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                           return (
                             <tr key={idx} className={`border-b border-white/[0.04] transition-colors ${isMe ? "table-row-user font-semibold" : ""}`}>
                               <td className="py-2.5 pl-2 pr-1">
-                                <span className={`inline-flex w-5 h-5 items-center justify-center rounded-full text-[9px] font-black font-sport ${
+                                <span className={`inline-flex w-5 h-5 items-center justify-center rounded-full text-[11px] font-black font-sport ${
                                   idx < 4
                                     ? "bg-blue-600/25 text-blue-400 border border-blue-500/40"
                                     : idx < 8
@@ -718,7 +751,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     </table>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-[#74ACDF]/10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[9px] font-bold font-sport uppercase tracking-wider text-slate-400">
+                  <div className="mt-4 pt-3 border-t border-[#74ACDF]/10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[11px] font-bold font-sport uppercase tracking-wider text-slate-400">
                     <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-blue-600/30 border border-blue-500/40" /> 1-4: Libertadores</span>
                     <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-600/30 border border-emerald-500/40" /> 5-8: Sudamericana</span>
                     <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-600/30 border border-red-500/40" /> Últimos 4: Descenso</span>
@@ -738,17 +771,17 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                         <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-black font-sport ${
                           idx === 0 ? "bg-[#D4AF37] text-black" : "bg-slate-800 text-slate-400"
                         }`}>{idx + 1}</div>
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 font-sport"
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 font-sport"
                           style={{ backgroundColor: getPC(p.position) }}>
                           {p.playerName.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="font-bold text-xs text-white truncate">{p.playerName}</div>
-                          <div className="text-[9px] text-slate-500 mt-0.5">{POS_LABELS[p.position] || p.position} · {p.matchesPlayed} Partidos</div>
+                          <div className="text-[11px] text-slate-500 mt-0.5">{POS_LABELS[p.position] || p.position} · {p.matchesPlayed} Partidos</div>
                         </div>
                         <div className="text-right">
                           <div className="text-base font-black text-green-400 font-display">{p.goals}</div>
-                          <div className="text-[9px] text-slate-500">{p.assists} Asistencias</div>
+                          <div className="text-[11px] text-slate-500">{p.assists} Asistencias</div>
                         </div>
                       </div>
                     ))}
@@ -768,17 +801,17 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                         <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-black font-sport ${
                           idx === 0 ? "bg-blue-500 text-white" : "bg-slate-800 text-slate-400"
                         }`}>{idx + 1}</div>
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 font-sport"
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 font-sport"
                           style={{ backgroundColor: getPC(p.position) }}>
                           {p.playerName.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="font-bold text-xs text-white truncate">{p.playerName}</div>
-                          <div className="text-[9px] text-slate-500 mt-0.5">{POS_LABELS[p.position] || p.position} · {p.matchesPlayed} Partidos</div>
+                          <div className="text-[11px] text-slate-500 mt-0.5">{POS_LABELS[p.position] || p.position} · {p.matchesPlayed} Partidos</div>
                         </div>
                         <div className="text-right">
                           <div className="text-base font-black text-blue-400 font-display">{p.assists}</div>
-                          <div className="text-[9px] text-slate-500">{p.goals} Goles</div>
+                          <div className="text-[11px] text-slate-500">{p.goals} Goles</div>
                         </div>
                       </div>
                     ))}
@@ -872,7 +905,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {elo && (
                 <div className="mb-5 flex items-center justify-between gap-4 rounded-2xl border border-[#74ACDF]/25 bg-slate-950/50 px-5 py-4">
                   <div>
-                    <div className="text-[9px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">
+                    <div className="text-[11px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">
                       Ranking
                     </div>
                     <div className="mt-1 font-display text-xl font-black leading-none text-white">
@@ -922,6 +955,11 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 }
                 className="mb-5"
               />
+
+              {/* Guardar el progreso ANTES que pedir plata. La cuenta vale más que una donación y
+                  dos pedidos en la misma pantalla se anulan entre sí. Al que ya tiene cuenta no se
+                  le muestra nada y ve la donación directo. */}
+              <GuardarProgreso elo={elo?.delta} />
 
               {/* Bancar el proyecto, justo después de compartir: es el momento en que la persona
                   la acaba de pasar bien. En el footer del home no lo veía casi nadie. */}

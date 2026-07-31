@@ -522,7 +522,7 @@ export default function VersusPage() {
                 <div className="card-gradient rounded-2xl p-4 border border-white/5 flex justify-between items-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 bottom-0 w-[4px]" style={{ backgroundColor: activeDTKey === "dt1" ? "#74ACDF" : "#a855f7" }} />
                   <div>
-                    <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport">Cancha de Selección</div>
+                    <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport">Cancha de Selección</div>
                     <h3 className="font-display text-lg font-black uppercase text-white mt-0.5 font-sport tracking-wider">
                       TURNO DE {activeDT.name}
                     </h3>
@@ -577,17 +577,17 @@ export default function VersusPage() {
                                 }`}
                               >
                                 {/* Position Tag */}
-                                <div className="absolute -top-2 px-1.5 py-0.5 rounded bg-slate-950 text-[8px] font-black border border-slate-900 uppercase font-sport scale-90"
+                                <div className="absolute -top-2 px-1.5 py-0.5 rounded bg-slate-950 text-[10px] font-black border border-slate-900 uppercase font-sport scale-90"
                                   style={{ color: getPC(slot.pos), borderColor: getPC(slot.pos) + "40" }}>
                                   {POS_LABELS[slot.pos]?.slice(0, 3) || slot.pos.slice(0, 3)}
                                 </div>
 
                                 {draftedPlayer ? (
                                   <>
-                                    <div className="text-white text-[9px] font-black font-sport mb-0.5">
+                                    <div className="text-white text-[11px] font-black font-sport mb-0.5">
                                       {draftedPlayer.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()}
                                     </div>
-                                    <span className="text-[8px] text-slate-500 font-bold tracking-tight truncate w-full px-0.5 text-center">
+                                    <span className="text-[10px] text-slate-500 font-bold tracking-tight truncate w-full px-0.5 text-center">
                                       {draftedPlayer.name.split(" ").pop()}
                                     </span>
                                     <span className="text-[10px] text-yellow-400 font-black mt-1 font-display">
@@ -623,7 +623,7 @@ export default function VersusPage() {
                 {/* 1. WHEEL CONTROL CARD */}
                 <div className="card-gradient rounded-3xl p-5 border border-white/5 text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-slate-900 via-[#74ACDF]/20 to-slate-900" />
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-1">RULETA DE CLUBES</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-1">RULETA DE CLUBES</span>
                   <h4 className="font-display font-black text-xs text-[#74ACDF] uppercase tracking-wider mb-4">
                     Buscando para: {POS_LABELS[currentSlot.pos] || currentSlot.pos}
                   </h4>
@@ -688,8 +688,8 @@ export default function VersusPage() {
                 {activeDT.currentSquad && (
                   <div className="card-gradient rounded-2xl p-5 border border-slate-900">
                     <div className="flex justify-between items-center mb-3">
-                      <h4 className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport">JUGADORES DISPONIBLES</h4>
-                      <span className="text-[9px] text-[#74ACDF] font-bold">{compatiblePlayersInSquad.length} disponibles</span>
+                      <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport">JUGADORES DISPONIBLES</h4>
+                      <span className="text-[11px] text-[#74ACDF] font-bold">{compatiblePlayersInSquad.length} disponibles</span>
                     </div>
 
                     <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
@@ -700,18 +700,18 @@ export default function VersusPage() {
                           className="w-full flex items-center justify-between p-2.5 rounded-xl bg-slate-950/40 border border-slate-900/60 hover:border-[#74ACDF]/30 hover:bg-slate-900/10 transition-all text-left group"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0 font-sport"
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0 font-sport"
                               style={{ backgroundColor: getPC(player.position) }}>
                               {player.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()}
                             </div>
                             <div>
                               <div className="text-xs font-bold text-white group-hover:text-[#74ACDF] transition-colors">{player.name}</div>
-                              <div className="text-[9px] text-slate-500 mt-0.5">{POS_LABELS[player.position] || player.position} · {player.nationality}</div>
+                              <div className="text-[11px] text-slate-500 mt-0.5">{POS_LABELS[player.position] || player.position} · {player.nationality}</div>
                             </div>
                           </div>
                           <div className="text-right shrink-0">
                             <div className="text-sm font-black text-yellow-400 font-display">{player.rating}</div>
-                            <div className="text-[9px] text-slate-500 mt-0.5">OVR</div>
+                            <div className="text-[11px] text-slate-500 mt-0.5">OVR</div>
                           </div>
                         </button>
                       ))}
@@ -786,7 +786,7 @@ export default function VersusPage() {
                     {dt1.drafted.map((player, idx) => (
                       <div key={idx} className="flex justify-between items-center p-2 rounded-xl bg-slate-950/40 border border-slate-900/60 text-xs">
                         <div className="flex items-center gap-3">
-                          <span className="text-[9px] font-black text-[#74ACDF] font-sport shrink-0 w-6">
+                          <span className="text-[11px] font-black text-[#74ACDF] font-sport shrink-0 w-6">
                             {POS_LABELS[formations[dt1.formationKey as keyof typeof formations].positions[idx].pos]?.slice(0, 3).toUpperCase()}
                           </span>
                           <span className="font-bold text-white truncate max-w-[150px]">{player?.name || "Vacío"}</span>
@@ -811,7 +811,7 @@ export default function VersusPage() {
                     {dt2.drafted.map((player, idx) => (
                       <div key={idx} className="flex justify-between items-center p-2 rounded-xl bg-slate-950/40 border border-slate-900/60 text-xs">
                         <div className="flex items-center gap-3">
-                          <span className="text-[9px] font-black text-[#a855f7] font-sport shrink-0 w-6">
+                          <span className="text-[11px] font-black text-[#a855f7] font-sport shrink-0 w-6">
                             {POS_LABELS[formations[dt2.formationKey as keyof typeof formations].positions[idx].pos]?.slice(0, 3).toUpperCase()}
                           </span>
                           <span className="font-bold text-white truncate max-w-[150px]">{player?.name || "Vacío"}</span>
@@ -856,7 +856,7 @@ export default function VersusPage() {
 
                 {/* Conclusion summary */}
                 <div className="mt-8 pt-6 border-t border-slate-900 text-center flex flex-col items-center">
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">RESULTADO DEL DUELO</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">RESULTADO DEL DUELO</span>
                   <div className="flex items-center gap-4 sm:gap-6 justify-center font-display mb-8">
                     <span className="text-base sm:text-lg font-black text-white max-w-[140px] truncate">{dt1.name}</span>
                     <span className="px-4 py-2 bg-slate-950 border border-slate-850 rounded-xl text-xl sm:text-2xl font-black text-[#74ACDF] font-sport">

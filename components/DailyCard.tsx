@@ -49,14 +49,14 @@ export default function DailyCard() {
   // Hasta que monte, el mismo hueco: nada que el servidor pueda escribir distinto.
   if (!reto) {
     return (
-      <section className="relative z-10 max-w-6xl mx-auto px-4 pt-6">
+      <section className="relative z-10 max-w-6xl mx-auto px-4 pt-12 sm:pt-14">
         <div className="h-[168px] animate-pulse rounded-3xl border border-[#74ACDF]/20 bg-[#0c1728]/60 sm:h-[136px]" />
       </section>
     )
   }
 
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-6">
+    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-12 sm:pt-14">
       <div className="relative overflow-hidden rounded-3xl border border-[#74ACDF]/25 bg-gradient-to-r from-[#0c1728]/90 to-[#050a14]/90 p-5 sm:p-6">
         <div className="banda-argentina absolute inset-x-0 top-0 h-1 opacity-80" />
 
@@ -64,11 +64,11 @@ export default function DailyCard() {
           {/* Qué hay que hacer hoy */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">
                 Reto diario #{challengeNumber()}
               </span>
               {hecho && (
-                <span className="rounded-full border border-emerald-400/40 bg-emerald-500/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-emerald-300 font-sport">
+                <span className="rounded-full border border-emerald-400/40 bg-emerald-500/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-emerald-300 font-sport">
                   ✓ Hecho
                 </span>
               )}
@@ -88,7 +88,7 @@ export default function DailyCard() {
               <div className="font-display text-3xl font-black leading-none text-white">
                 {streak > 0 ? "🔥" : "·"} {streak}
               </div>
-              <div className="mt-0.5 text-[9px] font-black uppercase tracking-widest text-slate-500 font-sport">
+              <div className="mt-0.5 text-[11px] font-black uppercase tracking-widest text-slate-500 font-sport">
                 {streak === 1 ? "día seguido" : "días seguidos"}
               </div>
             </div>
