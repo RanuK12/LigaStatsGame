@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#04101f"/>
+      <stop offset="0.55" stop-color="#020813"/>
+      <stop offset="1" stop-color="#0a1526"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.18" cy="0.15" r="0.6">
+      <stop offset="0" stop-color="#74ACDF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#74ACDF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowOro" cx="0.85" cy="0.85" r="0.5">
+      <stop offset="0" stop-color="#F6C750" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#F6C750" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#fondo)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glowOro)"/>
+
+  <!-- banda argentina -->
+  <rect x="0" y="0" width="1200" height="8" fill="#74ACDF"/>
+  <rect x="0" y="8" width="1200" height="8" fill="#FFFFFF"/>
+  <rect x="0" y="16" width="1200" height="8" fill="#74ACDF"/>
+
+  <text x="70" y="108" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="8" fill="#74ACDF">GAMBETA · GAMBETAFUTBOL.GAMES</text>
+
+  <text x="70" y="196" font-family="Helvetica, Arial, sans-serif" font-size="72" font-weight="800" fill="#FFFFFF">Los mejores equipos</text>
+  <text x="70" y="272" font-family="Helvetica, Arial, sans-serif" font-size="72" font-weight="800" fill="#F6C750">del fútbol argentino</text>
+
+  <text x="70" y="330" font-family="Helvetica, Arial, sans-serif" font-size="27" font-weight="500" fill="#B6C6DA">El Vélez del 94 · Los Boca de Bianchi · El River del 96 · El Estudiantes de Verón</text>
+
+  
+  <rect x="70" y="380" width="250" height="130" rx="22" fill="rgba(2,8,19,0.55)" stroke="#F6C750" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="195" y="442" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="52" font-weight="800" fill="#F6C750">36</text>
+  <text x="195" y="476" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#94A3B8">planteles históricos</text>
+  
+  <rect x="340" y="380" width="250" height="130" rx="22" fill="rgba(2,8,19,0.55)" stroke="#74ACDF" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="465" y="442" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="52" font-weight="800" fill="#74ACDF">3.334</text>
+  <text x="465" y="476" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#94A3B8">jugadores reales</text>
+  
+  <rect x="610" y="380" width="250" height="130" rx="22" fill="rgba(2,8,19,0.55)" stroke="#74ACDF" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="735" y="442" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="52" font-weight="800" fill="#74ACDF">206</text>
+  <text x="735" y="476" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#94A3B8">planteles en total</text>
+  
+  <rect x="880" y="380" width="250" height="130" rx="22" fill="rgba(2,8,19,0.55)" stroke="#F6C750" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="1005" y="442" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="52" font-weight="800" fill="#F6C750">54</text>
+  <text x="1005" y="476" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#94A3B8">datos curiosos</text>
+
+  <text x="70" y="562" font-family="Helvetica, Arial, sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">Libertadores y Sudamericana: no se eligen, se clasifican</text>
+  <text x="70" y="596" font-family="Helvetica, Arial, sans-serif" font-size="21" font-weight="500" fill="#7C8DA3">Gratis, sin registro para jugar · 1994-2021 · Hecho en Argentina</text>
+</svg>
