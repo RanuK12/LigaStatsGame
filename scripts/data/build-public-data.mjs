@@ -38,7 +38,15 @@ const squads = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'squads.json'), 'u
 const clubs = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'clubs.json'), 'utf8'))
 fs.writeFileSync(
   path.join(DERIVED_DIR, 'stats.json'),
-  JSON.stringify({ players: players.length, squads: squads.length, clubs: clubs.length, legends: players.filter((p) => p.legendary).length }, null, 2),
+  JSON.stringify({
+    players: players.length,
+    squads: squads.length,
+    clubs: clubs.length,
+    legends: players.filter((p) => p.legendary).length,
+    // Los planteles históricos son el argumento del juego, así que el número va a la portada y
+    // sale de acá: escrito a mano se desactualizaría al primer scrape nuevo.
+    historicos: squads.filter((s) => s.historico).length,
+  }, null, 2),
 )
 
 // 4) ruleta: top-16 completos (la página muestra clubs/trofeos/caps del ganador)

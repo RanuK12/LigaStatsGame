@@ -484,6 +484,30 @@ function DraftInner() {
               <li>5. Armá los 11 y <strong className="text-slate-200">simulá el torneo con estadísticas</strong></li>
             </ol>
           </div>
+          {/* Lo que hay en juego, antes de empezar. El que arranca sin saber que puede clasificar
+              a la Libertadores juega un draft suelto; el que lo sabe, juega una temporada. */}
+          <div className="card-gradient rounded-3xl p-6 mb-6 text-left border border-[#F6C750]/25">
+            <h3 className="font-display font-bold text-lg mb-3 text-[#F6C750]">Lo que está en juego</h3>
+            <ul className="text-sm text-slate-400 space-y-2.5">
+              <li>
+                🏆 <strong className="text-slate-200">Clasificá a la Libertadores.</strong> Si terminás entre los
+                cuatro primeros de la Liga te ganás la plaza (5° a 8°, la Sudamericana). No se eligen desde un
+                menú: se clasifica, y valen <strong className="text-white">150 y 120</strong> puntos contra los
+                100 de la Liga. Es lo que más ELO reparte del juego.
+              </li>
+              <li>
+                ⭐ <strong className="text-slate-200">Los mejores equipos argentinos de los últimos 35 años</strong>{" "}
+                están en el bombo: el Vélez del 94, los Boca de Bianchi, el River del 96, el Estudiantes de Verón.
+                Sale uno cada cuatro giros, más o menos tres por draft.
+              </li>
+              <li>
+                📈 <strong className="text-slate-200">Todo suma al ranking.</strong> Cada torneo mueve tu ELO según
+                dónde termines.{" "}
+                {user?.isLoggedIn ? "Ya tenés cuenta: te cuenta todo." : "Como invitado no entrás al ranking global ni guardás la plaza continental."}
+              </li>
+            </ul>
+          </div>
+
           <MagneticButton>
             <button onClick={startGame} disabled={!playersCore} className="btn-primary px-10 py-4 font-sport">
               {playersCore ? "Comenzar Draft" : "Cargando jugadores..."}
