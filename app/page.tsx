@@ -734,6 +734,12 @@ export default function HomePage() {
       {/* ── DETALLES DE LA LIGA SHOWCASE ── */}
       <LigaDetailsShowcase />
 
+      {/* ── BANCAR EL PROYECTO ──
+          Estaba al final de todo, después de las sugerencias: la veía el que scrolleaba la página
+          entera, que es casi nadie. Va acá, cuando la persona ya entendió qué es el juego y todavía
+          está leyendo. Sigue siendo pedir, no exigir: no hay nada pago adentro del juego. */}
+      <DonationSection />
+
       {/* ── EXTRA LINKS ── */}
       <section className="relative z-10 max-w-6xl mx-auto px-4 pb-16">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -775,11 +781,8 @@ export default function HomePage() {
         <LiveScoresWidget />
       </div>
 
-      {/* ── SUGERENCIAS ── antes de donaciones: primero se pide opinión, después plata */}
+      {/* ── SUGERENCIAS ── */}
       <SuggestionBox />
-
-      {/* ── DONATION BOX ── */}
-      <DonationSection />
 
       {/* ── CTA ── */}
       <CTASection />
@@ -861,6 +864,23 @@ export default function HomePage() {
             <p className="mt-5 text-slate-600 text-[10px] font-sans font-medium">
               Hecho con pasión para los hinchas del fútbol argentino · Temporada 2026
             </p>
+
+            {/* Titularidad, dicha de frente y con fecha. Es lo que convierte "salimos antes" en algo
+                que se puede mostrar. El detalle completo, en /legal. */}
+            <div className="mx-auto mt-5 max-w-2xl rounded-2xl border border-white/5 bg-slate-950/50 px-4 py-3">
+              <p className="font-sport text-[10px] font-black uppercase tracking-widest text-slate-500">
+                © 2026 Ranuk IT Solutions · Todos los derechos reservados
+              </p>
+              <p className="mt-1.5 font-sans text-[10px] leading-relaxed text-slate-600">
+                <strong className="text-slate-500">GAMBETA</strong> y{" "}
+                <strong className="text-slate-500">GAMBETA FÚTBOL</strong>, con su logo e identidad visual, son
+                signos distintivos en uso desde julio de 2026. El código, la base de datos y el diseño son obra
+                propia, protegidos por la Ley 11.723.{" "}
+                <Link href="/legal" className="text-[#74ACDF]/70 underline underline-offset-2 hover:text-[#74ACDF]">
+                  Ver aviso legal completo
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </footer>
