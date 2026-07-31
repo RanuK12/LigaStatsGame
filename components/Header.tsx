@@ -10,21 +10,32 @@ import { supabase } from '@/lib/supabase'
 import { profileFromSupabaseUser } from '@/lib/auth'
 import TierBadge from './TierBadge'
 
+// Nueve items no entraban: medido, la barra pedía 1.136px y entre 768 y 1023px el botón de
+// INGRESAR quedaba FUERA de la pantalla, con la página desplazándose de costado. Quedan los cuatro
+// destinos que sostienen una sesión —jugar, la sesión larga, el motivo de volver mañana y el de
+// competir— y el resto pasa a un menú. INICIO se va: el logo ya lleva al home, que es lo que
+// todo el mundo espera.
 const NAV_ITEMS = [
-  { href: '/', label: 'INICIO', match: '/' },
   { href: '/draft?mode=clasico', match: '/draft', label: 'DRAFT' },
   { href: '/carrera', label: 'CARRERA' },
-  { href: '/versus', label: 'VERSUS' },
+  { href: '/daily', label: 'RETO' },
+  { href: '/leaderboard', label: 'RANKING' },
+]
+
+// Consulta y modos sueltos: se visitan una vez, no compiten por la atención con DRAFT.
+const NAV_MAS = [
+  { href: '/datos', label: '¿SABÍAS QUE?' },
   { href: '/ruleta', label: 'RULETA' },
-  { href: '/records', label: 'RECORDS' },
-  { href: '/daily', label: 'RETO DIARIO' },
-  { href: '/datos', label: 'DATOS' },
-  { href: '/leaderboard', label: 'POSICIONES' },
+  { href: '/versus', label: 'VERSUS' },
+  { href: '/records', label: 'LEYENDAS' },
+  { href: '/como-jugar', label: 'CÓMO SE JUEGA' },
 ]
 
 export default function Header() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [masOpen, setMasOpen] = useState(false)
+  const masActivo = NAV_MAS.some((i) => pathname.startsWith(i.href))
   const { user, openAuthModal, openProfileModal, setUser, closeAuthModal } = useUserStore()
 
   // Hydrate the local store from Supabase Auth (OAuth redirect + persisted session).
@@ -51,7 +62,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020813]/72 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group -ml-2 sm:-ml-3 transition-transform">
+        <Link href="/" className="flex items-center gap-2.5 group transition-transform">
           <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0">
             <img
               src="/logos/gambeta.svg"
@@ -64,7 +75,8 @@ export default function Header() {
               <span className="font-malvinas text-xl sm:text-2xl text-white uppercase tracking-[0.14em]" title="Gambeta">
                 GAMBETA
               </span>
-              <span className="inline-flex gap-0.5 ml-1 animate-pulse shrink-0">
+              {/* Las estrellas quedaban tapadas por el botón INGRESAR en teléfono. Desde sm. */}
+              <span className="hidden sm:inline-flex gap-0.5 ml-1 animate-pulse shrink-0">
                 {[1, 2, 3].map(n => (
                   <svg key={n} className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#D4AF37] fill-current drop-shadow-[0_0_6px_rgba(212,175,55,0.6)]" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
@@ -72,14 +84,16 @@ export default function Header() {
                 ))}
               </span>
             </div>
-            <span className="text-[9px] sm:text-[10px] text-[#74ACDF] font-bold tracking-[0.22em] leading-none font-sport uppercase whitespace-nowrap mt-1">
+            {/* En teléfono la bajada quedaba a tres píxeles del botón INGRESAR, y en 360px se
+                solapaban. Se oculta: el hero repite el mismo texto palabra por palabra. */}
+            <span className="hidden sm:block text-[9px] sm:text-[10px] text-[#74ACDF] font-bold tracking-[0.22em] leading-none font-sport uppercase whitespace-nowrap mt-1">
               EL JUEGO DEL FÚTBOL ARGENTINO
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
+        {/* Desktop Navigation — a lg, no a md: con md se encendía a 768px, donde no entraba */}
+        <nav className="hidden lg:flex items-center gap-1">
           {NAV_ITEMS.map((item) => {
             const matchPath = item.match || item.href
             const isActive = pathname === matchPath || (matchPath !== '/' && pathname.startsWith(matchPath))
@@ -103,6 +117,54 @@ export default function Header() {
               </Link>
             )
           })}
+
+          {/* MÁS: lo que se visita una vez y no pelea con DRAFT por la atención */}
+          <div className="relative" onMouseLeave={() => setMasOpen(false)}>
+            <button
+              onMouseEnter={() => setMasOpen(true)}
+              onClick={() => setMasOpen((v) => !v)}
+              className={`relative flex items-center gap-1 rounded-2xl px-3.5 py-2 font-sport text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-300 ease-out ${
+                masActivo ? 'text-white' : 'text-slate-400 hover:text-white'
+              }`}
+              aria-expanded={masOpen}
+            >
+              {masActivo && (
+                <motion.span
+                  layoutId="nav-pill"
+                  className="absolute inset-0 rounded-2xl border border-[#74ACDF]/25 bg-gradient-to-r from-[#74ACDF]/16 via-[#74ACDF]/10 to-transparent shadow-[0_0_20px_rgba(116,172,223,0.12)]"
+                  transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
+                />
+              )}
+              <span className="relative z-10">MÁS</span>
+              <svg className={`relative z-10 h-2.5 w-2.5 transition-transform ${masOpen ? 'rotate-180' : ''}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M2 4l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <AnimatePresence>
+              {masOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.16 }}
+                  className="absolute right-0 top-full z-50 mt-1 w-52 overflow-hidden rounded-2xl border border-white/10 bg-[#050d1a]/97 p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+                >
+                  {NAV_MAS.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMasOpen(false)}
+                      className={`block rounded-xl px-3 py-2.5 font-sport text-[10px] font-bold uppercase tracking-[0.18em] transition-colors ${
+                        pathname.startsWith(item.href) ? 'bg-[#74ACDF]/12 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </nav>
 
         {/* User profile / Login button */}
@@ -140,7 +202,7 @@ export default function Header() {
           {/* Mobile menu trigger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl p-2.5 text-slate-400 hover:text-white hover:bg-white/5 border border-white/5 transition-all duration-300 ease-out"
+            className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl p-2.5 text-slate-400 hover:text-white hover:bg-white/5 border border-white/5 transition-all duration-300 ease-out"
             aria-label="Abrir menú"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -161,7 +223,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden border-t border-white/5 bg-[#020813]/92 backdrop-blur-xl font-sport"
+            className="lg:hidden overflow-hidden border-t border-white/5 bg-[#020813]/92 backdrop-blur-xl font-sport"
           >
             <div className="flex flex-col gap-1 px-4 py-3.5">
               {NAV_ITEMS.map((item) => {
@@ -183,6 +245,22 @@ export default function Header() {
                   </Link>
                 )
               })}
+
+              {/* Lo secundario, más chico y separado: se ve que es otra categoría */}
+              <div className="mt-2 flex flex-col gap-0.5 border-t border-white/5 pt-2.5">
+                {NAV_MAS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex items-center rounded-2xl px-4 py-3 text-[10px] font-bold uppercase tracking-[0.25em] transition-colors ${
+                      pathname.startsWith(item.href) ? 'text-white' : 'text-slate-500 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </motion.nav>
         )}
