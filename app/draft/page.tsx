@@ -718,6 +718,24 @@ function DraftInner() {
               </div>
               <div className="text-2xl font-display font-black text-[#75AADB]">Score: {teamScore || partialScore} pts</div>
             </div>
+
+            {/* Qué te llevás por simular. Va acá y no solo en /leaderboard: es el momento en que
+                se ganan los puntos, y sin esto el número del ranking no se entiende. */}
+            <div className="max-w-xl mx-auto mb-5 rounded-2xl border border-[#74ACDF]/20 bg-slate-950/50 px-4 py-3 text-center">
+              <p className="text-[10px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">
+                Esto suma al ranking
+              </p>
+              <p className="mt-1.5 text-[11px] leading-relaxed text-slate-400 font-sans">
+                Tu <strong className="text-slate-200">ELO</strong> se mueve según en qué puesto termines: salir
+                campeón te catapulta, pelear el descenso te resta. La <strong className="text-slate-200">Liga</strong>{" "}
+                vale más que la <strong className="text-slate-200">Copa</strong> porque son 28 fechas contra 32
+                equipos de eliminación directa. Con el ELO subís de Bronce a Leyenda.{" "}
+                <Link href="/leaderboard" className="text-[#74ACDF] hover:text-white underline underline-offset-2">
+                  Ver el ranking
+                </Link>
+              </p>
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6 font-sport">
               <MagneticButton>
                 <button onClick={() => startSim("liga")} className="btn-primary w-full sm:w-auto px-8 py-3">Simular Liga</button>
