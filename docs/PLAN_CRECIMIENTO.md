@@ -435,3 +435,18 @@ A 30 días, con la Fase 0 andando, las metas son: usuarios recurrentes por encim
 home → draft por encima del 70 %, y al menos un compartido cada 20 drafts terminados. Si el
 tráfico de Google se mantiene y la retención sube a 15 %, la base de usuarios activos crece sin
 gastar un peso en publicidad.
+
+---
+
+## Pendientes anotados el 07-31 (pedidos de Emilio)
+
+- **Donaciones más destacadas.** `DonationSection` ya está en el home, pero aparece abajo de todo,
+  después de las sugerencias. Hay que subirla y darle peso propio.
+- **Álbum de figuritas** (§1.4). Sigue siendo el gancho más fuerte sin construir. Comparte mazo y
+  mecánica de rareza con `/datos`, así que conviene hacerlo encima de eso y no de cero.
+- **Plaza continental en Supabase.** Hoy vive en `ligastats_user_profile_v1` (localStorage): si
+  cambiás de dispositivo, la perdés. Emilio lo dejó para más adelante.
+- **Más redes.** En el footer están X y ranuk.dev. Faltan Instagram y TikTok cuando existan las
+  cuentas; los handles conviene tomarlos antes de que los tome otro (ver `docs/PRIORIDAD_NOMBRE.md`).
+- **Registro de marca en el INPI.** Es la única acción que da un derecho oponible sobre el nombre.
+  Detalle y pasos en `docs/PRIORIDAD_NOMBRE.md`.
