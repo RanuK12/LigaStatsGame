@@ -202,6 +202,8 @@ function DraftInner() {
   const [pity, setPity] = useState<PityState>({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
   // Clubes que ya salieron en este draft: el bombo no los repite mientras queden otros.
   const [clubesUsados, setClubesUsados] = useState<Set<string>>(new Set())
+  // Lo que movió el último torneo en el ranking, para mostrarlo en la ficha de cierre.
+  const [eloTorneo, setEloTorneo] = useState<{ nuevo: number; delta: number; pts: number } | null>(null)
 
   const f = formations[fm as keyof typeof formations] || formations["4-3-3"]
   const totalSlots = f.positions.length
@@ -385,6 +387,7 @@ function DraftInner() {
       elo: newElo,
       date: new Date().toISOString(),
     }
+    setEloTorneo({ nuevo: newElo, delta, pts })
     saveLocalScore(entry)
     const { id: _omit, ...online } = entry
     void submitOnlineScore(online) // fire & forget (no-op sin Supabase)
@@ -488,6 +491,7 @@ function DraftInner() {
         onBack={() => { setPhase("done"); setSimResult(null) }}
         onReset={resetGame}
         onDownloadPDF={() => generatePDF(simResult, drafted, f)}
+        elo={eloTorneo}
         />
       </>
     )

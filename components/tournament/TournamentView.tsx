@@ -12,11 +12,14 @@ import DonationSection from "@/components/DonationSection"
 import { storyBlob } from "@/lib/story-card"
 import Image from "next/image"
 
-export default function TournamentView({ result, onBack, onReset, onDownloadPDF }: {
+export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo }: {
   result: TournamentResult
     onBack: () => void
   onReset: () => void
   onDownloadPDF: () => void
+  /** Lo que movió este torneo en el ranking. Sin esto la ficha no cierra: el jugador ve cómo
+   *  le fue pero no qué se llevó. */
+  elo?: { nuevo: number; delta: number; pts: number } | null
 }) {
   // Simulation modality state
   // "intro" = choosing mode, "interactive" = playing step-by-step, "animating" = showing match feed, "done" = final results
@@ -209,6 +212,33 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
 
   // Mensaje ya armado según lo que pasó en el torneo
   const goles = result.playerStats.reduce((a, p) => a + p.goals, 0)
+  const asistencias = result.playerStats.reduce((a, p) => a + p.assists, 0)
+  const goleador = result.topScorers[0]
+  const asistidor = result.topAssisters[0]
+
+  /**
+   * El cierre de la ficha, distinto por torneo.
+   *
+   * En Copa lo que se cuenta es el camino —a quién eliminaste y dónde te quedaste—, que es lo que
+   * uno responde cuando le preguntan cómo le fue. En Liga, quién fue el goleador y el asistidor
+   * del plantel, que es lo que mira un hincha.
+   */
+  const cierreFicha = (() => {
+    if (result.type === "copa") {
+      const rondas = result.rounds?.length ?? 0
+      const llegada = result.isChampion
+        ? `Campeón tras ${rondas} rondas`
+        : result.eliminated
+        ? `Eliminado en ${result.eliminatedRound}`
+        : "Subcampeón"
+      return goleador?.playerName ? `${llegada} · ${goleador.playerName} fue el goleador` : llegada
+    }
+    const partes: string[] = []
+    if (goleador?.playerName) partes.push(`Goleador: ${goleador.playerName} (${goleador.goals})`)
+    if (asistidor?.playerName && asistidor.assists > 0) partes.push(`Asistidor: ${asistidor.playerName} (${asistidor.assists})`)
+    if (!result.isChampion && result.champion) partes.push(`Campeón: ${result.champion}`)
+    return partes.join(" · ") || undefined
+  })()
   const textoParaCompartir = isChamp
     ? `¡SALÍ CAMPEÓN en Gambeta! 🏆 Armé mi 11 con ${result.teamLabel} (OVR ${result.teamScore}) y me quedé con la ${result.type === "liga" ? "Liga Profesional" : "Copa Argentina"} con ${goles} goles. ¿Podés hacerlo mejor?`
     : result.type === "liga"
@@ -729,10 +759,41 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                 </div>
               )}
 
+              {/* Lo que te llevaste al ranking. Antes el torneo terminaba y el ELO se movía sin
+                  que se viera: el jugador no tenía forma de saber que había ganado algo. */}
+              {elo && (
+                <div className="mb-5 flex items-center justify-between gap-4 rounded-2xl border border-[#74ACDF]/25 bg-slate-950/50 px-5 py-4">
+                  <div>
+                    <div className="text-[9px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">
+                      Ranking
+                    </div>
+                    <div className="mt-1 font-display text-xl font-black leading-none text-white">
+                      {elo.nuevo} <span className="text-sm text-slate-500">ELO</span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div
+                      className={`font-display text-2xl font-black leading-none ${
+                        elo.delta >= 0 ? "text-emerald-300" : "text-red-300"
+                      }`}
+                    >
+                      {elo.delta >= 0 ? "+" : ""}
+                      {elo.delta}
+                    </div>
+                    <Link
+                      href="/leaderboard"
+                      className="mt-1 block text-[10px] font-black uppercase tracking-wider text-slate-500 font-sport transition-colors hover:text-white"
+                    >
+                      Ver el ranking →
+                    </Link>
+                  </div>
+                </div>
+              )}
+
               {/* Compartir el resultado */}
               <ShareBar
                 titulo="Contá cómo te fue"
-                texto={textoParaCompartir}
+                texto={elo && elo.delta !== 0 ? `${textoParaCompartir} (${elo.delta > 0 ? "+" : ""}${elo.delta} ELO)` : textoParaCompartir}
                 imagen={() =>
                   storyBlob({
                     volanta: result.type === "liga" ? "Liga Profesional" : "Copa Argentina",
@@ -740,11 +801,14 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                     subtitulo: `${result.teamLabel} · ${result.formation}`,
                     stats: [
                       { valor: `${result.teamScore}`, label: "OVR del 11" },
-                      { valor: `${result.playerStats.reduce((a, p) => a + p.goals, 0)}`, label: "Goles" },
-                      { valor: `${result.playerStats.reduce((a, p) => a + p.assists, 0)}`, label: "Asistencias" },
-                      { valor: result.topScorers[0]?.goals ? `${result.topScorers[0].goals}` : "0", label: "Goleador" },
+                      { valor: `${goles}`, label: "Goles" },
+                      { valor: `${asistencias}`, label: "Asistencias" },
+                      // Lo que te llevaste al ranking: es el número que da ganas de volver a jugar.
+                      elo
+                        ? { valor: `${elo.delta >= 0 ? "+" : ""}${elo.delta}`, label: "ELO" }
+                        : { valor: goleador?.goals ? `${goleador.goals}` : "0", label: "Goleador" },
                     ],
-                    pie: result.topScorers[0]?.playerName ? `Goleador del plantel: ${result.topScorers[0].playerName}` : undefined,
+                    pie: cierreFicha,
                     acento: isChamp ? "#F6C750" : "#74ACDF",
                   })
                 }
