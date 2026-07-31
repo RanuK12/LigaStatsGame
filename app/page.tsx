@@ -184,7 +184,7 @@ function WorldCupBanner() {
               </div>
             </div>
 
-            <h2 className="font-malvinas text-5xl sm:text-6xl lg:text-7xl text-white leading-[0.95] mb-2 tracking-[0.04em] drop-shadow-[0_2px_20px_rgba(116,172,223,0.3)]">
+            <h2 className="font-malvinas text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.04] mb-2 tracking-[0.04em] drop-shadow-[0_2px_20px_rgba(116,172,223,0.3)]">
               Vamos{' '}
               <span className="gradient-text-gold">Argentina</span>
             </h2>
@@ -380,7 +380,7 @@ function HeroSection() {
         </motion.div>
 
         {/* Hero Title */}
-        <h1 className="font-impact text-[3.4rem] leading-[0.95] sm:text-7xl lg:text-[7.5rem] lg:leading-[0.9] mb-6 tracking-[-0.02em] font-black">
+        <h1 className="font-impact text-[3.4rem] leading-[1.04] sm:text-7xl lg:text-[7.5rem] lg:leading-[1.0] mb-6 tracking-[-0.02em] font-black">
           <span className="block text-white drop-shadow-[0_2px_30px_rgba(255,255,255,0.15)]">ARMÁ TU</span>
           <span
             className="block bg-clip-text text-transparent drop-shadow-[0_2px_30px_rgba(116,172,223,0.35)]"
@@ -468,7 +468,10 @@ function ClubGrid() {
             onMouseEnter={() => setHovered(club.id)}
             onMouseLeave={() => setHovered(null)}
           >
-            <div className={`relative rounded-xl p-3 flex flex-col items-center justify-center aspect-square cursor-pointer transition-all duration-200 ${
+            {/* El tile tenía cursor de mano, hover con escala y tooltip, y no llevaba a ningún
+                lado: el hincha buscaba su club, lo tocaba y no pasaba nada. Ahora arranca un draft
+                con ese club en el once. Es el punto de entrada más emocional del sitio. */}
+            <Link href={`/draft?mode=liga&club=${club.id}`} className={`relative rounded-xl p-3 flex flex-col items-center justify-center aspect-square min-h-[88px] transition-all duration-200 ${
               hovered === club.id
                 ? 'bg-[#74ACDF]/10 border border-[#74ACDF]/30 shadow-lg'
                 : 'card-gradient border border-transparent'
@@ -501,7 +504,7 @@ function ClubGrid() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </Link>
           </motion.div>
         ))}
       </div>
@@ -516,169 +519,14 @@ function ClubGrid() {
 /* ═══════════════════════════════════════════════════════════════
    HOW TO PLAY (mini section)
    ═══════════════════════════════════════════════════════════════ */
-function HowToPlay() {
-  const steps = [
-    { n: '01', title: 'ELEGÍ LA POSICIÓN', desc: 'Seleccionás qué posición querés sortear: arquero, defensor, mediocampista o delantero.' },
-    { n: '02', title: 'GIRÁS LA RULETA', desc: 'Sorteás un plantel real de la Liga Argentina y un año de temporada.' },
-    { n: '03', title: 'ELEGÍS UN JUGADOR', desc: 'Tomás un solo jugador compatible con la posición sorteada.' },
-    { n: '04', title: 'SIMULÁS EL TORNEO', desc: 'Con tu XI armado simulás la Liga o Copa y medís sus estadísticas reales.' },
-  ]
-  return (
-    <section className="relative z-10 max-w-6xl mx-auto px-4 pb-20">
-      <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-center mb-10">
-        <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2 uppercase tracking-tight">Cómo <span className="gradient-text">Jugar</span></h3>
-        <p className="text-slate-400 text-xs max-w-md mx-auto font-sans">4 pasos y sos el DT más capo de la liga</p>
-      </motion.div>
-      <motion.div
-        variants={container} initial="hidden" whileInView="visible" viewport={{ once: true }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-      >
-        {steps.map((s, i) => (
-          <motion.div key={i} variants={item} whileHover={{ y: -4 }}
-            className="relative card-gradient rounded-xl p-6 border border-slate-900"
-          >
-            <div className="text-4xl font-black text-slate-800 font-display select-none tracking-widest leading-none mb-3 font-sport">{s.n}</div>
-            <h4 className="font-display font-bold text-white text-sm mb-2 uppercase tracking-wider">{s.title}</h4>
-            <p className="text-slate-400 text-xs leading-relaxed font-sans">{s.desc}</p>
-            {i < 3 && (
-              <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-[#74ACDF]/20 text-xl">→</div>
-            )}
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
-  )
-}
 
 /* ═══════════════════════════════════════════════════════════════
    DETALLES DE LA LIGA SHOWCASE
    ═══════════════════════════════════════════════════════════════ */
-function LigaDetailsShowcase() {
-  const details = [
-    {
-      title: "ESTRUCTURA LPF Y CLASIFICACIÓN",
-      badge: "LIGA PROFESIONAL",
-      color: "border-[#74ACDF]/30 text-[#74ACDF]",
-      items: [
-        "14 Equipos Históricos por Sorteo Determinístico",
-        "Clasificación Directa a Copa Libertadores (1° al 3°)",
-        "Clasificación a Copa Sudamericana (4° al 6°)",
-        "Tabla de Promedios y Descenso Directo a la Primera B (14°)"
-      ]
-    },
-    {
-      title: "COPA ARGENTINA Y DEFINICIONES",
-      badge: "ELIMINACIÓN DIRECTA",
-      color: "border-amber-500/30 text-amber-400",
-      items: [
-        "Formato Federal de Llaves de Eliminación Directa",
-        "Simulación Partido a Partido con Crónica Radial en Vivo",
-        "Definiciones Agónicas por Penales en Empate",
-        "Campeón del Cuadro Clasifica a la Recopa del Juego"
-      ]
-    },
-    {
-      title: "MOTOR TÁCTICO Y QUÍMICA 100%",
-      badge: "STATS & QUÍMICA",
-      color: "border-emerald-500/30 text-emerald-400",
-      items: [
-        "Bonificación por Clubes Compartidos (Boca, River, Racing, etc.)",
-        "Química por Posición Natural (GK, CB, LB, CDM, CAM, ST)",
-        "Motor de Cálculo Individual de Goles, Asistencias y Vallas Invictas",
-        "Generación Instantánea del Reporte PDF Oficial de la Fecha"
-      ]
-    }
-  ]
-
-  return (
-    <section className="relative z-10 max-w-6xl mx-auto px-4 pb-20">
-      <motion.div
-        variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}
-        className="text-center mb-10"
-      >
-        <div className="inline-flex items-center gap-2 bg-[#74ACDF]/10 border border-[#74ACDF]/20 px-3.5 py-1 rounded-full mb-3">
-          <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-widest">SISTEMA OFICIAL DE SIMULACIÓN</span>
-        </div>
-        <h3 className="font-display text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
-          DETALLES DE LA <span className="gradient-text">LIGA Y TORNEOS</span>
-        </h3>
-        <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto font-sans mt-2">
-          Conocé el motor táctico, las reglas de descenso y la clasificación continental del juego
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {details.map((card, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
-            className="card-gradient rounded-3xl p-6 border border-white/10 relative flex flex-col justify-between hover:border-[#74ACDF]/40 transition-colors shadow-lg"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className={`text-[9px] font-bold px-2.5 py-1 rounded-full border font-sport tracking-widest uppercase ${card.color}`}>
-                  {card.badge}
-                </span>
-                <span className="text-xs font-black text-slate-600 font-sport">0{idx + 1}</span>
-              </div>
-              <h4 className="font-display text-base font-bold text-white mb-4 uppercase tracking-wider">
-                {card.title}
-              </h4>
-              <ul className="space-y-3 font-sans text-xs text-slate-300">
-                {card.items.map((it, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#74ACDF] mt-1.5 shrink-0" />
-                    <span className="leading-relaxed">{it}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  )
-}
 
 /* ═══════════════════════════════════════════════════════════════
    CTA SECTION
    ═══════════════════════════════════════════════════════════════ */
-function CTASection() {
-  return (
-    <section className="relative z-10 max-w-4xl mx-auto px-4 pb-24">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="relative rounded-2xl overflow-hidden border border-slate-900"
-      >
-        <div className="relative z-10 px-8 py-12 sm:py-16 text-center card-gradient">
-          <h3 className="font-display text-2xl sm:text-4xl font-black text-white mb-3 uppercase tracking-tighter">
-            ¿Listo para armar tu <span className="gradient-text">once soñado</span>?
-          </h3>
-          <p className="text-slate-400 text-xs sm:text-sm mb-10 max-w-sm mx-auto font-sans leading-relaxed">
-            Elegí un formato y empezá a crear el mejor equipo de la historia del fútbol local
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 font-sport">
-            <Link href="/draft?mode=clasico" className="btn-primary px-8 py-4">
-              Draft Clásico
-            </Link>
-            <Link href="/draft?mode=liga" className="btn-secondary px-8 py-4">
-              Liga Argentina
-            </Link>
-            <Link href="/draft?mode=copa" className="btn-secondary px-8 py-4">
-              Copa Argentina
-            </Link>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  )
-}
 
 /* ═══════════════════════════════════════════════════════════════
    MAIN PAGE
@@ -692,15 +540,10 @@ export default function HomePage() {
       {/* ── HERO ── */}
       <HeroSection />
 
-      {/* ── RETO DIARIO ── arriba de todo: es el único motivo para volver mañana */}
-      <DailyCard />
-
-      {/* ── NOVEDADES ── lo que cambió esta semana: el home es donde la gente lee */}
-      <Novedades />
-
-      {/* ── WORLD CUP BANNER ── */}
-      <WorldCupBanner />
-
+      {/* ── MODOS DE JUEGO ── lo segundo que se ve.
+          Estaba a 2.342px en teléfono: casi tres pantallas de scroll antes de que el hincha se
+          enterara de que hay cinco formas de jugar. Con 3 minutos de permanencia medidos, nunca
+          llegaba. El menú del juego va arriba; lo que explica y promociona, abajo. */}
       {/* ── GAME MODES ── */}
       <section className="relative z-10 max-w-6xl mx-auto px-4 pb-20">
         <motion.div
@@ -725,14 +568,15 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+
+      {/* ── RETO DIARIO ── arriba de todo: es el único motivo para volver mañana */}
+      <DailyCard />
+
+      {/* ── WORLD CUP BANNER ── */}
+      <WorldCupBanner />
+
       {/* ── COPAS CONTINENTALES ── lo único que hay que ganarse, así que va en la portada */}
       <ContinentalBanner />
-
-      {/* ── HOW TO PLAY ── */}
-      <HowToPlay />
-
-      {/* ── DETALLES DE LA LIGA SHOWCASE ── */}
-      <LigaDetailsShowcase />
 
       {/* ── BANCAR EL PROYECTO ──
           Estaba al final de todo, después de las sugerencias: la veía el que scrolleaba la página
@@ -781,11 +625,11 @@ export default function HomePage() {
         <LiveScoresWidget />
       </div>
 
+      {/* ── NOVEDADES ── al pie: le interesa al que ya juega, no al que entra por primera vez */}
+      <Novedades />
+
       {/* ── SUGERENCIAS ── */}
       <SuggestionBox />
-
-      {/* ── CTA ── */}
-      <CTASection />
 
       {/* ── FOOTER ── */}
       <footer className="relative z-10 border-t border-[rgba(116,172,223,0.10)] bg-[#020813]/40">
