@@ -41,7 +41,7 @@ export const LIBERTADORES_CLUBS: ContinentalClub[] = [
   { id: 'internacional', name: 'Internacional', country: 'Brasil', flag: '🇧🇷', colors: ['#E4002B', '#FFFFFF'], ...fuerza(60) },
   { id: 'gremio', name: 'Grêmio', country: 'Brasil', flag: '🇧🇷', colors: ['#0D80BF', '#000000'], ...fuerza(60) },
   { id: 'penarol', name: 'Peñarol', country: 'Uruguay', flag: '🇺🇾', colors: ['#F5D000', '#000000'], ...fuerza(60) },
-  { id: 'nacional-uru', name: 'Nacional', country: 'Uruguay', flag: '🇺🇾', colors: ['#FFFFFF', '#0038A8'], ...fuerza(59) },
+  { id: 'nacional-uru', name: 'Nacional de Montevideo', country: 'Uruguay', flag: '🇺🇾', colors: ['#FFFFFF', '#0038A8'], ...fuerza(59) },
   { id: 'ldu-quito', name: 'LDU Quito', country: 'Ecuador', flag: '🇪🇨', colors: ['#FFFFFF', '#0038A8'], ...fuerza(59) },
   { id: 'ind-del-valle', name: 'Independiente del Valle', country: 'Ecuador', flag: '🇪🇨', colors: ['#000000', '#0038A8'], ...fuerza(60) },
   { id: 'colo-colo', name: 'Colo-Colo', country: 'Chile', flag: '🇨🇱', colors: ['#FFFFFF', '#000000'], ...fuerza(58) },
@@ -55,7 +55,7 @@ export const LIBERTADORES_CLUBS: ContinentalClub[] = [
   { id: 'bolivar', name: 'Bolívar', country: 'Bolivia', flag: '🇧🇴', colors: ['#0F5EA8', '#FFFFFF'], ...fuerza(56) },
   { id: 'the-strongest', name: 'The Strongest', country: 'Bolivia', flag: '🇧🇴', colors: ['#F5D000', '#000000'], ...fuerza(55) },
   { id: 'caracas', name: 'Caracas', country: 'Venezuela', flag: '🇻🇪', colors: ['#E4002B', '#FFFFFF'], ...fuerza(54) },
-  { id: 'nacional-py', name: 'Nacional', country: 'Paraguay', flag: '🇵🇾', colors: ['#0038A8', '#FFFFFF'], ...fuerza(55) },
+  { id: 'nacional-py', name: 'Nacional de Asunción', country: 'Paraguay', flag: '🇵🇾', colors: ['#0038A8', '#FFFFFF'], ...fuerza(55) },
 ]
 
 /**
@@ -101,6 +101,14 @@ function barajar<T>(items: T[]): T[] {
     ;[out[i], out[j]] = [out[j], out[i]]
   }
   return out
+}
+
+// La tabla del grupo se arma con el NOMBRE como clave, así que dos clubes que se llamen igual se
+// pisan y el grupo queda con tres filas en vez de cuatro. Pasaba con los dos Nacional, el de
+// Montevideo y el de Asunción. Se exige que no haya nombres repetidos en ninguno de los dos cuadros.
+const nombresUnicos = (clubes: ContinentalClub[]) => new Set(clubes.map((c) => c.name)).size === clubes.length
+if (!nombresUnicos(LIBERTADORES_CLUBS) || !nombresUnicos(SUDAMERICANA_CLUBS)) {
+  throw new Error('Hay clubes continentales con el mismo nombre: la tabla del grupo los fusionaría')
 }
 
 const filaVacia = (name: string): LigaTeamRow => ({ name, pts: 0, gf: 0, ga: 0, w: 0, d: 0, l: 0, form: [] })

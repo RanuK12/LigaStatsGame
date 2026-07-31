@@ -85,7 +85,14 @@ export function tournamentPoints(opts: {
 }): number {
   const { type, pos, totalTeams, isChampion } = opts
   const base = BASE_POR_TORNEO[type] ?? 70
-  const perf = totalTeams > 1 ? 1 - (2 * (pos - 1)) / (totalTeams - 1) : 0 // 1º = +1, mitad = 0, último = -1
+  const continental = type === 'libertadores' || type === 'sudamericana'
+  // En la liga y en la copa terminar abajo resta: es la competencia de todos los días y quedarse
+  // último tiene consecuencias. En las copas continentales NO, porque la plaza te la ganaste
+  // clasificando: irse en la fase de grupos daba -73 puntos, o sea que jugar la Libertadores te
+  // costaba más caro que no clasificar nunca. Acá el peor resultado es cero, no un castigo.
+  const perf = totalTeams <= 1 ? 0
+    : continental ? (totalTeams - pos) / (totalTeams - 1)          // 1º = 1, último = 0
+    : 1 - (2 * (pos - 1)) / (totalTeams - 1)                       // 1º = +1, mitad = 0, último = -1
   const champ = isChampion ? 40 : 0
   // El descenso es de la Liga. En una copa de eliminación directa terminar abajo es quedar
   // afuera en primera ronda, no descender: no corresponde castigarlo dos veces.

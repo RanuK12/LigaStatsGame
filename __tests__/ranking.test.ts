@@ -45,3 +45,27 @@ describe('ranking', () => {
     expect(Math.abs(mitad)).toBeLessThanOrEqual(10) // mitad de tabla: casi neutro
   })
 })
+
+// Clasificar a una copa continental es un premio; jugarla no puede salir más caro que no ir.
+describe('puntos de las copas continentales', () => {
+  it('irse en la fase de grupos suma poco, pero nunca resta', () => {
+    const grupos = tournamentPoints({ type: 'libertadores', pos: 24, totalTeams: 32, isChampion: false })
+    expect(grupos).toBeGreaterThan(0)
+  })
+
+  it('ganarla paga mucho más que quedar afuera en el grupo', () => {
+    const campeon = tournamentPoints({ type: 'libertadores', pos: 1, totalTeams: 32, isChampion: true })
+    const grupos = tournamentPoints({ type: 'libertadores', pos: 24, totalTeams: 32, isChampion: false })
+    expect(campeon).toBeGreaterThan(grupos * 3)
+  })
+
+  it('la Libertadores paga más que la Sudamericana en el mismo puesto', () => {
+    const lib = tournamentPoints({ type: 'libertadores', pos: 1, totalTeams: 32, isChampion: true })
+    const sud = tournamentPoints({ type: 'sudamericana', pos: 1, totalTeams: 32, isChampion: true })
+    expect(lib).toBeGreaterThan(sud)
+  })
+
+  it('en la liga, el fondo de la tabla sí resta', () => {
+    expect(tournamentPoints({ type: 'liga', pos: 27, totalTeams: 28, isChampion: false })).toBeLessThan(0)
+  })
+})
