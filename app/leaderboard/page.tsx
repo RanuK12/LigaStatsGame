@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { loadLocalScores, type GameScore } from '@/lib/scores'
-import { fetchOnlineScores } from '@/lib/supabase'
+import { fetchOnlineScores, fetchRankGlobal } from '@/lib/supabase'
 import { useUserStore } from '@/lib/user-store'
 import { SEED_RIVALS } from '@/lib/leaderboard-seed'
 import TierBadge from '@/components/TierBadge'
@@ -48,6 +48,8 @@ export default function LeaderboardPage() {
   const [scores, setScores] = useState<GameScore[]>([])
   const [tab, setTab] = useState<'global' | 'online'>('global')
   const [loadingOnline, setLoadingOnline] = useState(false)
+  // Puesto contado en la base, no dentro de las filas descargadas.
+  const [rankGlobal, setRankGlobal] = useState<{ puesto: number; total: number } | null>(null)
   const user = useUserStore((s) => s.user)
 
   useEffect(() => {
@@ -76,21 +78,25 @@ export default function LeaderboardPage() {
         )
       })
       .finally(() => setLoadingOnline(false))
-  }, [tab])
+    if (user?.isLoggedIn) fetchRankGlobal(user.elo).then(setRankGlobal)
+  }, [tab, user])
 
-  // La tabla mezcla tus partidas con los DTs de la casa, para tener siempre contra quién medirse.
+  // En "mis partidas" se suman los DTs de la casa para tener contra quién medirse. En el ranking
+  // global NO: son jugadores de mentira y correrían de puesto a los reales.
   const ranked = useMemo(
-    () => [...SEED_RIVALS, ...scores].sort((a, b) => b.elo - a.elo || b.pts - a.pts),
-    [scores],
+    () => (tab === 'online' ? [...scores] : [...SEED_RIVALS, ...scores])
+      .sort((a, b) => b.elo - a.elo || b.pts - a.pts),
+    [scores, tab],
   )
   const miPuesto = useMemo(() => {
     if (!user?.isLoggedIn) return null
+    // Online: el puesto lo cuenta la base, así vale aunque estés fuera del top que se descargó.
+    if (tab === 'online') return rankGlobal
     const idx = ranked.findIndex((s) => s.username === user.username)
     if (idx >= 0) return { puesto: idx + 1, total: ranked.length }
-    // Todavía sin partidas cargadas: se ubica por ELO entre los rivales de la casa.
     const porEncima = ranked.filter((s) => s.elo > user.elo).length
     return { puesto: porEncima + 1, total: ranked.length + 1 }
-  }, [ranked, user])
+  }, [ranked, user, tab, rankGlobal])
 
   return (
     <div className="min-h-screen gradient-bg">
@@ -141,7 +147,9 @@ export default function LeaderboardPage() {
         )}
 
         <div className="text-center mt-8 text-xs text-slate-500">
-          <p>{tab === 'online' ? 'Ranking global (requiere iniciar sesión para sumar ELO)' : `${ranked.length} partidas registradas en este dispositivo`}</p>
+          <p>{tab === 'online'
+            ? `Top ${ranked.length} del ranking global${rankGlobal ? ` · ${rankGlobal.total} jugadores` : ''} (hay que iniciar sesión para sumar ELO)`
+            : `${ranked.length} partidas registradas en este dispositivo`}</p>
         </div>
       </main>
       <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm py-2.5 px-4 inline-block">← Volver al inicio</Link></div>

@@ -35,13 +35,20 @@ export function calculateElo(currentElo: number, pos: number, totalTeams: number
   return { newElo, delta }
 }
 
-/** Fetch top online leaderboard entries */
-export async function fetchOnlineScores(limit: number = 50): Promise<OnlineScore[]> {
+/**
+ * Top del ranking global.
+ *
+ * Ordena por ELO, que es por lo que se muestra la tabla. Antes pedía por `pts` y ordenaba en
+ * pantalla por ELO: el top que traía no era el top que mostraba, así que alguien con ELO alto y
+ * pocos puntos no entraba nunca a la lista por más que le correspondiera.
+ */
+export async function fetchOnlineScores(limit: number = 100): Promise<OnlineScore[]> {
   if (!supabase) return []
   try {
     const { data, error } = await supabase
       .from('leaderboard')
       .select('*')
+      .order('elo', { ascending: false })
       .order('pts', { ascending: false })
       .limit(limit)
 
@@ -49,6 +56,26 @@ export async function fetchOnlineScores(limit: number = 50): Promise<OnlineScore
     return data as OnlineScore[]
   } catch {
     return []
+  }
+}
+
+/**
+ * Tu puesto real y cuántos jugadores hay, contados en la base.
+ *
+ * Sin esto el puesto salía del índice dentro de las filas descargadas: si estabas 300° la tabla
+ * te decía cualquier cosa, porque solo conocía las primeras. Se cuenta cuántos te superan.
+ */
+export async function fetchRankGlobal(elo: number): Promise<{ puesto: number; total: number } | null> {
+  if (!supabase) return null
+  try {
+    const [encima, todos] = await Promise.all([
+      supabase.from('leaderboard').select('*', { count: 'exact', head: true }).gt('elo', elo),
+      supabase.from('leaderboard').select('*', { count: 'exact', head: true }),
+    ])
+    if (encima.error || todos.error) return null
+    return { puesto: (encima.count ?? 0) + 1, total: todos.count ?? 0 }
+  } catch {
+    return null
   }
 }
 
