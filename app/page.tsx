@@ -9,6 +9,8 @@ import squadsData from '@/data/squads.json'
 import type { Club, Squad } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
 import DonationSection from '@/components/DonationSection'
+import DailyCard from '@/components/DailyCard'
+import SuggestionBox from '@/components/SuggestionBox'
 import SolDeMayo from '@/components/ui/SolDeMayo'
 import dbStats from '@/data/derived/stats.json'
 
@@ -685,6 +687,9 @@ export default function HomePage() {
       {/* ── HERO ── */}
       <HeroSection />
 
+      {/* ── RETO DIARIO ── arriba de todo: es el único motivo para volver mañana */}
+      <DailyCard />
+
       {/* ── WORLD CUP BANNER ── */}
       <WorldCupBanner />
 
@@ -757,6 +762,9 @@ export default function HomePage() {
       <div className="max-w-6xl mx-auto px-4">
         <LiveScoresWidget />
       </div>
+
+      {/* ── SUGERENCIAS ── antes de donaciones: primero se pide opinión, después plata */}
+      <SuggestionBox />
 
       {/* ── DONATION BOX ── */}
       <DonationSection />

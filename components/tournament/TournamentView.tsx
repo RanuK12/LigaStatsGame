@@ -8,6 +8,7 @@ import { POS_LABELS } from "@/lib/game-engine"
 import { getPC } from "@/lib/ui-constants"
 import MatchChronicleFeed from "./MatchChronicleFeed"
 import ShareBar from "@/components/ShareBar"
+import DonationSection from "@/components/DonationSection"
 import { storyBlob } from "@/lib/story-card"
 import Image from "next/image"
 
@@ -749,6 +750,10 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF 
                 }
                 className="mb-5"
               />
+
+              {/* Bancar el proyecto, justo después de compartir: es el momento en que la persona
+                  la acaba de pasar bien. En el footer del home no lo veía casi nadie. */}
+              <DonationSection compacta />
 
               {/* Action buttons */}
               <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">

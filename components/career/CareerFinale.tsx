@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { TROPHY_META, retirementStory, positionCategory, type CareerState } from "@/lib/career-engine"
 import ShareBar from "@/components/ShareBar"
+import DonationSection from "@/components/DonationSection"
 import { storyBlob } from "@/lib/story-card"
 
 function useCountUp(to: number, ms: number, start: boolean) {
@@ -205,6 +206,9 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
                 className="mt-5"
               />
             )}
+
+            {/* Después de retirarse y compartir la ficha: el mejor momento para pedir apoyo. */}
+            <DonationSection compacta />
 
             <div className="mt-4 flex gap-2 font-sport">
               <button onClick={onClose} className="flex-1 rounded-2xl border border-white/10 bg-white/5 py-3 text-xs font-black uppercase tracking-widest text-slate-300 hover:text-white transition-colors">
