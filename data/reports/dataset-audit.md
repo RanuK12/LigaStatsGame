@@ -1,9 +1,9 @@
 # LigaStatsGame Dataset Audit
 
 ## Totals
-- Clubs: 34
-- Players: 2939
-- Squads: 170
+- Clubs: 35
+- Players: 3334
+- Squads: 206
 
 ## Health Score
 - Score: 90
@@ -19,33 +19,34 @@
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 2939
-- Players with clubs: 2939
-- Players with valid position: 2939
-- Playable squads: 165
+- Players with rating: 3334
+- Players with clubs: 3334
+- Players with valid position: 3334
+- Playable squads: 201
 
 ## Players by club
-- banfield: 372
-- huracan: 306
-- independiente: 254
-- rosario-central: 254
+- banfield: 386
+- huracan: 326
+- boca-juniors: 311
+- rosario-central: 273
+- lanus: 272
+- river-plate: 268
+- independiente: 265
+- velez: 251
 - talleres-cba: 247
-- lanus: 244
-- boca-juniors: 242
-- racing-club: 240
-- river-plate: 236
-- newells: 227
-- velez: 225
-- san-lorenzo: 216
+- newells: 246
+- racing-club: 246
+- san-lorenzo: 235
+- belgrano: 219
 - gimnasia-lp: 215
-- belgrano: 211
-- godoy-cruz: 198
-- estudiantes-lp: 189
-- argentinos-jrs: 56
+- godoy-cruz: 214
+- estudiantes-lp: 211
+- argentinos-jrs: 75
+- arsenal: 61
 - defensa-y-justicia: 50
 - colon: 46
+- tigre: 40
 - union-sf: 26
-- tigre: 25
 - atl-tucuman: 19
 - central-cordoba: 19
 - instituto: 19
@@ -56,7 +57,6 @@
 - independiente-rivadavia: 13
 - argentina: 12
 - riestra: 11
-- arsenal: 9
 - aa-argentinos-juniors: 7
 - real-madrid: 7
 - atletico-rafaela: 6
@@ -164,10 +164,10 @@
 - zaragoza: 1
 
 ## Players by decade
-- 2010s: 974
-- 2020s: 766
-- 1990s: 606
-- 2000s: 561
+- 2010s: 1081
+- 2020s: 769
+- 2000s: 766
+- 1990s: 686
 - 1970s: 9
 - 1980s: 8
 - 1950s: 6

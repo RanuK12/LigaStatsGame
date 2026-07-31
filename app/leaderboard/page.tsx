@@ -83,11 +83,21 @@ export default function LeaderboardPage() {
 
   // En "mis partidas" se suman los DTs de la casa para tener contra quién medirse. En el ranking
   // global NO: son jugadores de mentira y correrían de puesto a los reales.
-  const ranked = useMemo(
-    () => (tab === 'online' ? [...scores] : [...SEED_RIVALS, ...scores])
-      .sort((a, b) => b.elo - a.elo || b.pts - a.pts),
-    [scores, tab],
-  )
+  //
+  // Y una fila por persona: la tabla guarda una por partida, así que el que jugó veinte veces
+  // ocupaba veinte puestos y empujaba a todos los demás para abajo. Se queda su mejor ELO.
+  const ranked = useMemo(() => {
+    const filas = tab === 'online' ? [...scores] : [...SEED_RIVALS, ...scores]
+    const mejorPorNombre = new Map<string, (typeof filas)[number]>()
+    for (const f of filas) {
+      const clave = (f.username || '').trim().toLowerCase()
+      const previa = mejorPorNombre.get(clave)
+      if (!previa || f.elo > previa.elo || (f.elo === previa.elo && f.pts > previa.pts)) {
+        mejorPorNombre.set(clave, f)
+      }
+    }
+    return [...mejorPorNombre.values()].sort((a, b) => b.elo - a.elo || b.pts - a.pts)
+  }, [scores, tab])
   const miPuesto = useMemo(() => {
     if (!user?.isLoggedIn) return null
     // Online: el puesto lo cuenta la base, así vale aunque estés fuera del top que se descargó.

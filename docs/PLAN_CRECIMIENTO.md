@@ -222,7 +222,27 @@ Cada torneo cierra con **su ficha**, igual que la carrera:
 Esto es lo que convierte "simulé un torneo" en "mirá cómo me fue", que es el único momento en que
 un jugador trae a otro.
 
-### 5.7 Libertadores y Sudamericana: se clasifica, no se elige
+### 5.7 Libertadores y Sudamericana: se clasifica, no se elige — HECHO, y después arreglado
+
+La clasificación salió en el PR #34: 1° a 4° Libertadores, 5° a 8° Sudamericana, la plaza vive en
+la cuenta, se gasta al jugarla y vale 150 y 120 contra los 100 de la Liga.
+
+Pero el torneo en sí estaba a medio hacer y **no se podía ganar**:
+
+- la "fase de grupos" eran tres partidos sueltos que no eliminaban a nadie;
+- los rivales estaban cargados en escala FIFA (72-84) y el motor de partidos usa otra: un once de
+  95 da 73 de overall. El equipo perfecto entraba último del grupo;
+- la Sudamericana era idéntica a la Libertadores, así que clasificar 5°-8° no cambiaba nada.
+
+Arreglado: grupo de cuatro ida y vuelta con tabla, llaves a doble partido con global y penales,
+final única, dos cuadros de 24 clubes con escudo propio, y el puesto en la copa entra al ranking
+(irse en el grupo ya no puntúa igual que perder la final). Con un once de 78, la Sudamericana se
+gana el 18 % de las veces y la Libertadores el 6 %.
+
+**Queda pendiente**: la plaza se guarda en el navegador (`ligastats_user_profile_v1`), no en
+Supabase. El login por Supabase sí es real, pero si cambiás de dispositivo, perdés la plaza.
+
+### 5.7 bis · Lo que decía el plan original
 
 La idea es que no sean un botón más sino **algo que te ganaste**, que es lo que hace que alguien
 vuelva al día siguiente:
@@ -264,56 +284,55 @@ de verdad, sin escribir motor nuevo:
 Esto le da al ranking algo que hoy no tiene: **varias formas de sumar**, que es lo que hace que
 alguien vuelva a intentar con otro 11.
 
-### 5.5 Los equipos históricos (el pedido grande)
+### 5.5 Los equipos históricos — HECHO
 
-Hoy el bombo arranca en 2015. Faltan los planteles que un hincha argentino reconoce al toque:
-los Boca de Bianchi, el River de Gallardo, el Vélez del 94, el Estudiantes de Verón, el Huracán
-de Cappa, el Independiente de Bochini. Son, además, el mejor material posible para la cuenta de X
-y para SEO.
+**36 planteles históricos, de 1994 a 2021, ya están en el bombo.** El Vélez del 94 de Bianchi y
+Chilavert, el River del 96, los Boca de la era Bianchi (2000, 2001, 2003, 2007), el Estudiantes
+de Verón, el Huracán de Cappa. 17 clubes, 395 jugadores nuevos en la base.
 
-**Qué hay y qué falta (medido, no estimado):**
+**Cómo se hizo (el pipeline queda, es reanudable y se puede volver a correr):**
 
-- `data/players.json` tiene 2.939 jugadores con club y años (`clubs[].years`), 606 de los 90 y
-  561 de los 2000, y 35 marcados como leyenda.
-- Pero solo están **las figuras, no los planteles**. Probado: para Boca 2001 la base da 4
-  jugadores (Tevez, Riquelme, Palermo, Abbondanzieri); para Boca 2007, 2; para el River de
-  Gallardo 2015, **0**; para Talleres 1999, 0.
-- `data/squads_historical.json` **no sirve para esto**: a pesar del nombre, son los mismos
-  2015-2025 con otros slugs de club. Es un residuo de scraping, no planteles históricos.
+1. `data/historicos/candidatos.json` — 64 equipos desde el palmarés, no de memoria. Cada año se
+   verificó contra Wikipedia antes de escribirlo (así se corrigió que el hito continental de
+   Talleres es la **Copa Conmebol 1999**, no 1996).
+2. `scripts/data/verificar-historicos.mjs` — QID del club en Wikidata y plantel de esa temporada
+   (P54 con P580/P582). 63 de 64 equipos con plantel armable.
+3. `scripts/data/cruzar-historicos.mjs` — cruza **tres fuentes**: Wikidata, el artículo de
+   es.wikipedia del jugador y del club, y nuestra propia base. **Un jugador entra solo si lo
+   respaldan dos de tres.** El OVR de los que ya teníamos manda; los nuevos se calculan con la
+   misma fórmula de `recompute-ovr.mjs`, nunca a ojo. 56 de 63 equipos quedaron armables.
+4. `scripts/data/merge-historicos.mjs` — fusiona sin romper: no toca el rating ni el id de nadie
+   que ya estuviera, no borra ningún plantel actual, deja backup y es idempotente. El criterio de
+   entrada es el mismo que usa `npm run audit:data` para llamar jugable a un plantel: arquero,
+   tres del fondo, tres del medio y un delantero.
+5. Bonus de época **+2** solo a los jugadores nuevos y con techo de 85, para que ninguno pase por
+   encima de las leyendas curadas a mano.
+6. En el bombo salen con **peso 0,4** contra 1 de los actuales (`HISTORICO_PESO`), con tier
+   legendario y su hito en el reveal. Tres tests nuevos en `__tests__/draft-historicos.test.ts`.
 
-O sea: **el scrape nuevo hace falta**, y es sobre todo de jugadores, no de equipos.
+**Lo que se aprendió, en tres errores que valían la mitad del trabajo:**
 
-**Cómo hacerlo:**
+1. La etiqueta de Wikidata en español para el arco es «guardameta», y el mapa de posiciones no la
+   tenía. Todos los arqueros nuevos se caían y equipos enteros quedaban afuera por "sin arquero".
+2. Wikidata no tiene la carrera de clubes de Verón (su ítem no registra un solo P54), así que el
+   Estudiantes campeón de América se armaba sin Verón. Los ídolos hay que buscarlos en nuestra
+   propia base, que es la fuente más confiable que tenemos para eso.
+3. Wikidata tiene períodos de club abiertos, que empiezan y no terminan nunca. Arrastraban al
+   jugador a todas las temporadas siguientes: Rugilo, que jugó en los 40, aparecía en el Vélez
+   del 94, y Chividini (1930) en el San Lorenzo 2014. Una etapa sin cerrar de más de doce años no
+   es una etapa, es un dato incompleto.
 
-1. **Definir la lista desde el palmarés, no de memoria.** Exhaustiva, en este orden de prioridad:
-   - todos los **campeones argentinos de Libertadores** (Independiente ×7, Boca ×6, Estudiantes
-     ×4, River ×4, Racing, Vélez, Argentinos, San Lorenzo);
-   - los campeones de **Intercontinental / Mundial de Clubes**;
-   - campeones de **Sudamericana, Copa Conmebol y Supercopa**;
-   - los **campeones de liga** de cada club desde los 80;
-   - y los **hitos sin título**: el Huracán de Cappa, el Newell's de Bielsa, equipos que quedaron
-     en la memoria aunque no dieron la vuelta.
+**Lo que no entró, y por qué (no se completa a ojo):**
 
-   Cada equipo queda respaldado por una fuente; si un año no se confirma, no entra. (Ojo con dos
-   del pedido: el hito continental de Talleres es la **Copa Conmebol 1999**, no 1996, y "el
-   Belgrano campeón" hay que definir a cuál nos referimos. Lo resuelve la fuente, no nosotros.)
-2. **Scrapear el plantel** de cada temporada elegida con el pipeline que ya usa el repo:
-   Wikidata + es.wikipedia.org, igual que `scripts/data/enrich-wikidata-stats.mjs` y
-   `verify-vs-wikidata.mjs`. Script nuevo: `scripts/data/scrape-squads-historicos.mjs`.
-3. **Fusionar sin romper**: los jugadores que ya existen se reusan por id; los nuevos se agregan
-   con su OVR calculado igual que el resto (`recompute-ovr.mjs`), no a ojo.
-4. **OVR un poco más alto**, como pediste, pero acotado: un bonus de época de +2/+3 sobre el
-   plantel, no más. Si un equipo histórico arrasa siempre, deja de ser un premio y rompe el
-   equilibrio del torneo.
-5. **Que se sientan un premio al salir**: estos planteles entran en la ruleta con menor
-   probabilidad que los actuales y con animación propia, como ya pasa con las cartas de leyenda.
-   Salir el Boca de Bianchi tiene que ser un momento.
-6. **Validar** con `npm run audit:data` (ya existe) antes de publicar: sin jugadores duplicados,
-   sin planteles de menos de 11, sin años inventados.
+- 14 equipos porque **esa temporada ya estaba en el juego** con datos actuales, que le ganan al
+  scrapeo: River 2015 y 2018, Boca 2015, 2020 y 2022, Racing 2019 y 2024, Independiente 2017,
+  Rosario Central 2023, Estudiantes 2023, River 2023, Vélez 2024, Talleres 2024, Platense 2025.
+- 13 por **falta de respaldo**: Newell's 1991 y 2013, Independiente 2002 y 2010, Talleres 1999,
+  Gimnasia 1994, River 2004, Defensa y Justicia 2020 y 2021, Colón 2021, Racing 2001,
+  Central Córdoba 2024. Wikidata no tiene el plantel entero de esas temporadas.
+- Pendiente: cada plantel histórico es además **una página de contenido** ("Boca 2001: el plantel
+  campeón de América") y **un tweet** con la ruleta mostrándolo. Ese trabajo es la Fase 3.
 
-Cada equipo histórico es además **una página de contenido** para la Fase 3 ("Boca 2001: el
-plantel campeón de América") y **un tweet** con la ruleta mostrándolo. El mismo trabajo sirve
-para las tres cosas.
 
 ### 5.3 Que el equipo bueno gane más seguido
 El OVR y la química **ya entran** en la simulación (`teamToStrength`, `simulateMatchGoals`), así
@@ -344,6 +363,17 @@ Arreglo:
 
 ---
 
+## Lo que sigue, en orden
+
+1. **Álbum de figuritas** (§1.4). Es el gancho más fuerte de la lista y el que más trabajo pide.
+   Cada leyenda que sale en la ruleta queda en tu álbum. Coleccionar sin gastar plata, que es
+   cultura argentina pura.
+2. **¿Sabías que?** — datos curiosos que se *tiran* como un dado, con rareza y carta compartible.
+   Plan completo en `docs/PLAN_SABIAS_QUE.md`. Comparte mazo y mecánica con el álbum: conviene
+   construirlos juntos, no uno detrás del otro.
+3. **Páginas de contenido** por plantel histórico y por dato de rareza leyenda (§3.1). El dato ya
+   está cargado; falta escribir las páginas.
+
 ## Fase 6 — Consolidarnos en fútbol (más allá del trimestre)
 
 Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
@@ -366,7 +396,7 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 1 | Fase 0 completa (títulos, eventos, Search Console) | Sin esto no se puede decidir nada |
 | 2 | Dedupe del bombo + shuffle (5.1, 5.2) | Es el defecto que ya se nota jugando |
 | 3 | Ranking real (5.4) | Es el motivo de volver que ya está construido a medias |
-| 4 | Equipos históricos: scrape y bombo (5.5) | El más grande, y el que más contenido genera para X y SEO |
+| 4 | ~~Equipos históricos: scrape y bombo (5.5)~~ HECHO | El más grande, y el que más contenido genera para X y SEO |
 | 5 | Álbum de figuritas (1.4) | El gancho más fuerte, pero el que más trabajo pide |
 | 6 | Páginas de contenido de fútbol (3.1) | SEO compuesto: rinde a partir del mes |
 
@@ -384,6 +414,10 @@ Todo lo que agreguemos tiene que ser de fútbol, no de "gaming":
 | 07-31 | Donaciones al terminar torneo y carrera, y explicando quiénes somos (PR #32) |
 | 07-31 | Ficha de cierre de torneo: ELO ganado a la vista y camino de la Copa (PR #33) |
 | 07-31 | Libertadores y Sudamericana por clasificación, con cuenta y puntos propios (PR #34) |
+| 07-31 | 38 planteles históricos en el bombo (1994-2021), cruzados contra tres fuentes (5.5) |
+| 07-31 | Card de novedades en el home, que se actualiza desde `data/novedades.json` |
+| 07-31 | Los ídolos de cada plantel histórico salen de nuestra base: Verón, Riquelme, Palermo |
+| 07-31 | La Libertadores y la Sudamericana con fases reales, escudos y dos cuadros distintos |
 
 ---
 

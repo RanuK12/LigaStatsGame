@@ -10,6 +10,8 @@ import type { Club, Squad } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
 import DonationSection from '@/components/DonationSection'
 import DailyCard from '@/components/DailyCard'
+import Novedades from '@/components/Novedades'
+import ContinentalBanner from '@/components/ContinentalBanner'
 import SuggestionBox from '@/components/SuggestionBox'
 import SolDeMayo from '@/components/ui/SolDeMayo'
 import dbStats from '@/data/derived/stats.json'
@@ -91,6 +93,9 @@ const TICKER_ITEMS = [
   "MUNDIAL 2026 — ARGENTINA BUSCA LA 4TA ESTRELLA",
   "LIGA PROFESIONAL TEMPORADA 2026 — ACTUALIZADO",
   "GAMBETA — ARMÁ TU MEJOR ONCE HISTÓRICO",
+  `LOS MEJORES EQUIPOS ARGENTINOS DE LOS ÚLTIMOS 35 AÑOS — ${dbStats.historicos} PLANTELES`,
+  "EL VÉLEZ DEL 94 · LOS BOCA DE BIANCHI · EL RIVER DEL 96 · EL ESTUDIANTES DE VERÓN",
+  "LIBERTADORES Y SUDAMERICANA — SE CLASIFICA, NO SE ELIGE",
   "CAMPEONES DE AMÉRICA Y DEL MUNDO EN LA BASE",
   "COPA ARGENTINA — MODO DE ELIMINACIÓN DIRECTA ACTIVADO",
   `+${dbStats.players} JUGADORES REALES · ${dbStats.squads} PLANTELES FILTRADOS`,
@@ -229,7 +234,7 @@ function WorldCupBanner() {
               { icon: '⚽', label: 'Jugadores', value: dbStats.players.toLocaleString('es-AR'), sub: 'Reales, auditados' },
               { icon: '📋', label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas oficiales' },
               { icon: '🛡️', label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
-              { icon: '🏆', label: 'Mundiales', value: '3', sub: '78 · 86 · 22' },
+              { icon: '🏆', label: 'Históricos', value: `${dbStats.historicos}`, sub: 'Equipos que hicieron historia' },
             ].map((s, i) => (
               <motion.div
                 key={i}
@@ -690,6 +695,9 @@ export default function HomePage() {
       {/* ── RETO DIARIO ── arriba de todo: es el único motivo para volver mañana */}
       <DailyCard />
 
+      {/* ── NOVEDADES ── lo que cambió esta semana: el home es donde la gente lee */}
+      <Novedades />
+
       {/* ── WORLD CUP BANNER ── */}
       <WorldCupBanner />
 
@@ -717,6 +725,9 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* ── COPAS CONTINENTALES ── lo único que hay que ganarse, así que va en la portada */}
+      <ContinentalBanner />
+
       {/* ── HOW TO PLAY ── */}
       <HowToPlay />
 
@@ -725,11 +736,12 @@ export default function HomePage() {
 
       {/* ── EXTRA LINKS ── */}
       <section className="relative z-10 max-w-6xl mx-auto px-4 pb-16">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
             { href: '/como-jugar', title: 'CÓMO SE JUEGA', text: 'Aprendé el flujo del draft, las posiciones y la simulación táctica.', color: 'border-slate-900 hover:border-slate-800' },
             { href: '/records', title: 'RECORDS HISTÓRICOS', text: 'Consulta el ranking de mejores puntuaciones y leyendas de la liga.', color: 'border-slate-900 hover:border-slate-800' },
             { href: '/daily', title: 'RETO DIARIO', text: 'Competí en el desafío de simulación del día en igualdad de condiciones.', color: 'border-slate-900 hover:border-slate-800' },
+            { href: '/datos', title: '¿SABÍAS QUE?', text: 'Tirá el dado y sacá un dato del fútbol argentino. Ninguno inventado.', color: 'border-slate-900 hover:border-slate-800' },
           ].map((item, i) => (
             <motion.div
               key={item.href}
@@ -784,7 +796,12 @@ export default function HomePage() {
                 <span className="text-[#74ACDF]/40 text-xs font-sport font-bold block tracking-wider">
                   GAMBETA
                 </span>
-                <span className="text-slate-600 text-[10px] font-medium font-sans">© 2026 · El Draft del Fútbol Argentino</span>
+                <span className="text-slate-600 text-[10px] font-medium font-sans">
+                  © 2026 Ranuk IT Solutions · El Draft del Fútbol Argentino ·{" "}
+                  <Link href="/legal" className="underline underline-offset-2 hover:text-slate-400">
+                    Legal
+                  </Link>
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-1">
@@ -807,8 +824,41 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+          {/* Dónde encontrarnos. Sin esto, el que quiere seguir el proyecto no tiene a dónde ir:
+              entra, juega tres minutos y se va sin dejar rastro. */}
           <div className="mt-6 pt-6 border-t border-slate-900 text-center">
-            <p className="text-slate-600 text-[10px] font-sans font-medium">
+            <p className="font-sport text-[10px] font-black uppercase tracking-widest text-slate-500">
+              Seguinos
+            </p>
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5">
+              <a
+                href="https://x.com/GambetafutbolAR"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-2.5 transition-colors hover:border-[#74ACDF]/40 hover:bg-slate-900"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-white" aria-hidden="true">
+                  <path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8.1-9.3L1 2h7l4.8 6.3L18.9 2Zm-1.2 18h1.9L7.4 4H5.4l12.3 16Z" />
+                </svg>
+                <span className="font-sport text-[11px] font-black tracking-wider text-white">@GambetafutbolAR</span>
+              </a>
+              <a
+                href="https://ranuk.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-2.5 transition-colors hover:border-[#74ACDF]/40 hover:bg-slate-900"
+              >
+                <span className="text-sm">🦊</span>
+                <span className="font-sport text-[11px] font-black tracking-wider text-white">ranuk.dev</span>
+              </a>
+              <Link
+                href="/legal"
+                className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-2.5 transition-colors hover:border-[#74ACDF]/40 hover:bg-slate-900"
+              >
+                <span className="font-sport text-[11px] font-black tracking-wider text-slate-300">Legal</span>
+              </Link>
+            </div>
+            <p className="mt-5 text-slate-600 text-[10px] font-sans font-medium">
               Hecho con pasión para los hinchas del fútbol argentino · Temporada 2026
             </p>
           </div>

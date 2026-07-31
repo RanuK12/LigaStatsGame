@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc"
 import { FaXTwitter } from "react-icons/fa6"
 import { useUserStore } from "@/lib/user-store"
 import { signInWithProvider, signUpWithEmail, signInWithEmail, isSupabaseConfigured } from "@/lib/auth"
+import { nombreEnUso } from "@/lib/supabase"
 
 type Tab = "guest" | "account"
 
@@ -28,10 +29,24 @@ export default function AuthModal() {
     return () => window.removeEventListener("keydown", onKey)
   }, [isAuthModalOpen, closeAuthModal])
 
-  const handleGuestSubmit = (e: React.FormEvent) => {
+  const handleGuestSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!usernameInput.trim()) return
-    loginGuest(usernameInput.trim())
+    const nombre = usernameInput.trim()
+    if (!nombre) return
+    // Dos personas con el mismo nombre son, en la tabla, la misma persona. Si el nombre ya está
+    // tomado se pide otro, y de paso es el momento exacto para ofrecer la cuenta: registrarse es
+    // lo único que te reserva el nombre.
+    setBusy(true)
+    const tomado = await nombreEnUso(nombre)
+    setBusy(false)
+    if (tomado) {
+      setFeedback({
+        ok: false,
+        text: `"${nombre}" ya lo está usando otro DT. Elegí otro, o creá una cuenta y te lo quedás.`,
+      })
+      return
+    }
+    loginGuest(nombre)
   }
 
   const handleAccountSubmit = async (e: React.FormEvent) => {
@@ -118,6 +133,14 @@ export default function AuthModal() {
                     className="input-dark"
                   />
                 </div>
+                {feedback && !feedback.ok && (
+                  <p className="rounded-xl border border-amber-400/30 bg-amber-500/10 px-3 py-2.5 text-[11px] leading-relaxed text-amber-200">
+                    {feedback.text}{" "}
+                    <button type="button" onClick={() => { setTab("account"); setFeedback(null) }} className="font-bold underline">
+                      Crear cuenta
+                    </button>
+                  </p>
+                )}
                 <div className="card-glass rounded-xl p-3 flex items-center gap-3 border border-white/5">
                   <div className="w-10 h-10 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-lg">⚡</div>
                   <div className="text-xs">
@@ -125,8 +148,15 @@ export default function AuthModal() {
                     <div className="text-[10px] text-slate-400">Jugás al toque, sin registro. El progreso queda en este dispositivo.</div>
                   </div>
                 </div>
-                <button type="submit" className="btn-primary w-full py-3.5 text-xs font-bold tracking-widest uppercase font-sport rounded-2xl shadow-lg mt-2">
-                  INGRESAR COMO DT
+                {/* Lo que se pierde sin cuenta, dicho de frente: es más honesto y convierte mejor
+                    que esconderlo hasta que el jugador se choca con el límite. */}
+                <div className="rounded-xl border border-[#74ACDF]/20 bg-[#74ACDF]/5 p-3 text-[10px] leading-relaxed text-slate-400">
+                  Como invitado no entrás al <strong className="text-slate-200">ranking global</strong>, no guardás la
+                  plaza a la <strong className="text-slate-200">Libertadores</strong> ni a la Sudamericana, y el nombre
+                  no queda reservado. Con cuenta, sí.
+                </div>
+                <button type="submit" disabled={busy} className="btn-primary w-full py-3.5 text-xs font-bold tracking-widest uppercase font-sport rounded-2xl shadow-lg mt-2 disabled:opacity-50">
+                  {busy ? "VERIFICANDO..." : "INGRESAR COMO DT"}
                 </button>
               </form>
             )}

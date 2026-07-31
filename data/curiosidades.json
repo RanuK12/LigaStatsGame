@@ -1,0 +1,187 @@
+[
+  {
+    "id": "velez-1994-intercontinental",
+    "rareza": "leyenda",
+    "texto": "En 1994 Vélez le ganó la Intercontinental al Milan de Capello, que venía de golear 4-0 al Barcelona en la final de Europa. Chilavert atajó y Trotta hizo los dos goles.",
+    "clave": [
+      "Vélez",
+      "Intercontinental",
+      "1994"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Intercontinental_1994",
+      "https://en.wikipedia.org/wiki/1994_Intercontinental_Cup"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "chilavert-goles",
+    "rareza": "insolito",
+    "texto": "José Luis Chilavert es el único arquero que hizo un hat-trick en un partido oficial: tres penales a Ferro, con la camiseta de Vélez, en 1999.",
+    "clave": [
+      "Chilavert",
+      "Vélez"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Jos%C3%A9_Luis_Chilavert",
+      "https://en.wikipedia.org/wiki/Jos%C3%A9_Luis_Chilavert"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "boca-2000-real-madrid",
+    "rareza": "leyenda",
+    "texto": "El Boca de Bianchi le ganó 2-1 al Real Madrid de Figo y Raúl en la Intercontinental de 2000. Palermo hizo los dos goles en los primeros cinco minutos.",
+    "clave": [
+      "Boca",
+      "Intercontinental",
+      "2000"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Intercontinental_2000",
+      "https://en.wikipedia.org/wiki/2000_Intercontinental_Cup"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "river-2018-madrid",
+    "rareza": "leyenda",
+    "texto": "La final de la Libertadores 2018 entre River y Boca se terminó jugando en Madrid: es la única final del torneo disputada fuera de América.",
+    "clave": [
+      "River",
+      "Libertadores",
+      "2018",
+      "Madrid"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Libertadores_2018",
+      "https://en.wikipedia.org/wiki/2018_Copa_Libertadores"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "independiente-rey-de-copas",
+    "rareza": "insolito",
+    "texto": "Independiente ganó siete Copas Libertadores, más que cualquier otro club del continente. Cuatro fueron seguidas, entre 1972 y 1975.",
+    "clave": [
+      "Independiente",
+      "Libertadores"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Club_Atl%C3%A9tico_Independiente",
+      "https://en.wikipedia.org/wiki/Club_Atl%C3%A9tico_Independiente"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "estudiantes-1968-1970",
+    "rareza": "leyenda",
+    "texto": "Estudiantes ganó tres Copas Libertadores seguidas entre 1968 y 1970, con un plantel armado casi entero con juveniles del club.",
+    "clave": [
+      "Estudiantes",
+      "Libertadores"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Club_Estudiantes_de_La_Plata",
+      "https://en.wikipedia.org/wiki/Estudiantes_de_La_Plata"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "san-lorenzo-2014",
+    "rareza": "insolito",
+    "texto": "San Lorenzo tardó 106 años en ganar su primera Copa Libertadores. La consiguió en 2014, el mismo año en que un hincha suyo se convirtió en Papa.",
+    "clave": [
+      "San Lorenzo",
+      "Libertadores",
+      "2014"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Libertadores_2014",
+      "https://en.wikipedia.org/wiki/2014_Copa_Libertadores"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "argentinos-1985",
+    "rareza": "insolito",
+    "texto": "Argentinos Juniors, el club que formó a Maradona, ganó la Copa Libertadores en 1985 y jugó la final Intercontinental contra la Juventus de Platini.",
+    "clave": [
+      "Argentinos Juniors",
+      "Libertadores"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Asociaci%C3%B3n_Atl%C3%A9tica_Argentinos_Juniors",
+      "https://en.wikipedia.org/wiki/Argentinos_Juniors"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "racing-1967",
+    "rareza": "insolito",
+    "texto": "Racing fue el primer club argentino en ganar la Intercontinental, en 1967, contra el Celtic de Escocia. Después pasó 35 años sin salir campeón local.",
+    "clave": [
+      "Racing",
+      "Intercontinental"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Racing_Club",
+      "https://en.wikipedia.org/wiki/Racing_Club_de_Avellaneda"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "superclasico",
+    "rareza": "comun",
+    "texto": "El Superclásico entre Boca y River se juega desde 1913. Es, para varios diarios del mundo, el clásico más pasional del planeta.",
+    "clave": [
+      "Boca",
+      "River",
+      "Superclásico"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Supercl%C3%A1sico",
+      "https://en.wikipedia.org/wiki/Superclásico"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "primera-division-1891",
+    "rareza": "comun",
+    "texto": "La Primera División argentina se juega desde 1891: es la liga de fútbol más antigua fuera de las Islas Británicas.",
+    "clave": [
+      "Primera División",
+      "1891"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Primera_Divisi%C3%B3n_de_Argentina",
+      "https://en.wikipedia.org/wiki/Argentine_Primera_Divisi%C3%B3n"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "gambeta-palabra",
+    "rareza": "comun",
+    "texto": "La palabra gambeta viene del italiano gamba, pierna. En el Río de la Plata pasó del baile y de la esgrima al fútbol, para nombrar al que se va de uno.",
+    "clave": [
+      "gambeta"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Regate",
+      "https://es.wiktionary.org/wiki/gambeta"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-07-31"
+  }
+]

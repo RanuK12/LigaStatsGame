@@ -27,7 +27,10 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
   const style = TIER_STYLE[tier]
   const isGold = tier === "legendario"
   const isSpecial = tier !== "comun"
-  const era = epoca(squad.season)
+  // Un plantel histórico se anuncia por lo que hizo, no por el año en que jugó.
+  const era = squad.historico
+    ? { label: "PLANTEL HISTÓRICO", clase: "text-[#E7C27D] border-[#E7C27D]/40 bg-[#E7C27D]/10" }
+    : epoca(squad.season)
 
   return (
     <motion.div
@@ -100,11 +103,16 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
           </div>
         </div>
         <h2 className="font-display text-3xl font-black text-white mb-1">{squad.label}</h2>
-        <p className="text-sm text-slate-400 mb-3">{squad.competition} · Temporada {squad.season}</p>
+        <p className="text-sm text-slate-400 mb-3">
+          {squad.historico ? `Temporada ${squad.season}` : `${squad.competition} · Temporada ${squad.season}`}
+        </p>
         {era && (
           <div className={`mb-5 inline-block rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] font-sport ${era.clase}`}>
             {era.label}
           </div>
+        )}
+        {squad.hito && (
+          <p className="mb-5 px-2 text-sm italic text-[#E7C27D]">{squad.hito}</p>
         )}
         <div className="flex justify-center gap-6 mb-6 text-sm">
           <div>

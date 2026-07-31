@@ -931,5 +931,30 @@
       "2020s"
     ],
     "nickname": "El Tiburón"
+  },
+  {
+    "id": "arsenal",
+    "name": "Arsenal de Sarandí",
+    "shortName": "Arsenal",
+    "founded": 1957,
+    "stadium": "Julio Humberto Grondona",
+    "city": "Sarandí",
+    "colors": [
+      "#6CACE4",
+      "#E4002B"
+    ],
+    "titles": 2,
+    "Libertadores": 0,
+    "era": [
+      "1950s",
+      "1960s",
+      "1970s",
+      "1980s",
+      "1990s",
+      "2000s",
+      "2010s",
+      "2020s"
+    ],
+    "nickname": "El Arse"
   }
 ]

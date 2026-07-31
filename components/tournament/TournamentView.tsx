@@ -223,7 +223,31 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
    * uno responde cuando le preguntan cómo le fue. En Liga, quién fue el goleador y el asistidor
    * del plantel, que es lo que mira un hincha.
    */
+  // La copa continental tiene nombre propio, color propio y una historia propia que contar: no es
+  // "la copa" genérica. Todo lo que la distingue sale de acá.
+  const copa = result.continental
+    ? result.continental === "libertadores"
+      ? { nombre: "Copa Libertadores", corto: "Libertadores", gentilicio: "CAMPEÓN DE AMÉRICA", color: "#F6C750", emoji: "🏆" }
+      : { nombre: "Copa Sudamericana", corto: "Sudamericana", gentilicio: "CAMPEÓN DE LA SUDAMERICANA", color: "#F0883E", emoji: "🥈" }
+    : null
+  // Hasta dónde llegaste, dicho como se dice en el fútbol. "Eliminado en Semifinal" es una derrota;
+  // "Semifinalista de la Libertadores" es algo que se cuenta.
+  const llegadaCopa = !copa ? null
+    : result.isChampion ? `Campeón de la ${copa.corto}`
+    : result.eliminatedRound === "Final" ? `Finalista de la ${copa.corto}`
+    : result.eliminatedRound === "Semifinal" ? `Semifinalista de la ${copa.corto}`
+    : result.eliminatedRound === "Cuartos de Final" ? `Cuartos de final de la ${copa.corto}`
+    : result.eliminatedRound === "Octavos de Final" ? `Octavos de final de la ${copa.corto}`
+    : `Fase de grupos de la ${copa.corto}`
+
   const cierreFicha = (() => {
+    if (copa) {
+      const partes = [llegadaCopa!]
+      if (result.groupPos) partes.push(`${result.groupPos}° del grupo`)
+      if (goleador?.playerName && goleador.goals > 0) partes.push(`${goleador.playerName}, ${goleador.goals} goles`)
+      if (!result.isChampion && result.champion) partes.push(`Campeón: ${result.champion}`)
+      return partes.join(" · ")
+    }
     if (result.type === "copa") {
       const rondas = result.rounds?.length ?? 0
       const llegada = result.isChampion
@@ -239,7 +263,11 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
     if (!result.isChampion && result.champion) partes.push(`Campeón: ${result.champion}`)
     return partes.join(" · ") || undefined
   })()
-  const textoParaCompartir = isChamp
+  const textoParaCompartir = copa
+    ? isChamp
+      ? `¡${copa.gentilicio}! ${copa.emoji} Clasifiqué con mi 11 (OVR ${result.teamScore}) y gané la ${copa.nombre} en Gambeta, con ${goles} goles. La plaza se gana jugando la Liga: a ver si llegás`
+      : `${llegadaCopa} en Gambeta con mi 11 (OVR ${result.teamScore}). La clasificación me la gané saliendo ${result.groupPos ? "" : ""}entre los primeros de la Liga. Armá el tuyo y contame hasta dónde llegás`
+    : isChamp
     ? `¡SALÍ CAMPEÓN en Gambeta! 🏆 Armé mi 11 con ${result.teamLabel} (OVR ${result.teamScore}) y me quedé con la ${result.type === "liga" ? "Liga Profesional" : "Copa Argentina"} con ${goles} goles. ¿Podés hacerlo mejor?`
     : result.type === "liga"
     ? `Terminé ${result.playerPos}° de ${result.table?.length ?? 28} en Gambeta con mi 11 (OVR ${result.teamScore}) y ${goles} goles. A ver si vos armás un equipo mejor 👀`
@@ -502,8 +530,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   </div>
                 )}
 
-                <h1 className="font-display text-3xl font-black mb-1 uppercase tracking-tight">
-                  {isChamp
+                <h1
+                  className="font-display text-3xl font-black mb-1 uppercase tracking-tight"
+                  style={copa && isChamp ? { color: copa.color } : undefined}
+                >
+                  {copa
+                    ? isChamp ? `¡${copa.gentilicio}!` : llegadaCopa
+                    : isChamp
                     ? "¡CAMPEÓN!"
                     : result.type === "copa" && result.eliminated
                     ? `Eliminado en ${result.eliminatedRound}`
@@ -511,17 +544,59 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     ? `Posición ${result.playerPos}° de ${result.table?.length}`
                     : "Subcampeón"}
                 </h1>
-                {isChamp && (
+                {isChamp && !copa && (
                   <p className="text-yellow-300 font-bold text-xs mb-2 font-sport tracking-widest uppercase">
                     ¡{result.teamLabel} ES CAMPEÓN DEL TORNEO!
                   </p>
                 )}
-                {!isChamp && (
+                {!isChamp && !copa && (
                   <p className="text-slate-400 text-xs mb-2 font-sport uppercase tracking-wider">
                     {result.type === "copa" && result.eliminated
                       ? "Seguí intentando, el próximo draft será mejor."
                       : `El campeón fue ${result.champion}. ¡Mejor suerte en el próximo draft!`}
                   </p>
+                )}
+
+                {/* ── La ficha de la copa continental ──
+                    Ganarla es lo más difícil que tiene el juego (con un once de 78 pasa una de cada
+                    seis veces en la Libertadores), así que la ficha tiene que estar a la altura. Y
+                    perderla tampoco es cualquier cosa: llegaste porque clasificaste jugando. */}
+                {copa && (
+                  <div
+                    className="mt-3 mb-3 rounded-2xl border px-4 py-3.5 text-center"
+                    style={{
+                      borderColor: isChamp ? `${copa.color}66` : "rgba(148,163,184,0.18)",
+                      background: isChamp
+                        ? `linear-gradient(180deg, ${copa.color}1f, rgba(2,8,19,0.5))`
+                        : "rgba(2,8,19,0.4)",
+                      boxShadow: isChamp ? `0 0 40px ${copa.color}33` : undefined,
+                    }}
+                  >
+                    <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: copa.color }}>
+                      {copa.nombre}
+                    </p>
+                    <p className="mt-1.5 text-[12px] leading-relaxed text-slate-300 font-sans">
+                      {isChamp ? (
+                        <>
+                          Diste la vuelta con <strong className="text-white">{result.teamLabel.replace(/ \(.*\)$/, "")}</strong>.
+                          No la elegiste de un menú: la clasificación te la ganaste en la Liga, la jugaste con este
+                          mismo once y lo ganaste todo.
+                        </>
+                      ) : (
+                        <>
+                          Llegaste hasta <strong className="text-white">{result.eliminatedRound}</strong> con un once
+                          que armaste vos y una plaza que te ganaste jugando. El campeón fue{" "}
+                          <strong className="text-white">{result.champion}</strong>.
+                        </>
+                      )}
+                    </p>
+                    {result.groupPos && (
+                      <p className="mt-2 text-[10px] font-sport uppercase tracking-wider text-slate-500">
+                        {result.groupPos}° en la fase de grupos · {result.rounds?.length ?? 0} partidos jugados
+                        {goles > 0 ? ` · ${goles} goles` : ""}
+                      </p>
+                    )}
+                  </div>
                 )}
 
                 {/* Division Outcome Banners for Liga */}
@@ -711,10 +786,37 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 </div>
               )}
 
+              {/* Tabla del grupo (solo copas continentales: la Copa Argentina no tiene grupos) */}
+              {result.type === "copa" && result.groupTable && tab === "stats" && (
+                <div className="card-gradient rounded-2xl p-4 border border-white/5 mt-4">
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">
+                    FASE DE GRUPOS · PASAN LOS DOS PRIMEROS
+                  </h3>
+                  <div className="space-y-1">
+                    {result.groupTable.map((row, i) => {
+                      const soyYo = row.name === result.teamLabel.replace(/ \(.*\)$/, "")
+                      return (
+                        <div key={row.name} className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-xs ${
+                          soyYo ? "bg-[#74ACDF]/10 border-[#74ACDF]/30" : i < 2 ? "bg-emerald-500/5 border-emerald-400/15" : "bg-slate-950/20 border-white/5"
+                        }`}>
+                          <span className={`w-5 text-center font-black font-sport ${i < 2 ? "text-emerald-300" : "text-slate-600"}`}>{i + 1}</span>
+                          <span className={`flex-1 truncate font-bold ${soyYo ? "text-white" : "text-slate-400"}`}>{row.name}</span>
+                          <span className="text-[10px] text-slate-500 font-sport">{row.w}-{row.d}-{row.l}</span>
+                          <span className="w-10 text-right text-[10px] text-slate-500 font-sport">{row.gf}:{row.ga}</span>
+                          <span className="w-7 text-right font-black text-white font-sport">{row.pts}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Copa rounds bracket (if Copa) */}
               {result.type === "copa" && result.rounds && tab === "stats" && (
                 <div className="card-gradient rounded-2xl p-4 border border-white/5 mt-4">
-                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">CRUCES DE LA COPA ARGENTINA</h3>
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">
+                    {result.groupTable ? `CAMINO EN LA ${result.teamLabel.replace(/^.*\(|\)$/g, "").toUpperCase()}` : "CRUCES DE LA COPA ARGENTINA"}
+                  </h3>
                   {result.rounds.map((round: any, ri: number) => (
                     <div key={ri} className="mb-5 last:mb-0">
                       <h4 className="text-[10px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport mb-2.5">{round.round}</h4>
@@ -725,12 +827,18 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                             <div key={mi} className={`flex items-center justify-between text-xs px-3 py-2 rounded-2xl border ${
                               isMe ? "bg-[#74ACDF]/8 border-[#74ACDF]/20 shadow-[0_0_12px_rgba(116,172,223,0.04)]" : "bg-slate-950/20 border-white/5"
                             }`}>
-                              <span className={`flex-1 text-right truncate max-w-[120px] font-bold ${m.homeGoals > m.awayGoals ? "text-white" : "text-slate-500"}`}>{m.home}</span>
+                              <span className={`flex flex-1 items-center justify-end gap-1.5 truncate font-bold ${m.homeGoals > m.awayGoals ? "text-white" : "text-slate-500"}`}>
+                                <span className="truncate max-w-[110px]">{m.home}</span>
+                                {m.homeId && <img src={`/logos/continental/${m.homeId}.svg`} alt="" className="h-5 w-5 shrink-0 object-contain" />}
+                              </span>
                               <span className="px-3.5 py-0.5 rounded-lg bg-slate-950 font-bold text-[10px] text-slate-300 font-sport">
                                 {m.homeGoals} - {m.awayGoals}
                                 {m.penalties && <span className="text-[#FFD700] ml-1">({m.penalties}p)</span>}
                               </span>
-                              <span className={`flex-1 truncate max-w-[120px] font-bold ${m.awayGoals > m.homeGoals ? "text-white" : "text-slate-500"}`}>{m.away}</span>
+                              <span className={`flex flex-1 items-center gap-1.5 truncate font-bold ${m.awayGoals > m.homeGoals ? "text-white" : "text-slate-500"}`}>
+                                {m.awayId && <img src={`/logos/continental/${m.awayId}.svg`} alt="" className="h-5 w-5 shrink-0 object-contain" />}
+                                <span className="truncate max-w-[110px]">{m.away}</span>
+                              </span>
                             </div>
                           )
                         })}

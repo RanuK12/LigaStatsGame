@@ -29,9 +29,16 @@ describe('cuánto vale cada torneo', () => {
     expect(campeon('liga')).toBeGreaterThan(campeon('copa'))
   })
 
-  it('un torneo flojo resta, también en las continentales', () => {
+  // Corregido el 2026-07-31. Antes este test pedía lo contrario: que un torneo flojo restara
+  // también en las continentales. Medido con equipos drafteados de verdad, irse en la fase de
+  // grupos de la Libertadores daba -73 puntos, o sea que jugar la copa que te ganaste salía más
+  // caro que no clasificar nunca. Eso empuja a NO usar la plaza, que es justo al revés de lo que
+  // el modo busca. La plaza es un premio: el peor resultado posible es cero, nunca un castigo.
+  it('en las continentales el peor resultado es cero, nunca un castigo', () => {
     expect(tournamentPoints({ type: 'libertadores', pos: 16, totalTeams: 16, isChampion: false }))
-      .toBeLessThan(0)
+      .toBeGreaterThanOrEqual(0)
+    expect(tournamentPoints({ type: 'sudamericana', pos: 32, totalTeams: 32, isChampion: false }))
+      .toBeGreaterThanOrEqual(0)
   })
 
   it('el castigo por descenso es solo de la liga', () => {
