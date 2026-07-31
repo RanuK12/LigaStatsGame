@@ -36,7 +36,7 @@ export default function PlayerTradingCard({ player, onSelect, showRating, curren
       {showRating && (
         <div className="flex w-9 shrink-0 flex-col items-center">
           <span className={`font-display text-xl font-black leading-none ${ratingColor}`}>{player.rating}</span>
-          <span className="mt-0.5 text-[8px] font-bold uppercase tracking-wider text-slate-500">
+          <span className="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">
             {POS_LABELS[player.position]?.slice(0, 3) || player.position.slice(0, 3)}
           </span>
         </div>
@@ -60,7 +60,7 @@ export default function PlayerTradingCard({ player, onSelect, showRating, curren
           <span className="text-[10px] text-slate-500 font-sport font-semibold">{player.goalsClub} G · {player.capsClub} PJ</span>
         </div>
         {displayClub && (
-          <div className="mt-0.5 truncate text-[9px] text-[#75AADB]">
+          <div className="mt-0.5 truncate text-[11px] text-[#75AADB]">
             {displayClub.name}{displayClub.years ? ` · ${displayClub.years}` : ""}
           </div>
         )}

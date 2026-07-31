@@ -27,7 +27,7 @@ export default function Novedades() {
         <div className="banda-argentina absolute inset-x-0 top-0 h-1 opacity-80" />
 
         <div className="flex items-baseline justify-between gap-3">
-          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#E7C27D] font-sport">
+          <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#E7C27D] font-sport">
             Novedades
           </span>
           <span className="text-[10px] text-slate-500 font-sport uppercase tracking-wider">

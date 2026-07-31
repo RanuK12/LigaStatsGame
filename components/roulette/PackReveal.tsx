@@ -1,7 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import type { Squad } from "@/lib/types"
+import { tocar } from "@/lib/sonido"
 import type { SquadTier } from "@/lib/game-engine"
 
 const TIER_STYLE: Record<SquadTier, { border: string; glow: string; label: string | null }> = {
@@ -28,6 +30,28 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
   const isGold = tier === "legendario"
   const isSpecial = tier !== "comun"
   // Un plantel histórico se anuncia por lo que hizo, no por el año en que jugó.
+  // Sonido y golpecito al abrir: un pack opening mudo es medio pack opening.
+  useEffect(() => {
+    tocar(isSpecial ? "legendario" : "ficha")
+  }, [isSpecial])
+
+  const [copiado, setCopiado] = useState(false)
+  const compartir = async () => {
+    const texto = squad.hito
+      ? `Me salió ${squad.label} en Gambeta. ${squad.hito}\n\ngambetafutbol.games`
+      : `Me salió ${squad.label} en el draft de Gambeta (${avg} de promedio).\n\ngambetafutbol.games`
+    try {
+      if (navigator.share) await navigator.share({ text: texto })
+      else {
+        await navigator.clipboard.writeText(texto)
+        setCopiado(true)
+        setTimeout(() => setCopiado(false), 1800)
+      }
+    } catch {
+      /* el usuario canceló */
+    }
+  }
+
   const era = squad.historico
     ? { label: "PLANTEL HISTÓRICO", clase: "text-[#E7C27D] border-[#E7C27D]/40 bg-[#E7C27D]/10" }
     : epoca(squad.season)
@@ -91,18 +115,29 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55 }}
-            className={`font-sport text-xs font-black uppercase tracking-[0.3em] mb-4 ${isGold ? "text-[#FFD700]" : "text-[#75AADB]"}`}>
+            className={`mb-4 font-impact text-2xl font-black uppercase leading-none tracking-[0.06em] sm:text-3xl ${isGold ? "text-[#FFD700]" : "text-[#75AADB]"}`}>
             {style.label}
           </motion.p>
         )}
-        <div className="flex justify-center mb-4">
+        {/* El escudo del club, que ya está en public/logos/clubs. Antes acá había un ícono de
+            estrella genérico, el mismo que usa la pantalla de campeón: en un juego sobre figuritas
+            del fútbol argentino, lo que tiene que verse es el escudo. */}
+        <div className="mb-4 flex justify-center">
+          <img
+            src={`/logos/clubs/${squad.clubId}.png`}
+            alt=""
+            className="h-20 w-20 object-contain drop-shadow-[0_0_20px_rgba(0,0,0,0.6)]"
+            onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
+          />
+        </div>
+        <div className="hidden">
           <div className="w-12 h-12 rounded-full border border-yellow-500/30 bg-yellow-500/10 flex items-center justify-center">
             <svg className="w-6 h-6 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
             </svg>
           </div>
         </div>
-        <h2 className="font-display text-3xl font-black text-white mb-1">{squad.label}</h2>
+        <h2 className="mb-1 font-display text-xl font-black text-white">{squad.label}</h2>
         <p className="text-sm text-slate-400 mb-3">
           {squad.historico ? `Temporada ${squad.season}` : `${squad.competition} · Temporada ${squad.season}`}
         </p>
@@ -127,6 +162,17 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
         <button onClick={onContinue} className="btn-primary w-full py-3 font-sport">
           Elegir jugador
         </button>
+
+        {/* El momento más "figurita" del juego terminaba en un botón que dice "Elegir jugador" y
+            nada más. Si te tocó el Vélez del 94, querés contarlo. */}
+        {isSpecial && (
+          <button
+            onClick={compartir}
+            className="mt-2 w-full rounded-2xl border border-white/10 py-2.5 font-sport text-[11px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-white/25 hover:text-white"
+          >
+            {copiado ? "¡Copiado!" : "Compartir lo que salió"}
+          </button>
+        )}
       </motion.div>
     </motion.div>
   )

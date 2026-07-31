@@ -74,7 +74,7 @@ export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemis
                   transition={{ repeat: isActive ? Infinity : 0, duration: 1.6 }}>
                   {pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()}
                 </motion.div>
-                <div className="text-[9px] text-white font-semibold mt-0.5 bg-black/40 px-1 rounded max-w-[70px] truncate text-center">
+                <div className="text-[11px] text-white font-semibold mt-0.5 bg-black/40 px-1 rounded max-w-[70px] truncate text-center">
                   {pl.name.split(" ").pop()}
                 </div>
                 <div className="text-[10px] font-semibold text-slate-100 [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]">{POS_LABELS[pos.pos] || pos.pos}</div>

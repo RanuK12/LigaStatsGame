@@ -39,7 +39,7 @@ export default function WorldCupSummary({ wc, categoria }: { wc: WorldCupRun; ca
 
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="font-sport text-[9px] font-black uppercase tracking-[0.3em] text-[#74ACDF]">
+          <div className="font-sport text-[11px] font-black uppercase tracking-[0.3em] text-[#74ACDF]">
             Mundial {wc.year} · {wc.seleccion}
           </div>
           <div
@@ -52,7 +52,7 @@ export default function WorldCupSummary({ wc, categoria }: { wc: WorldCupRun; ca
           )}
         </div>
         <span
-          className="shrink-0 rounded-full border px-2.5 py-1 text-[9px] font-black uppercase tracking-wider font-sport"
+          className="shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-black uppercase tracking-wider font-sport"
           style={{ color: rol.color, borderColor: `${rol.color}55`, background: `${rol.color}14` }}
         >
           {rol.texto}
@@ -66,7 +66,7 @@ export default function WorldCupSummary({ wc, categoria }: { wc: WorldCupRun; ca
           const perdio = p.golesAFavor < p.golesEnContra
           return (
             <div key={i} className="flex items-center gap-2 rounded-lg bg-black/25 px-2.5 py-1.5 text-[11px]">
-              <span className="w-16 shrink-0 font-sport text-[9px] font-bold uppercase tracking-wider text-slate-500">
+              <span className="w-16 shrink-0 font-sport text-[11px] font-bold uppercase tracking-wider text-slate-500">
                 {p.ronda}
               </span>
               <span className="flex-1 truncate text-slate-300">{p.rival}</span>
@@ -75,7 +75,7 @@ export default function WorldCupSummary({ wc, categoria }: { wc: WorldCupRun; ca
               >
                 {p.golesAFavor}-{p.golesEnContra}
               </span>
-              {p.penales && <span className="text-[9px] text-[#F6C750] font-sport">({p.penales}p)</span>}
+              {p.penales && <span className="text-[11px] text-[#F6C750] font-sport">({p.penales}p)</span>}
             </div>
           )
         })}
@@ -94,7 +94,7 @@ export default function WorldCupSummary({ wc, categoria }: { wc: WorldCupRun; ca
             <div className="font-display text-lg font-black" style={{ color: s.c }}>
               {s.v}
             </div>
-            <div className="text-[8px] uppercase tracking-wider text-slate-400">{s.l}</div>
+            <div className="text-[10px] uppercase tracking-wider text-slate-400">{s.l}</div>
           </div>
         ))}
       </div>

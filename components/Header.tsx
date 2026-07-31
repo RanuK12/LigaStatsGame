@@ -2,13 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useUserStore } from '@/lib/user-store'
 import { supabase } from '@/lib/supabase'
 import { profileFromSupabaseUser } from '@/lib/auth'
 import TierBadge from './TierBadge'
+import BotonSonido from './BotonSonido'
 
 // Nueve items no entraban: medido, la barra pedía 1.136px y entre 768 y 1023px el botón de
 // INGRESAR quedaba FUERA de la pantalla, con la página desplazándose de costado. Quedan los cuatro
@@ -23,7 +24,7 @@ const NAV_ITEMS = [
 ]
 
 // Consulta y modos sueltos: se visitan una vez, no compiten por la atención con DRAFT.
-const NAV_MAS = [
+const NAV_MAS: { href: string; label: string; match?: string }[] = [
   { href: '/datos', label: '¿SABÍAS QUE?' },
   { href: '/ruleta', label: 'RULETA' },
   { href: '/versus', label: 'VERSUS' },
@@ -35,6 +36,7 @@ export default function Header() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [masOpen, setMasOpen] = useState(false)
+  const cierre = useRef<ReturnType<typeof setTimeout> | null>(null)
   const masActivo = NAV_MAS.some((i) => pathname.startsWith(i.href))
   const { user, openAuthModal, openProfileModal, setUser, closeAuthModal } = useUserStore()
 
@@ -59,7 +61,7 @@ export default function Header() {
   }, [setUser, closeAuthModal])
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020813]/72 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
+    <header className="sticky top-0 z-50 w-full border-b border-white/[0.07] bg-[#020813]/[0.93] shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group transition-transform">
@@ -86,15 +88,19 @@ export default function Header() {
             </div>
             {/* En teléfono la bajada quedaba a tres píxeles del botón INGRESAR, y en 360px se
                 solapaban. Se oculta: el hero repite el mismo texto palabra por palabra. */}
-            <span className="hidden sm:block text-[9px] sm:text-[10px] text-[#74ACDF] font-bold tracking-[0.22em] leading-none font-sport uppercase whitespace-nowrap mt-1">
+            <span className="hidden sm:block text-[11px] sm:text-[10px] text-[#74ACDF] font-bold tracking-[0.22em] leading-none font-sport uppercase whitespace-nowrap mt-1">
               EL JUEGO DEL FÚTBOL ARGENTINO
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation — a lg, no a md: con md se encendía a 768px, donde no entraba */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {NAV_ITEMS.map((item) => {
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+          {[...NAV_ITEMS, ...NAV_MAS].map((item, i) => {
+            // De xl para arriba se ven los ocho: esconder destinos detrás de un menú hace que
+            // gente que entraría a Datos o a Versus no se entere de que existen. El menú MÁS
+            // sobrevive solo entre 1024 y 1279px, donde los ocho no entran.
+            const secundario = i >= NAV_ITEMS.length
             const matchPath = item.match || item.href
             const isActive = pathname === matchPath || (matchPath !== '/' && pathname.startsWith(matchPath))
 
@@ -102,9 +108,9 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative rounded-2xl px-3.5 py-2 text-[10px] font-bold tracking-[0.25em] font-sport transition-all duration-300 ease-out uppercase ${
+                className={`relative rounded-2xl px-2.5 py-2 font-sport text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 ease-out xl:px-3 xl:tracking-[0.16em] ${
                   isActive ? 'text-white' : 'text-slate-400 hover:text-white'
-                }`}
+                } ${secundario ? 'hidden xl:block' : ''}`}
               >
                 {isActive && (
                   <motion.span
@@ -119,9 +125,16 @@ export default function Header() {
           })}
 
           {/* MÁS: lo que se visita una vez y no pelea con DRAFT por la atención */}
-          <div className="relative" onMouseLeave={() => setMasOpen(false)}>
+          {/* Se cerraba con onMouseLeave a secas: apenas el mouse salía un píxel el menú
+              desaparecía, y para llegar a una opción había que cruzar el hueco entre el botón y la
+              lista. Ahora hay un margen de gracia de 420ms y el hueco está cubierto. */}
+          <div
+            className="relative xl:hidden"
+            onMouseEnter={() => { if (cierre.current) clearTimeout(cierre.current) }}
+            onMouseLeave={() => { cierre.current = setTimeout(() => setMasOpen(false), 420) }}
+          >
             <button
-              onMouseEnter={() => setMasOpen(true)}
+              onMouseEnter={() => { if (cierre.current) clearTimeout(cierre.current); setMasOpen(true) }}
               onClick={() => setMasOpen((v) => !v)}
               className={`relative flex items-center gap-1 rounded-2xl px-3.5 py-2 font-sport text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-300 ease-out ${
                 masActivo ? 'text-white' : 'text-slate-400 hover:text-white'
@@ -147,7 +160,7 @@ export default function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.16 }}
-                  className="absolute right-0 top-full z-50 mt-1 w-52 overflow-hidden rounded-2xl border border-white/10 bg-[#050d1a]/97 p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+                  className="absolute right-0 top-full z-[60] w-56 overflow-hidden rounded-2xl border border-[#74ACDF]/20 bg-[#050d1a] p-1.5 pt-2 shadow-[0_24px_60px_rgba(0,0,0,0.75)]"
                 >
                   {NAV_MAS.map((item) => (
                     <Link
@@ -199,6 +212,9 @@ export default function Header() {
             </button>
           )}
 
+          {/* Prender el sonido. Arranca apagado: un sitio que suena sin permiso se cierra. */}
+          <BotonSonido className="hidden sm:flex" />
+
           {/* Mobile menu trigger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -223,7 +239,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden overflow-hidden border-t border-white/5 bg-[#020813]/92 backdrop-blur-xl font-sport"
+            className="lg:hidden overflow-hidden border-t border-white/5 bg-[#020813] shadow-[0_20px_50px_rgba(0,0,0,0.6)] font-sport"
           >
             <div className="flex flex-col gap-1 px-4 py-3.5">
               {NAV_ITEMS.map((item) => {

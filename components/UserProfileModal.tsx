@@ -83,7 +83,7 @@ export default function UserProfileModal() {
 
             {puesto && (
               <div className="mt-5 rounded-2xl border border-[#74ACDF]/30 bg-[#74ACDF]/[0.07] p-3.5">
-                <div className="text-[9px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">Puesto en el ranking</div>
+                <div className="text-[11px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">Puesto en el ranking</div>
                 <div className="font-display text-3xl font-black text-white leading-none mt-1">
                   #{puesto.n} <span className="text-slate-500 text-base">de {puesto.total}</span>
                 </div>
@@ -96,15 +96,15 @@ export default function UserProfileModal() {
             <div className="grid grid-cols-3 gap-3 my-6">
               <div className="card-glass p-3 rounded-2xl border border-white/5">
                 <div className="text-xl font-black text-[#74ACDF] font-display">{user.elo}</div>
-                <div className="text-[9px] text-slate-400 uppercase font-sport tracking-wider mt-0.5">Rating ELO</div>
+                <div className="text-[11px] text-slate-400 uppercase font-sport tracking-wider mt-0.5">Rating ELO</div>
               </div>
               <div className="card-glass p-3 rounded-2xl border border-white/5">
                 <div className="text-xl font-black text-amber-400 font-display">🏆 {user.titles}</div>
-                <div className="text-[9px] text-slate-400 uppercase font-sport tracking-wider mt-0.5">Títulos</div>
+                <div className="text-[11px] text-slate-400 uppercase font-sport tracking-wider mt-0.5">Títulos</div>
               </div>
               <div className="card-glass p-3 rounded-2xl border border-white/5">
                 <div className="text-xl font-black text-emerald-400 font-display">{user.draftsCompleted}</div>
-                <div className="text-[9px] text-slate-400 uppercase font-sport tracking-wider mt-0.5">Drafts</div>
+                <div className="text-[11px] text-slate-400 uppercase font-sport tracking-wider mt-0.5">Drafts</div>
               </div>
             </div>
 

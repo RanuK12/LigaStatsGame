@@ -302,12 +302,12 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
                     {t.icon}
                   </div>
                   {t.count > 1 && (
-                    <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-slate-950 border border-amber-400 text-[9px] font-black font-sport text-amber-300 shadow-md">
+                    <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-slate-950 border border-amber-400 text-[11px] font-black font-sport text-amber-300 shadow-md">
                       ×{t.count}
                     </span>
                   )}
                 </div>
-                <span className="text-[9px] font-bold text-slate-400 font-sport uppercase mt-1 tracking-wider text-center max-w-[80px] truncate">
+                <span className="text-[11px] font-bold text-slate-400 font-sport uppercase mt-1 tracking-wider text-center max-w-[80px] truncate">
                   {t.name}
                 </span>
               </div>
@@ -321,7 +321,7 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
           style={{ transform: "translateZ(20px)" }}
         >
           <span className="font-display font-black text-white tracking-[0.15em]">GAMBETA</span>
-          <span className="text-[#74ACDF] text-[9px] tracking-[0.2em]">GAMBETAFUTBOL.GAMES</span>
+          <span className="text-[#74ACDF] text-[11px] tracking-[0.2em]">GAMBETAFUTBOL.GAMES</span>
         </div>
       </motion.div>
     </div>

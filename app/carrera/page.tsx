@@ -221,7 +221,7 @@ function CareerSetupWizard() {
               <div className="relative h-44 w-40 filter drop-shadow-[0_16px_28px_rgba(0,0,0,0.85)]">
                 <Jersey3D color={jerseyColor} pattern={jerseyPattern} number={number} name={name} />
               </div>
-              <span className="text-[9px] text-slate-500 font-sans">Arrastrá para girar</span>
+              <span className="text-[11px] text-slate-500 font-sans">Arrastrá para girar</span>
 
               <div className="text-xs font-bold text-white font-display uppercase tracking-wider">
                 #{number} · {name || "JUGADOR"}
@@ -388,7 +388,7 @@ function ClubGroup({
           >
             <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
             <span className="text-[11px] font-bold text-white truncate flex-1">{c.name}</span>
-            <span className="text-[9px] font-sport text-amber-400 shrink-0">{c.strength}</span>
+            <span className="text-[11px] font-sport text-amber-400 shrink-0">{c.strength}</span>
           </button>
         ))}
       </div>
@@ -531,10 +531,10 @@ function CareerDashboard() {
               )}
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-0.5 text-[9px] font-black tracking-[0.2em] uppercase text-amber-300 font-sport">
+                  <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-0.5 text-[11px] font-black tracking-[0.2em] uppercase text-amber-300 font-sport">
                     Temporada {career.seasonsPlayed + (career.finished ? 0 : 1)} / {MAX_SEASONS}
                   </span>
-                  <span key={career.seasonsPlayed} className="contador-in text-[9px] font-black tracking-[0.2em] uppercase text-slate-500 font-sport">
+                  <span key={career.seasonsPlayed} className="contador-in text-[11px] font-black tracking-[0.2em] uppercase text-slate-500 font-sport">
                     {career.startYear + career.seasonsPlayed}
                   </span>
                 </div>
@@ -562,7 +562,7 @@ function CareerDashboard() {
 
             {/* Progreso de la carrera: se llena temporada a temporada */}
             <div className="relative mt-4">
-              <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-slate-500 font-sport">
+              <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-slate-500 font-sport">
                 <span>Camino a la gloria</span>
                 <span className="text-[#74ACDF]">{career.seasonsPlayed}/{MAX_SEASONS}</span>
               </div>
@@ -602,7 +602,7 @@ function CareerDashboard() {
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
                           {o.clubName}
-                          {euro && <span className="text-[8px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase">Europa</span>}
+                          {euro && <span className="text-[10px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase">Europa</span>}
                         </div>
                         <div className="text-[10px] text-slate-400 font-sport">Oferta {formatMarketValue(o.valueM)}</div>
                       </div>

@@ -31,7 +31,8 @@ import {
 } from "@/lib/game-engine"
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
-import { challengeForDate, localYmd } from "@/lib/daily-challenge"
+import { tocar } from "@/lib/sonido"
+import { challengeForDate, localYmd, CHALLENGES } from "@/lib/daily-challenge"
 import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
 import { calculateChemistry } from "@/lib/chemistry"
 import ChemistryPanel from "@/components/ChemistryPanel"
@@ -149,7 +150,7 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
                           : "bg-slate-800 border-slate-600 text-slate-200 hover:border-[#75AADB]/60 hover:bg-slate-700"
                       }`}
                       style={{ borderColor: pos === currentPos ? undefined : getPC(pos) + "55" }}>
-                      <span className="inline-block w-5 h-5 rounded-full text-white text-[9px] font-black mr-1 leading-5 text-center" style={{ backgroundColor: getPC(pos) }}>
+                      <span className="inline-block w-5 h-5 rounded-full text-white text-[11px] font-black mr-1 leading-5 text-center" style={{ backgroundColor: getPC(pos) }}>
                         {POS_LABELS[pos]?.slice(0, 3) || pos.slice(0, 3)}
                       </span>
                       {POS_LABELS[pos] || pos}
@@ -179,7 +180,23 @@ function DraftInner() {
   const retoId = sp.get("reto")
 
   const { players: playersCore, error: playersError } = usePlayersCore()
-  const allP = useMemo(() => playersCore ?? [], [playersCore])
+    // ── EL RETO DIARIO FILTRA EL BOMBO DE VERDAD ──
+  // Antes el reto solo servía para cobrar el bono de ELO: los catorce retos producían el mismo
+  // draft aleatorio, cambiaba el título y nada más. Sin regla aplicada no hay resultado comparable
+  // entre dos personas, y sin eso compartir no significa nada. Ahora el bombo se recorta.
+  const retoDelDia = useMemo(() => {
+    if (!retoId) return null
+    return CHALLENGES.find((c) => c.id === retoId) ?? null
+  }, [retoId])
+
+  const allP = useMemo(() => {
+    const base = playersCore ?? []
+    if (!retoDelDia) return base
+    const filtrados = base.filter((pl) => retoDelDia.filtro(pl))
+    // Si el filtro dejara un bombo imposible de completar, se juega sin restricción antes que
+    // dejar al jugador trabado. No debería pasar: cada filtro está medido, pero la base cambia.
+    return filtrados.length >= 60 ? filtrados : base
+  }, [playersCore, retoDelDia])
   const allS = useMemo(() => normalizeSquads(squadsData), [])
   const { user, updateElo, addTitle, otorgarPlaza, usarPlaza } = useUserStore()
 
@@ -263,6 +280,7 @@ function DraftInner() {
     setSpinNotice(null)
     setCurrentSquad(result)
     setClubesUsados(prev => new Set(prev).add(result.clubId))
+    tocar("giro")
     setSpinning(true)
     setPhase("spinning")
   }, [spinning, allS, allP, currentPos.pos, draftedIds, pity, f, drafted, clubesUsados])
@@ -314,6 +332,47 @@ function DraftInner() {
       }, 300)
     }
   }, [drafted, draftedIds, f, pity, totalSlots])
+
+  // ── COMPLETAR EL RESTO ──
+  // El once completo son 22 toques: once giros con animación más once elecciones. Medido, el
+  // jugador promedio tiene 44 segundos dentro del juego, así que casi nadie llegaba a simular y
+  // todo lo que da ganas de volver —ELO, ranking, ficha, compartir— quedaba detrás de esa pared.
+  // Esto llena los puestos que falten con el mejor disponible y deja jugar. El once armado a mano
+  // sigue siendo la partida buena; esto es la puerta de entrada.
+  const completarEquipo = useCallback(() => {
+    const nuevos = [...drafted]
+    const ids = new Set(draftedIds)
+    let sumados = 0
+
+    f.positions.forEach((slot: any, i: number) => {
+      if (nuevos[i]) return
+      // Mismo bombo que el giro manual: solo planteles que tengan a alguien para ese puesto.
+      const elegibles = getEligibleSquadsForSlot(allS, allP, slot.pos, ids)
+      if (elegibles.length === 0) return
+      const sq = spinSquadWithPity(elegibles, allP, pity, { position: slot.pos, drafted: ids }, clubesUsados)
+      clubesUsados.add(sq.clubId)
+      const mejor = allP
+        .filter(pl => sq.playerIds.includes(pl.id) && !ids.has(pl.id) && canPlayHere(pl, slot.pos))
+        .sort((x, y) => (y.rating || 0) - (x.rating || 0))[0]
+      if (!mejor) return
+      nuevos[i] = mejor
+      ids.add(mejor.id)
+      sumados++
+    })
+
+    if (sumados === 0) return
+    setDrafted(nuevos)
+    setDraftedIds(ids)
+    setClubesUsados(new Set(clubesUsados))
+    setCurrentSquad(null)
+    setPhase("done")
+    setBurst({ label: "¡EQUIPO ARMADO!", tone: "celeste" })
+    trackEvent(EVENTOS.draftCompletado, {
+      formacion: f.id,
+      puntaje: Math.round(calculateFullTeamScore(nuevos, f)),
+      autocompletado: sumados,
+    })
+  }, [drafted, draftedIds, allS, allP, f, pity, clubesUsados])
 
   // ── SLOT CLICK ──
   const handleSlotClick = useCallback((idx: number) => {
@@ -628,6 +687,18 @@ function DraftInner() {
                 <span className="font-display font-bold text-xl text-white">{currentPos.label}</span>
               </div>
             </div>
+            {/* La regla del día, a la vista mientras jugás: si no se ve, no se siente un reto. */}
+            {retoDelDia && (
+              <div className="mb-4 rounded-2xl border border-orange-400/30 bg-orange-500/[0.07] px-4 py-3 text-center">
+                <p className="font-sport text-[10px] font-black uppercase tracking-[0.28em] text-orange-300">
+                  {retoDelDia.icon} Reto de hoy · {retoDelDia.title}
+                </p>
+                <p className="mt-1 font-sans text-[12px] leading-relaxed text-slate-300">{retoDelDia.rule}</p>
+                <p className="mt-1 font-sport text-[10px] uppercase tracking-wider text-slate-500">
+                  Bombo recortado: hoy todos juegan con los mismos jugadores
+                </p>
+              </div>
+            )}
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
             {filledCount >= 2 && <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>}
             <div className="flex gap-3 justify-center flex-wrap font-sport">
@@ -640,7 +711,24 @@ function DraftInner() {
                 Elegir posición
               </button>
             </div>
-            <p className="text-xs text-slate-400 mt-2 text-center">
+
+            {/* La salida rápida, desde el primer giro. Sin esto hay que dar 22 toques antes de que
+                exista cualquier resultado, y el jugador promedio tiene 44 segundos adentro. */}
+            {filledCount >= 1 && filledCount < totalSlots && (
+              <div className="mt-4 text-center">
+                <button
+                  onClick={completarEquipo}
+                  className="rounded-2xl border border-[#F6C750]/40 bg-[#F6C750]/[0.08] px-6 py-3 font-sport text-[11px] font-black uppercase tracking-[0.18em] text-[#F6C750] transition-colors hover:bg-[#F6C750]/15 hover:text-white"
+                >
+                  ⚡ Completar los {totalSlots - filledCount} que faltan y jugar
+                </button>
+                <p className="mt-1.5 font-sans text-[11px] text-slate-500">
+                  Te llena los puestos vacíos con lo mejor que haya y vas directo al torneo
+                </p>
+              </div>
+            )}
+
+            <p className="text-xs text-slate-400 mt-3 text-center">
               Girá para la posición actual · o elegí otra posición manualmente
             </p>
           </motion.div>
@@ -755,8 +843,8 @@ function DraftInner() {
                   return (
                     <div key={i} className="flex items-center gap-1.5 bg-slate-800/50 rounded-lg px-2.5 py-1.5 border border-slate-700 group relative">
                       <button onClick={() => removePlayer(i)}
-                        className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[8px] flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center text-[7px] font-bold text-white"
+                        className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
                         style={{ backgroundColor: getPC(pos.pos) }}>
                         {pl ? pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase() : POS_LABELS[pos.pos]}
                       </div>
@@ -764,7 +852,7 @@ function DraftInner() {
                         <div className="text-[10px] font-semibold text-white truncate max-w-[80px]">
                           {pl ? pl.name.split(" ").pop() : <span className="text-slate-500 italic">vacío</span>}
                         </div>
-                        <div className="text-[8px] text-slate-500">{POS_LABELS[pos.pos] || pos.pos}</div>
+                        <div className="text-[10px] text-slate-500">{POS_LABELS[pos.pos] || pos.pos}</div>
                       </div>
                       {pl && mode.ratingsVisible && <span className="text-[10px] font-bold text-[#75AADB]">{pl.rating}</span>}
                     </div>
@@ -801,8 +889,8 @@ function DraftInner() {
                       x.t === "libertadores" ? "text-[#F6C750]" : x.t === "sudamericana" ? "text-[#9CCBF0]" : "text-white"}`}>
                       {BASE_POR_TORNEO[x.t]}
                     </div>
-                    <div className="mt-0.5 text-[9px] font-black uppercase tracking-wider text-slate-300 font-sport">{x.label}</div>
-                    <div className="text-[8px] leading-tight text-slate-500 font-sans">{x.nota}</div>
+                    <div className="mt-0.5 text-[11px] font-black uppercase tracking-wider text-slate-300 font-sport">{x.label}</div>
+                    <div className="text-[10px] leading-tight text-slate-500 font-sans">{x.nota}</div>
                   </div>
                 ))}
               </div>

@@ -152,7 +152,7 @@ export default function ShareBar({
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#74ACDF] opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#74ACDF]" />
           </span>
-          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">{titulo}</span>
+          <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">{titulo}</span>
         </div>
 
         <p className="mx-auto mt-3 max-w-md rounded-2xl border border-white/[0.06] bg-black/25 px-4 py-3 text-[12px] leading-relaxed text-slate-300 font-sans">

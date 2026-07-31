@@ -173,7 +173,7 @@ export default function LiveScoresWidget() {
                       ) : (
                         <div className="text-xs font-black text-[#74ACDF]">{m.time || "-"}</div>
                       )}
-                      <div className="text-[9px] font-bold text-slate-500 uppercase tracking-wider min-w-[40px] text-right">
+                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider min-w-[40px] text-right">
                         {m.status === "FINAL" && "FINAL"}
                         {m.status === "LIVE" && <span className="text-red-400 animate-pulse">{m.minute || "LIVE"}</span>}
                         {m.status === "UPCOMING" && "PRÓX"}
