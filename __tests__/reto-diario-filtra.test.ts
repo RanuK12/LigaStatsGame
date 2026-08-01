@@ -39,3 +39,25 @@ describe('el reto diario aplica su regla', () => {
     expect(semana.size).toBeGreaterThan(1)
   })
 })
+
+// El link compartido tiene que llevar al MISMO bombo, o "mirá cómo me fue" no se puede comparar
+// con nada. Es el mecanismo de Wordle: mismo puzzle para todos, resultados comparables.
+describe('el reto se puede desafiar', () => {
+  it('el id del reto sobrevive en una URL y vuelve a encontrar el mismo reto', () => {
+    for (const c of CHALLENGES) {
+      const url = new URL(`https://gambetafutbol.games/draft?mode=liga&reto=${c.id}`)
+      const id = url.searchParams.get('reto')
+      expect(id).toBe(c.id)
+      expect(CHALLENGES.find((x) => x.id === id)).toBeTruthy()
+    }
+  })
+
+  it('dos personas con el mismo link juegan el mismo bombo', () => {
+    const c = challengeForDate('2026-08-01')
+    const unoA = players.filter((p) => c.filtro(p)).map((p) => p.id).sort()
+    const unoB = players.filter((p) => c.filtro(p)).map((p) => p.id).sort()
+    expect(unoA).toEqual(unoB)
+    // Y distinto del bombo completo, o el reto no restringiría nada
+    expect(unoA.length).toBeLessThan(players.length)
+  })
+})

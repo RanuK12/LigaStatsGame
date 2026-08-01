@@ -15,7 +15,7 @@ import { tocar } from "@/lib/sonido"
 import { storyBlob } from "@/lib/story-card"
 import Image from "next/image"
 
-export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo }: {
+export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto }: {
   result: TournamentResult
     onBack: () => void
   onReset: () => void
@@ -23,6 +23,8 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
   /** Lo que movió este torneo en el ranking. Sin esto la ficha no cierra: el jugador ve cómo
    *  le fue pero no qué se llevó. */
   elo?: { nuevo: number; delta: number; pts: number } | null
+  /** Si la partida salió del reto del día, para que el link compartido lleve al MISMO bombo. */
+  reto?: { id: string; titulo: string }
 }) {
   // Simulation modality state
   // "intro" = choosing mode, "interactive" = playing step-by-step, "animating" = showing match feed, "done" = final results
@@ -275,6 +277,10 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
     if (!result.isChampion && result.champion) partes.push(`Campeón: ${result.champion}`)
     return partes.join(" · ") || undefined
   })()
+  // El texto del reto va con el resultado y sin spoiler del once: es lo que hace comparable dos
+  // partidas distintas. Sin esto, compartir era "jugué a algo" y el que abría no sabía a qué.
+  const sufijoReto = reto ? `\n\nReto de hoy: ${reto.titulo}. Mismo bombo para todos. ¿Cuánto sacás vos?` : ""
+
   const textoParaCompartir = copa
     ? isChamp
       ? `¡${copa.gentilicio}! ${copa.emoji} Clasifiqué con mi 11 (OVR ${result.teamScore}) y gané la ${copa.nombre} en Gambeta, con ${goles} goles. La plaza se gana jugando la Liga: a ver si llegás`
@@ -933,8 +939,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
 
               {/* Compartir el resultado */}
               <ShareBar
-                titulo="Contá cómo te fue"
-                texto={elo && elo.delta !== 0 ? `${textoParaCompartir} (${elo.delta > 0 ? "+" : ""}${elo.delta} ELO)` : textoParaCompartir}
+                titulo={reto ? "Desafiá a alguien con el mismo bombo" : "Contá cómo te fue"}
+                destino={
+                  reto
+                    ? `https://gambetafutbol.games/draft?mode=liga&reto=${reto.id}`
+                    : undefined
+                }
+                texto={(elo && elo.delta !== 0 ? `${textoParaCompartir} (${elo.delta > 0 ? "+" : ""}${elo.delta} ELO)` : textoParaCompartir) + sufijoReto}
                 imagen={() =>
                   storyBlob({
                     volanta: result.type === "liga" ? "Liga Profesional" : "Copa Argentina",
