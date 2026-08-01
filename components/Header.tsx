@@ -62,9 +62,9 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/[0.07] bg-[#020813]/[0.93] shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-      <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-4">
+      <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-3 px-4">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group transition-transform">
+        <Link href="/" className="flex shrink-0 basis-0 grow items-center gap-2.5 group transition-transform">
           <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0">
             <img
               src="/logos/gambeta.svg"
@@ -95,7 +95,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation — a lg, no a md: con md se encendía a 768px, donde no entraba */}
-        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+        <nav className="hidden shrink-0 items-center gap-0.5 lg:flex xl:gap-1">
           {[...NAV_ITEMS, ...NAV_MAS].map((item, i) => {
             // De xl para arriba se ven los ocho: esconder destinos detrás de un menú hace que
             // gente que entraría a Datos o a Versus no se entere de que existen. El menú MÁS
@@ -108,7 +108,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative rounded-2xl px-2.5 py-2 font-sport text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 ease-out xl:px-3 xl:tracking-[0.16em] ${
+                className={`relative rounded-2xl px-2.5 py-2 font-sport text-[11px] font-bold uppercase tracking-[0.08em] transition-all duration-300 ease-out xl:tracking-[0.1em] ${
                   isActive ? 'text-white' : 'text-slate-400 hover:text-white'
                 } ${secundario ? 'hidden xl:block' : ''}`}
               >
@@ -181,7 +181,7 @@ export default function Header() {
         </nav>
 
         {/* User profile / Login button */}
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 basis-0 grow items-center justify-end gap-2">
           {user?.isLoggedIn ? (
             <button
               onClick={openProfileModal}
