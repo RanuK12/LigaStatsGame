@@ -39,8 +39,8 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
   const [estado, setEstado] = useState<"" | "generando" | "copiado">("")
   const compartir = async () => {
     const texto = squad.hito
-      ? `Me salió ${squad.label} en Gambeta. ${squad.hito}\n\ngambetafutbol.games`
-      : `Me salió ${squad.label} en el draft de Gambeta (${avg} de promedio).\n\ngambetafutbol.games`
+      ? `Me salió ${squad.label} en Gambeta. ${squad.hito}\n\ngambetafutbol.games/?utm_source=directo&utm_medium=social&utm_campaign=plantel`
+      : `Me salió ${squad.label} en el draft de Gambeta (${avg} de promedio).\n\ngambetafutbol.games/?utm_source=directo&utm_medium=social&utm_campaign=plantel`
 
     // Con imagen. Un link pelado en X o en WhatsApp no lo abre nadie; una carta con el escudo y
     // el hito, sí. storyBlob ya se usa en la ficha de torneo y en la de carrera.

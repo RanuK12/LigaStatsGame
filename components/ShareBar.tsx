@@ -38,14 +38,36 @@ export default function ShareBar({
   const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "error">("")
   const [copiado, setCopiado] = useState(false)
 
-  const url = destino || SITE_URL
+  const urlBase = destino || SITE_URL
+
+  /**
+   * El link, etiquetado según a dónde va.
+   *
+   * Sin esto el 15 % del tráfico llegaba a Analytics como "Unassigned": WhatsApp, Instagram y las
+   * apps de mensajería no mandan de dónde viene la visita, así que la sesión queda huérfana y no
+   * se sabe qué red trae gente de verdad. La etiqueta la pone el botón, no la persona: nadie se
+   * va a acordar de pegarla a mano.
+   */
+  const conEtiqueta = (red: string) => {
+    try {
+      const u = new URL(urlBase)
+      u.searchParams.set("utm_source", red)
+      u.searchParams.set("utm_medium", "social")
+      u.searchParams.set("utm_campaign", destino ? "reto_diario" : "compartir")
+      return u.toString()
+    } catch {
+      return urlBase
+    }
+  }
+
+  const url = conEtiqueta("directo")
   const textoConLink = `${texto}\n\n🎮 ${url}`
   // La mención es lo que convierte un compartido en un seguidor: sin ella el tweet no lleva a
   // ninguna cuenta. Y sin hashtags: amontonados no traen a nadie y hacen ver la cuenta como marca.
   const textoX = `${texto}\n\nvía @${CUENTA_X}`
-  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textoX)}&url=${encodeURIComponent(url)}`
-  const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(texto)}`
-  const waUrl = `https://wa.me/?text=${encodeURIComponent(textoConLink)}`
+  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textoX)}&url=${encodeURIComponent(conEtiqueta("x"))}`
+  const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(conEtiqueta("facebook"))}&quote=${encodeURIComponent(texto)}`
+  const waUrl = `https://wa.me/?text=${encodeURIComponent(`${texto}\n\n🎮 ${conEtiqueta("whatsapp")}`)}`
 
   function descargar(blob: Blob) {
     const url = URL.createObjectURL(blob)
@@ -113,7 +135,7 @@ export default function ShareBar({
     const nav = navigator as Navigator & { canShare?: (d: unknown) => boolean }
     if (nav.share && nav.canShare?.({ files: [file] })) {
       try {
-        await nav.share({ files: [file], text: `${textoX}\n\n${url}`, title: "Gambeta" })
+        await nav.share({ files: [file], text: `${textoX}\n\n${conEtiqueta("historia")}`, title: "Gambeta" })
         setEstado("listo")
         return
       } catch {

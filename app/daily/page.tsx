@@ -53,7 +53,7 @@ export default function DailyPage() {
 
   const desafiar = async () => {
     const c = challengeForDate(localYmd())
-    const url = `https://gambetafutbol.games/draft?mode=clasico&reto=${c.id}`
+    const url = `https://gambetafutbol.games/draft?mode=clasico&reto=${c.id}&utm_source=directo&utm_medium=social&utm_campaign=reto_diario`
     const texto = `Reto de hoy en Gambeta: ${c.title}. ${c.rule}\n\nMismo bombo para los dos. A ver quién arma el mejor 11.\n\n${url}`
     try {
       if (navigator.share) await navigator.share({ text: texto })
