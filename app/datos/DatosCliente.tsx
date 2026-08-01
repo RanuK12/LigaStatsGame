@@ -50,7 +50,7 @@ export default function DatosCliente() {
 
   const compartir = async () => {
     if (!dato) return
-    const texto = `${dato.texto}\n\nMás datos del fútbol argentino en gambetafutbol.games`
+    const texto = `${dato.texto}\n\nMás datos del fútbol argentino en gambetafutbol.games/datos?utm_source=directo&utm_medium=social&utm_campaign=dato`
     trackEvent("compartido", { red: "dato" })
     try {
       if (navigator.share) await navigator.share({ text: texto })
