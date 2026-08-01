@@ -134,7 +134,7 @@ describe('prueba de humo del juego entero', () => {
       }
       // Una carrera entera: quince temporadas, de los 18 a los 33.
       for (let t = 0; t < 15; t++) {
-        const rng = makeRng(`humo-${i}-${t}`)
+        const rng = makeRng(i * 1000 + t)
         const r = simulateSeason(estado, rng)
         expect(r.season, `carrera ${i} temporada ${t} sin resultado`).toBeTruthy()
         expect(r.season.matchesPlayed).toBeGreaterThanOrEqual(0)
