@@ -37,6 +37,7 @@ export default function DailyPage() {
   const [countdown, setCountdown] = useState(0)
   const user = useUserStore((s) => s.user)
   const [progreso, setProgreso] = useState<{ hecho: boolean; streak: number }>({ hecho: false, streak: 0 })
+  const [copiado, setCopiado] = useState(false)
 
   useEffect(() => {
     setToday(localYmd())
@@ -49,6 +50,22 @@ export default function DailyPage() {
     const p = loadDaily()
     setProgreso({ hecho: completadoHoy(p), streak: p.streak })
   }, [])
+
+  const desafiar = async () => {
+    const c = challengeForDate(localYmd())
+    const url = `https://gambetafutbol.games/draft?mode=clasico&reto=${c.id}`
+    const texto = `Reto de hoy en Gambeta: ${c.title}. ${c.rule}\n\nMismo bombo para los dos. A ver quién arma el mejor 11.\n\n${url}`
+    try {
+      if (navigator.share) await navigator.share({ text: texto })
+      else {
+        await navigator.clipboard.writeText(texto)
+        setCopiado(true)
+        setTimeout(() => setCopiado(false), 1800)
+      }
+    } catch {
+      /* el usuario canceló */
+    }
+  }
 
   if (!today) {
     return (
@@ -158,6 +175,18 @@ export default function DailyPage() {
               Ingresá para que el bono sume a tu ELO del ranking
             </p>
           )}
+
+          {/* Desafiar a alguien con el MISMO reto. Todo lo que se compartía llevaba al home, así
+              que el que abría el link jugaba otra cosa y no había con qué compararse. */}
+          <button
+            onClick={desafiar}
+            className="mx-auto mt-5 flex items-center gap-2 rounded-2xl border border-white/10 px-5 py-2.5 font-sport text-[11px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-[#74ACDF]/40 hover:text-white"
+          >
+            {copiado ? "¡Link copiado!" : "Desafiar a un amigo"}
+          </button>
+          <p className="mt-1.5 font-sans text-[11px] text-slate-500">
+            Le llega el mismo bombo que a vos. Después comparan.
+          </p>
         </motion.div>
 
         {/* countdown al próximo reto */}

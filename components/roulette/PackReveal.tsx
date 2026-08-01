@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import type { Squad } from "@/lib/types"
 import { tocar } from "@/lib/sonido"
+import { storyBlob } from "@/lib/story-card"
 import type { SquadTier } from "@/lib/game-engine"
 
 const TIER_STYLE: Record<SquadTier, { border: string; glow: string; label: string | null }> = {
@@ -35,18 +36,55 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
     tocar(isSpecial ? "legendario" : "ficha")
   }, [isSpecial])
 
-  const [copiado, setCopiado] = useState(false)
+  const [estado, setEstado] = useState<"" | "generando" | "copiado">("")
   const compartir = async () => {
     const texto = squad.hito
       ? `Me salió ${squad.label} en Gambeta. ${squad.hito}\n\ngambetafutbol.games`
       : `Me salió ${squad.label} en el draft de Gambeta (${avg} de promedio).\n\ngambetafutbol.games`
+
+    // Con imagen. Un link pelado en X o en WhatsApp no lo abre nadie; una carta con el escudo y
+    // el hito, sí. storyBlob ya se usa en la ficha de torneo y en la de carrera.
+    setEstado("generando")
+    let archivo: File | null = null
     try {
-      if (navigator.share) await navigator.share({ text: texto })
-      else {
-        await navigator.clipboard.writeText(texto)
-        setCopiado(true)
-        setTimeout(() => setCopiado(false), 1800)
+      const blob = await storyBlob({
+        volanta: squad.historico ? "Plantel histórico" : style.label ?? "En el bombo",
+        titulo: squad.label,
+        subtitulo: squad.historico ? `Temporada ${squad.season}` : `${squad.competition} · ${squad.season}`,
+        stats: [
+          { valor: `${avg}`, label: "OVR promedio" },
+          { valor: `${squad.playerIds.length}`, label: "Jugadores" },
+        ],
+        pie: squad.hito ?? "Me salió en la ruleta de Gambeta",
+        acento: isGold ? "#F6C750" : "#74ACDF",
+      })
+      archivo = new File([blob], "gambeta-plantel.jpg", { type: blob.type || "image/jpeg" })
+    } catch {
+      /* si la imagen falla, se comparte el texto igual */
+    }
+    setEstado("")
+
+    try {
+      if (archivo && navigator.canShare?.({ files: [archivo] })) {
+        await navigator.share({ text: texto, files: [archivo] })
+        return
       }
+      if (navigator.share) {
+        await navigator.share({ text: texto })
+        return
+      }
+      // Sin API de compartir (escritorio): el texto al portapapeles y la imagen se descarga.
+      await navigator.clipboard.writeText(texto)
+      if (archivo) {
+        const url = URL.createObjectURL(archivo)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = archivo.name
+        a.click()
+        setTimeout(() => URL.revokeObjectURL(url), 4000)
+      }
+      setEstado("copiado")
+      setTimeout(() => setEstado(""), 1800)
     } catch {
       /* el usuario canceló */
     }
@@ -170,7 +208,7 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
             onClick={compartir}
             className="mt-2 w-full rounded-2xl border border-white/10 py-2.5 font-sport text-[11px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-white/25 hover:text-white"
           >
-            {copiado ? "¡Copiado!" : "Compartir lo que salió"}
+            {estado === "generando" ? "Armando la imagen..." : estado === "copiado" ? "¡Listo, copiado!" : "Compartir con imagen"}
           </button>
         )}
       </motion.div>

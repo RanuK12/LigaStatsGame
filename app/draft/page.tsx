@@ -370,7 +370,10 @@ function DraftInner() {
     trackEvent(EVENTOS.draftCompletado, {
       formacion: f.id,
       puntaje: Math.round(calculateFullTeamScore(nuevos, f)),
+      // Cuántos puestos llenó el botón. Sin esto no se puede saber si el express sirvió o si la
+      // gente completa el once igual: es el número que decide si la mecánica se queda.
       autocompletado: sumados,
+      via: "express",
     })
   }, [drafted, draftedIds, allS, allP, f, pity, clubesUsados])
 
@@ -423,6 +426,9 @@ function DraftInner() {
     setSimResult(r)
     setPhase("sim")
     trackEvent(EVENTOS.torneoSimulado, { tipo: type, puntaje: Math.round(score), campeon: !!r.isChampion })
+    if (retoDelDia) {
+      trackEvent(EVENTOS.retoDiario, { reto: retoDelDia.id, puntaje: Math.round(score), tipo: type })
+    }
     // Récords de por vida + último equipo para /results
     saveLifetimeStats(applyTournament(applyDraftCompleted(loadLifetimeStats(), players, score), r))
     saveLastResult({
@@ -602,6 +608,7 @@ function DraftInner() {
         onReset={resetGame}
         onDownloadPDF={() => generatePDF(simResult, drafted, f)}
         elo={eloTorneo}
+        reto={retoDelDia ? { id: retoDelDia.id, titulo: retoDelDia.title } : undefined}
         />
       </>
     )

@@ -18,22 +18,33 @@ export default function ShareBar({
   imagen,
   className = "",
   titulo = "Compartí tu resultado",
+  destino,
 }: {
   texto: string
   /** Devuelve la imagen para la historia (1080x1920). Sin esto, el botón de IG no aparece. */
   imagen?: () => Promise<Blob>
   className?: string
   titulo?: string
+  /**
+   * A dónde lleva el link. Por defecto, al home.
+   *
+   * Todo lo que se compartía apuntaba a la portada, así que el que abría el link no podía jugar
+   * lo mismo que vos: llegaba a un draft distinto y no había con qué compararse. Pasándole el
+   * reto del día acá, el link lleva al MISMO bombo y "mirá cómo me fue" se convierte en "jugá vos".
+   * Es el mecanismo de Wordle.
+   */
+  destino?: string
 }) {
   const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "error">("")
   const [copiado, setCopiado] = useState(false)
 
-  const textoConLink = `${texto}\n\n🎮 ${SITE_URL}`
+  const url = destino || SITE_URL
+  const textoConLink = `${texto}\n\n🎮 ${url}`
   // La mención es lo que convierte un compartido en un seguidor: sin ella el tweet no lleva a
   // ninguna cuenta. Y sin hashtags: amontonados no traen a nadie y hacen ver la cuenta como marca.
   const textoX = `${texto}\n\nvía @${CUENTA_X}`
-  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textoX)}&url=${encodeURIComponent(SITE_URL)}`
-  const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE_URL)}&quote=${encodeURIComponent(texto)}`
+  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textoX)}&url=${encodeURIComponent(url)}`
+  const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(texto)}`
   const waUrl = `https://wa.me/?text=${encodeURIComponent(textoConLink)}`
 
   function descargar(blob: Blob) {
@@ -102,7 +113,7 @@ export default function ShareBar({
     const nav = navigator as Navigator & { canShare?: (d: unknown) => boolean }
     if (nav.share && nav.canShare?.({ files: [file] })) {
       try {
-        await nav.share({ files: [file], text: `${textoX}\n\n${SITE_URL}`, title: "Gambeta" })
+        await nav.share({ files: [file], text: `${textoX}\n\n${url}`, title: "Gambeta" })
         setEstado("listo")
         return
       } catch {
