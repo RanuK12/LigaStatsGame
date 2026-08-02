@@ -946,7 +946,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     : undefined
                 }
                 texto={(elo && elo.delta !== 0 ? `${textoParaCompartir} (${elo.delta > 0 ? "+" : ""}${elo.delta} ELO)` : textoParaCompartir) + sufijoReto}
-                imagen={() =>
+                imagen={(formato) =>
                   storyBlob({
                     volanta: result.type === "liga" ? "Liga Profesional" : "Copa Argentina",
                     titulo: isChamp ? "¡Campeón!" : result.type === "liga" ? `${result.playerPos}° puesto` : result.eliminated ? `Eliminado en ${result.eliminatedRound}` : "Subcampeón",
@@ -962,7 +962,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     ],
                     pie: cierreFicha,
                     acento: isChamp ? "#F6C750" : "#74ACDF",
-                  })
+                  }, formato)
                 }
                 className="mb-5"
               />

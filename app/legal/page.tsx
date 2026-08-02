@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Legal y propiedad intelectual | Gambeta",
   description:
     "Titularidad, marca y condiciones de uso de Gambeta, el juego de fútbol argentino de Ranuk IT Solutions. En línea desde julio de 2026.",
+  alternates: { canonical: "/legal/" },
 }
 
 /**

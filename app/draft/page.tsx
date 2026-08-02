@@ -521,8 +521,9 @@ function DraftInner() {
 
   /* ── RENDER: START ── */
   if (phase === "start" || !started) {
+    // El padding de abajo es para que la barra fija del teléfono no tape "Volver al inicio".
     return (
-      <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
+      <div className="min-h-screen gradient-bg flex items-center justify-center px-4 pb-28 sm:pb-0">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg w-full text-center">
           <img src="/logos/afa.png" alt="AFA" className="h-20 w-auto object-contain mx-auto block mb-6 opacity-80" />
           <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">Liga Argentina Fans</h1>
@@ -573,16 +574,37 @@ function DraftInner() {
             </ul>
           </div>
 
-          <MagneticButton>
-            <button onClick={startGame} disabled={!playersCore} className="btn-primary px-10 py-4 font-sport">
-              {playersCore ? "Comenzar Draft" : "Cargando jugadores..."}
-            </button>
-          </MagneticButton>
+          {/* En escritorio el botón vive acá abajo, después de todo lo que hay para leer. */}
+          {/* El `hidden` va en el contenedor, no en el botón: `.btn-primary` fija `inline-flex` en
+              globals.css y le gana a la utilidad de Tailwind, así que el botón seguía a la vista. */}
+          <div className="hidden sm:block">
+            <MagneticButton>
+              <button onClick={startGame} disabled={!playersCore} className="btn-primary px-10 py-4 font-sport">
+                {playersCore ? "Comenzar Draft" : "Cargando jugadores..."}
+              </button>
+            </MagneticButton>
+          </div>
           {playersError && (
             <p className="mt-3 text-xs text-red-400">No se pudo cargar la base de jugadores: {playersError}. Recargá la página.</p>
           )}
           <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider">Volver al inicio</Link>
         </motion.div>
+
+        {/* En el teléfono, no.
+            Medido en producción: la pantalla útil son 664 px y este botón arrancaba en el 1715,
+            o sea a dos pantallas y media de scroll. Es la única acción de la página y había que ir
+            a buscarla. Es lo que explica que el móvil sea la mitad del público y un quinto de los
+            eventos clave (0,049 por usuario contra 0,205 en escritorio).
+            Fijo abajo: se lee todo lo de arriba igual, pero se puede empezar en cualquier momento. */}
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#020813]/95 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden">
+          <button
+            onClick={startGame}
+            disabled={!playersCore}
+            className="btn-primary w-full py-4 font-sport text-sm"
+          >
+            {playersCore ? "Comenzar Draft" : "Cargando jugadores..."}
+          </button>
+        </div>
       </div>
     )
   }
