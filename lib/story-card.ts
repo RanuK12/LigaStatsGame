@@ -112,16 +112,33 @@ export function renderStoryCard(data: StoryData, formato: FormatoFicha = "histor
   ctx.font = "800 30px system-ui, sans-serif"
   ctx.fillText(data.volanta.toUpperCase(), W / 2, 520)
 
+  // El título entra entero o se achica, pero no se corta.
+  //
+  // Antes se dibujaban dos líneas a 108 px y el resto se tiraba: "Nicolás Ferrari se pareció a
+  // Juan Román Riquelme" salía como "...SE PARECIÓ A JUAN" y el titular quedaba sin el nombre,
+  // que es justo lo único que la placa tiene para decir. Ahora se prueban tamaños hasta que el
+  // texto completo entre en las líneas disponibles.
   ctx.fillStyle = "#FFFFFF"
-  ctx.font = "900 108px Impact, 'Arial Black', sans-serif"
-  const tituloLineas = wrap(ctx, data.titulo.toUpperCase(), W - 140)
-  tituloLineas.slice(0, 2).forEach((l, i) => ctx.fillText(l, W / 2, 650 + i * 110))
+  const TOPE_LINEAS = 4
+  let tam = 108
+  let tituloLineas: string[] = []
+  for (const prueba of [108, 96, 84, 74, 66]) {
+    ctx.font = `900 ${prueba}px Impact, 'Arial Black', sans-serif`
+    tituloLineas = wrap(ctx, data.titulo.toUpperCase(), W - 140)
+    tam = prueba
+    if (tituloLineas.length <= TOPE_LINEAS) break
+  }
+  // Aunque no haya entrado en el más chico, se dibuja lo que hay: mejor apretado que mutilado.
+  ctx.font = `900 ${tam}px Impact, 'Arial Black', sans-serif`
+  const alto = Math.round(tam * 1.02)
+  tituloLineas.forEach((l, i) => ctx.fillText(l, W / 2, 650 + i * alto))
 
   if (data.subtitulo) {
     ctx.fillStyle = "#B9C6DA"
     ctx.font = "600 38px system-ui, sans-serif"
-    const subLineas = wrap(ctx, data.subtitulo, W - 180)
-    subLineas.slice(0, 2).forEach((l, i) => ctx.fillText(l, W / 2, 650 + tituloLineas.length * 110 + 20 + i * 50))
+    wrap(ctx, data.subtitulo, W - 180)
+      .slice(0, 2)
+      .forEach((l, i) => ctx.fillText(l, W / 2, 650 + tituloLineas.length * alto + 20 + i * 50))
   }
 
   // Métricas
@@ -230,12 +247,22 @@ function renderFichaAncha(data: StoryData): HTMLCanvasElement {
   ctx.font = "800 22px system-ui, sans-serif"
   ctx.fillText(data.volanta.toUpperCase(), X, 208)
 
+  // Mismo criterio que en la vertical: entra entero o se achica, pero no se corta. Cortar el
+  // titular en "…SE PARECIÓ A JUAN" deja la placa sin lo único que tenía para decir.
   ctx.fillStyle = "#FFFFFF"
-  ctx.font = "900 62px Impact, 'Arial Black', sans-serif"
-  const titulo = wrap(ctx, data.titulo.toUpperCase(), 620).slice(0, 3)
-  titulo.forEach((l, i) => ctx.fillText(l, X, 282 + i * 66))
+  let tam = 62
+  let titulo: string[] = []
+  for (const prueba of [62, 54, 47, 42]) {
+    ctx.font = `900 ${prueba}px Impact, 'Arial Black', sans-serif`
+    titulo = wrap(ctx, data.titulo.toUpperCase(), 620)
+    tam = prueba
+    if (titulo.length <= 3) break
+  }
+  ctx.font = `900 ${tam}px Impact, 'Arial Black', sans-serif`
+  const alto = Math.round(tam * 1.06)
+  titulo.forEach((l, i) => ctx.fillText(l, X, 282 + i * alto))
 
-  let y = 282 + titulo.length * 66 + 10
+  let y = 282 + titulo.length * alto + 10
   if (data.subtitulo) {
     ctx.fillStyle = "#B9C6DA"
     ctx.font = "600 25px system-ui, sans-serif"
