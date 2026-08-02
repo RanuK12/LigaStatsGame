@@ -8,7 +8,7 @@
     "build:data": "node scripts/data/build-public-data.mjs",
     "build:curiosidades": "node scripts/data/build-curiosidades.mjs",
     "fetch:scores": "node scripts/data/fetch-live-scores.mjs || true",
-    "prebuild": "npm run build:data && npm run build:curiosidades && npm run fetch:scores",
+    "prebuild": "npm run build:data && npm run build:curiosidades && npm run build:equipos && npm run fetch:scores",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -19,7 +19,8 @@
     "audit:data": "node scripts/data/validate-dataset.mjs",
     "normalize:data": "node scripts/data/normalize-dataset.mjs",
     "curate:data": "node scripts/data/backfill-player-clubs.mjs",
-    "balance:squads": "node scripts/data/balance-squads.mjs"
+    "balance:squads": "node scripts/data/balance-squads.mjs",
+    "build:equipos": "node scripts/data/build-equipos.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",

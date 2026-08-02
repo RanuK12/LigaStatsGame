@@ -38,3 +38,7 @@ data/*.json.bak
 # Fichas de promoción: las verticales pesan 1,7 MB cada una y se regeneran con
 # `node scripts/fichas-promo.mjs`. Las apaisadas sí se guardan: son las que van a X.
 data/reports/fichas-promo/*-historia.png
+
+# Placas de equipos: 36 PNG de 400 kB que se regeneran con `node scripts/placas-equipos.mjs`.
+# El README con los textos de los tweets sí se versiona.
+data/reports/placas-equipos/*.png

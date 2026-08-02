@@ -96,11 +96,31 @@ Ordenado por tamaño de palanca, no por facilidad.
 Es el único canal con volumen real y el único que compone. Cada arreglo acá se multiplica por
 las 970 sesiones semanales que ya llegan solas.
 
-1. Verificar Search Console (archivo HTML en la raíz) y enviar el sitemap.
-2. `app/sitemap.ts` de verdad, con las 11 rutas y sus prioridades.
-3. `metadataBase` + canonical por ruta.
-4. `og:image` de 1200×630 y `twitter:card: summary_large_image`.
-5. JSON-LD: `WebSite` con `SearchAction` y `VideoGame` para el juego.
+1. ~~Verificar Search Console y enviar el sitemap.~~ **hecho el 02-08**
+2. ~~`app/sitemap.ts` de verdad.~~ **hecho**
+3. ~~`metadataBase` + canonical por ruta.~~ **hecho**
+4. ~~`og:image` de 1200×630 y `twitter:card: summary_large_image`.~~ **hecho**
+5. ~~JSON-LD: `WebSite`, `Organization` y `VideoGame`.~~ **hecho**
+
+### A bis · Páginas que respondan a lo que la gente busca — **hecho el 02-08**
+
+Lo anterior arregla *cómo* se ve el sitio en Google. Esto arregla el problema de fondo: **el
+sitio tenía once páginas y todas hablaban del juego**. Nadie busca "juego de fútbol argentino";
+se busca *"Vélez 1994 plantel"*, *"Boca 2001 campeón de América"*, *"River del 96"*.
+
+Los 36 equipos históricos que ya estaban en la base son 36 páginas de contenido real:
+
+- `/equipos/` — el índice, agrupado por década.
+- `/equipos/velez-1994/` y 35 más — el plantel completo jugador por jugador, con el hito, el
+  estadio, la figura, los otros equipos del mismo club y un botón a jugar arriba de todo.
+
+**El sitio pasa de 11 a 48 URLs.** Son componentes de servidor: el HTML del build ya trae los
+nombres, así que Google no depende de ejecutar JavaScript. Cada una lleva `SportsTeam` en
+JSON-LD con el plantel, canonical propio y botones para pasarla por WhatsApp o X — que es
+contenido que un hincha comparte sin haber jugado nunca, a diferencia del resultado de una
+partida.
+
+Se regeneran con `npm run build:equipos`, que ya corre dentro de `prebuild`.
 
 ### B · Que compartir se vea
 
