@@ -149,8 +149,36 @@ Verón. Eso es una nota en sí misma, y es contenido que a un periodista de fút
 | 2 | Formato 1200×675 para X y WhatsApp | **hecho** — `lib/story-card.ts` |
 | 3 | Lote de fichas listas para postear | **hecho** — `scripts/fichas-promo.mjs` |
 | 4 | El cron de citas en X | **hecho** — `rk-x-gambeta-citas.py`, 3×/día |
-| 5 | Fichas por hito (placa distinta según cómo terminó) | pendiente |
-| 6 | La nota de prensa sobre los equipos históricos | pendiente |
+| 5 | Un equipo histórico por día en X | **hecho** — sexto tipo de `rk-x-gambeta-daily.py` |
+| 6 | Fichas por hito (placa distinta según cómo terminó) | pendiente |
+| 7 | La nota de prensa sobre los equipos históricos | pendiente |
+
+### El posteo diario de equipos
+
+Es el único de los seis tipos que **no pasa por un modelo**: el plantel, el hito y el año salen
+del dataset. Los otros cinco tienen la regla de no inventar datos justamente porque ya se mandó
+una "final del 98 donde Riquelme…" que nunca existió; acá no hay nada que inventar.
+
+```
+Boca Juniors 2001.
+Bicampeón de la Copa Libertadores.
+Juan Román Riquelme, Carlos Tevez, Martín Palermo y 24 más.
+gambetafutbol.games/equipos/boca-juniors-2001/?utm_source=x…
+```
+
+Y no lleva al home: lleva a la página del equipo, que tiene el plantel completo. El home recibe
+299 usuarios que le dedican 30 segundos — no es el lugar a donde mandar a alguien que no te
+conoce. Rota entre los 36 sin repetir en 24 días.
+
+Las placas se generan con `node scripts/placas-equipos.mjs`.
+
+### Sobre el cron de citas
+
+La primera corrida real trajo tres tweets de **La Gambeta, un programa de radio mexicano**,
+hablando del draft del fútbol mexicano, de 2017. "Gambeta" es palabra común del fútbol y "draft"
+también: juntas no prueban nada. Ahora exige el dominio o la cuenta en el texto, y descarta lo de
+más de 45 días. Encuentra menos, y está bien: un cron que manda basura a Telegram se deja de
+leer, y eso es peor que no tenerlo.
 
 ### Cómo salen las fichas para postear
 
