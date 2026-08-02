@@ -92,12 +92,23 @@ export default function DailyCard() {
                 {streak === 1 ? "día seguido" : "días seguidos"}
               </div>
             </div>
-            <Link
-              href="/daily"
-              className="btn-primary whitespace-nowrap px-6 py-3 text-[11px] font-black uppercase tracking-widest font-sport rounded-2xl"
-            >
-              {hecho ? "Ver el reto" : streak > 0 ? "Seguir la racha" : "Jugar"}
-            </Link>
+            {/* Directo al bombo del reto, no a /daily. La página del medio solo lo describía y
+                tenía otro botón: de 24 personas que llegaban a /daily, una sola terminaba jugando
+                el reto. El detalle sigue estando, pero abajo y para el que lo busque. */}
+            <div className="flex flex-col items-center gap-1 sm:items-end">
+              <Link
+                href={`/draft?mode=clasico&reto=${reto.id}`}
+                className="btn-primary whitespace-nowrap px-6 py-3 text-[11px] font-black uppercase tracking-widest font-sport rounded-2xl"
+              >
+                {hecho ? "Jugarlo de nuevo" : streak > 0 ? "Seguir la racha" : "Jugar el reto"}
+              </Link>
+              <Link
+                href="/daily"
+                className="font-sport text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors hover:text-[#74ACDF]"
+              >
+                Cómo suma al ranking
+              </Link>
+            </div>
           </div>
         </div>
       </div>

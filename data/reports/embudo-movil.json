@@ -1,0 +1,178 @@
+[
+  {
+    "perfil": "teléfono",
+    "paso": "home",
+    "ms": 2964,
+    "alto": 886,
+    "primerCta": "DRAFT CLÁSICO 11",
+    "ctaY": 551,
+    "problema": null
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "home · toques chicos",
+    "ms": 0,
+    "cuantos": 1,
+    "ejemplos": [
+      {
+        "texto": "GAMBETA",
+        "w": 160,
+        "h": 40
+      }
+    ],
+    "problema": "1 toques de menos de 44 px"
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "draft",
+    "ms": 960,
+    "problema": "no encontré el botón de girar"
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "draft · toques chicos",
+    "ms": 0,
+    "cuantos": 5,
+    "ejemplos": [
+      {
+        "texto": "GAMBETA",
+        "w": 160,
+        "h": 40
+      },
+      {
+        "texto": "4-3-3",
+        "w": 79,
+        "h": 38
+      },
+      {
+        "texto": "4-4-2",
+        "w": 81,
+        "h": 38
+      },
+      {
+        "texto": "4-2-3-1",
+        "w": 96,
+        "h": 38
+      },
+      {
+        "texto": "3-5-2",
+        "w": 80,
+        "h": 38
+      }
+    ],
+    "problema": "5 toques de menos de 44 px"
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "draft · atajo",
+    "ms": 0,
+    "express": null,
+    "expressY": null,
+    "problema": "no está el botón de completar equipo"
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "peso",
+    "ms": 0,
+    "kb": 97,
+    "problema": null
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "home",
+    "ms": 2160,
+    "alto": 900,
+    "primerCta": "DRAFT",
+    "ctaY": 20,
+    "problema": null
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "home · toques chicos",
+    "ms": 0,
+    "cuantos": 9,
+    "ejemplos": [
+      {
+        "texto": "DRAFT",
+        "w": 59,
+        "h": 33
+      },
+      {
+        "texto": "CARRERA",
+        "w": 76,
+        "h": 33
+      },
+      {
+        "texto": "RETO",
+        "w": 51,
+        "h": 33
+      },
+      {
+        "texto": "RANKING",
+        "w": 73,
+        "h": 33
+      },
+      {
+        "texto": "¿SABÍAS QUE?",
+        "w": 107,
+        "h": 33
+      }
+    ],
+    "problema": "9 toques de menos de 44 px"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "draft",
+    "ms": 784,
+    "problema": "no encontré el botón de girar"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "draft · toques chicos",
+    "ms": 0,
+    "cuantos": 13,
+    "ejemplos": [
+      {
+        "texto": "DRAFT",
+        "w": 59,
+        "h": 33
+      },
+      {
+        "texto": "CARRERA",
+        "w": 76,
+        "h": 33
+      },
+      {
+        "texto": "RETO",
+        "w": 51,
+        "h": 33
+      },
+      {
+        "texto": "RANKING",
+        "w": 73,
+        "h": 33
+      },
+      {
+        "texto": "¿SABÍAS QUE?",
+        "w": 107,
+        "h": 33
+      }
+    ],
+    "problema": "13 toques de menos de 44 px"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "draft · atajo",
+    "ms": 0,
+    "express": null,
+    "expressY": null,
+    "problema": "no está el botón de completar equipo"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "peso",
+    "ms": 0,
+    "kb": 116,
+    "problema": null
+  }
+]
