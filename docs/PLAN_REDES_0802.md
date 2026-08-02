@@ -143,11 +143,35 @@ Verón. Eso es una nota en sí misma, y es contenido que a un periodista de fút
 
 ## 4. Orden de ejecución
 
-1. La comparación con una leyenda en la ficha de carrera. *(lo que más rinde por línea de código)*
-2. Formato 1200×675 para X y WhatsApp.
-3. Fichas por hito.
-4. El cron de citas en X.
-5. La nota de prensa sobre los equipos históricos.
+| # | Qué | Estado |
+|---|---|---|
+| 1 | La comparación con una leyenda en la ficha de carrera | **hecho** — `lib/career-legend.ts` |
+| 2 | Formato 1200×675 para X y WhatsApp | **hecho** — `lib/story-card.ts` |
+| 3 | Lote de fichas listas para postear | **hecho** — `scripts/fichas-promo.mjs` |
+| 4 | El cron de citas en X | **hecho** — `rk-x-gambeta-citas.py`, 3×/día |
+| 5 | Fichas por hito (placa distinta según cómo terminó) | pendiente |
+| 6 | La nota de prensa sobre los equipos históricos | pendiente |
+
+### Cómo salen las fichas para postear
+
+```
+node scripts/fichas-promo.mjs                # 6 carreras nuevas
+node scripts/fichas-promo.mjs --semilla 77   # otro lote
+```
+
+Simula seis carreras completas **con el motor del juego** —el mismo lazo que
+`lib/career-store.ts`, temporada por temporada— y las renderiza con el mismo canvas que usa la
+ficha que se baja un jugador. Los números de la placa son números que el juego produce, no una
+maqueta.
+
+Deja en `data/reports/fichas-promo/`: la placa `-ancha` (para X), la `-historia` (para estados de
+WhatsApp e Instagram) y un `README.md` con la tabla de las seis carreras, el recorrido de cada
+una y **el texto del tweet ya escrito**, con el link etiquetado para Analytics.
+
+Lo único que se filtra son los retiros de bajón: el motor tiene finales que van del festejo al
+quilombo judicial, y adentro del juego están bien, pero como pie de una placa que sale a buscar
+jugadores no sirven. Se prueban varias semillas y se queda la primera carrera con un final que
+dé ganas.
 
 ## 5. Cómo sabemos si funcionó
 

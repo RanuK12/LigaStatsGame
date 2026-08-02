@@ -129,6 +129,43 @@ const LEYENDAS: Leyenda[] = [
     perfil: { titulos: 0.45, europa: 0.5, gol: 0.5, rodaje: 0.8, techo: 0.8 },
   },
   {
+    nombre: 'Carlos Tevez',
+    bajada: 'El Apache. Dio la vuelta al mundo ganando y volvió a Boca igual.',
+    categoria: 'ATT',
+    perfil: { titulos: 0.9, europa: 0.6, gol: 0.8, rodaje: 1, techo: 0.9 },
+  },
+  {
+    nombre: 'Walter Samuel',
+    bajada: 'El Muro. Quince años de central en Italia sin que nadie le pasara por al lado.',
+    categoria: 'DEF',
+    perfil: { titulos: 0.7, europa: 0.75, gol: 0.15, rodaje: 0.5, techo: 0.85 },
+  },
+  {
+    nombre: 'Oscar Ruggeri',
+    bajada: 'El Cabezón: campeón del mundo y de todo lo que se le puso adelante.',
+    categoria: 'DEF',
+    perfil: { titulos: 0.9, europa: 0.4, gol: 0.25, rodaje: 0.9, techo: 0.9 },
+    requiere: { mundial: true },
+  },
+  {
+    nombre: 'Roberto Perfumo',
+    bajada: 'El Mariscal. Se hizo grande de este lado del charco y no le hizo falta más.',
+    categoria: 'DEF',
+    perfil: { titulos: 0.55, europa: 0, gol: 0.15, rodaje: 0.45, techo: 0.8 },
+  },
+  {
+    nombre: 'Fernando Redondo',
+    bajada: 'Elegancia pura en el medio, y en Europa lo entendieron antes que acá.',
+    categoria: 'MID',
+    perfil: { titulos: 0.6, europa: 0.85, gol: 0.15, rodaje: 0.5, techo: 0.9 },
+  },
+  {
+    nombre: 'Diego Simeone',
+    bajada: 'El Cholo jugador: cabeza, pierna fuerte y una valija siempre lista.',
+    categoria: 'MID',
+    perfil: { titulos: 0.5, europa: 0.7, gol: 0.35, rodaje: 1, techo: 0.75 },
+  },
+  {
     nombre: 'Marcelo Gallardo',
     bajada: 'El Muñeco jugador: pausa, gol y títulos de los dos lados del charco.',
     categoria: 'MID',
@@ -146,6 +183,14 @@ const LEYENDAS: Leyenda[] = [
     categoria: 'ATT',
     perfil: { titulos: 0.35, europa: 0.7, gol: 0.95, rodaje: 0.55, techo: 0.75 },
   },
+  // Los que no llegaron. Uno por puesto, porque la comparación se hace solo dentro del puesto y
+  // sin esto un delantero del montón terminaba comparado con Batistuta por descarte.
+  {
+    nombre: 'un nueve de barrio',
+    bajada: 'De los que hacían el gol del domingo y el lunes seguían laburando.',
+    categoria: 'ATT',
+    perfil: { titulos: 0.1, europa: 0.05, gol: 0.45, rodaje: 0.5, techo: 0.35 },
+  },
   {
     nombre: 'un histórico del Ascenso',
     bajada: 'De los que se ganaron el respeto sin salir en la tapa de los diarios.',
@@ -156,7 +201,13 @@ const LEYENDAS: Leyenda[] = [
     nombre: 'un ídolo de barrio',
     bajada: 'Nunca se fue del club que lo vio nacer, y ahí lo siguen cantando.',
     categoria: 'DEF',
-    perfil: { titulos: 0.2, europa: 0, gol: 0.15, rodaje: 0.1, techo: 0.5 },
+    perfil: { titulos: 0.2, europa: 0, gol: 0.15, rodaje: 0.1, techo: 0.45 },
+  },
+  {
+    nombre: 'un arquero de toda la vida',
+    bajada: 'Atajó veinte años en el mismo arco y lo sacaron en andas.',
+    categoria: 'GK',
+    perfil: { titulos: 0.2, europa: 0, gol: 0, rodaje: 0.25, techo: 0.45 },
   },
 ]
 
@@ -169,9 +220,11 @@ function perfilDeCarrera(career: CareerState): Leyenda['perfil'] {
   const temporadas = Math.max(1, career.seasonsPlayed)
   const clubes = new Set(career.clubHistory).size
 
-  // Temporadas en Europa, sobre el total. Un club sin ficha se cuenta como argentino: es lo que
-  // era antes de que existieran los clubes europeos en la base.
-  const enEuropa = career.clubHistory.filter((id) => findClub(id)?.region === 'euro').length
+  // Temporadas jugadas en Europa, sobre el total. Se cuenta sobre el historial de temporadas y no
+  // sobre la lista de clubes: contar clubes y dividir por temporadas mezclaba dos unidades, y un
+  // central con quince años de carrera que pasó por Chelsea, Liverpool y el City daba 3/15 = 0,2
+  // de Europa. Con eso salía comparado con Roberto Perfumo, cuya ficha dice que nunca se fue.
+  const enEuropa = career.history.filter((s) => findClub(s.clubId)?.region === 'euro').length
   const pico = Math.max(career.player.ovr, ...career.history.map((s) => s.nextOvr ?? s.ovr))
 
   // Los goles se miden contra el puesto: 40 goles de un central no son 40 goles de un nueve.
@@ -219,32 +272,37 @@ export function leyendaParecida(career: CareerState): Comparacion {
   const ganoMundial = career.milestones.worldCup === true
   const tieneBalon = (career.milestones.balonDeOro ?? 0) > 0
 
+  // El puesto no se negocia. Un central no se parece a Ariel Ortega por más que los números den
+  // parecido, y un arquero no se parece a Batistuta por muchos goles que le hayan hecho. Al
+  // principio el puesto era solo un empujón en el puntaje y en seis carreras simuladas de verdad
+  // salió Ortega cuatro veces, una de ellas para un zaguero.
   const candidatas = LEYENDAS.filter((l) => {
+    if (l.categoria !== cat) return false
     if (l.requiere?.mundial && !ganoMundial) return false
     if (l.requiere?.balonDeOro && !tieneBalon) return false
-    // El puesto no se negocia: un arquero no se parece a Batistuta por más goles que le hayan
-    // hecho. Los arqueros solo se comparan con arqueros y viceversa.
-    if (cat === 'GK') return l.categoria === 'GK'
-    return l.categoria !== 'GK'
+    return true
   })
 
   let mejor = candidatas[0]
   let mejorDist = Infinity
   for (const l of candidatas) {
-    // Distancia ponderada: cuanto más chica, más se parece.
+    // Distancia al cuadrado, no lineal: castiga estar MUY lejos en un eje. Con distancia lineal
+    // ganaba siempre el perfil más promedio, porque nunca quedaba lejos de nada; con esta gana
+    // el que tiene la misma forma de carrera, que es lo que se quería comparar.
     let d = 0
-    for (const eje of EJES) d += PESO[eje] * Math.abs(mio[eje] - l.perfil[eje])
-    // Mismo puesto exacto, un empujón: entre dos parecidos gana el del puesto del jugador.
-    if (l.categoria === cat) d -= 0.25
+    for (const eje of EJES) {
+      const dif = mio[eje] - l.perfil[eje]
+      d += PESO[eje] * dif * dif
+    }
     if (d < mejorDist) {
       mejorDist = d
       mejor = l
     }
   }
 
-  // La distancia máxima posible es la suma de los pesos; el parecido es lo que queda de eso.
+  // La distancia máxima posible es la suma de los pesos (cada eje va de 0 a 1, y 1² = 1).
   const maxDist = Object.values(PESO).reduce((a, b) => a + b, 0)
-  const parecido = Math.round(Math.max(0, 1 - Math.max(0, mejorDist) / maxDist) * 100)
+  const parecido = Math.round(Math.max(0, 1 - mejorDist / maxDist) * 100)
 
   return { leyenda: mejor, parecido }
 }

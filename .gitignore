@@ -34,3 +34,7 @@ data/derived/
 data/raw/fifa-legacy.csv
 data/fifa-index.json
 data/*.json.bak
+
+# Fichas de promoción: las verticales pesan 1,7 MB cada una y se regeneran con
+# `node scripts/fichas-promo.mjs`. Las apaisadas sí se guardan: son las que van a X.
+data/reports/fichas-promo/*-historia.png

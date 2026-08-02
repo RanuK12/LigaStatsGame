@@ -34,18 +34,32 @@ describe('a qué leyenda te pareciste', () => {
     expect(r.parecido).toBeLessThanOrEqual(100)
   })
 
-  it('a un arquero solo lo compara con arqueros', () => {
-    const c = carrera({
-      player: { ...carrera().player, position: 'GK' },
-      totals: { matchesPlayed: 400, goals: 0, assists: 0 },
-    })
-    expect(['Ubaldo Fillol', 'Sergio Goycochea']).toContain(leyendaParecida(c).leyenda.nombre)
+  // El puesto es filtro duro, no un empujón: con el empujón, seis carreras simuladas de verdad
+  // daban Ariel Ortega cuatro veces, una de ellas para un zaguero central.
+  it('la leyenda es siempre del puesto del jugador', () => {
+    const casos: [string, string][] = [
+      ['GK', 'GK'],
+      ['CB', 'DEF'],
+      ['LB', 'DEF'],
+      ['CM', 'MID'],
+      ['CAM', 'MID'],
+      ['ST', 'ATT'],
+      ['LW', 'ATT'],
+    ]
+    for (const [pos, cat] of casos) {
+      const r = leyendaParecida(carrera({ player: { ...carrera().player, position: pos } }))
+      expect(r.leyenda.categoria, `${pos} salió comparado con ${r.leyenda.nombre}`).toBe(cat)
+    }
   })
 
-  it('a un jugador de campo nunca lo compara con un arquero', () => {
-    for (const pos of ['ST', 'CM', 'CB', 'LW']) {
-      const r = leyendaParecida(carrera({ player: { ...carrera().player, position: pos } }))
-      expect(r.leyenda.categoria).not.toBe('GK')
+  it('cada puesto tiene a quién parecerse aunque la carrera sea floja', () => {
+    for (const pos of ['GK', 'CB', 'CM', 'ST']) {
+      const c = carrera({
+        player: { ...carrera().player, position: pos, ovr: 62 },
+        seasonsPlayed: 4,
+        totals: { matchesPlayed: 60, goals: 2, assists: 1 },
+      })
+      expect(leyendaParecida(c).leyenda.nombre).toBeTruthy()
     }
   })
 
@@ -110,5 +124,39 @@ describe('a qué leyenda te pareciste', () => {
     ]
     const nombres = new Set(casos.map((c) => leyendaParecida(c).leyenda.nombre))
     expect(nombres.size).toBeGreaterThanOrEqual(3)
+  })
+})
+
+describe('el perfil de Europa se mide en temporadas, no en clubes', () => {
+  // Contar clubes europeos y dividir por temporadas mezcla dos unidades: un central con quince
+  // años que pasó por Chelsea, Liverpool y el City daba 3/15 = 0,2 y salía comparado con
+  // Roberto Perfumo, cuya ficha dice que nunca se fue del país.
+  it('una carrera con media vida en Europa no cae en un ídolo local', () => {
+    const c = carrera({
+      player: { ...carrera().player, position: 'CB', ovr: 90 },
+      seasonsPlayed: 12,
+      clubHistory: ['lanus', 'chelsea', 'liverpool'],
+      trophies: { lpf: 2, champions: 1 },
+      totals: { matchesPlayed: 420, goals: 18, assists: 20 },
+      // Ocho de las doce temporadas en Europa.
+      history: [
+        ...Array.from({ length: 4 }, () => ({ clubId: 'lanus', ovr: 80 })),
+        ...Array.from({ length: 4 }, () => ({ clubId: 'chelsea', ovr: 88 })),
+        ...Array.from({ length: 4 }, () => ({ clubId: 'liverpool', ovr: 90 })),
+      ] as CareerState['history'],
+    })
+    const r = leyendaParecida(c)
+    expect(r.leyenda.perfil.europa).toBeGreaterThan(0.5)
+  })
+
+  it('una carrera entera en el país no cae en uno de Europa', () => {
+    const c = carrera({
+      player: { ...carrera().player, position: 'CB', ovr: 84 },
+      seasonsPlayed: 12,
+      clubHistory: ['lanus', 'river-plate'],
+      trophies: { lpf: 3 },
+      history: Array.from({ length: 12 }, () => ({ clubId: 'river-plate', ovr: 82 })) as CareerState['history'],
+    })
+    expect(leyendaParecida(c).leyenda.perfil.europa).toBeLessThan(0.4)
   })
 })
