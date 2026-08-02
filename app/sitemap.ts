@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import equipos from '@/data/derived/equipos.json'
 
 /**
  * El sitemap que robots.txt viene prometiendo desde el primer día.
@@ -19,6 +20,9 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   ['/', 1.0, 'daily'],
   ['/draft/', 0.9, 'weekly'],
   ['/carrera/', 0.9, 'weekly'],
+  // El índice de equipos históricos: es la puerta a las 36 páginas de contenido, y lo único de
+  // todo el sitio que responde a lo que la gente busca de verdad ("Vélez 1994 plantel").
+  ['/equipos/', 0.9, 'monthly'],
   ['/daily/', 0.8, 'daily'],
   ['/como-jugar/', 0.7, 'monthly'],
   ['/datos/', 0.7, 'weekly'],
@@ -34,10 +38,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // "cambió todo" cada vez que se despliega, aunque no haya cambiado nada.
   const hoy = new Date().toISOString().slice(0, 10)
 
-  return RUTAS.map(([ruta, priority, changeFrequency]) => ({
+  const fijas = RUTAS.map(([ruta, priority, changeFrequency]) => ({
     url: `${BASE}${ruta}`,
     lastModified: hoy,
     changeFrequency,
     priority,
   }))
+
+  // Una entrada por equipo histórico. Son páginas de archivo: el plantel del Vélez del 94 no
+  // cambia, así que 'yearly' le dice a Google que no vuelva a mirarlas todas las semanas.
+  const deEquipos = equipos.map((e) => ({
+    url: `${BASE}/equipos/${e.slug}/`,
+    lastModified: hoy,
+    changeFrequency: 'yearly' as const,
+    priority: 0.7,
+  }))
+
+  return [...fijas, ...deEquipos]
 }
