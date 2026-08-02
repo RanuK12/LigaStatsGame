@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import type { FormatoFicha } from "@/lib/story-card"
 
 const SITE_URL = "https://gambetafutbol.games/"
 const CUENTA_X = "GambetafutbolAR"
@@ -10,8 +11,11 @@ const CUENTA_X = "GambetafutbolAR"
  * Barra para compartir el resultado (draft o carrera) con un texto ya armado.
  *
  * X y Facebook abren su intent web. Instagram no tiene URL de publicación, así que el botón
- * genera la imagen 1080x1920 y usa el share nativo del celular (donde aparece "Historia de
- * Instagram"); en escritorio la descarga para subirla a mano.
+ * genera la imagen y usa el share nativo del celular (donde aparece "Historia de Instagram"); en
+ * escritorio la descarga para subirla a mano.
+ *
+ * Cada botón pide la medida que le sirve: X la apaisada, porque recorta las verticales a una
+ * tira y de la ficha se veía solo el encabezado; Instagram y WhatsApp la vertical de historias.
  */
 export default function ShareBar({
   texto,
@@ -21,8 +25,8 @@ export default function ShareBar({
   destino,
 }: {
   texto: string
-  /** Devuelve la imagen para la historia (1080x1920). Sin esto, el botón de IG no aparece. */
-  imagen?: () => Promise<Blob>
+  /** Devuelve la ficha en el formato pedido. Sin esto, el botón de IG no aparece. */
+  imagen?: (formato: FormatoFicha) => Promise<Blob>
   className?: string
   titulo?: string
   /**
@@ -86,7 +90,7 @@ export default function ShareBar({
     trackEvent(EVENTOS.compartido, { red: "instagram" })
     let blob: Blob
     try {
-      blob = await imagen()
+      blob = await imagen("historia")
     } catch {
       setEstado("error")
       return
@@ -124,7 +128,7 @@ export default function ShareBar({
     setEstado("generando")
     let blob: Blob
     try {
-      blob = await imagen()
+      blob = await imagen("ancha")
     } catch {
       setEstado("error")
       window.open(xUrl, "_blank", "noopener,noreferrer")

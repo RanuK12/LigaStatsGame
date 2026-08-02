@@ -57,7 +57,8 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
         ],
         pie: squad.hito ?? "Me salió en la ruleta de Gambeta",
         acento: isGold ? "#F6C750" : "#74ACDF",
-      })
+        // Apaisada: esto va al chat de WhatsApp y a X, que recortan las verticales a una tira.
+      }, "ancha")
       archivo = new File([blob], "gambeta-plantel.jpg", { type: blob.type || "image/jpeg" })
     } catch {
       /* si la imagen falla, se comparte el texto igual */

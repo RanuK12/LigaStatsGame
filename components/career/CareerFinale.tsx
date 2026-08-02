@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { TROPHY_META, retirementStory, positionCategory, type CareerState } from "@/lib/career-engine"
+import { leyendaParecida } from "@/lib/career-legend"
 import ShareBar from "@/components/ShareBar"
 import DonationSection from "@/components/DonationSection"
 import { storyBlob } from "@/lib/story-card"
@@ -64,9 +65,12 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
     : []
   const clubCount = career ? new Set(career.history.map((s) => s.clubId)).size : 0
   const esArquero = positionCategory(career?.player.position || "CM") === "GK"
+  // A quién te pareciste. Es el titular de la ficha: lo que alguien lee cuando la captura le
+  // pasa por la línea de tiempo, y lo que hace que valga la pena publicarla.
+  const parecido = career ? leyendaParecida(career) : null
   // Mensaje ya armado con lo mejor de la carrera
   const textoCarrera = career
-    ? `Terminé mi carrera en Gambeta: ${career.seasonsPlayed} temporadas, OVR pico ${peak}, ${titlesTotal} ${titlesTotal === 1 ? "título" : "títulos"}${career.milestones.worldCup ? " y CAMPEÓN DEL MUNDO 🌍" : ""}${career.milestones.balonDeOro ? ` · ${career.milestones.balonDeOro} Balón de Oro` : ""}. Creá tu crack y contame hasta dónde llegás`
+    ? `Terminé mi carrera en Gambeta y me parecí a ${parecido!.leyenda.nombre}: ${career.seasonsPlayed} temporadas, OVR pico ${peak}, ${titlesTotal} ${titlesTotal === 1 ? "título" : "títulos"}${career.milestones.worldCup ? " y CAMPEÓN DEL MUNDO 🌍" : ""}${career.milestones.balonDeOro ? ` · ${career.milestones.balonDeOro} Balón de Oro` : ""}. Creá tu crack y contame a quién te parecés vos`
     : ""
 
   const milestones: { icon: string; label: string }[] = []
@@ -171,6 +175,29 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
               </motion.div>
             )}
 
+            {/* A quién te pareciste. Va antes de la crónica porque es el titular, no el detalle. */}
+            {phase >= 2 && parecido && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.12, type: "spring", stiffness: 150, damping: 15 }}
+                className="mx-auto mt-5 max-w-sm rounded-2xl border border-[#F6C750]/35 bg-gradient-to-b from-[#F6C750]/[0.10] to-transparent px-4 py-4"
+              >
+                <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#F6C750]">
+                  Te pareciste a
+                </p>
+                <p className="mt-1 font-display text-2xl font-black leading-tight text-white">
+                  {parecido.leyenda.nombre}
+                </p>
+                <p className="mt-1.5 font-sans text-[12px] leading-relaxed text-slate-300">
+                  {parecido.leyenda.bajada}
+                </p>
+                <p className="mt-2 font-sport text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                  {parecido.parecido}% de parecido
+                </p>
+              </motion.div>
+            )}
+
             {/* Mini-historia de retiro (distinta según la carrera) */}
             {phase >= 2 && (
               <motion.p
@@ -186,11 +213,13 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
               <ShareBar
                 titulo="Contá tu carrera"
                 texto={textoCarrera}
-                imagen={() =>
+                imagen={(formato) =>
                   storyBlob({
                     volanta: "Modo Carrera",
-                    titulo: `${career.player.name} colgó los botines`,
-                    subtitulo: `${career.seasonsPlayed} temporadas · OVR pico ${peak}`,
+                    // El titular de la imagen es la comparación, no el retiro: "colgó los botines"
+                    // no le dice nada a quien no jugó, y "se pareció a Riquelme" sí.
+                    titulo: `${career.player.name} se pareció a ${parecido!.leyenda.nombre}`,
+                    subtitulo: `${career.seasonsPlayed} temporadas · OVR pico ${peak} · ${parecido!.parecido}% de parecido`,
                     stats: [
                       { valor: `${titlesTotal}`, label: "Títulos" },
                       { valor: `${career.totals.matchesPlayed}`, label: "Partidos" },
@@ -201,7 +230,7 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
                     ],
                     pie: retirementStory(career),
                     acento: titlesTotal > 0 ? "#F6C750" : "#74ACDF",
-                  })
+                  }, formato)
                 }
                 className="mt-5"
               />
