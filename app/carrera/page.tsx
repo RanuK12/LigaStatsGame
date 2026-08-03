@@ -17,6 +17,8 @@ import CareerTimelineCard from "@/components/career/CareerTimelineCard"
 import BallonDorReveal from "@/components/career/BallonDorReveal"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
 import SeasonProgress, { SEASON_PROGRESS_MS } from "@/components/career/SeasonProgress"
+import IdolatriaBar from "@/components/career/IdolatriaBar"
+import { idolatriaActual } from "@/lib/career-idolatria"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
 import {
@@ -218,7 +220,7 @@ function CareerSetupWizard() {
                 VISTA PREVIA CAMISETA 3D
               </span>
 
-              <div className="relative h-44 w-40 filter drop-shadow-[0_16px_28px_rgba(0,0,0,0.85)]">
+              <div className="relative h-60 w-52 filter drop-shadow-[0_16px_28px_rgba(0,0,0,0.85)]">
                 <Jersey3D color={jerseyColor} pattern={jerseyPattern} number={number} name={name} />
               </div>
               <span className="text-[11px] text-slate-500 font-sans">Arrastrá para girar</span>
@@ -574,6 +576,10 @@ function CareerDashboard() {
                 />
               </div>
             </div>
+
+            {career.history.length > 0 && (
+              <IdolatriaBar idolatria={idolatriaActual(career)} clubName={club?.name ?? "tu club"} />
+            )}
           </div>
 
           {/* OFERTAS: si hay, se resuelven primero (bloquean la simulación) */}

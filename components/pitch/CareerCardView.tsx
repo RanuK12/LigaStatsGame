@@ -19,6 +19,8 @@ export interface CareerCardData {
   trophies: { id: string; name: string; count: number; icon: string }[]
   jerseyPattern?: string
   jerseyColor?: string
+  /** El club del que más ídolo fuiste. Ausente si nunca pasaste de "uno más". */
+  idolatria?: { nivel: string; icono: string; clubName: string }
 }
 
 export default function CareerCardView({ data }: { data: CareerCardData }) {
@@ -314,6 +316,20 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             ))}
           </div>
         </div>
+
+        {/* IDOLATRÍA: el renglón que se comparte. Va abajo de todo y antes del pie. */}
+        {data.idolatria && (
+          <div className="mb-4 relative z-10" style={{ transform: "translateZ(25px)" }}>
+            <div className="rounded-2xl border border-[#F6C750]/40 bg-gradient-to-r from-[#F6C750]/15 to-transparent px-4 py-3 text-center">
+              <div className="font-sport text-[9px] font-black uppercase tracking-[0.35em] text-[#F6C750]">
+                {data.idolatria.icono} {data.idolatria.nivel}
+              </div>
+              <div className="mt-0.5 font-display text-sm font-black uppercase tracking-wide text-white">
+                de {data.idolatria.clubName}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* FOOTER WATERMARK (TranslateZ 20px) */}
         <div

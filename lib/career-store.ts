@@ -17,6 +17,7 @@ import {
   playsMundialClubesFrom,
   nationalTeamSeason,
 } from './career-engine'
+import { clubDeLaVida } from './career-idolatria'
 
 export interface CareerSetup {
   name: string
@@ -274,6 +275,12 @@ export function buildCareerCardData(state: CareerState): CareerCardData {
     penaltiesSaved: state.history.reduce((acc, h) => acc + (h.penaltiesSaved || 0), 0),
     clubs,
     trophies,
+    // "Leyenda de Vélez" dice más que "12 títulos", y es lo que la gente saca de captura.
+    idolatria: (() => {
+      const i = clubDeLaVida(state)
+      if (!i || i.nivel.id === 'uno-mas') return undefined
+      return { nivel: i.nivel.nombre, icono: i.nivel.icono, clubName: findClub(i.clubId)?.name ?? i.clubName }
+    })(),
   }
 }
 
