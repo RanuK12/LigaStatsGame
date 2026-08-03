@@ -19,6 +19,8 @@ export interface CareerCardData {
   trophies: { id: string; name: string; count: number; icon: string }[]
   jerseyPattern?: string
   jerseyColor?: string
+  /** El club del que más ídolo fuiste. Ausente si nunca pasaste de "uno más". */
+  idolatria?: { nivel: string; icono: string; clubName: string }
 }
 
 export default function CareerCardView({ data }: { data: CareerCardData }) {
@@ -33,6 +35,9 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
 
   const kitColor = data.jerseyColor || "#74ACDF"
   const pattern = data.jerseyPattern || "sash"
+  // El apellido, que es lo que va en la espalda de una camiseta.
+  const partesNombre = data.playerName.trim().toUpperCase().split(/\s+/)
+  const apellido = (partesNombre.length > 1 ? partesNombre[partesNombre.length - 1] : partesNombre[0]).slice(0, 12)
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     if (!cardRef.current) return
@@ -127,7 +132,10 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
           <div className="absolute h-32 w-32 rounded-full blur-2xl opacity-40" style={{ background: kitColor }} />
 
           <div className="relative w-36 h-40 flex items-center justify-center drop-shadow-[0_18px_30px_rgba(0,0,0,0.85)]">
-            <svg viewBox="0 0 120 130" className="w-full h-full">
+            {/* El trazo es EL MISMO que el de la camiseta 3D del creador (components/career/
+                Jersey3D.tsx): si la del creador tiene mangas y cintura y la de la ficha es un
+                rectángulo con dos aletas, parecen dos juegos distintos. */}
+            <svg viewBox="0 0 100 122" className="w-full h-full">
               <defs>
                 <linearGradient id="telaLuz" x1="15%" y1="0%" x2="85%" y2="100%">
                   <stop offset="0%" stopColor="#ffffff" stopOpacity="0.28" />
@@ -145,70 +153,88 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
                 </linearGradient>
                 {/* La tela recorta patrones y brillos para que nada se salga de la prenda */}
                 <clipPath id="cuerpoCamiseta">
-                  <path d="M42,16 C42,26 78,26 78,16 L92,21 C99,24 105,31 108,39 L112,50 C113,54 111,57 107,58 L96,61 C93,62 90,60 90,57 L90,49 L90,112 C90,117 87,120 82,120 L38,120 C33,120 30,117 30,112 L30,49 L30,57 C30,60 27,62 24,61 L13,58 C9,57 7,54 8,50 L12,39 C15,31 21,24 28,21 Z" />
+                  <path d="M38,10 Q32,11 27,14 L6,29 Q2,33 3,39 L9,55 Q11,60 17,59 L29,51 Q30,64 29,78 L27,112 Q50,117 73,112 L71,78 Q70,64 71,51 L83,59 Q89,60 91,55 L97,39 Q98,33 94,29 L73,14 Q68,11 62,10 Q50,31 38,10 Z" />
                 </clipPath>
               </defs>
 
               {/* Cuerpo + mangas en una silueta continua */}
               <path
-                d="M42,16 C42,26 78,26 78,16 L92,21 C99,24 105,31 108,39 L112,50 C113,54 111,57 107,58 L96,61 C93,62 90,60 90,57 L90,49 L90,112 C90,117 87,120 82,120 L38,120 C33,120 30,117 30,112 L30,49 L30,57 C30,60 27,62 24,61 L13,58 C9,57 7,54 8,50 L12,39 C15,31 21,24 28,21 Z"
+                d="M38,10 Q32,11 27,14 L6,29 Q2,33 3,39 L9,55 Q11,60 17,59 L29,51 Q30,64 29,78 L27,112 Q50,117 73,112 L71,78 Q70,64 71,51 L83,59 Q89,60 91,55 L97,39 Q98,33 94,29 L73,14 Q68,11 62,10 Q50,31 38,10 Z"
                 fill={kitColor}
               />
 
               <g clipPath="url(#cuerpoCamiseta)">
                 {/* Diseño de la camiseta */}
                 {pattern === "sash" && (
-                  <path d="M18,18 L104,120 L84,120 L8,34 Z" fill="#ffffff" opacity="0.92" />
+                  <path d="M20,8 L82,116 L64,116 L8,22 Z" fill="#ffffff" opacity="0.92" />
                 )}
                 {pattern === "stripes" && (
                   <>
-                    {[36, 52, 68, 84].map((x) => (
-                      <rect key={x} x={x} y="8" width="8" height="120" fill="#ffffff" opacity="0.9" />
+                    {[30, 46, 62].map((x) => (
+                      <rect key={x} x={x} y="6" width="8" height="118" fill="#ffffff" opacity="0.9" />
                     ))}
                   </>
                 )}
                 {pattern === "hoops" && (
                   <>
                     {[40, 66, 92].map((y) => (
-                      <rect key={y} x="0" y={y} width="120" height="13" fill="#ffffff" opacity="0.9" />
+                      <rect key={y} x="0" y={y} width="100" height="14" fill="#ffffff" opacity="0.9" />
                     ))}
                   </>
                 )}
 
                 {/* Textura de tela + volumen */}
-                <rect x="0" y="0" width="120" height="130" fill="url(#telaLuz)" />
-                <rect x="0" y="0" width="120" height="130" fill="url(#mangaSombra)" opacity="0.35" />
+                <rect x="0" y="0" width="100" height="122" fill="url(#telaLuz)" />
+                <rect x="0" y="0" width="100" height="122" fill="url(#mangaSombra)" opacity="0.35" />
                 {/* Pliegues */}
-                <path d="M44,60 C48,80 46,100 43,118" stroke="#000" strokeOpacity="0.16" strokeWidth="2.5" fill="none" />
-                <path d="M76,58 C72,78 74,98 77,118" stroke="#000" strokeOpacity="0.16" strokeWidth="2.5" fill="none" />
+                <path d="M38,58 C42,78 40,98 37,114" stroke="#000" strokeOpacity="0.16" strokeWidth="2.5" fill="none" />
+                <path d="M63,56 C59,76 61,96 64,114" stroke="#000" strokeOpacity="0.16" strokeWidth="2.5" fill="none" />
                 {/* Brillo especular del hombro izquierdo */}
-                <ellipse cx="40" cy="34" rx="16" ry="9" fill="#ffffff" opacity="0.12" />
+                <ellipse cx="38" cy="30" rx="15" ry="9" fill="#ffffff" opacity="0.12" />
               </g>
 
               {/* Costuras de las mangas */}
-              <path d="M30,49 L30,57" stroke="#000" strokeOpacity="0.25" strokeWidth="2" />
-              <path d="M90,49 L90,57" stroke="#000" strokeOpacity="0.25" strokeWidth="2" />
+              <path d="M29,51 Q30,64 29,78" fill="none" stroke="#000" strokeOpacity="0.22" strokeWidth="1.6" />
+              <path d="M71,51 Q70,64 71,78" fill="none" stroke="#000" strokeOpacity="0.22" strokeWidth="1.6" />
 
               {/* Cuello redondo con ribete */}
-              <path d="M42,16 C42,27 78,27 78,16" fill="none" stroke="#050b16" strokeWidth="6" strokeLinecap="round" />
-              <path d="M42,16 C42,27 78,27 78,16" fill="none" stroke="#ffffff" strokeOpacity="0.75" strokeWidth="2" strokeLinecap="round" />
+              <path d="M38,10 Q50,31 62,10" fill="none" stroke="#050b16" strokeWidth="5" strokeLinecap="round" />
+              <path d="M38,10 Q50,31 62,10" fill="none" stroke="#ffffff" strokeOpacity="0.75" strokeWidth="1.8" strokeLinecap="round" />
 
               {/* Escudito y estrellas de campeón */}
-              <g transform="translate(36,40)">
+              <g transform="translate(33,40)">
                 <circle cx="0" cy="0" r="6" fill="#0b1220" stroke="#F3C14B" strokeWidth="1.2" />
                 <path d="M0,-3.4 L1,-1 L3.6,-1 L1.5,0.6 L2.3,3.1 L0,1.6 L-2.3,3.1 L-1.5,0.6 L-3.6,-1 L-1,-1 Z" fill="#F3C14B" />
               </g>
 
+              {/* Apellido sobre el dorsal, como en una camiseta de verdad. El nombre completo
+                  no entra: en la espalda va uno solo. */}
+              <text
+                x="50"
+                y="62"
+                textAnchor="middle"
+                fill="#ffffff"
+                stroke="#05070d"
+                strokeWidth="1.2"
+                paintOrder="stroke"
+                fontSize="9"
+                fontWeight="900"
+                fontFamily="var(--font-impact, Impact, sans-serif)"
+                letterSpacing="0.5"
+              >
+                {apellido}
+              </text>
+
               {/* Dorsal */}
               <text
-                x="60"
+                x="50"
                 y="92"
                 textAnchor="middle"
                 fill="url(#numeroOro)"
                 stroke="#05070d"
                 strokeWidth="1.6"
                 paintOrder="stroke"
-                fontSize="34"
+                fontSize="30"
                 fontWeight="900"
                 fontFamily="var(--font-impact, Impact, sans-serif)"
                 letterSpacing="-1"
@@ -217,7 +243,7 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
               </text>
 
               {/* Sombra al piso */}
-              <ellipse cx="60" cy="125" rx="30" ry="4" fill="#000" opacity="0.45" />
+              <ellipse cx="50" cy="119" rx="26" ry="3.5" fill="#000" opacity="0.45" />
             </svg>
           </div>
         </div>
@@ -314,6 +340,20 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             ))}
           </div>
         </div>
+
+        {/* IDOLATRÍA: el renglón que se comparte. Va abajo de todo y antes del pie. */}
+        {data.idolatria && (
+          <div className="mb-4 relative z-10" style={{ transform: "translateZ(25px)" }}>
+            <div className="rounded-2xl border border-[#F6C750]/40 bg-gradient-to-r from-[#F6C750]/15 to-transparent px-4 py-3 text-center">
+              <div className="font-sport text-[9px] font-black uppercase tracking-[0.35em] text-[#F6C750]">
+                {data.idolatria.icono} {data.idolatria.nivel}
+              </div>
+              <div className="mt-0.5 font-display text-sm font-black uppercase tracking-wide text-white">
+                de {data.idolatria.clubName}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* FOOTER WATERMARK (TranslateZ 20px) */}
         <div

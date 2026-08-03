@@ -23,6 +23,7 @@ export default function ShareBar({
   className = "",
   titulo = "Compartí tu resultado",
   destino,
+  campana,
 }: {
   texto: string
   /** Devuelve la ficha en el formato pedido. Sin esto, el botón de IG no aparece. */
@@ -38,6 +39,11 @@ export default function ShareBar({
    * Es el mecanismo de Wordle.
    */
   destino?: string
+  /**
+   * Nombre de la campaña en la etiqueta UTM. Antes se deducía de si había `destino`, y con eso
+   * cualquier link propio caía en Analytics como "reto_diario", incluido el de la carrera.
+   */
+  campana?: string
 }) {
   const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "error">("")
   const [copiado, setCopiado] = useState(false)
@@ -57,7 +63,7 @@ export default function ShareBar({
       const u = new URL(urlBase)
       u.searchParams.set("utm_source", red)
       u.searchParams.set("utm_medium", "social")
-      u.searchParams.set("utm_campaign", destino ? "reto_diario" : "compartir")
+      u.searchParams.set("utm_campaign", campana || (destino ? "reto_diario" : "compartir"))
       return u.toString()
     } catch {
       return urlBase
