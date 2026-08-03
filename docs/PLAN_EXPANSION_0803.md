@@ -129,19 +129,28 @@ juego no tiene jugadores.
 
 ## 5. El plan, por orden de ejecución
 
-### Fase 1 · El link de la carrera (1-2 días)
+### Fase 1 · El link de la carrera — **HECHO el 2026-08-03**
 
 Lo más barato y lo de mayor palanca. Sin esto, todo lo demás mueve menos.
 
-- Al retirarse, la carrera se guarda en Supabase (`carreras`) con un id corto y se devuelve
-  `gambetafutbol.games/c/?id=xxxx`.
-- Página `/c/` estática que lee el `id` del query, trae la carrera y la muestra completa: palmarés,
-  clubes, goles, la leyenda con la que se comparó, la ficha.
-- Botón "Copiar link" al lado del de descargar, y `navigator.share` con el link en móvil.
-- **Ojo con la previsualización**: el sitio es `output: 'export'` en GitHub Pages, así que la
-  `og:image` de `/c/` va a ser genérica. Sirve igual para arrancar. La imagen personalizada en la
-  previsualización necesita un Worker de Cloudflare en `c.gambetafutbol.games` que arme el PNG al
-  vuelo — **fase 1b**, después de ver si el link se usa.
+**La carrera viaja DENTRO del link, no en Supabase.** El plan original decía guardarla en una
+tabla y mandar un id. Se descartó al implementarlo: el sitio es export estático, así que una
+tabla agrega una dependencia de red para abrir un link, algo que moderar y un id que puede quedar
+huérfano, a cambio de nada que se note. Codificada en base64url la carrera entera ocupa **707
+caracteres** —medido, no estimado— y el link es autosuficiente: anda sin backend y sin cuenta.
+
+- `lib/career-link.ts` — codifica y decodifica. El escudo no viaja: se arma del id al abrir.
+- `app/c/` — página que lee el parámetro y muestra la carrera completa, con CTA a crear la tuya.
+  Va **`noindex`**: todas las carreras comparten la ruta, así que lo único que Google podría
+  guardar es la página vacía.
+- El `destino` del ShareBar del final de carrera ahora es esa URL, con `utm_campaign=carrera`.
+- Eventos nuevos: `carrera_link_visto` y `carrera_link_cta`.
+
+**La previsualización arranca genérica** (título e imagen fijos): personalizarla necesita un
+Worker de Cloudflare que arme el PNG al vuelo. Es la fase 1b, después de ver si el link se usa.
+
+Verificado de punta a punta en el navegador con una carrera de 13 temporadas simulada con el
+motor real, y con un link roto, que muestra el cartel en vez de romper la página.
 
 Éxito: `compartido` arriba del 5 % de los que terminan una carrera.
 
@@ -185,6 +194,11 @@ indexadas en Search Console a las dos semanas.
 
 Ellos tienen tres cosas que hacen volver y nosotros ninguna. Con Supabase ya vivo salen baratas.
 
+- **Idolatría** — **HECHA el 2026-08-03** (`lib/career-idolatria.ts`). Cinco niveles hasta la
+  estatua, calculados del historial y no guardados en el estado: la carrera ya sabe en qué club
+  jugó cada año, y un campo nuevo sería una segunda fuente de verdad que se desincroniza. La
+  racha cuenta temporadas **seguidas** y crece más que lineal, así que irse y volver no paga lo
+  mismo que quedarse. Sale en el panel, en la ficha y en el subtítulo de lo que se comparte.
 - **Perfil**: tus últimas carreras, tus mejores drafts, tu ELO.
 - **Vitrina de copas**: todas las copas del juego, apagadas, que se van encendiendo. Es la razón
   por la que alguien juega la carrera número siete.

@@ -87,6 +87,10 @@ export const EVENTOS = {
   carreraRetiro: "carrera_retiro",
   fichaDescargada: "ficha_descargada",
   compartido: "compartido",
+  // El link de una carrera abierto por otra persona. Es la métrica del circuito viral: si
+  // `carrera_link_visto` no sube, la ficha no está circulando y lo demás no importa.
+  carreraLinkVisto: "carrera_link_visto",
+  carreraLinkCta: "carrera_link_cta",
   retoDiario: "reto_diario_jugado",
   rankingVisto: "ranking_visto",
   sugerenciaEnviada: "sugerencia_enviada",

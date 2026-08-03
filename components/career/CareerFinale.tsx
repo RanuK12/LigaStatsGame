@@ -8,6 +8,8 @@ import ShareBar from "@/components/ShareBar"
 import DonationSection from "@/components/DonationSection"
 import { storyBlob } from "@/lib/story-card"
 import { clubDeLaVida } from "@/lib/career-idolatria"
+import { urlDeCarrera } from "@/lib/career-link"
+import { buildCareerCardData } from "@/lib/career-store"
 
 function useCountUp(to: number, ms: number, start: boolean) {
   const [v, setV] = useState(0)
@@ -73,6 +75,17 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
   // un título que alguien tenga ganas de publicar.
   const idoloClub = career ? clubDeLaVida(career) : null
   const idoloDe = idoloClub && (idoloClub.nivel.id === "idolo" || idoloClub.nivel.id === "leyenda") ? idoloClub : null
+  // La carrera entera codificada en la URL. Se arma acá, una vez, cuando ya están todos los
+  // datos: la ficha, la idolatría y la leyenda con la que se comparó.
+  const urlCarrera = career
+    ? urlDeCarrera({
+        card: buildCareerCardData(career),
+        temporadas: career.seasonsPlayed,
+        leyenda: parecido ? { nombre: parecido.leyenda.nombre, parecido: parecido.parecido } : undefined,
+        pie: retirementStory(career),
+      })
+    : undefined
+
   // Mensaje ya armado con lo mejor de la carrera
   const textoCarrera = career
     ? `Terminé mi carrera en Gambeta y me parecí a ${parecido!.leyenda.nombre}: ${career.seasonsPlayed} temporadas, OVR pico ${peak}, ${titlesTotal} ${titlesTotal === 1 ? "título" : "títulos"}${career.milestones.worldCup ? " y CAMPEÓN DEL MUNDO 🌍" : ""}${career.milestones.balonDeOro ? ` · ${career.milestones.balonDeOro} Balón de Oro` : ""}. Creá tu crack y contame a quién te parecés vos`
@@ -218,6 +231,11 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
               <ShareBar
                 titulo="Contá tu carrera"
                 texto={textoCarrera}
+                // El link ya no lleva al home: lleva a TU carrera, que el que lo abre puede ver
+                // entera. Un PNG descargado no se previsualiza, no se clickea y no lo indexa
+                // nadie; una URL sí. Es lo que hace El Ídolo y es su circuito de crecimiento.
+                destino={urlCarrera}
+                campana="carrera"
                 imagen={(formato) =>
                   storyBlob({
                     volanta: "Modo Carrera",
