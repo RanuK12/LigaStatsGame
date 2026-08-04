@@ -25,6 +25,7 @@ const NAV_ITEMS = [
 
 // Consulta y modos sueltos: se visitan una vez, no compiten por la atención con DRAFT.
 const NAV_MAS: { href: string; label: string; match?: string }[] = [
+  { href: '/retos', label: 'RETOS 🏆' },
   { href: '/equipos', label: 'EQUIPOS' },
   { href: '/datos', label: '¿SABÍAS QUE?' },
   { href: '/ruleta', label: 'RULETA' },

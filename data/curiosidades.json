@@ -183,5 +183,85 @@
     ],
     "verificado": true,
     "verificadoEl": "2026-07-31"
+  },
+  {
+    "id": "milan-sacchi-invicto",
+    "rareza": "leyenda",
+    "texto": "El AC Milan de Arrigo Sacchi (1989-1990) con Van Basten, Gullit y Rijkaard fue el último club en ganar la Copa de Europa dos veces consecutivas antes del nuevo formato de la Champions.",
+    "clave": [
+      "AC Milan",
+      "Arrigo Sacchi",
+      "Champions"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Associazione_Calcio_Milan",
+      "https://en.wikipedia.org/wiki/AC_Milan"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-04"
+  },
+  {
+    "id": "brasil-1970-jairzinho",
+    "rareza": "leyenda",
+    "texto": "En la Copa del Mundo 1970, Jairzinho de la Selección de Brasil convirtió al menos un gol en los 6 partidos del torneo, récord que nadie ha logrado repetir jamás.",
+    "clave": [
+      "Brasil",
+      "1970",
+      "Jairzinho"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Jairzinho",
+      "https://en.wikipedia.org/wiki/Jairzinho"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-04"
+  },
+  {
+    "id": "ajax-1995-invicto",
+    "rareza": "insolito",
+    "texto": "El Ajax de Louis van Gaal de 1995 ganó la Eredivisie y la UEFA Champions League de forma invicta, con un promedio de edad en su plantel de apenas 23 años.",
+    "clave": [
+      "Ajax",
+      "1995",
+      "Van Gaal"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/AFC_Ajax",
+      "https://en.wikipedia.org/wiki/AFC_Ajax"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-04"
+  },
+  {
+    "id": "barcelona-2009-sextete",
+    "rareza": "leyenda",
+    "texto": "El FC Barcelona de Pep Guardiola en 2009 se convirtió en el primer equipo de la historia del fútbol en ganar el Sextete: Liga, Copa del Rey, Champions, Supercopa de España, Supercopa de Europa y Mundial de Clubes.",
+    "clave": [
+      "Barcelona",
+      "2009",
+      "Guardiola"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/F%C3%Batbol_Club_Barcelona",
+      "https://en.wikipedia.org/wiki/FC_Barcelona"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-04"
+  },
+  {
+    "id": "real-madrid-zidane-2002",
+    "rareza": "leyenda",
+    "texto": "En la final de la Champions 2002 en Glasgow, Zinedine Zidane convirtió una volea con la zurda desde el borde del área considerada el mejor gol en la historia de las finales de Europa.",
+    "clave": [
+      "Real Madrid",
+      "2002",
+      "Zidane"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Real_Madrid_Club_de_F%C3%Batbol",
+      "https://en.wikipedia.org/wiki/Real_Madrid_CF"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-04"
   }
 ]

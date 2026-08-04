@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
+import VersusRealtimeLobby from "@/components/versus/VersusRealtimeLobby"
 import { usePlayersCore } from "@/lib/data-loader"
 import squadsData from "@/data/squads.json"
 import { normalizeSquads } from "@/lib/data-normalizers"
@@ -66,10 +67,12 @@ function clubColors(clubId: string): string[] | undefined {
 }
 
 export default function VersusPage() {
-  const { players: playersCore, error: playersError } = usePlayersCore()
+  const { players: playersCore } = usePlayersCore()
   const allP = useMemo(() => playersCore ?? [], [playersCore])
   const allS = useMemo(() => normalizeSquads(squadsData), [])
 
+  const [versusMode, setVersusMode] = useState<"local" | "realtime">("local")
+  
   // ── Mode Phase ──
   // "setup" = choosing names/formations
   // "draft1" = player 1 drafting
@@ -440,9 +443,43 @@ export default function VersusPage() {
               key="setup"
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="card-gradient rounded-3xl p-6 sm:p-8 border border-white/5"
+              className="space-y-6"
             >
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sport mb-6 text-center">Configurá a los Directores Técnicos</h3>
+              {/* MODE SWITCHER */}
+              <div className="flex justify-center gap-2">
+                <button
+                  onClick={() => setVersusMode("local")}
+                  className={`px-5 py-2.5 rounded-xl font-sport text-xs font-bold uppercase tracking-wider transition-all ${
+                    versusMode === "local"
+                      ? "bg-gradient-to-r from-[#74ACDF] to-blue-600 text-slate-950 font-black shadow-lg"
+                      : "bg-slate-900/60 text-slate-400 border border-white/5 hover:text-white"
+                  }`}
+                >
+                  📱 MISMA PANTALLA
+                </button>
+                <button
+                  onClick={() => setVersusMode("realtime")}
+                  className={`px-5 py-2.5 rounded-xl font-sport text-xs font-bold uppercase tracking-wider transition-all ${
+                    versusMode === "realtime"
+                      ? "bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-black shadow-lg"
+                      : "bg-slate-900/60 text-slate-400 border border-white/5 hover:text-white"
+                  }`}
+                >
+                  🌐 SALA ONLINE 1V1 REALTIME
+                </button>
+              </div>
+
+              {versusMode === "realtime" ? (
+                <VersusRealtimeLobby
+                  onStartMatch={(roomCode, isHost, opponentName) => {
+                    setDt1((prev) => ({ ...prev, name: isHost ? "Vos" : opponentName }))
+                    setDt2((prev) => ({ ...prev, name: isHost ? opponentName : "Vos" }))
+                    setPhase("draft1")
+                  }}
+                />
+              ) : (
+                <div className="card-gradient rounded-3xl p-6 sm:p-8 border border-white/5">
+                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sport mb-6 text-center">Configurá a los Directores Técnicos</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 {/* DT 1 Setup */}
@@ -504,12 +541,14 @@ export default function VersusPage() {
                 </div>
               </div>
 
-              <button
-                onClick={() => setPhase("draft1")}
-                className="btn-primary w-full py-4 text-xs font-bold tracking-widest uppercase font-sport"
-              >
-                Comenzar Draft Versus
-              </button>
+                  <button
+                    onClick={() => setPhase("draft1")}
+                    className="btn-primary w-full py-4 text-xs font-bold tracking-widest uppercase font-sport"
+                  >
+                    Comenzar Draft Versus
+                  </button>
+                </div>
+              )}
             </motion.div>
           )}
 
