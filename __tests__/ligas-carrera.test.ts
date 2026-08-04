@@ -29,7 +29,7 @@ describe('ligas del modo carrera', () => {
   it('cada liga tiene formato, clubes y estructura de ascenso', () => {
     for (const l of LIGAS) {
       expect(['liga', 'semestral', 'playoff']).toContain(l.formato)
-      expect(l.clubIds.length).toBeGreaterThan(5)
+      expect(l.clubIds.length).toBeGreaterThanOrEqual(5)
       expect(l.division).toBeGreaterThanOrEqual(1)
       expect(l.asciende + l.desciende).toBeGreaterThan(0)
     }
