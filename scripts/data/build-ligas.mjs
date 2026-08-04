@@ -134,10 +134,6 @@ const PAISES = {
     copa: 'Copa do Brasil', continental: 'sudam', gentilicio: 'brasileño',
     plazas: { libertadores: 6, sudamericana: 6 },
   },
-  'Arabia Saudita': {
-    copa: 'Copa del Rey de Arabia', continental: 'afc', gentilicio: 'saudí',
-    plazas: { libertadores: 2, sudamericana: 2 },
-  },
 }
 
 /**

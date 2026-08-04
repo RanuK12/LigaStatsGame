@@ -120,30 +120,30 @@ export const SUDAM_CLUBS: CareerClub[] = CONTINENTAL_CLUBS.filter(
 }))
 
 export const EURO_CLUBS: CareerClub[] = [
-  { id: 'real-madrid', name: 'Real Madrid', strength: 90, continental: true, region: 'euro', flag: '🇪🇸' },
-  { id: 'fc-barcelona', name: 'FC Barcelona', strength: 88, continental: true, region: 'euro', flag: '🇪🇸' },
-  { id: 'manchester-city', name: 'Manchester City', strength: 90, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'arsenal', name: 'Arsenal FC', strength: 87, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'liverpool', name: 'Liverpool FC', strength: 88, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'bayern-munich', name: 'Bayern Múnich', strength: 89, continental: true, region: 'euro', flag: '🇩🇪' },
-  { id: 'bayer-leverkusen', name: 'Bayer Leverkusen', strength: 86, continental: true, region: 'euro', flag: '🇩🇪' },
-  { id: 'paris-saint-germain', name: 'Paris Saint-Germain', strength: 87, continental: true, region: 'euro', flag: '🇫🇷' },
-  { id: 'inter-milan', name: 'Inter de Milán', strength: 86, continental: true, region: 'euro', flag: '🇮🇹' },
-  { id: 'ac-milan', name: 'AC Milán', strength: 85, continental: true, region: 'euro', flag: '🇮🇹' },
-  { id: 'juventus', name: 'Juventus', strength: 84, continental: true, region: 'euro', flag: '🇮🇹' },
-  { id: 'napoli', name: 'SSC Napoli', strength: 84, continental: true, region: 'euro', flag: '🇮🇹' },
-  { id: 'manchester-united', name: 'Manchester United', strength: 83, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'atletico-madrid', name: 'Atlético Madrid', strength: 85, continental: true, region: 'euro', flag: '🇪🇸' },
-  { id: 'chelsea', name: 'Chelsea FC', strength: 83, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'tottenham-hotspur', name: 'Tottenham Hotspur', strength: 83, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'borussia-dortmund', name: 'Borussia Dortmund', strength: 83, continental: true, region: 'euro', flag: '🇩🇪' },
-  { id: 'benfica', name: 'SL Benfica', strength: 82, continental: true, region: 'euro', flag: '🇵🇹' },
-  { id: 'sporting-cp', name: 'Sporting CP', strength: 82, continental: true, region: 'euro', flag: '🇵🇹' },
-  { id: 'porto', name: 'FC Porto', strength: 81, continental: true, region: 'euro', flag: '🇵🇹' },
-  { id: 'ajax', name: 'AFC Ajax', strength: 81, continental: true, region: 'euro', flag: '🇳🇱' },
-  { id: 'psv-eindhoven', name: 'PSV Eindhoven', strength: 81, continental: true, region: 'euro', flag: '🇳🇱' },
-  { id: 'villarreal', name: 'Villarreal CF', strength: 81, continental: true, region: 'euro', flag: '🇪🇸' },
-  { id: 'sevilla-fc', name: 'Sevilla FC', strength: 80, continental: true, region: 'euro', flag: '🇪🇸' },
+  { id: 'real-madrid', name: 'Real Madrid', strength: 90, continental: true, region: 'euro', flag: '🇪🇸', escudo: '/logos/clubs/real-madrid.png' },
+  { id: 'fc-barcelona', name: 'FC Barcelona', strength: 88, continental: true, region: 'euro', flag: '🇪🇸', escudo: '/logos/clubs/fc-barcelona.png' },
+  { id: 'manchester-city', name: 'Manchester City', strength: 90, continental: true, region: 'euro', flag: '🏴', escudo: '/logos/clubs/manchester-city.png' },
+  { id: 'arsenal', name: 'Arsenal FC', strength: 87, continental: true, region: 'euro', flag: '🏴', escudo: '/logos/clubs/arsenal.png' },
+  { id: 'liverpool', name: 'Liverpool FC', strength: 88, continental: true, region: 'euro', flag: '🏴', escudo: '/logos/clubs/liverpool.png' },
+  { id: 'bayern-munich', name: 'Bayern Múnich', strength: 89, continental: true, region: 'euro', flag: '🇩🇪', escudo: '/logos/clubs/bayern-munich.png' },
+  { id: 'bayer-leverkusen', name: 'Bayer Leverkusen', strength: 86, continental: true, region: 'euro', flag: '🇩🇪', escudo: '/logos/ligas/bayer-leverkusen.svg' },
+  { id: 'paris-saint-germain', name: 'Paris Saint-Germain', strength: 87, continental: true, region: 'euro', flag: '🇫🇷', escudo: '/logos/clubs/paris-saint-germain.png' },
+  { id: 'inter-milan', name: 'Inter de Milán', strength: 86, continental: true, region: 'euro', flag: '🇮🇹', escudo: '/logos/clubs/inter-milan.png' },
+  { id: 'ac-milan', name: 'AC Milán', strength: 85, continental: true, region: 'euro', flag: '🇮🇹', escudo: '/logos/ligas/ac-milan.svg' },
+  { id: 'juventus', name: 'Juventus', strength: 84, continental: true, region: 'euro', flag: '🇮🇹', escudo: '/logos/clubs/juventus.png' },
+  { id: 'napoli', name: 'SSC Napoli', strength: 84, continental: true, region: 'euro', flag: '🇮🇹', escudo: '/logos/ligas/napoli.svg' },
+  { id: 'manchester-united', name: 'Manchester United', strength: 83, continental: true, region: 'euro', flag: '🏴', escudo: '/logos/clubs/manchester-united.png' },
+  { id: 'atletico-madrid', name: 'Atlético Madrid', strength: 85, continental: true, region: 'euro', flag: '🇪🇸', escudo: '/logos/clubs/atletico-madrid.png' },
+  { id: 'chelsea', name: 'Chelsea FC', strength: 83, continental: true, region: 'euro', flag: '🏴', escudo: '/logos/clubs/chelsea.png' },
+  { id: 'tottenham-hotspur', name: 'Tottenham Hotspur', strength: 83, continental: true, region: 'euro', flag: '🏴', escudo: '/logos/ligas/tottenham-hotspur.svg' },
+  { id: 'borussia-dortmund', name: 'Borussia Dortmund', strength: 83, continental: true, region: 'euro', flag: '🇩🇪', escudo: '/logos/clubs/borussia-dortmund.png' },
+  { id: 'benfica', name: 'SL Benfica', strength: 82, continental: true, region: 'euro', flag: '🇵🇹', escudo: '/logos/ligas/benfica.svg' },
+  { id: 'sporting-cp', name: 'Sporting CP', strength: 82, continental: true, region: 'euro', flag: '🇵🇹', escudo: '/logos/ligas/sporting-cp.svg' },
+  { id: 'porto', name: 'FC Porto', strength: 81, continental: true, region: 'euro', flag: '🇵🇹', escudo: '/logos/ligas/porto.svg' },
+  { id: 'ajax', name: 'AFC Ajax', strength: 81, continental: true, region: 'euro', flag: '🇳🇱', escudo: '/logos/ligas/ajax.svg' },
+  { id: 'psv-eindhoven', name: 'PSV Eindhoven', strength: 81, continental: true, region: 'euro', flag: '🇳🇱', escudo: '/logos/ligas/psv-eindhoven.svg' },
+  { id: 'villarreal', name: 'Villarreal CF', strength: 81, continental: true, region: 'euro', flag: '🇪🇸', escudo: '/logos/ligas/villarreal.svg' },
+  { id: 'sevilla-fc', name: 'Sevilla FC', strength: 80, continental: true, region: 'euro', flag: '🇪🇸', escudo: '/logos/ligas/sevilla-fc.svg' },
 ]
 
 /**
@@ -686,6 +686,17 @@ export function nationalTeamSeason(o: {
   return out
 }
 
+const RETIRE_SAUDI_LUXURY = [
+  'Tras amasar una fortuna en petrodólares, {n} compró tres mansiones en The Palm Dubái y hoy pasa sus tardes en yates privados de lujo.',
+  '{n} se retiró multimillonario en Arabia: un jeque le regaló un Bugatti bañado en oro y hoy comparte asados de cordero en su palacio en Riad.',
+  '{n} vive la vida de un rey entre Dubái y Riad: se compró un zoológico privado de halcones y leones, y se desplaza solo en jet privado.',
+  'El rey del lujo: {n} acumuló tantos petrodólares que fundó un resort flotante en los Emiratos y organiza torneos VIP para celebridades mundiales.',
+  '{n} colgará los botines pero no la billetera: tras su paso por Arabia Saudita, posee una colección de 15 superdeportivos y una isla privada.',
+  '{n} vive como un jeque en las torres de Dubái: invirtió sus millones árabes en bienes raíces y hoy es uno de los ex-futbolistas más ricos de la historia.',
+  'Con los millones ganados en Arabia, {n} construyó su propia villa de cristal en el desierto con cancha de fútbol de césped sintetizado y helipuerto.',
+  '{n} cerró su carrera en la Saudi Pro League llenándose de oro: hoy asesora a príncipes para comprar clubes europeos desde su yate en las Maldivas.',
+]
+
 export function retirementStory(career: CareerState): string {
   const { player } = career
   const peak = Math.max(player.ovr, ...career.history.map((s) => s.nextOvr ?? s.ovr))
@@ -694,6 +705,16 @@ export function retirementStory(career: CareerState): string {
   const lastClub = findClub(career.clubId)?.name || 'su último club'
   const seed = (peak * 131 + titles * 977 + career.startYear * 7 + player.name.length * 13) >>> 0
   const rng = makeRng(seed || 1)
+
+  const jugoEnArabia = career.clubHistory.some((id) => {
+    const c = findClub(id)
+    return c?.pais === 'Arabia Saudita'
+  })
+
+  if (jugoEnArabia && rng() < 0.6) {
+    const t = RETIRE_SAUDI_LUXURY[Math.floor(rng() * RETIRE_SAUDI_LUXURY.length)]
+    return t.replace(/\{n\}/g, player.name).replace(/\{c\}/g, lastClub)
+  }
 
   let tier: string[]
   if (peak >= 92 || (wc && titles >= 5)) tier = RETIRE_LEGEND
@@ -1463,6 +1484,7 @@ export function simulateSeason(
  * club argentino son unos pocos millones, y las cifras grandes solo existen en Europa.
  */
 export function topeTraspaso(club: CareerClub): number {
+  if (club.pais === 'Arabia Saudita') return 250
   if (club.region === 'euro') {
     if (club.strength >= 88) return 180
     if (club.strength >= 84) return 110
