@@ -175,6 +175,51 @@ export function findLiga(id: string): Liga | undefined {
 }
 
 /**
+ * El nivel de una liga, de 0 a 100.
+ *
+ * Es lo que hace que elegir dónde arrancar signifique algo: la Série A brasileña y el Torneo
+ * Federal A no pueden verse igual en la pantalla. Sale de la fuerza media de sus clubes, que ya
+ * trae adentro el coeficiente de país y la división.
+ */
+function mediaDeLiga(ligaId: string): number {
+  const c = clubesDeLiga(ligaId)
+  if (!c.length) return 0
+  // Los diez mejores pesan doble: el nivel de una liga lo marcan sus grandes, no el promedio
+  // con los veinte clubes de relleno que Wikidata trae de temporadas viejas.
+  const orden = [...c].sort((a, b) => b.strength - a.strength)
+  const top = orden.slice(0, 10)
+  const mediaTop = top.reduce((a, x) => a + x.strength, 0) / top.length
+  const mediaTodos = c.reduce((a, x) => a + x.strength, 0) / c.length
+  return mediaTop * 0.66 + mediaTodos * 0.34
+}
+
+const NIVEL_CACHE = new Map<string, number>()
+export function nivelDeLiga(ligaId: string): number {
+  const guardado = NIVEL_CACHE.get(ligaId)
+  if (guardado !== undefined) return guardado
+  // La escala se estira contra el rango REAL de las ligas cargadas, no contra números escritos
+  // a mano: con un piso y un techo fijos todo quedaba apretado entre 5 y 59, y la Primera
+  // argentina —que es de las mejores del continente— aparecía como "Media".
+  const medias = LIGAS.map((l) => mediaDeLiga(l.id)).filter((m) => m > 0)
+  const piso = Math.min(...medias)
+  const techo = Math.max(...medias)
+  const mia = mediaDeLiga(ligaId)
+  const rango = Math.max(techo - piso, 1)
+  const n = mia > 0 ? Math.round(clamp(8 + ((mia - piso) / rango) * 92, 5, 100)) : 0
+  NIVEL_CACHE.set(ligaId, n)
+  return n
+}
+
+/** Cómo se llama ese nivel, para no mostrar solo un número. */
+export function etiquetaDeNivel(nivel: number): string {
+  if (nivel >= 85) return 'Elite'
+  if (nivel >= 65) return 'Alta'
+  if (nivel >= 45) return 'Media'
+  if (nivel >= 25) return 'Baja'
+  return 'Amateur'
+}
+
+/**
  * La liga de arriba y la de abajo, que es lo que hace posible el ascenso y el descenso.
  * `null` cuando no hay: de la Primera de Brasil no se sube, y de la C no se baja.
  */
@@ -1358,6 +1403,21 @@ export function topeTraspaso(club: CareerClub): number {
   return 2
 }
 
+/**
+ * El nivel del club en la escalera, 0-100.
+ *
+ * Los europeos no están en ninguna liga del archivo: son el último escalón y van por encima de
+ * todo lo demás, escalados desde su propia fuerza para que Real Madrid no valga lo mismo que
+ * Borussia Dortmund.
+ */
+function nivelDelClub(c: CareerClub): number {
+  if (c.region === 'euro') return 100 + (c.strength - 82) * 2
+  if (c.ligaId) return nivelDeLiga(c.ligaId)
+  // Los sudamericanos escritos a mano (copa-libertadores.ts) no tienen liga: se ubican con su
+  // fuerza en la misma escala que las primeras divisiones.
+  return clamp((c.strength - 50) * 3, 5, 100)
+}
+
 function generateOffers(state: CareerState, performance: number, rng: () => number, decisionOptionId?: string): TransferOffer[] {
   const current = findClub(state.clubId)!
   const value = state.player.marketValueM
@@ -1378,15 +1438,49 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
 
   const ovr = state.player.ovr
   const count = 1 + Math.floor(rng() * 3)
+
+  // ── La escalera ──
+  //
+  // El filtro de antes solo miraba la FUERZA del club, no dónde jugaba. Con 470 clubes eso
+  // significa que a alguien del Torneo Federal A le podía llegar una oferta de la Segunda
+  // uruguaya, de la Liga 2 peruana y de la Primera B chilena el mismo año, todas equivalentes:
+  // no había ninguna carrera que construir, solo clubes intercambiables.
+  //
+  // Ahora la carrera sube por escalones: primero un club mejor de tu misma categoría, después
+  // la de arriba de tu país, después un país más fuerte, y al final Europa. El salto que podés
+  // pegar depende de cuánto estés por encima de tu club: un fenómeno en la B se saltea etapas,
+  // el resto las camina.
+  const nivelActual = nivelDelClub(current)
+  // Cada punto de OVR por encima del club habilita más salto. Un jugador parejo con su equipo
+  // sube un escalón; uno que le saca 10 puntos puede pegar el salto largo.
+  const brecha = ovr - current.strength
+  // El tope importa tanto como la fórmula: con 70 de techo, un OVR 68 en la B Metropolitana
+  // (nivel 12) recibía oferta de Colo-Colo (nivel 81) en el primer pase, que es exactamente el
+  // salto que no puede pasar. Con 42, ese mismo jugador llega hasta la Primera Nacional o la
+  // Segunda uruguaya, y de ahí sigue subiendo si le va bien.
+  const saltoMaximo = clamp(12 + brecha * 1.5 + (performance - 0.5) * 14, 8, 42)
+
   const candidates = ALL_CLUBS.filter((c) => {
     if (c.id === state.clubId) return false
     // Un club NO ficha a alguien muy por debajo de su nivel (nada de River con un OVR bajo).
     if (ovr < c.strength - 7) return false
     // Ni muy por encima: un club chico no compra a una figura, no le da el bolsillo.
     if (c.region !== 'euro' && ovr > c.strength + 8) return false
-    if (c.region === 'euro') return ovr >= 78 && performance >= 0.5 && c.strength >= current.strength - 3
-    // Tiene que ser un paso adelante (o lateral), no un club peor.
-    return c.strength >= current.strength - 2
+    const nivelDestino = nivelDelClub(c)
+
+    // Europa es el ÚLTIMO escalón, no un atajo. Este `return` estaba antes del cálculo de nivel
+    // y se salteaba la escalera entera: un OVR 78 jugando en el Torneo Federal A recibía oferta
+    // del Manchester United sin haber pisado nunca una primera división. Ahora, además del OVR,
+    // hay que estar jugando en una liga que ya sea de nivel alto.
+    if (c.region === 'euro') {
+      return ovr >= 78 && performance >= 0.5 && nivelActual >= 60 && c.strength >= current.strength - 3
+    }
+    // Ni un salto imposible ni un paso atrás grande: nadie deja la Série A por la Primera B.
+    if (nivelDestino > nivelActual + saltoMaximo) return false
+    if (nivelDestino < nivelActual - 22) return false
+    // Y dentro de la misma categoría, tiene que ser un paso adelante.
+    if (nivelDestino <= nivelActual + 4 && c.strength < current.strength + 1) return false
+    return true
   }).sort(() => rng() - 0.5)
 
   return candidates.slice(0, count).map((c) => {

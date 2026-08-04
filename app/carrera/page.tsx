@@ -29,6 +29,8 @@ import {
   LIGAS,
   PAISES_CARRERA,
   clubesDeLiga,
+  nivelDeLiga,
+  etiquetaDeNivel,
   findClub,
   MAX_SEASONS,
   marketValueFor,
@@ -362,72 +364,148 @@ function CareerSetupWizard() {
 }
 
 /**
- * Dónde debutás: país, después categoría, después club.
+ * Dónde debutás, en tres pasos y de a UNO por vez.
  *
- * Antes eran dos listas planas (Argentina y "Sudamérica"). Con 470 clubes en siete países y
- * cuatro categorías eso es una pared: hay que poder decir "quiero arrancar en la B de Uruguay"
- * en tres toques, que es lo que hace que el camino desde abajo se elija en vez de sufrirse.
+ * Antes los tres niveles —país, categoría y club— se mostraban apilados al mismo tiempo, y con
+ * 470 clubes eso es una pared: la lista de la Série A sola son 29 tarjetas, y para llegar al
+ * botón de empezar había que scrollear media pantalla. Ahora se elige país, después la
+ * categoría con su nivel, y recién ahí aparecen los clubes.
+ *
+ * Cada liga muestra su nivel porque es lo que da sentido a elegir: la Série A vale 100 y el
+ * Torneo Federal A vale 8, y arrancar abajo tiene que verse como lo que es.
  */
 function ClubPicker({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
-  const [pais, setPais] = useState("Argentina")
+  const [paso, setPaso] = useState<"pais" | "liga" | "club">("pais")
+  const [pais, setPais] = useState<string | null>(null)
+  const [ligaId, setLigaId] = useState<string | null>(null)
+
   const ligasDelPais = useMemo(
-    () => LIGAS.filter((l) => l.pais === pais).sort((a, b) => a.division - b.division),
+    () => (pais ? LIGAS.filter((l) => l.pais === pais).sort((a, b) => a.division - b.division) : []),
     [pais],
   )
-  const [ligaId, setLigaId] = useState(ligasDelPais[0]?.id ?? "ar-1")
-
-  // Al cambiar de país la liga elegida deja de existir: se vuelve a la primera del nuevo.
-  useEffect(() => {
-    if (!ligasDelPais.some((l) => l.id === ligaId)) setLigaId(ligasDelPais[0]?.id ?? "")
-  }, [ligasDelPais, ligaId])
-
-  const liga = LIGAS.find((l) => l.id === ligaId)
+  const liga = ligaId ? LIGAS.find((l) => l.id === ligaId) : null
   const clubes = useMemo(() => (ligaId ? clubesDeLiga(ligaId) : []), [ligaId])
+
+  function elegirPais(p: string) {
+    setPais(p)
+    setLigaId(null)
+    setPaso("liga")
+  }
+
+  function elegirLiga(id: string) {
+    setLigaId(id)
+    setPaso("club")
+  }
 
   return (
     <div className="space-y-4">
-      <div>
-        <h4 className="mb-2 font-sport text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">País</h4>
-        <div className="flex flex-wrap gap-2">
-          {PAISES_CARRERA.map((p) => (
+      {/* Las migas: se ve dónde se está y se puede volver sin perder lo elegido. */}
+      <div className="flex flex-wrap items-center gap-1.5 font-sport text-[11px] font-bold uppercase tracking-wider">
+        <button
+          onClick={() => setPaso("pais")}
+          className={paso === "pais" ? "text-white" : "text-[#74ACDF] hover:text-white"}
+        >
+          {pais ? `${PAISES_CARRERA.find((p) => p.nombre === pais)?.bandera ?? ""} ${pais}` : "Elegí el país"}
+        </button>
+        {pais && (
+          <>
+            <span className="text-slate-600">›</span>
             <button
-              key={p.nombre}
-              onClick={() => setPais(p.nombre)}
-              className={`rounded-xl border px-3 py-2 font-sport text-[11px] font-bold transition-all ${
-                pais === p.nombre ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white" : "border-white/5 bg-slate-950/50 text-slate-300 hover:border-white/20"
-              }`}
+              onClick={() => setPaso("liga")}
+              className={paso === "liga" ? "text-white" : "text-[#74ACDF] hover:text-white"}
+              disabled={!pais}
             >
-              {p.bandera} {p.nombre}
+              {liga ? liga.nombre : "Categoría"}
             </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <h4 className="mb-2 font-sport text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Categoría</h4>
-        <div className="flex flex-wrap gap-2">
-          {ligasDelPais.map((l) => (
-            <button
-              key={l.id}
-              onClick={() => setLigaId(l.id)}
-              className={`rounded-xl border px-3 py-2 font-sport text-[11px] font-bold transition-all ${
-                ligaId === l.id ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white" : "border-white/5 bg-slate-950/50 text-slate-300 hover:border-white/20"
-              }`}
-            >
-              {l.nombre}
-              <span className="ml-1.5 text-[9px] text-slate-500">{l.division}ª</span>
-            </button>
-          ))}
-        </div>
-        {liga?.nota && <p className="mt-2 text-[11px] leading-snug text-slate-500">{liga.nota}</p>}
-        {liga && liga.division > 1 && (
-          <p className="mt-1 font-sport text-[10px] uppercase tracking-wider text-[#F6C750]">
-            🔼 Suben {liga.asciende} · empezás desde abajo
-          </p>
+          </>
+        )}
+        {liga && (
+          <>
+            <span className="text-slate-600">›</span>
+            <span className={paso === "club" ? "text-white" : "text-slate-500"}>Club</span>
+          </>
         )}
       </div>
 
-      <ClubGroup title={`${liga?.bandera ?? ""} ${liga?.nombre ?? ""} · ${clubes.length} clubes`} clubs={clubes} selected={selected} onSelect={onSelect} />
+      {paso === "pais" && (
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {PAISES_CARRERA.map((p) => {
+            const divisiones = LIGAS.filter((l) => l.pais === p.nombre)
+            const tope = Math.max(...divisiones.map((l) => nivelDeLiga(l.id)))
+            return (
+              <button
+                key={p.nombre}
+                onClick={() => elegirPais(p.nombre)}
+                className={`rounded-2xl border p-3 text-left transition-all ${
+                  pais === p.nombre
+                    ? "border-[#74ACDF] bg-[#74ACDF]/15"
+                    : "border-white/5 bg-slate-950/50 hover:border-white/25"
+                }`}
+              >
+                <div className="text-2xl leading-none">{p.bandera}</div>
+                <div className="mt-1.5 font-display text-sm font-black uppercase text-white">{p.nombre}</div>
+                <div className="font-sport text-[10px] uppercase tracking-wider text-slate-500">
+                  {divisiones.length} {divisiones.length === 1 ? "categoría" : "categorías"} · nivel {tope}
+                </div>
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      {paso === "liga" && pais && (
+        <div className="space-y-2">
+          {ligasDelPais.map((l) => {
+            const nivel = nivelDeLiga(l.id)
+            return (
+              <button
+                key={l.id}
+                onClick={() => elegirLiga(l.id)}
+                className={`w-full rounded-2xl border p-3.5 text-left transition-all ${
+                  ligaId === l.id
+                    ? "border-[#74ACDF] bg-[#74ACDF]/15"
+                    : "border-white/5 bg-slate-950/50 hover:border-white/25"
+                }`}
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="font-display text-base font-black uppercase text-white">{l.nombre}</span>
+                  <span className="font-sport text-[10px] uppercase tracking-wider text-slate-500">
+                    {l.division}ª · {clubesDeLiga(l.id).length} clubes
+                  </span>
+                </div>
+                {/* La barra de nivel: es lo que hace visible que arrancar en el Federal A no es
+                    lo mismo que arrancar en la Série A. */}
+                <div className="mt-2 flex items-center gap-2">
+                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-[#74ACDF] to-[#F6C750]"
+                      style={{ width: `${nivel}%` }}
+                    />
+                  </div>
+                  <span className="font-sport text-[10px] font-bold uppercase tracking-wider text-[#F6C750]">
+                    {etiquetaDeNivel(nivel)} {nivel}
+                  </span>
+                </div>
+                {l.asciende > 0 && (
+                  <p className="mt-1.5 font-sport text-[10px] uppercase tracking-wider text-[#34d399]">
+                    Suben {l.asciende} · se puede ascender
+                  </p>
+                )}
+                {l.nota && <p className="mt-1 text-[11px] leading-snug text-slate-500">{l.nota}</p>}
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      {paso === "club" && liga && (
+        <ClubGroup
+          title={`${liga.bandera} ${liga.nombre} · ${clubes.length} clubes`}
+          clubs={clubes}
+          selected={selected}
+          onSelect={onSelect}
+        />
+      )}
     </div>
   )
 }
