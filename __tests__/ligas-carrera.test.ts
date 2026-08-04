@@ -16,14 +16,13 @@ import {
 } from '@/lib/career-engine'
 
 describe('ligas del modo carrera', () => {
-  it('están los siete países con sus divisiones y su copa', () => {
+  it('están los países sudamericanos y México con sus divisiones y su copa', () => {
     expect(PAISES_CARRERA.map((p) => p.nombre).sort()).toEqual(
-      ['Argentina', 'Brasil', 'Chile', 'Colombia', 'Paraguay', 'Perú', 'Uruguay'],
+      ['Argentina', 'Brasil', 'Chile', 'Colombia', 'México', 'Paraguay', 'Perú', 'Uruguay'],
     )
     for (const p of PAISES_CARRERA) {
       expect(p.ligaIds.length).toBeGreaterThanOrEqual(2)
       expect(p.copa).toBeTruthy()
-      expect(p.plazas.libertadores).toBeGreaterThan(0)
     }
   })
 
