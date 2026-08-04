@@ -60,21 +60,34 @@ export default function RecordsPage() {
         </article>
 
         <article className="card-gradient rounded-2xl p-5">
-          <h2 className="font-display text-xl font-black text-white uppercase tracking-wider">MÁXIMOS GOLEADORES</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-display text-xl font-black text-white">⚽ Máximos goleadores históricos</h2>
+            <span className="text-[10px] font-bold text-amber-400 font-sport uppercase tracking-wider">
+              CLUBES + SELECCIÓN
+            </span>
+          </div>
 
-          <div className="mt-4 space-y-2">
-            {topScorers.length > 0 ? topScorers.map((player, index) => (
+          <div className="space-y-2">
+            {topScorers.length > 0 ? (topScorers as any[]).map((player, index) => (
               <div
                 key={`${player.id}-${index}`}
-                className="flex items-center justify-between rounded-xl bg-slate-900/40 px-4 py-3"
+                className="flex items-center justify-between rounded-xl bg-slate-900/40 px-4 py-3 border border-white/5"
               >
                 <div>
                   <p className="font-bold text-white">{index + 1}. {player.name}</p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-400">
                     {player.position || 'POS'} · {player.decade || 'Década N/D'}
+                    {player.breakdown && <span className="block text-[10px] text-slate-500 font-sport mt-0.5">{player.breakdown}</span>}
                   </p>
                 </div>
-                <span className="font-display text-xl font-black text-emerald-400 font-sport">{player.goalsClub} G</span>
+                <div className="text-right">
+                  <span className="font-display text-xl font-black text-emerald-400 block font-sport">
+                    {player.goalsTotal || player.goalsClub}
+                  </span>
+                  <span className="text-[9px] font-bold font-sport text-slate-500 uppercase tracking-wider">
+                    GOLES TOT.
+                  </span>
+                </div>
               </div>
             )) : (
               <p className="text-sm text-slate-400">Todavía no hay datos suficientes.</p>

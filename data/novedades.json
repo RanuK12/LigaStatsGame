@@ -1,62 +1,42 @@
 [
   {
     "fecha": "2026-08-04",
-    "titulo": "El modo carrera se juega en siete países",
-    "texto": "Argentina, Uruguay, Chile, Colombia, Perú, Paraguay y Brasil: 16 categorías y 378 clubes. Elegís país, categoría y club, y cada liga tiene su formato de verdad, su copa nacional y sus plazas a la Libertadores."
+    "titulo": "¡La Liga MX y Expansión MX llegaron al Modo Carrera!",
+    "texto": "América, Chivas, Cruz Azul, Tigres, Monterrey, Pumas y todos los clubes mexicanos con su torneo y copa. Elegís a tu crack latinoamericano y arrancás desde abajo."
+  },
+  {
+    "fecha": "2026-08-04",
+    "titulo": "Analíticas 3D FIFA y Radar de Atributos",
+    "texto": "La Ficha 3D ahora calcula los 6 atributos FIFA (PAC, SHO, PAS, DRI, DEF, PHY) según posición y OVR. Además, el panel de carrera despliega la curva evolutiva de momentum año a año."
+  },
+  {
+    "fecha": "2026-08-04",
+    "titulo": "Dado 3D Interactiva en ¿Sabías que?",
+    "texto": "Un nuevo dado físico 3D con giros reales, 6 caras con pips y sonidos de tirada. Descubrí curiosidades verificadas del fútbol argentino tirando cada día."
+  },
+  {
+    "fecha": "2026-08-04",
+    "titulo": "Goles Oficiales de Leyendas Actualizados",
+    "texto": "Estadísticas al día con la totalidad de goles oficiales (clubes + Selección Nacional): Lionel Messi con 947+ goles, Agüero, Di Stéfano, Batistuta, Maradona y más."
+  },
+  {
+    "fecha": "2026-08-04",
+    "titulo": "El modo carrera se juega en Latinoamérica entera",
+    "texto": "Argentina, México, Uruguay, Chile, Colombia, Perú, Paraguay y Brasil. Canteras locales según tu nacionalidad de origen."
   },
   {
     "fecha": "2026-08-04",
     "titulo": "Ahora se puede empezar desde el Ascenso",
-    "texto": "Primera Nacional, Primera B Metropolitana y Torneo Federal A. Se asciende peleándola y se puede descender: si el club sube, el año que viene jugás la categoría de arriba. El ascenso va a la vitrina como un título más."
-  },
-  {
-    "fecha": "2026-08-04",
-    "titulo": "Las decisiones ahora interrumpen",
-    "texto": "La pretemporada, la oferta rara, los barras: antes eran un cuadro fijo que quedaba en pantalla todo el tiempo. Ahora aparecen cuando toca, elegís, y siguen. Y la ficha final se cierra con una cruz, como corresponde."
+    "texto": "Primera Nacional, Primera B Metropolitana y Torneo Federal A. Se asciende peleándola y se puede descender."
   },
   {
     "fecha": "2026-08-03",
     "titulo": "Tu carrera ahora tiene link propio",
-    "texto": "Al retirarte se genera una dirección que podés mandar por WhatsApp o pegar en X. El que la abre ve tu carrera entera: los clubes, los títulos, a qué leyenda te pareciste y cómo terminaste. Antes solo se podía bajar una imagen."
+    "texto": "Al retirarte se genera una dirección que podés mandar por WhatsApp o pegar en X. El que la abre ve tu carrera entera."
   },
   {
     "fecha": "2026-08-03",
     "titulo": "La idolatría: el camino a la estatua",
-    "texto": "Cada club lleva la cuenta de cuánto te quiere su gente, en cinco escalones que van de uno más del plantel a Leyenda. Se sube quedándote, metiendo goles y ganando. Saltar de club por plata te aleja de la estatua: la lealtad ahora vale."
-  },
-  {
-    "fecha": "2026-08-03",
-    "titulo": "La camiseta se ve como una camiseta",
-    "texto": "Era una silueta plana con dos aletas por mangas. Ahora tiene mangas de verdad, hombro caído, cintura y ruedo, con tu apellido en la espalda y el escudo al pecho. Y la de la ficha final es la misma que armás vos."
-  },
-  {
-    "fecha": "2026-07-31",
-    "titulo": "Los equipos históricos entraron al bombo",
-    "texto": "El Vélez del 94, el Boca de Bianchi, el River del 96. 36 planteles de 1994 a 2021, con cada jugador cruzado contra tres fuentes. Salen menos seguido que los actuales: cuando sale uno, es un premio."
-  },
-  {
-    "fecha": "2026-07-31",
-    "titulo": "La Libertadores y la Sudamericana se clasifican, no se eligen",
-    "texto": "Terminás la Liga entre los cuatro primeros y te ganás la plaza continental, con el mismo 11 con el que clasificaste. Vale más en el ranking."
-  },
-  {
-    "fecha": "2026-07-31",
-    "titulo": "Los torneos cierran con su ficha",
-    "texto": "La Liga y la Copa terminan con tu tabla, tu camino ronda por ronda, el ELO que ganaste y una imagen para compartir."
-  },
-  {
-    "fecha": "2026-07-31",
-    "titulo": "El reto diario, adelante y con racha",
-    "texto": "Estaba escondido en /daily. Ahora está arriba del home, con los días seguidos a la vista."
-  },
-  {
-    "fecha": "2026-07-31",
-    "titulo": "El ranking muestra lo que ordena",
-    "texto": "Top 100 real por ELO, tu puesto contado sobre la base entera, y sin rivales inventados ocupando lugares."
-  },
-  {
-    "fecha": "2026-07-31",
-    "titulo": "El bombo dejó de repetir clubes",
-    "texto": "En once giros salían dos y tres veces los mismos. Ahora un club sale una vez por draft mientras queden otros."
+    "texto": "Cada club lleva la cuenta de cuánto te quiere su gente, en cinco escalones que van de uno más del plantel a Leyenda."
   }
 ]

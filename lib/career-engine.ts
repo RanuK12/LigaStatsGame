@@ -406,11 +406,15 @@ export const BARRABRAVAS_DECISION: CareerDecision = {
   ],
 }
 
-// Interés de la cantera al arrancar: a mayor OVR inicial, más y mejores clubes te buscan.
-export function academyInterest(ovr: number, seed: number): CareerClub[] {
+// Interés de la cantera al arrancar: a mayor OVR inicial, más y mejores clubes te buscan (preferencia de su país).
+export function academyInterest(ovr: number, seed: number, nationality?: string): CareerClub[] {
   const rng = makeRng(seed >>> 0 || 1)
   const n = ovr >= 74 ? 4 : ovr >= 68 ? 3 : 2
-  return [...ARG_CLUBS].sort(() => rng() - 0.5).slice(0, n)
+  const pool = nationality
+    ? ALL_CLUBS.filter((c) => c.pais === nationality)
+    : []
+  const usablePool = pool.length >= 2 ? pool : ALL_CLUBS.filter((c) => c.region === "arg")
+  return [...usablePool].sort(() => rng() - 0.5).slice(0, n)
 }
 
 // Carreras de leyenda (modo debug). Valores de arranque aproximados, no oficiales.

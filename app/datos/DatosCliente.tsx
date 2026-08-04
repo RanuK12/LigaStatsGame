@@ -9,6 +9,8 @@ import {
 } from "@/lib/curiosidades"
 import { trackEvent } from "@/components/Analytics"
 
+import InteractiveDice from "@/components/dice/InteractiveDice"
+
 /**
  * ¿Sabías que? — el dato no se lee de una lista: se tira y sale.
  *
@@ -24,9 +26,6 @@ export default function DatosCliente() {
   const total = totalDelMazo()
   const [efemeride, setEfemeride] = useState<ReturnType<typeof efemerideDelDia>>(null)
 
-  // Todo sale de localStorage, así que se lee después del montaje: en el server no hay tiradas.
-  // La efeméride también: depende del día del usuario, y el servidor puede estar en otra zona
-  // horaria. Calcularla en el server daría una efeméride distinta a la del cliente.
   useEffect(() => {
     setQuedan(tiradasDisponibles())
     setColeccion(vistos())
@@ -37,7 +36,6 @@ export default function DatosCliente() {
     if (rodando || quedan === 0) return
     setRodando(true)
     setDato(null)
-    // El dado rueda antes de mostrar: sin la espera, no hay sorteo, hay un texto que aparece.
     window.setTimeout(() => {
       const c = tirar()
       setDato(c)
@@ -45,7 +43,7 @@ export default function DatosCliente() {
       setQuedan(tiradasDisponibles())
       setColeccion(vistos())
       if (c) trackEvent("dato_tirado", { rareza: c.rareza, id: c.id })
-    }, reducir ? 120 : 750)
+    }, reducir ? 120 : 850)
   }
 
   const compartir = async () => {
@@ -70,12 +68,12 @@ export default function DatosCliente() {
             ¿Sabías <span className="gradient-text">que?</span>
           </h1>
           <p className="mx-auto mt-3 max-w-md font-sans text-[13px] leading-relaxed text-slate-400">
-            Tirá el dado y sacá un dato del fútbol argentino. Ninguno está inventado: los que
+            Tirá el dado 3D y sacá un dato del fútbol argentino. Ninguno está inventado: los que
             contamos nosotros salen de la base del juego, y los demás tienen dos fuentes.
           </p>
         </header>
 
-        {/* Un día como hoy: contenido que cambia solo, sin generarlo */}
+        {/* Un día como hoy */}
         {efemeride && (
           <section className="mt-7 rounded-3xl border border-[#E7C27D]/25 bg-gradient-to-r from-[#141026]/80 to-[#050a14]/80 p-4">
             <p className="font-sport text-[11px] font-black uppercase tracking-[0.3em] text-[#E7C27D]">
@@ -87,19 +85,14 @@ export default function DatosCliente() {
           </section>
         )}
 
-        {/* El dado */}
+        {/* DADO 3D INTERACTIVO */}
         <section className="mt-8 text-center">
-          <motion.button
-            onClick={tirarDado}
-            disabled={rodando || quedan === 0}
-            whileTap={quedan === 0 ? undefined : { scale: 0.92 }}
-            animate={rodando && !reducir ? { rotate: [0, 220, 400, 540], scale: [1, 1.12, 0.96, 1] } : { rotate: 0 }}
-            transition={{ duration: 0.75, ease: "easeOut" }}
-            className="mx-auto flex h-28 w-28 items-center justify-center rounded-[28px] border-2 border-[#74ACDF]/40 bg-gradient-to-b from-[#0c1728] to-[#050a14] text-5xl shadow-[0_0_50px_rgba(116,172,223,0.18)] transition-opacity disabled:opacity-40"
-            aria-label="Tirar el dado"
-          >
-            ⚽
-          </motion.button>
+          <InteractiveDice
+            rolling={rodando}
+            onRoll={tirarDado}
+            disabled={quedan === 0}
+            remaining={quedan}
+          />
 
           <p className="mt-4 font-sport text-[11px] font-black uppercase tracking-widest text-slate-400">
             {quedan === null

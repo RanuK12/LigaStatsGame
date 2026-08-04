@@ -56,11 +56,19 @@ const NATIONALITIES: { name: string; flag: string }[] = [
   { name: "Uruguay", flag: "🇺🇾" },
   { name: "Chile", flag: "🇨🇱" },
   { name: "Colombia", flag: "🇨🇴" },
+  { name: "México", flag: "🇲🇽" },
+  { name: "Perú", flag: "🇵🇪" },
   { name: "Paraguay", flag: "🇵🇾" },
+  { name: "Ecuador", flag: "🇪🇨" },
+  { name: "Venezuela", flag: "🇻🇪" },
+  { name: "Bolivia", flag: "🇧🇴" },
+  { name: "Costa Rica", flag: "🇨🇷" },
+  { name: "Honduras", flag: "🇭🇳" },
+  { name: "Panamá", flag: "🇵🇦" },
+  { name: "Estados Unidos", flag: "🇺🇸" },
   { name: "España", flag: "🇪🇸" },
   { name: "Italia", flag: "🇮🇹" },
   { name: "Francia", flag: "🇫🇷" },
-  { name: "México", flag: "🇲🇽" },
 ]
 
 const JERSEY_PATTERNS = [
@@ -182,7 +190,7 @@ function CareerSetupWizard() {
 
   // Interés de la cantera al arrancar (mismo seed => estable durante la creación).
   const academySeed = (name.length * 31 + ovr * 7 + 13) >>> 0
-  const academyClubs = academyInterest(ovr, academySeed)
+  const academyClubs = academyInterest(ovr, academySeed, nationality)
 
   return (
     <div className="space-y-6">
