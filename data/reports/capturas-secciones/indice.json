@@ -1,0 +1,92 @@
+[
+ {
+  "id": "sabias-que",
+  "titulo": "¿Sabías que?",
+  "archivo": "sabias-que.png",
+  "link": "gambetafutbol.games/datos/",
+  "de_que_habla": "Datos del fútbol argentino con dos fuentes cada uno. Se tira un dado y sale uno.",
+  "angulos": [
+   "El Vélez del 94 le ganó al Milan de Capello en la Intercontinental.",
+   "Cada dato del mazo está cruzado contra dos fuentes: no hay ninguno inventado."
+  ],
+  "revisar": "la captura pesa 5643 bytes, puede estar vacía"
+ },
+ {
+  "id": "leyendas",
+  "titulo": "Leyendas",
+  "archivo": "leyendas.png",
+  "link": "gambetafutbol.games/records/",
+  "de_que_habla": "Los máximos goleadores y las leyendas del fútbol argentino, con sus números.",
+  "angulos": [
+   "Los goleadores históricos, ordenados.",
+   "Cada leyenda con sus goles y su recorrido."
+  ]
+ },
+ {
+  "id": "versus",
+  "titulo": "Versus",
+  "archivo": "versus.png",
+  "link": "gambetafutbol.games/versus/",
+  "de_que_habla": "Dos jugadores cara a cara, para discutir con un amigo quién era mejor.",
+  "angulos": [
+   "Poné a dos y discutan.",
+   "El que pierde la discusión paga el café."
+  ],
+  "revisar": "la captura pesa 8694 bytes, puede estar vacía"
+ },
+ {
+  "id": "ruleta",
+  "titulo": "Ruleta",
+  "archivo": "ruleta.png",
+  "link": "gambetafutbol.games/ruleta/",
+  "de_que_habla": "La ruleta que te da un plantel al azar, con sus tiers.",
+  "angulos": [
+   "A ver qué te toca.",
+   "Los planteles históricos salen poco: cuando salen, es un premio."
+  ]
+ },
+ {
+  "id": "equipos",
+  "titulo": "Equipos históricos",
+  "archivo": "equipos.png",
+  "link": "gambetafutbol.games/equipos/",
+  "de_que_habla": "36 planteles históricos argentinos, cada jugador cruzado contra tres fuentes.",
+  "angulos": [
+   "El Vélez del 94, los Boca de Bianchi, el River del 96.",
+   "El plantel completo de cada uno."
+  ]
+ },
+ {
+  "id": "carrera",
+  "titulo": "Modo carrera",
+  "archivo": "carrera.png",
+  "link": "gambetafutbol.games/carrera/",
+  "de_que_habla": "7 países, 16 categorías y 410 clubes. Se puede empezar en el Torneo Federal A.",
+  "angulos": [
+   "Elegís país, categoría y club, y subís peleándola.",
+   "Ningún otro juego deja empezar en el Federal A."
+  ],
+  "revisar": "la captura pesa 23811 bytes, puede estar vacía"
+ },
+ {
+  "id": "ranking",
+  "titulo": "Ranking",
+  "archivo": "ranking.png",
+  "link": "gambetafutbol.games/leaderboard/",
+  "de_que_habla": "El ranking global por ELO. Cada torneo que jugás suma o resta.",
+  "angulos": [
+   "A ver dónde entrás.",
+   "El ELO sube y baja según cómo te va: no es un contador de partidas."
+  ]
+ },
+ {
+  "id": "home",
+  "titulo": "El juego",
+  "archivo": "home.png",
+  "link": "gambetafutbol.games/",
+  "de_que_habla": "Draft, modo carrera, reto diario, torneos. Gratis y sin registrarse.",
+  "angulos": [
+   "Gratis, en el navegador, sin cuenta."
+  ]
+ }
+]
