@@ -964,8 +964,33 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     acento: isChamp ? "#F6C750" : "#74ACDF",
                   }, formato)
                 }
-                className="mb-5"
+                className="mb-3"
               />
+
+              {/* Las acciones van PEGADAS a compartir, no treinta píxeles más abajo con dos
+                  bloques en el medio. Compartir la ficha, bajarla y volver al equipo son la
+                  misma decisión —"qué hago con esto que acabo de lograr"— y estaban separadas
+                  por el pedido de cuenta y el de donación. */}
+              <div className="mb-6 flex flex-wrap justify-center gap-2.5 font-sport">
+                <button
+                  onClick={onDownloadPDF}
+                  className="btn-gold rounded-2xl px-6 py-3 text-[11px] font-bold uppercase tracking-widest shadow-lg"
+                >
+                  Descargar PDF
+                </button>
+                <button
+                  onClick={onBack}
+                  className="btn-secondary rounded-2xl border-[#74ACDF]/25 px-6 py-3 text-[11px] font-bold uppercase tracking-widest hover:border-[#74ACDF]/50"
+                >
+                  Ver equipo
+                </button>
+                <button
+                  onClick={onReset}
+                  className="btn-secondary rounded-2xl border-[#74ACDF]/25 px-6 py-3 text-[11px] font-bold uppercase tracking-widest hover:border-[#74ACDF]/50"
+                >
+                  Nuevo draft
+                </button>
+              </div>
 
               {/* Guardar el progreso ANTES que pedir plata. La cuenta vale más que una donación y
                   dos pedidos en la misma pantalla se anulan entre sí. Al que ya tiene cuenta no se
@@ -976,14 +1001,6 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   la acaba de pasar bien. En el footer del home no lo veía casi nadie. */}
               <DonationSection compacta />
 
-              {/* Action buttons */}
-              <div className="flex gap-3 justify-center flex-wrap mb-6 font-sport">
-                <button onClick={onDownloadPDF} className="btn-gold px-8 py-3.5 text-[11px] font-bold tracking-widest uppercase rounded-2xl shadow-lg">
-                  Descargar PDF
-                </button>
-                <button onClick={onBack} className="btn-secondary px-7 py-3.5 text-[11px] font-bold tracking-widest uppercase border-[#74ACDF]/25 hover:border-[#74ACDF]/50">Ver equipo</button>
-                <button onClick={onReset} className="btn-secondary px-7 py-3.5 text-[11px] font-bold tracking-widest uppercase border-[#74ACDF]/25 hover:border-[#74ACDF]/50">Nuevo Draft</button>
-              </div>
               <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">
                 Volver al inicio
               </Link>

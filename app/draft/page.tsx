@@ -907,6 +907,32 @@ function DraftInner() {
               <div className="text-2xl font-display font-black text-[#75AADB]">Score: {teamScore || partialScore} pts</div>
             </div>
 
+            {/* La plaza que te ganaste clasificando con la Liga. No es un modo que se elige:
+                está acá porque saliste entre los primeros, y se gasta al jugarla. */}
+            {user?.plaza && (
+              <div className="cartel-in cartel-shine mx-auto mb-5 max-w-xl rounded-2xl border-2 border-amber-400/60 bg-gradient-to-b from-amber-400/20 to-slate-950/40 px-5 py-5 text-center shadow-[0_0_40px_rgba(246,199,80,0.18)]">
+                <p className="text-[10px] font-black font-sport uppercase tracking-widest text-[#F6C750]">
+                  Clasificaste
+                </p>
+                <p className="mt-1.5 text-[12px] leading-relaxed text-slate-300 font-sans">
+                  Saliste <strong className="text-white">{user.plaza.puesto}°</strong> con{" "}
+                  {user.plaza.equipo}: te ganaste un lugar en la{" "}
+                  <strong className="text-white">
+                    {user.plaza.torneo === "libertadores" ? "Copa Libertadores" : "Copa Sudamericana"}
+                  </strong>
+                  . Se juega con el 11 que tengas armado ahora.
+                </p>
+                <MagneticButton>
+                  <button
+                    onClick={() => startSim(user.plaza!.torneo)}
+                    className="btn-gold mt-4 rounded-2xl px-10 py-4 font-sport text-[12px] font-black uppercase tracking-widest"
+                  >
+                    Jugar la {user.plaza.torneo === "libertadores" ? "Libertadores" : "Sudamericana"}
+                  </button>
+                </MagneticButton>
+              </div>
+            )}
+
             {/* Qué te llevás por simular. Va acá y no solo en /leaderboard: es el momento en que
                 se ganan los puntos, y sin esto el número del ranking no se entiende. */}
             <div className="max-w-xl mx-auto mb-5 rounded-2xl border border-[#74ACDF]/20 bg-slate-950/50 px-4 py-3 text-center">
@@ -950,32 +976,6 @@ function DraftInner() {
                 </Link>
               </p>
             </div>
-
-            {/* La plaza que te ganaste clasificando con la Liga. No es un modo que se elige:
-                está acá porque saliste entre los primeros, y se gasta al jugarla. */}
-            {user?.plaza && (
-              <div className="max-w-xl mx-auto mb-5 rounded-2xl border border-amber-400/40 bg-gradient-to-b from-amber-400/10 to-slate-950/40 px-5 py-4 text-center">
-                <p className="text-[10px] font-black font-sport uppercase tracking-widest text-[#F6C750]">
-                  Clasificaste
-                </p>
-                <p className="mt-1.5 text-[12px] leading-relaxed text-slate-300 font-sans">
-                  Saliste <strong className="text-white">{user.plaza.puesto}°</strong> con{" "}
-                  {user.plaza.equipo}: te ganaste un lugar en la{" "}
-                  <strong className="text-white">
-                    {user.plaza.torneo === "libertadores" ? "Copa Libertadores" : "Copa Sudamericana"}
-                  </strong>
-                  . Se juega con el 11 que tengas armado ahora.
-                </p>
-                <MagneticButton>
-                  <button
-                    onClick={() => startSim(user.plaza!.torneo)}
-                    className="btn-gold mt-3 px-8 py-3 text-[11px] font-black uppercase tracking-widest font-sport rounded-2xl"
-                  >
-                    Jugar la {user.plaza.torneo === "libertadores" ? "Libertadores" : "Sudamericana"}
-                  </button>
-                </MagneticButton>
-              </div>
-            )}
 
             <div className="mb-6 flex flex-col items-center justify-center gap-3 font-sport sm:flex-row">
               {/* Un equipo juega cada torneo UNA vez. Antes se podía volver desde el resumen y

@@ -181,6 +181,64 @@ describe('la escalera de la carrera', () => {
     }
   })
 
+  /**
+   * Quedarse toda la vida en una categoría menor tiene que costar algo, o la escalera de ofertas
+   * no significa nada: para qué aceptar un pase si vas a llegar al mismo OVR igual.
+   *
+   * El techo NO baja el OVR que ya tenés —el que llegó a 85 y bajó a la B no se desintegra—:
+   * frena el crecimiento mientras estés ahí.
+   */
+  it('el que se queda en el Ascenso llega mucho más abajo que el que salta', () => {
+    const picoMedio = (ligaId: string, aceptar: boolean) => {
+      const semillas = [3, 17, 29, 41, 63, 88, 102, 131]
+      const picos = semillas.map((semilla) => {
+        const club = clubesDeLiga(ligaId).slice(-2)[0]
+        let s: CareerState = {
+          player: { name: 'T', number: 9, position: 'ST', nationality: 'Argentina', flag: '🇦🇷', ovr: 64, age: 18, marketValueM: 1 },
+          clubId: club.id, startYear: 2026, seasonsPlayed: 0,
+          totals: { matchesPlayed: 0, goals: 0, assists: 0 },
+          trophies: {}, clubHistory: [club.id], history: [], pendingOffers: [],
+          nextContinental: 'sudamericana',
+          milestones: { nationalTeam: false, balonDeOro: 0, goldenBoots: 0, worldCup: false },
+          finished: false,
+        }
+        const rng = makeRng(semilla)
+        let pico = 64
+        for (let i = 0; i < 15; i++) {
+          if (aceptar && s.pendingOffers.length > 0) {
+            const mejor = [...s.pendingOffers].sort((a, b) => b.strength - a.strength)[0]
+            if (mejor.strength > findClub(s.clubId)!.strength) {
+              s = { ...s, clubId: mejor.clubId, ligaActualId: undefined }
+            }
+          }
+          s = { ...s, pendingOffers: [] }
+          const { season, offers } = simulateSeason(s, rng)
+          s = {
+            ...s,
+            player: advancePlayer(s, season),
+            seasonsPlayed: s.seasonsPlayed + 1,
+            history: [...s.history, season],
+            pendingOffers: offers,
+            ligaActualId: season.nuevaLigaId ?? s.ligaActualId,
+          }
+          pico = Math.max(pico, s.player.ovr)
+        }
+        return pico
+      })
+      return picos.reduce((a, b) => a + b, 0) / picos.length
+    }
+
+    // Desde el Ascenso la diferencia tiene que ser grande y a favor del que se mueve.
+    for (const ligaId of ['ar-3f', 'ar-3']) {
+      const quieto = picoMedio(ligaId, false)
+      const movido = picoMedio(ligaId, true)
+      expect(movido, `en ${ligaId} quedarse rinde igual que saltar`).toBeGreaterThan(quieto + 3)
+    }
+    // Y en la Primera argentina el techo de la categoría NO puede ser lo que frena: ahí el
+    // límite es la edad y el talento, como debe ser.
+    expect(picoMedio('ar-1', false)).toBeGreaterThan(78)
+  })
+
   it('cada club de liga sabe en qué escalón está', () => {
     for (const l of LIGAS) {
       const n = nivelDeLiga(l.id)

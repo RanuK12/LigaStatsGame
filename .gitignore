@@ -50,3 +50,7 @@ data/reports/promo-ligas/*.png
 # Las 76 placas para X: 30 MB que se regeneran con `node scripts/placas-x.mjs`. El indice SI se
 # versiona, que es lo que dice que placa existe y de que familia es.
 data/reports/placas-x/*.png
+
+# Cache incremental de TypeScript: se regenera en cada `tsc` y cambia en cada commit.
+# Estaba versionado y chocaba en TODOS los merges, sin aportar nada.
+tsconfig.tsbuildinfo

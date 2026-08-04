@@ -21,6 +21,8 @@ import type { Player, Squad, FormationConfig } from "@/lib/types"
 import { calculateChemistry } from "@/lib/chemistry"
 import { getPC } from "@/lib/ui-constants"
 import MatchChronicleFeed from "@/components/tournament/MatchChronicleFeed"
+import RuedaDeClubes from "@/components/ui/RuedaDeClubes"
+import clubsData from "@/data/clubs.json"
 
 function getEligibleSquadsForSlot(
   squads: Squad[], players: Player[], slotPosition: string, draftedIds: Set<string>
@@ -56,6 +58,11 @@ interface VersusMatchEvent {
   team: "home" | "away"
   playerId?: string
   playerName?: string
+}
+
+/** Los colores del club, para pintar su gajo en la rueda. */
+function clubColors(clubId: string): string[] | undefined {
+  return (clubsData as { id: string; colors?: string[] }[]).find((c) => c.id === clubId)?.colors
 }
 
 export default function VersusPage() {
@@ -628,30 +635,20 @@ export default function VersusPage() {
                     Buscando para: {POS_LABELS[currentSlot.pos] || currentSlot.pos}
                   </h4>
 
-                  {/* Roulette wheel element */}
-                  <div className="relative w-28 h-28 mx-auto my-5">
-                    <motion.div
-                      animate={activeDT.spinning ? { rotate: 360 * 3 } : { rotate: 0 }}
-                      transition={{ duration: 1, ease: "easeOut" }}
-                      className="absolute inset-0 rounded-full border-[6px] border-slate-950 bg-slate-900 flex items-center justify-center shadow-inner"
-                    >
-                      {activeDT.currentSquad ? (
-                        <div className="relative w-12 h-12">
-                          <Image
-                            src={`/logos/clubs/${activeDT.currentSquad.id.replace(/-20\d\ds$/, "")}.png`}
-                            alt="Logo"
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
-                      ) : (
-                        <svg className="w-6 h-6 text-[#D4AF37] fill-current" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                        </svg>
-                      )}
-                    </motion.div>
-                    {/* Spinner Arrow Indicator */}
-                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-yellow-400 border-2 border-slate-950 rotate-45 z-10 rounded-br" />
+                  {/* La rueda de verdad: un gajo por club candidato, con sus colores, que frena
+                      en el que salió. La anterior era un círculo gris con una estrella adentro
+                      que giraba y paraba sin mostrar qué se estaba sorteando. */}
+                  <div className="my-5">
+                    <RuedaDeClubes
+                      gajos={eligibleSquads.map((sq) => ({
+                        id: sq.clubId,
+                        label: sq.label,
+                        colores: clubColors(sq.clubId),
+                      }))}
+                      ganadorId={activeDT.currentSquad?.clubId ?? null}
+                      girando={activeDT.spinning}
+                      size={132}
+                    />
                   </div>
 
                   {activeDT.currentSquad ? (

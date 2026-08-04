@@ -919,6 +919,30 @@ export function sortearTalento(rng: () => number = Math.random): Talento {
 const CRECIMIENTO_TALENTO: Record<Talento, number> = { normal: 0, destacado: 0.75, generacional: 1.5 }
 const TECHO_TALENTO: Record<Talento, number> = { normal: 85, destacado: 89, generacional: 97 }
 
+/**
+ * Hasta dónde te deja llegar el lugar donde jugás.
+ *
+ * Un 9 que se queda toda la vida en el Torneo Federal A no llega a 88 por más que meta cien
+ * goles: entrena con lo que hay, juega contra lo que hay y nadie lo ve. Sin este techo el
+ * escalón del juego se rompía —quedarse abajo rendía igual que dar el salto— y la escalera de
+ * ofertas dejaba de tener sentido: para qué irte si vas a llegar al mismo lado.
+ *
+ * No es un castigo: es el motivo por el que aceptar la oferta importa. El techo sube apenas
+ * cambiás de aire, y el que salta a Europa no tiene ninguno.
+ *
+ * El nivel de liga va de 8 (Federal A) a 100 (Série A), así que el techo va de 71 a 90; Europa
+ * queda libre hasta el techo por talento.
+ *
+ * El rango tiene que ser ANCHO o el techo no muerde: con 74-92 el de la Primera Nacional daba
+ * 82, por encima del techo por edad, así que quedarse y saltar terminaban en el mismo OVR y el
+ * escalón no significaba nada. Medido: 81 contra 80.
+ */
+function techoPorLiga(club: CareerClub | undefined): number {
+  if (!club || club.region === 'euro') return 99
+  const nivel = club.ligaId ? nivelDeLiga(club.ligaId) : 78
+  return Math.round(clamp(70 + (nivel / 100) * 20, 70, 90))
+}
+
 function nextOvr(
   ovr: number,
   age: number,
@@ -927,6 +951,7 @@ function nextOvr(
   euroBonus = 0,
   talento: Talento = 'normal',
   lesionGrave = false,
+  techoLiga = 99,
 ): number {
   const luck = rng()
   let delta: number
@@ -943,9 +968,18 @@ function nextOvr(
   if (substanceHit) delta += 5
   if (lesionGrave) delta -= 2 // una lesión seria deja secuela
   delta += euroBonus
-  // Respeta el techo por edad Y el techo de nacimiento: un jugador normal no llega a 90 ni
-  // jugando cien temporadas, y ahí está la gracia de que salga un generacional.
-  return clamp(Math.round(ovr + delta), 55, Math.min(ovrCapForAge(age + 1), TECHO_TALENTO[talento]))
+  // Tres techos: la edad, el talento con el que naciste y la categoría donde jugás.
+  //
+  // El de la liga NO baja el OVR que ya tenés —el que llegó a 85 y bajó a la B no se
+  // desintegra— sino que frena el crecimiento mientras estés ahí. Por eso se aplica solo
+  // cuando el delta es positivo.
+  const techo = Math.min(ovrCapForAge(age + 1), TECHO_TALENTO[talento])
+  const conDelta = Math.round(ovr + delta)
+  if (delta > 0 && conDelta > techoLiga) {
+    // Se puede acercar al techo de la categoría, pero no pasarlo.
+    return clamp(Math.max(ovr, Math.min(conDelta, techoLiga)), 55, techo)
+  }
+  return clamp(conDelta, 55, techo)
 }
 
 function buildCronica(
@@ -1334,9 +1368,13 @@ export function simulateSeason(
 
   // Carreras guardadas de antes no traen talento: se tratan como normales.
   const talento = state.talento ?? 'normal'
-  let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus, talento, lesionGrave)
+  // El techo de la categoría donde juega: quedarse toda la vida en el Ascenso no puede rendir
+  // lo mismo que dar el salto, o la escalera de ofertas no significa nada.
+  const techoLiga = techoPorLiga(club)
+  let grownOvr = nextOvr(ovr, age, rng, substanceHit, euroBonus, talento, lesionGrave, techoLiga)
   // Bonus de OVR de la decisión (trabajo físico, capitanía, adaptarse, mentor, renovar...).
-  if (bonusOvr) grownOvr = clamp(grownOvr + bonusOvr, 55, ovrCapForAge(age + 1))
+  // También respeta el techo de la categoría: entrenar no reemplaza jugar contra buenos.
+  if (bonusOvr) grownOvr = clamp(grownOvr + bonusOvr, 55, Math.min(ovrCapForAge(age + 1), Math.max(grownOvr, techoLiga)))
   // Mala reacción a la sustancia: -2 OVR (el riesgo real de apostar).
   if (substanceBad) grownOvr = clamp(grownOvr - 2, 55, ovrCapForAge(age + 1))
   // Barrabravas: efecto de la decisión tomada.

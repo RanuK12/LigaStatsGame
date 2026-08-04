@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import novedadesData from "@/data/novedades.json"
 
 type Novedad = { fecha: string; titulo: string; texto: string }
 
 const novedades = novedadesData as Novedad[]
-const VISIBLES = 3
+const VISIBLES = 4
 
 /**
  * Las últimas novedades del juego, en el home.
@@ -35,23 +36,54 @@ export default function Novedades() {
           </span>
         </div>
 
-        <ul className="mt-4 space-y-3.5">
-          {lista.map((n) => (
-            <li key={n.titulo} className="border-l-2 border-[#E7C27D]/30 pl-3.5">
-              <h3 className="font-display text-sm sm:text-base font-black text-white uppercase tracking-tight">
-                {n.titulo}
-              </h3>
-              <p className="mt-1 text-[12px] leading-relaxed text-slate-400 font-sans">{n.texto}</p>
-            </li>
-          ))}
+        {/* Cada novedad es una tarjeta, no un renglón con una rayita al costado: se lee que
+            son cosas distintas y las nuevas se distinguen de las de hace dos semanas. */}
+        <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+          <AnimatePresence initial={false}>
+            {lista.map((n, i) => {
+              const nueva = n.fecha === novedades[0].fecha
+              return (
+                <motion.li
+                  key={n.titulo}
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ delay: Math.min(i, VISIBLES) * 0.05 }}
+                  whileHover={{ y: -3 }}
+                  className={`group relative overflow-hidden rounded-2xl border p-3.5 transition-colors ${
+                    nueva
+                      ? "border-[#E7C27D]/40 bg-gradient-to-b from-[#E7C27D]/[0.09] to-transparent"
+                      : "border-white/[0.07] bg-white/[0.02] hover:border-white/20"
+                  }`}
+                >
+                  {/* El resplandor que cruza al pasar el mouse: cuesta cero y hace que la
+                      tarjeta se sienta viva en vez de un cuadro de texto. */}
+                  <span className="pointer-events-none absolute inset-y-0 -left-full w-1/2 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent transition-[left] duration-700 group-hover:left-full" />
+                  {nueva && (
+                    <span className="font-sport mb-1 inline-block rounded-full bg-[#E7C27D]/20 px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.2em] text-[#E7C27D]">
+                      Nuevo
+                    </span>
+                  )}
+                  <h3 className="font-display text-sm font-black uppercase tracking-tight text-white sm:text-base">
+                    {n.titulo}
+                  </h3>
+                  <p className="mt-1 font-sans text-[12px] leading-relaxed text-slate-400">{n.texto}</p>
+                </motion.li>
+              )
+            })}
+          </AnimatePresence>
         </ul>
 
         {novedades.length > VISIBLES && (
           <button
             onClick={() => setAbierto((v) => !v)}
-            className="mt-4 -mx-2 min-h-[44px] rounded-xl px-2 py-2.5 text-[10px] font-black uppercase tracking-widest text-[#74ACDF] font-sport transition-colors hover:bg-white/5 hover:text-white"
+            className="font-sport mt-4 flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-xl border border-white/10 px-4 py-2.5 text-[10px] font-black uppercase tracking-widest text-[#74ACDF] transition-colors hover:border-[#74ACDF]/40 hover:bg-white/5 hover:text-white"
           >
             {abierto ? "Ver menos" : `Ver las ${novedades.length} novedades`}
+            <motion.span animate={{ rotate: abierto ? 180 : 0 }} transition={{ duration: 0.25 }} className="inline-block">
+              ▾
+            </motion.span>
           </button>
         )}
       </div>
