@@ -3,6 +3,7 @@ import { Sora, Space_Grotesk, Inter, Bebas_Neue, Kanit } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/components/Header'
+import TickerNovedades from '@/components/TickerNovedades'
 import AuthModal from '@/components/AuthModal'
 import UserProfileModal from '@/components/UserProfileModal'
 import Analytics from '@/components/Analytics'
@@ -138,6 +139,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-[#020813] text-white min-h-screen antialiased font-sans">
+        {/* La cinta va ARRIBA del header y fuera del sticky: si entrara adentro, el header
+            crecería y taparía más pantalla en el celular, que es donde menos sobra. */}
+        <TickerNovedades />
         <Header />
         <main className="w-full">{children}</main>
         <AuthModal />

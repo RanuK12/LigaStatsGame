@@ -582,6 +582,17 @@ button, input, select, textarea {
   );
 }
 
+/* ── Cinta de novedades ──
+   Se desplaza exactamente el 50 %: la lista va duplicada, así que al terminar la primera copia
+   la segunda queda justo donde arrancó y el bucle no salta. */
+@keyframes tickerCorre { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+.ticker-cinta { animation: tickerCorre 40s linear infinite; }
+
+/* A quien pidió menos movimiento no se le mueve nada: la cinta queda quieta y legible. */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-cinta { animation: none; }
+}
+
 /* ── Estallido de evento grande (título, Balón de Oro, salto a Europa) ── */
 @keyframes burstRays { from { transform: rotate(0deg) scale(0.6); opacity: 0 } 25% { opacity: .85 } to { transform: rotate(160deg) scale(2.6); opacity: 0 } }
 @keyframes burstFlash { from { opacity: 0 } 12% { opacity: .9 } to { opacity: 0 } }

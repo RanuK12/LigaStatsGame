@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Europa League">
+  <defs>
+    <linearGradient id="eu" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F6D9B0"/>
+      <stop offset="0.45" stop-color="#C98A45"/>
+      <stop offset="1" stop-color="#7A4A18"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M22 14 h20 v11 c0 7 -4.6 11.5 -10 11.5 S22 32 22 25 z" fill="url(#eu)"/>
+  <path d="M22 15.5 h4.5 v9.5 c0 4.6 1.8 8 4 9.5 -5.2 -1 -8.5 -5 -8.5 -9.5 z" fill="url(#brillo)"/>
+  <path d="M22 17 c-5.5 0 -8 3 -8 6.5 s2.5 6.5 8 6.5" fill="none" stroke="url(#eu)" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M42 17 c5.5 0 8 3 8 6.5 s-2.5 6.5 -8 6.5" fill="none" stroke="url(#eu)" stroke-width="2.6" stroke-linecap="round"/>
+  <rect x="30" y="36" width="4" height="15" fill="url(#eu)"/>
+
+  <rect x="20" y="52" width="24" height="4.5" rx="1.6" fill="url(#eu)"/>
+  <rect x="15" y="56" width="34" height="5.5" rx="2" fill="url(#eu)" opacity="0.9"/>
+</svg>

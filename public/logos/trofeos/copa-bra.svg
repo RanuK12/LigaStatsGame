@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Copa do Brasil">
+  <defs>
+    <linearGradient id="copabra" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D9F5E4"/>
+      <stop offset="0.45" stop-color="#006437"/>
+      <stop offset="1" stop-color="#00301B"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M23 9 h18 v18 c0 7 -4 11.5 -9 11.5 S23 34 23 27 z" fill="url(#copabra)"/>
+  <path d="M23 10.5 h4.5 v16.5 c0 4.6 1.6 8 3.8 9.6 -5 -1 -8.3 -5 -8.3 -9.6 z" fill="url(#brillo)"/>
+  <path d="M24.5 13 c-5.4 0 -8 2.6 -8 6 s2.6 6 8 6" fill="none" stroke="url(#copabra)" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M39.5 13 c5.4 0 8 2.6 8 6 s-2.6 6 -8 6" fill="none" stroke="url(#copabra)" stroke-width="2.6" stroke-linecap="round"/>
+  <rect x="30" y="38.5" width="4" height="12" fill="url(#copabra)"/>
+
+  <rect x="20" y="52" width="24" height="4.5" rx="1.6" fill="url(#copabra)"/>
+  <rect x="15" y="56" width="34" height="5.5" rx="2" fill="url(#copabra)" opacity="0.9"/>
+</svg>

@@ -96,12 +96,13 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation — a lg, no a md: con md se encendía a 768px, donde no entraba */}
-        <nav className="hidden shrink-0 items-center gap-0.5 lg:flex xl:gap-1">
-          {[...NAV_ITEMS, ...NAV_MAS].map((item, i) => {
-            // De xl para arriba se ven los ocho: esconder destinos detrás de un menú hace que
-            // gente que entraría a Datos o a Versus no se entere de que existen. El menú MÁS
-            // sobrevive solo entre 1024 y 1279px, donde los ocho no entran.
-            const secundario = i >= NAV_ITEMS.length
+        <nav className="hidden shrink-0 items-center gap-1 lg:flex">
+          {NAV_ITEMS.map((item) => {
+            // SOLO los cuatro modos de juego. Antes, de 1280px para arriba, se mostraban los
+            // diez destinos con el mismo peso: DRAFT pesaba igual que CÓMO SE JUEGA y la barra
+            // se leía como el menú de un sitio corporativo, sin decir a qué se viene a jugar.
+            // El resto vive en MÁS, que ahora está siempre.
+            const secundario = false
             const matchPath = item.match || item.href
             const isActive = pathname === matchPath || (matchPath !== '/' && pathname.startsWith(matchPath))
 
@@ -109,7 +110,9 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative rounded-2xl px-2.5 py-2 font-sport text-[11px] font-bold uppercase tracking-[0.08em] transition-all duration-300 ease-out xl:tracking-[0.1em] ${
+                // 12px con poco tracking en vez de 11px con 0.1em: las mayúsculas espaciadas se
+                // leen palabra por palabra, y una nav se lee de un vistazo o no se lee.
+                className={`relative rounded-2xl px-3.5 py-2.5 font-sport text-[12px] font-bold uppercase tracking-[0.04em] transition-all duration-300 ease-out ${
                   isActive ? 'text-white' : 'text-slate-400 hover:text-white'
                 } ${secundario ? 'hidden xl:block' : ''}`}
               >
@@ -130,14 +133,14 @@ export default function Header() {
               desaparecía, y para llegar a una opción había que cruzar el hueco entre el botón y la
               lista. Ahora hay un margen de gracia de 420ms y el hueco está cubierto. */}
           <div
-            className="relative xl:hidden"
+            className="relative"
             onMouseEnter={() => { if (cierre.current) clearTimeout(cierre.current) }}
             onMouseLeave={() => { cierre.current = setTimeout(() => setMasOpen(false), 420) }}
           >
             <button
               onMouseEnter={() => { if (cierre.current) clearTimeout(cierre.current); setMasOpen(true) }}
               onClick={() => setMasOpen((v) => !v)}
-              className={`relative flex items-center gap-1 rounded-2xl px-3.5 py-2 font-sport text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-300 ease-out ${
+              className={`relative flex items-center gap-1.5 rounded-2xl px-3.5 py-2.5 font-sport text-[12px] font-bold uppercase tracking-[0.04em] transition-all duration-300 ease-out ${
                 masActivo ? 'text-white' : 'text-slate-400 hover:text-white'
               }`}
               aria-expanded={masOpen}
@@ -207,7 +210,12 @@ export default function Header() {
           ) : (
             <button
               onClick={openAuthModal}
-              className="btn-primary px-3.5 py-1.5 text-[10px] font-bold tracking-widest uppercase font-sport rounded-xl shadow-md"
+              // `.btn-primary` trae letter-spacing 0.28em y font-family Sora, y como los define
+              // en CSS puro le ganan a las utilidades de Tailwind. A este tamaño 0.28em da 3 px
+              // entre letras —bien para el CTA grande del home, ilegible acá— y la fuente
+              // distinta hacía que en la misma barra convivieran tres tipografías. Se pisan las
+              // dos con `!`, sin tocar el global que usa el resto del sitio.
+              className="btn-primary min-h-0 rounded-xl px-4 py-2 !font-sport text-[11px] font-bold uppercase !tracking-[0.06em] shadow-md"
             >
               INGRESAR
             </button>

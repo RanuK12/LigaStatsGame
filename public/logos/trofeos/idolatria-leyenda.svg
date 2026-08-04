@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Leyenda">
+  <defs>
+    <linearGradient id="idle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF9DE"/>
+      <stop offset="0.45" stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#8A6410"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 7 L52 14 v16 c0 12 -8.2 20.5 -20 24.5 C20.2 50.5 12 42 12 30 V14 z" fill="url(#idle)"/>
+  <path d="M32 7 L22 10.5 v19.5 c0 9 4.2 15.8 10 20 -11.8 -4 -20 -12.5 -20 -24.5 V14 z" fill="url(#brillo)"/>
+  <circle cx="32" cy="21" r="4.4" fill="#5A3B08" fill-opacity="0.55"/>
+  <path d="M26.5 27 c0 -2.6 2.4 -4.4 5.5 -4.4 s5.5 1.8 5.5 4.4 v12 h-11 z" fill="#5A3B08" fill-opacity="0.55"/>
+  <rect x="22" y="39.5" width="20" height="4" rx="1.2" fill="#5A3B08" fill-opacity="0.55"/>
+  <rect x="19.5" y="43.5" width="25" height="4" rx="1.2" fill="#5A3B08" fill-opacity="0.42"/>
+</svg>

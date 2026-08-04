@@ -7,6 +7,7 @@ import {
   type TransferOffer,
   MAX_SEASONS,
   TROPHY_META,
+  trofeoDeCopaNacional,
   findClub,
   marketValueFor,
   makeRng,
@@ -163,6 +164,8 @@ export const useCareerStore = create<CareerStore>()(
             pendingOffers: offers,
             nextContinental: nextContinentalFrom(season),
             playsMundialClubes: playsMundialClubesFrom(season),
+            // Si el club subió o bajó, el año que viene juega en otra categoría.
+            ligaActualId: season.nuevaLigaId ?? state.ligaActualId,
             milestones,
             finished: seasonsPlayed >= MAX_SEASONS,
           },
@@ -190,6 +193,8 @@ export const useCareerStore = create<CareerStore>()(
           career: {
             ...state,
             clubId: offer.clubId,
+            // El club nuevo trae su propia categoría: la del anterior no lo sigue.
+            ligaActualId: undefined,
             clubHistory: state.clubHistory.includes(offer.clubId)
               ? state.clubHistory
               : [...state.clubHistory, offer.clubId],
@@ -255,8 +260,14 @@ export function buildCareerCardData(state: CareerState): CareerCardData {
     .filter(([, count]) => count > 0)
     .map(([id, count]) => ({
       id,
-      name: TROPHY_META[id]?.name ?? id,
-      icon: TROPHY_META[id]?.icon ?? '🏆',
+      name: id === 'copa-arg'
+        ? trofeoDeCopaNacional(findClub(state.clubId)?.pais).name
+        : (TROPHY_META[id]?.name ?? id),
+      // La ruta al SVG del trofeo. Para la copa nacional depende del país del club: todas se
+      // guardan como 'copa-arg' pero el que ganó la Copa do Brasil tiene que ver la brasileña.
+      icon: id === 'copa-arg'
+        ? trofeoDeCopaNacional(findClub(state.clubId)?.pais).icon
+        : (TROPHY_META[id]?.icon ?? '/logos/trofeos/lpf.svg'),
       count,
     }))
 
@@ -279,7 +290,12 @@ export function buildCareerCardData(state: CareerState): CareerCardData {
     idolatria: (() => {
       const i = clubDeLaVida(state)
       if (!i || i.nivel.id === 'uno-mas') return undefined
-      return { nivel: i.nivel.nombre, icono: i.nivel.icono, clubName: findClub(i.clubId)?.name ?? i.clubName }
+      return {
+        nivel: i.nivel.nombre,
+        icono: i.nivel.icono,
+        imagen: i.nivel.imagen,
+        clubName: findClub(i.clubId)?.name ?? i.clubName,
+      }
     })(),
   }
 }

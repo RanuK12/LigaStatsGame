@@ -1,4 +1,5 @@
 import clubsData from '@/data/clubs.json'
+import ligasData from '@/data/derived/ligas.json'
 import { CONTINENTAL_CLUBS } from './copa-libertadores'
 import { simularMundial, resumenMundial, type WorldCupRun } from './world-cup'
 
@@ -40,11 +41,48 @@ export type ContinentalComp = 'libertadores' | 'sudamericana' | 'champions' | 'e
 export interface CareerClub {
   id: string
   name: string
+  /** El nombre completo, para las pantallas donde entra ("Club Atlético Chacarita Juniors"). */
+  nombreLargo?: string
   strength: number
   continental: boolean
   region: Region
   flag?: string
   colors?: string[]
+  /** Solo los clubes de data/derived/ligas.json: sin esto no hay ascenso ni descenso. */
+  ligaId?: string
+  division?: number
+  pais?: string
+  ciudad?: string
+  escudo?: string
+}
+
+/** Una liga jugable: la estructura del campeonato, no solo su nombre. */
+export interface Liga {
+  id: string
+  pais: string
+  iso: string
+  bandera: string
+  nombre: string
+  division: number
+  copa: string
+  continental: string
+  equipos: number
+  formato: 'liga' | 'semestral' | 'playoff'
+  asciende: number
+  desciende: number
+  nota?: string
+  clubIds: string[]
+}
+
+export interface PaisCarrera {
+  nombre: string
+  bandera: string
+  iso: string
+  copa: string
+  continental: string
+  gentilicio: string
+  plazas: { libertadores: number; sudamericana: number }
+  ligaIds: string[]
 }
 
 /** Argentine clubs from clubs.json, excluding the national team entry. */
@@ -57,6 +95,11 @@ export const ARG_CLUBS: CareerClub[] = (clubsData as any[])
     continental: false,
     region: 'arg' as Region,
     colors: c.colors,
+    // La Primera argentina es el techo de su pirámide: sin esto, un club de acá no puede
+    // descender y el ascenso desde la Primera Nacional no lleva a ningún lado.
+    ligaId: 'ar-1',
+    division: 1,
+    pais: 'Argentina',
   }))
 
 export const SUDAM_CLUBS: CareerClub[] = CONTINENTAL_CLUBS.filter(
@@ -78,10 +121,115 @@ export const EURO_CLUBS: CareerClub[] = [
   { id: 'borussia-dortmund', name: 'Borussia Dortmund', strength: 82, continental: true, region: 'euro', flag: '🇩🇪' },
 ]
 
-export const ALL_CLUBS: CareerClub[] = [...ARG_CLUBS, ...SUDAM_CLUBS, ...EURO_CLUBS]
+/**
+ * Los 414 clubes del ascenso argentino y de las ligas de Uruguay, Chile, Colombia, Perú,
+ * Paraguay y Brasil (data/derived/ligas.json, generado desde Wikidata).
+ *
+ * Traen su liga y su división a cuestas porque el modo carrera las necesita: sin división no hay
+ * ascenso, y sin ascenso arrancar en la B no significa nada.
+ */
+export const LIGA_CLUBS: CareerClub[] = (ligasData.clubes as any[])
+  // Los que ya están en clubs.json con escudo real y plantel ganan: no se duplican.
+  .filter((c) => !ARG_CLUBS.some((a) => a.id === c.id) && !SUDAM_CLUBS.some((s) => s.id === c.id))
+  .map((c) => ({
+    id: c.id,
+    name: c.corto || c.nombre,
+    nombreLargo: c.nombre,
+    strength: c.fuerza,
+    continental: c.division === 1,
+    region: (c.pais === 'Argentina' ? 'arg' : 'sudam') as Region,
+    flag: c.bandera,
+    colors: c.colores,
+    ligaId: c.ligaId,
+    division: c.division,
+    pais: c.pais,
+    ciudad: c.ciudad,
+    escudo: `/logos/ligas/${c.id}.svg`,
+  }))
+
+export const LIGAS = ligasData.ligas as Liga[]
+export const PAISES_CARRERA = ligasData.paises as PaisCarrera[]
+
+export const ALL_CLUBS: CareerClub[] = [...ARG_CLUBS, ...SUDAM_CLUBS, ...EURO_CLUBS, ...LIGA_CLUBS]
+
+const CLUB_POR_ID = new Map(ALL_CLUBS.map((c) => [c.id, c]))
 
 export function findClub(id: string): CareerClub | undefined {
-  return ALL_CLUBS.find((c) => c.id === id)
+  // Un Map y no un find(): con 12 clubes daba igual, con 470 esto corre en cada temporada
+  // simulada, dentro del lazo de ofertas y del de rivales.
+  return CLUB_POR_ID.get(id)
+}
+
+/**
+ * Los clubes de una liga, de más fuerte a más débil.
+ *
+ * Mira ALL_CLUBS y no solo los generados: la Primera argentina vive en clubs.json, así que
+ * filtrar únicamente LIGA_CLUBS la dejaba vacía y el ascenso no llevaba a ninguna parte.
+ */
+export function clubesDeLiga(ligaId: string): CareerClub[] {
+  return ALL_CLUBS.filter((c) => c.ligaId === ligaId).sort((a, b) => b.strength - a.strength)
+}
+
+export function findLiga(id: string): Liga | undefined {
+  return LIGAS.find((l) => l.id === id)
+}
+
+/**
+ * El nivel de una liga, de 0 a 100.
+ *
+ * Es lo que hace que elegir dónde arrancar signifique algo: la Série A brasileña y el Torneo
+ * Federal A no pueden verse igual en la pantalla. Sale de la fuerza media de sus clubes, que ya
+ * trae adentro el coeficiente de país y la división.
+ */
+function mediaDeLiga(ligaId: string): number {
+  const c = clubesDeLiga(ligaId)
+  if (!c.length) return 0
+  // Los diez mejores pesan doble: el nivel de una liga lo marcan sus grandes, no el promedio
+  // con los veinte clubes de relleno que Wikidata trae de temporadas viejas.
+  const orden = [...c].sort((a, b) => b.strength - a.strength)
+  const top = orden.slice(0, 10)
+  const mediaTop = top.reduce((a, x) => a + x.strength, 0) / top.length
+  const mediaTodos = c.reduce((a, x) => a + x.strength, 0) / c.length
+  return mediaTop * 0.66 + mediaTodos * 0.34
+}
+
+const NIVEL_CACHE = new Map<string, number>()
+export function nivelDeLiga(ligaId: string): number {
+  const guardado = NIVEL_CACHE.get(ligaId)
+  if (guardado !== undefined) return guardado
+  // La escala se estira contra el rango REAL de las ligas cargadas, no contra números escritos
+  // a mano: con un piso y un techo fijos todo quedaba apretado entre 5 y 59, y la Primera
+  // argentina —que es de las mejores del continente— aparecía como "Media".
+  const medias = LIGAS.map((l) => mediaDeLiga(l.id)).filter((m) => m > 0)
+  const piso = Math.min(...medias)
+  const techo = Math.max(...medias)
+  const mia = mediaDeLiga(ligaId)
+  const rango = Math.max(techo - piso, 1)
+  const n = mia > 0 ? Math.round(clamp(8 + ((mia - piso) / rango) * 92, 5, 100)) : 0
+  NIVEL_CACHE.set(ligaId, n)
+  return n
+}
+
+/** Cómo se llama ese nivel, para no mostrar solo un número. */
+export function etiquetaDeNivel(nivel: number): string {
+  if (nivel >= 85) return 'Elite'
+  if (nivel >= 65) return 'Alta'
+  if (nivel >= 45) return 'Media'
+  if (nivel >= 25) return 'Baja'
+  return 'Amateur'
+}
+
+/**
+ * La liga de arriba y la de abajo, que es lo que hace posible el ascenso y el descenso.
+ * `null` cuando no hay: de la Primera de Brasil no se sube, y de la C no se baja.
+ */
+export function ligaVecina(ligaId: string, direccion: 'arriba' | 'abajo'): Liga | undefined {
+  const liga = findLiga(ligaId)
+  if (!liga) return undefined
+  const objetivo = direccion === 'arriba' ? liga.division - 1 : liga.division + 1
+  // En Argentina la tercera son dos torneos en paralelo (Metro y Federal): se sube al de la
+  // misma división y se baja al que corresponde por región, que acá es el primero que haya.
+  return LIGAS.find((l) => l.pais === liga.pais && l.division === objetivo)
 }
 
 function argClubStrength(titles: number, libertadores: number, id: string): number {
@@ -565,6 +713,12 @@ export interface SeasonResult {
   clasificoLibertadores?: boolean // el año que viene se juega la Copa grande
   mundialClubes?: boolean // el club jugó el Mundial de Clubes (por ganar la continental)
   mundialClubesGanado?: boolean
+  ascendio?: boolean // el club subió de categoría
+  descendio?: boolean
+  /** La liga en la que juega el club el año que viene, si cambió de categoría. */
+  nuevaLigaId?: string
+  /** "🇺🇾 Primera División", para mostrar dónde se jugó esa temporada. */
+  ligaNombre?: string
 }
 
 export interface Milestones {
@@ -605,19 +759,66 @@ export interface CareerState {
   talento?: Talento
   /** El club ganó la continental el año pasado: esta temporada juega el Mundial de Clubes. */
   playsMundialClubes?: boolean
+  /**
+   * La liga donde juega HOY el club del jugador, cuando ascendió o descendió.
+   *
+   * El club vive en un archivo generado, con su liga fija: la categoría que cambia es la del
+   * club EN ESTA CARRERA. Guardarla acá es lo que permite que Chacarita ascienda en tu partida
+   * sin que ascienda en la de todos.
+   */
+  ligaActualId?: string
 }
 
 export const MAX_SEASONS = 15
 
-export const TROPHY_META: Record<string, { name: string; icon: string }> = {
-  lpf: { name: 'Liga', icon: '⭐' },
-  'copa-arg': { name: 'Copa Argentina', icon: '🥛' },
-  libertadores: { name: 'Libertadores', icon: '🏆' },
-  sudamericana: { name: 'Sudamericana', icon: '🥇' },
-  champions: { name: 'Champions League', icon: '🌟' },
-  europa: { name: 'Europa League', icon: '🎖️' },
-  mundial: { name: 'Mundial', icon: '🌍' },
-  'mundial-clubes': { name: 'Mundial de Clubes', icon: '🌐' },
+/**
+ * Los títulos, con su trofeo dibujado.
+ *
+ * `icon` era un emoji: la Libertadores 🏆, la Copa Argentina 🥛 (una copa de leche) y el Mundial
+ * 🌍. Además de quedar pobre al lado de los escudos, cada sistema dibuja los emojis distinto, así
+ * que la ficha que comparte alguien de iPhone no es la misma que la de Android.
+ *
+ * Ahora cada uno tiene su SVG en /logos/trofeos/. El emoji queda como `emoji` porque hay lugares
+ * donde solo entra texto plano —el texto de un tweet, un mensaje de Telegram— y ahí sigue
+ * sirviendo.
+ */
+export const TROPHY_META: Record<string, { name: string; icon: string; emoji: string }> = {
+  lpf: { name: 'Liga', icon: '/logos/trofeos/lpf.svg', emoji: '⭐' },
+  'copa-arg': { name: 'Copa Argentina', icon: '/logos/trofeos/copa-arg.svg', emoji: '🥛' },
+  libertadores: { name: 'Libertadores', icon: '/logos/trofeos/libertadores.svg', emoji: '🏆' },
+  sudamericana: { name: 'Sudamericana', icon: '/logos/trofeos/sudamericana.svg', emoji: '🥇' },
+  champions: { name: 'Champions League', icon: '/logos/trofeos/champions.svg', emoji: '🌟' },
+  europa: { name: 'Europa League', icon: '/logos/trofeos/europa.svg', emoji: '🎖️' },
+  mundial: { name: 'Mundial', icon: '/logos/trofeos/mundial.svg', emoji: '🌍' },
+  'mundial-clubes': { name: 'Mundial de Clubes', icon: '/logos/trofeos/mundial-clubes.svg', emoji: '🌐' },
+  ascenso: { name: 'Ascenso', icon: '/logos/trofeos/ascenso.svg', emoji: '🔼' },
+}
+
+/**
+ * La copa nacional según el país donde juega el club.
+ *
+ * Todos los títulos de copa nacional se guardan con el id 'copa-arg' —viene de cuando el juego
+ * era solo argentino— pero el trofeo que se muestra tiene que ser el del país: si ganaste la
+ * Copa do Brasil, en la ficha va la brasileña.
+ */
+const COPA_POR_PAIS: Record<string, string> = {
+  Argentina: 'copa-arg',
+  Uruguay: 'copa-uru',
+  Chile: 'copa-chi',
+  Colombia: 'copa-col',
+  'Perú': 'copa-per',
+  Paraguay: 'copa-par',
+  Brasil: 'copa-bra',
+}
+
+export function trofeoDeCopaNacional(pais?: string): { name: string; icon: string } {
+  const id = (pais && COPA_POR_PAIS[pais]) || 'copa-arg'
+  const nombres: Record<string, string> = {
+    'copa-arg': 'Copa Argentina', 'copa-uru': 'Copa Uruguay', 'copa-chi': 'Copa Chile',
+    'copa-col': 'Copa Colombia', 'copa-per': 'Copa Perú', 'copa-par': 'Copa Paraguay',
+    'copa-bra': 'Copa do Brasil',
+  }
+  return { name: nombres[id], icon: `/logos/trofeos/${id}.svg` }
 }
 
 export function makeRng(seed: number): () => number {
@@ -934,13 +1135,59 @@ export function simulateSeason(
   }
 
   const liga = rng() < ligaP
-  const copaArgentina = club.region === 'arg' && rng() < copaP
+  // La copa nacional la juegan todos los países que tienen una, no solo Argentina: un peruano
+  // pelea la Copa Perú igual que un argentino la Copa Argentina.
+  // La categoría que vale es la de esta carrera: si el club ascendió el año pasado, este año
+  // juega arriba.
+  const ligaDelClub = findLiga(state.ligaActualId ?? club.ligaId ?? '')
+  const juegaCopaNacional = club.region === 'arg' || Boolean(ligaDelClub?.copa)
+  const copaArgentina = juegaCopaNacional && rng() < copaP
   const continentalWon = rng() < contP
 
   const trophiesWon: string[] = []
   if (liga) trophiesWon.push('lpf')
   if (copaArgentina) trophiesWon.push('copa-arg')
   if (continentalWon) trophiesWon.push(contType)
+
+  // ── Ascenso y descenso ──
+  // Es lo que hace que arrancar en la B signifique algo: se sube peleándola y se puede bajar.
+  // Solo aplica a los clubes que tienen liga con estructura; los de clubs.json y los europeos
+  // están escritos a mano y no tienen división.
+  let ascendio = false
+  let descendio = false
+  let nuevaLigaId: string | undefined
+  if (ligaDelClub) {
+    const arriba = ligaVecina(ligaDelClub.id, 'arriba')
+    const abajo = ligaVecina(ligaDelClub.id, 'abajo')
+    // La chance sale de la fuerza del club DENTRO de su liga, no de su fuerza absoluta: el más
+    // fuerte de la B asciende seguido, el más débil se va a la C.
+    //
+    // El divisor es `equipos` —los que juegan el torneo de verdad— y no cuántos clubes trajo
+    // Wikidata: la Série A la juegan 20 y el archivo tiene 58, así que dividir por el archivo
+    // hacía que ascender y descender fueran casi imposibles en las ligas mejor documentadas.
+    const rivales = clubesDeLiga(ligaDelClub.id)
+    const puesto = Math.max(0, rivales.findIndex((c) => c.id === club.id))
+    const relativo = 1 - puesto / Math.max(rivales.length, 1) // 1 = el más fuerte de la liga
+    const enTorneo = Math.max(ligaDelClub.equipos || rivales.length, 8)
+    if (arriba && ligaDelClub.asciende > 0) {
+      // Un jugador muy por encima del club lo empuja: es la carrera del pibe que sube al equipo.
+      const empuje = clamp((ovr - club.strength) / 40, -0.05, 0.15)
+      // Exponente y no proporción directa: el candidato pelea el ascenso todos los años y el
+      // colista no lo pelea nunca, que es como se siente una categoría de verdad.
+      const pAsc = clamp((ligaDelClub.asciende / enTorneo) * Math.pow(relativo, 1.6) * 2.4 + empuje, 0, 0.5)
+      ascendio = rng() < pAsc
+      if (ascendio) {
+        nuevaLigaId = arriba.id
+        trophiesWon.push('ascenso')
+      }
+    }
+    if (!ascendio && abajo && ligaDelClub.desciende > 0) {
+      const salvavidas = clamp((ovr - club.strength) / 50, 0, 0.12)
+      const pDesc = clamp((ligaDelClub.desciende / enTorneo) * Math.pow(1 - relativo, 1.6) * 2.2 - salvavidas, 0, 0.45)
+      descendio = rng() < pDesc
+      if (descendio) nuevaLigaId = abajo.id
+    }
+  }
 
   // Mundial de Clubes: se entra por ser campeón de la Libertadores (o de la Champions). El
   // torneo se juega al año siguiente, así que lo dispara el estado que dejó la temporada
@@ -987,9 +1234,24 @@ export function simulateSeason(
     europa: 'Europa League',
   }
   const highlights: string[] = []
-  if (liga) highlights.push(`🏆 Campeón de la Liga con ${club.name}`)
+  // El ascenso va PRIMERO: en la B es el título del año y le gana a cualquier otra cosa.
+  if (ascendio) {
+    const arriba = ligaVecina(ligaDelClub!.id, 'arriba')
+    highlights.push(`🔼 ¡ASCENSO! ${club.name} sube a ${arriba?.nombre ?? 'la categoría de arriba'}`)
+  }
+  if (descendio) {
+    const abajo = ligaVecina(ligaDelClub!.id, 'abajo')
+    highlights.push(`🔽 ${club.name} se fue al descenso: el año que viene, ${abajo?.nombre ?? 'una categoría menos'}`)
+  }
+  if (liga) {
+    highlights.push(
+      ligaDelClub
+        ? `🏆 Campeón de ${ligaDelClub.nombre} con ${club.name}`
+        : `🏆 Campeón de la Liga con ${club.name}`,
+    )
+  }
   if (continentalWon) highlights.push(`${TROPHY_META[contType]?.icon || '🌎'} Levantaste la ${CONT_NAME[contType]}`)
-  if (copaArgentina) highlights.push(`🥛 Campeón de la Copa Argentina`)
+  if (copaArgentina) highlights.push(`🥛 Campeón de la ${ligaDelClub?.copa || 'Copa Argentina'}`)
   if (mundialClubesGanado) highlights.push(`🌐 ¡CAMPEÓN DEL MUNDO DE CLUBES! Le ganaste a Europa`)
   else if (mundialClubes) highlights.push(`🌐 Jugaste el Mundial de Clubes representando a Sudamérica`)
   if (clasificoLibertadores) highlights.push(`🏆 Clasificaste a la próxima Copa Libertadores`)
@@ -1110,6 +1372,10 @@ export function simulateSeason(
     penaltiesSaved,
     yellowCards,
     redCards,
+    ascendio,
+    descendio,
+    nuevaLigaId,
+    ligaNombre: ligaDelClub ? `${ligaDelClub.bandera} ${ligaDelClub.nombre}` : undefined,
   }
 
   const offers = generateOffers(state, performance, rng, decisionOptionId)
@@ -1137,6 +1403,21 @@ export function topeTraspaso(club: CareerClub): number {
   return 2
 }
 
+/**
+ * El nivel del club en la escalera, 0-100.
+ *
+ * Los europeos no están en ninguna liga del archivo: son el último escalón y van por encima de
+ * todo lo demás, escalados desde su propia fuerza para que Real Madrid no valga lo mismo que
+ * Borussia Dortmund.
+ */
+function nivelDelClub(c: CareerClub): number {
+  if (c.region === 'euro') return 100 + (c.strength - 82) * 2
+  if (c.ligaId) return nivelDeLiga(c.ligaId)
+  // Los sudamericanos escritos a mano (copa-libertadores.ts) no tienen liga: se ubican con su
+  // fuerza en la misma escala que las primeras divisiones.
+  return clamp((c.strength - 50) * 3, 5, 100)
+}
+
 function generateOffers(state: CareerState, performance: number, rng: () => number, decisionOptionId?: string): TransferOffer[] {
   const current = findClub(state.clubId)!
   const value = state.player.marketValueM
@@ -1157,15 +1438,49 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
 
   const ovr = state.player.ovr
   const count = 1 + Math.floor(rng() * 3)
+
+  // ── La escalera ──
+  //
+  // El filtro de antes solo miraba la FUERZA del club, no dónde jugaba. Con 470 clubes eso
+  // significa que a alguien del Torneo Federal A le podía llegar una oferta de la Segunda
+  // uruguaya, de la Liga 2 peruana y de la Primera B chilena el mismo año, todas equivalentes:
+  // no había ninguna carrera que construir, solo clubes intercambiables.
+  //
+  // Ahora la carrera sube por escalones: primero un club mejor de tu misma categoría, después
+  // la de arriba de tu país, después un país más fuerte, y al final Europa. El salto que podés
+  // pegar depende de cuánto estés por encima de tu club: un fenómeno en la B se saltea etapas,
+  // el resto las camina.
+  const nivelActual = nivelDelClub(current)
+  // Cada punto de OVR por encima del club habilita más salto. Un jugador parejo con su equipo
+  // sube un escalón; uno que le saca 10 puntos puede pegar el salto largo.
+  const brecha = ovr - current.strength
+  // El tope importa tanto como la fórmula: con 70 de techo, un OVR 68 en la B Metropolitana
+  // (nivel 12) recibía oferta de Colo-Colo (nivel 81) en el primer pase, que es exactamente el
+  // salto que no puede pasar. Con 42, ese mismo jugador llega hasta la Primera Nacional o la
+  // Segunda uruguaya, y de ahí sigue subiendo si le va bien.
+  const saltoMaximo = clamp(12 + brecha * 1.5 + (performance - 0.5) * 14, 8, 42)
+
   const candidates = ALL_CLUBS.filter((c) => {
     if (c.id === state.clubId) return false
     // Un club NO ficha a alguien muy por debajo de su nivel (nada de River con un OVR bajo).
     if (ovr < c.strength - 7) return false
     // Ni muy por encima: un club chico no compra a una figura, no le da el bolsillo.
     if (c.region !== 'euro' && ovr > c.strength + 8) return false
-    if (c.region === 'euro') return ovr >= 78 && performance >= 0.5 && c.strength >= current.strength - 3
-    // Tiene que ser un paso adelante (o lateral), no un club peor.
-    return c.strength >= current.strength - 2
+    const nivelDestino = nivelDelClub(c)
+
+    // Europa es el ÚLTIMO escalón, no un atajo. Este `return` estaba antes del cálculo de nivel
+    // y se salteaba la escalera entera: un OVR 78 jugando en el Torneo Federal A recibía oferta
+    // del Manchester United sin haber pisado nunca una primera división. Ahora, además del OVR,
+    // hay que estar jugando en una liga que ya sea de nivel alto.
+    if (c.region === 'euro') {
+      return ovr >= 78 && performance >= 0.5 && nivelActual >= 60 && c.strength >= current.strength - 3
+    }
+    // Ni un salto imposible ni un paso atrás grande: nadie deja la Série A por la Primera B.
+    if (nivelDestino > nivelActual + saltoMaximo) return false
+    if (nivelDestino < nivelActual - 22) return false
+    // Y dentro de la misma categoría, tiene que ser un paso adelante.
+    if (nivelDestino <= nivelActual + 4 && c.strength < current.strength + 1) return false
+    return true
   }).sort(() => rng() - 0.5)
 
   return candidates.slice(0, count).map((c) => {

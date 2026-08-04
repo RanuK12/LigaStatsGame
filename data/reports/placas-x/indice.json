@@ -1,0 +1,306 @@
+[
+ {
+  "familia": "dilema",
+  "archivo": "dilema-barras.png"
+ },
+ {
+  "familia": "dilema",
+  "archivo": "dilema-capitania.png"
+ },
+ {
+  "familia": "dilema",
+  "archivo": "dilema-descenso.png"
+ },
+ {
+  "familia": "dilema",
+  "archivo": "dilema-europa.png"
+ },
+ {
+  "familia": "dilema",
+  "archivo": "dilema-pretemporada.png"
+ },
+ {
+  "familia": "dilema",
+  "archivo": "dilema-sustancia.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-argentinos-jrs-2010.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-arsenal-2007.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-arsenal-2012.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-banfield-2009.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-belgrano-2011.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-boca-juniors-1998.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-boca-juniors-2000.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-boca-juniors-2001.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-boca-juniors-2003.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-boca-juniors-2005.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-boca-juniors-2007.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-boca-juniors-2011.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-estudiantes-lp-2006.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-estudiantes-lp-2009.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-godoy-cruz-2011.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-huracan-2009.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-huracan-2014.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-independiente-1995.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-lanus-2007.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-lanus-2013.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-lanus-2016.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-newells-2004.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-newells-2013.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-racing-club-2014.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-river-plate-1996.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-river-plate-1997.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-river-plate-2014.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-river-plate-2021.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-rosario-central-1995.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-san-lorenzo-2001.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-san-lorenzo-2002.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-san-lorenzo-2014.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-tigre-2007.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-velez-1994.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-velez-1998.png"
+ },
+ {
+  "familia": "equipo",
+  "archivo": "equipo-velez-2005.png"
+ },
+ {
+  "familia": "idolatria",
+  "archivo": "idolatria-niveles.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-ar-1.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-ar-2.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-ar-3.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-ar-3f.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-br-1.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-br-2.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-cl-1.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-cl-2.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-co-1.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-co-2.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-pe-1.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-pe-2.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-py-1.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-py-2.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-uy-1.png"
+ },
+ {
+  "familia": "liga",
+  "archivo": "liga-uy-2.png"
+ },
+ {
+  "familia": "novedad",
+  "archivo": "novedad-ascenso.png"
+ },
+ {
+  "familia": "novedad",
+  "archivo": "novedad-leyenda.png"
+ },
+ {
+  "familia": "novedad",
+  "archivo": "novedad-link.png"
+ },
+ {
+  "familia": "novedad",
+  "archivo": "novedad-siete-paises.png"
+ },
+ {
+  "familia": "numero",
+  "archivo": "numero-categorias.png"
+ },
+ {
+  "familia": "numero",
+  "archivo": "numero-clubes.png"
+ },
+ {
+  "familia": "numero",
+  "archivo": "numero-historicos.png"
+ },
+ {
+  "familia": "numero",
+  "archivo": "numero-idolatria.png"
+ },
+ {
+  "familia": "numero",
+  "archivo": "numero-jugadores.png"
+ },
+ {
+  "familia": "numero",
+  "archivo": "numero-paises.png"
+ },
+ {
+  "familia": "numero",
+  "archivo": "numero-temporadas.png"
+ },
+ {
+  "familia": "pregunta",
+  "archivo": "pregunta-ascenso-o-grande.png"
+ },
+ {
+  "familia": "pregunta",
+  "archivo": "pregunta-donde-debutas.png"
+ },
+ {
+  "familia": "pregunta",
+  "archivo": "pregunta-idolo-o-plata.png"
+ },
+ {
+  "familia": "pregunta",
+  "archivo": "pregunta-mejor-5.png"
+ },
+ {
+  "familia": "pregunta",
+  "archivo": "pregunta-mejor-9.png"
+ },
+ {
+  "familia": "pregunta",
+  "archivo": "pregunta-plantel-historico.png"
+ }
+]

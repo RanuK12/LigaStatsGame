@@ -159,8 +159,13 @@ describe('prueba de humo del juego entero', () => {
   })
 
   it('todos los clubes que puede tocar la carrera tienen escudo', () => {
-    const sinEscudo = ALL_CLUBS.filter(
-      (c) => !fs.existsSync(`public/logos/clubs/${c.id}.png`) && !fs.existsSync(`public/logos/clubs/${c.id}.svg`),
+    // Cada club dice dónde está su escudo: los argentinos de Primera y los europeos en
+    // logos/clubs (reales), y los 414 de las ligas nuevas en logos/ligas (generados). Buscar
+    // todo en una sola carpeta daba 409 clubes "sin escudo" que sí lo tienen.
+    const sinEscudo = ALL_CLUBS.filter((c) =>
+      c.escudo
+        ? !fs.existsSync(`public${c.escudo}`)
+        : !fs.existsSync(`public/logos/clubs/${c.id}.png`) && !fs.existsSync(`public/logos/clubs/${c.id}.svg`),
     )
     anotar(`- Clubes de carrera sin escudo: **${sinEscudo.length}**${sinEscudo.length ? ' → ' + sinEscudo.map((c) => c.id).join(', ') : ''}`)
     expect(sinEscudo.map((c) => c.id)).toEqual([])

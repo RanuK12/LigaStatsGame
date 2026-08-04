@@ -33,10 +33,21 @@ function baseState(overrides: Partial<CareerState> = {}): CareerState {
 describe('career-engine', () => {
   it('club strength derivation covers all clubs within bounds', () => {
     expect(ALL_CLUBS.length).toBeGreaterThan(30)
+    // El piso bajó de 60 a 50 cuando entraron el ascenso y las ligas de los otros países: un
+    // club de la Primera B Metropolitana no puede valer lo mismo que uno de Primera, y esa
+    // diferencia es justamente lo que hace que ascender se sienta. Lo que sigue sin poder pasar
+    // es que las categorías se pisen, así que el test ahora mira eso.
     for (const c of ALL_CLUBS) {
-      expect(c.strength).toBeGreaterThanOrEqual(60)
+      expect(c.strength).toBeGreaterThanOrEqual(50)
       expect(c.strength).toBeLessThanOrEqual(90)
     }
+    const rango = (div: number) => {
+      const v = ALL_CLUBS.filter((c) => c.division === div).map((c) => c.strength)
+      return { min: Math.min(...v), max: Math.max(...v) }
+    }
+    expect(rango(1).min).toBeGreaterThan(rango(2).min)
+    expect(rango(2).min).toBeGreaterThan(rango(3).min)
+    expect(rango(1).max).toBeGreaterThan(rango(2).max)
     // National team entry must be excluded from the club pool.
     expect(ARG_CLUBS.some((c) => c.id === 'argentina')).toBe(false)
   })
