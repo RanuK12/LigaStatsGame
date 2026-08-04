@@ -58,6 +58,16 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
     return () => [t1, t2].forEach(clearTimeout)
   }, [career])
 
+  // Escape también cierra: es lo que la gente prueba antes de buscar la cruz.
+  useEffect(() => {
+    if (!career) return
+    const alTeclear = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    }
+    window.addEventListener("keydown", alTeclear)
+    return () => window.removeEventListener("keydown", alTeclear)
+  }, [career, onClose])
+
   const peak = career ? Math.max(career.player.ovr, ...career.history.map((s) => s.nextOvr ?? s.ovr)) : 0
   const titlesTotal = career ? Object.values(career.trophies).reduce((a, b) => a + b, 0) : 0
   const v = verdict(peak, titlesTotal, career?.milestones.worldCup ?? false, career?.milestones.balonDeOro ?? 0)
@@ -88,7 +98,7 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
 
   // Mensaje ya armado con lo mejor de la carrera
   const textoCarrera = career
-    ? `Terminé mi carrera en Gambeta y me parecí a ${parecido!.leyenda.nombre}: ${career.seasonsPlayed} temporadas, OVR pico ${peak}, ${titlesTotal} ${titlesTotal === 1 ? "título" : "títulos"}${career.milestones.worldCup ? " y CAMPEÓN DEL MUNDO 🌍" : ""}${career.milestones.balonDeOro ? ` · ${career.milestones.balonDeOro} Balón de Oro` : ""}. Creá tu crack y contame a quién te parecés vos`
+    ? `Terminé mi carrera en Gambeta y me parecí a ${parecido!.leyenda.nombre}: ${career.seasonsPlayed} ${career.seasonsPlayed === 1 ? 'temporada' : 'temporadas'}, OVR pico ${peak}, ${titlesTotal} ${titlesTotal === 1 ? "título" : "títulos"}${career.milestones.worldCup ? " y CAMPEÓN DEL MUNDO 🌍" : ""}${career.milestones.balonDeOro ? ` · ${career.milestones.balonDeOro} Balón de Oro` : ""}. Creá tu crack y contame a quién te parecés vos`
     : ""
 
   const milestones: { icon: string; label: string }[] = []
@@ -105,7 +115,11 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
     <AnimatePresence>
       {career && (
         <motion.div
-          className="fixed inset-0 z-[130] flex items-center justify-center overflow-y-auto p-4"
+          // `items-center` junto con `overflow-y-auto` en el MISMO elemento corta la parte de
+          // arriba cuando el contenido es más alto que la pantalla: el navegador no deja
+          // scrollear hacia el margen que genera el centrado. Con `items-start` + `my-auto` en
+          // el hijo, se centra cuando entra y se puede scrollear entero cuando no.
+          className="fixed inset-0 z-[130] flex items-start justify-center overflow-y-auto overscroll-contain p-4"
           initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           style={{ background: "radial-gradient(circle at 50% 20%, rgba(20,16,4,0.96), rgba(2,4,10,0.99))", backdropFilter: "blur(8px)" }}
         >
@@ -124,10 +138,20 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
           ))}
 
           <motion.div
-            className="relative my-8 w-[440px] max-w-[94vw] rounded-3xl border border-[#D4AF37]/30 bg-gradient-to-b from-[#161206]/95 to-slate-950/97 p-7 text-center shadow-[0_0_80px_rgba(212,175,55,0.25)]"
+            className="relative my-auto w-[440px] max-w-[94vw] rounded-3xl border border-[#D4AF37]/30 bg-gradient-to-b from-[#161206]/95 to-slate-950/97 p-7 pt-12 text-center shadow-[0_0_80px_rgba(212,175,55,0.25)]"
             initial={{ scale: 0.85, y: 30, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 140, damping: 16 }}
           >
+            {/* La cruz de cerrar. No estaba: para salir había que scrollear hasta abajo y
+                encontrar "Ver ficha", que nadie encuentra. */}
+            <button
+              onClick={onClose}
+              aria-label="Cerrar"
+              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/40 text-lg text-slate-300 transition-colors hover:border-white/40 hover:text-white"
+            >
+              ✕
+            </button>
+
             <div className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 font-sport">Fin de la carrera</div>
             <h2 className="mt-1 font-display text-3xl font-black uppercase text-white">
               {career.player.flag} {career.player.name}
@@ -246,7 +270,7 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
                     // hincha reconoce de una, mucho antes que el OVR pico.
                     subtitulo: [
                       idoloDe && `${idoloDe.nivel.nombre} de ${idoloDe.clubName}`,
-                      `${career.seasonsPlayed} temporadas`,
+                      `${career.seasonsPlayed} ${career.seasonsPlayed === 1 ? 'temporada' : 'temporadas'}`,
                       `${parecido!.parecido}% de parecido`,
                     ]
                       .filter(Boolean)

@@ -18,6 +18,7 @@ import BallonDorReveal from "@/components/career/BallonDorReveal"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
 import SeasonProgress, { SEASON_PROGRESS_MS } from "@/components/career/SeasonProgress"
 import IdolatriaBar from "@/components/career/IdolatriaBar"
+import EventoCarrera, { type EventoPendiente } from "@/components/career/EventoCarrera"
 import { idolatriaActual } from "@/lib/career-idolatria"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
@@ -40,7 +41,6 @@ import {
   academyInterest,
   LEGEND_CAREERS,
   positionCategory,
-  effectLabelFor,
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
@@ -480,6 +480,8 @@ function CareerDashboard() {
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
   const [lote, setLote] = useState<{ temporadas: number } | null>(null)
   const [simulando, setSimulando] = useState<{ temporadas: number } | null>(null)
+  // El evento que está en pantalla ahora mismo. `null` = no hay ninguno abierto.
+  const [eventoAbierto, setEventoAbierto] = useState<EventoPendiente | null>(null)
 
   if (!career) return null
   const cardData = buildCareerCardData(career)
@@ -492,6 +494,23 @@ function CareerDashboard() {
   )
   const dilemma = eligibleDilemmas[career.seasonsPlayed % eligibleDilemmas.length]
   const barraActive = career.history[career.history.length - 1]?.barrabravas === true
+
+  /**
+   * El evento que interrumpe esta temporada, y de qué tipo es.
+   *
+   * Hay uno por temporada y en este orden: si te apretaron los barras eso manda, después la
+   * sustancia (cada tres años), y si no, el dilema de pretemporada. Dos modales seguidos serían
+   * peor que el panel fijo que estamos sacando.
+   */
+  const eventoDeLaTemporada: EventoPendiente | null = career.finished
+    ? null
+    : barraActive
+      ? { decision: BARRABRAVAS_DECISION, tono: "duro" }
+      : career.seasonsPlayed % 3 === 1
+        ? { decision: SUBSTANCE_DECISION, tono: "raro" }
+        : dilemma
+          ? { decision: dilemma, tono: "dificil" }
+          : null
 
   async function handleExport(kind: "png" | "jpg" | "pdf") {
     if (!fichaRef.current) return
@@ -525,18 +544,40 @@ function CareerDashboard() {
     return null
   }
 
+  /**
+   * Simular una temporada pasa primero por el evento, si lo hay.
+   *
+   * En lote (simular 5 años) NO se pregunta: pedir cinco decisiones seguidas en un modal es
+   * peor que no pedir ninguna, así que se usa la opción que estuviera elegida y se sigue.
+   */
   function handleSimulate(yearsCount = 1) {
+    if (yearsCount === 1 && eventoDeLaTemporada) {
+      setEventoAbierto(eventoDeLaTemporada)
+      return
+    }
+    correrConAnimacion(yearsCount, selectedOptionId)
+  }
+
+  /** Elegiste en el modal: se cierra y arranca la temporada con esa decisión. */
+  function resolverEvento(optionId: string) {
+    setSelectedOptionId(optionId)
+    setEventoAbierto(null)
+    // El modal tarda ~200 ms en irse: si la temporada arranca antes, se pisan las animaciones.
+    window.setTimeout(() => correrConAnimacion(1, optionId), 220)
+  }
+
+  function correrConAnimacion(yearsCount: number, optionId: string) {
     // El cálculo es instantáneo: se corre igual, pero el resultado se revela después de que
     // la temporada "se juegue" en pantalla. Si no, aparece todo de golpe y no se siente nada.
     setSimulando({ temporadas: yearsCount })
-    const resultado = correrTemporadas(yearsCount)
+    const resultado = correrTemporadas(yearsCount, optionId)
     window.setTimeout(() => {
       setSimulando(null)
       revelar(resultado, yearsCount)
     }, SEASON_PROGRESS_MS + 120)
   }
 
-  function correrTemporadas(yearsCount: number) {
+  function correrTemporadas(yearsCount: number, optionId: string) {
     let simuladas = 0
     for (let i = 0; i < yearsCount; i++) {
       const cur = useCareerStore.getState().career
@@ -551,7 +592,7 @@ function CareerDashboard() {
         if (mejor && actual && mejor.strength > actual.strength) acceptOffer(mejor.clubId)
         else declineOffers()
       }
-      simulateNextSeason(selectedOptionId)
+      simulateNextSeason(optionId)
       simuladas++
     }
     return simuladas
@@ -690,97 +731,14 @@ function CareerDashboard() {
             </div>
           )}
 
-          {/* DECISIONES (inline, antes de simular) */}
-          {!career.finished && !hasOffers && barraActive && (
-            <div className="card-gradient rounded-3xl p-5 border border-red-500/40 space-y-3 shadow-2xl">
-              <h4 className="text-sm font-black text-red-300 font-display">{BARRABRAVAS_DECISION.title}</h4>
-              <p className="text-xs text-slate-300 font-sans leading-relaxed">{BARRABRAVAS_DECISION.description}</p>
-              <div className="space-y-2 pt-1 font-sport">
-                {BARRABRAVAS_DECISION.options.map((opt) => (
-                  <button
-                    key={opt.id}
-                    onClick={() => setSelectedOptionId(opt.id)}
-                    className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
-                      selectedOptionId === opt.id
-                        ? "bg-red-500/20 border-red-400 text-white shadow-md"
-                        : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <span>{opt.label}</span>
-                    <span className="text-[10px] text-red-300 font-bold text-right ml-2">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
-                  </button>
-                ))}
-              </div>
-              <p className="text-[10px] text-slate-500 font-sans">Elegí y simulá la próxima temporada para resolverlo.</p>
-            </div>
-          )}
-
-          {!career.finished && !hasOffers && dilemma && (
-            <div className="panel-in card-gradient rounded-3xl p-5 border border-[#74ACDF]/30 space-y-3 shadow-2xl">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider">
-                  🧠 DECISIÓN DE PRETEMPORADA
-                </span>
-              </div>
-              <h4 className="text-sm font-bold text-white font-display">{dilemma.title}</h4>
-              <p className="text-xs text-slate-300 font-sans leading-relaxed">{dilemma.description}</p>
-
-              <div className="space-y-2.5 pt-1 font-sport">
-                {dilemma.options.map((opt, i) => {
-                  const elegida = selectedOptionId === opt.id
-                  return (
-                    <button
-                      key={opt.id}
-                      onClick={() => setSelectedOptionId(opt.id)}
-                      style={{ animationDelay: `${i * 70}ms` }}
-                      className={`cartel-in w-full rounded-2xl border p-3.5 text-left text-xs font-bold transition-all duration-300 flex items-center justify-between gap-3 hover:-translate-y-0.5 ${
-                        elegida
-                          ? "border-[#74ACDF] bg-[#74ACDF]/15 text-white shadow-[0_0_24px_rgba(116,172,223,0.25)]"
-                          : "border-white/5 bg-slate-950/60 text-slate-400 hover:border-[#74ACDF]/40 hover:text-white"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <span
-                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] transition-colors ${
-                            elegida ? "border-[#74ACDF] bg-[#74ACDF] text-slate-950" : "border-slate-700 text-transparent"
-                          }`}
-                        >
-                          ✓
-                        </span>
-                        {opt.label}
-                      </span>
-                      <span className="shrink-0 text-right text-[10px] font-bold text-amber-300">
-                        {effectLabelFor(opt.effectDescription, career.player.position)}
-                      </span>
-                    </button>
-                  )
-                })}
-              </div>
-
-              {/* Sustancia misteriosa: NO todas las temporadas — evento ocasional (cada ~3). */}
-              {career.seasonsPlayed % 3 === 1 && (
-                <div className="pt-3 mt-2 border-t border-white/10">
-                  <div className="text-[10px] font-bold text-purple-300 font-sport uppercase tracking-wider mb-2">
-                    {SUBSTANCE_DECISION.title}
-                  </div>
-                  <div className="space-y-2 font-sport">
-                    {SUBSTANCE_DECISION.options.map((opt) => (
-                      <button
-                        key={opt.id}
-                        onClick={() => setSelectedOptionId(opt.id)}
-                        className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
-                          selectedOptionId === opt.id
-                            ? "bg-purple-500/20 border-purple-400 text-white shadow-md"
-                            : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
-                        }`}
-                      >
-                        <span>{opt.label}</span>
-                        <span className="text-[10px] text-purple-300 font-bold">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+          {/* Las decisiones ya no viven acá: interrumpen al simular (EventoCarrera). Como panel
+              fijo se quedaban en pantalla temporada tras temporada, sin señal de que hubiera
+              algo que resolver ni de que ya estuviera resuelto, y se leían como algo roto. */}
+          {!career.finished && !hasOffers && eventoDeLaTemporada && (
+            <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-center">
+              <span className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+                Al simular vas a tener que decidir
+              </span>
             </div>
           )}
 
@@ -966,6 +924,9 @@ function CareerDashboard() {
           </div>
         </div>
       )}
+
+      {/* El evento de la temporada: interrumpe, se decide, se va. */}
+      <EventoCarrera evento={eventoAbierto} posicion={career.player.position} onElegir={resolverEvento} />
 
       <SeasonReveal
         season={revealSeason}
