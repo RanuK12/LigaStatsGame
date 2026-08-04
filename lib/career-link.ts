@@ -1,4 +1,5 @@
 import type { CareerCardData } from '@/components/pitch/CareerCardView'
+import { NIVELES } from './career-idolatria'
 
 /**
  * El link de la carrera terminada.
@@ -27,6 +28,12 @@ export interface CarreraCompartida {
 }
 
 const VERSION = '1'
+
+/** El escudo del nivel de idolatría, a partir de su nombre. */
+function imagenDeNivel(nombre: string): string | undefined {
+  const n = NIVELES.find((x) => x.nombre === nombre)
+  return n?.imagen
+}
 
 /** base64url: el base64 común lleva `+`, `/` y `=`, que en una URL hay que escapar. */
 function aBase64Url(bytes: Uint8Array): string {
@@ -113,7 +120,11 @@ export function decodeCarrera(param: string): CarreraCompartida | null {
       })),
       jerseyPattern: o.jp,
       jerseyColor: o.jc,
-      idolatria: o.id ? { nivel: o.id[0], icono: o.id[1], clubName: o.id[2] } : undefined,
+      // La imagen del nivel NO viaja en el link: se arma del nombre. Un link viejo, de antes
+      // de los escudos, sigue abriendo con su emoji.
+      idolatria: o.id
+        ? { nivel: o.id[0], icono: o.id[1], clubName: o.id[2], imagen: imagenDeNivel(o.id[0]) }
+        : undefined,
     }
 
     return {

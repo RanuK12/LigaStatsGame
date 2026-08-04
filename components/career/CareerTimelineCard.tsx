@@ -1,6 +1,7 @@
 "use client"
 
-import { TROPHY_META, findClub, retirementStory, formatMarketValue, positionCategory, type CareerState } from "@/lib/career-engine"
+import { findClub, retirementStory, formatMarketValue, positionCategory, type CareerState } from "@/lib/career-engine"
+import Trofeo, { nombreDeTrofeo } from "@/components/ui/Trofeo"
 
 // Abreviatura de posición en español (estilo Copero: ED, DC, ARQ...).
 const POS_ES: Record<string, string> = {
@@ -21,26 +22,33 @@ function ageColor(age: number): { bg: string; text: string } {
 }
 
 // Trofeos ganados en esa temporada (íconos inline).
-function seasonTrophies(s: CareerState["history"][number]): string[] {
-  const t: string[] = []
-  if (s.liga) t.push("🏆")
-  if (s.copaArgentina) t.push("🥇")
-  if (s.continentalWon) t.push(TROPHY_META[s.continental || ""]?.icon || "🌎")
-  if (s.topScorer) t.push("👟")
+function seasonTrophies(s: CareerState["history"][number]): { trofeo?: string; emoji?: string }[] {
+  const t: { trofeo?: string; emoji?: string }[] = []
+  if (s.liga) t.push({ trofeo: "lpf" })
+  if (s.copaArgentina) t.push({ trofeo: "copa-arg" })
+  if (s.continentalWon && s.continental) t.push({ trofeo: s.continental })
+  if (s.ascendio) t.push({ trofeo: "ascenso" })
+  if (s.topScorer) t.push({ emoji: "👟" })
   return t
 }
 
 // Palmarés: chips resumen (Mundial, copas por tipo con contador, Balón de Oro, Bota de Oro).
-function palmares(career: CareerState): { icon: string; label: string }[] {
-  const chips: { icon: string; label: string }[] = []
-  if (career.milestones.worldCup) chips.push({ icon: "🌍", label: "Campeón del Mundo" })
-  if (career.milestones.balonDeOro > 0) chips.push({ icon: "🏅", label: `Balón de Oro ×${career.milestones.balonDeOro}` })
-  // Copas ganadas por tipo (liga, copa argentina, libertadores, sudamericana...).
+function palmares(career: CareerState): { trofeo?: string; emoji?: string; label: string }[] {
+  const chips: { trofeo?: string; emoji?: string; label: string }[] = []
+  if (career.milestones.worldCup) chips.push({ trofeo: "mundial", label: "Campeón del Mundo" })
+  // El Balón de Oro y la Bota son premios individuales, no copas: siguen con su símbolo.
+  if (career.milestones.balonDeOro > 0) chips.push({ emoji: "🏅", label: `Balón de Oro ×${career.milestones.balonDeOro}` })
+  // Copas ganadas por tipo (liga, copa nacional, libertadores, sudamericana...).
   for (const [comp, n] of Object.entries(career.trophies).sort((a, b) => b[1] - a[1])) {
-    if (n > 0) chips.push({ icon: TROPHY_META[comp]?.icon || "🏆", label: `${TROPHY_META[comp]?.name || comp} ×${n}` })
+    if (n > 0) chips.push({ trofeo: comp, label: `${nombreDeTrofeo(comp, paisDeCarrera(career))} ×${n}` })
   }
-  if (career.milestones.goldenBoots > 0) chips.push({ icon: "👟", label: `Bota de Oro ×${career.milestones.goldenBoots}` })
+  if (career.milestones.goldenBoots > 0) chips.push({ emoji: "👟", label: `Bota de Oro ×${career.milestones.goldenBoots}` })
   return chips
+}
+
+/** El país del club donde terminó: decide qué copa nacional se dibuja. */
+function paisDeCarrera(career: CareerState): string | undefined {
+  return findClub(career.clubId)?.pais
 }
 
 export default function CareerTimelineCard({ career }: { career: CareerState }) {
@@ -113,7 +121,12 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
         <div className="flex flex-wrap gap-1.5 pt-4">
           {chips.map((c, i) => (
             <span key={i} className="inline-flex items-center gap-1 rounded-full bg-white/[0.06] border border-white/10 px-2.5 py-1 text-[11px] font-bold text-slate-100">
-              <span className="text-sm leading-none">{c.icon}</span>{c.label}
+              {c.trofeo ? (
+                <Trofeo id={c.trofeo} pais={paisDeCarrera(career)} size={16} />
+              ) : (
+                <span className="text-sm leading-none">{c.emoji}</span>
+              )}
+              {c.label}
             </span>
           ))}
         </div>
@@ -138,9 +151,19 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
             <div key={i} className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-x-2 sm:gap-x-3 items-center rounded-xl bg-white/[0.03] px-1.5 py-1.5">
               <span className="w-9 h-9 rounded-lg flex items-center justify-center font-impact font-black text-lg shrink-0" style={{ background: ac.bg, color: ac.text }}>{s.age}</span>
               <div className="flex items-center gap-1.5 min-w-0">
-                <img src={`/logos/clubs/${s.clubId}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                <img src={findClub(s.clubId)?.escudo ?? `/logos/clubs/${s.clubId}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                 <span className="font-bold text-sm text-white truncate">{s.clubName}</span>
-                {trophies.length > 0 && <span className="text-xs shrink-0">{trophies.join("")}</span>}
+                {trophies.length > 0 && (
+                  <span className="flex shrink-0 items-center gap-0.5">
+                    {trophies.map((t, j) =>
+                      t.trofeo ? (
+                        <Trofeo key={j} id={t.trofeo} pais={paisDeCarrera(career)} size={15} />
+                      ) : (
+                        <span key={j} className="text-xs leading-none">{t.emoji}</span>
+                      ),
+                    )}
+                  </span>
+                )}
               </div>
               <span className="w-9 h-7 rounded-md flex items-center justify-center font-impact font-black text-base shrink-0" style={{ background: roc.bg, color: roc.text }}>{rowOvr}</span>
               <span className="text-center font-bold text-sm text-slate-200 min-w-[28px] font-sport">{s.matchesPlayed}</span>

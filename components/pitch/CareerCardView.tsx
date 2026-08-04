@@ -20,7 +20,7 @@ export interface CareerCardData {
   jerseyPattern?: string
   jerseyColor?: string
   /** El club del que más ídolo fuiste. Ausente si nunca pasaste de "uno más". */
-  idolatria?: { nivel: string; icono: string; clubName: string }
+  idolatria?: { nivel: string; icono: string; clubName: string; imagen?: string }
 }
 
 export default function CareerCardView({ data }: { data: CareerCardData }) {
@@ -324,9 +324,21 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             {data.trophies.map((t, i) => (
               <div key={i} className="flex flex-col items-center group relative">
                 <div className="relative w-12 h-14 flex items-center justify-center">
-                  <div className="text-3xl filter drop-shadow-[0_6px_12px_rgba(245,158,11,0.5)] group-hover:scale-110 transition-transform">
-                    {t.icon}
-                  </div>
+                  {/* El trofeo dibujado. `icon` es la ruta al SVG; los que quedaron con un
+                      emoji viejo (fichas compartidas por link de antes del cambio) se siguen
+                      mostrando como texto, para que un link viejo no se rompa. */}
+                  {t.icon.startsWith("/") ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={t.icon}
+                      alt={t.name}
+                      className="h-11 w-11 object-contain drop-shadow-[0_6px_12px_rgba(245,158,11,0.4)] transition-transform group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className="text-3xl filter drop-shadow-[0_6px_12px_rgba(245,158,11,0.5)] transition-transform group-hover:scale-110">
+                      {t.icon}
+                    </div>
+                  )}
                   {t.count > 1 && (
                     <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-slate-950 border border-amber-400 text-[11px] font-black font-sport text-amber-300 shadow-md">
                       ×{t.count}
@@ -345,8 +357,14 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
         {data.idolatria && (
           <div className="mb-4 relative z-10" style={{ transform: "translateZ(25px)" }}>
             <div className="rounded-2xl border border-[#F6C750]/40 bg-gradient-to-r from-[#F6C750]/15 to-transparent px-4 py-3 text-center">
-              <div className="font-sport text-[9px] font-black uppercase tracking-[0.35em] text-[#F6C750]">
-                {data.idolatria.icono} {data.idolatria.nivel}
+              <div className="flex items-center justify-center gap-1.5 font-sport text-[9px] font-black uppercase tracking-[0.35em] text-[#F6C750]">
+                {data.idolatria.imagen ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={data.idolatria.imagen} alt="" className="h-5 w-5 object-contain" />
+                ) : (
+                  <span>{data.idolatria.icono}</span>
+                )}
+                {data.idolatria.nivel}
               </div>
               <div className="mt-0.5 font-display text-sm font-black uppercase tracking-wide text-white">
                 de {data.idolatria.clubName}

@@ -61,7 +61,7 @@ export default function CarreraCompartidaCliente() {
               </h1>
               <p className="font-sport mt-2 text-xs uppercase tracking-wider text-slate-400">
                 {[
-                  data.card.idolatria && `${data.card.idolatria.icono} ${data.card.idolatria.nivel} de ${data.card.idolatria.clubName}`,
+                  data.card.idolatria && `${data.card.idolatria.nivel} de ${data.card.idolatria.clubName}`,
                   `${data.temporadas} temporadas`,
                   data.leyenda && `${data.leyenda.parecido}% de parecido`,
                 ]

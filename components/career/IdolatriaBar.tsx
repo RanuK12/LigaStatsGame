@@ -20,8 +20,10 @@ export default function IdolatriaBar({ idolatria, clubName }: { idolatria: Idola
         <span className="text-slate-500">
           Idolatría en {clubName}
         </span>
-        <span className={esLeyenda ? "text-[#F6C750]" : "text-[#74ACDF]"}>
-          {nivel.icono} {nivel.nombre}
+        <span className={`flex items-center gap-1.5 ${esLeyenda ? "text-[#F6C750]" : "text-[#74ACDF]"}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={nivel.imagen} alt="" className="h-5 w-5 object-contain" />
+          {nivel.nombre}
         </span>
       </div>
 
@@ -38,10 +40,16 @@ export default function IdolatriaBar({ idolatria, clubName }: { idolatria: Idola
 
       {/* Los cinco escalones, para que se vea cuánto falta hasta la estatua. */}
       <div className="mt-1.5 flex items-center justify-between font-sport text-[9px] uppercase tracking-wider">
+        {/* Los cinco escalones. Los que faltan van apagados: se ve cuánto queda para la estatua. */}
         {NIVELES.map((n, i) => (
-          <span key={n.id} className={i <= idx ? "text-slate-300" : "text-slate-600"}>
-            {n.icono}
-          </span>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={n.id}
+            src={n.imagen}
+            alt={n.nombre}
+            title={n.nombre}
+            className={`h-5 w-5 object-contain transition-opacity ${i <= idx ? "opacity-100" : "opacity-25 grayscale"}`}
+          />
         ))}
       </div>
 

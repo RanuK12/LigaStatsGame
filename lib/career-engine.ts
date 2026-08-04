@@ -726,17 +726,54 @@ export interface CareerState {
 
 export const MAX_SEASONS = 15
 
-export const TROPHY_META: Record<string, { name: string; icon: string }> = {
-  lpf: { name: 'Liga', icon: '⭐' },
-  'copa-arg': { name: 'Copa Argentina', icon: '🥛' },
-  libertadores: { name: 'Libertadores', icon: '🏆' },
-  sudamericana: { name: 'Sudamericana', icon: '🥇' },
-  champions: { name: 'Champions League', icon: '🌟' },
-  europa: { name: 'Europa League', icon: '🎖️' },
-  mundial: { name: 'Mundial', icon: '🌍' },
-  'mundial-clubes': { name: 'Mundial de Clubes', icon: '🌐' },
-  // Un ascenso no es una copa, pero en el ascenso se festeja más que una copa y va a la vitrina.
-  ascenso: { name: 'Ascenso', icon: '🔼' },
+/**
+ * Los títulos, con su trofeo dibujado.
+ *
+ * `icon` era un emoji: la Libertadores 🏆, la Copa Argentina 🥛 (una copa de leche) y el Mundial
+ * 🌍. Además de quedar pobre al lado de los escudos, cada sistema dibuja los emojis distinto, así
+ * que la ficha que comparte alguien de iPhone no es la misma que la de Android.
+ *
+ * Ahora cada uno tiene su SVG en /logos/trofeos/. El emoji queda como `emoji` porque hay lugares
+ * donde solo entra texto plano —el texto de un tweet, un mensaje de Telegram— y ahí sigue
+ * sirviendo.
+ */
+export const TROPHY_META: Record<string, { name: string; icon: string; emoji: string }> = {
+  lpf: { name: 'Liga', icon: '/logos/trofeos/lpf.svg', emoji: '⭐' },
+  'copa-arg': { name: 'Copa Argentina', icon: '/logos/trofeos/copa-arg.svg', emoji: '🥛' },
+  libertadores: { name: 'Libertadores', icon: '/logos/trofeos/libertadores.svg', emoji: '🏆' },
+  sudamericana: { name: 'Sudamericana', icon: '/logos/trofeos/sudamericana.svg', emoji: '🥇' },
+  champions: { name: 'Champions League', icon: '/logos/trofeos/champions.svg', emoji: '🌟' },
+  europa: { name: 'Europa League', icon: '/logos/trofeos/europa.svg', emoji: '🎖️' },
+  mundial: { name: 'Mundial', icon: '/logos/trofeos/mundial.svg', emoji: '🌍' },
+  'mundial-clubes': { name: 'Mundial de Clubes', icon: '/logos/trofeos/mundial-clubes.svg', emoji: '🌐' },
+  ascenso: { name: 'Ascenso', icon: '/logos/trofeos/ascenso.svg', emoji: '🔼' },
+}
+
+/**
+ * La copa nacional según el país donde juega el club.
+ *
+ * Todos los títulos de copa nacional se guardan con el id 'copa-arg' —viene de cuando el juego
+ * era solo argentino— pero el trofeo que se muestra tiene que ser el del país: si ganaste la
+ * Copa do Brasil, en la ficha va la brasileña.
+ */
+const COPA_POR_PAIS: Record<string, string> = {
+  Argentina: 'copa-arg',
+  Uruguay: 'copa-uru',
+  Chile: 'copa-chi',
+  Colombia: 'copa-col',
+  'Perú': 'copa-per',
+  Paraguay: 'copa-par',
+  Brasil: 'copa-bra',
+}
+
+export function trofeoDeCopaNacional(pais?: string): { name: string; icon: string } {
+  const id = (pais && COPA_POR_PAIS[pais]) || 'copa-arg'
+  const nombres: Record<string, string> = {
+    'copa-arg': 'Copa Argentina', 'copa-uru': 'Copa Uruguay', 'copa-chi': 'Copa Chile',
+    'copa-col': 'Copa Colombia', 'copa-per': 'Copa Perú', 'copa-par': 'Copa Paraguay',
+    'copa-bra': 'Copa do Brasil',
+  }
+  return { name: nombres[id], icon: `/logos/trofeos/${id}.svg` }
 }
 
 export function makeRng(seed: number): () => number {

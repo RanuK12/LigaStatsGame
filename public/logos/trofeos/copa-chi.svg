@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Copa Chile">
+  <defs>
+    <linearGradient id="copachi" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBDEDE"/>
+      <stop offset="0.45" stop-color="#E4002B"/>
+      <stop offset="1" stop-color="#7C0016"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M21 12 h22 l-2.5 16 c-0.6 5.6 -4.2 9 -8.5 9 s-7.9 -3.4 -8.5 -9 z" fill="url(#copachi)"/>
+  <path d="M21 13.5 h5 l2 14.5 c0.5 4.4 2 7 4 8 -5.4 -0.9 -8.8 -4.4 -9.4 -9.5 z" fill="url(#brillo)"/>
+  <path d="M22 16 h-6 v6 h5" fill="none" stroke="url(#copachi)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M42 16 h6 v6 h-5" fill="none" stroke="url(#copachi)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="30" y="37" width="4" height="14" fill="url(#copachi)"/>
+
+  <rect x="20" y="52" width="24" height="4.5" rx="1.6" fill="url(#copachi)"/>
+  <rect x="15" y="56" width="34" height="5.5" rx="2" fill="url(#copachi)" opacity="0.9"/>
+</svg>

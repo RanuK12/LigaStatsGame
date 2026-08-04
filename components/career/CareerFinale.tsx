@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { TROPHY_META, retirementStory, positionCategory, type CareerState } from "@/lib/career-engine"
+import { TROPHY_META, retirementStory, positionCategory, findClub, type CareerState } from "@/lib/career-engine"
 import { leyendaParecida } from "@/lib/career-legend"
 import ShareBar from "@/components/ShareBar"
 import DonationSection from "@/components/DonationSection"
 import { storyBlob } from "@/lib/story-card"
 import { clubDeLaVida } from "@/lib/career-idolatria"
+import Trofeo, { nombreDeTrofeo } from "@/components/ui/Trofeo"
 import { urlDeCarrera } from "@/lib/career-link"
 import { buildCareerCardData } from "@/lib/career-store"
 
@@ -84,6 +85,9 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
   // El club del que quedaste ídolo. Solo cuenta de Ídolo para arriba: "Querido de Lanús" no es
   // un título que alguien tenga ganas de publicar.
   const idoloClub = career ? clubDeLaVida(career) : null
+  // El país donde más jugó decide qué copa nacional mostrar: todas se guardan como 'copa-arg'
+  // pero el que ganó la Copa do Brasil tiene que ver la brasileña.
+  const paisDelClub = career ? findClub(career.clubId)?.pais : undefined
   const idoloDe = idoloClub && (idoloClub.nivel.id === "idolo" || idoloClub.nivel.id === "leyenda") ? idoloClub : null
   // La carrera entera codificada en la URL. Se arma acá, una vez, cuando ya están todos los
   // datos: la ficha, la idolatría y la leyenda con la que se comparó.
@@ -198,8 +202,8 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
                 <div className="flex flex-wrap justify-center gap-2">
                   {trophyEntries.map(([id, n]) => (
                     <div key={id} className="flex items-center gap-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-3 py-1.5 text-xs font-black text-[#D4AF37] font-sport">
-                      <span className="text-base">{TROPHY_META[id]?.icon || "🏆"}</span>
-                      {TROPHY_META[id]?.name || id} ×{n}
+                      <Trofeo id={id} pais={paisDelClub} size={22} />
+                      {nombreDeTrofeo(id, paisDelClub)} ×{n}
                     </div>
                   ))}
                 </div>

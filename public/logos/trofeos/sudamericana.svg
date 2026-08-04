@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Copa Sudamericana">
+  <defs>
+    <linearGradient id="sud" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F8FC"/>
+      <stop offset="0.45" stop-color="#C9D6E4"/>
+      <stop offset="1" stop-color="#7C8C9E"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M20 14 h24 v9 c0 8 -5.4 13.5 -12 13.5 S20 31 20 23 z" fill="url(#sud)"/>
+  <path d="M20 15.5 h5 v7.5 c0 5.5 2.2 9.4 5 11 -6 -1.2 -10 -6 -10 -11 z" fill="url(#brillo)"/>
+  <path d="M20 17 c-4.4 0 -7 2.6 -7 6 s2.6 6 7 6" fill="none" stroke="url(#sud)" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M44 17 c4.4 0 7 2.6 7 6 s-2.6 6 -7 6" fill="none" stroke="url(#sud)" stroke-width="2.6" stroke-linecap="round"/>
+  <rect x="29.5" y="36" width="5" height="14" fill="url(#sud)"/>
+
+  <rect x="17" y="50" width="30" height="4.5" rx="1.6" fill="url(#sud)"/>
+  <rect x="14" y="54" width="36" height="5" rx="1.8" fill="url(#sud)" opacity="0.92"/>
+  <rect x="11" y="58.4" width="42" height="4.6" rx="1.8" fill="url(#sud)" opacity="0.85"/>
+</svg>

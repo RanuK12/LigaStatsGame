@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Ascenso">
+  <defs>
+    <linearGradient id="asc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D8F6E4"/>
+      <stop offset="0.45" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#12694C"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 7 L53 14 v17 c0 12.5 -8.6 21.5 -21 25.5 C19.6 52.5 11 43.5 11 31 V14 z" fill="url(#asc)"/>
+  <path d="M32 7 L21 10.7 v20.3 c0 9.5 4.4 16.6 11 21 -12.4 -4 -21 -13 -21 -25.5 V14 z" fill="url(#brillo)"/>
+  <path d="M32 17 l11 12 h-6.5 v11 h-9 V29 H21 z" fill="#0C3E2C" fill-opacity="0.6"/>
+</svg>

@@ -15,18 +15,21 @@ import type { CareerState, SeasonResult } from './career-engine'
 export interface NivelIdolatria {
   id: 'uno-mas' | 'querido' | 'referente' | 'idolo' | 'leyenda'
   nombre: string
+  /** El emoji. Queda para donde solo entra texto plano: un tweet, un mensaje de Telegram. */
   icono: string
+  /** El escudo dibujado, que es lo que se muestra en pantalla y en la ficha. */
+  imagen: string
   /** Puntos a partir de los cuales se entra al nivel. */
   desde: number
   descripcion: string
 }
 
 export const NIVELES: NivelIdolatria[] = [
-  { id: 'uno-mas', nombre: 'Uno más', icono: '▫️', desde: 0, descripcion: 'Recién llegás. Sos uno más del plantel.' },
-  { id: 'querido', nombre: 'Querido', icono: '👏', desde: 40, descripcion: 'El hincha empieza a bancarte.' },
-  { id: 'referente', nombre: 'Referente', icono: '💙', desde: 100, descripcion: 'Sos una pieza clave. El equipo te mira a vos.' },
-  { id: 'idolo', nombre: 'Ídolo', icono: '⭐', desde: 190, descripcion: 'Tu nombre ya es canción de tribuna.' },
-  { id: 'leyenda', nombre: 'Leyenda', icono: '🗿', desde: 300, descripcion: 'Tenés tu estatua en la puerta del estadio.' },
+  { id: 'uno-mas', imagen: '/logos/trofeos/idolatria-uno-mas.svg', nombre: 'Uno más', icono: '▫️', desde: 0, descripcion: 'Recién llegás. Sos uno más del plantel.' },
+  { id: 'querido', imagen: '/logos/trofeos/idolatria-querido.svg', nombre: 'Querido', icono: '👏', desde: 40, descripcion: 'El hincha empieza a bancarte.' },
+  { id: 'referente', imagen: '/logos/trofeos/idolatria-referente.svg', nombre: 'Referente', icono: '💙', desde: 100, descripcion: 'Sos una pieza clave. El equipo te mira a vos.' },
+  { id: 'idolo', imagen: '/logos/trofeos/idolatria-idolo.svg', nombre: 'Ídolo', icono: '⭐', desde: 190, descripcion: 'Tu nombre ya es canción de tribuna.' },
+  { id: 'leyenda', imagen: '/logos/trofeos/idolatria-leyenda.svg', nombre: 'Leyenda', icono: '🗿', desde: 300, descripcion: 'Tenés tu estatua en la puerta del estadio.' },
 ]
 
 export interface Idolatria {
