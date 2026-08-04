@@ -363,7 +363,7 @@ function CareerSetupWizard() {
           </div>
         </div>
 
-        <ClubPicker selected={clubId} onSelect={setClubId} />
+        <ClubPicker selected={clubId} onSelect={setClubId} initialPais={nationality} />
       </div>
 
       {/* STEP 3: START */}
@@ -378,21 +378,17 @@ function CareerSetupWizard() {
   )
 }
 
-/**
- * Dónde debutás, en tres pasos y de a UNO por vez.
- *
- * Antes los tres niveles —país, categoría y club— se mostraban apilados al mismo tiempo, y con
- * 470 clubes eso es una pared: la lista de la Série A sola son 29 tarjetas, y para llegar al
- * botón de empezar había que scrollear media pantalla. Ahora se elige país, después la
- * categoría con su nivel, y recién ahí aparecen los clubes.
- *
- * Cada liga muestra su nivel porque es lo que da sentido a elegir: la Série A vale 100 y el
- * Torneo Federal A vale 8, y arrancar abajo tiene que verse como lo que es.
- */
-function ClubPicker({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
+function ClubPicker({ selected, onSelect, initialPais }: { selected: string; onSelect: (id: string) => void; initialPais?: string }) {
   const [paso, setPaso] = useState<"pais" | "liga" | "club">("pais")
   const [pais, setPais] = useState<string | null>(null)
   const [ligaId, setLigaId] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (initialPais && PAISES_CARRERA.some((p) => p.nombre === initialPais)) {
+      setPais(initialPais)
+      setPaso("liga")
+    }
+  }, [initialPais])
 
   const ligasDelPais = useMemo(
     () => (pais ? LIGAS.filter((l) => l.pais === pais).sort((a, b) => a.division - b.division) : []),
