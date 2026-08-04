@@ -248,11 +248,10 @@ export const useCareerStore = create<CareerStore>()(
 export function buildCareerCardData(state: CareerState): CareerCardData {
   const clubs = state.clubHistory.map((id) => {
     const c = findClub(id)
-    // Todos los clubes (incluidos los europeos) tienen escudo en /logos/clubs.
     return {
       id,
       name: c?.name ?? id,
-      logoUrl: c ? `/logos/clubs/${id}.png` : undefined,
+      logoUrl: c?.escudo || (c ? `/logos/clubs/${id}.png` : undefined),
     }
   })
 

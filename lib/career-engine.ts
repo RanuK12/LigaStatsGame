@@ -840,6 +840,7 @@ const COPA_POR_PAIS: Record<string, string> = {
   'Perú': 'copa-per',
   Paraguay: 'copa-par',
   Brasil: 'copa-bra',
+  'México': 'copa-mx',
 }
 
 export function trofeoDeCopaNacional(pais?: string): { name: string; icon: string } {
@@ -847,9 +848,9 @@ export function trofeoDeCopaNacional(pais?: string): { name: string; icon: strin
   const nombres: Record<string, string> = {
     'copa-arg': 'Copa Argentina', 'copa-uru': 'Copa Uruguay', 'copa-chi': 'Copa Chile',
     'copa-col': 'Copa Colombia', 'copa-per': 'Copa Perú', 'copa-par': 'Copa Paraguay',
-    'copa-bra': 'Copa do Brasil',
+    'copa-bra': 'Copa do Brasil', 'copa-mx': 'Copa MX',
   }
-  return { name: nombres[id], icon: `/logos/trofeos/${id}.svg` }
+  return { name: nombres[id] || 'Copa Nacional', icon: `/logos/trofeos/${id}.svg` }
 }
 
 export function makeRng(seed: number): () => number {

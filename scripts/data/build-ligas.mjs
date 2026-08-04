@@ -106,6 +106,10 @@ const PAISES = {
     copa: 'Copa Argentina', continental: 'sudam', gentilicio: 'argentino',
     plazas: { libertadores: 6, sudamericana: 6 },
   },
+  México: {
+    copa: 'Copa MX', continental: 'champions', gentilicio: 'mexicano',
+    plazas: { libertadores: 4, sudamericana: 4 },
+  },
   Uruguay: {
     copa: 'Copa Uruguay', continental: 'sudam', gentilicio: 'uruguayo',
     plazas: { libertadores: 4, sudamericana: 4 },
@@ -142,6 +146,8 @@ const PAISES = {
  * en la B tiene sentido: se sube peleándola.
  */
 const FORMATOS = {
+  'mx-1': { equipos: 18, formato: 'playoff', asciende: 0, desciende: 1, nota: 'Torneos Apertura y Clausura con Liguilla final.' },
+  'mx-2': { equipos: 7, formato: 'liga', asciende: 1, desciende: 0, nota: 'Liga de Expansión MX.' },
   'ar-2': { equipos: 38, formato: 'playoff', asciende: 2, desciende: 4, nota: 'Dos zonas; sube el campeón de cada una y el reducido da la segunda plaza.' },
   'ar-3': { equipos: 20, formato: 'playoff', asciende: 2, desciende: 2, nota: 'Campeón directo y reducido por la segunda plaza.' },
   'ar-3f': { equipos: 36, formato: 'playoff', asciende: 2, desciende: 4, nota: 'Zonas regionales y llaves finales.' },
@@ -360,6 +366,78 @@ for (const l of ligas) {
 
 // La Primera argentina se suma al final: sus clubes ya existen en clubs.json y no se tocan.
 ligas.push(LIGA_PRIMERA_AR)
+
+// México se suma al final con sus dos divisiones y clubes
+const MEXICO_LIGAS = [
+  {
+    id: "mx-1",
+    pais: "México",
+    iso: "MX",
+    bandera: "🇲🇽",
+    nombre: "Liga MX",
+    division: 1,
+    copa: "Copa MX",
+    continental: "champions",
+    equipos: 18,
+    formato: "playoff",
+    asciende: 0,
+    desciende: 1,
+    nota: "Torneos Apertura y Clausura con Liguilla final.",
+    clubIds: [
+      "club-america", "club-deportivo-guadalajara", "cruz-azul", "club-universidad-nacional",
+      "tigres-uanl", "club-de-futbol-monterrey", "club-de-futbol-pachuca", "deportivo-toluca",
+      "club-santos-laguna", "club-leon", "club-atlas", "puebla-fc", "club-necaxa", "club-tijuana",
+      "queretaro-fc", "mazatlan-fc", "fc-juarez", "atletico-san-luis"
+    ]
+  },
+  {
+    id: "mx-2",
+    pais: "México",
+    iso: "MX",
+    bandera: "🇲🇽",
+    nombre: "Liga de Expansión MX",
+    division: 2,
+    copa: "Copa MX",
+    continental: "champions",
+    equipos: 7,
+    formato: "liga",
+    asciende: 1,
+    desciende: 0,
+    nota: "Torneo de desarrollo de la Liga MX.",
+    clubIds: ["atlante-fc", "leones-negros-udg", "celaya-fc", "cimarrones-de-sonora", "venados-fc", "cancun-fc", "tapatio-fc"]
+  }
+]
+
+const MEXICO_CLUBES = [
+  { id: "club-america", nombre: "Club América", fuerza: 85, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#FFF3B0", "#002F6C"] },
+  { id: "club-deportivo-guadalajara", nombre: "Chivas de Guadalajara", fuerza: 84, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#FFFFFF"] },
+  { id: "cruz-azul", nombre: "Cruz Azul", fuerza: 84, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#002F6C", "#FFFFFF"] },
+  { id: "club-universidad-nacional", nombre: "Pumas UNAM", fuerza: 82, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#C5A059", "#002F6C"] },
+  { id: "tigres-uanl", nombre: "Tigres UANL", fuerza: 85, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#F59E0B", "#002F6C"] },
+  { id: "club-de-futbol-monterrey", nombre: "CF Monterrey", fuerza: 85, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#002F6C", "#FFFFFF"] },
+  { id: "club-de-futbol-pachuca", nombre: "CF Pachuca", fuerza: 83, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#002F6C", "#FFFFFF"] },
+  { id: "deportivo-toluca", nombre: "Deportivo Toluca", fuerza: 83, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#FFFFFF"] },
+  { id: "club-santos-laguna", nombre: "Santos Laguna", fuerza: 81, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#10B981", "#FFFFFF"] },
+  { id: "club-leon", nombre: "Club León", fuerza: 81, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#10B981", "#F59E0B"] },
+  { id: "club-atlas", nombre: "Atlas FC", fuerza: 80, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#000000"] },
+  { id: "puebla-fc", nombre: "Puebla FC", fuerza: 78, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#002F6C", "#FFFFFF"] },
+  { id: "club-necaxa", nombre: "Club Necaxa", fuerza: 78, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#FFFFFF"] },
+  { id: "club-tijuana", nombre: "Xolos de Tijuana", fuerza: 78, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#000000"] },
+  { id: "queretaro-fc", nombre: "Querétaro FC", fuerza: 76, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#002F6C", "#000000"] },
+  { id: "mazatlan-fc", nombre: "Mazatlán FC", fuerza: 75, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#8B5CF6", "#000000"] },
+  { id: "fc-juarez", nombre: "FC Juárez", fuerza: 75, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#10B981", "#E53935"] },
+  { id: "atletico-san-luis", nombre: "Atlético San Luis", fuerza: 77, division: 1, ligaId: "mx-1", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#002F6C"] },
+  { id: "atlante-fc", nombre: "Atlante FC", fuerza: 73, division: 2, ligaId: "mx-2", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#002F6C"] },
+  { id: "leones-negros-udg", nombre: "Leones Negros UdeG", fuerza: 72, division: 2, ligaId: "mx-2", pais: "México", bandera: "🇲🇽", colores: ["#F59E0B", "#E53935"] },
+  { id: "celaya-fc", nombre: "Celaya FC", fuerza: 71, division: 2, ligaId: "mx-2", pais: "México", bandera: "🇲🇽", colores: ["#002F6C", "#FFFFFF"] },
+  { id: "cimarrones-de-sonora", nombre: "Cimarrones de Sonora", fuerza: 70, division: 2, ligaId: "mx-2", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#F59E0B"] },
+  { id: "venados-fc", nombre: "Venados FC", fuerza: 70, division: 2, ligaId: "mx-2", pais: "México", bandera: "🇲🇽", colores: ["#F59E0B", "#10B981"] },
+  { id: "cancun-fc", nombre: "Cancún FC", fuerza: 71, division: 2, ligaId: "mx-2", pais: "México", bandera: "🇲🇽", colores: ["#38BDF8", "#002F6C"] },
+  { id: "tapatio-fc", nombre: "CD Tapatío", fuerza: 71, division: 2, ligaId: "mx-2", pais: "México", bandera: "🇲🇽", colores: ["#E53935", "#002F6C"] }
+]
+
+ligas.push(...MEXICO_LIGAS)
+clubes.push(...MEXICO_CLUBES)
 
 // Dos clubes con el mismo nombre corto en la misma liga son indistinguibles en la pantalla de
 // elección: "Cerro Porteño" y "Cerro Porteño" no le dicen a nadie cuál es cuál. Se desempata

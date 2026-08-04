@@ -227,11 +227,26 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             {data.clubs.map((c, i) => (
               <div
                 key={i}
-                className="w-13 h-13 rounded-2xl bg-[#050A14] border border-white/10 p-2 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+                className="w-13 h-13 rounded-2xl bg-[#050A14] border border-white/10 p-2 flex items-center justify-center shadow-lg hover:scale-110 transition-transform overflow-hidden"
                 title={c.name}
               >
                 {c.logoUrl ? (
-                  <img src={c.logoUrl} alt={c.name} className="w-full h-full object-contain" />
+                  <img
+                    src={c.logoUrl}
+                    alt={c.name}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      const target = e.target as HTMLElement
+                      target.style.display = "none"
+                      const parent = target.parentElement
+                      if (parent && !parent.querySelector(".initials-fallback")) {
+                        const span = document.createElement("span")
+                        span.className = "initials-fallback text-[10px] font-black font-sport text-[#74ACDF]"
+                        span.innerText = c.name.slice(0, 3).toUpperCase()
+                        parent.appendChild(span)
+                      }
+                    }}
+                  />
                 ) : (
                   <span className="text-[10px] font-black font-sport text-[#74ACDF]">{c.name.slice(0, 3).toUpperCase()}</span>
                 )}
@@ -249,11 +264,22 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
             {data.trophies.map((t, i) => (
               <div key={i} className="flex flex-col items-center group relative">
                 <div className="relative w-12 h-14 flex items-center justify-center">
-                  <div className="text-3xl filter drop-shadow-[0_6px_12px_rgba(245,158,11,0.5)] group-hover:scale-110 transition-transform">
-                    {t.icon}
-                  </div>
+                  {t.icon && (t.icon.startsWith("/") || t.icon.includes(".svg")) ? (
+                    <img
+                      src={t.icon}
+                      alt={t.name}
+                      className="w-10 h-10 object-contain drop-shadow-[0_4px_10px_rgba(245,158,11,0.5)] group-hover:scale-110 transition-transform"
+                      onError={(e) => {
+                        (e.target as HTMLElement).style.display = "none"
+                      }}
+                    />
+                  ) : (
+                    <div className="text-3xl filter drop-shadow-[0_6px_12px_rgba(245,158,11,0.5)] group-hover:scale-110 transition-transform">
+                      {t.icon || "🏆"}
+                    </div>
+                  )}
                   {t.count > 1 && (
-                    <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-slate-950 border border-amber-400 text-[9px] font-black font-sport text-amber-300 shadow-md">
+                    <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-slate-950 border border-amber-400 text-[9px] font-black font-sport text-amber-300 shadow-md z-10">
                       ×{t.count}
                     </span>
                   )}
