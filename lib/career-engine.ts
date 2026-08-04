@@ -123,15 +123,27 @@ export const EURO_CLUBS: CareerClub[] = [
   { id: 'real-madrid', name: 'Real Madrid', strength: 90, continental: true, region: 'euro', flag: '🇪🇸' },
   { id: 'fc-barcelona', name: 'FC Barcelona', strength: 88, continental: true, region: 'euro', flag: '🇪🇸' },
   { id: 'manchester-city', name: 'Manchester City', strength: 90, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'liverpool', name: 'Liverpool', strength: 88, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'arsenal', name: 'Arsenal FC', strength: 87, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'liverpool', name: 'Liverpool FC', strength: 88, continental: true, region: 'euro', flag: '🏴' },
   { id: 'bayern-munich', name: 'Bayern Múnich', strength: 89, continental: true, region: 'euro', flag: '🇩🇪' },
+  { id: 'bayer-leverkusen', name: 'Bayer Leverkusen', strength: 86, continental: true, region: 'euro', flag: '🇩🇪' },
   { id: 'paris-saint-germain', name: 'Paris Saint-Germain', strength: 87, continental: true, region: 'euro', flag: '🇫🇷' },
-  { id: 'inter-milan', name: 'Inter de Milán', strength: 85, continental: true, region: 'euro', flag: '🇮🇹' },
+  { id: 'inter-milan', name: 'Inter de Milán', strength: 86, continental: true, region: 'euro', flag: '🇮🇹' },
+  { id: 'ac-milan', name: 'AC Milán', strength: 85, continental: true, region: 'euro', flag: '🇮🇹' },
   { id: 'juventus', name: 'Juventus', strength: 84, continental: true, region: 'euro', flag: '🇮🇹' },
+  { id: 'napoli', name: 'SSC Napoli', strength: 84, continental: true, region: 'euro', flag: '🇮🇹' },
   { id: 'manchester-united', name: 'Manchester United', strength: 83, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'atletico-madrid', name: 'Atlético Madrid', strength: 84, continental: true, region: 'euro', flag: '🇪🇸' },
-  { id: 'chelsea', name: 'Chelsea', strength: 83, continental: true, region: 'euro', flag: '🏴' },
-  { id: 'borussia-dortmund', name: 'Borussia Dortmund', strength: 82, continental: true, region: 'euro', flag: '🇩🇪' },
+  { id: 'atletico-madrid', name: 'Atlético Madrid', strength: 85, continental: true, region: 'euro', flag: '🇪🇸' },
+  { id: 'chelsea', name: 'Chelsea FC', strength: 83, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'tottenham-hotspur', name: 'Tottenham Hotspur', strength: 83, continental: true, region: 'euro', flag: '🏴' },
+  { id: 'borussia-dortmund', name: 'Borussia Dortmund', strength: 83, continental: true, region: 'euro', flag: '🇩🇪' },
+  { id: 'benfica', name: 'SL Benfica', strength: 82, continental: true, region: 'euro', flag: '🇵🇹' },
+  { id: 'sporting-cp', name: 'Sporting CP', strength: 82, continental: true, region: 'euro', flag: '🇵🇹' },
+  { id: 'porto', name: 'FC Porto', strength: 81, continental: true, region: 'euro', flag: '🇵🇹' },
+  { id: 'ajax', name: 'AFC Ajax', strength: 81, continental: true, region: 'euro', flag: '🇳🇱' },
+  { id: 'psv-eindhoven', name: 'PSV Eindhoven', strength: 81, continental: true, region: 'euro', flag: '🇳🇱' },
+  { id: 'villarreal', name: 'Villarreal CF', strength: 81, continental: true, region: 'euro', flag: '🇪🇸' },
+  { id: 'sevilla-fc', name: 'Sevilla FC', strength: 80, continental: true, region: 'euro', flag: '🇪🇸' },
 ]
 
 /**
@@ -171,15 +183,20 @@ export const LIGA_CLUBS: CareerClub[] = (ligasData.clubes as any[])
     // El escudo real si lo tenemos (bajado de Wikimedia Commons con licencia libre) y el
     // generado si no. La lista de cuáles hay se arma en el build, así que no hay que
     // sincronizar nada a mano.
-    escudo: ESCUDOS_REALES.has(c.id) ? `/logos/carrera/${c.id}.png` : `/logos/ligas/${c.id}.svg`,
+    escudo: c.escudo || (ESCUDOS_REALES.has(c.id) ? `/logos/carrera/${c.id}.png` : `/logos/ligas/${c.id}.svg`),
   }))
 
 export const LIGAS = ligasData.ligas as Liga[]
 export const PAISES_CARRERA = ligasData.paises as PaisCarrera[]
 
-export const ALL_CLUBS: CareerClub[] = [...ARG_CLUBS, ...SUDAM_CLUBS, ...EURO_CLUBS, ...LIGA_CLUBS]
+const rawClubs = [...ARG_CLUBS, ...SUDAM_CLUBS, ...EURO_CLUBS, ...LIGA_CLUBS]
+const mapClubs = new Map<string, CareerClub>()
+for (const c of rawClubs) {
+  if (!mapClubs.has(c.id)) mapClubs.set(c.id, c)
+}
+export const ALL_CLUBS: CareerClub[] = [...mapClubs.values()]
 
-const CLUB_POR_ID = new Map(ALL_CLUBS.map((c) => [c.id, c]))
+const CLUB_POR_ID = mapClubs
 
 export function findClub(id: string): CareerClub | undefined {
   // Un Map y no un find(): con 12 clubes daba igual, con 470 esto corre en cada temporada
@@ -1092,6 +1109,7 @@ export function simulateSeason(
   const ovr = state.player.ovr
   const age = state.player.age
   const year = state.startYear + state.seasonsPlayed
+  const highlights: string[] = []
 
   // ── Cuánto jugás: la titularidad se gana ──
   // Antes todos jugaban 28-42 partidos desde el primer año, incluso un pibe de 17 recién
@@ -1119,7 +1137,6 @@ export function simulateSeason(
   let bonusTitle = 0
   let bonusOvr = 0
   const opt = decisionOptionId || ''
-  // Efectos de las decisiones (agrupados por tipo).
   const GOAL_OPTS = new Set(['train_finishing', 'focus_play', 'refuse_position', 'focus_self'])
   const ASSIST_OPTS = new Set(['train_vision', 'balanced_train', 'link_up'])
   const TITLE_OPTS = new Set(['play_injured', 'focus_football', 'team_leader', 'barra_stay'])
@@ -1129,8 +1146,6 @@ export function simulateSeason(
   if (TITLE_OPTS.has(opt)) bonusTitle += opt === 'barra_stay' ? 0.06 : 0.1
   if (OVR_OPTS.has(opt)) bonusOvr += 1
 
-  // Un arquero no se vuelve goleador por entrenar definición: sus bonus van a la valla
-  // invicta, y en un defensor pesan la mitad. Antes un arquero terminaba con goles.
   let bonusCleanSheets = 0
   if (cat === 'GK') {
     bonusCleanSheets += bonusGoals + bonusAssists
@@ -1143,56 +1158,61 @@ export function simulateSeason(
   }
 
   // ── Lesiones ──
-  // Después de los 30 el cuerpo empieza a pasar factura; a los 34+ es habitual perderse medio
-  // año. Una lesión seria recorta partidos y deja secuela en el OVR.
   const riesgoLesion = clamp(0.06 + Math.max(0, age - 28) * 0.035 + (decisionOptionId === 'play_injured' ? 0.18 : 0), 0.05, 0.55)
   const lesionado = rng() < riesgoLesion
   const lesionGrave = lesionado && rng() < clamp(0.2 + Math.max(0, age - 31) * 0.06, 0.2, 0.6)
 
+  let lesionDetalle: { tipo: string; meses: number; impacto: string } | undefined = undefined
+  if (lesionGrave) {
+    const tiposGrave = [
+      { tipo: "Rotura de ligamento cruzado anterior", meses: 8, impacto: "-2 OVR · 8 meses fuera" },
+      { tipo: "Rotura de menisco interno", meses: 5, impacto: "-1 OVR · 5 meses fuera" },
+      { tipo: "Fractura de peroné", meses: 6, impacto: "-1 OVR · 6 meses fuera" },
+      { tipo: "Pubalgia crónica grave", meses: 6, impacto: "-1 OVR · 6 meses fuera" },
+    ]
+    lesionDetalle = tiposGrave[Math.floor(rng() * tiposGrave.length)]
+    highlights.push(`🏥 Lesión grave: ${lesionDetalle.tipo} (${lesionDetalle.meses} meses de baja)`)
+  } else if (lesionado) {
+    const tiposMod = [
+      { tipo: "Desgarro muscular de grado 2", meses: 2, impacto: "2 meses fuera" },
+      { tipo: "Esguince grave de tobillo", meses: 3, impacto: "3 meses fuera" },
+      { tipo: "Distensión de ligamento colateral", meses: 2, impacto: "2 meses fuera" },
+    ]
+    lesionDetalle = tiposMod[Math.floor(rng() * tiposMod.length)]
+    highlights.push(`🩹 Lesión: ${lesionDetalle.tipo} (${lesionDetalle.meses} meses de baja)`)
+  }
+
   const ovrScale = clamp(ovr / 80, 0.6, 1.35)
-  // La lesión te saca de la cancha: se descuentan partidos antes de repartir goles y vallas.
   const partidosJugados = lesionado
-    ? Math.max(3, Math.round(matchesPlayed * (lesionGrave ? 0.45 : 0.75)))
+    ? Math.max(3, Math.round(matchesPlayed * (lesionGrave ? 0.35 : 0.65)))
     : matchesPlayed
   const apps = partidosJugados / 38
-  // Un equipo que ataca bien te deja más pelotas para empujar; en un club chico hacés menos.
   const empujeClub = clamp(0.78 + (club.strength - 70) / 55, 0.7, 1.3)
   const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * empujeClub * (0.6 + rng() * 0.9)) + bonusGoals))
   const assists = Math.max(0, Math.round((ASSIST_BASE[cat] * ovrScale * apps * empujeClub * (0.5 + rng() * 0.9)) + bonusAssists))
-  // Vallas invictas (arqueros/defensores): dependen del OVR y la fuerza del club.
   const keepsCleanSheets = cat === 'GK' || cat === 'DEF'
   const csRate = keepsCleanSheets ? clamp(0.12 + (ovr - 70) / 120 + (club.strength - 72) / 130, 0.05, 0.55) : 0
   const cleanSheets = Math.min(
     partidosJugados,
     Math.round(partidosJugados * csRate * (0.7 + rng() * 0.6)) + bonusCleanSheets,
   )
-  // Penales: el arquero enfrenta un puñado por año y ataja según su nivel.
   const penaltiesFaced = cat === 'GK' ? 2 + Math.floor(rng() * 6) : 0
   const penaltiesSaved = Math.min(
     penaltiesFaced,
     Math.round(penaltiesFaced * clamp(0.18 + (ovr - 70) / 250, 0.08, 0.45) + (rng() < 0.25 ? 1 : 0)),
   )
-  // Tarjetas: el defensor vive al límite, el arquero casi no ve amarillas.
   const yellowCards = Math.max(0, Math.round(YELLOW_BASE[cat] * apps * (0.5 + rng())))
   const redCards = rng() < RED_CHANCE[cat] * (0.6 + apps) ? 1 : 0
 
-  // --- Probabilidades de título estilo Copero (del tweet) ---
-  // Efecto Maradona: con 90+ de OVR el juego sube un nivel la reputación del club.
   const maradona = ovr >= 90 ? 6 : 0
   const str = clamp(club.strength + maradona, 60, 92)
-  // Margen de OVR: si superás en +10 lo que pide el club, todo x1.6.
   const margin = ovr >= club.strength + 10 ? 1.6 : 1
-  // Cuánto sale ganar cada torneo. Los valores viejos (70% la liga para un club grande) daban
-  // carreras con 10 ligas y 7 Libertadores en 15 años: los títulos dejaban de significar algo.
-  // En una liga de 28 equipos, hasta River o Boca ganan más o menos 1 de cada 3 torneos.
   const ligaP = clamp(((str - 64) / 19) * 0.32 * margin + 0.005 + bonusTitle, 0.005, 0.45)
   const copaP = clamp(((str - 64) / 19) * 0.26 * margin + 0.03 + bonusTitle, 0.03, 0.38)
 
   const topTier = state.nextContinental === 'libertadores'
   const contType: ContinentalComp =
     club.region === 'euro' ? (topTier ? 'champions' : 'europa') : topTier ? 'libertadores' : 'sudamericana'
-  // Sudamericana / Europa League: solo la ganan los clubes del montón; los grandes 0%.
-  // Libertadores / Champions: reservada para los grandes.
   let contP: number
   if (contType === 'sudamericana' || contType === 'europa') {
     contP = club.strength >= 79 ? 0 : clamp(((str - 64) / 15) * 0.22 * margin + 0.04, 0.02, 0.3)
@@ -1201,10 +1221,6 @@ export function simulateSeason(
   }
 
   const liga = rng() < ligaP
-  // La copa nacional la juegan todos los países que tienen una, no solo Argentina: un peruano
-  // pelea la Copa Perú igual que un argentino la Copa Argentina.
-  // La categoría que vale es la de esta carrera: si el club ascendió el año pasado, este año
-  // juega arriba.
   const ligaDelClub = findLiga(state.ligaActualId ?? club.ligaId ?? '')
   const juegaCopaNacional = club.region === 'arg' || Boolean(ligaDelClub?.copa)
   const copaArgentina = juegaCopaNacional && rng() < copaP
@@ -1215,31 +1231,18 @@ export function simulateSeason(
   if (copaArgentina) trophiesWon.push('copa-arg')
   if (continentalWon) trophiesWon.push(contType)
 
-  // ── Ascenso y descenso ──
-  // Es lo que hace que arrancar en la B signifique algo: se sube peleándola y se puede bajar.
-  // Solo aplica a los clubes que tienen liga con estructura; los de clubs.json y los europeos
-  // están escritos a mano y no tienen división.
   let ascendio = false
   let descendio = false
   let nuevaLigaId: string | undefined
   if (ligaDelClub) {
     const arriba = ligaVecina(ligaDelClub.id, 'arriba')
     const abajo = ligaVecina(ligaDelClub.id, 'abajo')
-    // La chance sale de la fuerza del club DENTRO de su liga, no de su fuerza absoluta: el más
-    // fuerte de la B asciende seguido, el más débil se va a la C.
-    //
-    // El divisor es `equipos` —los que juegan el torneo de verdad— y no cuántos clubes trajo
-    // Wikidata: la Série A la juegan 20 y el archivo tiene 58, así que dividir por el archivo
-    // hacía que ascender y descender fueran casi imposibles en las ligas mejor documentadas.
     const rivales = clubesDeLiga(ligaDelClub.id)
     const puesto = Math.max(0, rivales.findIndex((c) => c.id === club.id))
-    const relativo = 1 - puesto / Math.max(rivales.length, 1) // 1 = el más fuerte de la liga
+    const relativo = 1 - puesto / Math.max(rivales.length, 1)
     const enTorneo = Math.max(ligaDelClub.equipos || rivales.length, 8)
     if (arriba && ligaDelClub.asciende > 0) {
-      // Un jugador muy por encima del club lo empuja: es la carrera del pibe que sube al equipo.
       const empuje = clamp((ovr - club.strength) / 40, -0.05, 0.15)
-      // Exponente y no proporción directa: el candidato pelea el ascenso todos los años y el
-      // colista no lo pelea nunca, que es como se siente una categoría de verdad.
       const pAsc = clamp((ligaDelClub.asciende / enTorneo) * Math.pow(relativo, 1.6) * 2.4 + empuje, 0, 0.5)
       ascendio = rng() < pAsc
       if (ascendio) {
@@ -1299,7 +1302,6 @@ export function simulateSeason(
     champions: 'Champions League',
     europa: 'Europa League',
   }
-  const highlights: string[] = []
   // El ascenso va PRIMERO: en la B es el título del año y le gana a cualquier otra cosa.
   if (ascendio) {
     const arriba = ligaVecina(ligaDelClub!.id, 'arriba')
@@ -1571,6 +1573,10 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
     // del Manchester United sin haber pisado nunca una primera división. Ahora, además del OVR,
     // hay que estar jugando en una liga que ya sea de nivel alto.
     if (c.region === 'euro') {
+      if (current.pais === 'Arabia Saudita') {
+        // Desde Arabia Saudita, los clubes de Europa rarísimamente vuelven a ofertar.
+        return ovr >= 86 && rng() < 0.05
+      }
       return ovr >= 78 && performance >= 0.5 && nivelActual >= 60 && c.strength >= current.strength - 3
     }
     // Ni un salto imposible ni un paso atrás grande: nadie deja la Série A por la Primera B.
@@ -1599,17 +1605,27 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
   }
 
   // ── Europa no llama de a uno ──
-  //
-  // El salto a Europa es el momento de una carrera sudamericana, y con una sola oferta no se
-  // sentía: aparecía un club, se aceptaba o no, y listo. Cuando a un pibe de acá lo vienen a
-  // buscar, lo vienen a buscar varios y él ELIGE — eso es lo que hay que poder jugar.
   const europeos = candidates.filter((c) => c.region === 'euro')
   if (europeos.length >= 2) {
     const patota = europeos.slice(0, clamp(2 + Math.floor(rng() * 3), 2, europeos.length))
-    // Y una de acá, para que irse siga siendo una decisión y no un trámite: quedarse en el club
-    // que te formó teniendo cuatro de Europa arriba de la mesa es una carrera que vale contar.
     const deAca = candidates.find((c) => c.region !== 'euro')
-    return [...patota, ...(deAca ? [deAca] : [])].map(aOferta)
+    const resultOffers = [...patota, ...(deAca ? [deAca] : [])].map(aOferta)
+
+    // Oferta tentadora de Petrodólares de Arabia Saudita
+    if (ovr >= 78 && rng() < 0.45) {
+      const saudiClub = ALL_CLUBS.filter((c) => c.pais === "Arabia Saudita").sort(() => rng() - 0.5)[0]
+      if (saudiClub) {
+        resultOffers.unshift({
+          clubId: saudiClub.id,
+          clubName: `${saudiClub.name}`,
+          strength: saudiClub.strength,
+          region: saudiClub.region,
+          flag: saudiClub.flag,
+          valueM: Math.round(value * (2.5 + rng() * 2.0)),
+        })
+      }
+    }
+    return resultOffers
   }
 
   // ── Los de tu país te siguen ──

@@ -929,15 +929,21 @@ function CareerDashboard() {
                     {s.highlights && s.highlights.length > 0 && (
                       <ul className="mt-2 space-y-1.5">
                         {s.highlights.map((h, j) => {
+                          const esLesion = /🏥|🩹/.test(h)
+                          const esArabia = /🐪|💰/.test(h)
                           const grande = /🏆|🥇|🌍|🏅|⭐|🧤 Héroe|BALÓN DE ORO|EUROPA/.test(h)
+                          let estilo = "text-slate-300 bg-white/[0.03] border-white/5"
+                          if (esLesion) {
+                            estilo = "text-red-300 bg-red-500/10 border-red-500/30 font-bold shadow-[0_0_15px_rgba(239,68,68,0.15)]"
+                          } else if (esArabia) {
+                            estilo = "text-amber-200 bg-amber-500/10 border-amber-500/30 font-bold shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+                          } else if (grande) {
+                            estilo = "cartel-shine text-[#FFE9A8] bg-[#D4AF37]/10 border-[#D4AF37]/40 font-bold shadow-[0_0_18px_rgba(212,175,55,0.15)]"
+                          }
                           return (
                             <li
                               key={j}
-                              className={`cartel-in text-[11px] font-sans rounded-xl px-2.5 py-1.5 border ${
-                                grande
-                                  ? "cartel-shine text-[#FFE9A8] bg-[#D4AF37]/10 border-[#D4AF37]/40 font-bold shadow-[0_0_18px_rgba(212,175,55,0.15)]"
-                                  : "text-slate-300 bg-white/[0.03] border-white/5"
-                              }`}
+                              className={`cartel-in text-[11px] font-sans rounded-xl px-2.5 py-1.5 border ${estilo}`}
                               style={{ animationDelay: `${j * 90}ms` }}
                             >
                               {h}

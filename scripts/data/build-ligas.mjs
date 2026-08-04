@@ -134,6 +134,10 @@ const PAISES = {
     copa: 'Copa do Brasil', continental: 'sudam', gentilicio: 'brasileño',
     plazas: { libertadores: 6, sudamericana: 6 },
   },
+  'Arabia Saudita': {
+    copa: 'Copa del Rey de Arabia', continental: 'afc', gentilicio: 'saudí',
+    plazas: { libertadores: 2, sudamericana: 2 },
+  },
 }
 
 /**
@@ -438,6 +442,37 @@ const MEXICO_CLUBES = [
 
 ligas.push(...MEXICO_LIGAS)
 clubes.push(...MEXICO_CLUBES)
+
+const ARABIA_LIGAS = [
+  {
+    id: "sa-1",
+    pais: "Arabia Saudita",
+    iso: "SA",
+    bandera: "🇸🇦",
+    nombre: "Saudi Pro League",
+    division: 1,
+    copa: "Copa del Rey de Arabia",
+    continental: "afc",
+    equipos: 18,
+    formato: "liga",
+    asciende: 0,
+    desciende: 3,
+    nota: "Liga millonaria con contrataciones estelares.",
+    clubIds: ["al-nassr", "al-hilal", "al-ittihad", "al-ahli", "al-ettifaq", "al-shabab"]
+  }
+]
+
+const ARABIA_CLUBES = [
+  { id: "al-nassr", nombre: "Al-Nassr FC", fuerza: 83, division: 1, ligaId: "sa-1", pais: "Arabia Saudita", bandera: "🇸🇦", colores: ["#002B7F", "#FCE300"], escudo: "/logos/ligas/al-nassr.svg" },
+  { id: "al-hilal", nombre: "Al-Hilal SFC", fuerza: 84, division: 1, ligaId: "sa-1", pais: "Arabia Saudita", bandera: "🇸🇦", colores: ["#0033A0", "#FFFFFF"], escudo: "/logos/ligas/al-hilal.svg" },
+  { id: "al-ittihad", nombre: "Al-Ittihad Club", fuerza: 82, division: 1, ligaId: "sa-1", pais: "Arabia Saudita", bandera: "🇸🇦", colores: ["#FFCC00", "#000000"], escudo: "/logos/ligas/al-ittihad.svg" },
+  { id: "al-ahli", nombre: "Al-Ahli Saudi FC", fuerza: 82, division: 1, ligaId: "sa-1", pais: "Arabia Saudita", bandera: "🇸🇦", colores: ["#006837", "#FFFFFF"], escudo: "/logos/ligas/al-ahli.svg" },
+  { id: "al-ettifaq", nombre: "Al-Ettifaq FC", fuerza: 77, division: 1, ligaId: "sa-1", pais: "Arabia Saudita", bandera: "🇸🇦", colores: ["#10B981", "#E53935"], escudo: "/logos/ligas/al-ettifaq.svg" },
+  { id: "al-shabab", nombre: "Al-Shabab FC", fuerza: 77, division: 1, ligaId: "sa-1", pais: "Arabia Saudita", bandera: "🇸🇦", colores: ["#000000", "#FFFFFF"], escudo: "/logos/ligas/al-shabab.svg" }
+]
+
+ligas.push(...ARABIA_LIGAS)
+clubes.push(...ARABIA_CLUBES)
 
 // Dos clubes con el mismo nombre corto en la misma liga son indistinguibles en la pantalla de
 // elección: "Cerro Porteño" y "Cerro Porteño" no le dicen a nadie cuál es cuál. Se desempata
