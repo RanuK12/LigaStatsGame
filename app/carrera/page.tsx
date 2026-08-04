@@ -18,6 +18,7 @@ import BallonDorReveal from "@/components/career/BallonDorReveal"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
 import SeasonProgress, { SEASON_PROGRESS_MS } from "@/components/career/SeasonProgress"
 import IdolatriaBar from "@/components/career/IdolatriaBar"
+import EventoCarrera, { type EventoPendiente } from "@/components/career/EventoCarrera"
 import { idolatriaActual } from "@/lib/career-idolatria"
 import type { SeasonResult } from "@/lib/career-engine"
 import { usePlayersCore } from "@/lib/data-loader"
@@ -25,6 +26,9 @@ import {
   POSITIONS,
   ARG_CLUBS,
   SUDAM_CLUBS,
+  LIGAS,
+  PAISES_CARRERA,
+  clubesDeLiga,
   findClub,
   MAX_SEASONS,
   marketValueFor,
@@ -37,7 +41,6 @@ import {
   academyInterest,
   LEGEND_CAREERS,
   positionCategory,
-  effectLabelFor,
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
@@ -358,11 +361,73 @@ function CareerSetupWizard() {
   )
 }
 
+/**
+ * Dónde debutás: país, después categoría, después club.
+ *
+ * Antes eran dos listas planas (Argentina y "Sudamérica"). Con 470 clubes en siete países y
+ * cuatro categorías eso es una pared: hay que poder decir "quiero arrancar en la B de Uruguay"
+ * en tres toques, que es lo que hace que el camino desde abajo se elija en vez de sufrirse.
+ */
 function ClubPicker({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
+  const [pais, setPais] = useState("Argentina")
+  const ligasDelPais = useMemo(
+    () => LIGAS.filter((l) => l.pais === pais).sort((a, b) => a.division - b.division),
+    [pais],
+  )
+  const [ligaId, setLigaId] = useState(ligasDelPais[0]?.id ?? "ar-1")
+
+  // Al cambiar de país la liga elegida deja de existir: se vuelve a la primera del nuevo.
+  useEffect(() => {
+    if (!ligasDelPais.some((l) => l.id === ligaId)) setLigaId(ligasDelPais[0]?.id ?? "")
+  }, [ligasDelPais, ligaId])
+
+  const liga = LIGAS.find((l) => l.id === ligaId)
+  const clubes = useMemo(() => (ligaId ? clubesDeLiga(ligaId) : []), [ligaId])
+
   return (
     <div className="space-y-4">
-      <ClubGroup title="Liga Profesional Argentina" clubs={ARG_CLUBS} selected={selected} onSelect={onSelect} />
-      <ClubGroup title="Sudamérica" clubs={SUDAM_CLUBS} selected={selected} onSelect={onSelect} />
+      <div>
+        <h4 className="mb-2 font-sport text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">País</h4>
+        <div className="flex flex-wrap gap-2">
+          {PAISES_CARRERA.map((p) => (
+            <button
+              key={p.nombre}
+              onClick={() => setPais(p.nombre)}
+              className={`rounded-xl border px-3 py-2 font-sport text-[11px] font-bold transition-all ${
+                pais === p.nombre ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white" : "border-white/5 bg-slate-950/50 text-slate-300 hover:border-white/20"
+              }`}
+            >
+              {p.bandera} {p.nombre}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h4 className="mb-2 font-sport text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Categoría</h4>
+        <div className="flex flex-wrap gap-2">
+          {ligasDelPais.map((l) => (
+            <button
+              key={l.id}
+              onClick={() => setLigaId(l.id)}
+              className={`rounded-xl border px-3 py-2 font-sport text-[11px] font-bold transition-all ${
+                ligaId === l.id ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white" : "border-white/5 bg-slate-950/50 text-slate-300 hover:border-white/20"
+              }`}
+            >
+              {l.nombre}
+              <span className="ml-1.5 text-[9px] text-slate-500">{l.division}ª</span>
+            </button>
+          ))}
+        </div>
+        {liga?.nota && <p className="mt-2 text-[11px] leading-snug text-slate-500">{liga.nota}</p>}
+        {liga && liga.division > 1 && (
+          <p className="mt-1 font-sport text-[10px] uppercase tracking-wider text-[#F6C750]">
+            🔼 Suben {liga.asciende} · empezás desde abajo
+          </p>
+        )}
+      </div>
+
+      <ClubGroup title={`${liga?.bandera ?? ""} ${liga?.nombre ?? ""} · ${clubes.length} clubes`} clubs={clubes} selected={selected} onSelect={onSelect} />
     </div>
   )
 }
@@ -374,7 +439,7 @@ function ClubGroup({
   onSelect,
 }: {
   title: string
-  clubs: { id: string; name: string; strength: number }[]
+  clubs: { id: string; name: string; strength: number; escudo?: string; ciudad?: string }[]
   selected: string
   onSelect: (id: string) => void
 }) {
@@ -388,7 +453,9 @@ function ClubGroup({
             onClick={() => onSelect(c.id)}
             className={`flex items-center gap-2 px-2.5 py-2 rounded-xl border text-left transition-all ${selected === c.id ? "bg-[#74ACDF]/20 border-[#74ACDF]" : "bg-slate-950/50 border-white/5 hover:border-white/20"}`}
           >
-            <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+            {/* Cada club sabe dónde está su escudo: los de siempre en logos/clubs, los de las
+                ligas nuevas en logos/ligas. */}
+            <img src={c.escudo ?? `/logos/clubs/${c.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
             <span className="text-[11px] font-bold text-white truncate flex-1">{c.name}</span>
             <span className="text-[11px] font-sport text-amber-400 shrink-0">{c.strength}</span>
           </button>
@@ -413,6 +480,8 @@ function CareerDashboard() {
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
   const [lote, setLote] = useState<{ temporadas: number } | null>(null)
   const [simulando, setSimulando] = useState<{ temporadas: number } | null>(null)
+  // El evento que está en pantalla ahora mismo. `null` = no hay ninguno abierto.
+  const [eventoAbierto, setEventoAbierto] = useState<EventoPendiente | null>(null)
 
   if (!career) return null
   const cardData = buildCareerCardData(career)
@@ -425,6 +494,23 @@ function CareerDashboard() {
   )
   const dilemma = eligibleDilemmas[career.seasonsPlayed % eligibleDilemmas.length]
   const barraActive = career.history[career.history.length - 1]?.barrabravas === true
+
+  /**
+   * El evento que interrumpe esta temporada, y de qué tipo es.
+   *
+   * Hay uno por temporada y en este orden: si te apretaron los barras eso manda, después la
+   * sustancia (cada tres años), y si no, el dilema de pretemporada. Dos modales seguidos serían
+   * peor que el panel fijo que estamos sacando.
+   */
+  const eventoDeLaTemporada: EventoPendiente | null = career.finished
+    ? null
+    : barraActive
+      ? { decision: BARRABRAVAS_DECISION, tono: "duro" }
+      : career.seasonsPlayed % 3 === 1
+        ? { decision: SUBSTANCE_DECISION, tono: "raro" }
+        : dilemma
+          ? { decision: dilemma, tono: "dificil" }
+          : null
 
   async function handleExport(kind: "png" | "jpg" | "pdf") {
     if (!fichaRef.current) return
@@ -458,18 +544,40 @@ function CareerDashboard() {
     return null
   }
 
+  /**
+   * Simular una temporada pasa primero por el evento, si lo hay.
+   *
+   * En lote (simular 5 años) NO se pregunta: pedir cinco decisiones seguidas en un modal es
+   * peor que no pedir ninguna, así que se usa la opción que estuviera elegida y se sigue.
+   */
   function handleSimulate(yearsCount = 1) {
+    if (yearsCount === 1 && eventoDeLaTemporada) {
+      setEventoAbierto(eventoDeLaTemporada)
+      return
+    }
+    correrConAnimacion(yearsCount, selectedOptionId)
+  }
+
+  /** Elegiste en el modal: se cierra y arranca la temporada con esa decisión. */
+  function resolverEvento(optionId: string) {
+    setSelectedOptionId(optionId)
+    setEventoAbierto(null)
+    // El modal tarda ~200 ms en irse: si la temporada arranca antes, se pisan las animaciones.
+    window.setTimeout(() => correrConAnimacion(1, optionId), 220)
+  }
+
+  function correrConAnimacion(yearsCount: number, optionId: string) {
     // El cálculo es instantáneo: se corre igual, pero el resultado se revela después de que
     // la temporada "se juegue" en pantalla. Si no, aparece todo de golpe y no se siente nada.
     setSimulando({ temporadas: yearsCount })
-    const resultado = correrTemporadas(yearsCount)
+    const resultado = correrTemporadas(yearsCount, optionId)
     window.setTimeout(() => {
       setSimulando(null)
       revelar(resultado, yearsCount)
     }, SEASON_PROGRESS_MS + 120)
   }
 
-  function correrTemporadas(yearsCount: number) {
+  function correrTemporadas(yearsCount: number, optionId: string) {
     let simuladas = 0
     for (let i = 0; i < yearsCount; i++) {
       const cur = useCareerStore.getState().career
@@ -484,7 +592,7 @@ function CareerDashboard() {
         if (mejor && actual && mejor.strength > actual.strength) acceptOffer(mejor.clubId)
         else declineOffers()
       }
-      simulateNextSeason(selectedOptionId)
+      simulateNextSeason(optionId)
       simuladas++
     }
     return simuladas
@@ -604,7 +712,7 @@ function CareerDashboard() {
                   const euro = o.region === "euro"
                   return (
                     <div key={o.clubId} className={`flex items-center gap-2 rounded-xl p-3 border ${euro ? "bg-amber-400/10 border-amber-400/40" : "bg-slate-950/60 border-white/5"}`}>
-                      <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                      <img src={findClub(o.clubId)?.escudo ?? `/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
                           {o.clubName}
@@ -623,97 +731,14 @@ function CareerDashboard() {
             </div>
           )}
 
-          {/* DECISIONES (inline, antes de simular) */}
-          {!career.finished && !hasOffers && barraActive && (
-            <div className="card-gradient rounded-3xl p-5 border border-red-500/40 space-y-3 shadow-2xl">
-              <h4 className="text-sm font-black text-red-300 font-display">{BARRABRAVAS_DECISION.title}</h4>
-              <p className="text-xs text-slate-300 font-sans leading-relaxed">{BARRABRAVAS_DECISION.description}</p>
-              <div className="space-y-2 pt-1 font-sport">
-                {BARRABRAVAS_DECISION.options.map((opt) => (
-                  <button
-                    key={opt.id}
-                    onClick={() => setSelectedOptionId(opt.id)}
-                    className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
-                      selectedOptionId === opt.id
-                        ? "bg-red-500/20 border-red-400 text-white shadow-md"
-                        : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <span>{opt.label}</span>
-                    <span className="text-[10px] text-red-300 font-bold text-right ml-2">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
-                  </button>
-                ))}
-              </div>
-              <p className="text-[10px] text-slate-500 font-sans">Elegí y simulá la próxima temporada para resolverlo.</p>
-            </div>
-          )}
-
-          {!career.finished && !hasOffers && dilemma && (
-            <div className="panel-in card-gradient rounded-3xl p-5 border border-[#74ACDF]/30 space-y-3 shadow-2xl">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider">
-                  🧠 DECISIÓN DE PRETEMPORADA
-                </span>
-              </div>
-              <h4 className="text-sm font-bold text-white font-display">{dilemma.title}</h4>
-              <p className="text-xs text-slate-300 font-sans leading-relaxed">{dilemma.description}</p>
-
-              <div className="space-y-2.5 pt-1 font-sport">
-                {dilemma.options.map((opt, i) => {
-                  const elegida = selectedOptionId === opt.id
-                  return (
-                    <button
-                      key={opt.id}
-                      onClick={() => setSelectedOptionId(opt.id)}
-                      style={{ animationDelay: `${i * 70}ms` }}
-                      className={`cartel-in w-full rounded-2xl border p-3.5 text-left text-xs font-bold transition-all duration-300 flex items-center justify-between gap-3 hover:-translate-y-0.5 ${
-                        elegida
-                          ? "border-[#74ACDF] bg-[#74ACDF]/15 text-white shadow-[0_0_24px_rgba(116,172,223,0.25)]"
-                          : "border-white/5 bg-slate-950/60 text-slate-400 hover:border-[#74ACDF]/40 hover:text-white"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <span
-                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] transition-colors ${
-                            elegida ? "border-[#74ACDF] bg-[#74ACDF] text-slate-950" : "border-slate-700 text-transparent"
-                          }`}
-                        >
-                          ✓
-                        </span>
-                        {opt.label}
-                      </span>
-                      <span className="shrink-0 text-right text-[10px] font-bold text-amber-300">
-                        {effectLabelFor(opt.effectDescription, career.player.position)}
-                      </span>
-                    </button>
-                  )
-                })}
-              </div>
-
-              {/* Sustancia misteriosa: NO todas las temporadas — evento ocasional (cada ~3). */}
-              {career.seasonsPlayed % 3 === 1 && (
-                <div className="pt-3 mt-2 border-t border-white/10">
-                  <div className="text-[10px] font-bold text-purple-300 font-sport uppercase tracking-wider mb-2">
-                    {SUBSTANCE_DECISION.title}
-                  </div>
-                  <div className="space-y-2 font-sport">
-                    {SUBSTANCE_DECISION.options.map((opt) => (
-                      <button
-                        key={opt.id}
-                        onClick={() => setSelectedOptionId(opt.id)}
-                        className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between ${
-                          selectedOptionId === opt.id
-                            ? "bg-purple-500/20 border-purple-400 text-white shadow-md"
-                            : "bg-slate-950/60 border-white/5 text-slate-400 hover:text-white"
-                        }`}
-                      >
-                        <span>{opt.label}</span>
-                        <span className="text-[10px] text-purple-300 font-bold">{effectLabelFor(opt.effectDescription, career.player.position)}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+          {/* Las decisiones ya no viven acá: interrumpen al simular (EventoCarrera). Como panel
+              fijo se quedaban en pantalla temporada tras temporada, sin señal de que hubiera
+              algo que resolver ni de que ya estuviera resuelto, y se leían como algo roto. */}
+          {!career.finished && !hasOffers && eventoDeLaTemporada && (
+            <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-center">
+              <span className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+                Al simular vas a tener que decidir
+              </span>
             </div>
           )}
 
@@ -767,13 +792,13 @@ function CareerDashboard() {
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/logos/clubs/${s.clubId}.png`}
+                      src={findClub(s.clubId)?.escudo ?? `/logos/clubs/${s.clubId}.png`}
                       alt=""
                       className="pointer-events-none absolute -right-4 -bottom-6 w-28 h-28 object-contain opacity-[0.06]"
                       onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")}
                     />
                     <div className="relative flex items-center gap-2.5 mb-2">
-                      <img src={`/logos/clubs/${s.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                      <img src={findClub(s.clubId)?.escudo ?? `/logos/clubs/${s.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-black text-white font-display truncate">{s.year} · {s.clubName}</div>
                         <div className="text-[10px] text-slate-400 font-sport">{s.age} años · Nota {(s.rating ?? 7).toFixed(1)}</div>
@@ -899,6 +924,9 @@ function CareerDashboard() {
           </div>
         </div>
       )}
+
+      {/* El evento de la temporada: interrumpe, se decide, se va. */}
+      <EventoCarrera evento={eventoAbierto} posicion={career.player.position} onElegir={resolverEvento} />
 
       <SeasonReveal
         season={revealSeason}

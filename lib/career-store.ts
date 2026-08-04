@@ -163,6 +163,8 @@ export const useCareerStore = create<CareerStore>()(
             pendingOffers: offers,
             nextContinental: nextContinentalFrom(season),
             playsMundialClubes: playsMundialClubesFrom(season),
+            // Si el club subió o bajó, el año que viene juega en otra categoría.
+            ligaActualId: season.nuevaLigaId ?? state.ligaActualId,
             milestones,
             finished: seasonsPlayed >= MAX_SEASONS,
           },
@@ -190,6 +192,8 @@ export const useCareerStore = create<CareerStore>()(
           career: {
             ...state,
             clubId: offer.clubId,
+            // El club nuevo trae su propia categoría: la del anterior no lo sigue.
+            ligaActualId: undefined,
             clubHistory: state.clubHistory.includes(offer.clubId)
               ? state.clubHistory
               : [...state.clubHistory, offer.clubId],
