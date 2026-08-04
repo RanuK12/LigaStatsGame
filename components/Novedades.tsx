@@ -22,7 +22,7 @@ export default function Novedades() {
   if (novedades.length === 0) return null
 
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-6">
+    <section id="novedades" className="relative z-10 max-w-6xl mx-auto px-4 pt-6 scroll-mt-24">
       <div className="relative overflow-hidden rounded-3xl border border-[#E7C27D]/25 bg-gradient-to-r from-[#141026]/90 to-[#050a14]/90 p-5 sm:p-6">
         <div className="banda-argentina absolute inset-x-0 top-0 h-1 opacity-80" />
 
