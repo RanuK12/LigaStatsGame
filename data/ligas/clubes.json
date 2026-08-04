@@ -1,0 +1,3969 @@
+{
+ "generado": "2026-08-03",
+ "fuente": "Wikidata: P118 (liga), P1346 (ganador) sobre P3450",
+ "ligas": [
+  {
+   "id": "ar-2",
+   "qid": "Q934724",
+   "pais": "Argentina",
+   "iso": "AR",
+   "bandera": "🇦🇷",
+   "nombre": "Primera Nacional",
+   "division": 2,
+   "clubes": [
+    {
+     "qid": "Q476836",
+     "nombre": "Arsenal Fútbol Club",
+     "fundado": 1957,
+     "estadio": "Estadio Julio Humberto Grondona",
+     "ciudad": "Sarandí",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q3781627",
+     "nombre": "Club Atlético Chaco For Ever",
+     "fundado": 1913,
+     "estadio": "Estadio Juan Alberto García",
+     "ciudad": "Resistencia",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q1022938",
+     "nombre": "Club Atlético San Martín (Tucumán)",
+     "fundado": 1909,
+     "estadio": "",
+     "ciudad": "San Miguel de Tucumán",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q775966",
+     "nombre": "Quilmes Atlético Club",
+     "fundado": 1887,
+     "estadio": "Estadio Centenario Ciudad de Quilmes",
+     "ciudad": "Quilmes",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q1102935",
+     "nombre": "Club Almagro",
+     "fundado": 1911,
+     "estadio": "Estadio Tres de Febrero",
+     "ciudad": "Buenos Aires",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1102931",
+     "nombre": "Club Almirante Brown",
+     "fundado": 1912,
+     "estadio": "Estadio Fragata Presidente Sarmiento",
+     "ciudad": "Isidro Casanova",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5772949",
+     "nombre": "Club Argentino Agropecuario",
+     "fundado": 2011,
+     "estadio": "",
+     "ciudad": "Carlos Casares",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q646088",
+     "nombre": "Club Atlético All Boys",
+     "fundado": 1913,
+     "estadio": "Estadio Islas Malvinas",
+     "ciudad": "Monte Castro",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q4737892",
+     "nombre": "Club Atlético Alvarado",
+     "fundado": 1928,
+     "estadio": "Estadio José María Minella",
+     "ciudad": "Mar del Plata",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1022904",
+     "nombre": "Club Atlético Atlanta",
+     "fundado": 1904,
+     "estadio": "Estadio Don León Kolbowski",
+     "ciudad": "Buenos Aires",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2979814",
+     "nombre": "Club Atlético Brown",
+     "fundado": 1945,
+     "estadio": "",
+     "ciudad": "Adrogué",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3384346",
+     "nombre": "Club Atlético Central Norte",
+     "fundado": 1921,
+     "estadio": "",
+     "ciudad": "Potosí",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q853053",
+     "nombre": "Club Atlético Chacarita Juniors",
+     "fundado": 1906,
+     "estadio": "Estadio de Chacarita Juniors",
+     "ciudad": "Villa Maipú",
+     "apodo": "Τρίχρωμοι",
+     "titulos": 0
+    },
+    {
+     "qid": "Q80897",
+     "nombre": "Club Atlético Colón",
+     "fundado": 1905,
+     "estadio": "Estadio Brigadier General Estanislao López",
+     "ciudad": "Santa Fe",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2979817",
+     "nombre": "Club Atlético Defensores de Belgrano",
+     "fundado": 1906,
+     "estadio": "Estadio Juan Pasquale",
+     "ciudad": "Núñez",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3622189",
+     "nombre": "Club Atlético Defensores Unidos",
+     "fundado": 1914,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2333719",
+     "nombre": "Club Atlético Estudiantes",
+     "fundado": 1898,
+     "estadio": "Estadio Ciudad de Caseros",
+     "ciudad": "Caseros",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2707037",
+     "nombre": "Club Atlético Gimnasia y Esgrima",
+     "fundado": 1908,
+     "estadio": "Estadio Víctor Legrotaglie",
+     "ciudad": "Mendoza",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5773135",
+     "nombre": "Club Atlético Güemes",
+     "fundado": 1932,
+     "estadio": "Estadio Arturo \"Jiya\" Miranda",
+     "ciudad": "Ciudad de Santiago del Estero",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2979819",
+     "nombre": "Club Atlético Juventud Unida Universitario",
+     "fundado": 1976,
+     "estadio": "Estadio Mario Sebastián Diez",
+     "ciudad": "San Luis",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2317584",
+     "nombre": "Club Atlético Los Andes",
+     "fundado": 1917,
+     "estadio": "Estadio Eduardo Gallardón",
+     "ciudad": "Lomas de Zamora",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5487437",
+     "nombre": "Club Atlético Mitre",
+     "fundado": 1907,
+     "estadio": "Estadio Doctores José y Antonio Castiglione",
+     "ciudad": "Ciudad de Santiago del Estero",
+     "apodo": "Tigre de la Roca",
+     "titulos": 0
+    },
+    {
+     "qid": "Q744555",
+     "nombre": "Club Atlético Nueva Chicago",
+     "fundado": 1911,
+     "estadio": "Estadio Nueva Chicago",
+     "ciudad": "Buenos Aires",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1773830",
+     "nombre": "Club Atlético Patronato",
+     "fundado": 1914,
+     "estadio": "Estadio Presbítero Bartolomé Grella",
+     "ciudad": "Paraná",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q632805",
+     "nombre": "Club Atlético Racing",
+     "fundado": 1924,
+     "estadio": "Estadio Miguel Sancho",
+     "ciudad": "Córdoba",
+     "apodo": "Club Atlético Racing",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2979822",
+     "nombre": "Club Atlético San Telmo",
+     "fundado": 1904,
+     "estadio": "Estadio Dr. Osvaldo Baletto",
+     "ciudad": "Dock Sud",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2778591",
+     "nombre": "Club Atlético Temperley",
+     "fundado": 1912,
+     "estadio": "Estadio Alfredo Beranger",
+     "ciudad": "Temperley",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q80886",
+     "nombre": "Club Atlético Tigre",
+     "fundado": 1902,
+     "estadio": "Estadio José Dellagiovanna",
+     "ciudad": "Victoria",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1102967",
+     "nombre": "Club Ciudad de Bolívar",
+     "fundado": 2002,
+     "estadio": "",
+     "ciudad": "San Carlos de Bolívar",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2759870",
+     "nombre": "Club de Gimnasia y Tiro",
+     "fundado": 1902,
+     "estadio": "Estadio El Gigante del Norte",
+     "ciudad": "Salta",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6319023",
+     "nombre": "Club Deportivo Juventud Unida de Gualeguaychú",
+     "fundado": 1907,
+     "estadio": "Estadio de los Eucaliptos",
+     "ciudad": "Gualeguaychú",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3775566",
+     "nombre": "Club Deportivo Maipú",
+     "fundado": 1927,
+     "estadio": "Estadio Omar Higinio Sperdutti",
+     "ciudad": "Maipú",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2318771",
+     "nombre": "Club Deportivo Morón",
+     "fundado": 1947,
+     "estadio": "Estadio Nuevo Francisco Urbano",
+     "ciudad": "Morón",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q910444",
+     "nombre": "Club Ferro Carril Oeste",
+     "fundado": 1904,
+     "estadio": "Estadio Ferro Carril Oeste",
+     "ciudad": "Buenos Aires",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q686739",
+     "nombre": "Club Social y Atlético Guillermo Brown",
+     "fundado": 1945,
+     "estadio": "Estadio Raúl Conti",
+     "ciudad": "Puerto Madryn",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2562022",
+     "nombre": "Club Social y Deportivo Flandria",
+     "fundado": 1941,
+     "estadio": "Estadio Carlos V",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2979984",
+     "nombre": "Club Tristán Suárez",
+     "fundado": 1929,
+     "estadio": "Estadio 20 de Octubre",
+     "ciudad": "Tristán Suárez",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3298533",
+     "nombre": "Club Villa Dálmine",
+     "fundado": 1957,
+     "estadio": "Estadio Jorge Rubén Varela",
+     "ciudad": "Campana",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5260763",
+     "nombre": "Club y Biblioteca Ramón Santamarina",
+     "fundado": 1913,
+     "estadio": "Estadio Municipal General San Martín",
+     "ciudad": "Tandil",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5905359",
+     "nombre": "Huracán de Medellín",
+     "fundado": 1949,
+     "estadio": "Unidad Deportiva Atanasio Girardot",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q125591021",
+     "nombre": "Pablo Martel",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "ar-3",
+   "qid": "Q1146403",
+   "pais": "Argentina",
+   "iso": "AR",
+   "bandera": "🇦🇷",
+   "nombre": "Primera B Metropolitana",
+   "division": 3,
+   "clubes": [
+    {
+     "qid": "Q5136150",
+     "nombre": "Club Atlético Villa San Carlos",
+     "fundado": 1925,
+     "estadio": "Estadio Genacio Sálice",
+     "ciudad": "Berisso",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q676088",
+     "nombre": "Club Sportivo Italiano",
+     "fundado": 1955,
+     "estadio": "Estadio República de Italia",
+     "ciudad": "Ciudad Evita",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2860985",
+     "nombre": "Argentino de Quilmes",
+     "fundado": 1899,
+     "estadio": "Estadio de la Barranca Dr.Isidoro Iriarte (Argentino de Quilmes)",
+     "ciudad": "Quilmes",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5136122",
+     "nombre": "Club Atlético Acassuso",
+     "fundado": 1922,
+     "estadio": "Estadio La Quema",
+     "ciudad": "San Isidro",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3681261",
+     "nombre": "Club Atlético Alvear",
+     "fundado": 1903,
+     "estadio": "",
+     "ciudad": "Villa Crespo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q4936073",
+     "nombre": "Club Atlético Boca Alumni",
+     "fundado": 1907,
+     "estadio": "",
+     "ciudad": "La Boca",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2057734",
+     "nombre": "Club Atlético Colegiales",
+     "fundado": 1908,
+     "estadio": "Estadio Libertarios Unidos",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2068001",
+     "nombre": "Club Atlético Ituzaingo",
+     "fundado": 1912,
+     "estadio": "Estadio Carlos Alberto Sacaan",
+     "ciudad": "Ituzaingó",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q972701",
+     "nombre": "Club Atlético San Miguel",
+     "fundado": 1922,
+     "estadio": "Estadio Malvinas Argentinas",
+     "ciudad": "Los Polvorines",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1022941",
+     "nombre": "Club Atlético Talleres de Remedios de Escalada",
+     "fundado": 1906,
+     "estadio": "Estadio Pablo Comelli",
+     "ciudad": "Remedios de Escalada",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2979842",
+     "nombre": "Club Comunicaciones de Buenos Aires",
+     "fundado": 1931,
+     "estadio": "Estadio Alfredo Ramos",
+     "ciudad": "Buenos Aires",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q965275",
+     "nombre": "Club Deportivo Armenio",
+     "fundado": 1962,
+     "estadio": "Estadio Armenia",
+     "ciudad": "Ingeniero Maschwitz",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7863739",
+     "nombre": "Club Deportivo UAI Urquiza",
+     "fundado": 1950,
+     "estadio": "Estadio Monumental de Villa Lynch",
+     "ciudad": "Buenos Aires",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3681462",
+     "nombre": "Club Honor y Patria",
+     "fundado": 1911,
+     "estadio": "",
+     "ciudad": "Bernal",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5136378",
+     "nombre": "Club Social y Deportivo Liniers",
+     "fundado": 1931,
+     "estadio": "",
+     "ciudad": "San Justo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q919761",
+     "nombre": "Club Social y Deportivo Madryn",
+     "fundado": 1924,
+     "estadio": "Categoría:Hospitales de la provincia de Córdoba (España)",
+     "ciudad": "Puerto Madryn",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2602775",
+     "nombre": "Deportivo Merlo",
+     "fundado": 1954,
+     "estadio": "Estadio José Manuel Moreno",
+     "ciudad": "Parque San Martín",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q8347139",
+     "nombre": "San Martín de Burzaco",
+     "fundado": 1936,
+     "estadio": "",
+     "ciudad": "Burzaco",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "ar-3f",
+   "qid": "Q17446411",
+   "pais": "Argentina",
+   "iso": "AR",
+   "bandera": "🇦🇷",
+   "nombre": "Torneo Federal A",
+   "division": 3,
+   "clubes": [
+    {
+     "qid": "Q59839",
+     "nombre": "Asociación Mutual Social y Deportiva Atlético de Rafaela",
+     "fundado": 1907,
+     "estadio": "Estadio Nuevo Monumental",
+     "ciudad": "Rafaela",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q603223",
+     "nombre": "Atlético Club San Martín",
+     "fundado": 1927,
+     "estadio": "Estadio Libertador General San Martín",
+     "ciudad": "Mendoza",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2706716",
+     "nombre": "Centro Juventud Antoniana",
+     "fundado": 1916,
+     "estadio": "Estadio Fray Honorato Pistoia",
+     "ciudad": "Salta",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2979812",
+     "nombre": "Club Atlético 9 de Julio (Rafaela)",
+     "fundado": 1904,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q8346999",
+     "nombre": "Club Atlético Bartolomé Mitre",
+     "fundado": 1926,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "Auriazul",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2602791",
+     "nombre": "Club Atlético Boca Unidos",
+     "fundado": 1927,
+     "estadio": "Estadio José Antonio Romero Feris",
+     "ciudad": "Corrientes",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q132194749",
+     "nombre": "Club Atlético Costa Brava",
+     "fundado": 1932,
+     "estadio": "",
+     "ciudad": "General Pico",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3625211",
+     "nombre": "Club Atlético Huracán Las Heras",
+     "fundado": 1929,
+     "estadio": "",
+     "ciudad": "Las Heras",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2640559",
+     "nombre": "Club Atlético Independiente",
+     "fundado": 1921,
+     "estadio": "Estadio La Chacra",
+     "ciudad": "Neuquén",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6554162",
+     "nombre": "Club Atlético Liniers",
+     "fundado": 1908,
+     "estadio": "",
+     "ciudad": "Bahía Blanca",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18621008",
+     "nombre": "Club Atlético Paraná",
+     "fundado": 1907,
+     "estadio": "Estadio Pedro Mutio",
+     "ciudad": "Paraná",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5773314",
+     "nombre": "Club Atlético Sarmiento (La Banda)",
+     "fundado": 1909,
+     "estadio": "Estadio Ciudad de La Banda",
+     "ciudad": "La Banda",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3492843",
+     "nombre": "Club Atlético Sarmiento (Resistencia)",
+     "fundado": 1910,
+     "estadio": "Estadio Centenario, Resistencia",
+     "ciudad": "Resistencia",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5136176",
+     "nombre": "Club Cipolletti",
+     "fundado": 1926,
+     "estadio": "Estadio La Visera",
+     "ciudad": "Cipolletti",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q110979800",
+     "nombre": "Club Deportivo Argentino",
+     "fundado": 1925,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2057329",
+     "nombre": "Club Mutual Crucero del Norte",
+     "fundado": 2003,
+     "estadio": "Estadio Comandante Andrés Guacurarí",
+     "ciudad": "Posadas",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1074980",
+     "nombre": "Club Olimpo",
+     "fundado": 1910,
+     "estadio": "Estadio Roberto Natalio Carminatti",
+     "ciudad": "Bahía Blanca",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q132194842",
+     "nombre": "Club Social Cultural y Deportivo Gimnasia y Esgrima",
+     "fundado": 1916,
+     "estadio": "",
+     "ciudad": "Chivilcoy",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2042968",
+     "nombre": "Club Social y Deportivo San Jorge",
+     "fundado": 2008,
+     "estadio": "",
+     "ciudad": "San Miguel de Tucumán",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7579610",
+     "nombre": "Club Sportivo Belgrano",
+     "fundado": 1914,
+     "estadio": "Estadio Juan Pablo Francia",
+     "ciudad": "San Francisco",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2001244",
+     "nombre": "Club Sportivo Ben Hur",
+     "fundado": 1940,
+     "estadio": "Estadio Parque Barrio Ilolay",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5848004",
+     "nombre": "Club Sportivo Estudiantes",
+     "fundado": 1976,
+     "estadio": "Estadio Héctor Odicino - Pedro Benoza",
+     "ciudad": "Provincia de San Luis",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7579617",
+     "nombre": "Club Sportivo y Biblioteca Atenas",
+     "fundado": 1916,
+     "estadio": "",
+     "ciudad": "Río Cuarto",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5773519",
+     "nombre": "Defensores de Pronunciamiento",
+     "fundado": 1972,
+     "estadio": "",
+     "ciudad": "Provincia de Entre Ríos",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2562601",
+     "nombre": "Deportivo Mandiyú",
+     "fundado": 1998,
+     "estadio": "Estadio José Antonio Romero Feris",
+     "ciudad": "Corrientes",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7555605",
+     "nombre": "Sol de América de Formosa",
+     "fundado": 1947,
+     "estadio": "Estadio de Sol de América",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6133406",
+     "nombre": "Sportivo Las Parejas",
+     "fundado": 1922,
+     "estadio": "",
+     "ciudad": "Las Parejas",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "br-1",
+   "qid": "Q206813",
+   "pais": "Brasil",
+   "iso": "BR",
+   "bandera": "🇧🇷",
+   "nombre": "Série A",
+   "division": 1,
+   "clubes": [
+    {
+     "qid": "Q80964",
+     "nombre": "Sociedade Esportiva Palmeiras",
+     "fundado": 1914,
+     "estadio": "Estadio Allianz Parque",
+     "ciudad": "São Paulo",
+     "apodo": "",
+     "titulos": 11
+    },
+    {
+     "qid": "Q17479",
+     "nombre": "Clube de Regatas do Flamengo",
+     "fundado": 1895,
+     "estadio": "Estadio de Maracaná",
+     "ciudad": "Río de Janeiro",
+     "apodo": "",
+     "titulos": 7
+    },
+    {
+     "qid": "Q80955",
+     "nombre": "Santos Futebol Clube",
+     "fundado": 1912,
+     "estadio": "Estadio Urbano Caldeira",
+     "ciudad": "Santos",
+     "apodo": "",
+     "titulos": 7
+    },
+    {
+     "qid": "Q38568",
+     "nombre": "São Paulo Futebol Clube",
+     "fundado": 1930,
+     "estadio": "Estadio Morumbi",
+     "ciudad": "São Paulo",
+     "apodo": "",
+     "titulos": 6
+    },
+    {
+     "qid": "Q35933",
+     "nombre": "Sport Club Corinthians Paulista",
+     "fundado": 1910,
+     "estadio": "Neo Química Arena",
+     "ciudad": "São Paulo",
+     "apodo": "",
+     "titulos": 6
+    },
+    {
+     "qid": "Q5014111",
+     "nombre": "Club de Regatas Vasco da Gama",
+     "fundado": 1898,
+     "estadio": "Estadio São Januário",
+     "ciudad": "Río de Janeiro",
+     "apodo": "",
+     "titulos": 4
+    },
+    {
+     "qid": "Q188277",
+     "nombre": "Cruzeiro Esporte Clube",
+     "fundado": 1921,
+     "estadio": "Estadio Mineirão",
+     "ciudad": "Belo Horizonte",
+     "apodo": "",
+     "titulos": 4
+    },
+    {
+     "qid": "Q80987",
+     "nombre": "Fluminense Football Club",
+     "fundado": 1902,
+     "estadio": "Estadio de Maracaná",
+     "ciudad": "Río de Janeiro",
+     "apodo": "",
+     "titulos": 4
+    },
+    {
+     "qid": "Q80845",
+     "nombre": "Sport Club Internacional",
+     "fundado": 1909,
+     "estadio": "Estadio Beira-Rio",
+     "ciudad": "Porto Alegre",
+     "apodo": "",
+     "titulos": 3
+    },
+    {
+     "qid": "Q80958",
+     "nombre": "Botafogo de Futebol e Regatas",
+     "fundado": 1904,
+     "estadio": "Estadio João Havelange",
+     "ciudad": "Río de Janeiro",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q270995",
+     "nombre": "Clube Atlético Mineiro",
+     "fundado": 1908,
+     "estadio": "Arena MRV",
+     "ciudad": "Belo Horizonte",
+     "apodo": "Galo",
+     "titulos": 2
+    },
+    {
+     "qid": "Q198032",
+     "nombre": "Esporte Clube Bahia",
+     "fundado": 1931,
+     "estadio": "Itaipava Arena Fonte Nova",
+     "ciudad": "Salvador",
+     "apodo": "Tricolor Baiano",
+     "titulos": 2
+    },
+    {
+     "qid": "Q221695",
+     "nombre": "Grêmio Foot-Ball Porto Alegrense",
+     "fundado": 1903,
+     "estadio": "Arena do Grêmio",
+     "ciudad": "Porto Alegre",
+     "apodo": "Tricolor dos Pampas",
+     "titulos": 2
+    },
+    {
+     "qid": "Q506832",
+     "nombre": "Clube Atlético Paranaense",
+     "fundado": 1924,
+     "estadio": "Estadio Joaquim Américo Guimarães",
+     "ciudad": "Curitiba",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q219098",
+     "nombre": "Sport Club do Recife",
+     "fundado": 1905,
+     "estadio": "Estadio Ilha do Retiro",
+     "ciudad": "Recife",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2857911",
+     "nombre": "Anápolis Futebol Clube",
+     "fundado": 1946,
+     "estadio": "Estadio Jonas Duarte",
+     "ciudad": "Anápolis",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q198034",
+     "nombre": "Atlético Clube Goianiense",
+     "fundado": 1937,
+     "estadio": "Estadio Serra Dourada",
+     "ciudad": "Goiânia",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q101230488",
+     "nombre": "Breno Lopes",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1052219",
+     "nombre": "Ceará Sporting Club",
+     "fundado": 1914,
+     "estadio": "Estádio Presidente Vargas",
+     "ciudad": "Fortaleza",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2946171",
+     "nombre": "Centro de Ensino Unificado de Brasília Esporte Clube",
+     "fundado": 1968,
+     "estadio": "Estadio Edson Arantes do Nascimento",
+     "ciudad": "Brasilia",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5136515",
+     "nombre": "Clube de Regatas do Flamengo",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "Río de Janeiro",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2552872",
+     "nombre": "Clube do Remo",
+     "fundado": 1905,
+     "estadio": "Estadio Evandro Almeida",
+     "ciudad": "Belém",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q73971",
+     "nombre": "Clube Náutico Capibaribe",
+     "fundado": 1901,
+     "estadio": "Estadio Eládio de Barros Carvalho",
+     "ciudad": "Recife",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q598834",
+     "nombre": "Criciúma Esporte Clube",
+     "fundado": 1947,
+     "estadio": "Estadio Heriberto Hülse",
+     "ciudad": "Criciúma",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q508316",
+     "nombre": "Deivid de Souza",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "Hulk da Fiel",
+     "titulos": 0
+    },
+    {
+     "qid": "Q314750",
+     "nombre": "Eduardo César Daud Gaspar",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q910453",
+     "nombre": "Esporte Clube Juventude",
+     "fundado": 1913,
+     "estadio": "Estadio Alfredo Jaconi",
+     "ciudad": "Caxias do Sul",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q274465",
+     "nombre": "Esporte Clube Vitória",
+     "fundado": 1899,
+     "estadio": "Estadio Manoel Barradas",
+     "ciudad": "Salvador",
+     "apodo": "Rubro-Negro Baiano",
+     "titulos": 0
+    },
+    {
+     "qid": "Q188841",
+     "nombre": "Fortaleza Esporte Clube",
+     "fundado": 1918,
+     "estadio": "Estadio Aderaldo Plácido Castelo",
+     "ciudad": "Fortaleza",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1534448",
+     "nombre": "Goiânia Esporte Clube",
+     "fundado": 1938,
+     "estadio": "Estadio Olímpico Pedro Ludovico Teixeira",
+     "ciudad": "Goiânia",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q816779",
+     "nombre": "Goiás Esporte Clube",
+     "fundado": 1943,
+     "estadio": "Estadio Serra Dourada",
+     "ciudad": "Goiânia",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q28145562",
+     "nombre": "Jailson Marques Siqueira",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q19497",
+     "nombre": "Oscar",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q541744",
+     "nombre": "Red Bull Bragantino",
+     "fundado": 1928,
+     "estadio": "Estadio Nabi Abi Chedid",
+     "ciudad": "Bragança Paulista",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q24006455",
+     "nombre": "Ribamar",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q20806743",
+     "nombre": "Richarlison",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q65718359",
+     "nombre": "Talles Magno",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q131234",
+     "nombre": "Toni Kroos",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1857213",
+     "nombre": "Uberlândia Esporte Clube",
+     "fundado": 1922,
+     "estadio": "Estádio Parque do Sabiá",
+     "ciudad": "Uberlândia",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q28973866",
+     "nombre": "Vinícius Júnior",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "br-2",
+   "qid": "Q610175",
+   "pais": "Brasil",
+   "iso": "BR",
+   "bandera": "🇧🇷",
+   "nombre": "Série B",
+   "division": 2,
+   "clubes": [
+    {
+     "qid": "Q478317",
+     "nombre": "Coritiba Foot Ball Club",
+     "fundado": 1909,
+     "estadio": "Estadio Couto Pereira",
+     "ciudad": "Curitiba",
+     "apodo": "",
+     "titulos": 3
+    },
+    {
+     "qid": "Q338285",
+     "nombre": "América Futebol Clube",
+     "fundado": 1912,
+     "estadio": "Estadio Independencia",
+     "ciudad": "Belo Horizonte",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q1508285",
+     "nombre": "Paysandu Sport Club",
+     "fundado": 1914,
+     "estadio": "Estadio Leônidas Sodré de Castro",
+     "ciudad": "Belém",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q1133475",
+     "nombre": "Guarani Futebol Clube",
+     "fundado": 1911,
+     "estadio": "Estádio Brinco de Ouro da Princesa",
+     "ciudad": "Campinas",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q1633430",
+     "nombre": "Londrina Esporte Clube",
+     "fundado": 1956,
+     "estadio": "Estadio Jacy Scaff",
+     "ciudad": "Londrina",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q838534",
+     "nombre": "Paraná Clube",
+     "fundado": 1989,
+     "estadio": "Estadio Durival de Britto e Silva",
+     "ciudad": "Curitiba",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2453706",
+     "nombre": "Sampaio Corrêa Futebol Clube",
+     "fundado": 1923,
+     "estadio": "Estádio Governador João Castelo",
+     "ciudad": "São Luís",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q687712",
+     "nombre": "Vila Nova AC",
+     "fundado": 1908,
+     "estadio": "Estádio Castor Cifuentes",
+     "ciudad": "Nova Lima",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2306468",
+     "nombre": "Agremiação Sportiva Arapiraquense",
+     "fundado": 1952,
+     "estadio": "Estádio Municipal Coaracy da Mata Fonseca",
+     "ciudad": "Arapiraca",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2590133",
+     "nombre": "Americana Futebol",
+     "fundado": 1998,
+     "estadio": "Estádio Municipal Professor Dario Rodrigues Leite",
+     "ciudad": "Guaratinguetá",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1028545",
+     "nombre": "Associação Desportiva Recreativa Cultural Icasa",
+     "fundado": 1963,
+     "estadio": "Estadio Mauro Sampaio",
+     "ciudad": "Juazeiro do Norte",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q374069",
+     "nombre": "Avaí Futebol Clube",
+     "fundado": 1923,
+     "estadio": "Estadio de la Ressacada",
+     "ciudad": "Florianópolis",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q919695",
+     "nombre": "Boa Esporte Clube",
+     "fundado": 1947,
+     "estadio": "Estádio Municipal Prefeito Dilzon Luiz de Melo",
+     "ciudad": "Varginha",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2332493",
+     "nombre": "Botafogo Futebol Clube",
+     "fundado": 1918,
+     "estadio": "Estádio Santa Cruz",
+     "ciudad": "Ribeirão Preto",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q101230488",
+     "nombre": "Breno Lopes",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2536715",
+     "nombre": "Chapecoense",
+     "fundado": 1973,
+     "estadio": "Arena Condá",
+     "ciudad": "Chapecó",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1024264",
+     "nombre": "Clube de Regatas Brasil",
+     "fundado": 1912,
+     "estadio": "Estadio Rei Pelé",
+     "ciudad": "Maceió",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2552872",
+     "nombre": "Clube do Remo",
+     "fundado": 1905,
+     "estadio": "Estadio Evandro Almeida",
+     "ciudad": "Belém",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2945011",
+     "nombre": "Cuiabá Esporte Clube",
+     "fundado": 2001,
+     "estadio": "Arena Pantanal",
+     "ciudad": "Cuiabá",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1474977",
+     "nombre": "Grêmio Esportivo Brasil",
+     "fundado": 1911,
+     "estadio": "Estadio Bento Freitas",
+     "ciudad": "Pelotas",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q20806743",
+     "nombre": "Richarlison",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2553450",
+     "nombre": "Volta Redonda Futebol Clube",
+     "fundado": 1976,
+     "estadio": "Estadio Raulino de Oliveira",
+     "ciudad": "Volta Redonda",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "cl-1",
+   "qid": "Q606832",
+   "pais": "Chile",
+   "iso": "CL",
+   "bandera": "🇨🇱",
+   "nombre": "Primera División",
+   "division": 1,
+   "clubes": [
+    {
+     "qid": "Q207373",
+     "nombre": "Club Social y Deportivo Colo Colo",
+     "fundado": 1925,
+     "estadio": "Estadio Monumental",
+     "ciudad": "Santiago de Chile",
+     "apodo": "Cacique",
+     "titulos": 33
+    },
+    {
+     "qid": "Q737753",
+     "nombre": "Club Universidad de Chile",
+     "fundado": 1927,
+     "estadio": "Estadio Nacional Julio Martínez Prádanos",
+     "ciudad": "Santiago de Chile",
+     "apodo": "Η Κουκουβάγια",
+     "titulos": 19
+    },
+    {
+     "qid": "Q427446",
+     "nombre": "Club Deportivo Universidad Católica",
+     "fundado": 1937,
+     "estadio": "Claro Arena",
+     "ciudad": "Santiago de Chile",
+     "apodo": "",
+     "titulos": 12
+    },
+    {
+     "qid": "Q1129059",
+     "nombre": "Unión Española",
+     "fundado": 1897,
+     "estadio": "Estadio Santa Laura",
+     "ciudad": "Santiago de Chile",
+     "apodo": "",
+     "titulos": 8
+    },
+    {
+     "qid": "Q758689",
+     "nombre": "Audax Italiano",
+     "fundado": 1910,
+     "estadio": "Estadio Bicentenario de La Florida",
+     "ciudad": "La Florida",
+     "apodo": "",
+     "titulos": 4
+    },
+    {
+     "qid": "Q515425",
+     "nombre": "Club Deportivo Magallanes",
+     "fundado": 1925,
+     "estadio": "Estadio Santiago Bueras",
+     "ciudad": "Santiago de Chile",
+     "apodo": "",
+     "titulos": 4
+    },
+    {
+     "qid": "Q1103684",
+     "nombre": "Everton de Viña del Mar",
+     "fundado": 1909,
+     "estadio": "Estadio Sausalito",
+     "ciudad": "Viña del Mar",
+     "apodo": "Παίκτες ρουλέτας",
+     "titulos": 4
+    },
+    {
+     "qid": "Q1023191",
+     "nombre": "Club Deportivo Huachipato",
+     "fundado": 1947,
+     "estadio": "Estadio Huachipato-CAP Acero",
+     "ciudad": "Talcahuano",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q719719",
+     "nombre": "Club Deportivo Palestino",
+     "fundado": 1920,
+     "estadio": "Estadio Municipal de La Cisterna",
+     "ciudad": "Santiago de Chile",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q642669",
+     "nombre": "Club de Deportes Cobresal",
+     "fundado": 1979,
+     "estadio": "Estadio El Cobre",
+     "ciudad": "El Salvador",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q1023187",
+     "nombre": "Club de Deportes Green Cross",
+     "fundado": 1916,
+     "estadio": "",
+     "ciudad": "Santiago de Chile",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q719722",
+     "nombre": "Club Deportivo O'Higgins",
+     "fundado": 1955,
+     "estadio": "Monasterio Celeste",
+     "ciudad": "Rancagua",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2407595",
+     "nombre": "Coquimbo Unido",
+     "fundado": 1957,
+     "estadio": "Estadio Francisco Sánchez Rumoroso",
+     "ciudad": "Coquimbo",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q64364635",
+     "nombre": "Carlos Walker Martínez Football Club",
+     "fundado": 1907,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2076979",
+     "nombre": "Club de Deportes Antofagasta",
+     "fundado": 1973,
+     "estadio": "Estadio Regional Calvo y Bascuñán",
+     "ciudad": "Antofagasta",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q338923",
+     "nombre": "Club de Deportes Copiapó",
+     "fundado": 1999,
+     "estadio": "Estadio Luis Valenzuela Hermosilla",
+     "ciudad": "Copiapó",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q642824",
+     "nombre": "Club de Deportes Iquique",
+     "fundado": 1978,
+     "estadio": "Estadio Tierra de Campeones",
+     "ciudad": "Iquique",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q105144613",
+     "nombre": "Club de Deportes Limache",
+     "fundado": 2012,
+     "estadio": "Estadio Gustavo Ocaranza",
+     "ciudad": "Limache",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1858893",
+     "nombre": "Club de Deportes Melipilla",
+     "fundado": 1992,
+     "estadio": "Estadio Municipal Roberto Bravo Santibáñez",
+     "ciudad": "Melipilla",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1023125",
+     "nombre": "Club de Deportes Provincial Curicó Unido",
+     "fundado": 1973,
+     "estadio": "Estadio La Granja",
+     "ciudad": "Curicó",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q642098",
+     "nombre": "Club Deportes La Serena",
+     "fundado": 1955,
+     "estadio": "Estadio La Portada",
+     "ciudad": "La Serena",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q63806434",
+     "nombre": "Club Deportivo Metropolitano",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2317539",
+     "nombre": "Club Deportivo Ñublense",
+     "fundado": 1916,
+     "estadio": "Estadio Bicentenario Municipal Nelson Oyarzún",
+     "ciudad": "Chillán",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3296621",
+     "nombre": "Club Deportivo San Marcos de Arica",
+     "fundado": 1978,
+     "estadio": "Estadio Carlos Dittborn",
+     "ciudad": "Arica",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q8347138",
+     "nombre": "Club Social y Deportivo Quesos Kümey",
+     "fundado": 2009,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q116154521",
+     "nombre": "CobreloaDomesticRecord",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3705241",
+     "nombre": "Deportes Naval de Talcahuano",
+     "fundado": 1944,
+     "estadio": "Estadio El Morro",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q10265273",
+     "nombre": "Deportivo Alemán",
+     "fundado": 1916,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2268949",
+     "nombre": "Eduardo Vargas",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2447092",
+     "nombre": "San Luis de Quillota",
+     "fundado": 1919,
+     "estadio": "Estadio Municipal Lucio Fariña Fernández",
+     "ciudad": "Quillota",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6120914",
+     "nombre": "Santiago Football Club",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q719383",
+     "nombre": "Unión La Calera",
+     "fundado": 1954,
+     "estadio": "Estadio Municipal Nicolás Chahuán Nazar",
+     "ciudad": "La Calera",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "cl-2",
+   "qid": "Q2686290",
+   "pais": "Chile",
+   "iso": "CL",
+   "bandera": "🇨🇱",
+   "nombre": "Primera B",
+   "division": 2,
+   "clubes": [
+    {
+     "qid": "Q572940",
+     "nombre": "Club Deportivo Unión San Felipe",
+     "fundado": 1956,
+     "estadio": "Estadio Municipal de San Felipe",
+     "ciudad": "San Felipe",
+     "apodo": "",
+     "titulos": 5
+    },
+    {
+     "qid": "Q1023222",
+     "nombre": "Club de Deportes Santiago Morning",
+     "fundado": 1903,
+     "estadio": "Estadio Municipal de La Pintana",
+     "ciudad": "La Pintana",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q719338",
+     "nombre": "Club de Deportes Santiago Wanderers",
+     "fundado": 1892,
+     "estadio": "Estadio Elías Figueroa Brander",
+     "ciudad": "Valparaíso",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q431679",
+     "nombre": "Club Deportivo Arturo Fernández Vial",
+     "fundado": 1903,
+     "estadio": "Estadio Ester Roa Rebolledo de Concepción",
+     "ciudad": "Concepción",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q721560",
+     "nombre": "Club Deportivo Universidad de Concepción",
+     "fundado": 1994,
+     "estadio": "Estadio Ester Roa Rebolledo de Concepción",
+     "ciudad": "Concepción",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q719439",
+     "nombre": "Club Social de Deportes Rangers",
+     "fundado": 1902,
+     "estadio": "Estadio Bicentenario Iván Azócar Bernales",
+     "ciudad": "Talca",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2317166",
+     "nombre": "Deportes Concepción",
+     "fundado": 1966,
+     "estadio": "Estadio Ester Roa Rebolledo de Concepción",
+     "ciudad": "Concepción",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q3542721",
+     "nombre": "Athletic Club Barnechea",
+     "fundado": 1929,
+     "estadio": "Estadio Municipal de La Pintana",
+     "ciudad": "Lo Barnechea",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5260711",
+     "nombre": "Club de Deportes Aviación",
+     "fundado": 1957,
+     "estadio": "Estadio Reinaldo Martín Müller",
+     "ciudad": "El Bosque",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q4841042",
+     "nombre": "Club de Deportes Badminton",
+     "fundado": 1912,
+     "estadio": "Estadio La Granja",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5774962",
+     "nombre": "Club de Deportes Instituto O'Higgins",
+     "fundado": 1925,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q581629",
+     "nombre": "Club Deportivo Ferrobádminton",
+     "fundado": 1950,
+     "estadio": "Estadio Ferroviario Hugo Arqueros Rodríguez",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6159364",
+     "nombre": "Club Deportivo Valparaíso Ferroviarios",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "Valparaíso",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q643338",
+     "nombre": "Cobreloa",
+     "fundado": 1977,
+     "estadio": "Estadio Zorros del Desierto",
+     "ciudad": "Calama",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q116154521",
+     "nombre": "CobreloaDomesticRecord",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5788895",
+     "nombre": "Corporación Club de Deportes Temuco",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5963080",
+     "nombre": "La Cruz Football Club",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6026461",
+     "nombre": "Municipal de Santiago",
+     "fundado": 1961,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q958536",
+     "nombre": "Santiago National Football Club",
+     "fundado": 1900,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3496610",
+     "nombre": "Unión Temuco",
+     "fundado": 2008,
+     "estadio": "Estadio Germán Becker",
+     "ciudad": "Temuco",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q99593283",
+     "nombre": "Yorman Zapata",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "co-1",
+   "qid": "Q1033349",
+   "pais": "Colombia",
+   "iso": "CO",
+   "bandera": "🇨🇴",
+   "nombre": "Categoría Primera A",
+   "division": 1,
+   "clubes": [
+    {
+     "qid": "Q391984",
+     "nombre": "Millonarios Fútbol Club",
+     "fundado": 1946,
+     "estadio": "Estadio Nemesio Camacho El Campín",
+     "ciudad": "Bogotá",
+     "apodo": "",
+     "titulos": 14
+    },
+    {
+     "qid": "Q391987",
+     "nombre": "América de Cali",
+     "fundado": 1927,
+     "estadio": "Estadio Olímpico Pascual Guerrero",
+     "ciudad": "Cali",
+     "apodo": "",
+     "titulos": 12
+    },
+    {
+     "qid": "Q332605",
+     "nombre": "Atlético Nacional",
+     "fundado": 1947,
+     "estadio": "Estadio Atanasio Girardot",
+     "ciudad": "Medellín",
+     "apodo": "",
+     "titulos": 8
+    },
+    {
+     "qid": "Q663400",
+     "nombre": "Deportivo Cali",
+     "fundado": 1912,
+     "estadio": "Estadio Deportivo Cail",
+     "ciudad": "Cali",
+     "apodo": "",
+     "titulos": 8
+    },
+    {
+     "qid": "Q1424072",
+     "nombre": "Independiente Santa Fe",
+     "fundado": 1941,
+     "estadio": "Estadio Nemesio Camacho El Campín",
+     "ciudad": "Bogotá",
+     "apodo": "",
+     "titulos": 8
+    },
+    {
+     "qid": "Q332524",
+     "nombre": "Junior de Barranquilla",
+     "fundado": 1924,
+     "estadio": "Estadio Metropolitano Roberto Meléndez",
+     "ciudad": "Barranquilla",
+     "apodo": "",
+     "titulos": 7
+    },
+    {
+     "qid": "Q332527",
+     "nombre": "Deportivo Independiente Medellín",
+     "fundado": 1913,
+     "estadio": "Unidad Deportiva Atanasio Girardot",
+     "ciudad": "Medellín",
+     "apodo": "",
+     "titulos": 3
+    },
+    {
+     "qid": "Q332532",
+     "nombre": "Deportes Tolima",
+     "fundado": 1954,
+     "estadio": "Estadio Manuel Murillo Toro",
+     "ciudad": "Ibagué",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q47533",
+     "nombre": "Once Caldas",
+     "fundado": 1947,
+     "estadio": "Estadio Palogrande",
+     "ciudad": "Manizales",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q332833",
+     "nombre": "Aguilas Doradas",
+     "fundado": 2008,
+     "estadio": "Estadio Arturo Cumplido Sierra",
+     "ciudad": "Sincelejo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q122375907",
+     "nombre": "Alejandro Tobar",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q124310966",
+     "nombre": "Alianza Fútbol Club (Colombia)",
+     "fundado": 2024,
+     "estadio": "Estadio Armando Maestre Pavajeau",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q952393",
+     "nombre": "Alianza Petrolera",
+     "fundado": 1982,
+     "estadio": "Unidad Deportiva Atanasio Girardot",
+     "ciudad": "Barrancabermeja",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q109849940",
+     "nombre": "Álvaro Meléndez",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q16488451",
+     "nombre": "Andrés Correa",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5675745",
+     "nombre": "Andrés Felipe Ibargüen",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q47452532",
+     "nombre": "Andrés Varon",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q757418",
+     "nombre": "Atlético Bucaramanga",
+     "fundado": 1949,
+     "estadio": "Estadio Américo Montanini",
+     "ciudad": "Bucaramanga",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q332661",
+     "nombre": "Atlético Huila",
+     "fundado": 1990,
+     "estadio": "Estadio Guillermo Plazas Alcid",
+     "ciudad": "Neiva",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q48795764",
+     "nombre": "Atlético Manizales",
+     "fundado": 1954,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q332863",
+     "nombre": "Boyacá Chicó Fútbol Club",
+     "fundado": 2002,
+     "estadio": "Estadio de La Independencia",
+     "ciudad": "Tunja",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5767541",
+     "nombre": "Christian Vargas",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18857738",
+     "nombre": "Club Deportivo Barranquilla",
+     "fundado": 1949,
+     "estadio": "Estadio Romelio Martínez",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q332668",
+     "nombre": "Club Deportivo La Equidad Seguros",
+     "fundado": 1982,
+     "estadio": "Estadio Metropolitano de Techo",
+     "ciudad": "Bogotá",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18857741",
+     "nombre": "Club Deportivo Manizales",
+     "fundado": 1952,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q20022229",
+     "nombre": "Club Deportivo Oro Negro",
+     "fundado": 1971,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q16549824",
+     "nombre": "Club Deportivo Universidad Nacional",
+     "fundado": 1948,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18857737",
+     "nombre": "Club Universidad Nacional de Bogotá",
+     "fundado": 1948,
+     "estadio": "Estadio Alfonso López Pumarejo",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2617893",
+     "nombre": "Cortuluá",
+     "fundado": 1967,
+     "estadio": "Estadio Olímpico Pascual Guerrero",
+     "ciudad": "Cali",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q616380",
+     "nombre": "Cúcuta Deportivo",
+     "fundado": 1924,
+     "estadio": "General Santander",
+     "ciudad": "Cúcuta",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q332858",
+     "nombre": "Deportivo Pasto",
+     "fundado": 1949,
+     "estadio": "Estadio Departamental Libertad",
+     "ciudad": "Pasto",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q515178",
+     "nombre": "Deportivo Pereira",
+     "fundado": 1944,
+     "estadio": "Estadio Hernán Ramírez Villegas",
+     "ciudad": "Pereira",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q8354889",
+     "nombre": "Deportivo Samarios",
+     "fundado": 1951,
+     "estadio": "Estadio Eduardo Santos",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5803248",
+     "nombre": "Deportivo Unicosta",
+     "fundado": 1995,
+     "estadio": "Estadio Romelio Martínez",
+     "ciudad": "Barranquilla",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q47538984",
+     "nombre": "Eduardo Sosa",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q332636",
+     "nombre": "Envigado Fútbol Club",
+     "fundado": 1989,
+     "estadio": "Estadio Polideportivo Sur",
+     "ciudad": "Envigado",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5472511",
+     "nombre": "Fortaleza Fútbol Club",
+     "fundado": 2010,
+     "estadio": "Estadio Metropolitano de Techo",
+     "ciudad": "Bogotá",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5905990",
+     "nombre": "Héctor Antonio Urrego",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5896299",
+     "nombre": "Hernán Torres Oliveros",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q137324985",
+     "nombre": "Internacional de Bogotá",
+     "fundado": 2025,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5924752",
+     "nombre": "Jaguares de Córdoba",
+     "fundado": 2012,
+     "estadio": "Estadio Jaraguay",
+     "ciudad": "Montería",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q16301426",
+     "nombre": "José Guillermo Ortiz",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5948091",
+     "nombre": "Juan Camilo Saiz",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q16585144",
+     "nombre": "Juan Sebastian Quintero",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q25407417",
+     "nombre": "Libertad de Barranquilla",
+     "fundado": 1956,
+     "estadio": "Estadio Romelio Martínez",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q26838145",
+     "nombre": "Luis Sinisterra",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6012876",
+     "nombre": "Michael Rangel",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3541194",
+     "nombre": "Miguel Augusto Prince",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18857736",
+     "nombre": "Once Deportivo de Manizales",
+     "fundado": 1948,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q501399",
+     "nombre": "Sporting de Barranquilla",
+     "fundado": 1950,
+     "estadio": "Estadio Romelio Martínez",
+     "ciudad": "Barranquilla",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5421649",
+     "nombre": "Tigres Fútbol Club",
+     "fundado": 2016,
+     "estadio": "Estadio Metropolitano de Techo",
+     "ciudad": "Bogotá",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "co-2",
+   "qid": "Q635198",
+   "pais": "Colombia",
+   "iso": "CO",
+   "bandera": "🇨🇴",
+   "nombre": "Categoría Primera B",
+   "division": 2,
+   "clubes": [
+    {
+     "qid": "Q392284",
+     "nombre": "Real Cartagena",
+     "fundado": 1971,
+     "estadio": "Estadio Olímpico Jaime Morón León",
+     "ciudad": "Cartagena de Indias",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2031920",
+     "nombre": "Unión Magdalena",
+     "fundado": 1953,
+     "estadio": "Estadio Sierra Nevada",
+     "ciudad": "Santa Marta",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q545250",
+     "nombre": "Universidad Autónoma del Caribe Fútbol Club",
+     "fundado": 2011,
+     "estadio": "Estadio Marcos Henríquez",
+     "ciudad": "Barranquilla",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q4671072",
+     "nombre": "Academia Fútbol Club",
+     "fundado": 2005,
+     "estadio": "Estadio de Compensar",
+     "ciudad": "Bogotá",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5668544",
+     "nombre": "Alianza Llanos",
+     "fundado": 1985,
+     "estadio": "Estadio Bello Horizonte - Rey Pelé",
+     "ciudad": "Villavicencio",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3299068",
+     "nombre": "Atlético Bello",
+     "fundado": 1995,
+     "estadio": "Estadio Tulio Ospina",
+     "ciudad": "Bello",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18857747",
+     "nombre": "Atlético Buenaventura",
+     "fundado": 1982,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5260699",
+     "nombre": "Atlético de Cali",
+     "fundado": 2005,
+     "estadio": "Estadio Olímpico Pascual Guerrero",
+     "ciudad": "Cali",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q605231",
+     "nombre": "Atlético de la Sabana",
+     "fundado": 2008,
+     "estadio": "Estadio Arturo Cumplido Sierra",
+     "ciudad": "Sincelejo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q8208539",
+     "nombre": "Atlético Juventud Fútbol Club",
+     "fundado": 2007,
+     "estadio": "Estadio Luis Antonio Duque Peña",
+     "ciudad": "Soacha",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3293573",
+     "nombre": "Barranquilla Fútbol Club",
+     "fundado": 2005,
+     "estadio": "Estadio Romelio Martínez",
+     "ciudad": "Barranquilla",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2567648",
+     "nombre": "Boca Juniors de Cali",
+     "fundado": 1939,
+     "estadio": "Estadio Olímpico Pascual Guerrero",
+     "ciudad": "Cali",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q8249127",
+     "nombre": "Bogotá Fútbol Club",
+     "fundado": 2003,
+     "estadio": "Estadio Metropolitano de Techo",
+     "ciudad": "Bogotá",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1053504",
+     "nombre": "Centauros Villavicencio",
+     "fundado": 2003,
+     "estadio": "Estadio Bello Horizonte - Rey Pelé",
+     "ciudad": "Villavicencio",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5768657",
+     "nombre": "Chía Fútbol Club",
+     "fundado": 2003,
+     "estadio": "Estadio Daniel Villa Zapata",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18857748",
+     "nombre": "Club Deportivo Armenia",
+     "fundado": 1991,
+     "estadio": "Estadio San José de Armenia",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q20022236",
+     "nombre": "Club Deportivo Industrial Itagüí",
+     "fundado": 1992,
+     "estadio": "Estadio Metropolitano Ciudad de Itagüí",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5202726",
+     "nombre": "Córdoba F.C.",
+     "fundado": 2006,
+     "estadio": "",
+     "ciudad": "Cereté",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2539776",
+     "nombre": "Corporación de Fútbol Deportivo",
+     "fundado": 1944,
+     "estadio": "Estadio Alberto Grisales",
+     "ciudad": "Turbo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18857746",
+     "nombre": "Deportes Dinastía de Riosucio",
+     "fundado": 1989,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5260714",
+     "nombre": "Deportes Palmira",
+     "fundado": 2009,
+     "estadio": "Estadio Francisco Rivera Escobar",
+     "ciudad": "Palmira",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q332537",
+     "nombre": "Deportes Quindío",
+     "fundado": 1951,
+     "estadio": "Estadio Centenario de Armenia",
+     "ciudad": "Armenia",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q16491994",
+     "nombre": "Dimerco Real Popayán Fútbol Club",
+     "fundado": 2002,
+     "estadio": "Estadio Ciro López",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5853543",
+     "nombre": "Expreso Palmira Fútbol Club",
+     "fundado": 1992,
+     "estadio": "Estadio Francisco Rivera Escobar",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3694134",
+     "nombre": "Girardot Fútbol Club",
+     "fundado": 1995,
+     "estadio": "Estadio Luis Antonio Duque Peña",
+     "ciudad": "Girardot",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q124247895",
+     "nombre": "Internacional Fútbol Club de Palmira",
+     "fundado": 2024,
+     "estadio": "",
+     "ciudad": "Palmira",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6661327",
+     "nombre": "Llaneros Fútbol Club S.A.",
+     "fundado": 2012,
+     "estadio": "Estadio Bello Horizonte - Rey Pelé",
+     "ciudad": "Villavicencio",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q22082634",
+     "nombre": "Orsomarso Sportivo Clube",
+     "fundado": 2016,
+     "estadio": "Estadio Francisco Rivera Escobar",
+     "ciudad": "Palmira",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q514048",
+     "nombre": "Pacífico Fútbol Club",
+     "fundado": 2010,
+     "estadio": "Polideportivo El Cristal",
+     "ciudad": "Buenaventura",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q391600",
+     "nombre": "Patriotas Fútbol Club",
+     "fundado": 2003,
+     "estadio": "Estadio de La Independencia",
+     "ciudad": "Tunja",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6092801",
+     "nombre": "Pumas de Casanare",
+     "fundado": 2002,
+     "estadio": "Estadio Santiago de las Atalayas",
+     "ciudad": "Yopal",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q120589535",
+     "nombre": "Real Cundinamarca",
+     "fundado": 2023,
+     "estadio": "Estadio Luis Carlos Galán Sarmiento",
+     "ciudad": "Soacha",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5405066",
+     "nombre": "Real Floridablanca",
+     "fundado": 1996,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q629387",
+     "nombre": "Real Santander",
+     "fundado": 2002,
+     "estadio": "Estadio Villa Concha",
+     "ciudad": "Piedecuesta",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q22082637",
+     "nombre": "Real Sincelejo Fútbol Club",
+     "fundado": null,
+     "estadio": "Estadio Arturo Cumplido Sierra",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6135056",
+     "nombre": "Sucre Fútbol Club",
+     "fundado": 2011,
+     "estadio": "Estadio Arturo Cumplido Sierra",
+     "ciudad": "Sincelejo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q110392009",
+     "nombre": "Unión Meta",
+     "fundado": 2000,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q14036529",
+     "nombre": "Universitario de Popayán",
+     "fundado": 2011,
+     "estadio": "Estadio Ciro López",
+     "ciudad": "Popayán",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7911914",
+     "nombre": "Valledupar Fútbol Club",
+     "fundado": 2003,
+     "estadio": "Estadio Armando Maestre Pavajeau",
+     "ciudad": "Valledupar",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "pe-1",
+   "qid": "Q606652",
+   "pais": "Perú",
+   "iso": "PE",
+   "bandera": "🇵🇪",
+   "nombre": "Liga 1",
+   "division": 1,
+   "clubes": [
+    {
+     "qid": "Q19066",
+     "nombre": "Club Universitario de Deportes",
+     "fundado": 1924,
+     "estadio": "Estadio Monumental U",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 21
+    },
+    {
+     "qid": "Q572957",
+     "nombre": "Club Alianza Lima",
+     "fundado": 1921,
+     "estadio": "Estadio Alejandro Villanueva",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 16
+    },
+    {
+     "qid": "Q604581",
+     "nombre": "Club Sporting Cristal",
+     "fundado": 1955,
+     "estadio": "Estadio Alberto Gallardo",
+     "ciudad": "Rímac",
+     "apodo": "",
+     "titulos": 13
+    },
+    {
+     "qid": "Q602582",
+     "nombre": "Club Deportivo Universidad de San Martín de Porres",
+     "fundado": 2004,
+     "estadio": "Villa Deportiva de la Universidad San Martín de Porres",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 3
+    },
+    {
+     "qid": "Q602542",
+     "nombre": "Fútbol Club Melgar",
+     "fundado": 1915,
+     "estadio": "Estadio Arequipa",
+     "ciudad": "Arequipa",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q603023",
+     "nombre": "Club Deportivo Universidad César Vallejo",
+     "fundado": 1996,
+     "estadio": "Estadio Mansiche",
+     "ciudad": "Trujillo",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q766988",
+     "nombre": "Alberto Quintero Medina",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5151530",
+     "nombre": "Asociación Social, Deportiva y Cultural Comerciantes Unidos",
+     "fundado": 2002,
+     "estadio": "Estadio Municipal Juan Maldonado Gamarra",
+     "ciudad": "Cutervo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602436",
+     "nombre": "Ayacucho Fútbol Club",
+     "fundado": 1972,
+     "estadio": "Estadio Las Américas",
+     "ciudad": "Ayacucho",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q3288724",
+     "nombre": "Club Atlético Grau",
+     "fundado": 1919,
+     "estadio": "Estadio Miguel Grau",
+     "ciudad": "Piura",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q957166",
+     "nombre": "Club Centro Iqueño",
+     "fundado": 1935,
+     "estadio": "Estadio Nacional del Perú",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602482",
+     "nombre": "Club Cienciano",
+     "fundado": 1901,
+     "estadio": "Estadio Inca Garcilaso de la Vega",
+     "ciudad": "Cusco",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q971843",
+     "nombre": "Club Cultural y Deportivo Universidad Técnica de Cajamarca",
+     "fundado": 1964,
+     "estadio": "Estadio Héroes de San Ramón",
+     "ciudad": "Cajamarca",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5136210",
+     "nombre": "Club Deportivo Pacífico FC",
+     "fundado": 1960,
+     "estadio": "Estadio Hugo Sotil",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q15628663",
+     "nombre": "Club Deportivo San Simón",
+     "fundado": 1983,
+     "estadio": "Estadio 25 de Noviembre",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602800",
+     "nombre": "Club Deportivo Unión Comercio",
+     "fundado": 1994,
+     "estadio": "Estadio IPD de Moyobamba",
+     "ciudad": "Moyobamba",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602987",
+     "nombre": "Club Sport Huancayo",
+     "fundado": 2008,
+     "estadio": "Estadio Huancayo",
+     "ciudad": "Huancayo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q48790264",
+     "nombre": "Club Sport Independencia",
+     "fundado": null,
+     "estadio": "Antiguo Estadio Nacional del Perú",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q48790268",
+     "nombre": "Club Sport Libertad Barranco",
+     "fundado": null,
+     "estadio": "Antiguo Estadio Nacional del Perú",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q48790271",
+     "nombre": "Club Sport Magdalena",
+     "fundado": null,
+     "estadio": "Antiguo Estadio Nacional del Perú",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18418676",
+     "nombre": "Club Sport Rosario",
+     "fundado": 1965,
+     "estadio": "Estadio Rosas Pampa",
+     "ciudad": "Huaraz",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5774811",
+     "nombre": "Club Sporting Tabaco",
+     "fundado": 1926,
+     "estadio": "Estadio Nacional del Perú",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602397",
+     "nombre": "Cusco Fútbol Club",
+     "fundado": 2009,
+     "estadio": "Estadio Inca Garcilaso de la Vega",
+     "ciudad": "Cusco",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q62609246",
+     "nombre": "Eduardo Caballero",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q448730",
+     "nombre": "Emanuel Biancucchi",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5838706",
+     "nombre": "Escuela Militar de Chorrillos (fútbol)",
+     "fundado": 1904,
+     "estadio": "Antiguo Estadio Nacional del Perú",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q603394",
+     "nombre": "José Gálvez",
+     "fundado": 1951,
+     "estadio": "Estadio Manuel Rivera Sánchez",
+     "ciudad": "Chimbote",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q59182726",
+     "nombre": "Pirata Fútbol Club",
+     "fundado": 2015,
+     "estadio": "Estadio Francisco Mendoza Pizarro",
+     "ciudad": "Distrito de José Leonardo Ortiz",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "pe-2",
+   "qid": "Q507576",
+   "pais": "Perú",
+   "iso": "PE",
+   "bandera": "🇵🇪",
+   "nombre": "Liga 2",
+   "division": 2,
+   "clubes": [
+    {
+     "qid": "Q509510",
+     "nombre": "Asociación Deportiva Club Alianza Atlético de Sullana",
+     "fundado": 1920,
+     "estadio": "Estadio Campeones del 36",
+     "ciudad": "Sullana",
+     "apodo": "",
+     "titulos": 2
+    },
+    {
+     "qid": "Q6682550",
+     "nombre": "Centro Cultural Deportivo Los Caimanes",
+     "fundado": 1957,
+     "estadio": "Estadio César Flores Marigorda",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q602787",
+     "nombre": "Club Deportivo Cobresol FBC",
+     "fundado": 2008,
+     "estadio": "Estadio 25 de Noviembre",
+     "ciudad": "Moquegua",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q7579342",
+     "nombre": "Club Sport Coopsol",
+     "fundado": 2000,
+     "estadio": "Estadio Municipal de Chorrillos",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q114152540",
+     "nombre": "Asociación Deportiva Comerciantes Fútbol Club",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5121557",
+     "nombre": "Circolo Sportivo Internazionale San Borja",
+     "fundado": 1986,
+     "estadio": "Estadio Nacional del Perú",
+     "ciudad": "Lima",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q426898",
+     "nombre": "Club Atlético Minero del Rímac",
+     "fundado": 1997,
+     "estadio": "Estadio Municipal de Matucana",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2869523",
+     "nombre": "Club Atlético Torino",
+     "fundado": 1957,
+     "estadio": "Estadio Campeonísimo",
+     "ciudad": "Talara",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q23872045",
+     "nombre": "Club Deportivo Alfredo Salinas",
+     "fundado": null,
+     "estadio": "Estadio Municipal de Espinar",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q8347042",
+     "nombre": "Club Deportivo Alianza Cristiana",
+     "fundado": 2008,
+     "estadio": "Estadio Max Augustín",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5260729",
+     "nombre": "Club Deportivo Coopsol",
+     "fundado": 1964,
+     "estadio": "",
+     "ciudad": "Chancay",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q16903515",
+     "nombre": "Club Deportivo Serrato Pacasmayo",
+     "fundado": 2012,
+     "estadio": "Estadio Carlos A. Olivares",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5010151",
+     "nombre": "Club Deportivo Universidad Nacional Mayor de San Marcos",
+     "fundado": 2001,
+     "estadio": "Estadio de la Universidad Nacional Mayor de San Marcos",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5970115",
+     "nombre": "Club IDUNSA",
+     "fundado": 2003,
+     "estadio": "Estadio Arequipa",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q60825690",
+     "nombre": "Club Mixto Estudiantil",
+     "fundado": null,
+     "estadio": "Estadio Nacional del Perú",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q28163613",
+     "nombre": "Club Social Cultural y Deportivo Hualgayoc",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7692756",
+     "nombre": "Club Social Deportivo Instituto Superior Tecnológico Suiza",
+     "fundado": 2005,
+     "estadio": "Estadio Aliardo Soria",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7896919",
+     "nombre": "Club Social Deportivo Unión Tarapoto",
+     "fundado": 1955,
+     "estadio": "Estadio Carlos Vidaurre García",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q4725580",
+     "nombre": "Club Social Deportivo y Cultural Alianza Universidad de Huánuco",
+     "fundado": 1939,
+     "estadio": "Estadio Heraclio Tapia",
+     "ciudad": "Huánuco",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5475965",
+     "nombre": "Club Sport Águila",
+     "fundado": 1947,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q720635",
+     "nombre": "Club Sport Áncash",
+     "fundado": 1967,
+     "estadio": "Estadio Rosas Pampa",
+     "ciudad": "Huaraz",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q18644038",
+     "nombre": "Cristal B",
+     "fundado": 1998,
+     "estadio": "Estadio Alberto Gallardo",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q21598449",
+     "nombre": "Defensor La Bocana",
+     "fundado": 1987,
+     "estadio": "Estadio Sesquicentenario",
+     "ciudad": "Sechura",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q46533713",
+     "nombre": "Deportivo Santa Marina Norte",
+     "fundado": null,
+     "estadio": "Estadio Telmo Carbajo",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602607",
+     "nombre": "León de Huánuco",
+     "fundado": 1946,
+     "estadio": "Estadio Heraclio Tapia",
+     "ciudad": "Huánuco",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q28663901",
+     "nombre": "Sporting Fry",
+     "fundado": null,
+     "estadio": "Antiguo Estadio Nacional del Perú",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "py-1",
+   "qid": "Q954911",
+   "pais": "Paraguay",
+   "iso": "PY",
+   "bandera": "🇵🇾",
+   "nombre": "División Profesional",
+   "division": 1,
+   "clubes": [
+    {
+     "qid": "Q914086",
+     "nombre": "Cerro Porteño",
+     "fundado": 1912,
+     "estadio": "Estadio General Pablo Rojas",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 13
+    },
+    {
+     "qid": "Q848642",
+     "nombre": "Club Libertad",
+     "fundado": 2018,
+     "estadio": "Estadio Dr. Nicolás Leoz",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 13
+    },
+    {
+     "qid": "Q604589",
+     "nombre": "Club Olimpia",
+     "fundado": 1902,
+     "estadio": "Estadio Osvaldo Domínguez Dibb",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 11
+    },
+    {
+     "qid": "Q603101",
+     "nombre": "Club Nacional",
+     "fundado": 1904,
+     "estadio": "Estadio Arsenio Erico",
+     "ciudad": "Barrio Obrero",
+     "apodo": "",
+     "titulos": 5
+    },
+    {
+     "qid": "Q605044",
+     "nombre": "Club Guaraní",
+     "fundado": 1903,
+     "estadio": "Estadio Rogelio Livieres",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 4
+    },
+    {
+     "qid": "Q1900225",
+     "nombre": "12 de Octubre Football Club",
+     "fundado": 1914,
+     "estadio": "Estadio Juan Canuto Pettengill",
+     "ciudad": "Itauguá",
+     "apodo": "Tejedores",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5773246",
+     "nombre": "Club Atlético Presidente Franco",
+     "fundado": null,
+     "estadio": "Estadio Juan Eudes Pereira",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2623197",
+     "nombre": "Club Cerro Porteño",
+     "fundado": 1967,
+     "estadio": "Estadio Juan Eudes Pereira",
+     "ciudad": "Presidente Franco",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5260723",
+     "nombre": "Club Deportivo Capiatá",
+     "fundado": 2008,
+     "estadio": "Estadio Deportivo Capiatá",
+     "ciudad": "Capiatá",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1102990",
+     "nombre": "Club General Díaz",
+     "fundado": 1917,
+     "estadio": "Estadio General Adrián Jara",
+     "ciudad": "Luque",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q603085",
+     "nombre": "Club Rubio Ñu",
+     "fundado": 1913,
+     "estadio": "Estadio La Arboleda",
+     "ciudad": "Santísima Trinidad",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2829897",
+     "nombre": "Club Silvio Pettirossi",
+     "fundado": 1926,
+     "estadio": "Estadio Bernabé Pedrozo",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1392226",
+     "nombre": "Club Sportivo Carapeguá",
+     "fundado": 2010,
+     "estadio": "Estadio Francisco Javier Bogarín",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602515",
+     "nombre": "Club Sportivo Luqueño",
+     "fundado": 1921,
+     "estadio": "Estadio Feliciano Cáceres",
+     "ciudad": "Luque",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1637661",
+     "nombre": "Deportivo Recoleta",
+     "fundado": 1931,
+     "estadio": "Estadio Roque F. Batelhana",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7315634",
+     "nombre": "Resistencia Sport Club",
+     "fundado": 1917,
+     "estadio": "Estadio Tomás Beygon Gorea",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2705130",
+     "nombre": "Sport Colombia",
+     "fundado": 1924,
+     "estadio": "Estadio Alfonso Colmán",
+     "ciudad": "Fernando de la Mora",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "py-2",
+   "qid": "Q786925",
+   "pais": "Paraguay",
+   "iso": "PY",
+   "bandera": "🇵🇾",
+   "nombre": "División Intermedia",
+   "division": 2,
+   "clubes": [
+    {
+     "qid": "Q2134801",
+     "nombre": "Club Atlético 3 de Febrero",
+     "fundado": 1970,
+     "estadio": "Estadio Antonio Oddone Sarubbi",
+     "ciudad": "Ciudad del Este",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2980011",
+     "nombre": "Club Sportivo Trinidense",
+     "fundado": 1935,
+     "estadio": "Estadio Martín Torres",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q2655567",
+     "nombre": "General Caballero Sport Club",
+     "fundado": 1918,
+     "estadio": "Estadio Hugo Vaceque Bogado",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q5737766",
+     "nombre": "Caacupé Football Club",
+     "fundado": null,
+     "estadio": "Estadio Teniente Fariña",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q757427",
+     "nombre": "Club Atlético Colegiales",
+     "fundado": 1977,
+     "estadio": "Estadio Profesor Luciano Zacarías",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q5260762",
+     "nombre": "Club Deportivo Santaní",
+     "fundado": 2009,
+     "estadio": "Estadio Juan José Vázquez",
+     "ciudad": "San Estanislao",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q598837",
+     "nombre": "Club Fernando de la Mora",
+     "fundado": 1925,
+     "estadio": "Estadio Emiliano Ghezzi",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q576189",
+     "nombre": "Club General Martín Ledesma",
+     "fundado": 1914,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1931192",
+     "nombre": "Club Presidente Hayes",
+     "fundado": 1907,
+     "estadio": "Estadio Kiko Reyes",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2030810",
+     "nombre": "Club River Plate Asunción",
+     "fundado": 1911,
+     "estadio": "Estadio River Plate (Paraguay)",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q54099409",
+     "nombre": "Club Social y Deportivo R.I. 3 Corrales",
+     "fundado": null,
+     "estadio": "Estadio R.I. 3 Corrales",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q605055",
+     "nombre": "Club Sol de América",
+     "fundado": 1909,
+     "estadio": "Estadio Luis Alfonso Giagni",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1926287",
+     "nombre": "Club Sportivo 2 de Mayo",
+     "fundado": 1935,
+     "estadio": "Estadio Río Parapití",
+     "ciudad": "Pedro Juan Caballero",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q2980003",
+     "nombre": "Club Sportivo San Lorenzo",
+     "fundado": 1930,
+     "estadio": "Estadio Ciudad Universitaria",
+     "ciudad": "San Lorenzo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q602815",
+     "nombre": "Independiente de Campo Grande",
+     "fundado": 1925,
+     "estadio": "Estadio Ricardo Gregor",
+     "ciudad": "Asunción",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q7135429",
+     "nombre": "Paranaense Fútbol Club",
+     "fundado": 2012,
+     "estadio": "Estadio R.I. 3 Corrales",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q603081",
+     "nombre": "Tacuary Football Club",
+     "fundado": 1923,
+     "estadio": "Estadio Toribio Vargas",
+     "ciudad": "Jara",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "uy-1",
+   "qid": "Q287453",
+   "pais": "Uruguay",
+   "iso": "UY",
+   "bandera": "🇺🇾",
+   "nombre": "Primera División",
+   "division": 1,
+   "clubes": [
+    {
+     "qid": "Q499616",
+     "nombre": "Club Nacional de Football",
+     "fundado": 1899,
+     "estadio": "Estadio Gran Parque Central",
+     "ciudad": "Montevideo",
+     "apodo": "rey de copas",
+     "titulos": 10
+    },
+    {
+     "qid": "Q16320",
+     "nombre": "Club Atlético Peñarol",
+     "fundado": 1891,
+     "estadio": "Estadio Campeón del Siglo",
+     "ciudad": "Montevideo",
+     "apodo": "Aurinegros",
+     "titulos": 7
+    },
+    {
+     "qid": "Q844238",
+     "nombre": "Defensor Sporting Club",
+     "fundado": 1913,
+     "estadio": "Estadio Luis Franzini",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 4
+    },
+    {
+     "qid": "Q584316",
+     "nombre": "Danubio Fútbol Club",
+     "fundado": 1932,
+     "estadio": "Estadio Jardines del Hipódromo",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q872702",
+     "nombre": "Montevideo Wanderers Fútbol Club",
+     "fundado": 1902,
+     "estadio": "Estadio Parque Alfredo Víctor Viera",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q509801",
+     "nombre": "Rampla Juniors Football Club",
+     "fundado": 1914,
+     "estadio": "Estadio Olímpico Pedro Arispe",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q1022910",
+     "nombre": "Boston River S.A.D.",
+     "fundado": 1939,
+     "estadio": "Estadio Complejo Rentistas",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1053786",
+     "nombre": "Central Español Fútbol Club",
+     "fundado": 1905,
+     "estadio": "Estadio Parque Palermo",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q978110",
+     "nombre": "Centro Atlético Fénix",
+     "fundado": 1916,
+     "estadio": "Estadio Parque Capurro",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1054290",
+     "nombre": "Centro Cultural y Deportivo El Tanque Sisley",
+     "fundado": 1955,
+     "estadio": "Estadio Víctor Della Valle",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1055895",
+     "nombre": "Cerro Largo Futbol Club",
+     "fundado": 2002,
+     "estadio": "Estadio Arquitecto Antonio Eleuterio Ubilla",
+     "ciudad": "Melo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q719344",
+     "nombre": "Club Atlético Cerro",
+     "fundado": 1922,
+     "estadio": "Estadio Luis Tróccoli",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q217644",
+     "nombre": "Club Atlético Juventud de Las Piedras",
+     "fundado": 1935,
+     "estadio": "Estadio Parque Artigas",
+     "ciudad": "Las Piedras",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q980573",
+     "nombre": "Club Atlético River Plate",
+     "fundado": 1932,
+     "estadio": "Estadio Parque Federico Omar Saroldi",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1023170",
+     "nombre": "Club Deportivo Colonia",
+     "fundado": 1999,
+     "estadio": "Estadio Miguel Campomar",
+     "ciudad": "Juan Lacaze",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1024343",
+     "nombre": "Club Social y Deportivo Villa Española",
+     "fundado": 1940,
+     "estadio": "Estadio Obdulio Varela",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1024474",
+     "nombre": "Club Sportivo Miramar Misiones",
+     "fundado": 1980,
+     "estadio": "Estadio Parque Luis Méndez Piana",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1023199",
+     "nombre": "Deportivo Maldonado",
+     "fundado": 1928,
+     "estadio": "Estadio Domingo Burgueño Miguel",
+     "ciudad": "Maldonado",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q217712",
+     "nombre": "Deutscher Fussball Klub",
+     "fundado": 1896,
+     "estadio": "",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q123169965",
+     "nombre": "Elías de León",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1131189",
+     "nombre": "Liverpool Fútbol Club",
+     "fundado": 1915,
+     "estadio": "Estadio Belvedere",
+     "ciudad": "Montevideo",
+     "apodo": "Negriazul",
+     "titulos": 0
+    },
+    {
+     "qid": "Q123174708",
+     "nombre": "Lucas Agazzi",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q26517",
+     "nombre": "Luis Suárez",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "El Pistolero",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1417183",
+     "nombre": "Racing Club de Montevideo",
+     "fundado": 1919,
+     "estadio": "Estadio Parque Osvaldo Roberto",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q124258490",
+     "nombre": "Rodrigo Dudok",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q116218871",
+     "nombre": "Thiago Helguera",
+     "fundado": null,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q6156310",
+     "nombre": "Universal Football Club",
+     "fundado": 1907,
+     "estadio": "",
+     "ciudad": "",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q420037",
+     "nombre": "Uruguay Athletic Club",
+     "fundado": 1898,
+     "estadio": "",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  },
+  {
+   "id": "uy-2",
+   "qid": "Q1033083",
+   "pais": "Uruguay",
+   "iso": "UY",
+   "bandera": "🇺🇾",
+   "nombre": "Segunda División",
+   "division": 2,
+   "clubes": [
+    {
+     "qid": "Q392091",
+     "nombre": "Institución Atlética Sud América",
+     "fundado": 1914,
+     "estadio": "Estadio Parque Carlos Ángel Fossa",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q751503",
+     "nombre": "Tacuarembó Fútbol Club",
+     "fundado": 1999,
+     "estadio": "Estadio Raúl Goyenola",
+     "ciudad": "Tacuarembó",
+     "apodo": "",
+     "titulos": 1
+    },
+    {
+     "qid": "Q286399",
+     "nombre": "Asociación Atlética Durazno Fútbol Club",
+     "fundado": 2005,
+     "estadio": "Estadio Silvestre Octavio Landoni",
+     "ciudad": "Durazno",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q978110",
+     "nombre": "Centro Atlético Fénix",
+     "fundado": 1916,
+     "estadio": "Estadio Parque Capurro",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q386543",
+     "nombre": "Club Atlético Atenas",
+     "fundado": 1928,
+     "estadio": "Estadio Atenas",
+     "ciudad": "San Carlos",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1772471",
+     "nombre": "Club Atlético Platense",
+     "fundado": 1935,
+     "estadio": "Estadio Obdulio Varela",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1022933",
+     "nombre": "Club Atlético Rentistas",
+     "fundado": 1933,
+     "estadio": "Estadio Complejo Rentistas",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q48664",
+     "nombre": "Club Atlético Villa Teresa",
+     "fundado": 1941,
+     "estadio": "Estadio Parque José Nasazzi",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1103101",
+     "nombre": "Club Plaza Colonia de Deportes",
+     "fundado": 1917,
+     "estadio": "Campus Municipal \"Profesor Alberto Suppici\"",
+     "ciudad": "Colonia del Sacramento",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1638380",
+     "nombre": "Club Social y Deportivo Huracán Buceo",
+     "fundado": 1940,
+     "estadio": "Estadio Parque Huracán",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q48654",
+     "nombre": "Colón Fútbol Club",
+     "fundado": 1907,
+     "estadio": "Estadio Parque Doctor Carlos Suero",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q584316",
+     "nombre": "Danubio Fútbol Club",
+     "fundado": 1932,
+     "estadio": "Estadio Jardines del Hipódromo",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q923308",
+     "nombre": "Huracán Football Club",
+     "fundado": 1954,
+     "estadio": "",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q48646",
+     "nombre": "Montevideo City Torque",
+     "fundado": 2007,
+     "estadio": "Estadio Municipal Casto Martínez Laguarda",
+     "ciudad": "Montevideo",
+     "apodo": "",
+     "titulos": 0
+    },
+    {
+     "qid": "Q1578104",
+     "nombre": "Rocha Fútbol Club",
+     "fundado": 1999,
+     "estadio": "Estadio Municipal Doctor Mario Sobrero",
+     "ciudad": "Rocha",
+     "apodo": "",
+     "titulos": 0
+    }
+   ]
+  }
+ ]
+}

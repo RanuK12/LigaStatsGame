@@ -25,6 +25,9 @@ import {
   POSITIONS,
   ARG_CLUBS,
   SUDAM_CLUBS,
+  LIGAS,
+  PAISES_CARRERA,
+  clubesDeLiga,
   findClub,
   MAX_SEASONS,
   marketValueFor,
@@ -358,11 +361,73 @@ function CareerSetupWizard() {
   )
 }
 
+/**
+ * Dónde debutás: país, después categoría, después club.
+ *
+ * Antes eran dos listas planas (Argentina y "Sudamérica"). Con 470 clubes en siete países y
+ * cuatro categorías eso es una pared: hay que poder decir "quiero arrancar en la B de Uruguay"
+ * en tres toques, que es lo que hace que el camino desde abajo se elija en vez de sufrirse.
+ */
 function ClubPicker({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
+  const [pais, setPais] = useState("Argentina")
+  const ligasDelPais = useMemo(
+    () => LIGAS.filter((l) => l.pais === pais).sort((a, b) => a.division - b.division),
+    [pais],
+  )
+  const [ligaId, setLigaId] = useState(ligasDelPais[0]?.id ?? "ar-1")
+
+  // Al cambiar de país la liga elegida deja de existir: se vuelve a la primera del nuevo.
+  useEffect(() => {
+    if (!ligasDelPais.some((l) => l.id === ligaId)) setLigaId(ligasDelPais[0]?.id ?? "")
+  }, [ligasDelPais, ligaId])
+
+  const liga = LIGAS.find((l) => l.id === ligaId)
+  const clubes = useMemo(() => (ligaId ? clubesDeLiga(ligaId) : []), [ligaId])
+
   return (
     <div className="space-y-4">
-      <ClubGroup title="Liga Profesional Argentina" clubs={ARG_CLUBS} selected={selected} onSelect={onSelect} />
-      <ClubGroup title="Sudamérica" clubs={SUDAM_CLUBS} selected={selected} onSelect={onSelect} />
+      <div>
+        <h4 className="mb-2 font-sport text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">País</h4>
+        <div className="flex flex-wrap gap-2">
+          {PAISES_CARRERA.map((p) => (
+            <button
+              key={p.nombre}
+              onClick={() => setPais(p.nombre)}
+              className={`rounded-xl border px-3 py-2 font-sport text-[11px] font-bold transition-all ${
+                pais === p.nombre ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white" : "border-white/5 bg-slate-950/50 text-slate-300 hover:border-white/20"
+              }`}
+            >
+              {p.bandera} {p.nombre}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h4 className="mb-2 font-sport text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Categoría</h4>
+        <div className="flex flex-wrap gap-2">
+          {ligasDelPais.map((l) => (
+            <button
+              key={l.id}
+              onClick={() => setLigaId(l.id)}
+              className={`rounded-xl border px-3 py-2 font-sport text-[11px] font-bold transition-all ${
+                ligaId === l.id ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white" : "border-white/5 bg-slate-950/50 text-slate-300 hover:border-white/20"
+              }`}
+            >
+              {l.nombre}
+              <span className="ml-1.5 text-[9px] text-slate-500">{l.division}ª</span>
+            </button>
+          ))}
+        </div>
+        {liga?.nota && <p className="mt-2 text-[11px] leading-snug text-slate-500">{liga.nota}</p>}
+        {liga && liga.division > 1 && (
+          <p className="mt-1 font-sport text-[10px] uppercase tracking-wider text-[#F6C750]">
+            🔼 Suben {liga.asciende} · empezás desde abajo
+          </p>
+        )}
+      </div>
+
+      <ClubGroup title={`${liga?.bandera ?? ""} ${liga?.nombre ?? ""} · ${clubes.length} clubes`} clubs={clubes} selected={selected} onSelect={onSelect} />
     </div>
   )
 }
@@ -374,7 +439,7 @@ function ClubGroup({
   onSelect,
 }: {
   title: string
-  clubs: { id: string; name: string; strength: number }[]
+  clubs: { id: string; name: string; strength: number; escudo?: string; ciudad?: string }[]
   selected: string
   onSelect: (id: string) => void
 }) {
@@ -388,7 +453,9 @@ function ClubGroup({
             onClick={() => onSelect(c.id)}
             className={`flex items-center gap-2 px-2.5 py-2 rounded-xl border text-left transition-all ${selected === c.id ? "bg-[#74ACDF]/20 border-[#74ACDF]" : "bg-slate-950/50 border-white/5 hover:border-white/20"}`}
           >
-            <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+            {/* Cada club sabe dónde está su escudo: los de siempre en logos/clubs, los de las
+                ligas nuevas en logos/ligas. */}
+            <img src={c.escudo ?? `/logos/clubs/${c.id}.png`} alt="" className="w-6 h-6 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
             <span className="text-[11px] font-bold text-white truncate flex-1">{c.name}</span>
             <span className="text-[11px] font-sport text-amber-400 shrink-0">{c.strength}</span>
           </button>
@@ -604,7 +671,7 @@ function CareerDashboard() {
                   const euro = o.region === "euro"
                   return (
                     <div key={o.clubId} className={`flex items-center gap-2 rounded-xl p-3 border ${euro ? "bg-amber-400/10 border-amber-400/40" : "bg-slate-950/60 border-white/5"}`}>
-                      <img src={`/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                      <img src={findClub(o.clubId)?.escudo ?? `/logos/clubs/${o.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
                           {o.clubName}
@@ -767,13 +834,13 @@ function CareerDashboard() {
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/logos/clubs/${s.clubId}.png`}
+                      src={findClub(s.clubId)?.escudo ?? `/logos/clubs/${s.clubId}.png`}
                       alt=""
                       className="pointer-events-none absolute -right-4 -bottom-6 w-28 h-28 object-contain opacity-[0.06]"
                       onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")}
                     />
                     <div className="relative flex items-center gap-2.5 mb-2">
-                      <img src={`/logos/clubs/${s.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                      <img src={findClub(s.clubId)?.escudo ?? `/logos/clubs/${s.clubId}.png`} alt="" className="w-8 h-8 object-contain shrink-0" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-black text-white font-display truncate">{s.year} · {s.clubName}</div>
                         <div className="text-[10px] text-slate-400 font-sport">{s.age} años · Nota {(s.rating ?? 7).toFixed(1)}</div>
