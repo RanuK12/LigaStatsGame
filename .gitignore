@@ -42,3 +42,7 @@ data/reports/fichas-promo/*-historia.png
 # Placas de equipos: 36 PNG de 400 kB que se regeneran con `node scripts/placas-equipos.mjs`.
 # El README con los textos de los tweets sí se versiona.
 data/reports/placas-equipos/*.png
+
+# Capturas del lanzamiento de las ligas: 4,5 MB que se regeneran levantando el sitio. El README
+# con los textos de los tweets SI se versiona, que es lo unico que no se puede volver a generar.
+data/reports/promo-ligas/*.png
