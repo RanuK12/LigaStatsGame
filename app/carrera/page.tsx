@@ -48,6 +48,8 @@ import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/car
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 
+import CareerMomentumChart from "@/components/charts/CareerMomentumChart"
+
 const NATIONALITIES: { name: string; flag: string }[] = [
   { name: "Argentina", flag: "🇦🇷" },
   { name: "Brasil", flag: "🇧🇷" },
@@ -850,6 +852,11 @@ function CareerDashboard() {
             <button onClick={() => setShowFinale(true)} className="btn-gold w-full py-4 rounded-2xl text-xs font-black uppercase tracking-widest">
               🏆 Ver resumen de carrera
             </button>
+          )}
+
+          {/* MOMENTUM & EVOLUCIÓN DE CARRERA (DATA SCIENCE ANALYTICS) */}
+          {career.history.length > 0 && (
+            <CareerMomentumChart history={career.history} />
           )}
 
           {/* FEED DE TEMPORADAS — la narrativa dinámica, en la misma pantalla.

@@ -4,22 +4,22 @@ Generada por `__tests__/humo-completo.test.ts` con los datos reales del juego.
 
 ## Drafts
 - 30 drafts en las 4 formaciones: **30 completos**, sin puestos vacíos ni clubes repetidos
-- OVR medio del once: **78.6**
+- OVR medio del once: **77.9**
 
 ## Retos diarios
 - Los 8 arman el once con el bombo recortado:
   - Clásico Eterno: 483 jugadores en el bombo, once armado con OVR 82
-  - Orgullo Rosarino: 476 jugadores en el bombo, once armado con OVR 82
+  - Orgullo Rosarino: 476 jugadores en el bombo, once armado con OVR 80
   - Furia Cordobesa: 471 jugadores en el bombo, once armado con OVR 79
-  - Clásico de Avellaneda: 467 jugadores en el bombo, once armado con OVR 79
-  - Zurdos Mágicos: 288 jugadores en el bombo, once armado con OVR 75
-  - Los que Vinieron: 669 jugadores en el bombo, once armado con OVR 71
-  - Puro Noventa: 686 jugadores en el bombo, once armado con OVR 76
+  - Clásico de Avellaneda: 467 jugadores en el bombo, once armado con OVR 78
+  - Zurdos Mágicos: 288 jugadores en el bombo, once armado con OVR 76
+  - Los que Vinieron: 669 jugadores en el bombo, once armado con OVR 75
+  - Puro Noventa: 686 jugadores en el bombo, once armado con OVR 79
   - Generación 2000: 766 jugadores en el bombo, once armado con OVR 76
 
 ## Torneos (30 cada uno)
-- Liga: campeón el **7 %**, clasifica a una copa el **63 %**
-- Libertadores: campeón el **3 %** · Sudamericana: **23 %**
+- Liga: campeón el **3 %**, clasifica a una copa el **47 %**
+- Libertadores: campeón el **7 %** · Sudamericana: **20 %**
 
 ## Modo carrera
 - **180 temporadas** en 12 carreras completas (18 a 33 años), sin excepciones

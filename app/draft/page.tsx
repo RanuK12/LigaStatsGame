@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation"
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import TeamTacticalRadar from "@/components/charts/TeamTacticalRadar"
 import squadsData from "@/data/squads.json"
 import type { Player, Squad, TournamentResult } from "@/lib/types"
 import { normalizeSquads } from "@/lib/data-normalizers"
@@ -875,9 +876,26 @@ function DraftInner() {
 
         {/* PHASE: DONE */}
         {phase === "done" && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
-            <div className="card-gradient rounded-3xl p-6 mb-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-6">
+            <div className="card-gradient rounded-3xl p-6">
               <h2 className="font-display text-3xl font-black gradient-text mb-2">¡11 Armado!</h2>
+              <p className="text-slate-400 text-sm mb-4">Tu equipo está listo para competir por el ranking ELO.</p>
+
+              {/* TEAM TACTICAL RADAR (DATA SCIENCE ANALYTICS) */}
+              {(() => {
+                const validPlayers = drafted.filter(Boolean) as Player[]
+                const avgRating = validPlayers.length > 0 ? validPlayers.reduce((a, b) => a + (b.rating || 70), 0) / validPlayers.length : 75
+                const starCount = validPlayers.filter(p => (p.rating || 0) >= 80).length
+                const metrics = {
+                  attack: Math.min(99, Math.round(avgRating * 1.05)),
+                  creation: Math.min(99, Math.round(avgRating * 0.98)),
+                  defense: Math.min(99, Math.round(avgRating * 0.95)),
+                  chemistry: chemBreakdown.total,
+                  starPower: Math.min(99, Math.round(50 + starCount * 12)),
+                  experience: Math.min(99, Math.round(65 + validPlayers.length * 3)),
+                }
+                return <TeamTacticalRadar metrics={metrics} />
+              })()}
               <p className="text-slate-400 text-sm mb-4">Tocá cualquier posición para cambiar el jugador</p>
               <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
               <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>
