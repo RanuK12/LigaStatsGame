@@ -31,6 +31,7 @@ const SITIO = 'gambetafutbol.games'
 const SECCIONES = [
   {
     id: 'sabias-que',
+    desplazar: 120,
     ruta: '/datos',
     titulo: '¿Sabías que?',
     selector: 'main',
@@ -51,6 +52,7 @@ const SECCIONES = [
   },
   {
     id: 'leyendas',
+    desplazar: 120,
     ruta: '/records',
     titulo: 'Leyendas',
     selector: 'main',
@@ -60,6 +62,7 @@ const SECCIONES = [
   },
   {
     id: 'versus',
+    desplazar: 90,
     ruta: '/versus',
     titulo: 'Versus',
     selector: 'main',
@@ -69,6 +72,7 @@ const SECCIONES = [
   },
   {
     id: 'ruleta',
+    desplazar: 120,
     ruta: '/ruleta',
     titulo: 'Ruleta',
     selector: 'main',
@@ -78,6 +82,7 @@ const SECCIONES = [
   },
   {
     id: 'equipos',
+    desplazar: 100,
     ruta: '/equipos',
     titulo: 'Equipos históricos',
     selector: 'main',
@@ -87,9 +92,12 @@ const SECCIONES = [
   },
   {
     id: 'carrera',
+    desplazar: 0,
     ruta: '/carrera',
     titulo: 'Modo carrera',
-    selector: 'main',
+    // El formulario de creación no vende nada: lo que vende son los siete países. El clip usa
+    // coordenadas del DOCUMENTO, así que scrollear no alcanza — hay que apuntar al elemento.
+    selector: 'div.card-gradient:has-text("CLUB DE INICIO")',
     link: `${SITIO}/carrera/`,
     de_que_habla: '7 países, 16 categorías y 410 clubes. Se puede empezar en el Torneo Federal A.',
     angulos: [
@@ -99,6 +107,7 @@ const SECCIONES = [
   },
   {
     id: 'ranking',
+    desplazar: 100,
     ruta: '/leaderboard',
     titulo: 'Ranking',
     selector: 'main',
@@ -108,6 +117,7 @@ const SECCIONES = [
   },
   {
     id: 'home',
+    desplazar: 0,
     ruta: '/',
     titulo: 'El juego',
     selector: 'main',
@@ -138,9 +148,29 @@ for (const s of SECCIONES) {
     await p.waitForTimeout(1200)
     if (s.preparar) await s.preparar(p)
 
+    // El fondo del sitio es `fixed`, y con `clip` eso hace que la captura salga NEGRA: el
+    // navegador dibuja el fondo pegado al viewport y no al documento. Se le pone el color
+    // plano justo antes de capturar.
+    await p.addStyleTag({
+      content: `body{background:#050d1c !important} .gradient-bg{background:#050d1c !important}`,
+    })
+    await p.waitForTimeout(400)
+
+    // Recortada a 1200x675, que es la medida que X muestra entera en la línea de tiempo. Las
+    // de página completa salían de 2 a 10 MB y 3000 px de alto: X las recorta a una tira y de
+    // la sección se veía solo el encabezado.
     const el = p.locator(s.selector).first()
+    const caja = await el.boundingBox()
     const archivo = path.join(SALIDA, `${s.id}.png`)
-    await el.screenshot({ path: archivo })
+    await p.screenshot({
+      path: archivo,
+      clip: {
+        x: caja.x,
+        y: caja.y + (s.desplazar ?? 0),
+        width: Math.min(caja.width, 1200),
+        height: Math.min(675, Math.max(caja.height - (s.desplazar ?? 0), 200)),
+      },
+    })
 
     // Una captura casi vacía es una captura fallida: se avisa en vez de dejarla pasar.
     const bytes = fs.statSync(archivo).size

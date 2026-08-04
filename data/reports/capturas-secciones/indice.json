@@ -9,7 +9,7 @@
    "El Vélez del 94 le ganó al Milan de Capello en la Intercontinental.",
    "Cada dato del mazo está cruzado contra dos fuentes: no hay ninguno inventado."
   ],
-  "revisar": "la captura pesa 5643 bytes, puede estar vacía"
+  "revisar": "la captura pesa 12473 bytes, puede estar vacía"
  },
  {
   "id": "leyendas",
@@ -31,8 +31,7 @@
   "angulos": [
    "Poné a dos y discutan.",
    "El que pierde la discusión paga el café."
-  ],
-  "revisar": "la captura pesa 8694 bytes, puede estar vacía"
+  ]
  },
  {
   "id": "ruleta",
@@ -65,8 +64,7 @@
   "angulos": [
    "Elegís país, categoría y club, y subís peleándola.",
    "Ningún otro juego deja empezar en el Federal A."
-  ],
-  "revisar": "la captura pesa 23811 bytes, puede estar vacía"
+  ]
  },
  {
   "id": "ranking",

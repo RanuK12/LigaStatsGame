@@ -206,16 +206,21 @@ function CareerSetupWizard() {
           </button>
         </div>
 
-        {/* Modo debug: cargar carrera de leyenda (valores aproximados). */}
-        <div className="flex items-center gap-2 text-[10px] font-sport">
-          <span className="text-slate-500 uppercase tracking-wider">Debug:</span>
-          <button onClick={() => loadLegend("messi")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 hover:text-white hover:border-[#74ACDF]/40 transition-all">
-            🐐 Carrera de Messi
-          </button>
-          <button onClick={() => loadLegend("maradona")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 hover:text-white hover:border-[#D4AF37]/40 transition-all">
-            🏆 Carrera de Maradona
-          </button>
-        </div>
+        {/* Modo debug: cargar carrera de leyenda (valores aproximados).
+            Solo en desarrollo. Estaba saliendo EN PRODUCCIÓN, con la palabra "Debug:" y todo,
+            arriba del creador de jugador: lo vi en una captura que iba a salir a promocionar
+            el juego. */}
+        {process.env.NODE_ENV === "development" && (
+          <div className="flex items-center gap-2 font-sport text-[10px]">
+            <span className="uppercase tracking-wider text-slate-500">Debug:</span>
+            <button onClick={() => loadLegend("messi")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 transition-all hover:border-[#74ACDF]/40 hover:text-white">
+              Carrera de Messi
+            </button>
+            <button onClick={() => loadLegend("maradona")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 transition-all hover:border-[#D4AF37]/40 hover:text-white">
+              Carrera de Maradona
+            </button>
+          </div>
+        )}
 
         {mode === "create" && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">

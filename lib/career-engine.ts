@@ -105,7 +105,19 @@ export const ARG_CLUBS: CareerClub[] = (clubsData as any[])
 
 export const SUDAM_CLUBS: CareerClub[] = CONTINENTAL_CLUBS.filter(
   (c) => !ARG_CLUBS.some((a) => a.id === c.id),
-).map((c) => ({ id: c.id, name: c.name, strength: c.nivel, continental: true, region: 'sudam' as Region }))
+).map((c) => ({
+  id: c.id,
+  name: c.name,
+  strength: c.nivel,
+  continental: true,
+  region: 'sudam' as Region,
+  // El país venía en el dato y se perdía en este map. Sin él, Peñarol y Colo-Colo eran clubes
+  // sin nacionalidad: un uruguayo no podía ser buscado por el club de su país porque el motor
+  // no sabía que Peñarol era uruguayo.
+  pais: c.country,
+  flag: c.flag,
+  colors: c.colors,
+}))
 
 export const EURO_CLUBS: CareerClub[] = [
   { id: 'real-madrid', name: 'Real Madrid', strength: 90, continental: true, region: 'euro', flag: '🇪🇸' },
@@ -1564,7 +1576,7 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
     return true
   }).sort(() => rng() - 0.5)
 
-  return candidates.slice(0, count).map((c) => {
+  const aOferta = (c: CareerClub): TransferOffer => {
     const bruto = value * (1.1 + rng() * 0.6) * (c.region === 'euro' ? 1.4 : 1)
     const pagado = Math.min(bruto, topeTraspaso(c))
     return {
@@ -1579,7 +1591,38 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
         ? Math.min(Math.round(pagado), topeTraspaso(c))
         : Math.max(0.2, Math.round(pagado * 10) / 10),
     }
-  })
+  }
+
+  // ── Europa no llama de a uno ──
+  //
+  // El salto a Europa es el momento de una carrera sudamericana, y con una sola oferta no se
+  // sentía: aparecía un club, se aceptaba o no, y listo. Cuando a un pibe de acá lo vienen a
+  // buscar, lo vienen a buscar varios y él ELIGE — eso es lo que hay que poder jugar.
+  const europeos = candidates.filter((c) => c.region === 'euro')
+  if (europeos.length >= 2) {
+    const patota = europeos.slice(0, clamp(2 + Math.floor(rng() * 3), 2, europeos.length))
+    // Y una de acá, para que irse siga siendo una decisión y no un trámite: quedarse en el club
+    // que te formó teniendo cuatro de Europa arriba de la mesa es una carrera que vale contar.
+    const deAca = candidates.find((c) => c.region !== 'euro')
+    return [...patota, ...(deAca ? [deAca] : [])].map(aOferta)
+  }
+
+  // ── Los de tu país te siguen ──
+  //
+  // Un club te ficha porque te vio, y al que más te ven es en tu país: un peruano que la rompe
+  // en el Torneo Federal A lo miran primero de Perú. Es preferencia, no encierro — el resto de
+  // las ofertas sigue saliendo de donde salía, así que la carrera no queda atada a la
+  // nacionalidad.
+  //
+  // Europa queda afuera de esta regla a propósito: no hay clubes europeos con nacionalidad
+  // argentina, y Europa ya tiene su propia puerta más arriba.
+  const paisanos = candidates.filter((c) => c.pais === state.player.nationality)
+  const resto = candidates.filter((c) => c.pais !== state.player.nationality)
+  const elegidos = paisanos.length
+    ? [...paisanos.slice(0, Math.max(1, count - 1)), ...resto].slice(0, count)
+    : candidates.slice(0, count)
+
+  return elegidos.map(aOferta)
 }
 
 export function advancePlayer(state: CareerState, season: SeasonResult): CareerPlayer {
