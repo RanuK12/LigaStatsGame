@@ -351,8 +351,12 @@ for (const c of clubesTotales) {
 }
 const clubes = [...porId.values()]
 
-// Y las ligas apuntan solo a los clubes que sobrevivieron a esa poda.
-for (const l of ligas) l.clubIds = l.clubIds.filter((id) => porId.get(id)?.ligaId === l.id)
+// Y las ligas apuntan solo a los clubes que sobrevivieron a esa poda, sin repetir: Wikidata
+// tiene DOS entidades llamadas "Clube de Regatas do Flamengo" y las dos daban el mismo id, así
+// que Flamengo aparecía dos veces en la lista de la Série A.
+for (const l of ligas) {
+  l.clubIds = [...new Set(l.clubIds.filter((id) => porId.get(id)?.ligaId === l.id))]
+}
 
 // La Primera argentina se suma al final: sus clubes ya existen en clubs.json y no se tocan.
 ligas.push(LIGA_PRIMERA_AR)

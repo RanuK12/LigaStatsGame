@@ -46,6 +46,31 @@ describe('ligas del modo carrera', () => {
   it('ningún club está duplicado en toda la base', () => {
     const ids = ALL_CLUBS.map((c) => c.id)
     expect(ids.length).toBe(new Set(ids).size)
+    // Y ninguna liga lista dos veces al mismo: Wikidata tiene DOS entidades llamadas "Clube de
+    // Regatas do Flamengo" y las dos caían en el mismo id, así que Flamengo salía repetido en
+    // la pantalla de elección.
+    for (const l of LIGAS) expect(new Set(l.clubIds).size).toBe(l.clubIds.length)
+  })
+
+  /**
+   * Wikidata pone P118 ("liga") en los JUGADORES además de en los clubes: la Série A devolvía
+   * 40 entidades y diez eran Vinícius Júnior, Toni Kroos y compañía, que salían en la pantalla
+   * de elección como si fueran equipos. Lo vi mirando una captura, no un test: este existe para
+   * que no haya que volver a mirarla.
+   */
+  it('no hay personas listadas como clubes', () => {
+    const PERSONAS = [
+      'vinicius', 'vinícius', 'toni kroos', 'richarlison', 'oscar', 'ribamar',
+      'breno lopes', 'talles magno', 'deivid', 'jailson',
+    ]
+    const sospechosos = LIGA_CLUBS.filter((c) => {
+      const n = (c.nombreLargo ?? c.name).toLowerCase()
+      return PERSONAS.some((p) => n === p || n.startsWith(p + ' '))
+    })
+    expect(sospechosos.map((c) => c.name)).toEqual([])
+    // Un club siempre trae algo que una persona no tiene: año de fundación, estadio o ciudad.
+    const sinSeñalDeClub = LIGA_CLUBS.filter((c) => !c.ciudad && !c.division)
+    expect(sinSeñalDeClub).toEqual([])
   })
 
   it('los clubes de liga traen todo lo que la pantalla necesita', () => {

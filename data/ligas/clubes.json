@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-03",
+ "generado": "2026-08-04",
  "fuente": "Wikidata: P118 (liga), P1346 (ganador) sobre P3450",
  "ligas": [
   {
@@ -367,15 +367,6 @@
      "nombre": "Huracán de Medellín",
      "fundado": 1949,
      "estadio": "Unidad Deportiva Atanasio Girardot",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q125591021",
-     "nombre": "Pablo Martel",
-     "fundado": null,
-     "estadio": "",
      "ciudad": "",
      "apodo": "",
      "titulos": 0
@@ -972,15 +963,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q101230488",
-     "nombre": "Breno Lopes",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q1052219",
      "nombre": "Ceará Sporting Club",
      "fundado": 1914,
@@ -1035,24 +1017,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q508316",
-     "nombre": "Deivid de Souza",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "Hulk da Fiel",
-     "titulos": 0
-    },
-    {
-     "qid": "Q314750",
-     "nombre": "Eduardo César Daud Gaspar",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q910453",
      "nombre": "Esporte Clube Juventude",
      "fundado": 1913,
@@ -1098,24 +1062,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q28145562",
-     "nombre": "Jailson Marques Siqueira",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q19497",
-     "nombre": "Oscar",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q541744",
      "nombre": "Red Bull Bragantino",
      "fundado": 1928,
@@ -1125,56 +1071,11 @@
      "titulos": 0
     },
     {
-     "qid": "Q24006455",
-     "nombre": "Ribamar",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q20806743",
-     "nombre": "Richarlison",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q65718359",
-     "nombre": "Talles Magno",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q131234",
-     "nombre": "Toni Kroos",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q1857213",
      "nombre": "Uberlândia Esporte Clube",
      "fundado": 1922,
      "estadio": "Estádio Parque do Sabiá",
      "ciudad": "Uberlândia",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q28973866",
-     "nombre": "Vinícius Júnior",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
      "apodo": "",
      "titulos": 0
     }
@@ -1316,15 +1217,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q101230488",
-     "nombre": "Breno Lopes",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q2536715",
      "nombre": "Chapecoense",
      "fundado": 1973,
@@ -1366,15 +1258,6 @@
      "fundado": 1911,
      "estadio": "Estadio Bento Freitas",
      "ciudad": "Pelotas",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q20806743",
-     "nombre": "Richarlison",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
      "apodo": "",
      "titulos": 0
     },
@@ -1651,15 +1534,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q2268949",
-     "nombre": "Eduardo Vargas",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q2447092",
      "nombre": "San Luis de Quillota",
      "fundado": 1919,
@@ -1876,15 +1750,6 @@
      "ciudad": "Temuco",
      "apodo": "",
      "titulos": 0
-    },
-    {
-     "qid": "Q99593283",
-     "nombre": "Yorman Zapata",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
     }
    ]
   },
@@ -1988,15 +1853,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q122375907",
-     "nombre": "Alejandro Tobar",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q124310966",
      "nombre": "Alianza Fútbol Club (Colombia)",
      "fundado": 2024,
@@ -2011,42 +1867,6 @@
      "fundado": 1982,
      "estadio": "Unidad Deportiva Atanasio Girardot",
      "ciudad": "Barrancabermeja",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q109849940",
-     "nombre": "Álvaro Meléndez",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q16488451",
-     "nombre": "Andrés Correa",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q5675745",
-     "nombre": "Andrés Felipe Ibargüen",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q47452532",
-     "nombre": "Andrés Varon",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
      "apodo": "",
      "titulos": 0
     },
@@ -2083,15 +1903,6 @@
      "fundado": 2002,
      "estadio": "Estadio de La Independencia",
      "ciudad": "Tunja",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q5767541",
-     "nombre": "Christian Vargas",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
      "apodo": "",
      "titulos": 0
     },
@@ -2204,15 +2015,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q47538984",
-     "nombre": "Eduardo Sosa",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q332636",
      "nombre": "Envigado Fútbol Club",
      "fundado": 1989,
@@ -2227,24 +2029,6 @@
      "fundado": 2010,
      "estadio": "Estadio Metropolitano de Techo",
      "ciudad": "Bogotá",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q5905990",
-     "nombre": "Héctor Antonio Urrego",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q5896299",
-     "nombre": "Hernán Torres Oliveros",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
      "apodo": "",
      "titulos": 0
     },
@@ -2267,64 +2051,10 @@
      "titulos": 0
     },
     {
-     "qid": "Q16301426",
-     "nombre": "José Guillermo Ortiz",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q5948091",
-     "nombre": "Juan Camilo Saiz",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q16585144",
-     "nombre": "Juan Sebastian Quintero",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q25407417",
      "nombre": "Libertad de Barranquilla",
      "fundado": 1956,
      "estadio": "Estadio Romelio Martínez",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q26838145",
-     "nombre": "Luis Sinisterra",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q6012876",
-     "nombre": "Michael Rangel",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q3541194",
-     "nombre": "Miguel Augusto Prince",
-     "fundado": null,
-     "estadio": "",
      "ciudad": "",
      "apodo": "",
      "titulos": 0
@@ -2784,15 +2514,6 @@
      "titulos": 1
     },
     {
-     "qid": "Q766988",
-     "nombre": "Alberto Quintero Medina",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q5151530",
      "nombre": "Asociación Social, Deportiva y Cultural Comerciantes Unidos",
      "fundado": 2002,
@@ -2933,24 +2654,6 @@
      "fundado": 2009,
      "estadio": "Estadio Inca Garcilaso de la Vega",
      "ciudad": "Cusco",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q62609246",
-     "nombre": "Eduardo Caballero",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q448730",
-     "nombre": "Emanuel Biancucchi",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
      "apodo": "",
      "titulos": 0
     },
@@ -3737,15 +3440,6 @@
      "titulos": 0
     },
     {
-     "qid": "Q123169965",
-     "nombre": "Elías de León",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
      "qid": "Q1131189",
      "nombre": "Liverpool Fútbol Club",
      "fundado": 1915,
@@ -3755,47 +3449,11 @@
      "titulos": 0
     },
     {
-     "qid": "Q123174708",
-     "nombre": "Lucas Agazzi",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q26517",
-     "nombre": "Luis Suárez",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "El Pistolero",
-     "titulos": 0
-    },
-    {
      "qid": "Q1417183",
      "nombre": "Racing Club de Montevideo",
      "fundado": 1919,
      "estadio": "Estadio Parque Osvaldo Roberto",
      "ciudad": "Montevideo",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q124258490",
-     "nombre": "Rodrigo Dudok",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
-     "apodo": "",
-     "titulos": 0
-    },
-    {
-     "qid": "Q116218871",
-     "nombre": "Thiago Helguera",
-     "fundado": null,
-     "estadio": "",
-     "ciudad": "",
      "apodo": "",
      "titulos": 0
     },

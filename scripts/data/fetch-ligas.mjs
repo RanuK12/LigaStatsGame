@@ -75,6 +75,14 @@ async function clubesDe(liga) {
   const filas = await sparql(`
     SELECT ?club ?clubLabel ?fundado ?estadioLabel ?ciudadLabel ?apodo (COUNT(DISTINCT ?t) AS ?titulos) WHERE {
       ?club wdt:P118 wd:${liga.qid} .
+      # NO puede ser una persona. Sin esto entraban jugadores: la Série A devolvía 40 entidades
+      # y diez eran Vinícius Júnior, Toni Kroos, Richarlison y compañía, que en Wikidata tienen
+      # P118 apuntando a la liga donde jugaron. Salían en la pantalla como si fueran equipos.
+      #
+      # Se excluyen humanos y no se exige "club de fútbol": Chacarita, Temperley, Patronato y
+      # San Telmo están tipificados como "club deportivo" o "club polideportivo", y exigir el
+      # tipo estricto se llevaba puestos 17 clubes reales solo en la Primera Nacional.
+      FILTER NOT EXISTS { ?club wdt:P31 wd:Q5 }
       OPTIONAL { ?club wdt:P571 ?fundado }
       OPTIONAL { ?club wdt:P115 ?estadio }
       OPTIONAL { ?club wdt:P159 ?ciudad }
