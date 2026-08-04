@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { positionCategory, type SeasonResult } from "@/lib/career-engine"
+import { positionCategory, findClub, type SeasonResult } from "@/lib/career-engine"
+import Trofeo, { nombreDeTrofeo } from "@/components/ui/Trofeo"
 import WorldCupSummary from "./WorldCupSummary"
 
 // Cuenta un número desde `from` hasta `to` en `ms`.
@@ -61,13 +62,16 @@ export default function SeasonReveal({ season, position, onClose }: Props) {
   const penaltiesSaved = useCountUp(season?.penaltiesSaved ?? 0, 700, phase >= 1)
   const ovrShown = useCountUp(next, 900, phase >= 3, prev)
 
-  const trophies: { icon: string; label: string }[] = []
-  if (season?.liga) trophies.push({ icon: "🏆", label: "Liga" })
-  if (season?.copaArgentina) trophies.push({ icon: "🥇", label: "Copa Argentina" })
-  if (season?.continentalWon) {
-    const m: Record<string, string> = { libertadores: "Libertadores", sudamericana: "Sudamericana", champions: "Champions", europa: "Europa League" }
-    trophies.push({ icon: "🌎", label: m[season.continental || ""] || "Continental" })
+  // Los trofeos van dibujados, no en emoji: cada sistema los renderiza distinto y al lado de
+  // los escudos de los clubes quedaban pobres.
+  const paisDelClub = season ? findClub(season.clubId)?.pais : undefined
+  const trophies: { id: string; label: string }[] = []
+  if (season?.liga) trophies.push({ id: "lpf", label: season.ligaNombre ? `Campeón de ${season.ligaNombre.replace(/^\S+\s/, "")}` : "Liga" })
+  if (season?.copaArgentina) trophies.push({ id: "copa-arg", label: nombreDeTrofeo("copa-arg", paisDelClub) })
+  if (season?.continentalWon && season.continental) {
+    trophies.push({ id: season.continental, label: nombreDeTrofeo(season.continental) })
   }
+  if (season?.ascendio) trophies.push({ id: "ascenso", label: "¡Ascenso!" })
 
   return (
     <AnimatePresence>
@@ -145,7 +149,7 @@ export default function SeasonReveal({ season, position, onClose }: Props) {
               >
                 {trophies.map((t, i) => (
                   <div key={i} className="flex items-center gap-1.5 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-3 py-1.5 text-xs font-black text-[#D4AF37] font-sport">
-                    <span className="text-base">{t.icon}</span> {t.label}
+                    <Trofeo id={t.id} pais={paisDelClub} size={20} /> {t.label}
                   </div>
                 ))}
               </motion.div>

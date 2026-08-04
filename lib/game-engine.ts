@@ -249,7 +249,16 @@ export function getSquadTier(squad: Squad, allPlayers: Player[]): { avg: number;
   const legendaryCount = players.filter(p => p.legendary).length;
   // Un plantel histórico (el Vélez del 94, el Boca de Bianchi) es legendario por lo que fue, no
   // por el promedio: sale poco y tiene que sentirse un premio cuando sale.
-  const tier: SquadTier = squad.historico || avg >= 64 || legendaryCount >= 3 ? 'legendario' : avg >= 58 ? 'elite' : 'comun';
+  //
+  // Los umbrales van con los OVR REALES, medidos: los planteles van de 70 a 79 y el medio es
+  // 73,9. Con los viejos (64 / 58) el 100 % de los 206 planteles era "legendario" y la ruleta
+  // festejaba siempre, que es lo mismo que no festejar nunca. Los de ahora salen de los
+  // percentiles: p95=77 y p50=74, así que legendario queda en el 5 % de arriba (más los 36
+  // históricos) y élite se lleva la mitad de arriba de lo que queda.
+  //
+  // Si vuelven a recalcularse los OVR, estos números hay que recalcularlos también: es lo que
+  // pasó la vez anterior y nadie se enteró hasta que la ruleta gritaba en cada giro.
+  const tier: SquadTier = squad.historico || avg >= 77 || legendaryCount >= 3 ? 'legendario' : avg >= 74 ? 'elite' : 'comun';
   return { avg: Math.round(avg), legendaryCount, tier };
 }
 

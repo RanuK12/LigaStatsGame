@@ -212,6 +212,17 @@ function DraftInner() {
   const [wildcards, setWildcards] = useState(mode.rerolls || 3)
   const [search, setSearch] = useState("")
   const [simResult, setSimResult] = useState<TournamentResult | null>(null)
+  /**
+   * Qué torneos ya jugó ESTE equipo.
+   *
+   * Desde el resumen se puede volver al once ("Ver equipo") y ahí estaban los botones de
+   * simular otra vez: con el mismo equipo se podía repetir la Liga hasta sacar un buen puesto y
+   * sumar ELO cada vez. Eso vacía el ranking de sentido. Un equipo juega cada torneo UNA vez;
+   * para volver a jugar hay que armar otro draft, que es lo que cuesta.
+   *
+   * Se limpia al armar un draft nuevo (resetGame) y cuando cambia el once.
+   */
+  const [torneosJugados, setTorneosJugados] = useState<Set<TorneoTipo>>(new Set())
   const [confetti, setConfetti] = useState(false)
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
   const [retoGanado, setRetoGanado] = useState<{ elo: number; streak: number } | null>(null)
@@ -409,6 +420,9 @@ function DraftInner() {
     const isP = (x: any): x is Player => x && typeof x.id === "string"
     const players = drafted.filter(isP)
     if (players.length < 11) return
+    // Un equipo, un torneo. Si ya lo jugó, no se repite: el botón está deshabilitado, pero el
+    // guard va acá también porque es lo que protege el ranking.
+    if (torneosJugados.has(type)) return
     const virtualSquad: Squad = {
       id: "mi-11-fantasy", clubId: "mi-11", season: "2026",
       competition: "Liga Profesional", label: "Mi 11 Fantasy",
@@ -424,6 +438,7 @@ function DraftInner() {
     // La plaza se gasta al jugarla: una clasificación, una copa.
     if (continental) usarPlaza()
     setSimResult(r)
+    setTorneosJugados((prev) => new Set(prev).add(type))
     setPhase("sim")
     trackEvent(EVENTOS.torneoSimulado, { tipo: type, puntaje: Math.round(score), campeon: !!r.isChampion })
     if (retoDelDia) {
@@ -493,11 +508,12 @@ function DraftInner() {
         setRetoGanado(premio)
       }
     }
-  }, [drafted, allS, allP, f, teamScore, partialScore, user, updateElo, addTitle, retoId])
+  }, [drafted, allS, allP, f, teamScore, partialScore, user, updateElo, addTitle, retoId, torneosJugados])
 
   // ── RESET ──
   const resetGame = useCallback(() => {
     setStarted(false); setPhase("start"); setDrafted([]); setDraftedIds(new Set())
+    setTorneosJugados(new Set())
     setCurrentSquad(null); setSimResult(null); setSpinNotice(null); setActiveSlotIdx(0)
     setPity({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
   }, [])
@@ -961,15 +977,35 @@ function DraftInner() {
               </div>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6 font-sport">
-              <MagneticButton>
-                <button onClick={() => startSim("liga")} className="btn-primary w-full sm:w-auto px-8 py-3">Simular Liga</button>
-              </MagneticButton>
-              <MagneticButton>
-                <button onClick={() => startSim("copa")} className="btn-primary w-full sm:w-auto px-6 py-3">Simular Copa</button>
-              </MagneticButton>
-              <button onClick={resetGame} className="btn-secondary w-full sm:w-auto px-6 py-3">Nuevo Draft</button>
+            <div className="mb-6 flex flex-col items-center justify-center gap-3 font-sport sm:flex-row">
+              {/* Un equipo juega cada torneo UNA vez. Antes se podía volver desde el resumen y
+                  repetir la Liga hasta sacar un buen puesto, sumando ELO cada vez. */}
+              {([["liga", "Simular Liga"], ["copa", "Simular Copa"]] as const).map(([tipo, texto]) => {
+                const yaJugado = torneosJugados.has(tipo)
+                return (
+                  <MagneticButton key={tipo}>
+                    <button
+                      onClick={() => startSim(tipo)}
+                      disabled={yaJugado}
+                      title={yaJugado ? "Ya jugaste este torneo con este equipo. Armá otro draft." : undefined}
+                      className={`w-full px-8 py-3 sm:w-auto ${yaJugado ? "btn-secondary opacity-50" : "btn-primary"}`}
+                    >
+                      {yaJugado ? `${texto.replace("Simular ", "")} jugada` : texto}
+                    </button>
+                  </MagneticButton>
+                )
+              })}
+              <button onClick={resetGame} className="btn-secondary w-full px-6 py-3 sm:w-auto">Nuevo Draft</button>
             </div>
+            {torneosJugados.size > 0 && (
+              <p className="mb-5 text-center text-[11px] leading-relaxed text-slate-400 font-sans">
+                Cada equipo juega cada torneo una sola vez. Para volver a competir,{" "}
+                <button onClick={resetGame} className="text-[#74ACDF] underline underline-offset-2 hover:text-white">
+                  armá otro draft
+                </button>
+                .
+              </p>
+            )}
             <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">Volver al inicio</Link>
           </motion.div>
         )}

@@ -12,6 +12,7 @@ import DonationSection from '@/components/DonationSection'
 import DailyCard from '@/components/DailyCard'
 import Novedades from '@/components/Novedades'
 import ContinentalBanner from '@/components/ContinentalBanner'
+import LigasBanner from '@/components/LigasBanner'
 import SuggestionBox from '@/components/SuggestionBox'
 import SolDeMayo from '@/components/ui/SolDeMayo'
 import dbStats from '@/data/derived/stats.json'
@@ -576,6 +577,8 @@ export default function HomePage() {
       <WorldCupBanner />
 
       {/* ── COPAS CONTINENTALES ── lo único que hay que ganarse, así que va en la portada */}
+      <LigasBanner />
+
       <ContinentalBanner />
 
       {/* ── BANCAR EL PROYECTO ──

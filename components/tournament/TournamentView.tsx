@@ -537,7 +537,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                         se usa a 80px en el home; acá es el premio, así que va grande. */}
                     {copa ? (
                       <img
-                        src={`/logos/copas/${result.continental}.svg`}
+                        src={`/logos/trofeos/${result.continental}.svg`}
                         alt={copa.nombre}
                         className="h-32 w-32 object-contain sm:h-40 sm:w-40"
                         style={{ filter: `drop-shadow(0 0 28px ${copa.color}66)` }}

@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { existsSync } from 'node:fs'
 import {
   LIGAS,
   LIGA_CLUBS,
@@ -78,7 +79,10 @@ describe('ligas del modo carrera', () => {
       expect(c.name).toBeTruthy()
       // 24 es el techo del nombre corto: entra en la tarjeta de la lista de clubes.
       expect(c.name.length).toBeLessThanOrEqual(24)
-      expect(c.escudo).toMatch(/^\/logos\/ligas\/[a-z0-9-]+\.svg$/)
+      // El escudo es el REAL si lo bajamos de Commons, y el generado si no. Los dos valen: lo
+      // que no puede pasar es que apunte a un archivo que no existe.
+      expect(c.escudo).toMatch(/^\/logos\/(ligas\/[a-z0-9-]+\.svg|carrera\/[a-z0-9-]+\.png)$/)
+      expect(existsSync(`public${c.escudo}`), `falta el archivo ${c.escudo}`).toBe(true)
       expect(c.colors?.length).toBe(2)
       expect(c.strength).toBeGreaterThanOrEqual(45)
       expect(c.strength).toBeLessThanOrEqual(85)

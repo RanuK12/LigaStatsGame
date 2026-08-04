@@ -68,8 +68,12 @@ export default function ContinentalBanner() {
                   background: `linear-gradient(180deg, ${c.color}14, rgba(2,8,19,0.6))`,
                 }}
               >
+                {/* Los de /logos/copas eran dos placeholders idénticos con una "L" y una "S"
+                    adentro: no distinguían una copa de la otra ni se parecían a nada. Los de
+                    /logos/trofeos son los del juego, y la Libertadores va en oro y la
+                    Sudamericana en plata, como en la vida. */}
                 <img
-                  src={`/logos/copas/${c.id}.svg`}
+                  src={`/logos/trofeos/${c.id}.svg`}
                   alt={c.nombre}
                   className="h-20 w-20 object-contain drop-shadow-[0_0_18px_rgba(246,199,80,0.25)] transition-transform group-hover:scale-105"
                 />

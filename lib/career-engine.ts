@@ -1,5 +1,6 @@
 import clubsData from '@/data/clubs.json'
 import ligasData from '@/data/derived/ligas.json'
+import creditosEscudos from '@/public/logos/carrera/CREDITOS.json'
 import { CONTINENTAL_CLUBS } from './copa-libertadores'
 import { simularMundial, resumenMundial, type WorldCupRun } from './world-cup'
 
@@ -128,6 +129,17 @@ export const EURO_CLUBS: CareerClub[] = [
  * Traen su liga y su división a cuestas porque el modo carrera las necesita: sin división no hay
  * ascenso, y sin ascenso arrancar en la B no significa nada.
  */
+/**
+ * Los clubes que tienen escudo REAL.
+ *
+ * Se bajan de Wikimedia Commons y solo los que la propia API declara con licencia libre
+ * (dominio público, CC0 o CC BY-SA): `node scripts/data/fetch-crests-commons.mjs`. Los créditos
+ * de cada uno quedan en public/logos/carrera/CREDITOS.json.
+ *
+ * Los que no tienen quedan con el escudo generado, que lleva las franjas del club.
+ */
+const ESCUDOS_REALES = new Set(Object.keys(creditosEscudos))
+
 export const LIGA_CLUBS: CareerClub[] = (ligasData.clubes as any[])
   // Los que ya están en clubs.json con escudo real y plantel ganan: no se duplican.
   .filter((c) => !ARG_CLUBS.some((a) => a.id === c.id) && !SUDAM_CLUBS.some((s) => s.id === c.id))
@@ -144,7 +156,10 @@ export const LIGA_CLUBS: CareerClub[] = (ligasData.clubes as any[])
     division: c.division,
     pais: c.pais,
     ciudad: c.ciudad,
-    escudo: `/logos/ligas/${c.id}.svg`,
+    // El escudo real si lo tenemos (bajado de Wikimedia Commons con licencia libre) y el
+    // generado si no. La lista de cuáles hay se arma en el build, así que no hay que
+    // sincronizar nada a mano.
+    escudo: ESCUDOS_REALES.has(c.id) ? `/logos/carrera/${c.id}.png` : `/logos/ligas/${c.id}.svg`,
   }))
 
 export const LIGAS = ligasData.ligas as Liga[]
@@ -1410,12 +1425,36 @@ export function topeTraspaso(club: CareerClub): number {
  * todo lo demás, escalados desde su propia fuerza para que Real Madrid no valga lo mismo que
  * Borussia Dortmund.
  */
+const NIVEL_CLUB_CACHE = new Map<string, number>()
+
 function nivelDelClub(c: CareerClub): number {
   if (c.region === 'euro') return 100 + (c.strength - 82) * 2
   if (c.ligaId) return nivelDeLiga(c.ligaId)
-  // Los sudamericanos escritos a mano (copa-libertadores.ts) no tienen liga: se ubican con su
-  // fuerza en la misma escala que las primeras divisiones.
-  return clamp((c.strength - 50) * 3, 5, 100)
+
+  const guardado = NIVEL_CLUB_CACHE.get(c.id)
+  if (guardado !== undefined) return guardado
+
+  // Los rivales continentales escritos a mano (copa-libertadores.ts) no tienen liga. Muchos SON
+  // el mismo club que ya está en una: Flamengo, Palmeiras y Peñarol están en las dos listas con
+  // ids distintos. Sin esto se les calculaba el nivel con su fuerza y daban 96-100 —más que
+  // cualquier liga—, así que desde la Primera B Metropolitana llegaban ofertas de "Bolívar" y
+  // "Caracas" en el primer pase.
+  const mismo = LIGA_CLUBS.find(
+    (x) => x.ligaId && normalizarNombre(x.nombreLargo ?? x.name) === normalizarNombre(c.name),
+  )
+  const n = mismo?.ligaId ? nivelDeLiga(mismo.ligaId) : clamp((c.strength - 50) * 3, 5, 100)
+  NIVEL_CLUB_CACHE.set(c.id, n)
+  return n
+}
+
+/** Para emparejar el mismo club escrito de dos formas ("Peñarol" y "Club Atlético Peñarol"). */
+function normalizarNombre(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\b(club|atletico|futbol|de|do|dos|da|regatas|sport|sociedade|esportiva|clube|fc|sc|ac)\b/g, '')
+    .replace(/[^a-z]/g, '')
 }
 
 function generateOffers(state: CareerState, performance: number, rng: () => number, decisionOptionId?: string): TransferOffer[] {
@@ -1454,11 +1493,15 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
   // Cada punto de OVR por encima del club habilita más salto. Un jugador parejo con su equipo
   // sube un escalón; uno que le saca 10 puntos puede pegar el salto largo.
   const brecha = ovr - current.strength
-  // El tope importa tanto como la fórmula: con 70 de techo, un OVR 68 en la B Metropolitana
-  // (nivel 12) recibía oferta de Colo-Colo (nivel 81) en el primer pase, que es exactamente el
-  // salto que no puede pasar. Con 42, ese mismo jugador llega hasta la Primera Nacional o la
-  // Segunda uruguaya, y de ahí sigue subiendo si le va bien.
-  const saltoMaximo = clamp(12 + brecha * 1.5 + (performance - 0.5) * 14, 8, 42)
+  // El tope importa tanto como la fórmula. Con 70, un OVR 68 en la B Metropolitana (nivel 12)
+  // recibía oferta de Colo-Colo (nivel 81) en el primer pase. Pero bajarlo a 42 creó el
+  // problema opuesto y peor: un OVR 78 en el Torneo Federal A tenía techo de nivel 50, y los 64
+  // clubes que podían ficharlo por su nivel estaban de 66 para arriba. Cero ofertas en 120
+  // temporadas simuladas — la escalera convertida en jaula.
+  //
+  // La brecha manda: un jugador parejo con su club sube un escalón, uno que le saca 25 puntos
+  // se saltea etapas porque en su categoría ya no hay nadie que lo pueda comprar.
+  const saltoMaximo = clamp(12 + brecha * 1.9 + (performance - 0.5) * 14, 8, 66)
 
   const candidates = ALL_CLUBS.filter((c) => {
     if (c.id === state.clubId) return false

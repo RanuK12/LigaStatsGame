@@ -1,3 +1,8 @@
+// OBSOLETO desde el 2026-08-04: los dos logos que generaba eran placeholders idénticos con
+// una "L" y una "S" adentro, y no distinguían una copa de la otra. Los reemplazan los
+// trofeos de scripts/data/generate-trophy-svgs.mjs, que tienen la forma y el metal de cada
+// una. Se deja el archivo porque nada lo llama y borrarlo no aporta.
+//
 // Logos de las dos copas continentales para el home.
 //
 // Los trofeos reales son marcas de la Conmebol y no son nuestros para redistribuir, así que se
