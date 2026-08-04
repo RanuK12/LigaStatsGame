@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import type { Player, FormationConfig } from "@/lib/types"
 import type { ChemistryBreakdown } from "@/lib/chemistry"
 import { POS_LABELS } from "@/lib/game-engine"
-import { getPC } from "@/lib/ui-constants"
+import { getPC, getNationalityFlag } from "@/lib/ui-constants"
 
 /**
  * Campo táctico interactivo: líneas de pase entre jugadores conectados por
@@ -66,13 +66,16 @@ export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemis
                 animate={reducedMotion ? undefined : { y: [0, -1.5, 0] }}
                 transition={{ repeat: Infinity, duration: 3, delay: i * 0.18, ease: "easeInOut" }}>
                 <motion.div
-                  className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 shadow-lg ${strongChem ? "ring-2 ring-[#74ACDF]/50" : ""}`}
+                  className={`relative w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 shadow-lg ${strongChem ? "ring-2 ring-[#74ACDF]/50" : ""}`}
                     style={{ backgroundColor: getPC(pos.pos), borderColor: isActive ? "#D4AF37" : "rgba(255,255,255,0.28)" }}
                   animate={isActive && !reducedMotion
                       ? { scale: [1, 1.07, 1], boxShadow: ["0 0 0px rgba(212,175,55,0)", "0 0 18px rgba(212,175,55,0.72)", "0 0 0px rgba(212,175,55,0)"] }
                     : { scale: 1 }}
                   transition={{ repeat: isActive ? Infinity : 0, duration: 1.6 }}>
                   {pl.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()}
+                  <span className="absolute -bottom-1 -right-1 text-[11px] leading-none drop-shadow-md font-normal">
+                    {getNationalityFlag(pl.nationality)}
+                  </span>
                 </motion.div>
                 <div className="text-[11px] text-white font-semibold mt-0.5 bg-black/40 px-1 rounded max-w-[70px] truncate text-center">
                   {pl.name.split(" ").pop()}

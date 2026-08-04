@@ -2,7 +2,7 @@
 
 import type { Player, Squad } from "@/lib/types"
 import { POS_LABELS } from "@/lib/game-engine"
-import { getPC } from "@/lib/ui-constants"
+import { getPC, getNationalityFlag } from "@/lib/ui-constants"
 
 type EnrichedPlayer = Player & { isCompatible: boolean }
 
@@ -18,6 +18,7 @@ export default function PlayerTradingCard({ player, onSelect, showRating, curren
   player: EnrichedPlayer; onSelect: () => void; showRating: boolean; currentSquad?: Squad | null
 }) {
   const ratingColor = player.legendary ? "text-[#FFD700]" : (player.rating || 0) >= 80 ? "text-[#75AADB]" : "text-slate-300"
+  const flag = getNationalityFlag(player.nationality)
   
   // Buscar el club que coincide con el plantel sorteado actual, o usar el primero de la carrera
   const matchedClub = currentSquad && player.clubs
@@ -41,27 +42,29 @@ export default function PlayerTradingCard({ player, onSelect, showRating, curren
           </span>
         </div>
       )}
-      {/* Escudo de iniciales */}
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white shadow-inner"
+      {/* Escudo de iniciales con insignia de bandera */}
+      <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white shadow-inner"
         style={{ backgroundColor: getPC(player.position) }}>
         {player.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase()}
+        <span className="absolute -bottom-1 -right-1 text-[11px] leading-none drop-shadow-md">{flag}</span>
       </div>
       <div className="min-w-0 flex-1">
-        <div className="truncate text-sm font-semibold text-white">
-          {player.name}
-          {player.legendary && <span className="ml-1 text-[10px]">⭐</span>}
+        <div className="flex items-center gap-1 truncate text-sm font-semibold text-white">
+          <span className="truncate">{player.name}</span>
+          <span className="text-[13px] shrink-0" title={player.nationality}>{flag}</span>
+          {player.legendary && <span className="text-[10px] shrink-0">⭐</span>}
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 mt-0.5">
           <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${
             player.isCompatible ? "bg-[#75AADB]/20 text-[#75AADB]" : "bg-slate-800 text-slate-500"
           }`}>
             {POS_LABELS[player.position] || player.position}
           </span>
-          <span className="text-[10px] text-slate-500 font-sport font-semibold">{player.goalsClub} G · {player.capsClub} PJ</span>
+          <span className="text-[10px] text-slate-400 font-sport font-semibold truncate">{player.nationality || "Argentina"} · {player.goalsClub}G</span>
         </div>
         {displayClub && (
           <div className="mt-0.5 truncate text-[11px] text-[#75AADB]">
-            {displayClub.name}{displayClub.years ? ` · ${displayClub.years}` : ""}
+            🛡️ {displayClub.name}{displayClub.years ? ` · ${displayClub.years}` : ""}
           </div>
         )}
       </div>

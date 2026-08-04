@@ -13,3 +13,33 @@ export const POS_GROUPS: { label: string; positions: string[]; icon: string }[] 
   { label: "Mediocampo", positions: ["CDM", "CM", "CAM", "LM", "RM"], icon: "" },
   { label: "Ataque", positions: ["LW", "RW", "ST", "CF"], icon: "" },
 ]
+
+export function getNationalityFlag(nationality?: string): string {
+  if (!nationality) return "🇦🇷"
+  const map: Record<string, string> = {
+    'Argentina': '🇦🇷',
+    'Brasil': '🇧🇷',
+    'Uruguay': '🇺🇾',
+    'Chile': '🇨🇱',
+    'Colombia': '🇨🇴',
+    'Paraguay': '🇵🇾',
+    'Perú': '🇵🇪',
+    'México': '🇲🇽',
+    'España': '🇪🇸',
+    'Francia': '🇫🇷',
+    'Italia': '🇮🇹',
+    'Alemania': '🇩🇪',
+    'Portugal': '🇵🇹',
+    'Países Bajos': '🇳🇱',
+    'Holanda': '🇳🇱',
+    'Inglaterra': '🏴',
+    'Reino Unido': '🇬🇧',
+    'Ecuador': '🇪🇨',
+    'Venezuela': '🇻🇪',
+    'Bolivia': '🇧🇴',
+    'EEUU': '🇺🇸',
+    'Estados Unidos': '🇺🇸',
+    'Arabia Saudita': '🇸🇦',
+  }
+  return map[nationality] || "🇦🇷"
+}
