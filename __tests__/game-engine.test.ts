@@ -362,16 +362,27 @@ describe('getSquadTier()', () => {
   const mk = (rating: number, legendary = false) =>
     Array.from({ length: 11 }, (_, i) => makePlayer({ id: `p${i + 1}`, rating, legendary }))
 
-  it('avg >= 64 es legendario', () => {
-    expect(getSquadTier(squad, mk(66)).tier).toBe('legendario')
+  /**
+   * Los umbrales subieron de 64/58 a 77/74 el 2026-08-04.
+   *
+   * No es un ajuste de gusto: los OVR se recalcularon con datos reales de FIFA y los planteles
+   * pasaron a ir de 70 a 79. Con los umbrales viejos el 100 % de los 206 planteles era
+   * "legendario" y la ruleta festejaba en cada giro. Ver draft-integridad.test.ts, que mide la
+   * distribución sobre los datos de verdad para que esto no vuelva a pasar en silencio.
+   */
+  it('avg >= 77 es legendario', () => {
+    expect(getSquadTier(squad, mk(78)).tier).toBe('legendario')
   })
   it('3+ legendarios es legendario aunque el avg sea bajo', () => {
     const players = mk(50)
     players[0].legendary = true; players[1].legendary = true; players[2].legendary = true
     expect(getSquadTier(squad, players).tier).toBe('legendario')
   })
-  it('avg >= 58 es elite', () => {
-    expect(getSquadTier(squad, mk(60)).tier).toBe('elite')
+  it('avg >= 74 es elite', () => {
+    expect(getSquadTier(squad, mk(75)).tier).toBe('elite')
+  })
+  it('un plantel del montón es común', () => {
+    expect(getSquadTier(squad, mk(72)).tier).toBe('comun')
   })
   it('avg bajo es comun y reporta el promedio', () => {
     const t = getSquadTier(squad, mk(50))
