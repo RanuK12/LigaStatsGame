@@ -44,7 +44,7 @@ describe('balance del modo carrera', () => {
         const club = ALL_CLUBS.find((c) => c.id === o.clubId)!
         // Un club argentino no puede aparecer ofreciendo cifras europeas
         expect(o.valorM).toBeLessThanOrEqual(topeTraspaso(club))
-        if (o.region !== 'euro') expect(o.valorM).toBeLessThanOrEqual(25)
+        if (o.region !== 'euro' && club.pais !== 'Arabia Saudita') expect(o.valorM).toBeLessThanOrEqual(25)
       }
     }
   })

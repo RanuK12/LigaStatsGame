@@ -1643,7 +1643,7 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
           strength: saudiClub.strength,
           region: saudiClub.region,
           flag: saudiClub.flag,
-          valueM: Math.round(value * (2.5 + rng() * 2.0)),
+          valueM: Math.min(Math.round(value * (2.5 + rng() * 2.0)), topeTraspaso(saudiClub)),
         })
       }
     }

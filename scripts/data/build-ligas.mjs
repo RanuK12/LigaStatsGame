@@ -488,13 +488,15 @@ for (const grupo of porLigaYCorto.values()) {
   }
 }
 
-const paises = [...new Set(ligas.map((l) => l.pais))].map((p) => ({
-  nombre: p,
-  bandera: ligas.find((l) => l.pais === p).bandera,
-  iso: ligas.find((l) => l.pais === p).iso,
-  ...PAISES[p],
-  ligaIds: ligas.filter((l) => l.pais === p).sort((a, b) => a.division - b.division).map((l) => l.id),
-}))
+const paises = [...new Set(ligas.map((l) => l.pais))]
+  .filter((p) => PAISES[p])
+  .map((p) => ({
+    nombre: p,
+    bandera: ligas.find((l) => l.pais === p).bandera,
+    iso: ligas.find((l) => l.pais === p).iso,
+    ...PAISES[p],
+    ligaIds: ligas.filter((l) => l.pais === p).sort((a, b) => a.division - b.division).map((l) => l.id),
+  }))
 
 fs.mkdirSync(path.dirname(SALIDA), { recursive: true })
 fs.writeFileSync(
