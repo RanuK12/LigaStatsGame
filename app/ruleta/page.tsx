@@ -50,7 +50,14 @@ const LEGEND_BIOGRAPHIES: Record<string, string> = {
   "pablo-aimar-1979": "'El Payaso'. Enganche de gambeta exquisita y clase infinita, ídolo de River y del Valencia. Fue el ídolo confeso de la infancia de Lionel Messi, que lo señaló siempre como su jugador favorito.",
   "esteban-cambiasso-1980": "'El Cuchu'. Volante central inteligente y ganador serial. Motor del Inter del Triplete 2010 y pieza clave del Real Madrid de los Galácticos. Recuperación, orden y llegada al gol desde el mediocampo.",
   "paulo-dybala-1993": "'La Joya'. Talento de zurda mágica y definición de otro planeta. Brilló en la Juventus y fue héroe entrando en la final del Mundial de Qatar 2022, convirtiendo su penal en la histórica consagración argentina.",
-  "mauro-icardi-1993": "Killer de área puro. Capitán y goleador histórico del Inter, donde ganó dos veces el título de máximo artillero de la Serie A. Delantero de instinto letal y una eficacia demoledora dentro del área rival."
+  "mauro-icardi-1993": "Killer de área puro. Capitán y goleador histórico del Inter, donde ganó dos veces el título de máximo artillero de la Serie A. Delantero de instinto letal y una eficacia demoledora dentro del área rival.",
+  "pele-santos-1962": "🇧🇷 Pelé ('O Rei'). El rey del fútbol mundial y único jugador en conquistar 3 Copas del Mundo (1958, 1962, 1970). Lideró al Santos al Bicampeonato Mundial de la Libertadores e Intercontinental en 1962 y 1963 con 767 goles oficiales.",
+  "zico-flamengo-1981": "🇧🇷 Zico ('El Pelé Blanco'). Máximo ídolo del Flamengo y maestro supremo del tiro libre. Lideró al Mengão a conquistar la Copa Libertadores e Intercontinental de 1981 goleando 3-0 al Liverpool de Inglaterra en Tokio.",
+  "alberto-spencer": "🇪🇨 Alberto Spencer ('Cabeza Mágica'). Leyenda ecuatoriana e ídolo de Peñarol. Máximo goleador histórico de la Copa Libertadores con 54 goles y tricampeón de América e Intercontinental.",
+  "ivan-zamorano": "🇨🇱 Iván Zamorano ('Bam Bam'). Leyenda indiscutida de la Selección de Chile y goleador del Real Madrid e Inter. Formó la dupla histórica 'Za-Sa' junto a Marcelo Salas clasificando a Chile al Mundial '98.",
+  "radamel-falcao": "🇨🇴 Radamel Falcao García ('El Tigre'). Delantero colombiano implacable. Récord histórico de 17 goles en una sola edición de la UEFA Europa League con Porto en 2011 y multicampeón con Atlético de Madrid y River Plate.",
+  "hugo-sanchez": "🇲🇽 Hugo Sánchez ('Pentapichi'). El máximo exponente del fútbol mexicano en la historia. Conquistó 5 Trofeos Pichichi en España (4 consecutivos con el Real Madrid) y anotó 516 goles oficiales con sus chilenas espectaculares.",
+  "jose-luis-chilavert": "🇵🇾 José Luis Chilavert ('Bulldog'). El arquero leyenda de la Selección de Paraguay y Vélez Sarsfield. Nombrado 3 veces mejor arquero del mundo por IFFHS, único en anotar un hat-trick y autor de 70 goles profesionales."
 }
 
 // Los dos íconos máximos: reveal aún más especial.

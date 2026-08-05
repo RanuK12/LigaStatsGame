@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Player, Club } from '@/lib/types'
+import { getNationalityFlag } from '@/lib/ui-constants'
 
 const posColors: Record<string, string> = {
   GK: '#f59e0b', CB: '#3b82f6', LB: '#06b6d4', RB: '#06b6d4', CM: '#10b981',
@@ -148,7 +149,12 @@ export default function LegendCardReveal({ player, club, isIcon, biography, onCl
                 {/* Nombre */}
                 <div className="mt-3 border-t border-white/10 pt-3 text-center">
                   <div className="font-black uppercase tracking-wide text-white" style={{ fontSize: lastName.length > 9 ? 20 : 26, lineHeight: 1 }}>{lastName}</div>
-                  <div className="mt-0.5 text-[11px] text-slate-400">{player.name} • {player.decade}</div>
+                  <div className="mt-0.5 text-[11px] text-slate-400 flex items-center justify-center gap-1.5 font-sport">
+                    <span>{getNationalityFlag(player.nationality)}</span>
+                    <span>{player.name}</span>
+                    <span>•</span>
+                    <span>{player.decade}</span>
+                  </div>
                 </div>
 
                 {/* Stats */}

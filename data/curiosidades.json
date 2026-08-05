@@ -13,7 +13,7 @@
       "https://en.wikipedia.org/wiki/1994_Intercontinental_Cup"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "chilavert-goles",
@@ -28,7 +28,7 @@
       "https://en.wikipedia.org/wiki/Jos%C3%A9_Luis_Chilavert"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "boca-2000-real-madrid",
@@ -44,7 +44,7 @@
       "https://en.wikipedia.org/wiki/2000_Intercontinental_Cup"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "river-2018-madrid",
@@ -61,7 +61,7 @@
       "https://en.wikipedia.org/wiki/2018_Copa_Libertadores"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "independiente-rey-de-copas",
@@ -76,7 +76,7 @@
       "https://en.wikipedia.org/wiki/Club_Atl%C3%A9tico_Independiente"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "estudiantes-1968-1970",
@@ -91,7 +91,7 @@
       "https://en.wikipedia.org/wiki/Estudiantes_de_La_Plata"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "san-lorenzo-2014",
@@ -107,7 +107,7 @@
       "https://en.wikipedia.org/wiki/2014_Copa_Libertadores"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "argentinos-1985",
@@ -122,7 +122,7 @@
       "https://en.wikipedia.org/wiki/Argentinos_Juniors"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "racing-1967",
@@ -137,7 +137,7 @@
       "https://en.wikipedia.org/wiki/Racing_Club_de_Avellaneda"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "superclasico",
@@ -153,7 +153,7 @@
       "https://en.wikipedia.org/wiki/Superclásico"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "primera-division-1891",
@@ -168,7 +168,7 @@
       "https://en.wikipedia.org/wiki/Argentine_Primera_Divisi%C3%B3n"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "gambeta-palabra",
@@ -182,7 +182,7 @@
       "https://es.wiktionary.org/wiki/gambeta"
     ],
     "verificado": true,
-    "verificadoEl": "2026-07-31"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "milan-sacchi-invicto",
@@ -198,7 +198,7 @@
       "https://en.wikipedia.org/wiki/AC_Milan"
     ],
     "verificado": true,
-    "verificadoEl": "2026-08-04"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "brasil-1970-jairzinho",
@@ -214,7 +214,7 @@
       "https://en.wikipedia.org/wiki/Jairzinho"
     ],
     "verificado": true,
-    "verificadoEl": "2026-08-04"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "ajax-1995-invicto",
@@ -230,7 +230,7 @@
       "https://en.wikipedia.org/wiki/AFC_Ajax"
     ],
     "verificado": true,
-    "verificadoEl": "2026-08-04"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "barcelona-2009-sextete",
@@ -246,7 +246,7 @@
       "https://en.wikipedia.org/wiki/FC_Barcelona"
     ],
     "verificado": true,
-    "verificadoEl": "2026-08-04"
+    "verificadoEl": "2026-08-05"
   },
   {
     "id": "real-madrid-zidane-2002",
@@ -262,6 +262,246 @@
       "https://en.wikipedia.org/wiki/Real_Madrid_CF"
     ],
     "verificado": true,
-    "verificadoEl": "2026-08-04"
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "pele-santos-goles",
+    "rareza": "leyenda",
+    "texto": "🇧🇷 Pelé convirtió 767 goles oficiales en 831 partidos en su carrera y es el único futbolista de la historia en ganar 3 Copas del Mundo (1958, 1962, 1970).",
+    "clave": [
+      "Pelé",
+      "Brasil",
+      "Santos"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Pel%C3%A9",
+      "https://en.wikipedia.org/wiki/Pel%C3%A9"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "alberto-spencer-libertadores",
+    "rareza": "leyenda",
+    "texto": "🇪🇨 Alberto Spencer es el máximo goleador histórico de la Copa Libertadores con 54 goles (48 en Peñarol 🇺🇾 y 6 en Barcelona de Guayaquil 🇪🇨).",
+    "clave": [
+      "Alberto Spencer",
+      "Ecuador",
+      "Peñarol"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Alberto_Spencer",
+      "https://en.wikipedia.org/wiki/Alberto_Spencer"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "zico-flamengo-1981",
+    "rareza": "leyenda",
+    "texto": "🇧🇷 El Flamengo de Zico bailó 3-0 al Liverpool de Bob Paisley en la Copa Intercontinental de 1981 en Tokio, con dos goles de Nunes y uno de Adílio.",
+    "clave": [
+      "Flamengo",
+      "Zico",
+      "Intercontinental"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Intercontinental_1981",
+      "https://en.wikipedia.org/wiki/1981_Intercontinental_Cup"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "sao-paulo-tele-santana",
+    "rareza": "leyenda",
+    "texto": "🇧🇷 El São Paulo de Telê Santana fue Bicampeón del Mundo consecutivo: venció 2-1 al Barcelona de Cruyff en 1992 y 3-2 al AC Milan de Capello en 1993.",
+    "clave": [
+      "São Paulo",
+      "Intercontinental",
+      "Telê Santana"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Intercontinental_1992",
+      "https://es.wikipedia.org/wiki/Copa_Intercontinental_1993"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "penarol-primer-campeon",
+    "rareza": "leyenda",
+    "texto": "🇺🇾 Peñarol de Montevideo conquistó la primera Copa Libertadores de la historia en 1960 derrotando a Olimpia de Paraguay en la final.",
+    "clave": [
+      "Peñarol",
+      "Libertadores",
+      "1960"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_de_Campeones_de_Am%C3%A9rica_1960",
+      "https://en.wikipedia.org/wiki/1960_Copa_Libertadores"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "colo-colo-1991",
+    "rareza": "leyenda",
+    "texto": "🇨🇱 El Colo-Colo de 1991, dirigido por el croata Mirko Jozić, es el único club chileno en consagrarse Campeón de América tras vencer 3-0 a Olimpia.",
+    "clave": [
+      "Colo-Colo",
+      "Chile",
+      "Libertadores"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Libertadores_1991",
+      "https://en.wikipedia.org/wiki/1991_Copa_Libertadores"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "atletico-nacional-1989",
+    "rareza": "leyenda",
+    "texto": "🇨🇴 Atlético Nacional de Medellín fue el primer club colombiano campeón de Libertadores en 1989, con René Higuita atajando 4 penales en la definición.",
+    "clave": [
+      "Atlético Nacional",
+      "Colombia",
+      "Higuita"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Atl%C3%A9tico_Nacional",
+      "https://es.wikipedia.org/wiki/Ren%C3%A9_Higuita"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "cruz-azul-2001-bombonera",
+    "rareza": "insolito",
+    "texto": "🇲🇽 Cruz Azul fue el primer club mexicano en disputar la final de Copa Libertadores en 2001, ganándole 1-0 a Boca Juniors en La Bombonera.",
+    "clave": [
+      "Cruz Azul",
+      "México",
+      "Boca"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Libertadores_2001",
+      "https://en.wikipedia.org/wiki/2001_Copa_Libertadores"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "hugo-sanchez-pichichi",
+    "rareza": "leyenda",
+    "texto": "🇲🇽 Hugo Sánchez conquistó 5 Trofeos Pichichi en España (4 consecutivos con el Real Madrid) y convirtió 516 goles oficiales en su carrera.",
+    "clave": [
+      "Hugo Sánchez",
+      "México",
+      "Real Madrid"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Hugo_S%C3%A1nchez",
+      "https://en.wikipedia.org/wiki/Hugo_S%C3%A1nchez"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "olimpia-campeon-mundo",
+    "rareza": "leyenda",
+    "texto": "🇵🇾 Olimpia de Asunción es el único club paraguayo Campeón del Mundo (1979 vs Malmö) y ostenta 3 Copas Libertadores en sus vitrinas.",
+    "clave": [
+      "Olimpia",
+      "Paraguay",
+      "Intercontinental"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Club_Olimpia",
+      "https://en.wikipedia.org/wiki/Club_Olimpia"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "liga-de-quito-2008",
+    "rareza": "leyenda",
+    "texto": "🇪🇨 Liga de Quito se convirtió en 2008 en el único club ecuatoriano Campeón de América, con José Francisco Cevallos atajando 3 penales en el Maracaná.",
+    "clave": [
+      "Liga de Quito",
+      "Ecuador",
+      "Libertadores"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Copa_Libertadores_2008",
+      "https://en.wikipedia.org/wiki/2008_Copa_Libertadores"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "teofilo-cubillas-peru",
+    "rareza": "leyenda",
+    "texto": "🇵🇪 Teófilo Cubillas anotó 10 goles en Copas del Mundo con Perú (5 en México 1970 y 5 en Argentina 1978) siendo una de las mayores leyendas de CONMEBOL.",
+    "clave": [
+      "Teófilo Cubillas",
+      "Perú",
+      "Mundial"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Te%C3%B3filo_Cubillas",
+      "https://en.wikipedia.org/wiki/Te%C3%B3filo_Cubillas"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "dupla-za-sa-chile",
+    "rareza": "insolito",
+    "texto": "🇨🇱 Iván Zamorano y Marcelo Salas formaron la mítica dupla \"Za-Sa\" que anotó 34 goles en Eliminatorias y llevó a Chile al Mundial de Francia 1998.",
+    "clave": [
+      "Zamorano",
+      "Salas",
+      "Chile"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Iv%C3%A1n_Zamorano",
+      "https://es.wikipedia.org/wiki/Marcelo_Salas"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "falcao-europa-league",
+    "rareza": "leyenda",
+    "texto": "🇨🇴 Radamel Falcao García ostenta el récord histórico de goles en una sola edición de la UEFA Europa League: 17 goles en 14 partidos con el Porto en 2011.",
+    "clave": [
+      "Radamel Falcao",
+      "Colombia",
+      "Porto"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Radamel_Falcao",
+      "https://en.wikipedia.org/wiki/Radamel_Falcao"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
+  },
+  {
+    "id": "roque-santa-cruz",
+    "rareza": "insolito",
+    "texto": "🇵🇾 Roque Santa Cruz es el máximo goleador histórico de la Selección de Paraguay con 32 goles oficiales y disputó 3 Copas del Mundo.",
+    "clave": [
+      "Roque Santa Cruz",
+      "Paraguay",
+      "Selección"
+    ],
+    "fuentes": [
+      "https://es.wikipedia.org/wiki/Roque_Santa_Cruz",
+      "https://en.wikipedia.org/wiki/Roque_Santa_Cruz"
+    ],
+    "verificado": true,
+    "verificadoEl": "2026-08-05"
   }
 ]
