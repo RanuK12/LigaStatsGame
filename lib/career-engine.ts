@@ -237,13 +237,28 @@ function mediaDeLiga(ligaId: string): number {
   return mediaTop * 0.66 + mediaTodos * 0.34
 }
 
+const NIVELES_FIELES: Record<string, number> = {
+  'br-1': 92, // Brasileirão Série A: La única liga Élite Latam por poderío económico y dominio continental
+  'mx-1': 81, // Liga MX: Nivel 81 Alta (ligeramente superior en presupuesto a la LPF, pero por debajo de Brasil)
+  'ar-1': 79, // LPF Argentina: Nivel 79 Alta
+  'co-1': 74, // Categoría Primera A Colombia
+  'ur-1': 72, // Primera División Uruguay
+  'cl-1': 71, // Primera División Chile
+  'ec-1': 71, // Serie A Ecuador
+  'py-1': 70, // Primera División Paraguay
+  'pe-1': 68, // Liga 1 Perú
+  'br-2': 55, // Série B Brasil
+  'ar-2': 45, // Primera Nacional Argentina
+  'mx-2': 42, // Liga de Expansión MX
+  'ar-3m': 28, // Primera B Metropolitana
+  'ar-3f': 25, // Torneo Federal A
+}
+
 const NIVEL_CACHE = new Map<string, number>()
 export function nivelDeLiga(ligaId: string): number {
+  if (NIVELES_FIELES[ligaId] !== undefined) return NIVELES_FIELES[ligaId]
   const guardado = NIVEL_CACHE.get(ligaId)
   if (guardado !== undefined) return guardado
-  // La escala se estira contra el rango REAL de las ligas cargadas, no contra números escritos
-  // a mano: con un piso y un techo fijos todo quedaba apretado entre 5 y 59, y la Primera
-  // argentina —que es de las mejores del continente— aparecía como "Media".
   const medias = LIGAS.map((l) => mediaDeLiga(l.id)).filter((m) => m > 0)
   const piso = Math.min(...medias)
   const techo = Math.max(...medias)
@@ -256,8 +271,8 @@ export function nivelDeLiga(ligaId: string): number {
 
 /** Cómo se llama ese nivel, para no mostrar solo un número. */
 export function etiquetaDeNivel(nivel: number): string {
-  if (nivel >= 85) return 'Elite'
-  if (nivel >= 65) return 'Alta'
+  if (nivel >= 90) return 'Élite Latam'
+  if (nivel >= 75) return 'Alta'
   if (nivel >= 45) return 'Media'
   if (nivel >= 25) return 'Baja'
   return 'Amateur'
@@ -423,15 +438,27 @@ export const BARRABRAVAS_DECISION: CareerDecision = {
   ],
 }
 
-// Interés de la cantera al arrancar: a mayor OVR inicial, más y mejores clubes te buscan (preferencia de su país).
+// Interés de la cantera al arrancar: medido 100% al OVR del jugador y al país elegido.
+// A mayor OVR inicial, mejor es la fuerza y prestigio del club que te busca desde las inferiores.
 export function academyInterest(ovr: number, seed: number, nationality?: string): CareerClub[] {
   const rng = makeRng(seed >>> 0 || 1)
-  const n = ovr >= 74 ? 4 : ovr >= 68 ? 3 : 2
+  const count = ovr >= 72 ? 4 : ovr >= 64 ? 3 : 2
+  const targetStrength = Math.max(45, Math.min(88, ovr + 8))
+
   const pool = nationality
     ? ALL_CLUBS.filter((c) => c.pais === nationality)
     : []
   const usablePool = pool.length >= 2 ? pool : ALL_CLUBS.filter((c) => c.region === "arg")
-  return [...usablePool].sort(() => rng() - 0.5).slice(0, n)
+
+  // Se puntúa cada club según la cercanía de su fuerza al targetStrength del jugador + un leve jitter aleatorio
+  const scored = usablePool.map((c) => {
+    const diff = Math.abs(c.strength - targetStrength)
+    const jitter = (rng() - 0.5) * 7
+    return { club: c, score: diff + jitter }
+  })
+
+  scored.sort((a, b) => a.score - b.score)
+  return scored.slice(0, count).map((s) => s.club)
 }
 
 // Carreras de leyenda (modo debug). Valores de arranque aproximados, no oficiales.

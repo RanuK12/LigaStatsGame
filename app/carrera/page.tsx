@@ -188,8 +188,10 @@ function CareerSetupWizard() {
     setMode("create")
   }
 
-  // Interés de la cantera al arrancar (mismo seed => estable durante la creación).
-  const academySeed = (name.length * 31 + ovr * 7 + 13) >>> 0
+  const [rotarCantera, setRotarCantera] = useState(0)
+
+  // Interés de la cantera al arrancar: dinámico según OVR, país de origen y rotación.
+  const academySeed = (name.length * 31 + ovr * 13 + (nationality ? nationality.length * 17 : 0) + rotarCantera * 101 + 13) >>> 0
   const academyClubs = academyInterest(ovr, academySeed, nationality)
 
   return (
@@ -216,10 +218,7 @@ function CareerSetupWizard() {
           </button>
         </div>
 
-        {/* Modo debug: cargar carrera de leyenda (valores aproximados).
-            Solo en desarrollo. Estaba saliendo EN PRODUCCIÓN, con la palabra "Debug:" y todo,
-            arriba del creador de jugador: lo vi en una captura que iba a salir a promocionar
-            el juego. */}
+        {/* Modo debug: cargar carrera de leyenda (valores aproximados). */}
         {process.env.NODE_ENV === "development" && (
           <div className="flex items-center gap-2 font-sport text-[10px]">
             <span className="uppercase tracking-wider text-slate-500">Debug:</span>
@@ -345,19 +344,29 @@ function CareerSetupWizard() {
         </div>
 
         {/* Interés de la cantera: clubes que te quieren desde las inferiores. */}
-        <div className="rounded-2xl border border-[#74ACDF]/20 bg-[#74ACDF]/5 p-3">
-          <div className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider mb-2">
-            👀 {academyClubs.length} clubes te siguen desde la cantera
+        <div className="rounded-2xl border border-[#74ACDF]/20 bg-[#74ACDF]/5 p-3.5">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <div className="text-[11px] font-black text-[#74ACDF] font-sport uppercase tracking-wider flex items-center gap-1.5">
+              <span>👀 {academyClubs.length} clubes te buscan de la cantera de {nationality} (OVR {ovr})</span>
+            </div>
+            <button
+              onClick={() => setRotarCantera((c) => c + 1)}
+              className="px-2.5 py-1 bg-[#74ACDF]/20 hover:bg-[#74ACDF]/30 text-[#74ACDF] text-[10px] font-black uppercase tracking-wider font-sport rounded-lg border border-[#74ACDF]/40 transition-all flex items-center gap-1 shrink-0"
+            >
+              <span>🔄 Rotar Ofertas</span>
+            </button>
           </div>
+
           <div className="flex flex-wrap gap-2">
             {academyClubs.map((c) => (
               <button
                 key={c.id}
                 onClick={() => setClubId(c.id)}
-                className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-slate-950/60 px-2.5 py-1.5 text-[11px] font-bold text-slate-300 hover:text-white hover:border-[#74ACDF]/50 transition-all font-sport"
+                className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold font-sport transition-all ${clubId === c.id ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white shadow-md scale-105" : "border-white/10 bg-slate-950/70 text-slate-300 hover:text-white hover:border-[#74ACDF]/50"}`}
               >
-                <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-4 h-4 object-contain" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
-                {c.name}
+                <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-5 h-5 object-contain" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                <span>{c.name}</span>
+                <span className="text-[10px] text-amber-400 ml-1">nv.{c.strength}</span>
               </button>
             ))}
           </div>
@@ -410,6 +419,17 @@ function ClubPicker({ selected, onSelect, initialPais }: { selected: string; onS
 
   return (
     <div className="space-y-4">
+      {/* Botón flecha volver atrás intuitivo */}
+      {paso !== "pais" && (
+        <button
+          onClick={() => setPaso(paso === "club" ? "liga" : "pais")}
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-[#74ACDF]/40 bg-[#74ACDF]/10 hover:bg-[#74ACDF]/20 text-[#74ACDF] font-sport text-xs font-black uppercase tracking-wider transition-all transform hover:-translate-x-1"
+        >
+          <span className="text-sm">←</span>
+          <span>Volver a {paso === "club" ? "Categorías" : "Selección de Países"}</span>
+        </button>
+      )}
+
       {/* Las migas: se ve dónde se está y se puede volver sin perder lo elegido. */}
       <div className="flex flex-wrap items-center gap-1.5 font-sport text-[11px] font-bold uppercase tracking-wider">
         <button
