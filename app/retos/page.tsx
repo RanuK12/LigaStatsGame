@@ -63,57 +63,81 @@ export default function RetosPage() {
           </p>
         </header>
 
-        {/* BANNER REGISTRO EN SUPABASE */}
-        {!user && (
-          <div className="rounded-3xl border border-[#74ACDF]/30 bg-gradient-to-r from-[#0c1728] to-[#050a14] p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
-            <div className="space-y-1 text-center sm:text-left">
+        {/* BANNER / LOCK EN CASO DE NO ESTAR REGISTRADO */}
+        {!user?.isLoggedIn ? (
+          <div className="card-gradient rounded-3xl p-8 border border-[#74ACDF]/30 text-center space-y-5 shadow-2xl relative overflow-hidden">
+            <div className="pointer-events-none absolute -top-20 -left-20 h-48 w-48 rounded-full bg-[#74ACDF]/15 blur-3xl" />
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-[#74ACDF]/40 bg-[#74ACDF]/10 text-3xl shadow-inner">
+              🔒
+            </div>
+            <div className="space-y-2 max-w-lg mx-auto">
               <span className="text-[10px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">
-                🆔 CUENTA Y PROGRESO EN LA NUBE
+                ACCESO RESERVADO A JUGADORES REGISTRADOS
               </span>
-              <p className="text-xs text-slate-300 font-sans">
-                Registrate gratis para guardar tus retos completados, conservar tu ELO y firmar tu Ficha Certificado Oficial.
+              <h2 className="font-display text-2xl font-black uppercase text-white sm:text-3xl">
+                Iniciá Sesión para <span className="gradient-text">Platinar Gambeta</span>
+              </h2>
+              <p className="text-xs text-slate-300 font-sans leading-relaxed">
+                Para registrar tus retos completados, guardar tu progreso de platinado en la nube y desbloquear tu Certificado Oficial de Leyenda, necesitás ingresar con tu cuenta.
               </p>
             </div>
-            <button
-              onClick={openAuthModal}
-              className="btn-primary py-2.5 px-6 font-sport text-xs font-bold uppercase tracking-wider shrink-0"
-            >
-              CREAR CUENTA / INGRESAR
-            </button>
+            <div className="pt-2">
+              <button
+                onClick={openAuthModal}
+                className="btn-primary py-3.5 px-8 font-sport text-xs font-black uppercase tracking-wider shadow-xl"
+              >
+                🚀 INICIAR SESIÓN O CREAR CUENTA GRATIS
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* BARRA DE PROGRESO GLOBAL PARA JUGADORES REGISTRADOS */
+          <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-4 shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <span className="text-[10px] font-sport font-bold text-slate-400 uppercase tracking-wider">
+                  TU PROGRESO OFICIAL DE PLATINADO
+                </span>
+                <div className="font-display text-2xl font-black text-white">
+                  {completados.length} <span className="text-slate-500 text-lg">/ {total} RETOS</span>
+                </div>
+              </div>
+              {completados.length >= 51 ? (
+                <button
+                  onClick={() => {
+                    tocar("legendario")
+                    setShowCertificado(true)
+                  }}
+                  className="btn-gold px-5 py-2.5 font-sport text-xs font-black uppercase tracking-wider shadow-[0_0_25px_rgba(245,158,11,0.5)] animate-pulse rounded-2xl flex items-center gap-2 shrink-0"
+                >
+                  📜 VER CERTIFICADO DE LEYENDA ✨
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    tocar("ficha")
+                    setShowCertificado(true)
+                  }}
+                  className="bg-slate-900/90 border border-amber-500/40 text-amber-300 hover:border-amber-400 hover:text-white px-4 py-2.5 font-sport text-xs font-bold uppercase tracking-wider rounded-2xl flex items-center gap-2 transition-all shadow-md shrink-0"
+                >
+                  🔒 CERTIFICADO BLOQUEADO ({completados.length}/52)
+                </button>
+              )}
+            </div>
+
+            <div className="h-3 w-full bg-slate-950 rounded-full overflow-hidden border border-white/10 p-0.5">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-[#74ACDF] via-amber-400 to-emerald-400 transition-all duration-500"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+
+            <div className="flex items-center justify-between text-[11px] font-sport text-slate-400">
+              <span>Completado: <strong className="text-emerald-400">{pct}%</strong></span>
+              <span>Estatus: <strong className="text-amber-400">{pct === 100 ? "👑 LEYENDA PLATINADA" : "⚽ EN CAMINO"}</strong></span>
+            </div>
           </div>
         )}
-
-        {/* BARRA DE PROGRESO GLOBAL */}
-        <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-4 shadow-2xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <span className="text-[10px] font-sport font-bold text-slate-400 uppercase tracking-wider">
-                TU PROGRESO DE PLATINADO
-              </span>
-              <div className="font-display text-2xl font-black text-white">
-                {completados.length} <span className="text-slate-500 text-lg">/ {total} RETOS</span>
-              </div>
-            </div>
-            <button
-              onClick={() => setShowCertificado(true)}
-              className="btn-gold px-5 py-2.5 font-sport text-xs font-black uppercase tracking-wider shadow-lg"
-            >
-              📜 VER CERTIFICADO
-            </button>
-          </div>
-
-          <div className="h-3 w-full bg-slate-950 rounded-full overflow-hidden border border-white/10 p-0.5">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-[#74ACDF] via-amber-400 to-emerald-400 transition-all duration-500"
-              style={{ width: `${pct}%` }}
-            />
-          </div>
-
-          <div className="flex items-center justify-between text-[11px] font-sport text-slate-400">
-            <span>Completado: <strong className="text-emerald-400">{pct}%</strong></span>
-            <span>Estatus: <strong className="text-amber-400">{pct === 100 ? "👑 LEYENDA PLATINADA" : "⚽ EN CAMINO"}</strong></span>
-          </div>
-        </div>
 
         {/* TIER FILTERS */}
         <div className="flex flex-wrap justify-center gap-2 font-sport text-xs font-bold uppercase">
@@ -133,13 +157,13 @@ export default function RetosPage() {
         </div>
 
         {/* LISTA DE RETOS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ${!user?.isLoggedIn ? "opacity-60 pointer-events-none select-none filter blur-[0.5px]" : ""}`}>
           {filteredRetos.map((r) => {
-            const isDone = completados.includes(r.id)
+            const isDone = user?.isLoggedIn && completados.includes(r.id)
             return (
               <motion.div
                 key={r.id}
-                whileHover={{ y: -3 }}
+                whileHover={user?.isLoggedIn ? { y: -3 } : undefined}
                 className={`rounded-2xl border p-4 flex flex-col justify-between space-y-3 transition-all ${
                   isDone
                     ? "bg-slate-950/80 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.15)]"
@@ -148,7 +172,7 @@ export default function RetosPage() {
               >
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-2xl">{r.icon}</span>
-                  <span className={`text-[9px] font-sport font-black uppercase px-2 py-0.5 rounded-md border ${tierColors[r.tier]}`}>
+                  <span className={`text-[9px] font-sport font-black uppercase px-2 py-0.5 rounded-md border ${tierColors[r.tier as keyof typeof tierColors]}`}>
                     {r.tier}
                   </span>
                 </div>
@@ -162,14 +186,6 @@ export default function RetosPage() {
                   <span className={`text-[10px] font-sport font-bold uppercase ${isDone ? "text-emerald-400" : "text-slate-500"}`}>
                     {isDone ? "✓ COMPLETADO" : "🔒 PENDIENTE"}
                   </span>
-                  {!isDone && (
-                    <button
-                      onClick={() => handleToggleSimulate(r.id)}
-                      className="text-[9px] font-sport font-bold text-[#74ACDF] hover:underline uppercase"
-                    >
-                      [PROBAR LOGRO]
-                    </button>
-                  )}
                 </div>
               </motion.div>
             )
