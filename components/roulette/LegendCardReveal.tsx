@@ -23,6 +23,7 @@ interface Props {
 // brillo holográfico y stats que aparecen. Íconos (Messi/Maradona) llevan corona y oro pleno.
 export default function LegendCardReveal({ player, club, isIcon, biography, onClose }: Props) {
   const [phase, setPhase] = useState(0) // 0 backdrop, 1 destello, 2 carta, 3 stats
+  const [copiado, setCopiado] = useState(false)
 
   useEffect(() => {
     if (!player) { setPhase(0); return }
@@ -37,6 +38,26 @@ export default function LegendCardReveal({ player, club, isIcon, biography, onCl
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
+
+  const handleShareCard = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!player) return
+    const flag = getNationalityFlag(player.nationality)
+    const totalGoles = (player as any).goalsTotal || (player.goalsClub || 0) + (player.goalsNationalTeam || 0)
+    const text = `🏆 ¡Me salió la Leyenda ${player.name} ${flag} en la Ruleta de Gambeta! OVR ${player.rating} · ${totalGoles} goles oficiales. ¿Te animás a girar? https://gambetafutbol.games/ruleta`
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ text })
+      } else {
+        await navigator.clipboard.writeText(text)
+        setCopiado(true)
+        setTimeout(() => setCopiado(false), 2500)
+      }
+    } catch {
+      /* user canceled */
+    }
+  }
 
   const initials = player ? player.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() : ''
   const lastName = player ? (player.name.split(' ').pop() || player.name) : ''
@@ -181,20 +202,33 @@ export default function LegendCardReveal({ player, club, isIcon, biography, onCl
                     "{biography}"
                   </motion.p>
                 )}
+
+                <div className="mt-3.5 border-t border-white/10 pt-2 flex items-center justify-between font-sport text-[9px] text-slate-400">
+                  <span className="font-bold text-[#74ACDF] tracking-wider">⚽ GAMBETA FÚTBOL GAME</span>
+                  <span>gambetafutbol.games/ruleta</span>
+                </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Continuar */}
+          {/* Botones de Acción */}
           {phase >= 3 && (
-            <motion.button
-              initial={{ y: 10 }} animate={{ y: 0 }}
-              onClick={onClose}
-              className="relative z-10 shrink-0 rounded-full border bg-slate-950/70 px-8 py-2.5 text-xs font-bold uppercase tracking-[0.3em] text-white transition-colors hover:bg-white/10"
-              style={{ borderColor: `${gold}66` }}
-            >
-              Continuar
-            </motion.button>
+            <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="relative z-10 flex flex-col sm:flex-row items-center gap-3">
+              <button
+                onClick={handleShareCard}
+                className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs uppercase tracking-wider font-sport rounded-full shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2"
+              >
+                <span>📲 COMPARTIR FICHA</span>
+                {copiado && <span className="bg-slate-950 text-emerald-400 text-[10px] px-2 py-0.5 rounded-full font-bold">¡COPIADA!</span>}
+              </button>
+              <button
+                onClick={onClose}
+                className="shrink-0 rounded-full border bg-slate-950/80 px-8 py-2.5 text-xs font-bold uppercase tracking-[0.3em] text-white transition-colors hover:bg-white/10"
+                style={{ borderColor: `${gold}66` }}
+              >
+                Continuar
+              </button>
+            </motion.div>
           )}
 
           <style jsx>{`

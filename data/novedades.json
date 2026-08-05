@@ -1,5 +1,15 @@
 [
   {
+    "fecha": "2026-08-05",
+    "titulo": "🌎 Expansión Latinoamericana: Leyendas, Ruleta & Trivias",
+    "texto": "Sumamos a Pelé (Santos '62), Zico (Flamengo '81), Telê Santana (São Paulo '92), Alberto Spencer (Peñarol '60), Colo-Colo '91, Atlético Nacional '89, Cruz Azul 2001, Olimpia '79 y Liga de Quito 2008 con banderas de nacionalidad e historias verificadas."
+  },
+  {
+    "fecha": "2026-08-05",
+    "titulo": "📲 Fichas Compartibles de Leyendas para Redes Sociales",
+    "texto": "Al girar la Ruleta y sacar una Leyenda o Ícono Eterno, podés compartir tu ficha con bandera de nacionalidad, OVR, historia y marca de Gambeta en WhatsApp, X o Redes."
+  },
+  {
     "fecha": "2026-08-04",
     "titulo": "¡La Liga MX y Expansión MX llegaron al Modo Carrera!",
     "texto": "América, Chivas, Cruz Azul, Tigres, Monterrey, Pumas y todos los clubes mexicanos con su torneo y copa. Elegís a tu crack latinoamericano y arrancás desde abajo."
@@ -11,32 +21,12 @@
   },
   {
     "fecha": "2026-08-04",
-    "titulo": "Dado 3D Interactiva en ¿Sabías que?",
-    "texto": "Un nuevo dado físico 3D con giros reales, 6 caras con pips y sonidos de tirada. Descubrí curiosidades verificadas del fútbol argentino tirando cada día."
+    "titulo": "Dado 3D Interactivo en ¿Sabías que?",
+    "texto": "Un nuevo dado físico 3D con giros reales, 6 caras con pips y sonidos de tirada. Descubrí curiosidades verificadas del fútbol latinoamericano tirando cada día."
   },
   {
     "fecha": "2026-08-04",
     "titulo": "Goles Oficiales de Leyendas Actualizados",
     "texto": "Estadísticas al día con la totalidad de goles oficiales (clubes + Selección Nacional): Lionel Messi con 947+ goles, Agüero, Di Stéfano, Batistuta, Maradona y más."
-  },
-  {
-    "fecha": "2026-08-04",
-    "titulo": "El modo carrera se juega en Latinoamérica entera",
-    "texto": "Argentina, México, Uruguay, Chile, Colombia, Perú, Paraguay y Brasil. Canteras locales según tu nacionalidad de origen."
-  },
-  {
-    "fecha": "2026-08-04",
-    "titulo": "Ahora se puede empezar desde el Ascenso",
-    "texto": "Primera Nacional, Primera B Metropolitana y Torneo Federal A. Se asciende peleándola y se puede descender."
-  },
-  {
-    "fecha": "2026-08-03",
-    "titulo": "Tu carrera ahora tiene link propio",
-    "texto": "Al retirarte se genera una dirección que podés mandar por WhatsApp o pegar en X. El que la abre ve tu carrera entera."
-  },
-  {
-    "fecha": "2026-08-03",
-    "titulo": "La idolatría: el camino a la estatua",
-    "texto": "Cada club lleva la cuenta de cuánto te quiere su gente, en cinco escalones que van de uno más del plantel a Leyenda."
   }
 ]
