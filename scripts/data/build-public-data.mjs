@@ -28,16 +28,25 @@ fs.writeFileSync(path.join(PUBLIC_DATA_DIR, 'players-core.json'), JSON.stringify
 
 // Estadísticas oficiales actualizadas (FIFA / AFA / IFFHS) para Leyendas del Fútbol Argentino
 const OFFICIAL_LEGEND_STATS = {
-  "messi-lionel-1987": { goalsClub: 794, goalsNT: 125 }, // 794 clubes (Barça, PSG, Inter Miami) + 125 Selección Argentina (112 Mayor + 13 Juvenil) = 919 goles oficiales
-  "sergio-agu-ero-1988": { goalsClub: 384, goalsNT: 42 }, // 384 clubes + 42 Selección Argentina = 426
-  "batistuta-gabriel-1969": { goalsClub: 300, goalsNT: 56 }, // 300 clubes + 56 Selección Argentina = 356
+  "messi-lionel-1987": { goalsClub: 794, goalsNT: 125 }, // 794 clubes (Barça, PSG, Inter Miami) + 125 Selección Argentina = 919 goles oficiales
   "alfredo-di-ste-fano-1926": { goalsClub: 480, goalsNT: 29 }, // 480 clubes + 29 Selección = 509
+  "sergio-agu-ero-1988": { goalsClub: 384, goalsNT: 42 }, // 384 clubes + 42 Selección Argentina = 426
+  "gonzalo-higuai-n-1987": { goalsClub: 335, goalsNT: 31 }, // 335 clubes + 31 Selección Argentina = 366
+  "batistuta-gabriel-1969": { goalsClub: 300, goalsNT: 56 }, // 300 clubes + 56 Selección Argentina = 356
   "maradona-diego-1960": { goalsClub: 311, goalsNT: 34 }, // 311 clubes + 34 Selección A = 345
-  "gonzalo-higuain": { goalsClub: 335, goalsNT: 31 }, // 335 clubes + 31 Selección Argentina = 366
   "mario-kempes": { goalsClub: 304, goalsNT: 20 }, // 304 clubes + 20 Selección Argentina = 324
   "martin-palermo": { goalsClub: 306, goalsNT: 9 }, // 306 clubes + 9 Selección Argentina = 315
+  "sand-jose-1980": { goalsClub: 312, goalsNT: 0 }, // 312 clubes = 312
   "carlos-tevez": { goalsClub: 280, goalsNT: 13 }, // 280 clubes + 13 Selección Argentina = 293
-  "juan-roman-riquelme": { goalsClub: 130, goalsNT: 17 }, // 130 clubes + 17 Selección Argentina = 147
+  "hernan-crespo": { goalsClub: 273, goalsNT: 35 }, // 273 clubes + 35 Selección Argentina = 308
+  "enzo-francescoli": { goalsClub: 220, goalsNT: 17 }, // 220 clubes + 17 Selección Uruguay = 237
+  "mauro-icardi-1993": { goalsClub: 220, goalsNT: 1 }, // 220 clubes + 1 Selección = 221
+  "daniel-passarella": { goalsClub: 175, goalsNT: 22 }, // 175 clubes + 22 Selección = 197
+  "angel-di-maria": { goalsClub: 173, goalsNT: 31 }, // 173 clubes + 31 Selección Argentina = 204
+  "angel-di-maria-rc": { goalsClub: 173, goalsNT: 31 }, // 173 clubes + 31 Selección Argentina = 204
+  "juan-roman-riquelme": { goalsClub: 147, goalsNT: 17 }, // 147 clubes + 17 Selección Argentina = 164
+  "ricardo-bochini": { goalsClub: 107, goalsNT: 0 }, // 107 clubes = 107
+  "jose-luis-chilavert": { goalsClub: 62, 'goalsNT': 8 }, // 62 clubes + 8 Selección Paraguay = 70
 }
 
 // 2) records: top-10 por rating y por goles totales (clubes + Selección A)
