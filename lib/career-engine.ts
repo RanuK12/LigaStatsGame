@@ -238,7 +238,7 @@ function mediaDeLiga(ligaId: string): number {
 }
 
 const NIVELES_FIELES: Record<string, number> = {
-  'br-1': 92, // Brasileirão Série A: La única liga Élite Latam por poderío económico y dominio continental
+  'br-1': 95, // Brasileirão Série A: Nivel 95 Élite (la única liga Élite Latam por presupuesto y títulos continentales)
   'mx-1': 81, // Liga MX: Nivel 81 Alta (ligeramente superior en presupuesto a la LPF, pero por debajo de Brasil)
   'ar-1': 79, // LPF Argentina: Nivel 79 Alta
   'co-1': 74, // Categoría Primera A Colombia
@@ -250,8 +250,8 @@ const NIVELES_FIELES: Record<string, number> = {
   'br-2': 55, // Série B Brasil
   'ar-2': 45, // Primera Nacional Argentina
   'mx-2': 42, // Liga de Expansión MX
-  'ar-3m': 28, // Primera B Metropolitana
-  'ar-3f': 25, // Torneo Federal A
+  'ar-3m': 18, // Primera B Metropolitana
+  'ar-3f': 12, // Torneo Federal A
 }
 
 const NIVEL_CACHE = new Map<string, number>()
@@ -271,8 +271,8 @@ export function nivelDeLiga(ligaId: string): number {
 
 /** Cómo se llama ese nivel, para no mostrar solo un número. */
 export function etiquetaDeNivel(nivel: number): string {
-  if (nivel >= 90) return 'Élite Latam'
-  if (nivel >= 75) return 'Alta'
+  if (nivel >= 85) return 'Elite'
+  if (nivel >= 65) return 'Alta'
   if (nivel >= 45) return 'Media'
   if (nivel >= 25) return 'Baja'
   return 'Amateur'
