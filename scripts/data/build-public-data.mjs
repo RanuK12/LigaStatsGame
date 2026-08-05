@@ -26,10 +26,50 @@ const core = players.map((p) => Object.fromEntries(CORE_FIELDS.map((f) => [f, p[
 fs.mkdirSync(PUBLIC_DATA_DIR, { recursive: true })
 fs.writeFileSync(path.join(PUBLIC_DATA_DIR, 'players-core.json'), JSON.stringify(core))
 
-// 2) records: top-10 por rating y por goles con los campos que muestra la página
-const recordFields = (p) => ({ id: p.id, name: p.name, position: p.position, decade: p.decade, rating: p.rating, goalsClub: p.goalsClub })
+// Mapeo oficial de goles en Selección Nacional A (FIFA / AFA / CONMEBOL) para Leyendas
+const OFFICIAL_NT_GOALS = {
+  "messi-lionel-1987": 118,
+  "sergio-agu-ero-1988": 42,
+  "batistuta-gabriel-1969": 56,
+  "alfredo-di-ste-fano-1926": 29,
+  "gonzalo-higuain": 31,
+  "mario-kempes": 20,
+  "martin-palermo": 9,
+  "maradona-diego-1960": 34,
+  "carlos-tevez": 13,
+  "juan-roman-riquelme": 17,
+  "luis-suarez": 69,
+  "edinson-cavani": 58,
+  "radamel-falcao": 36,
+  "neymar-jr": 79,
+  "ronaldinho": 33,
+}
+
+// 2) records: top-10 por rating y por goles totales (clubes + Selección A)
+const recordFields = (p) => {
+  const goalsClub = p.goalsClub || 0
+  const goalsNT = OFFICIAL_NT_GOALS[p.id] || 0
+  const goalsTotal = goalsClub + goalsNT
+  const breakdown = goalsNT > 0 ? `${goalsClub} club + ${goalsNT} Selección` : `${goalsClub} club`
+  return {
+    id: p.id,
+    name: p.name,
+    position: p.position,
+    decade: p.decade,
+    rating: p.rating,
+    goalsClub,
+    goalsNT,
+    goalsTotal,
+    breakdown,
+  }
+}
+
 const topRated = [...players].sort((a, b) => b.rating - a.rating).slice(0, 10).map(recordFields)
-const topScorers = [...players].sort((a, b) => b.goalsClub - a.goalsClub).slice(0, 10).map(recordFields)
+const topScorers = [...players]
+  .map(recordFields)
+  .sort((a, b) => b.goalsTotal - a.goalsTotal)
+  .slice(0, 10)
+
 fs.mkdirSync(DERIVED_DIR, { recursive: true })
 fs.writeFileSync(path.join(DERIVED_DIR, 'records.json'), JSON.stringify({ topRated, topScorers }, null, 2))
 

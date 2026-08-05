@@ -26,40 +26,58 @@ export default function InteractiveDice({
   remaining: number | null
 }) {
   const [face, setFace] = useState(1)
-  const [extraTurns, setExtraTurns] = useState({ x: 0, y: 0 })
+  const [extraTurns, setExtraTurns] = useState({ x: 0, y: 0, z: 0 })
 
   const handleRoll = () => {
     if (disabled || rolling) return
     tocar("giro")
-    
+
+    if (typeof window !== "undefined" && navigator.vibrate) {
+      try {
+        navigator.vibrate([30, 20, 50])
+      } catch {}
+    }
+
     // Pick random face 1 to 6
     const targetFace = Math.floor(Math.random() * 6) + 1
     setFace(targetFace)
-    // Add extra 360-degree spins for realistic tumble physics
+
+    // Add 3D multidirectional spins (X, Y, Z) with physics tumble offset
     setExtraTurns((prev) => ({
-      x: prev.x + 720 + Math.floor(Math.random() * 2) * 360,
-      y: prev.y + 1080 + Math.floor(Math.random() * 2) * 360,
+      x: prev.x + 720 + Math.floor(Math.random() * 3) * 360,
+      y: prev.y + 1080 + Math.floor(Math.random() * 3) * 360,
+      z: prev.z + (Math.random() > 0.5 ? 360 : -360),
     }))
 
     onRoll()
     setTimeout(() => {
       tocar("ficha")
-    }, 800)
+      if (typeof window !== "undefined" && navigator.vibrate) {
+        try {
+          navigator.vibrate([80])
+        } catch {}
+      }
+    }, 950)
   }
 
   const rot = FACE_ROTATIONS[face] || { x: 0, y: 0 }
   const currentRotateX = rot.x + extraTurns.x
   const currentRotateY = rot.y + extraTurns.y
+  const currentRotateZ = extraTurns.z
 
   return (
     <div className="flex flex-col items-center justify-center space-y-6 my-4">
       {/* 3D SCENE CONTAINER */}
-      <div className="perspective-1000 w-36 h-36 relative flex items-center justify-center">
-        {/* SHADOW PROJECTION */}
+      <div className="perspective-1000 w-40 h-40 relative flex items-center justify-center">
+        {/* SHADOW PROJECTION & BOUNCE RING */}
         <motion.div
-          animate={rolling ? { scale: [1, 0.6, 1.2, 0.8, 1], opacity: [0.4, 0.1, 0.6, 0.3, 0.4] } : { scale: 1, opacity: 0.4 }}
-          transition={{ duration: 0.85, ease: "easeInOut" }}
-          className="absolute bottom-[-15px] w-24 h-6 rounded-full bg-amber-500/30 blur-md pointer-events-none"
+          animate={
+            rolling
+              ? { scale: [1, 0.4, 1.4, 0.7, 1], opacity: [0.5, 0.15, 0.8, 0.3, 0.5] }
+              : { scale: 1, opacity: 0.4 }
+          }
+          transition={{ duration: 1.1, ease: "easeInOut" }}
+          className="absolute bottom-[-18px] w-28 h-7 rounded-full bg-gradient-to-r from-amber-500/40 via-amber-300/60 to-amber-500/40 blur-md pointer-events-none"
         />
 
         {/* 3D CUBE WRAPPER */}
@@ -67,8 +85,9 @@ export default function InteractiveDice({
           animate={{
             rotateX: currentRotateX,
             rotateY: currentRotateY,
+            rotateZ: currentRotateZ,
           }}
-          transition={{ duration: 0.85, ease: [0.25, 1, 0.5, 1] }}
+          transition={{ duration: 1.0, ease: [0.34, 1.4, 0.64, 1] }}
           style={{ transformStyle: "preserve-3d" }}
           className="w-24 h-24 relative cursor-pointer select-none"
           onClick={handleRoll}
