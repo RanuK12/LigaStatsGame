@@ -22,11 +22,17 @@ export default function RetosPage() {
   const [filterTier, setFilterTier] = useState<string>("todos")
   const [showCertificado, setShowCertificado] = useState(false)
 
-  useEffect(() => {
-    setCompletados(getRetosCompletados())
-  }, [])
+  const isAdmin = user?.isAdmin || user?.email?.toLowerCase() === 'tanquer9@gmail.com' || user?.username?.toLowerCase() === 'tanquer9'
 
-  const { pct, total } = calcularPorcentajeRetos()
+  useEffect(() => {
+    if (isAdmin) {
+      setCompletados(RETOS_GAMBETA.map((r) => r.id))
+    } else {
+      setCompletados(getRetosCompletados())
+    }
+  }, [isAdmin])
+
+  const { pct, total } = isAdmin ? { pct: 100, total: 52 } : calcularPorcentajeRetos()
 
   const handleToggleSimulate = (id: string) => {
     marcarRetoCompletado(id)

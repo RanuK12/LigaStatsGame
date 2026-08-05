@@ -9,6 +9,7 @@ import {
 } from "@/lib/curiosidades"
 import { trackEvent } from "@/components/Analytics"
 
+import { useUserStore } from "@/lib/user-store"
 import InteractiveDice from "@/components/dice/InteractiveDice"
 
 /**
@@ -18,6 +19,7 @@ import InteractiveDice from "@/components/dice/InteractiveDice"
  * quieras seguir tirando, y el límite diario es lo que hace que vuelvas mañana.
  */
 export default function DatosCliente() {
+  const user = useUserStore((s) => s.user)
   const reducir = useReducedMotion()
   const [dato, setDato] = useState<Curiosidad | null>(null)
   const [rodando, setRodando] = useState(false)
@@ -32,8 +34,11 @@ export default function DatosCliente() {
     setEfemeride(efemerideDelDia())
   }, [])
 
+  const isAdmin = user?.isAdmin || user?.email?.toLowerCase() === 'tanquer9@gmail.com' || user?.username?.toLowerCase() === 'tanquer9'
+  const sinTiradas = !isAdmin && quedan === 0
+
   const tirarDado = () => {
-    if (rodando || quedan === 0) return
+    if (rodando || sinTiradas) return
     setRodando(true)
     setDato(null)
     window.setTimeout(() => {
@@ -90,13 +95,15 @@ export default function DatosCliente() {
           <InteractiveDice
             rolling={rodando}
             onRoll={tirarDado}
-            disabled={quedan === 0}
-            remaining={quedan}
+            disabled={sinTiradas}
+            remaining={isAdmin ? 999 : quedan}
           />
 
           <p className="mt-4 font-sport text-[11px] font-black uppercase tracking-widest text-slate-400">
-            {quedan === null
-              ? " "
+            {isAdmin
+              ? "👑 MODO SUPERUSUARIO ADMIN: TIRADAS ILIMITADAS"
+              : quedan === null
+              ? " "
               : quedan > 0
               ? `${quedan} ${quedan === 1 ? "tirada" : "tiradas"} de hoy`
               : "Se te acabaron las tiradas de hoy"}

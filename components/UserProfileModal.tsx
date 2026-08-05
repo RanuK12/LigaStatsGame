@@ -4,12 +4,17 @@ import { useUserStore } from "@/lib/user-store"
 import { rankFromElo } from "@/lib/ranking"
 import { SEED_RIVALS } from "@/lib/leaderboard-seed"
 import { loadLocalScores } from "@/lib/scores"
+import { fetchSuggestions, type Suggestion } from "@/lib/supabase"
 import TierBadge from "./TierBadge"
 
 export default function UserProfileModal() {
   const { user, isProfileModalOpen, closeProfileModal, logout } = useUserStore()
-  // Puesto en la tabla: contra los DTs de la casa + tus propias partidas.
   const [puesto, setPuesto] = useState<{ n: number; total: number } | null>(null)
+  const [verSugerencias, setVerSugerencias] = useState(false)
+  const [sugerencias, setSugerencias] = useState<Suggestion[]>([])
+  const [cargandoSugerencias, setCargandoSugerencias] = useState(false)
+
+  const isAdmin = user?.isAdmin || user?.email?.toLowerCase() === 'tanquer9@gmail.com' || user?.username?.toLowerCase() === 'tanquer9'
   useEffect(() => {
     if (!isProfileModalOpen || !user) return
     const tabla = [...SEED_RIVALS.map((r) => r.elo), ...loadLocalScores().map((s) => s.elo)]
@@ -62,6 +67,12 @@ export default function UserProfileModal() {
             <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight">
               {user.username}
             </h3>
+            {isAdmin && (
+              <div className="mt-3 inline-block font-sport text-[10px] font-black uppercase tracking-widest text-amber-300 bg-amber-500/20 border border-amber-400/40 rounded-full px-3 py-1">
+                👑 SUPERUSUARIO ADMIN · {user.email || 'tanquer9@gmail.com'}
+              </div>
+            )}
+
             <div className="flex justify-center mt-2">
               <TierBadge elo={user.elo} showElo />
             </div>
@@ -81,7 +92,7 @@ export default function UserProfileModal() {
               )
             })()}
 
-            {puesto && (
+            {puesto && !isAdmin && (
               <div className="mt-5 rounded-2xl border border-[#74ACDF]/30 bg-[#74ACDF]/[0.07] p-3.5">
                 <div className="text-[11px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">Puesto en el ranking</div>
                 <div className="font-display text-3xl font-black text-white leading-none mt-1">
@@ -107,6 +118,49 @@ export default function UserProfileModal() {
                 <div className="text-[11px] text-slate-400 uppercase font-sport tracking-wider mt-0.5">Drafts</div>
               </div>
             </div>
+
+            {isAdmin && (
+              <div className="my-4 pt-4 border-t border-white/10 text-left">
+                <button
+                  onClick={async () => {
+                    setVerSugerencias(!verSugerencias)
+                    if (!verSugerencias && sugerencias.length === 0) {
+                      setCargandoSugerencias(true)
+                      const list = await fetchSuggestions()
+                      setSugerencias(list)
+                      setCargandoSugerencias(false)
+                    }
+                  }}
+                  className="w-full py-2.5 px-4 bg-amber-500/20 border border-amber-400/40 text-amber-300 rounded-xl text-xs font-black font-sport uppercase tracking-wider flex items-center justify-between"
+                >
+                  <span>📬 PANEL DE SUGERENCIAS DE USUARIOS</span>
+                  <span>{verSugerencias ? '▲ Ocultar' : '▼ Ver'}</span>
+                </button>
+
+                {verSugerencias && (
+                  <div className="mt-3 space-y-2 max-h-48 overflow-y-auto pr-1">
+                    {cargandoSugerencias ? (
+                      <p className="text-xs text-slate-400 text-center py-4">Cargando sugerencias de Supabase...</p>
+                    ) : sugerencias.length === 0 ? (
+                      <p className="text-xs text-slate-400 text-center py-4">Todavía no hay sugerencias enviadas en Supabase.</p>
+                    ) : (
+                      sugerencias.map((s, idx) => (
+                        <div key={idx} className="bg-slate-950 p-3 rounded-xl border border-white/10 text-xs">
+                          <div className="flex justify-between items-center text-[10px] text-amber-400 font-sport font-bold">
+                            <span>{s.tema || 'GENERAL'}</span>
+                            <span className="text-slate-500">{s.fecha ? new Date(s.fecha).toLocaleDateString() : ''}</span>
+                          </div>
+                          <p className="text-slate-200 mt-1 font-sans leading-snug">{s.mensaje}</p>
+                          {s.contacto && (
+                            <p className="text-[10px] text-[#74ACDF] mt-1 font-mono">Contacto: {s.contacto}</p>
+                          )}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
 
             <button
               onClick={() => {

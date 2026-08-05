@@ -111,6 +111,21 @@ export async function submitSuggestion(s: Suggestion): Promise<boolean> {
   }
 }
 
+export async function fetchSuggestions(): Promise<Suggestion[]> {
+  if (!supabase) return []
+  try {
+    const { data, error } = await supabase
+      .from('suggestions')
+      .select('*')
+      .order('fecha', { ascending: false })
+      .limit(100)
+    if (error || !data) return []
+    return data as Suggestion[]
+  } catch {
+    return []
+  }
+}
+
 /** Submit a draft score entry to Supabase */
 /**
  * ¿Ese nombre ya lo está usando alguien en el ranking?

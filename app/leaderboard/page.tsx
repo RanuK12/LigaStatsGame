@@ -115,14 +115,19 @@ export default function LeaderboardPage() {
         mejorPorNombre.set(clave, f)
       }
     }
-    const reales = [...mejorPorNombre.values()]
+    const ADMIN_NAMES = ['tanquer9@gmail.com', 'tanquer9', 'emilioranucoli', 'ranuk', 'ranukita', 'admin']
+    const reales = [...mejorPorNombre.values()].filter(
+      (f) => !ADMIN_NAMES.includes((f.username || '').trim().toLowerCase())
+    )
     // Mientras no haya jugadores reales, los DT de la casa dan contra quién medirse. En cuanto
     // haya gente de verdad, se van: un ranking con rivales inventados no significa nada.
     const filas = reales.length > 0 ? reales : SEED_RIVALS
     return filas.sort((a, b) => b.elo - a.elo || b.pts - a.pts)
   }, [misPartidas, online, tab])
+
   const miPuesto = useMemo(() => {
-    if (!user?.isLoggedIn) return null
+    const isAdmin = user?.isAdmin || user?.email?.toLowerCase() === 'tanquer9@gmail.com' || user?.username?.toLowerCase() === 'tanquer9'
+    if (!user?.isLoggedIn || isAdmin) return null
     // Online: el puesto lo cuenta la base, así vale aunque estés fuera del top que se descargó.
     if (tab === 'online') return rankGlobal
     const idx = ranked.findIndex((s) => s.username === user.username)

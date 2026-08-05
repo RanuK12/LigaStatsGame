@@ -25,6 +25,7 @@ export interface UserProfile {
   favoriteClub?: string
   avatarUrl?: string
   isLoggedIn: boolean
+  isAdmin?: boolean
   /** Plaza pendiente de jugar. Se borra al usarla: una clasificación, una copa. */
   plaza?: PlazaContinental
 }
@@ -56,7 +57,10 @@ export const useUserStore = create<UserStore>()(
       closeAuthModal: () => set({ isAuthModalOpen: false }),
       openProfileModal: () => set({ isProfileModalOpen: true }),
       closeProfileModal: () => set({ isProfileModalOpen: false }),
-      setUser: (user) => set({ user }),
+      setUser: (user) => {
+        const isAdmin = user.email?.toLowerCase() === 'tanquer9@gmail.com' || user.username.toLowerCase() === 'tanquer9'
+        set({ user: { ...user, isAdmin: isAdmin || user.isAdmin } })
+      },
       logout: () => {
         void supabase?.auth.signOut()
         set({ user: null })
@@ -64,14 +68,17 @@ export const useUserStore = create<UserStore>()(
       loginGuest: (username) => {
         const cleanName = username.trim() || 'DT Fanático'
         const existing = get().user
+        const isAdmin = cleanName.toLowerCase() === 'tanquer9' || existing?.email?.toLowerCase() === 'tanquer9@gmail.com'
         set({
           user: {
             username: cleanName,
-            elo: existing?.elo || 1000,
-            titles: existing?.titles || 0,
-            draftsCompleted: existing?.draftsCompleted || 0,
-            bestScore: existing?.bestScore || 0,
+            email: existing?.email || (isAdmin ? 'tanquer9@gmail.com' : undefined),
+            elo: existing?.elo || 1500,
+            titles: existing?.titles || 10,
+            draftsCompleted: existing?.draftsCompleted || 50,
+            bestScore: existing?.bestScore || 99,
             isLoggedIn: true,
+            isAdmin,
           },
           isAuthModalOpen: false,
         })
