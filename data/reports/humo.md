@@ -8,18 +8,18 @@ Generada por `__tests__/humo-completo.test.ts` con los datos reales del juego.
 
 ## Retos diarios
 - Los 8 arman el once con el bombo recortado:
-  - Clásico Eterno: 483 jugadores en el bombo, once armado con OVR 80
-  - Orgullo Rosarino: 476 jugadores en el bombo, once armado con OVR 81
-  - Furia Cordobesa: 471 jugadores en el bombo, once armado con OVR 79
-  - Clásico de Avellaneda: 467 jugadores en el bombo, once armado con OVR 82
-  - Zurdos Mágicos: 288 jugadores en el bombo, once armado con OVR 78
+  - Clásico Eterno: 483 jugadores en el bombo, once armado con OVR 83
+  - Orgullo Rosarino: 476 jugadores en el bombo, once armado con OVR 77
+  - Furia Cordobesa: 471 jugadores en el bombo, once armado con OVR 80
+  - Clásico de Avellaneda: 467 jugadores en el bombo, once armado con OVR 81
+  - Zurdos Mágicos: 288 jugadores en el bombo, once armado con OVR 77
   - Los que Vinieron: 669 jugadores en el bombo, once armado con OVR 74
-  - Puro Noventa: 686 jugadores en el bombo, once armado con OVR 79
+  - Puro Noventa: 686 jugadores en el bombo, once armado con OVR 82
   - Generación 2000: 766 jugadores en el bombo, once armado con OVR 77
 
 ## Torneos (30 cada uno)
-- Liga: campeón el **7 %**, clasifica a una copa el **47 %**
-- Libertadores: campeón el **0 %** · Sudamericana: **13 %**
+- Liga: campeón el **10 %**, clasifica a una copa el **53 %**
+- Libertadores: campeón el **10 %** · Sudamericana: **10 %**
 
 ## Modo carrera
 - **180 temporadas** en 12 carreras completas (18 a 33 años), sin excepciones
