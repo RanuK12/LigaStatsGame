@@ -269,10 +269,11 @@ export async function generatePDF(result: TournamentResult, draftedPlayers: (Pla
       const isMe = t.name === result.teamLabel
       
       // Determine rank dot colors
-      let rankColor = [71, 85, 105] // Slate
-      if (idx < 3) rankColor = [59, 130, 246] // Blue (Libertadores)
-      else if (idx < 6) rankColor = [16, 185, 129] // Emerald (Sudamericana)
-      else if (idx === 13) rankColor = [239, 68, 68] // Red (Relegation)
+      const totalTeams = result.table?.length || 28
+      let rankColor = [71, 85, 105] // Slate (Permanencia)
+      if (idx < 4) rankColor = [59, 130, 246] // Blue (Libertadores: 1 a 4)
+      else if (idx < 10) rankColor = [16, 185, 129] // Emerald (Sudamericana: 5 a 10)
+      else if (idx >= totalTeams - 2) rankColor = [239, 68, 68] // Red (Descenso: últimos 2)
 
       // Row background
       doc.setFillColor(isMe ? 30 : 15, isMe ? 45 : 23, isMe ? 70 : 42, isMe ? 0.3 : (idx % 2 === 0 ? 0.45 : 0.8))

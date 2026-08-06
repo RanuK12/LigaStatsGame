@@ -724,9 +724,9 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                                 <span className={`inline-flex w-5 h-5 items-center justify-center rounded-full text-[11px] font-black font-sport ${
                                   idx < 4
                                     ? "bg-blue-600/25 text-blue-400 border border-blue-500/40"
-                                    : idx < 8
+                                    : idx < 10
                                     ? "bg-emerald-600/25 text-emerald-400 border border-emerald-500/40"
-                                    : idx >= totalTeams - 4
+                                    : idx >= totalTeams - 2
                                     ? "bg-red-600/25 text-red-400 border border-red-500/40"
                                     : "bg-slate-950/60 text-slate-500 border border-slate-800"
                                 }`}>
@@ -759,8 +759,8 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
 
                   <div className="mt-4 pt-3 border-t border-[#74ACDF]/10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[11px] font-bold font-sport uppercase tracking-wider text-slate-400">
                     <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-blue-600/30 border border-blue-500/40" /> 1-4: Libertadores</span>
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-600/30 border border-emerald-500/40" /> 5-8: Sudamericana</span>
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-600/30 border border-red-500/40" /> Últimos 4: Descenso</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-600/30 border border-emerald-500/40" /> 5-10: Sudamericana</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-600/30 border border-red-500/40" /> Últimos 2: Descenso</span>
                   </div>
                 </div>
               )}

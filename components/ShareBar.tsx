@@ -130,30 +130,12 @@ export default function ShareBar({
     trackEvent(EVENTOS.compartido, { red: "x" })
     if (!imagen) return // sin imagen, el link abre normal
 
-    e.preventDefault()
+    // Abrimos Twitter inmediatamente para evitar bloqueos del navegador o esperas de 3 segundos
+    window.open(xUrl, "_blank", "noopener,noreferrer")
+
     setEstado("generando")
-    let blob: Blob
     try {
-      blob = await imagen("ancha")
-    } catch {
-      setEstado("error")
-      window.open(xUrl, "_blank", "noopener,noreferrer")
-      return
-    }
-
-    const file = new File([blob], "gambeta.png", { type: "image/png" })
-    const nav = navigator as Navigator & { canShare?: (d: unknown) => boolean }
-    if (nav.share && nav.canShare?.({ files: [file] })) {
-      try {
-        await nav.share({ files: [file], text: `${textoX}\n\n${conEtiqueta("historia")}`, title: "Gambeta" })
-        setEstado("listo")
-        return
-      } catch {
-        /* canceló o no se pudo: sigue por el compositor web */
-      }
-    }
-
-    try {
+      const blob = await imagen("ancha")
       const CI = (window as unknown as { ClipboardItem?: typeof ClipboardItem }).ClipboardItem
       if (CI && navigator.clipboard?.write) {
         await navigator.clipboard.write([new CI({ "image/png": blob })])
@@ -163,10 +145,8 @@ export default function ShareBar({
         setEstado("listo")
       }
     } catch {
-      descargar(blob)
-      setEstado("listo")
+      setEstado("error")
     }
-    window.open(xUrl, "_blank", "noopener,noreferrer")
   }
 
   async function copiarLink() {
