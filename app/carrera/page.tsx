@@ -16,6 +16,7 @@ import CareerFinale from "@/components/career/CareerFinale"
 import CareerTimelineCard from "@/components/career/CareerTimelineCard"
 import BallonDorReveal from "@/components/career/BallonDorReveal"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
+import ShareBar from "@/components/ShareBar"
 import SeasonProgress, { SEASON_PROGRESS_MS } from "@/components/career/SeasonProgress"
 import IdolatriaBar from "@/components/career/IdolatriaBar"
 import EventoCarrera, { type EventoPendiente } from "@/components/career/EventoCarrera"
@@ -991,7 +992,13 @@ function CareerDashboard() {
                 {exportError && (
                   <p className="text-center text-[10px] text-red-300 font-sport uppercase tracking-wider">{exportError}</p>
                 )}
-                <div className="hidden">
+                <div className="mt-4">
+                  <ShareBar
+                    titulo="Compartí tu Carrera en Redes"
+                    texto={`🏆 Terminé la carrera de ${career.player.name} (${career.seasonsPlayed} temporadas) en ${club?.name || 'Gambeta'} con ${career.history.reduce((a, s) => a + (s.liga ? 1 : 0) + (s.copaArgentina ? 1 : 0) + (s.continentalWon ? 1 : 0), 0)} títulos. 🔥 ¿Podés superarme?`}
+                    destino="https://gambetafutbol.games/carrera"
+                    campana="carrera_share"
+                  />
                 </div>
               </>
             ) : (
