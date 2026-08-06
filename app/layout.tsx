@@ -50,11 +50,26 @@ const bebas = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  // Sin metadataBase, Next escribe og:image y canonical como rutas relativas, y ni WhatsApp ni X
-  // ni Facebook resuelven una ruta relativa: la ignoran y el link sale pelado.
+  // Sin metadataBase, Next escribe og:image y canonical como rutas relativas
   metadataBase: new URL('https://gambetafutbol.games'),
-  title: 'Gambeta ⚽ | El Juego del Fútbol Argentino',
-  description: 'Armá tu 11 ideal, viví tu carrera de crack y competí por el ranking. El juego del fútbol argentino con planteles reales de toda la historia.',
+  title: 'Gambeta ⚽ | El Juego del Fútbol Argentino & Simulador de Draft',
+  description: 'Armá tu 11 ideal, jugá el Reto Diario con el mismo bombo, viví tu carrera de crack y competí en el ranking. El juego de fútbol gratis web #1 con planteles reales.',
+  keywords: [
+    'juegos de futbol gratis',
+    'juegos de futbol sin descargar',
+    'armar tu 11 ideal',
+    'draft futbol argentino',
+    'ruleta de futbolistas',
+    'simulador carrera futbolista web',
+    'trivia futbolera gratis',
+    'boca juniors 2000',
+    'velez 1994',
+    'river 1996',
+    'liga profesional de futbol',
+    'gambeta game',
+    'potrero juego',
+    'el idolo futbol'
+  ],
   manifest: '/manifest.json',
   alternates: { canonical: '/' },
   openGraph: {
