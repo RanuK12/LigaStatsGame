@@ -5,9 +5,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path.home() / "Apps" / "ranukita-bridge" / "scripts"))
 import rk_x_cuenta as cuenta
 
-HEADER_IMAGE = "/Users/emilioranucoli/Desktop/Oficina_Ranuk/LigaStatsGame/public/social/gambeta_twitter_header.png"
+HEADER_IMAGE = "/Users/emilioranucoli/Desktop/Oficina_Ranuk/LigaStatsGame/public/social/gambeta_twitter_header.jpg"
 if not os.path.exists(HEADER_IMAGE):
-    HEADER_IMAGE = os.path.expanduser("~/.ranukita/gambeta_twitter_header.png")
+    HEADER_IMAGE = os.path.expanduser("~/.ranukita/gambeta_twitter_header.jpg")
 
 print(f"🖼️ Imagen de portada a subir: {HEADER_IMAGE}")
 
