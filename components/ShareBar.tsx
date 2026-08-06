@@ -74,7 +74,7 @@ export default function ShareBar({
   const textoConLink = `${texto}\n\n🎮 ${url}`
   // La mención es lo que convierte un compartido en un seguidor: sin ella el tweet no lleva a
   // ninguna cuenta. Y sin hashtags: amontonados no traen a nadie y hacen ver la cuenta como marca.
-  const textoX = `${texto}\n\nvía @${CUENTA_X}`
+  const textoX = `${texto}\n\n#GambetaGame vía @${CUENTA_X}`
   const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textoX)}&url=${encodeURIComponent(conEtiqueta("x"))}`
   const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(conEtiqueta("facebook"))}&quote=${encodeURIComponent(texto)}`
   const waUrl = `https://wa.me/?text=${encodeURIComponent(`${texto}\n\n🎮 ${conEtiqueta("whatsapp")}`)}`
