@@ -479,14 +479,14 @@ export function validateSquadFormation(
 import type { TournamentPlayerStats, TournamentResult } from './types';
 
 const GOAL_PROBS: Record<string, number> = {
-  GK: 0.01, CB: 0.04, LB: 0.06, RB: 0.06, LWB: 0.07, RWB: 0.07,
-  CDM: 0.07, CM: 0.10, CAM: 0.14, LM: 0.12, RM: 0.12,
-  LW: 0.18, RW: 0.18, ST: 0.28, CF: 0.24,
+  GK: 0.001, CB: 0.03, LB: 0.05, RB: 0.05, LWB: 0.06, RWB: 0.06,
+  CDM: 0.06, CM: 0.10, CAM: 0.16, LM: 0.14, RM: 0.14,
+  LW: 0.20, RW: 0.20, ST: 0.32, CF: 0.26,
 };
 const ASSIST_PROBS: Record<string, number> = {
-  GK: 0.00, CB: 0.03, LB: 0.09, RB: 0.09, LWB: 0.10, RWB: 0.10,
-  CDM: 0.08, CM: 0.14, CAM: 0.20, LM: 0.16, RM: 0.16,
-  LW: 0.16, RW: 0.16, ST: 0.10, CF: 0.12,
+  GK: 0.00, CB: 0.015, LB: 0.10, RB: 0.10, LWB: 0.12, RWB: 0.12,
+  CDM: 0.07, CM: 0.16, CAM: 0.25, LM: 0.18, RM: 0.18,
+  LW: 0.18, RW: 0.18, ST: 0.08, CF: 0.10,
 };
 
 export function distributeGoalsAmongPlayers(
@@ -497,12 +497,12 @@ export function distributeGoalsAmongPlayers(
   players.forEach(p => { goals[p.id] = 0; assists[p.id] = 0; });
 
   for (let g = 0; g < totalGoals; g++) {
-    // Pick goal scorer weighted by position + rating
+    // Pick goal scorer weighted by position * rating multiplier
     const weights = players.map(p => {
       const pos = normPos(p.position);
-      const base = (GOAL_PROBS[pos] || 0.08);
-      const ratingBonus = (p.rating || 60) / 200;
-      return Math.max(0.005, base + ratingBonus);
+      const base = (GOAL_PROBS[pos] ?? 0.08);
+      const ratingMult = 0.7 + ((p.rating || 60) / 100) * 0.6;
+      return Math.max(0.001, base * ratingMult);
     });
     const totalW = weights.reduce((a, b) => a + b, 0);
     let rand = Math.random() * totalW;
@@ -513,12 +513,14 @@ export function distributeGoalsAmongPlayers(
     }
     goals[scorer.id] = (goals[scorer.id] || 0) + 1;
 
-    // Pick assister (different from scorer, weighted by assist probs)
+    // Pick assister (different from scorer, weighted by assist probs * rating multiplier)
     const assistCandidates = players.filter(p => p.id !== scorer.id);
-    if (assistCandidates.length > 0 && Math.random() < 0.75) {
+    if (assistCandidates.length > 0 && Math.random() < 0.78) {
       const aw = assistCandidates.map(p => {
         const pos = normPos(p.position);
-        return Math.max(0.005, (ASSIST_PROBS[pos] || 0.08) + (p.rating || 60) / 300);
+        const base = (ASSIST_PROBS[pos] ?? 0.05);
+        const ratingMult = 0.7 + ((p.rating || 60) / 100) * 0.6;
+        return Math.max(0.0005, base * ratingMult);
       });
       const totalAW = aw.reduce((a, b) => a + b, 0);
       let aRand = Math.random() * totalAW;

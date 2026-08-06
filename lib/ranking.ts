@@ -100,9 +100,9 @@ export function tournamentPoints(opts: {
   return Math.round(base * perf + champ + descenso)
 }
 
-/** Plaza continental que deja la Liga: 1° a 4° van a Libertadores, 5° a 8° a Sudamericana. */
+/** Plaza continental que deja la Liga: 1° a 4° van a Libertadores, 5° a 10° a Sudamericana. */
 export function plazaPorPuesto(pos: number): 'libertadores' | 'sudamericana' | null {
   if (pos >= 1 && pos <= 4) return 'libertadores'
-  if (pos >= 5 && pos <= 8) return 'sudamericana'
+  if (pos >= 5 && pos <= 10) return 'sudamericana'
   return null
 }

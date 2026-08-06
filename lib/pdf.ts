@@ -41,14 +41,8 @@ function getDivisionOutcome(result: TournamentResult) {
     }
   }
 
-  // Liga outcomes
-  if (result.playerPos === 14) {
-    return {
-      text: "DESCENDIDO - RELEGADO A LA PRIMERA B NACIONAL",
-      bg: [239, 68, 68], // Red
-      fg: [255, 255, 255]
-    }
-  }
+  // Liga outcomes: 1-4 Libertadores, 5-10 Sudamericana, ultimos 2 descenso (27 y 28)
+  const total = result.table?.length ?? 28
   if (result.isChampion) {
     return {
       text: "CAMPEÓN DE LA LIGA PROFESIONAL DE FÚTBOL",
@@ -56,17 +50,24 @@ function getDivisionOutcome(result: TournamentResult) {
       fg: [10, 14, 27]
     }
   }
-  if (result.playerPos && result.playerPos <= 3) {
+  if (result.playerPos && result.playerPos <= 4) {
     return {
       text: "CLASIFICADO A LA COPA LIBERTADORES DE AMÉRICA",
       bg: [59, 130, 246], // Blue
       fg: [255, 255, 255]
     }
   }
-  if (result.playerPos && result.playerPos >= 4 && result.playerPos <= 6) {
+  if (result.playerPos && result.playerPos >= 5 && result.playerPos <= 10) {
     return {
       text: "CLASIFICADO A LA COPA SUDAMERICANA",
       bg: [16, 185, 129], // Emerald
+      fg: [255, 255, 255]
+    }
+  }
+  if (result.playerPos && result.playerPos > total - 2) {
+    return {
+      text: "ZONA DE DESCENSO - RELEGADO A LA PRIMERA NACIONAL",
+      bg: [239, 68, 68], // Red
       fg: [255, 255, 255]
     }
   }

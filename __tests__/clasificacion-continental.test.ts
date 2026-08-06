@@ -8,14 +8,14 @@ describe('plaza continental por puesto en la Liga', () => {
     )
   })
 
-  it('5° a 8° van a Sudamericana', () => {
-    expect([5, 6, 7, 8].map(plazaPorPuesto)).toEqual(
-      ['sudamericana', 'sudamericana', 'sudamericana', 'sudamericana'],
+  it('5° a 10° van a Sudamericana', () => {
+    expect([5, 6, 7, 8, 9, 10].map(plazaPorPuesto)).toEqual(
+      ['sudamericana', 'sudamericana', 'sudamericana', 'sudamericana', 'sudamericana', 'sudamericana'],
     )
   })
 
-  it('del 9° para abajo no clasifica nadie', () => {
-    expect([9, 14, 28].map(plazaPorPuesto)).toEqual([null, null, null])
+  it('del 11° para abajo no clasifica nadie', () => {
+    expect([11, 14, 28].map(plazaPorPuesto)).toEqual([null, null, null])
   })
 })
 

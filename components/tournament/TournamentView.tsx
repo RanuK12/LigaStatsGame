@@ -639,9 +639,9 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 )}
 
                 {/* Division Outcome Banners for Liga */}
-                {result.type === "liga" && result.playerPos && result.playerPos >= 25 && (
+                {result.type === "liga" && result.playerPos && result.playerPos >= (result.table?.length ? result.table.length - 1 : 27) && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 text-xs font-bold leading-relaxed text-center shadow-[0_0_12px_rgba(239,68,68,0.1)] uppercase font-sport tracking-wider">
-                    ZONA DE DESCENSO — Tu equipo quedó en zona de promoción/descenso.
+                    ZONA DE DESCENSO — Tu equipo quedó en los últimos dos puestos y desciende a la Primera Nacional.
                   </div>
                 )}
                 {result.type === "liga" && result.playerPos && result.playerPos <= 4 && !isChamp && (
@@ -649,12 +649,12 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     CLASIFICADO A LA COPA LIBERTADORES — Tu once jugará el torneo continental más prestigioso.
                   </div>
                 )}
-                {result.type === "liga" && result.playerPos && result.playerPos >= 5 && result.playerPos <= 8 && (
+                {result.type === "liga" && result.playerPos && result.playerPos >= 5 && result.playerPos <= 10 && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-200 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
                     CLASIFICADO A LA COPA SUDAMERICANA — Aseguraste competencia internacional para la próxima temporada.
                   </div>
                 )}
-                {result.type === "liga" && result.playerPos && result.playerPos >= 9 && result.playerPos <= 24 && (
+                {result.type === "liga" && result.playerPos && result.playerPos >= 11 && result.playerPos <= (result.table?.length ? result.table.length - 2 : 26) && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-slate-700 bg-slate-800/20 text-slate-300 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
                     PERMANENCIA ASEGURADA — Mantuviste la categoría en la Liga Profesional de Fútbol.
                   </div>
