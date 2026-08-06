@@ -250,8 +250,8 @@ const NIVELES_FIELES: Record<string, number> = {
   'br-2': 55, // Série B Brasil
   'ar-2': 45, // Primera Nacional Argentina
   'mx-2': 42, // Liga de Expansión MX
-  'ar-3m': 18, // Primera B Metropolitana
-  'ar-3f': 12, // Torneo Federal A
+  'ar-3': 18, // Primera B Metropolitana (id: ar-3)
+  'ar-3f': 12, // Torneo Federal A (id: ar-3f)
 }
 
 const NIVEL_CACHE = new Map<string, number>()

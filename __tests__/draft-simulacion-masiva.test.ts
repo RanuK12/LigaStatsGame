@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { simulateSeasonWithStats } from '../lib/game-engine'
-import { formations } from '../lib/formations'
+import { simulateSeasonWithStats, formations } from '../lib/game-engine'
 import { plazaPorPuesto } from '../lib/ranking'
 
 describe('Simulación Masiva de Drafts (Verificación de Asistencias y LPF)', () => {
