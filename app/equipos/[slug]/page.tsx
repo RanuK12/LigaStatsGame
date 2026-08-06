@@ -119,10 +119,10 @@ export default async function EquipoPage({ params }: { params: Promise<{ slug: s
             simular el torneo.
           </p>
           <Link
-            href="/draft/"
+            href={`/draft?mode=clasico&club=${e.clubId}&utm_source=google_seo&utm_medium=organic&utm_campaign=equipo_${e.slug}`}
             className="btn-primary mt-4 block whitespace-nowrap px-7 py-3 text-center font-sport text-[11px] font-black uppercase sm:mt-0"
           >
-            Jugar gratis
+            Jugar gratis con este equipo
           </Link>
         </div>
 
