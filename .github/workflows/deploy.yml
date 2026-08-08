@@ -15,11 +15,20 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  # El arranque de GitHub trae `false` para no cortar un despliegue de producción a medias, y
+  # eso acá salió caro: el 6 de agosto la corrida #307 dejó el job `deploy` en "waiting" contra
+  # el entorno github-pages y se quedó así DOS DÍAS. Como el grupo no se soltaba, todas las
+  # corridas siguientes quedaban en cola y GitHub iba cancelando la vieja cada vez que entraba
+  # una nueva: 20 corridas canceladas y nada publicado entre el 6 y el 8.
+  #
+  # Esto es un sitio estático: el build más nuevo siempre reemplaza al anterior, no hay
+  # despliegue parcial que proteger. Con `true`, un push nuevo destraba solo lo que quedó colgado.
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,6 +55,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    # Un job colgado contra el entorno no puede volver a bloquear la cola indefinidamente.
+    timeout-minutes: 15
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4

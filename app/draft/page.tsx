@@ -33,8 +33,9 @@ import {
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 import { tocar } from "@/lib/sonido"
-import { challengeForDate, localYmd, CHALLENGES } from "@/lib/daily-challenge"
+import { challengeForDate, challengeNumber, localYmd, CHALLENGES } from "@/lib/daily-challenge"
 import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
+import { textoDeBloques, lineaDePuesto } from "@/lib/reto-bloques"
 import { calculateChemistry } from "@/lib/chemistry"
 import ChemistryPanel from "@/components/ChemistryPanel"
 import TournamentView from "@/components/tournament/TournamentView"
@@ -648,6 +649,21 @@ function DraftInner() {
         onDownloadPDF={() => generatePDF(simResult, drafted, f)}
         elo={eloTorneo}
         reto={retoDelDia ? { id: retoDelDia.id, titulo: retoDelDia.title } : undefined}
+        bloques={
+          retoDelDia
+            ? textoDeBloques({
+                numero: challengeNumber(),
+                titulo: retoDelDia.title,
+                jugadores: drafted
+                  .map((p, i) => (p ? { rating: p.rating || 50, linea: lineaDePuesto(f.positions[i].pos) } : null))
+                  .filter((x): x is { rating: number; linea: string } => x !== null),
+                puntaje: teamScore,
+                campeon: simResult.isChampion,
+                puesto: simResult.playerPos,
+                racha: retoGanado?.streak,
+              })
+            : undefined
+        }
         />
       </>
     )

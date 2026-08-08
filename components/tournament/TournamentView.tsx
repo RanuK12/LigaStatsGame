@@ -13,9 +13,10 @@ import GuardarProgreso from "@/components/GuardarProgreso"
 import EventBurst from "@/components/ui/EventBurst"
 import { tocar } from "@/lib/sonido"
 import { storyBlob } from "@/lib/story-card"
+import { trackEvent, EVENTOS } from "@/components/Analytics"
 import Image from "next/image"
 
-export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto }: {
+export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto, bloques }: {
   result: TournamentResult
     onBack: () => void
   onReset: () => void
@@ -25,6 +26,8 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
   elo?: { nuevo: number; delta: number; pts: number } | null
   /** Si la partida salió del reto del día, para que el link compartido lleve al MISMO bombo. */
   reto?: { id: string; titulo: string }
+  /** El resultado del reto en cuadraditos de color, listo para pegar en un grupo. */
+  bloques?: string
 }) {
   // Simulation modality state
   // "intro" = choosing mode, "interactive" = playing step-by-step, "animating" = showing match feed, "done" = final results
@@ -937,6 +940,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 </div>
               )}
 
+              {/* El resultado en cuadraditos, para pegar en un grupo.
+                  Es lo que hizo crecer a Wordle: texto plano, sin imagen y sin link, que se lee
+                  entero en la vista previa de WhatsApp y provoca sin spoilear —el que lo recibe
+                  ve CÓMO te fue, no CON QUÉ—. La imagen y el link ya están abajo para el que
+                  los quiera; esto es para el grupo del laburo. */}
+              {bloques && <BloquesDelReto texto={bloques} />}
+
               {/* Compartir el resultado */}
               <ShareBar
                 titulo={reto ? "Desafiá a alguien con el mismo bombo" : "Contá cómo te fue"}
@@ -1009,6 +1019,44 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
 
         </AnimatePresence>
       </div>
+    </div>
+  )
+}
+
+/**
+ * El resultado del reto en cuadraditos, con un botón para copiarlo.
+ *
+ * Se muestra el texto tal cual va a quedar pegado, no un preview estilizado: la gracia es que lo
+ * que ve acá es exactamente lo que va a ver el grupo, y eso es lo que da ganas de mandarlo.
+ */
+function BloquesDelReto({ texto }: { texto: string }) {
+  const [copiado, setCopiado] = useState(false)
+
+  async function copiar() {
+    try {
+      await navigator.clipboard.writeText(texto)
+      trackEvent(EVENTOS.compartido, { red: "bloques" })
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 2200)
+    } catch {
+      /* sin permiso de portapapeles: el texto está a la vista para seleccionarlo a mano */
+    }
+  }
+
+  return (
+    <div className="panel-in rounded-3xl border border-white/10 bg-gradient-to-b from-[#0c1728]/90 to-[#050a14]/90 p-5 text-center">
+      <span className="font-sport text-[11px] font-black uppercase tracking-[0.3em] text-[#74ACDF]">
+        Tu resultado, sin spoilers
+      </span>
+      <pre className="mx-auto mt-3 w-fit whitespace-pre rounded-2xl border border-white/[0.06] bg-black/30 px-5 py-3 text-left font-sans text-[13px] leading-relaxed text-slate-200">
+        {texto}
+      </pre>
+      <button
+        onClick={copiar}
+        className="btn-primary mt-3 w-full rounded-2xl py-3 font-sport text-[11px] font-black uppercase tracking-widest"
+      >
+        {copiado ? "✓ Copiado, pegalo en el grupo" : "📋 Copiar resultado"}
+      </button>
     </div>
   )
 }
