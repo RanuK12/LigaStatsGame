@@ -16,7 +16,6 @@ import LigasBanner from '@/components/LigasBanner'
 import SuggestionBox from '@/components/SuggestionBox'
 import SolDeMayo from '@/components/ui/SolDeMayo'
 import dbStats from '@/data/derived/stats.json'
-import { challengeForDate, challengeNumber, localYmd } from '@/lib/daily-challenge'
 
 const clubs: Club[] = clubsData as Club[]
 const squads: Squad[] = squadsData as Squad[]
@@ -253,46 +252,6 @@ function WorldCupBanner() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </div>
-    </motion.section>
-  )
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   DAILY CHALLENGE SECTION
-   ═══════════════════════════════════════════════════════════════ */
-function DailyChallengeSection() {
-  const challenge = challengeForDate(localYmd())
-  const number = challengeNumber()
-
-  return (
-    <motion.section
-      initial={{ y: 20, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true }}
-      className="relative z-10 max-w-6xl mx-auto px-4 mb-10"
-    >
-      <div className="card-glass relative overflow-hidden rounded-3xl border border-orange-500/40 p-6 sm:p-8 bg-gradient-to-r from-orange-950/40 via-slate-950/80 to-slate-950/60 shadow-[0_0_35px_rgba(249,115,22,0.18)]">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="text-center sm:text-left space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 font-sport text-xs font-black uppercase tracking-widest">
-              <span>🔥 RETO DEL DÍA #{number}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping" />
-            </div>
-            <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">
-              {challenge.title}
-            </h3>
-            <p className="text-slate-300 text-xs sm:text-sm font-sans max-w-xl">
-              {challenge.rule} · Mismo bombo para todos hoy. ¿Podés armar el mejor 11 de la jornada?
-            </p>
-          </div>
-          <Link
-            href="/daily"
-            className="btn-gold shrink-0 px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest font-sport shadow-lg hover:scale-105 transition-all flex items-center gap-2"
-          >
-            <span>JUGAR RETO DIARIO ⚽</span>
-          </Link>
         </div>
       </div>
     </motion.section>

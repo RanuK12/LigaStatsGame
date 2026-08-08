@@ -237,21 +237,34 @@ function mediaDeLiga(ligaId: string): number {
   return mediaTop * 0.66 + mediaTodos * 0.34
 }
 
+/**
+ * El nivel de las primeras divisiones, escrito a mano.
+ *
+ * La escala calculada de abajo mide el OVR promedio de los clubes que trajo Wikidata, y eso no
+ * es la fuerza de la liga: es cuán bien documentada está. Por eso la Saudi Pro League —cuatro
+ * cracks europeos y el resto sin datos— salía 95, empatada con Brasil y arriba de la Liga MX.
+ * Para las ligas que sí conocemos gana este número; el cálculo queda de fallback para las que
+ * no están acá (las segundas de Chile, Colombia, Perú, Paraguay y Uruguay).
+ *
+ * Los ids salen de `data/derived/ligas.json`. Un id que no exista NO da error: se cae al
+ * cálculo en silencio, que es como Uruguay quedó en 54 "Media" —debajo de la Série B— porque
+ * acá decía `ur-1` y la liga se llama `uy-1`.
+ */
 const NIVELES_FIELES: Record<string, number> = {
-  'br-1': 95, // Brasileirão Série A: Nivel 95 Élite (la única liga Élite Latam por presupuesto y títulos continentales)
-  'mx-1': 81, // Liga MX: Nivel 81 Alta (ligeramente superior en presupuesto a la LPF, pero por debajo de Brasil)
-  'ar-1': 79, // LPF Argentina: Nivel 79 Alta
+  'br-1': 95, // Brasileirão Série A: la única Élite de Latam por presupuesto y títulos continentales
+  'sa-1': 82, // Saudi Pro League: paga más que cualquiera de acá, pero no es Brasil dentro de la cancha
+  'mx-1': 81, // Liga MX: algo por encima de la LPF en presupuesto, por debajo de Brasil
+  'ar-1': 79, // Liga Profesional Argentina
   'co-1': 74, // Categoría Primera A Colombia
-  'ur-1': 72, // Primera División Uruguay
+  'uy-1': 72, // Primera División Uruguay
   'cl-1': 71, // Primera División Chile
-  'ec-1': 71, // Serie A Ecuador
-  'py-1': 70, // Primera División Paraguay
+  'py-1': 70, // División Profesional Paraguay
   'pe-1': 68, // Liga 1 Perú
   'br-2': 55, // Série B Brasil
   'ar-2': 45, // Primera Nacional Argentina
   'mx-2': 42, // Liga de Expansión MX
-  'ar-3': 18, // Primera B Metropolitana (id: ar-3)
-  'ar-3f': 12, // Torneo Federal A (id: ar-3f)
+  'ar-3': 18, // Primera B Metropolitana
+  'ar-3f': 12, // Torneo Federal A
 }
 
 const NIVEL_CACHE = new Map<string, number>()
@@ -259,6 +272,9 @@ export function nivelDeLiga(ligaId: string): number {
   if (NIVELES_FIELES[ligaId] !== undefined) return NIVELES_FIELES[ligaId]
   const guardado = NIVEL_CACHE.get(ligaId)
   if (guardado !== undefined) return guardado
+  // La escala se estira contra el rango REAL de las ligas cargadas, no contra números escritos
+  // a mano: con un piso y un techo fijos todo quedaba apretado entre 5 y 59, y la Primera
+  // argentina —que es de las mejores del continente— aparecía como "Media".
   const medias = LIGAS.map((l) => mediaDeLiga(l.id)).filter((m) => m > 0)
   const piso = Math.min(...medias)
   const techo = Math.max(...medias)
@@ -1185,6 +1201,7 @@ export function simulateSeason(
   let bonusTitle = 0
   let bonusOvr = 0
   const opt = decisionOptionId || ''
+  // Efectos de las decisiones (agrupados por tipo).
   const GOAL_OPTS = new Set(['train_finishing', 'focus_play', 'refuse_position', 'focus_self'])
   const ASSIST_OPTS = new Set(['train_vision', 'balanced_train', 'link_up'])
   const TITLE_OPTS = new Set(['play_injured', 'focus_football', 'team_leader', 'barra_stay'])
@@ -1194,6 +1211,8 @@ export function simulateSeason(
   if (TITLE_OPTS.has(opt)) bonusTitle += opt === 'barra_stay' ? 0.06 : 0.1
   if (OVR_OPTS.has(opt)) bonusOvr += 1
 
+  // Un arquero no se vuelve goleador por entrenar definición: sus bonus van a la valla
+  // invicta, y en un defensor pesan la mitad. Antes un arquero terminaba con goles.
   let bonusCleanSheets = 0
   if (cat === 'GK') {
     bonusCleanSheets += bonusGoals + bonusAssists
@@ -1231,36 +1250,49 @@ export function simulateSeason(
   }
 
   const ovrScale = clamp(ovr / 80, 0.6, 1.35)
+  // La lesión te saca de la cancha: se descuentan partidos antes de repartir goles y vallas.
   const partidosJugados = lesionado
     ? Math.max(3, Math.round(matchesPlayed * (lesionGrave ? 0.35 : 0.65)))
     : matchesPlayed
   const apps = partidosJugados / 38
+  // Un equipo que ataca bien te deja más pelotas para empujar; en un club chico hacés menos.
   const empujeClub = clamp(0.78 + (club.strength - 70) / 55, 0.7, 1.3)
   const goals = Math.max(0, Math.round((GOAL_BASE[cat] * ovrScale * apps * empujeClub * (0.6 + rng() * 0.9)) + bonusGoals))
   const assists = Math.max(0, Math.round((ASSIST_BASE[cat] * ovrScale * apps * empujeClub * (0.5 + rng() * 0.9)) + bonusAssists))
+  // Vallas invictas (arqueros/defensores): dependen del OVR y la fuerza del club.
   const keepsCleanSheets = cat === 'GK' || cat === 'DEF'
   const csRate = keepsCleanSheets ? clamp(0.12 + (ovr - 70) / 120 + (club.strength - 72) / 130, 0.05, 0.55) : 0
   const cleanSheets = Math.min(
     partidosJugados,
     Math.round(partidosJugados * csRate * (0.7 + rng() * 0.6)) + bonusCleanSheets,
   )
+  // Penales: el arquero enfrenta un puñado por año y ataja según su nivel.
   const penaltiesFaced = cat === 'GK' ? 2 + Math.floor(rng() * 6) : 0
   const penaltiesSaved = Math.min(
     penaltiesFaced,
     Math.round(penaltiesFaced * clamp(0.18 + (ovr - 70) / 250, 0.08, 0.45) + (rng() < 0.25 ? 1 : 0)),
   )
+  // Tarjetas: el defensor vive al límite, el arquero casi no ve amarillas.
   const yellowCards = Math.max(0, Math.round(YELLOW_BASE[cat] * apps * (0.5 + rng())))
   const redCards = rng() < RED_CHANCE[cat] * (0.6 + apps) ? 1 : 0
 
+  // --- Probabilidades de título estilo Copero (del tweet) ---
+  // Efecto Maradona: con 90+ de OVR el juego sube un nivel la reputación del club.
   const maradona = ovr >= 90 ? 6 : 0
   const str = clamp(club.strength + maradona, 60, 92)
+  // Margen de OVR: si superás en +10 lo que pide el club, todo x1.6.
   const margin = ovr >= club.strength + 10 ? 1.6 : 1
+  // Cuánto sale ganar cada torneo. Los valores viejos (70% la liga para un club grande) daban
+  // carreras con 10 ligas y 7 Libertadores en 15 años: los títulos dejaban de significar algo.
+  // En una liga de 28 equipos, hasta River o Boca ganan más o menos 1 de cada 3 torneos.
   const ligaP = clamp(((str - 64) / 19) * 0.32 * margin + 0.005 + bonusTitle, 0.005, 0.45)
   const copaP = clamp(((str - 64) / 19) * 0.26 * margin + 0.03 + bonusTitle, 0.03, 0.38)
 
   const topTier = state.nextContinental === 'libertadores'
   const contType: ContinentalComp =
     club.region === 'euro' ? (topTier ? 'champions' : 'europa') : topTier ? 'libertadores' : 'sudamericana'
+  // Sudamericana / Europa League: solo la ganan los clubes del montón; los grandes 0%.
+  // Libertadores / Champions: reservada para los grandes.
   let contP: number
   if (contType === 'sudamericana' || contType === 'europa') {
     contP = club.strength >= 79 ? 0 : clamp(((str - 64) / 15) * 0.22 * margin + 0.04, 0.02, 0.3)
@@ -1269,6 +1301,10 @@ export function simulateSeason(
   }
 
   const liga = rng() < ligaP
+  // La copa nacional la juegan todos los países que tienen una, no solo Argentina: un peruano
+  // pelea la Copa Perú igual que un argentino la Copa Argentina.
+  // La categoría que vale es la de esta carrera: si el club ascendió el año pasado, este año
+  // juega arriba.
   const ligaDelClub = findLiga(state.ligaActualId ?? club.ligaId ?? '')
   const juegaCopaNacional = club.region === 'arg' || Boolean(ligaDelClub?.copa)
   const copaArgentina = juegaCopaNacional && rng() < copaP
@@ -1279,18 +1315,31 @@ export function simulateSeason(
   if (copaArgentina) trophiesWon.push('copa-arg')
   if (continentalWon) trophiesWon.push(contType)
 
+  // ── Ascenso y descenso ──
+  // Es lo que hace que arrancar en la B signifique algo: se sube peleándola y se puede bajar.
+  // Solo aplica a los clubes que tienen liga con estructura; los de clubs.json y los europeos
+  // están escritos a mano y no tienen división.
   let ascendio = false
   let descendio = false
   let nuevaLigaId: string | undefined
   if (ligaDelClub) {
     const arriba = ligaVecina(ligaDelClub.id, 'arriba')
     const abajo = ligaVecina(ligaDelClub.id, 'abajo')
+    // La chance sale de la fuerza del club DENTRO de su liga, no de su fuerza absoluta: el más
+    // fuerte de la B asciende seguido, el más débil se va a la C.
+    //
+    // El divisor es `equipos` —los que juegan el torneo de verdad— y no cuántos clubes trajo
+    // Wikidata: la Série A la juegan 20 y el archivo tiene 58, así que dividir por el archivo
+    // hacía que ascender y descender fueran casi imposibles en las ligas mejor documentadas.
     const rivales = clubesDeLiga(ligaDelClub.id)
     const puesto = Math.max(0, rivales.findIndex((c) => c.id === club.id))
     const relativo = 1 - puesto / Math.max(rivales.length, 1)
     const enTorneo = Math.max(ligaDelClub.equipos || rivales.length, 8)
     if (arriba && ligaDelClub.asciende > 0) {
+      // Un jugador muy por encima del club lo empuja: es la carrera del pibe que sube al equipo.
       const empuje = clamp((ovr - club.strength) / 40, -0.05, 0.15)
+      // Exponente y no proporción directa: el candidato pelea el ascenso todos los años y el
+      // colista no lo pelea nunca, que es como se siente una categoría de verdad.
       const pAsc = clamp((ligaDelClub.asciende / enTorneo) * Math.pow(relativo, 1.6) * 2.4 + empuje, 0, 0.5)
       ascendio = rng() < pAsc
       if (ascendio) {
@@ -1657,6 +1706,8 @@ function generateOffers(state: CareerState, performance: number, rng: () => numb
   const europeos = candidates.filter((c) => c.region === 'euro')
   if (europeos.length >= 2) {
     const patota = europeos.slice(0, clamp(2 + Math.floor(rng() * 3), 2, europeos.length))
+    // Y una de acá, para que irse siga siendo una decisión y no un trámite: quedarse en el club
+    // que te formó teniendo cuatro de Europa arriba de la mesa es una carrera que vale contar.
     const deAca = candidates.find((c) => c.region !== 'euro')
     const resultOffers = [...patota, ...(deAca ? [deAca] : [])].map(aOferta)
 

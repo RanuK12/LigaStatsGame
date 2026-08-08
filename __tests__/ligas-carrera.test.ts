@@ -9,6 +9,7 @@ import {
   findLiga,
   ligaVecina,
   clubesDeLiga,
+  nivelDeLiga,
   simulateSeason,
   advancePlayer,
   makeRng,
@@ -198,6 +199,20 @@ describe('ascensos y descensos en el motor', () => {
       return
     }
     throw new Error('ninguna semilla ganó la copa nacional en Uruguay')
+  })
+
+  /**
+   * La tabla de niveles escritos a mano se indexa por id de liga, y un id mal escrito no da
+   * error: se cae al cálculo por OVR promedio en silencio. Así Uruguay quedó en 54 —debajo de
+   * la Série B de Brasil— porque la tabla decía `ur-1` y la liga es `uy-1`. Ninguna primera
+   * puede valer menos que una segunda.
+   */
+  it('ninguna primera división vale menos que una segunda', () => {
+    const primeras = PAISES_CARRERA.map((p) => p.ligaIds[0])
+    const segundas = PAISES_CARRERA.flatMap((p) => p.ligaIds.slice(1))
+    const peorPrimera = Math.min(...primeras.map(nivelDeLiga))
+    const mejorSegunda = Math.max(...segundas.map(nivelDeLiga))
+    expect(peorPrimera).toBeGreaterThan(mejorSegunda)
   })
 
   it('findClub encuentra tanto los de siempre como los nuevos', () => {

@@ -14,7 +14,9 @@ describe('Simulación Masiva de Drafts (Verificación de Asistencias y LPF)', ()
 
   it('simulación de 100 ligas: asistencias de defensores centrales son realistas (CB < 2.0 asistencias por temporada)', () => {
     const f = formations['4-3-3']
-    const mockPlayers = [
+    // `any[]`: al motor le alcanzan estos cinco campos, y escribir el Player entero (25 campos)
+    // por cada uno de los once no haría más claro qué se está midiendo acá.
+    const mockPlayers: any[] = [
       { id: 'p1', name: 'Arquero', position: 'GK', rating: 78, clubId: 'boca-juniors' },
       { id: 'p2', name: 'Ramiro Funes Mori', position: 'CB', rating: 80, clubId: 'river-plate' }, // Defensor Central
       { id: 'p3', name: 'Zaguero 2', position: 'CB', rating: 79, clubId: 'racing-club' },
