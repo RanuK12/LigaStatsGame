@@ -20,8 +20,14 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   ['/', 1.0, 'daily'],
   ['/draft/', 0.9, 'weekly'],
   ['/carrera/', 0.9, 'weekly'],
-  // El índice de equipos históricos: es la puerta a las 36 páginas de contenido, y lo único de
-  // todo el sitio que responde a lo que la gente busca de verdad ("Vélez 1994 plantel").
+  // La única página escrita para que la encuentre alguien que NO sabe que existimos. Medido el
+  // 8/8: las diez consultas que traen tráfico son las diez la marca, así que esta es la apuesta
+  // a la intención de jugar ("juegos de fútbol argentino", "sin descargar").
+  ['/juegos-de-futbol-argentino/', 0.9, 'monthly'],
+  // El índice de equipos históricos. Ojo con la nota vieja de acá: en 6 días de Search Console
+  // las 36 páginas juntaron 46 impresiones y CERO clics, y no aparecen en las primeras 20
+  // posiciones de sus propias consultas. Contra Wikipedia esa pelea no se gana; quedan porque
+  // ya están escritas, no porque estén trayendo gente.
   ['/equipos/', 0.9, 'monthly'],
   ['/daily/', 0.8, 'daily'],
   ['/como-jugar/', 0.7, 'monthly'],
