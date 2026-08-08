@@ -425,9 +425,11 @@ export default function VersusPage() {
           <span className="text-[10px] font-bold text-[#74ACDF] tracking-widest uppercase font-sport block mb-1">
             MODO MULTIJUGADOR LOCAL
           </span>
-          <h2 className="font-display text-3xl font-black uppercase tracking-tight">
+          {/* h1 y no h2: es el título de la página y era la única ruta del sitio sin ninguno,
+              así que para Google y para un lector de pantalla /versus no tenía encabezado. */}
+          <h1 className="font-display text-3xl font-black uppercase tracking-tight">
             DUELO VERSUS 1V1
-          </h2>
+          </h1>
           <p className="text-slate-500 text-xs mt-1 font-sport uppercase tracking-wider">
             Armá tu equipo con un amigo en la misma pantalla y simulen el partido de la fecha
           </p>

@@ -367,7 +367,11 @@ function CareerSetupWizard() {
                 onClick={() => setClubId(c.id)}
                 className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-bold font-sport transition-all ${clubId === c.id ? "border-[#74ACDF] bg-[#74ACDF]/20 text-white shadow-md scale-105" : "border-white/10 bg-slate-950/70 text-slate-300 hover:text-white hover:border-[#74ACDF]/50"}`}
               >
-                <img src={`/logos/clubs/${c.id}.png`} alt="" className="w-5 h-5 object-contain" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                {/* `c.escudo` y no la ruta armada a mano: desde que la cantera busca clubes del
+                    país del jugador acá pueden aparecer clubes del Ascenso, y esos tienen el
+                    escudo en /logos/carrera o /logos/ligas, no en /logos/clubs. Arsenal FC y
+                    Chaco For Ever daban 404. */}
+                <img src={c.escudo ?? `/logos/clubs/${c.id}.png`} alt="" className="w-5 h-5 object-contain" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
                 <span>{c.name}</span>
                 <span className="text-[10px] text-amber-400 ml-1">nv.{c.strength}</span>
               </button>
@@ -800,7 +804,7 @@ function CareerDashboard() {
             {club && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={`/logos/clubs/${club.id}.png`}
+                src={club.escudo ?? `/logos/clubs/${club.id}.png`}
                 alt=""
                 className="pointer-events-none absolute -right-6 -bottom-8 w-40 h-40 object-contain opacity-[0.07]"
                 onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")}
@@ -809,7 +813,7 @@ function CareerDashboard() {
             <div className="relative flex items-center gap-4">
               {club && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={`/logos/clubs/${club.id}.png`} alt="" className="w-16 h-16 object-contain shrink-0 drop-shadow-[0_4px_18px_rgba(0,0,0,0.6)]" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
+                <img src={club.escudo ?? `/logos/clubs/${club.id}.png`} alt="" className="w-16 h-16 object-contain shrink-0 drop-shadow-[0_4px_18px_rgba(0,0,0,0.6)]" onError={(e) => ((e.target as HTMLImageElement).style.visibility = "hidden")} />
               )}
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">

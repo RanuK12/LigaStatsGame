@@ -30,11 +30,25 @@ export default function CarreraEnCursoCard() {
         href="/carrera"
         className="group relative flex items-center gap-4 overflow-hidden rounded-3xl border border-[#D4AF37]/30 bg-gradient-to-r from-[#1a1508]/90 to-[#050a14]/90 p-4 transition-colors hover:border-[#D4AF37]/60 sm:p-5"
       >
+        {/* Los escudos viven en tres carpetas según de dónde salga el club: los 35 de siempre
+            en /logos/clubs, los del Ascenso y los otros países en /logos/carrera o /logos/ligas.
+            Saber cuál le toca a cada uno está en `career-engine`, y traerlo hasta acá metería
+            ligas.json (189 kB) en el bundle de la portada. Se prueban en orden y, si no hay
+            ninguno, la tarjeta se muestra igual sin escudo. */}
         <img
           src={`/logos/clubs/${carrera.clubId}.png`}
           alt=""
           className="h-12 w-12 shrink-0 object-contain sm:h-14 sm:w-14"
-          onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
+          onError={(e) => {
+            const img = e.target as HTMLImageElement
+            const alternativas = [
+              `/logos/carrera/${carrera.clubId}.png`,
+              `/logos/ligas/${carrera.clubId}.svg`,
+            ]
+            const i = alternativas.indexOf(new URL(img.src, location.origin).pathname)
+            if (i + 1 < alternativas.length) img.src = alternativas[i + 1]
+            else img.style.display = "none"
+          }}
         />
 
         <div className="min-w-0 flex-1">
