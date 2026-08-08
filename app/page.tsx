@@ -10,6 +10,7 @@ import type { Club, Squad } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
 import DonationSection from '@/components/DonationSection'
 import DailyCard from '@/components/DailyCard'
+import CarreraEnCursoCard from '@/components/CarreraEnCursoCard'
 import Novedades from '@/components/Novedades'
 import ContinentalBanner from '@/components/ContinentalBanner'
 import LigasBanner from '@/components/LigasBanner'
@@ -547,6 +548,10 @@ export default function HomePage() {
           llegaba. El menú del juego va arriba; lo que explica y promociona, abajo. */}
       {/* ── RETO DIARIO ── arriba de los modos: es la palanca principal de retención diaria */}
       <DailyCard />
+
+      {/* ── CARRERA EMPEZADA ── solo aparece si hay una guardada, y es el motivo más fuerte que
+          tiene alguien para volver: ya invirtió temporadas en ese jugador. */}
+      <CarreraEnCursoCard />
 
       {/* ── GAME MODES ── */}
       <section className="relative z-10 max-w-6xl mx-auto px-4 pb-20">

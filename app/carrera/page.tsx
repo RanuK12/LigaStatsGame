@@ -606,6 +606,21 @@ function CareerDashboard() {
   const barraActive = career.history[career.history.length - 1]?.barrabravas === true
 
   /**
+   * El texto que se comparte, para la carrera terminada y para la que va por la mitad.
+   *
+   * La versión de en curso no dice "terminé": dice dónde está parado y con qué. Es lo que a
+   * Copero le funciona —una carrera a medias también se cuenta— y es lo único que puede
+   * mostrar el 96 % que nunca llega al retiro.
+   */
+  const titulosGanados = career.history.reduce(
+    (a, s) => a + (s.liga ? 1 : 0) + (s.copaArgentina ? 1 : 0) + (s.continentalWon ? 1 : 0),
+    0,
+  )
+  const textoCompartir = career.finished
+    ? `🏆 Terminé la carrera de ${career.player.name} (${career.seasonsPlayed} temporadas) en ${club?.name || "Gambeta"} con ${titulosGanados} ${titulosGanados === 1 ? "título" : "títulos"}. 🔥 ¿Podés superarme?`
+    : `⚽ ${career.player.name}, ${career.player.age} años, ${career.player.ovr} de media en ${club?.name || "Gambeta"}. ${career.seasonsPlayed} ${career.seasonsPlayed === 1 ? "temporada" : "temporadas"}, ${career.totals.goals} goles${titulosGanados > 0 ? ` y ${titulosGanados} ${titulosGanados === 1 ? "título" : "títulos"}` : ""}. 🔥 A ver hasta dónde llegás vos.`
+
+  /**
    * El evento que interrumpe esta temporada, y de qué tipo es.
    *
    * Hay uno por temporada y en este orden: si te apretaron los barras eso manda, después la
@@ -985,31 +1000,32 @@ function CareerDashboard() {
             </div>
           )}
 
-          {/* ACCIONES: descargar ficha (SOLO al terminar/retirarse), retiro, reset */}
+          {/* ACCIONES: ficha y compartir (en cualquier momento de la carrera), retiro, reset.
+              Hasta hoy la ficha y el botón de compartir estaban detrás de `career.finished`, y
+              acá decía "vas a poder descargarla cuando termines". Medido del 11/7 al 7/8: 108
+              personas empiezan una carrera y 4 llegan al retiro, así que el artefacto que se
+              comparte —lo que a Copero le dio 9.901 seguidores— lo producían 4 personas por mes.
+              El que va tres temporadas también tiene algo para mostrar: se lo damos ahí. */}
           <div className="card-gradient rounded-3xl p-5 border border-white/10 space-y-3 shadow-xl">
-            {career.finished ? (
-              <>
-                <span className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider block text-center font-sport">Descargá tu ficha final HD</span>
-                <div className="grid grid-cols-3 gap-2 font-sport">
-                  <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "PNG HD"}</button>
-                  <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "JPG HD"}</button>
-                  <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "PDF HD"}</button>
-                </div>
-                {exportError && (
-                  <p className="text-center text-[10px] text-red-300 font-sport uppercase tracking-wider">{exportError}</p>
-                )}
-                <div className="mt-4">
-                  <ShareBar
-                    titulo="Compartí tu Carrera en Redes"
-                    texto={`🏆 Terminé la carrera de ${career.player.name} (${career.seasonsPlayed} temporadas) en ${club?.name || 'Gambeta'} con ${career.history.reduce((a, s) => a + (s.liga ? 1 : 0) + (s.copaArgentina ? 1 : 0) + (s.continentalWon ? 1 : 0), 0)} títulos. 🔥 ¿Podés superarme?`}
-                    destino="https://gambetafutbol.games/carrera"
-                    campana="carrera_share"
-                  />
-                </div>
-              </>
-            ) : (
-              <p className="text-[10px] text-slate-500 text-center font-sans">📥 Vas a poder descargar tu ficha HD cuando termines o te retires.</p>
+            <span className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-wider block text-center font-sport">
+              {career.finished ? "Descargá tu ficha final HD" : "Descargá tu ficha HD como va"}
+            </span>
+            <div className="grid grid-cols-3 gap-2 font-sport">
+              <button disabled={exporting} onClick={() => handleExport("png")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "PNG HD"}</button>
+              <button disabled={exporting} onClick={() => handleExport("jpg")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "JPG HD"}</button>
+              <button disabled={exporting} onClick={() => handleExport("pdf")} className="btn-gold py-2.5 text-[10px] font-bold tracking-wider uppercase rounded-xl shadow-md disabled:opacity-50">{exporting ? "Generando…" : "PDF HD"}</button>
+            </div>
+            {exportError && (
+              <p className="text-center text-[10px] text-red-300 font-sport uppercase tracking-wider">{exportError}</p>
             )}
+            <div className="mt-4">
+              <ShareBar
+                titulo={career.finished ? "Compartí tu Carrera en Redes" : "Compartí cómo va tu carrera"}
+                texto={textoCompartir}
+                destino="https://gambetafutbol.games/carrera"
+                campana="carrera_share"
+              />
+            </div>
             {!career.finished && (
               <button
                 onClick={() => { trackEvent(EVENTOS.carreraRetiro, { temporadas: career.history.length, edad: career.player.age }); retire(); setRevealSeason(null); setShowFinale(true) }}
