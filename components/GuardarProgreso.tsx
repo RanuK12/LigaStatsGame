@@ -1,6 +1,7 @@
 "use client"
 
 import { useUserStore } from "@/lib/user-store"
+import { useEmbebido } from "@/lib/embebido"
 
 /**
  * El pedido de cuenta, justo después de que la persona terminó un torneo.
@@ -14,9 +15,13 @@ import { useUserStore } from "@/lib/user-store"
  */
 export default function GuardarProgreso({ elo }: { elo?: number }) {
   const { user, openAuthModal } = useUserStore()
+  const embebido = useEmbebido()
 
   // Si ya tiene cuenta, no se le pide nada.
   if (user?.isLoggedIn) return null
+  // Dentro del reproductor de un portal tampoco: CrazyGames no permite que el juego ofrezca su
+  // propio login. Se juega de invitado y el progreso sigue en el navegador. Ver lib/embebido.ts.
+  if (embebido) return null
 
   return (
     <div className="mb-5 rounded-3xl border border-[#74ACDF]/30 bg-gradient-to-b from-[#74ACDF]/[0.09] to-slate-950/50 p-5 text-center">

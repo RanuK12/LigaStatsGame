@@ -11,12 +11,14 @@ import {
   type Reto,
 } from "@/lib/retos-engine"
 import { useUserStore } from "@/lib/user-store"
+import { useEmbebido } from '@/lib/embebido'
 import CertificadoPlatinadoModal from "@/components/retos/CertificadoPlatinadoModal"
 import { tocar } from "@/lib/sonido"
 
 export default function RetosPage() {
   const user = useUserStore((s) => s.user)
   const openAuthModal = useUserStore((s) => s.openAuthModal)
+  const embebido = useEmbebido()
 
   const [completados, setCompletados] = useState<string[]>([])
   const [filterTier, setFilterTier] = useState<string>("todos")
@@ -87,13 +89,22 @@ export default function RetosPage() {
                 Para registrar tus retos completados, guardar tu progreso de platinado en la nube y desbloquear tu Certificado Oficial de Leyenda, necesitás ingresar con tu cuenta.
               </p>
             </div>
+            {/* Dentro del reproductor de un portal no se ofrece login —CrazyGames no lo
+                permite— así que en vez del botón se dice dónde sí se puede.
+                Ver lib/embebido.ts. */}
             <div className="pt-2">
-              <button
-                onClick={openAuthModal}
-                className="btn-primary py-3.5 px-8 font-sport text-xs font-black uppercase tracking-wider shadow-xl"
-              >
-                🚀 INICIAR SESIÓN O CREAR CUENTA GRATIS
-              </button>
+              {embebido ? (
+                <p className="font-sport text-[11px] uppercase tracking-wider text-slate-400">
+                  Los retos necesitan una cuenta. Se juegan en gambetafutbol.games
+                </p>
+              ) : (
+                <button
+                  onClick={openAuthModal}
+                  className="btn-primary py-3.5 px-8 font-sport text-xs font-black uppercase tracking-wider shadow-xl"
+                >
+                  🚀 INICIAR SESIÓN O CREAR CUENTA GRATIS
+                </button>
+              )}
             </div>
           </div>
         ) : (

@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useUserStore } from '@/lib/user-store'
+import { useEmbebido } from '@/lib/embebido'
 import { supabase } from '@/lib/supabase'
 import { profileFromSupabaseUser } from '@/lib/auth'
 import TierBadge from './TierBadge'
@@ -41,6 +42,9 @@ export default function Header() {
   const cierre = useRef<ReturnType<typeof setTimeout> | null>(null)
   const masActivo = NAV_MAS.some((i) => pathname.startsWith(i.href))
   const { user, openAuthModal, openProfileModal, setUser, closeAuthModal } = useUserStore()
+  // Dentro del reproductor de un portal no se ofrece login: CrazyGames lo prohíbe y el juego
+  // anda entero de invitado. Ver lib/embebido.ts.
+  const embebido = useEmbebido()
 
   // Hydrate the local store from Supabase Auth (OAuth redirect + persisted session).
   // Al detectar sesión también cerramos el modal: sin esto, tras el login con Google
@@ -208,7 +212,7 @@ export default function Header() {
               <span className="text-[10px] text-[#74ACDF] font-bold">⚡{user.elo}</span>
               <span className="hidden sm:inline-flex"><TierBadge elo={user.elo} /></span>
             </button>
-          ) : (
+          ) : embebido ? null : (
             <button
               onClick={openAuthModal}
               // `.btn-primary` trae letter-spacing 0.28em y font-family Sora, y como los define
