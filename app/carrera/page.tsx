@@ -91,8 +91,11 @@ export default function CarreraPage() {
     <div className="min-h-screen gradient-bg arg-stripe-bg text-white px-4 py-8 font-sans">
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="card-gradient rounded-3xl p-6 sm:p-8 border border-[#74ACDF]/20 text-center relative overflow-hidden shadow-2xl">
+          {/* Acá decía "COPERO ENGINE". Copero es el competidor directo: su marca no va en
+              nuestra propia página, y menos en la portada del modo que compite con el suyo.
+              El motor de la carrera es nuestro y está en lib/career-engine.ts. */}
           <span className="text-[10px] font-bold text-[#74ACDF] tracking-widest uppercase font-sport block mb-1">
-            SIMULADOR MODO CARRERA INTERACTIVO 3D · COPERO ENGINE
+            SIMULADOR DE CARRERA · 409 CLUBES DE 8 PAÍSES
           </span>
           <h1 className="font-display text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
             TU CAMINO A LA GLORIA
