@@ -129,6 +129,32 @@ X vale mucho más de lo que dice Analytics y hay que multiplicarlo, no abandonar
 
 ---
 
+## 2 bis. Qué se ejecutó el 8 de agosto
+
+Todo lo de abajo está en `main` y desplegado. Lo que quedó pendiente lleva el motivo al lado.
+
+| Frente | Qué se hizo | Commit |
+|---|---|---|
+| **0** | **Los despliegues estaban trabados desde el 6/8.** La corrida #307 dejó el job `deploy` en "waiting" y, con `cancel-in-progress: false`, el grupo "pages" nunca se soltó: 20 corridas canceladas y nada publicado en dos días. Se destrabó a mano y se cambió a `cancel-in-progress: true` con timeout por job | `73b20d8` |
+| **1** | La ficha y el botón de compartir salieron de atrás de `career.finished`: ahora están desde la primera temporada, con placa de historias y link a `/c/` con tu carrera | `24773a6` `e08cf8e` |
+| **1** | El home ofrece seguir la carrera guardada. Ya se guardaba sola; nada se lo decía a nadie | `24773a6` |
+| **1** | `carrera_temporada_fin` medido: en una semana sabemos en qué año se abandona | `1efd137` |
+| **2.2** | `/juegos-de-futbol-argentino/`: la única página escrita para el que no sabe que existimos | `a39d288` |
+| **2.4** | Search Console vinculado a Analytics (estaba sin vincular; ahora las consultas aparecen al lado del embudo) | — configuración |
+| **3** | El resultado del reto en cuadraditos, para pegar en un grupo sin imagen ni link | `73b20d8` |
+| **—** | El ícono de la app era el escudo de la AFA y no era cuadrado. Reemplazado por el logo real en 192 y 512 | `12599d5` |
+| **—** | Borrado el pipeline de marketing que no leía nadie y la etiqueta `keywords`, que Google ignora desde 2009 | `5a3559a` |
+| **2.1** | Preparado entero en `docs/PORTALES_HTML5.md`: comprobado que se puede embeber, ficha escrita, íconos listos. **Falta Emilio**: crear las cuentas y subir | `12599d5` |
+| **2.3** | Comunidades: pendiente, necesita a Emilio publicando con su cuenta | — |
+| **4** | La hipótesis de la búsqueda de marca no se puede comprobar todavía: Search Console tiene 6 días de datos y hacen falta al menos tres semanas para cruzar contra los días de publicación | — |
+
+Una corrección respecto de lo que dice el Frente 1 más abajo: la **carrera express de 5
+temporadas quedó descartada**. Al leer el código apareció que el botón "🏁 Simular completa" ya
+termina la carrera de un clic, así que el largo no era el bloqueo. El bloqueo real era que el
+artefacto compartible estaba detrás del retiro, y eso es lo que se arregló.
+
+---
+
 ## 3. El plan
 
 Cuatro frentes, en este orden. El orden importa: abrir puertas antes de tapar el agujero es
