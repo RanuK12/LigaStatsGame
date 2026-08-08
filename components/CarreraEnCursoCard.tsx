@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { leerCarrera, CLAVE_CARRERA, type CarreraGuardada } from "@/lib/carrera-guardada"
+import { leerCarrera, crudoGuardado, type CarreraGuardada } from "@/lib/carrera-guardada"
 
 /**
  * "Seguí donde quedaste", en el home.
@@ -20,7 +20,7 @@ export default function CarreraEnCursoCard() {
 
   // Después del montaje: en el servidor no hay localStorage, y pintar la tarjeta en el HTML
   // daría un parpadeo con datos de otra persona en cualquier caché intermedia.
-  useEffect(() => setCarrera(leerCarrera(localStorage.getItem(CLAVE_CARRERA))), [])
+  useEffect(() => setCarrera(leerCarrera(crudoGuardado())), [])
 
   if (!carrera) return null
 

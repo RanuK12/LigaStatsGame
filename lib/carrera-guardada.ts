@@ -17,7 +17,25 @@ export interface CarreraGuardada {
   clubId: string
 }
 
-export const CLAVE_CARRERA = 'ligastats_career_v1'
+const CLAVE_CARRERA = 'ligastats_career_v1'
+
+/**
+ * El texto guardado, o null si no se puede leer.
+ *
+ * `localStorage.getItem` no siempre devuelve: en un iframe de otro dominio Safari lo bloquea, y
+ * en modo privado hay navegadores que tiran excepción al tocarlo. Sin este envoltorio la
+ * excepción sale del `useEffect` de la tarjeta y se lleva puesta la portada entera. El resto del
+ * juego (`daily-progress`, `scores`, `sonido`) ya se protege igual. Importa además para poder
+ * publicar el juego embebido en portales tipo CrazyGames, que es todo iframe de otro dominio.
+ */
+export function crudoGuardado(): string | null {
+  try {
+    if (typeof localStorage === 'undefined') return null
+    return localStorage.getItem(CLAVE_CARRERA)
+  } catch {
+    return null
+  }
+}
 
 export function leerCarrera(crudo: string | null): CarreraGuardada | null {
   if (!crudo) return null
