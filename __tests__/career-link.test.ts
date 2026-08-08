@@ -61,6 +61,22 @@ describe('link de la carrera', () => {
     expect(vuelta!.pie).toBe(c.pie)
   })
 
+  /**
+   * Desde que se puede compartir a mitad de camino, el link se arma sin leyenda ni historia de
+   * retiro: a las tres temporadas no hay con quién compararse todavía. `/c/` resuelve las dos
+   * ausencias ("La carrera de Fulano"), pero solo si el paquete viaja y vuelve entero.
+   */
+  it('una carrera a medias viaja sin leyenda ni retiro', () => {
+    const s = carreraJugada()
+    const c: CarreraCompartida = { card: buildCareerCardData(s), temporadas: s.seasonsPlayed }
+    const vuelta = decodeCarrera(encodeCarrera(c))
+    expect(vuelta).not.toBeNull()
+    expect(vuelta!.card.playerName).toBe(c.card.playerName)
+    expect(vuelta!.temporadas).toBe(c.temporadas)
+    expect(vuelta!.leyenda).toBeUndefined()
+    expect(vuelta!.pie).toBeUndefined()
+  })
+
   it('sobreviven los acentos y las banderas', () => {
     const c = paquete(carreraJugada())
     c.card.playerName = 'Ramiro Núñez'

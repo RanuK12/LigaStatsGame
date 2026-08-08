@@ -46,6 +46,8 @@ import {
   positionCategory,
 } from "@/lib/career-engine"
 import { useCareerStore, buildCareerCardData, type CareerSetup } from "@/lib/career-store"
+import { urlDeCarrera } from "@/lib/career-link"
+import { storyBlob, type FormatoFicha } from "@/lib/story-card"
 import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/career-pdf"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 
@@ -621,6 +623,45 @@ function CareerDashboard() {
     : `⚽ ${career.player.name}, ${career.player.age} años, ${career.player.ovr} de media en ${club?.name || "Gambeta"}. ${career.seasonsPlayed} ${career.seasonsPlayed === 1 ? "temporada" : "temporadas"}, ${career.totals.goals} goles${titulosGanados > 0 ? ` y ${titulosGanados} ${titulosGanados === 1 ? "título" : "títulos"}` : ""}. 🔥 A ver hasta dónde llegás vos.`
 
   /**
+   * El link lleva a TU carrera, no a la portada.
+   *
+   * Es el mismo circuito que ya usa la ficha final (`CareerFinale`) y que copiamos de El Ídolo:
+   * un PNG descargado no se previsualiza, no se clickea y no lo indexa nadie; una URL sí, y el
+   * que la abre ve la carrera entera con un botón para crear la suya. La carrera a mitad de
+   * camino no tiene leyenda con la que compararse ni historia de retiro todavía, y `/c/` ya
+   * resuelve las dos ausencias ("La carrera de Fulano").
+   */
+  const urlCarrera = urlDeCarrera({ card: cardData, temporadas: career.seasonsPlayed })
+
+  /** La placa para historias e Instagram, la misma que arma la ficha final. */
+  const placaCarrera = (formato: FormatoFicha) =>
+    storyBlob(
+      {
+        volanta: "Modo Carrera",
+        titulo: career.finished
+          ? `La carrera de ${career.player.name}`
+          : `${career.player.name}, ${career.player.ovr} de media`,
+        subtitulo: [
+          cardData.idolatria && `${cardData.idolatria.nivel} de ${cardData.idolatria.clubName}`,
+          club?.name,
+          `${career.seasonsPlayed} ${career.seasonsPlayed === 1 ? "temporada" : "temporadas"}`,
+        ]
+          .filter(Boolean)
+          .join(" · "),
+        stats: [
+          { valor: `${titulosGanados}`, label: "Títulos" },
+          { valor: `${career.totals.matchesPlayed}`, label: "Partidos" },
+          positionCategory(career.player.position) === "GK"
+            ? { valor: `${cardData.cleanSheets ?? 0}`, label: "Vallas" }
+            : { valor: `${career.totals.goals}`, label: "Goles" },
+          { valor: `${career.player.age}`, label: "Años" },
+        ],
+        acento: titulosGanados > 0 ? "#D4AF37" : undefined,
+      },
+      formato,
+    )
+
+  /**
    * El evento que interrumpe esta temporada, y de qué tipo es.
    *
    * Hay uno por temporada y en este orden: si te apretaron los barras eso manda, después la
@@ -1022,8 +1063,9 @@ function CareerDashboard() {
               <ShareBar
                 titulo={career.finished ? "Compartí tu Carrera en Redes" : "Compartí cómo va tu carrera"}
                 texto={textoCompartir}
-                destino="https://gambetafutbol.games/carrera"
+                destino={urlCarrera}
                 campana="carrera_share"
+                imagen={placaCarrera}
               />
             </div>
             {!career.finished && (
