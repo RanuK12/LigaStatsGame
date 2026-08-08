@@ -710,6 +710,12 @@ function CareerDashboard() {
 
   function revelar(simuladas: number, yearsCount: number) {
     const fin = useCareerStore.getState().career
+    // Dónde quedó la carrera. Sin esto solo sabemos cuántas empiezan (155) y cuántas llegan al
+    // retiro (4): el 96 % que abandona lo hace en un punto que no medimos. `temporada` es la
+    // acumulada, así que el máximo por usuario es el año en el que dejó de jugar.
+    if (fin?.history.length) {
+      trackEvent(EVENTOS.carreraTemporada, { temporada: fin.history.length, edad: fin.player.age })
+    }
     if (fin?.finished) {
       // Llegó al final de la carrera: ficha final directo.
       setShowFinale(true)
