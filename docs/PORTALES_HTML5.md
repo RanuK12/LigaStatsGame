@@ -70,6 +70,42 @@ aguja). Poki cuando el reto diario tenga un mes de datos.
 **Controles:** mouse y pantalla táctil
 **Edad:** apto todo público, sin violencia ni compras
 
+## 3 bis. El paquete y las portadas, ya hechos
+
+```
+node scripts/data/build-bundle-itchio.mjs     # → data/reports/portales/gambeta-itchio.zip
+node scripts/data/build-portada-portales.mjs  # → data/reports/portales/portada-*.png
+```
+
+**El zip de itch.io.** Ojo con esto, porque es lo que hace fracasar la primera subida: itch.io
+exige `index.html` en la raíz del zip y **prohíbe las rutas absolutas** ("if you use an absolute
+path … the request will fail"). CrazyGames dice lo mismo: *"Use only relative paths … Never use
+absolute paths, as they will fail to load"*. El export de Next escribe todo como `/_next/...`,
+así que **subir la carpeta `out/` tal cual da una pantalla en blanco**.
+
+La salida son los archivos servidos desde afuera, que las dos plataformas contemplan: itch.io
+permite cargar recursos externos por HTTPS y CrazyGames evalúa los *externally hosted/loaded
+files* por el tiempo hasta empezar a jugar (≤ 20 s). El zip es un `index.html` de 1 kB con el
+juego embebido desde gambetafutbol.games. Probado en un navegador real: carga y se juega.
+De regalo, la versión del portal nunca queda vieja: se actualiza sola con cada despliegue.
+
+Lo honesto: hay revisores de CrazyGames que prefieren un bundle propio antes que un envoltorio.
+Si lo rechazan por eso, la alternativa es un build con `assetPrefix` relativo, que con
+`trailingSlash: true` y rutas anidadas hay que armar aparte.
+
+**Las tres portadas** salen con las medidas obligatorias de CrazyGames
+(`docs.crazygames.com/requirements/game-covers`), verificadas en su documentación:
+
+| Archivo | Medida | Para |
+|---|---|---|
+| `portada-apaisada-1920x1080.png` | 1920×1080 (16:9) | apaisada |
+| `portada-vertical-800x1200.png` | 800×1200 (2:3) | vertical |
+| `portada-cuadrada-800x800.png` | 800×800 (1:1) | cuadrada |
+
+Respetan sus reglas: sin bordes, no son una captura del juego, el nombre va escrito arriba con
+la tipografía del sitio, y las tres comparten la misma imagen para que se reconozca el juego
+venga de donde venga.
+
 ## 4. Capturas
 
 Se generan con el juego corriendo, no son maquetas:
@@ -87,14 +123,35 @@ Las que conviene mandar, en este orden: `draft`, `carrera`, `home`, `equipos`, `
 
 ## 5. Lo que falta y necesita a Emilio
 
-Estos pasos piden una cuenta y aceptar términos, así que no los puedo hacer yo:
+Todo lo de arriba está hecho y probado. Lo que queda son los pasos que piden **crear una cuenta
+y aceptar los términos**, que es una firma y por eso va con la mano de Emilio, no con la mía.
 
-1. Crear cuenta de desarrollador en **itch.io** y en **CrazyGames**.
-2. Subir la ficha de arriba con las capturas.
-3. Decidir el punto de **GameDistribution**: su modelo es con anuncios y hoy el juego no tiene
-   ninguno. Es una decisión de producto, no técnica.
-4. Un video de 30 segundos. Es opcional en itch.io y **recomendado** en CrazyGames: se puede
-   grabar una partida de draft de punta a punta con la pantalla.
+### itch.io — 5 minutos
+
+1. Cuenta en <https://itch.io/register>.
+2. <https://itch.io/game/new>
+3. Título `Gambeta`, y en **Kind of project** elegir **HTML**.
+4. Subir `data/reports/portales/gambeta-itchio.zip` y tildar **"This file will be played in the
+   browser"**.
+5. Pegar la descripción de la sección 3.
+6. **Cover image**: `portada-apaisada-1920x1080.png`.
+7. Capturas: las de la sección 4.
+8. Publicar.
+
+### CrazyGames — más largo, tiene revisión
+
+1. Cuenta en <https://developer.crazygames.com/>.
+2. **Submit my game** → el mismo zip y la misma ficha.
+3. Las **tres portadas** son obligatorias: apaisada, vertical y cuadrada.
+4. Piden además un **video de vista previa**. Es lo único que no puedo generar: hay que grabar
+   la pantalla jugando un draft de punta a punta, unos 30 segundos.
+5. Queda en revisión de su equipo de calidad.
+
+### La decisión que es tuya
+
+**GameDistribution** reparte el juego a miles de sitios chicos de golpe, pero su modelo es meter
+**su SDK de anuncios**. Hoy Gambeta no tiene ni una publicidad y la página dice "gratis y sin
+anuncios". Es más alcance a cambio de romper esa promesa: decisión de producto, no técnica.
 
 ## 6. Cómo se mide si sirvió
 
