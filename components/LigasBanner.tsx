@@ -2,30 +2,29 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { LIGAS, PAISES_CARRERA, clubesDeLiga, nivelDeLiga, etiquetaDeNivel } from "@/lib/career-engine"
+import banner from "@/data/derived/ligas-banner.json"
 
 /**
  * Las ligas del modo carrera, en la portada.
  *
- * Es lo más grande que tiene el juego y no se contaba en ningún lado: 7 países, 16 categorías y
- * 378 clubes, con el ascenso argentino entero. Ningún otro juego del rubro deja empezar en el
- * Federal A, y eso hay que decirlo donde la gente llega, no esconderlo adentro del modo carrera.
+ * Es lo más grande que tiene el juego y no se contaba en ningún lado: ocho países, diecinueve
+ * categorías y más de cuatrocientos clubes, con el ascenso argentino entero. Ningún otro juego
+ * del rubro deja empezar en el Federal A, y eso hay que decirlo donde la gente llega, no
+ * esconderlo adentro del modo carrera.
  *
- * Los números salen del propio dato, no escritos a mano: si mañana entra otro país, la portada
- * lo cuenta sola.
+ * Los números exactos no se escriben acá a propósito —envejecen mal— sino que salen del dato.
  */
 
-const TOTAL_CLUBES = LIGAS.reduce((a, l) => a + clubesDeLiga(l.id).length, 0)
-
-/** Los países con sus categorías, de la liga más fuerte a la más floja. */
-const PAISES = PAISES_CARRERA.map((p) => {
-  const suyas = LIGAS.filter((l) => l.pais === p.nombre).sort((a, b) => a.division - b.division)
-  return {
-    ...p,
-    ligas: suyas.map((l) => ({ ...l, nivel: nivelDeLiga(l.id), clubes: clubesDeLiga(l.id).length })),
-    tope: Math.max(...suyas.map((l) => nivelDeLiga(l.id))),
-  }
-}).sort((a, b) => b.tope - a.tope)
+/**
+ * Los números salen de `data/derived/ligas-banner.json`, que arma el build.
+ *
+ * Antes esto importaba `career-engine` para mostrar cuatro datos por país, y con eso se llevaba
+ * `ligas.json` —189 kB— y el motor entero al bundle de la PORTADA. El móvil es la mayoría del
+ * tráfico y convierte cuatro veces peor: ese peso se paga justo ahí. El archivo derivado pesa
+ * 2 kB y se regenera solo con `npm run build:ligas-banner`, así que si mañana entra otro país
+ * la portada lo sigue contando sola.
+ */
+const { paises: PAISES, totalLigas: TOTAL_LIGAS, totalClubes: TOTAL_CLUBES } = banner
 
 export default function LigasBanner() {
   return (
@@ -43,7 +42,7 @@ export default function LigasBanner() {
         <p className="mx-auto mt-2.5 max-w-2xl text-sm leading-relaxed text-slate-400">
           El modo carrera se juega en{" "}
           <strong className="text-slate-200">{PAISES.length} países</strong> y{" "}
-          <strong className="text-slate-200">{LIGAS.length} categorías</strong>, con{" "}
+          <strong className="text-slate-200">{TOTAL_LIGAS} categorías</strong>, con{" "}
           <strong className="text-slate-200">{TOTAL_CLUBES} clubes</strong>. Elegís dónde debutar
           —hasta en el Torneo Federal A— y subís peleándola.
         </p>
@@ -91,7 +90,7 @@ export default function LigasBanner() {
 
                 <div className="mt-auto pt-3">
                   <span className="font-sport text-[10px] font-bold uppercase tracking-wider text-[#F6C750]">
-                    {etiquetaDeNivel(p.tope)} · {p.copa}
+                    {p.etiqueta} · {p.copa}
                   </span>
                 </div>
               </div>
