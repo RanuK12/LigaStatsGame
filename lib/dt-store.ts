@@ -267,7 +267,7 @@ export const useDTStore = create<DTStore>()(
         const echaronDe = ev.despedido && !e.echaronDe.includes(e.clubId) ? [...e.echaronDe, e.clubId] : e.echaronDe
         // Los que ya te echaron no te vuelven a llamar: cada despido cierra una puerta, y por eso
         // la carrera puede terminarse de verdad en vez de durar siempre veinte temporadas.
-        const ofertas = ev.despedido ? clubesQueTeLlaman(prestigio, clubes, echaronDe, rng) : []
+        const ofertas = ev.despedido ? clubesQueTeLlaman(prestigio, clubes, echaronDe, rng, echaronDe.length) : []
 
         // Pasa un año para todos: los pibes crecen, los veteranos bajan y alguno se retira.
         const evolucion = evolucionarPlantel(plantelReal, e.ajustes, 1, rngAnio)

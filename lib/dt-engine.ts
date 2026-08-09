@@ -635,16 +635,35 @@ export interface OfertaTrabajo {
  *
  * Se combina con `excluir`: los clubes que ya te echaron no te vuelven a llamar, así que a fuerza
  * de despidos te vas quedando sin puertas aunque el prestigio aguante.
+ *
+ * Y hacen falta las DOS condiciones. Con el piso solo, jugando una carrera de punta a punta en el
+ * navegador se terminaba en la temporada 6 con un despido: el prestigio arranca en 10 y una mala
+ * temporada resta hasta 12, así que el primer fracaso cerraba todas las puertas para siempre. A un
+ * técnico joven que fracasa en Aldosivi lo vuelve a llamar otro club chico; al que fracasó en dos,
+ * no. Y sin segundo club la ficha final no tiene trayectoria: un solo escudo en "por dónde pasó".
+ *
+ * El número de despidos es el que manda, no el piso: al despido llegás casi siempre con el
+ * prestigio en el fondo, así que la condición del piso rara vez decide sola. Barrido sobre las
+ * mismas 312 carreras de 20 temporadas:
+ *
+ *   despidos=1 → 62% termina sin trabajo, largo medio 9,2 temporadas
+ *   despidos=2 →  5% termina sin trabajo, largo medio 17,9 temporadas
+ *
+ * Va 2. Con 1, la mayoría de las carreras se corta en el primer tropiezo; con 2, el 80% igual se
+ * come un despido —la tensión temporada a temporada queda intacta— pero se puede reconstruir.
  */
-export const PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN = 8
+export const PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN = 20
+export const DESPIDOS_ANTES_DE_QUEDARTE_SIN_PUERTAS = 2
 
 export function clubesQueTeLlaman(
   prestigio: number,
   clubes: ClubDT[],
   excluir: string[],
   rng: () => number,
+  despidos = 0,
 ): OfertaTrabajo[] {
-  if (prestigio < PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN) return []
+  if (prestigio < PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN && despidos >= DESPIDOS_ANTES_DE_QUEDARTE_SIN_PUERTAS)
+    return []
   const disponibles = clubes.filter((c) => !excluir.includes(c.id))
   if (disponibles.length === 0) return []
 

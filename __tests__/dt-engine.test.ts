@@ -15,6 +15,7 @@ import {
   evaluar,
   clubesQueTeLlaman,
   PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN,
+  DESPIDOS_ANTES_DE_QUEDARTE_SIN_PUERTAS,
   resumenDeTemporada,
   resumenDeCopa,
   onceDeFormacion,
@@ -163,7 +164,7 @@ function correrCarreraDT(clubInicial: string, semilla: number, temporadas = MAX_
 
     if (ev.despedido) {
       const echaronDe = s.echaronDe.includes(s.clubId) ? s.echaronDe : [...s.echaronDe, s.clubId]
-      const ofertas = clubesQueTeLlaman(prestigio, CLUBES, echaronDe, rng)
+      const ofertas = clubesQueTeLlaman(prestigio, CLUBES, echaronDe, rng, echaronDe.length)
       if (ofertas.length === 0) {
         s = { ...s, historia: [...s.historia, temporada], prestigio, paciencia, echaronDe, despedido: true, terminada: true }
         break
@@ -402,20 +403,34 @@ describe('los clubes que te llaman', () => {
    * El final malo. Sin esto la carrera dura siempre veinte temporadas: en 144 carreras medidas
    * antes de existir este piso, CERO terminaron sin trabajo.
    */
-  it('con el prestigio por el piso no te llama nadie', () => {
+  it('con el prestigio por el piso y tres despidos encima no te llama nadie', () => {
     const rng = makeRng(5)
-    expect(clubesQueTeLlaman(PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN - 1, CLUBES, [], rng)).toHaveLength(0)
-    expect(clubesQueTeLlaman(0, CLUBES, [], rng)).toHaveLength(0)
+    const bajo = PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN - 1
+    expect(clubesQueTeLlaman(bajo, CLUBES, [], rng, DESPIDOS_ANTES_DE_QUEDARTE_SIN_PUERTAS)).toHaveLength(0)
+    expect(clubesQueTeLlaman(0, CLUBES, [], rng, 9)).toHaveLength(0)
+  })
+
+  /**
+   * La otra mitad de la misma regla, y la que faltaba: el primer fracaso no puede ser el último.
+   * El prestigio arranca en 10 y una mala temporada resta hasta 12, así que mirando solo el piso
+   * la carrera se terminaba en el primer despido. Medido jugando de punta a punta: se acabó en la
+   * temporada 6, con un despido y ninguna oferta.
+   */
+  it('el primer despido no te deja sin trabajo para siempre', () => {
+    const rng = makeRng(5)
+    for (let despidos = 0; despidos < DESPIDOS_ANTES_DE_QUEDARTE_SIN_PUERTAS; despidos++) {
+      expect(clubesQueTeLlaman(0, CLUBES, [], rng, despidos).length).toBeGreaterThan(0)
+    }
   })
 
   it('los clubes que ya te echaron no te vuelven a llamar', () => {
     const rng = makeRng(17)
     const echaronDe = CLUBES.slice(0, CLUBES.length - 2).map((c) => c.id)
-    const ofertas = clubesQueTeLlaman(90, CLUBES, echaronDe, rng)
+    const ofertas = clubesQueTeLlaman(90, CLUBES, echaronDe, rng, echaronDe.length)
     expect(ofertas.length).toBeGreaterThan(0)
     expect(ofertas.every((o) => !echaronDe.includes(o.clubId))).toBe(true)
     // Y si te echaron de todos, se acabó.
-    expect(clubesQueTeLlaman(90, CLUBES, CLUBES.map((c) => c.id), rng)).toHaveLength(0)
+    expect(clubesQueTeLlaman(90, CLUBES, CLUBES.map((c) => c.id), rng, CLUBES.length)).toHaveLength(0)
   })
 })
 
@@ -456,16 +471,23 @@ describe('300 carreras de DT completas', () => {
       let conDespido = 0
       let terminadasSinTrabajo = 0
       let conCopa = 0
+      let sumaTemporadas = 0
+      const largos: number[] = []
       const apodos = new Set<string>()
 
       for (const clubId of clubes) {
         for (const semilla of semillas) {
-          const s = correrCarreraDT(clubId, semilla, 8)
+          // El largo va hasta el tope real del modo. Con el corte en 8 el promedio daba 8,0
+          // —o sea, el tope— y no medía nada: la pregunta es cuánto dura una carrera, no si
+          // llega al corte que le puse yo.
+          const s = correrCarreraDT(clubId, semilla, MAX_TEMPORADAS_DT)
           const f = fichaDT(s, nombreDe)
           corridas++
           if (f.titulos > 0) conTitulo++
           if (f.despidos > 0) conDespido++
           if (f.copas > 0) conCopa++
+          sumaTemporadas += s.historia.length
+          largos.push(s.historia.length)
           if (s.despedido && s.historia.length < 8) terminadasSinTrabajo++
           apodos.add(f.apodo)
 
@@ -473,7 +495,7 @@ describe('300 carreras de DT completas', () => {
 
           // La carrera existe y avanzó.
           expect(s.historia.length, contexto).toBeGreaterThan(0)
-          expect(s.historia.length).toBeLessThanOrEqual(8)
+          expect(s.historia.length).toBeLessThanOrEqual(MAX_TEMPORADAS_DT)
 
           // Las escalas no se rompen nunca.
           expect(s.prestigio, contexto).toBeGreaterThanOrEqual(0)
@@ -521,11 +543,17 @@ describe('300 carreras de DT completas', () => {
         }
       }
 
+      const ordenLargos = [...largos].sort((a, b) => a - b)
+      const mediana = ordenLargos[Math.floor(ordenLargos.length / 2)]
+      const cortas = largos.filter((n) => n <= 5).length
+
       const resumen =
         `${corridas} carreras · ${conTitulo} con título (${Math.round((conTitulo / corridas) * 100)}%) · ` +
         `${conDespido} con despido (${Math.round((conDespido / corridas) * 100)}%) · ` +
         `${conCopa} con copa (${Math.round((conCopa / corridas) * 100)}%) · ` +
-        `${terminadasSinTrabajo} sin trabajo · apodos: ${[...apodos].join(', ')}`
+        `${terminadasSinTrabajo} sin trabajo (${Math.round((terminadasSinTrabajo / corridas) * 100)}%) · ` +
+        `largo: medio ${(sumaTemporadas / corridas).toFixed(1)}, mediana ${mediana}, ` +
+        `${cortas} de 5 o menos (${Math.round((cortas / corridas) * 100)}%) · apodos: ${[...apodos].join(', ')}`
       fs.writeFileSync('/tmp/dt-estres.txt', resumen)
       console.log('[DT] ' + resumen)
 
