@@ -5,10 +5,8 @@ import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "rea
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import TeamTacticalRadar from "@/components/charts/TeamTacticalRadar"
-import squadsData from "@/data/squads.json"
 import type { Player, Squad, TournamentResult } from "@/lib/types"
-import { normalizeSquads } from "@/lib/data-normalizers"
-import { usePlayersCore } from "@/lib/data-loader"
+import { usePlayersCore, useSquads } from "@/lib/data-loader"
 import { useUserStore } from "@/lib/user-store"
 import { calculateElo, submitOnlineScore } from "@/lib/supabase"
 import { tournamentPoints, plazaPorPuesto, BASE_POR_TORNEO, type TorneoTipo } from "@/lib/ranking"
@@ -199,7 +197,10 @@ function DraftInner() {
     // dejar al jugador trabado. No debería pasar: cada filtro está medido, pero la base cambia.
     return filtrados.length >= 60 ? filtrados : base
   }, [playersCore, retoDelDia])
-  const allS = useMemo(() => normalizeSquads(squadsData), [])
+  const { squads: squadsCore, error: squadsError } = useSquads()
+  const allS = squadsCore ?? []
+  // El bombo necesita las dos cosas: sin planteles, un giro no tiene de dónde sacar jugadores.
+  const datosListos = Boolean(playersCore && squadsCore)
   const { user, updateElo, addTitle, otorgarPlaza, usarPlaza } = useUserStore()
 
   // ── Game State ──
@@ -597,13 +598,13 @@ function DraftInner() {
               globals.css y le gana a la utilidad de Tailwind, así que el botón seguía a la vista. */}
           <div className="hidden sm:block">
             <MagneticButton>
-              <button onClick={startGame} disabled={!playersCore} className="btn-primary px-10 py-4 font-sport">
-                {playersCore ? "Comenzar Draft" : "Cargando jugadores..."}
+              <button onClick={startGame} disabled={!datosListos} className="btn-primary px-10 py-4 font-sport">
+                {datosListos ? "Comenzar Draft" : "Cargando jugadores..."}
               </button>
             </MagneticButton>
           </div>
-          {playersError && (
-            <p className="mt-3 text-xs text-red-400">No se pudo cargar la base de jugadores: {playersError}. Recargá la página.</p>
+          {(playersError || squadsError) && (
+            <p className="mt-3 text-xs text-red-400">No se pudo cargar la base: {playersError || squadsError}. Recargá la página.</p>
           )}
           <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider inline-block py-2.5 px-3">Volver al inicio</Link>
         </motion.div>
@@ -617,10 +618,10 @@ function DraftInner() {
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#020813]/95 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden">
           <button
             onClick={startGame}
-            disabled={!playersCore}
+            disabled={!datosListos}
             className="btn-primary w-full py-4 font-sport text-sm"
           >
-            {playersCore ? "Comenzar Draft" : "Cargando jugadores..."}
+            {datosListos ? "Comenzar Draft" : "Cargando jugadores..."}
           </button>
         </div>
       </div>

@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import clubsData from '@/data/clubs.json'
-import squadsData from '@/data/squads.json'
-import type { Club, Squad } from '@/lib/types'
+import type { Club } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
 import DonationSection from '@/components/DonationSection'
 import DailyCard from '@/components/DailyCard'
@@ -19,7 +18,6 @@ import SolDeMayo from '@/components/ui/SolDeMayo'
 import dbStats from '@/data/derived/stats.json'
 
 const clubs: Club[] = clubsData as Club[]
-const squads: Squad[] = squadsData as Squad[]
 
 /* ─── GAME MODES ─────────────────────────────────────────────── */
 const MODES = [
@@ -234,7 +232,7 @@ function WorldCupBanner() {
           <div className="grid grid-cols-2 gap-3 w-full max-w-xs shrink-0">
             {[
               { icon: '⚽', label: 'Jugadores', value: dbStats.players.toLocaleString('es-AR'), sub: 'Reales, auditados' },
-              { icon: '📋', label: 'Planteles', value: `${squads.length}`, sub: 'Temporadas oficiales' },
+              { icon: '📋', label: 'Planteles', value: `${dbStats.squads}`, sub: 'Temporadas oficiales' },
               { icon: '🛡️', label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
               { icon: '🏆', label: 'Históricos', value: `${dbStats.historicos}`, sub: 'Equipos que hicieron historia' },
             ].map((s, i) => (

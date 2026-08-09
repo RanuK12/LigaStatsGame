@@ -5,9 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import VersusRealtimeLobby from "@/components/versus/VersusRealtimeLobby"
-import { usePlayersCore } from "@/lib/data-loader"
-import squadsData from "@/data/squads.json"
-import { normalizeSquads } from "@/lib/data-normalizers"
+import { usePlayersCore, useSquads } from "@/lib/data-loader"
 import {
   formations,
   POS_LABELS,
@@ -69,7 +67,8 @@ function clubColors(clubId: string): string[] | undefined {
 export default function VersusPage() {
   const { players: playersCore } = usePlayersCore()
   const allP = useMemo(() => playersCore ?? [], [playersCore])
-  const allS = useMemo(() => normalizeSquads(squadsData), [])
+  const { squads: squadsCore } = useSquads()
+  const allS = squadsCore ?? []
 
   const [versusMode, setVersusMode] = useState<"local" | "realtime">("local")
   
@@ -144,6 +143,13 @@ export default function VersusPage() {
   const spinWheel = useCallback(() => {
     if (activeDT.spinning) return
 
+    // Los planteles y los jugadores llegan por fetch: hasta que están, no hay bombo. Sin esta
+    // distinción el aviso decía "no hay planteles con jugadores libres para esta posición", que
+    // es falso y manda a cambiar de posición cuando en realidad solo hay que esperar un segundo.
+    if (!squadsCore || !playersCore) {
+      alert("Todavía se están cargando los planteles. Probá de nuevo en un segundo.")
+      return
+    }
     if (eligibleSquads.length === 0) {
       alert("No hay planteles disponibles con jugadores libres para esta posición. Elegí otra posición o reiniciá.")
       return

@@ -26,6 +26,13 @@ const core = players.map((p) => Object.fromEntries(CORE_FIELDS.map((f) => [f, p[
 fs.mkdirSync(PUBLIC_DATA_DIR, { recursive: true })
 fs.writeFileSync(path.join(PUBLIC_DATA_DIR, 'players-core.json'), JSON.stringify(core))
 
+// 1 bis) squads-core: los planteles, servidos por fetch igual que los jugadores.
+//    `squads.json` son 174 kB y lo importaban tres páginas de cliente —portada, draft y
+//    versus— así que viajaban en el bundle antes de que se pudiera tocar nada. La portada ya
+//    no lo necesita (usaba solo el total, que está en stats.json); el draft y el versus sí,
+//    pero recién cuando el jugador entra a jugar.
+fs.copyFileSync(path.join(DATA_DIR, 'squads.json'), path.join(PUBLIC_DATA_DIR, 'squads-core.json'))
+
 // Estadísticas oficiales actualizadas (FIFA / AFA / IFFHS) para Leyendas del Fútbol Argentino
 const OFFICIAL_LEGEND_STATS = {
   "messi-lionel-1987": { goalsClub: 794, goalsNT: 125 }, // 794 clubes (Barça, PSG, Inter Miami) + 125 Selección Argentina = 919 goles oficiales
