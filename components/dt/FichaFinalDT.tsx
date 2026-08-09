@@ -46,9 +46,9 @@ export default function FichaFinalDT({ ficha, escudoDe }: { ficha: FichaDT; escu
       <div className="relative mt-6 grid grid-cols-4 gap-2">
         {[
           { valor: ficha.temporadas, label: ficha.temporadas === 1 ? "Temporada" : "Temporadas" },
-          { valor: ficha.titulos, label: ficha.titulos === 1 ? "Título" : "Títulos", oro: true },
+          { valor: ficha.titulos, label: ficha.titulos === 1 ? "Liga" : "Ligas", oro: true },
+          { valor: ficha.copas, label: ficha.copas === 1 ? "Copa" : "Copas", oro: true },
           { valor: ficha.despidos, label: ficha.despidos === 1 ? "Despido" : "Despidos", rojo: true },
-          { valor: `${ficha.efectividad}%`, label: "Efectividad" },
         ].map((s) => (
           <div
             key={s.label}
@@ -146,7 +146,7 @@ export default function FichaFinalDT({ ficha, escudoDe }: { ficha: FichaDT; escu
 
       <footer className="relative mt-6 flex items-center justify-between border-t border-white/[0.07] pt-4">
         <span className="font-sport text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">
-          {ficha.partidos} partidos dirigidos
+          {ficha.partidos} partidos · {ficha.efectividad}% de efectividad
         </span>
         <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-[#74ACDF]">
           gambetafutbol.games

@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import squadsData from '@/data/squads.json'
 import playersData from '@/data/players.json'
 import { normalizePlayers, normalizeSquads } from '@/lib/data-normalizers'
-import { formations, simulateSeasonWithStats, getSquadPlayers, calculateFullTeamScore } from '@/lib/game-engine'
+import { formations, simulateSeasonWithStats, simulateCopaWithStats, getSquadPlayers, calculateFullTeamScore } from '@/lib/game-engine'
 import type { Player, Squad } from '@/lib/types'
 import {
   fuerzaDeClub,
@@ -14,7 +14,9 @@ import {
   valorDe,
   evaluar,
   clubesQueTeLlaman,
+  PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN,
   resumenDeTemporada,
+  resumenDeCopa,
   ligaParaSimular,
   jugadoresParaSimular,
   rivalesParaSimular,
@@ -122,6 +124,9 @@ function correrCarreraDT(clubInicial: string, semilla: number, temporadas = MAX_
     const rivalesSquads = rivalesParaSimular(LIGA, s.clubId)
     const resultado = simulateSeasonWithStats(titulares, squadVirtual, rivalesSquads, P_SIM, formations['4-3-3'], puntaje)
     const r = resumenDeTemporada(resultado)
+    const copa = resumenDeCopa(
+      simulateCopaWithStats(titulares, { ...squadVirtual, id: `dt-copa-${s.clubId}` }, rivalesSquads, P_SIM, formations['4-3-3'], puntaje),
+    )
 
     // ── Te evalúan ──
     const ev = evaluar(s.objetivo, r.puesto, r.total, r.campeon, s.prestigio, s.paciencia)
@@ -133,6 +138,7 @@ function correrCarreraDT(clubInicial: string, semilla: number, temporadas = MAX_
       puesto: r.puesto,
       total: r.total,
       campeon: r.campeon,
+      copa,
       objetivo: s.objetivo,
       cumplio: ev.cumplio,
       despedido: ev.despedido,
@@ -146,13 +152,15 @@ function correrCarreraDT(clubInicial: string, semilla: number, temporadas = MAX_
       ventas,
     }
 
-    const prestigio = s.prestigio + ev.prestigio
-    const paciencia = s.paciencia + ev.paciencia
+    const bono = copa.campeon ? { p: 8, pa: 20 } : { p: 0, pa: 0 }
+    const prestigio = Math.max(0, Math.min(100, s.prestigio + ev.prestigio + bono.p))
+    const paciencia = Math.max(0, Math.min(100, s.paciencia + ev.paciencia + bono.pa))
 
     if (ev.despedido) {
-      const ofertas = clubesQueTeLlaman(prestigio, CLUBES, [s.clubId], rng)
+      const echaronDe = s.echaronDe.includes(s.clubId) ? s.echaronDe : [...s.echaronDe, s.clubId]
+      const ofertas = clubesQueTeLlaman(prestigio, CLUBES, echaronDe, rng)
       if (ofertas.length === 0) {
-        s = { ...s, historia: [...s.historia, temporada], prestigio, paciencia, despedido: true, terminada: true }
+        s = { ...s, historia: [...s.historia, temporada], prestigio, paciencia, echaronDe, despedido: true, terminada: true }
         break
       }
       // La oferta ya trae id, nombre y fuerza: no hace falta volver a buscar el club, y así no
@@ -164,6 +172,7 @@ function correrCarreraDT(clubInicial: string, semilla: number, temporadas = MAX_
         historia: [...s.historia, temporada],
         prestigio,
         paciencia: 65,
+        echaronDe,
         despedido: true,
         clubId: nuevo.id,
         trayectoria: s.trayectoria.includes(nuevo.id) ? s.trayectoria : [...s.trayectoria, nuevo.id],
@@ -361,7 +370,8 @@ describe('los clubes que te llaman', () => {
   it('con prestigio bajo llaman los chicos y con prestigio alto los grandes', () => {
     const rng = makeRng(11)
     const medioDe = (o: { fuerza: number }[]) => o.reduce((a, b) => a + b.fuerza, 0) / o.length
-    const abajo = clubesQueTeLlaman(5, CLUBES, [], rng)
+    // Justo en el piso: por debajo ya no te llama nadie, y eso se prueba aparte.
+    const abajo = clubesQueTeLlaman(PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN, CLUBES, [], rng)
     const arriba = clubesQueTeLlaman(95, CLUBES, [], rng)
     expect(abajo.length).toBeGreaterThan(0)
     expect(arriba.length).toBeGreaterThan(0)
@@ -376,11 +386,31 @@ describe('los clubes que te llaman', () => {
     }
   })
 
-  it('siempre ofrece algo mientras queden clubes', () => {
+  it('ofrece algo mientras el prestigio alcance', () => {
     const rng = makeRng(99)
-    for (const prestigio of [0, 20, 50, 80, 100]) {
+    for (const prestigio of [PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN, 20, 50, 80, 100]) {
       expect(clubesQueTeLlaman(prestigio, CLUBES, [], rng).length).toBeGreaterThan(0)
     }
+  })
+
+  /**
+   * El final malo. Sin esto la carrera dura siempre veinte temporadas: en 144 carreras medidas
+   * antes de existir este piso, CERO terminaron sin trabajo.
+   */
+  it('con el prestigio por el piso no te llama nadie', () => {
+    const rng = makeRng(5)
+    expect(clubesQueTeLlaman(PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN - 1, CLUBES, [], rng)).toHaveLength(0)
+    expect(clubesQueTeLlaman(0, CLUBES, [], rng)).toHaveLength(0)
+  })
+
+  it('los clubes que ya te echaron no te vuelven a llamar', () => {
+    const rng = makeRng(17)
+    const echaronDe = CLUBES.slice(0, CLUBES.length - 2).map((c) => c.id)
+    const ofertas = clubesQueTeLlaman(90, CLUBES, echaronDe, rng)
+    expect(ofertas.length).toBeGreaterThan(0)
+    expect(ofertas.every((o) => !echaronDe.includes(o.clubId))).toBe(true)
+    // Y si te echaron de todos, se acabó.
+    expect(clubesQueTeLlaman(90, CLUBES, CLUBES.map((c) => c.id), rng)).toHaveLength(0)
   })
 })
 
@@ -420,6 +450,7 @@ describe('300 carreras de DT completas', () => {
       let conTitulo = 0
       let conDespido = 0
       let terminadasSinTrabajo = 0
+      let conCopa = 0
       const apodos = new Set<string>()
 
       for (const clubId of clubes) {
@@ -429,6 +460,7 @@ describe('300 carreras de DT completas', () => {
           corridas++
           if (f.titulos > 0) conTitulo++
           if (f.despidos > 0) conDespido++
+          if (f.copas > 0) conCopa++
           if (s.despedido && s.historia.length < 8) terminadasSinTrabajo++
           apodos.add(f.apodo)
 
@@ -455,6 +487,11 @@ describe('300 carreras de DT completas', () => {
           expect(CLUBES.some((c) => c.id === s.clubId), `${contexto}: club inexistente`).toBe(true)
 
           for (const t of s.historia) {
+            // La copa no puede quedar a medias: o sos campeón o llegaste hasta alguna instancia.
+            if (t.copa) {
+              expect(t.copa.hasta, `${contexto}: copa sin instancia`).toBeTruthy()
+              if (t.copa.campeon) expect(t.copa.hasta).toBe('Campeón')
+            }
             expect(t.puesto, `${contexto} T${t.temporada}`).toBeGreaterThanOrEqual(1)
             expect(t.puesto).toBeLessThanOrEqual(t.total)
             expect(t.total).toBeGreaterThan(1)
@@ -482,6 +519,7 @@ describe('300 carreras de DT completas', () => {
       const resumen =
         `${corridas} carreras · ${conTitulo} con título (${Math.round((conTitulo / corridas) * 100)}%) · ` +
         `${conDespido} con despido (${Math.round((conDespido / corridas) * 100)}%) · ` +
+        `${conCopa} con copa (${Math.round((conCopa / corridas) * 100)}%) · ` +
         `${terminadasSinTrabajo} sin trabajo · apodos: ${[...apodos].join(', ')}`
       fs.writeFileSync('/tmp/dt-estres.txt', resumen)
       console.log('[DT] ' + resumen)

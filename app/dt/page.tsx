@@ -206,7 +206,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
         <FichaFinalDT ficha={ficha} escudoDe={escudoDe} />
         <ShareBar
           titulo="Contá tu carrera de DT"
-          texto={`⚽ ${ficha.apodo}: dirigí ${ficha.temporadas} ${ficha.temporadas === 1 ? "temporada" : "temporadas"} en Gambeta, ${titulos} ${titulos === 1 ? "título" : "títulos"} y ${ficha.despidos} ${ficha.despidos === 1 ? "despido" : "despidos"}. ${ficha.efectividad}% de efectividad. 🔥 A ver cuánto durás vos en el banco.`}
+          texto={`⚽ ${ficha.apodo}: dirigí ${ficha.temporadas} ${ficha.temporadas === 1 ? "temporada" : "temporadas"} en Gambeta, ${titulos} ${titulos === 1 ? "liga" : "ligas"}, ${ficha.copas} ${ficha.copas === 1 ? "copa" : "copas"} y ${ficha.despidos} ${ficha.despidos === 1 ? "despido" : "despidos"}. ${ficha.efectividad}% de efectividad. 🔥 A ver cuánto durás vos en el banco.`}
           destino="https://gambetafutbol.games/dt/"
           campana="dt"
           // Sin imagen no hay botón de Historia y el tweet sale con el link pelado. La placa se
@@ -227,10 +227,10 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                   .filter(Boolean)
                   .join(" · "),
                 stats: [
-                  { valor: `${titulos}`, label: titulos === 1 ? "Título" : "Títulos" },
+                  { valor: `${titulos}`, label: titulos === 1 ? "Liga" : "Ligas" },
+                  { valor: `${ficha.copas}`, label: ficha.copas === 1 ? "Copa" : "Copas" },
                   { valor: `${ficha.despidos}`, label: ficha.despidos === 1 ? "Despido" : "Despidos" },
                   { valor: `${ficha.efectividad}%`, label: "Efectividad" },
-                  { valor: `${ficha.partidos}`, label: "Partidos" },
                 ],
                 pie: ficha.mejorTemporada
                   ? ficha.mejorTemporada.campeon
@@ -487,6 +487,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                 />
                 <span className="font-sport min-w-0 flex-1 truncate text-[12px] font-bold text-white">
                   {t.campeon ? "🏆 Campeón" : `${t.puesto}º de ${t.total}`}
+                  {t.copa?.campeon && <span className="ml-1 text-[#D4AF37]">· 🏆 Copa</span>}
                   {t.despedido && <span className="ml-1 text-red-300">· despedido</span>}
                 </span>
                 <span className="font-sport shrink-0 text-[10px] uppercase tracking-wider text-slate-500">
@@ -554,6 +555,28 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                   </div>
                 ))}
               </div>
+
+              {/* La copa: un año malo en la liga se salva con una copa, y eso hay que contarlo */}
+              {revelacion.temporada.copa && (
+                <div
+                  className={`mt-4 rounded-2xl border px-4 py-3 text-center ${
+                    revelacion.temporada.copa.campeon
+                      ? "border-[#D4AF37]/40 bg-[#D4AF37]/[0.1]"
+                      : "border-white/[0.07] bg-black/25"
+                  }`}
+                >
+                  <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">
+                    Copa Argentina
+                  </span>
+                  <p
+                    className={`mt-1 font-display text-lg font-black uppercase ${
+                      revelacion.temporada.copa.campeon ? "text-[#D4AF37]" : "text-white"
+                    }`}
+                  >
+                    {revelacion.temporada.copa.campeon ? "🏆 Campeones" : revelacion.temporada.copa.hasta}
+                  </p>
+                </div>
+              )}
 
               {revelacion.temporada.goleador && (
                 <p className="mt-4 text-center font-sans text-[12px] text-slate-400">

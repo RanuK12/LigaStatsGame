@@ -3,7 +3,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Player, Squad } from './types'
-import { formations, simulateSeasonWithStats, calculateFullTeamScore } from './game-engine'
+import { formations, simulateSeasonWithStats, simulateCopaWithStats, calculateFullTeamScore } from './game-engine'
 import {
   fuerzaDeClub,
   ligaParaSimular,
@@ -16,6 +16,7 @@ import {
   evaluar,
   clubesQueTeLlaman,
   resumenDeTemporada,
+  resumenDeCopa,
   iniciarDT,
   MAX_TEMPORADAS_DT,
   type ClubDT,
@@ -196,6 +197,21 @@ export const useDTStore = create<DTStore>()(
           calculateFullTeamScore(titulares, formations['4-3-3']),
         )
         const r = resumenDeTemporada(resultado)
+
+        // La Copa Argentina, con el mismo once. En Football Manager media carrera se define en
+        // las copas: un año malo en la liga se salva con una copa, y eso hace que el mismo
+        // resultado en la tabla se sienta distinto.
+        const copa = resumenDeCopa(
+          simulateCopaWithStats(
+            titulares,
+            { ...squadBase, id: `dt-copa-${e.clubId}`, playerIds: plantel as [string, ...string[]] },
+            rivalesParaSimular(liga, e.clubId),
+            pSim,
+            formations['4-3-3'],
+            calculateFullTeamScore(titulares, formations['4-3-3']),
+          ),
+        )
+
         const ev = evaluar(e.objetivo, r.puesto, r.total, r.campeon, e.prestigio, e.paciencia)
 
         const temporada: TemporadaDT = {
@@ -206,6 +222,7 @@ export const useDTStore = create<DTStore>()(
           puesto: r.puesto,
           total: r.total,
           campeon: r.campeon,
+          copa,
           objetivo: e.objetivo,
           cumplio: ev.cumplio,
           despedido: ev.despedido,
@@ -219,10 +236,15 @@ export const useDTStore = create<DTStore>()(
           ventas,
         }
 
-        const prestigio = Math.max(0, Math.min(100, e.prestigio + ev.prestigio))
-        const paciencia = Math.max(0, Math.min(100, e.paciencia + ev.paciencia))
+        // La copa cuenta: no salva un objetivo incumplido, pero compra tiempo y nombre.
+        const bonoCopa = copa.campeon ? { prestigio: 8, paciencia: 20 } : { prestigio: 0, paciencia: 0 }
+        const prestigio = Math.max(0, Math.min(100, e.prestigio + ev.prestigio + bonoCopa.prestigio))
+        const paciencia = Math.max(0, Math.min(100, e.paciencia + ev.paciencia + bonoCopa.paciencia))
         const rng = makeRngLocal(e.semilla + e.temporada * 104729)
-        const ofertas = ev.despedido ? clubesQueTeLlaman(prestigio, clubes, [e.clubId], rng) : []
+        const echaronDe = ev.despedido && !e.echaronDe.includes(e.clubId) ? [...e.echaronDe, e.clubId] : e.echaronDe
+        // Los que ya te echaron no te vuelven a llamar: cada despido cierra una puerta, y por eso
+        // la carrera puede terminarse de verdad en vez de durar siempre veinte temporadas.
+        const ofertas = ev.despedido ? clubesQueTeLlaman(prestigio, clubes, echaronDe, rng) : []
 
         const historia = [...e.historia, temporada]
         const seAcabo = historia.length >= MAX_TEMPORADAS_DT
@@ -234,6 +256,7 @@ export const useDTStore = create<DTStore>()(
             prestigio,
             paciencia,
             plantel,
+            echaronDe,
             despedido: ev.despedido,
             ofertas,
             terminada: seAcabo || (ev.despedido && ofertas.length === 0),

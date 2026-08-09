@@ -454,12 +454,26 @@ export interface OfertaTrabajo {
  * trata de ganar la liga con River, se trata de llegar a River. Con prestigio bajo te llaman los
  * de abajo; con prestigio alto, los grandes.
  */
+/**
+ * Por debajo de esto no te llama nadie y la carrera se termina.
+ *
+ * Medido antes de existir este piso: en 144 carreras de 20 temporadas, CERO terminaron sin
+ * trabajo. Siempre quedaban 23 clubes dispuestos, así que un DT podía fracasar para siempre sin
+ * consecuencias y la carrera duraba exactamente veinte temporadas en todos los casos. Un modo DT
+ * sin final malo pierde la mitad de lo que lo hace un juego.
+ *
+ * Se combina con `excluir`: los clubes que ya te echaron no te vuelven a llamar, así que a fuerza
+ * de despidos te vas quedando sin puertas aunque el prestigio aguante.
+ */
+export const PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN = 8
+
 export function clubesQueTeLlaman(
   prestigio: number,
   clubes: ClubDT[],
   excluir: string[],
   rng: () => number,
 ): OfertaTrabajo[] {
+  if (prestigio < PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN) return []
   const disponibles = clubes.filter((c) => !excluir.includes(c.id))
   if (disponibles.length === 0) return []
 
@@ -492,6 +506,13 @@ export function clubesQueTeLlaman(
 
 /* ── La temporada en el historial ─────────────────────────────────────────── */
 
+/** Cómo terminó la Copa Argentina de ese año. */
+export interface CopaDT {
+  campeon: boolean
+  /** Hasta dónde llegó: "Final", "Semifinal", "Cuartos"… */
+  hasta: string
+}
+
 export interface TemporadaDT {
   temporada: number
   anio: number
@@ -500,6 +521,8 @@ export interface TemporadaDT {
   puesto: number
   total: number
   campeon: boolean
+  /** La copa nacional. En Football Manager media carrera se define en las copas. */
+  copa?: CopaDT
   objetivo: Objetivo
   cumplio: boolean
   despedido: boolean
@@ -512,6 +535,13 @@ export interface TemporadaDT {
   golesContra: number
   fichajes: string[]
   ventas: string[]
+}
+
+/** Cómo le fue en la copa, leído del resultado que devuelve el motor. */
+export function resumenDeCopa(resultado: TournamentResult): CopaDT {
+  if (resultado.isChampion) return { campeon: true, hasta: 'Campeón' }
+  // Si no lo eliminaron y no salió campeón, perdió la final.
+  return { campeon: false, hasta: resultado.eliminated ? resultado.eliminatedRound || 'Eliminado' : 'Final' }
 }
 
 /** Los números de la temporada, sacados de la tabla que devuelve el motor de partidos. */
@@ -560,6 +590,11 @@ export interface DTState {
   historia: TemporadaDT[]
   /** Clubes que ya dirigió, en orden. Es la trayectoria que va en la ficha final. */
   trayectoria: string[]
+  /**
+   * Los que te echaron. No te vuelven a llamar, así que cada despido cierra una puerta y la
+   * carrera puede terminarse de verdad en vez de durar siempre veinte temporadas.
+   */
+  echaronDe: string[]
   despedido: boolean
   ofertas: OfertaTrabajo[]
   terminada: boolean
@@ -591,6 +626,7 @@ export function iniciarDT(o: {
     objetivo,
     historia: [],
     trayectoria: [o.club.id],
+    echaronDe: [],
     despedido: false,
     ofertas: [],
     terminada: false,
@@ -605,6 +641,8 @@ export interface FichaDT {
   temporadas: number
   clubes: string[]
   titulos: number
+  /** Copas nacionales. Se cuentan aparte: no es lo mismo una liga que una copa. */
+  copas: number
   /** Ligas ganadas por club, que es lo que hace reconocible la ficha de un hincha. */
   titulosPorClub: { clubId: string; clubNombre: string; cantidad: number }[]
   despidos: number
@@ -637,6 +675,7 @@ export function fichaDT(estado: DTState, nombreDeClub: (id: string) => string): 
   const perdidos = h.reduce((a, t) => a + t.perdidos, 0)
   const partidos = ganados + empatados + perdidos
   const titulos = h.filter((t) => t.campeon).length
+  const copas = h.filter((t) => t.copa?.campeon).length
   const despidos = h.filter((t) => t.despedido).length
 
   const porClub = new Map<string, number>()
@@ -652,6 +691,7 @@ export function fichaDT(estado: DTState, nombreDeClub: (id: string) => string): 
     temporadas: h.length,
     clubes: estado.trayectoria,
     titulos,
+    copas,
     titulosPorClub: [...porClub.entries()]
       .map(([clubId, cantidad]) => ({ clubId, clubNombre: nombreDeClub(clubId), cantidad }))
       .sort((a, b) => b.cantidad - a.cantidad),
@@ -666,7 +706,7 @@ export function fichaDT(estado: DTState, nombreDeClub: (id: string) => string): 
     golesFavor: h.reduce((a, t) => a + t.golesFavor, 0),
     golesContra: h.reduce((a, t) => a + t.golesContra, 0),
     mejorTemporada: mejor,
-    apodo: apodoDe({ titulos, despidos, temporadas: h.length, clubes: estado.trayectoria.length, prestigio: estado.prestigio }),
+    apodo: apodoDe({ titulos, copas, despidos, temporadas: h.length, clubes: estado.trayectoria.length, prestigio: estado.prestigio }),
   }
 }
 
@@ -679,17 +719,22 @@ export function fichaDT(estado: DTState, nombreDeClub: (id: string) => string): 
  */
 export function apodoDe(o: {
   titulos: number
+  /** Copas nacionales. Un DT copero es un personaje propio del fútbol argentino. */
+  copas?: number
   despidos: number
   temporadas: number
   clubes: number
   prestigio: number
 }): string {
+  const copas = o.copas ?? 0
   if (o.temporadas === 0) return 'Recién llegado'
   if (o.titulos >= 6) return 'Leyenda del banco'
   if (o.titulos >= 3 && o.despidos === 0) return 'El intocable'
   if (o.titulos >= 3) return 'Ganador serial'
   if (o.titulos >= 1 && o.clubes === 1) return 'Ídolo de una sola camiseta'
   if (o.titulos >= 1) return 'Campeón'
+  if (copas >= 2) return 'Especialista en copas'
+  if (copas >= 1) return 'Copero'
   if (o.despidos >= 3) return 'El eterno interino'
   if (o.clubes >= 4) return 'Trotamundos del banco'
   if (o.despidos === 0 && o.temporadas >= 5) return 'De la casa'
