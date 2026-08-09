@@ -10,6 +10,10 @@ import {
   jugadoresParaSimular,
   rivalesParaSimular,
   onceIdeal,
+  onceDeFormacion,
+  evolucionarPlantel,
+  aplicarAjustes,
+  sortearLesion,
   objetivoDeTemporada,
   presupuestoDe,
   mercadoDePases,
@@ -25,6 +29,9 @@ import {
   type TemporadaDT,
   type EvaluacionDT,
   type OfertaTrabajo,
+  type FormacionDT,
+  type Lesion,
+  type EvolucionPlantel,
 } from './dt-engine'
 
 /**
@@ -44,6 +51,9 @@ export interface RevelacionDT {
   evaluacion: EvaluacionDT
   tabla: { name: string; pts: number; w: number; d: number; l: number; gf: number; ga: number }[]
   ofertas: OfertaTrabajo[]
+  /** Quién creció y quién bajó: lo que hace que el plantel se sienta vivo entre temporadas. */
+  evolucion: EvolucionPlantel
+  lesion: Lesion | null
 }
 
 interface DTStore {
@@ -60,6 +70,7 @@ interface DTStore {
   prepararMercado: (players: Player[]) => void
   alternarMovimiento: (jugadorId: string, players: Player[]) => void
   jugarTemporada: (o: { squads: Squad[]; players: Player[] }) => void
+  elegirFormacion: (f: FormacionDT) => void
   cerrarRevelacion: () => void
   aceptarOferta: (clubId: string, o: { squads: Squad[]; players: Player[] }) => void
   retirarse: () => void
@@ -187,14 +198,24 @@ export const useDTStore = create<DTStore>()(
         }
 
         const porId = new Map(players.map((p) => [p.id, p]))
-        const titulares = onceIdeal(plantel.map((id) => porId.get(id)).filter(Boolean) as Player[])
+        // El plantel con lo que creció o bajó en las temporadas anteriores.
+        const plantelReal = aplicarAjustes(
+          plantel.map((id) => porId.get(id)).filter(Boolean) as Player[],
+          e.ajustes,
+        )
+
+        // La lesión cae sobre el once, no sobre el número 20: si no, no sería una noticia.
+        const rngAnio = makeRngLocal(e.semilla + e.temporada * 31337)
+        const lesion = sortearLesion(onceDeFormacion(plantelReal, e.formacion), rngAnio)
+
+        const titulares = onceDeFormacion(plantelReal, e.formacion, lesion ? [lesion.jugadorId] : [])
         const resultado = simulateSeasonWithStats(
           titulares,
           { ...squadBase, id: `dt-${e.clubId}`, playerIds: plantel as [string, ...string[]] },
           rivalesParaSimular(liga, e.clubId),
           pSim,
-          formations['4-3-3'],
-          calculateFullTeamScore(titulares, formations['4-3-3']),
+          formations[e.formacion],
+          calculateFullTeamScore(titulares, formations[e.formacion]),
         )
         const r = resumenDeTemporada(resultado)
 
@@ -207,8 +228,8 @@ export const useDTStore = create<DTStore>()(
             { ...squadBase, id: `dt-copa-${e.clubId}`, playerIds: plantel as [string, ...string[]] },
             rivalesParaSimular(liga, e.clubId),
             pSim,
-            formations['4-3-3'],
-            calculateFullTeamScore(titulares, formations['4-3-3']),
+            formations[e.formacion],
+            calculateFullTeamScore(titulares, formations[e.formacion]),
           ),
         )
 
@@ -234,6 +255,8 @@ export const useDTStore = create<DTStore>()(
           golesContra: r.golesContra,
           fichajes,
           ventas,
+          formacion: e.formacion,
+          lesion,
         }
 
         // La copa cuenta: no salva un objetivo incumplido, pero compra tiempo y nombre.
@@ -246,6 +269,10 @@ export const useDTStore = create<DTStore>()(
         // la carrera puede terminarse de verdad en vez de durar siempre veinte temporadas.
         const ofertas = ev.despedido ? clubesQueTeLlaman(prestigio, clubes, echaronDe, rng) : []
 
+        // Pasa un año para todos: los pibes crecen, los veteranos bajan y alguno se retira.
+        const evolucion = evolucionarPlantel(plantelReal, e.ajustes, 1, rngAnio)
+        const plantelVivo = plantel.filter((id) => !evolucion.retirados.some((r) => r.jugadorId === id))
+
         const historia = [...e.historia, temporada]
         const seAcabo = historia.length >= MAX_TEMPORADAS_DT
 
@@ -255,7 +282,9 @@ export const useDTStore = create<DTStore>()(
             historia,
             prestigio,
             paciencia,
-            plantel,
+            plantel: plantelVivo,
+            ajustes: evolucion.ajustes,
+            lesion,
             echaronDe,
             despedido: ev.despedido,
             ofertas,
@@ -275,9 +304,17 @@ export const useDTStore = create<DTStore>()(
             evaluacion: ev,
             tabla: (resultado.table ?? []).map((t) => ({ name: t.name, pts: t.pts, w: t.w, d: t.d, l: t.l, gf: t.gf, ga: t.ga })),
             ofertas,
+            evolucion,
+            lesion,
           },
           simulando: false,
         })
+      },
+
+      elegirFormacion: (formacion) => {
+        const e = get().estado
+        if (!e) return
+        set({ estado: { ...e, formacion } })
       },
 
       cerrarRevelacion: () => set({ revelacion: null }),

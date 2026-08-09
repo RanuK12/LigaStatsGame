@@ -17,6 +17,11 @@ import {
   PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN,
   resumenDeTemporada,
   resumenDeCopa,
+  onceDeFormacion,
+  evolucionarPlantel,
+  aplicarAjustes,
+  sortearLesion,
+  FORMACIONES_DT,
   ligaParaSimular,
   jugadoresParaSimular,
   rivalesParaSimular,
@@ -540,4 +545,89 @@ describe('300 carreras de DT completas', () => {
     },
     600_000,
   )
+})
+
+/* ── Lo que sumamos de Football Manager ───────────────────────────────────── */
+
+describe('la táctica', () => {
+  it('cada dibujo arma un once distinto, con once jugadores', () => {
+    const plantel = getSquadPlayers(squadDe('river-plate'), TODOS_P)
+    const onces = FORMACIONES_DT.map((f) => onceDeFormacion(plantel, f))
+    for (const xi of onces) {
+      expect(xi).toHaveLength(11)
+      expect(new Set(xi.map((p) => p.id)).size, 'un jugador repetido en el once').toBe(11)
+    }
+    // Los puestos que se ocupan no son los mismos: si lo fueran, elegir dibujo sería cosmético.
+    const firma = (xi: typeof onces[0]) => xi.map((p) => p.position).sort().join(',')
+    expect(new Set(onces.map(firma)).size).toBeGreaterThan(1)
+  })
+
+  it('el lesionado no juega', () => {
+    const plantel = getSquadPlayers(squadDe('boca-juniors'), TODOS_P)
+    const xi = onceDeFormacion(plantel, '4-3-3')
+    const afuera = xi[5]
+    const sinEl = onceDeFormacion(plantel, '4-3-3', [afuera.id])
+    expect(sinEl.some((p) => p.id === afuera.id)).toBe(false)
+    expect(sinEl).toHaveLength(11)
+  })
+})
+
+describe('que el plantel se mueva entre temporadas', () => {
+  /**
+   * No se modela por edad a propósito: la base no la tiene para los jugadores modernos y
+   * `players-core.json` ni siquiera manda el campo al navegador. Lo que se prueba es lo que
+   * importa para jugar: el plantel se mueve solo, para arriba y para abajo.
+   */
+  it('unos crecen y otros bajan', () => {
+    const plantel = getSquadPlayers(squadDe('river-plate'), TODOS_P)
+    const rng = makeRng(2026)
+    let ajustes: Record<string, number> = {}
+    // Diez temporadas de golpe: es lo que vive una carrera larga.
+    for (let i = 0; i < 10; i++) {
+      ajustes = evolucionarPlantel(aplicarAjustes(plantel, ajustes), ajustes, i + 1, rng).ajustes
+    }
+    const conAjuste = Object.values(ajustes)
+    expect(conAjuste.length).toBeGreaterThan(0)
+    expect(conAjuste.some((d) => d > 0), 'nadie creció en diez años').toBe(true)
+    expect(conAjuste.some((d) => d < 0), 'nadie bajó en diez años').toBe(true)
+  })
+
+  it('nadie se sale de la escala ni crece para siempre', () => {
+    const plantel = getSquadPlayers(squadDe('aldosivi'), TODOS_P)
+    const rng = makeRng(77)
+    let ajustes: Record<string, number> = {}
+    for (let i = 0; i < 20; i++) {
+      ajustes = evolucionarPlantel(aplicarAjustes(plantel, ajustes), ajustes, i + 1, rng).ajustes
+    }
+    for (const p of aplicarAjustes(plantel, ajustes)) {
+      expect(p.rating, `${p.name} fuera de escala`).toBeGreaterThanOrEqual(35)
+      expect(p.rating).toBeLessThanOrEqual(99)
+      const base = plantel.find((x) => x.id === p.id)!.rating ?? 60
+      expect(p.rating! - base, `${p.name} creció sin techo`).toBeLessThanOrEqual(8)
+    }
+  })
+})
+
+describe('las lesiones', () => {
+  it('cae sobre alguien del once, no sobre el número veinte', () => {
+    const plantel = getSquadPlayers(squadDe('velez'), TODOS_P)
+    const xi = onceDeFormacion(plantel, '4-3-3')
+    const rng = makeRng(4)
+    let hubo = 0
+    for (let i = 0; i < 200; i++) {
+      const l = sortearLesion(xi, rng)
+      if (!l) continue
+      hubo++
+      expect(xi.some((p) => p.id === l.jugadorId), 'se lesionó alguien que no jugaba').toBe(true)
+      expect(l.tipo).toBeTruthy()
+      expect(l.partidos).toBeGreaterThan(0)
+    }
+    // Ni siempre ni nunca: si fuera siempre, sería un impuesto; si nunca, no existiría.
+    expect(hubo).toBeGreaterThan(20)
+    expect(hubo).toBeLessThan(180)
+  })
+
+  it('sin once no hay lesión', () => {
+    expect(sortearLesion([], makeRng(1))).toBeNull()
+  })
 })

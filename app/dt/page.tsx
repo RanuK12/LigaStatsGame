@@ -5,7 +5,7 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { usePlayersCore, useSquads } from "@/lib/data-loader"
 import { useDTStore, clubesDeLaLiga, ligaDeSquads } from "@/lib/dt-store"
-import { fichaDT, type ClubDT } from "@/lib/dt-engine"
+import { fichaDT, FORMACIONES_DT, PERFIL_FORMACION, type ClubDT } from "@/lib/dt-engine"
 import FichaFinalDT from "@/components/dt/FichaFinalDT"
 import ShareBar from "@/components/ShareBar"
 import { storyBlob, type FormatoFicha } from "@/lib/story-card"
@@ -187,6 +187,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
   const {
     estado, mercado, aceptados, caja, revelacion, simulando,
     alternarMovimiento, jugarTemporada, cerrarRevelacion, aceptarOferta, retirarse, reiniciar,
+    elegirFormacion,
   } = useDTStore()
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
 
@@ -359,6 +360,36 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
               Una más y te van a echar
             </p>
           )}
+        </div>
+      </div>
+
+      {/* La táctica: la decisión de manager por excelencia, y hasta acá no existía.
+          No es cosmética: `teamToStrength` reparte a los once en los puestos del dibujo, así que
+          un 3-5-2 con el mismo plantel da otro ataque y otra defensa que un 4-3-3. */}
+      <div className="card-gradient rounded-3xl border border-white/10 p-5 shadow-xl">
+        <h3 className="font-display text-lg font-black uppercase text-white">Tu dibujo</h3>
+        <p className="mt-1 font-sans text-[11px] text-slate-500">
+          Cambia quién entra al once y cómo se para el equipo.
+        </p>
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          {FORMACIONES_DT.map((f) => (
+            <button
+              key={f}
+              onClick={() => elegirFormacion(f)}
+              className={`rounded-2xl border px-3 py-3 text-left transition-all ${
+                estado.formacion === f
+                  ? "border-[#74ACDF] bg-[#74ACDF]/15"
+                  : "border-white/10 bg-slate-950/60 hover:border-[#74ACDF]/50"
+              }`}
+            >
+              <span className="font-display block text-base font-black text-white">
+                {PERFIL_FORMACION[f].nombre}
+              </span>
+              <span className="font-sans mt-0.5 block text-[11px] leading-snug text-slate-400">
+                {PERFIL_FORMACION[f].idea}
+              </span>
+            </button>
+          ))}
         </div>
       </div>
 
@@ -575,6 +606,37 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                   >
                     {revelacion.temporada.copa.campeon ? "🏆 Campeones" : revelacion.temporada.copa.hasta}
                   </p>
+                </div>
+              )}
+
+              {/* La lesión del año: es lo que hace que el fondo del plantel valga algo */}
+              {revelacion.lesion && (
+                <div className="mt-4 rounded-2xl border border-red-500/30 bg-red-500/[0.08] px-4 py-3 text-center">
+                  <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-red-300">
+                    🏥 Se lesionó
+                  </span>
+                  <p className="mt-1 font-sans text-[13px] text-white">
+                    <strong>{revelacion.lesion.nombre}</strong> · {revelacion.lesion.tipo}
+                  </p>
+                </div>
+              )}
+
+              {/* El plantel cambia solo: los pibes crecen y los veteranos bajan */}
+              {(revelacion.evolucion.crecieron.length > 0 || revelacion.evolucion.retirados.length > 0) && (
+                <div className="mt-4 rounded-2xl border border-white/[0.07] bg-black/25 px-4 py-3">
+                  <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">
+                    El plantel
+                  </span>
+                  {revelacion.evolucion.crecieron.slice(0, 3).map((c) => (
+                    <p key={c.jugadorId} className="mt-1 font-sans text-[12px] text-slate-200">
+                      📈 <strong className="text-white">{c.nombre}</strong> {c.antes} → {c.ahora}
+                    </p>
+                  ))}
+                  {revelacion.evolucion.retirados.slice(0, 2).map((c) => (
+                    <p key={c.jugadorId} className="mt-1 font-sans text-[12px] text-slate-400">
+                      🎬 <strong className="text-slate-200">{c.nombre}</strong> colgó los botines
+                    </p>
+                  ))}
                 </div>
               )}
 

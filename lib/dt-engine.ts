@@ -149,6 +149,177 @@ export function onceIdeal(disponibles: Player[]): Player[] {
   return equipo
 }
 
+/* ── La táctica ───────────────────────────────────────────────────────────── */
+
+export const FORMACIONES_DT = ['4-3-3', '4-4-2', '4-2-3-1', '3-5-2'] as const
+export type FormacionDT = (typeof FORMACIONES_DT)[number]
+
+/** Qué le hace cada dibujo al equipo, para que elegir no sea tirar una moneda. */
+export const PERFIL_FORMACION: Record<FormacionDT, { nombre: string; idea: string }> = {
+  '4-3-3': { nombre: '4-3-3', idea: 'Tres arriba. El que más ataca y el que más se expone.' },
+  '4-4-2': { nombre: '4-4-2', idea: 'El clásico. Equilibrado y sin sorpresas.' },
+  '4-2-3-1': { nombre: '4-2-3-1', idea: 'Dos cinco de contención. Aguanta y sale de contra.' },
+  '3-5-2': { nombre: '3-5-2', idea: 'Se puebla el medio. Se gana la pelota y se sufre atrás.' },
+}
+
+/**
+ * El once para una formación, sin los lesionados.
+ *
+ * Elegir el dibujo es la decisión de manager por excelencia y hasta acá no existía: el modo
+ * jugaba siempre 4-3-3. Y no es cosmético — `teamToStrength` reparte a los once en los puestos
+ * del dibujo, así que un 3-5-2 con este plantel da otro ataque y otra defensa que un 4-3-3.
+ */
+export function onceDeFormacion(
+  disponibles: Player[],
+  formacion: FormacionDT,
+  lesionados: string[] = [],
+): Player[] {
+  const puestos = formations[formacion].positions
+  const sanos = disponibles.filter((p) => !lesionados.includes(p.id))
+  const usados = new Set<string>()
+  const equipo: Player[] = []
+  for (const slot of puestos) {
+    const elegido = sanos
+      .filter((p) => !usados.has(p.id))
+      .sort((a, b) => {
+        const encaja = (x: Player) => (x.position === slot.pos ? 2 : canPlayHere(x, slot.pos) ? 1 : 0)
+        return encaja(b) - encaja(a) || (b.rating ?? 0) - (a.rating ?? 0)
+      })[0]
+    if (elegido) {
+      equipo.push(elegido)
+      usados.add(elegido.id)
+    }
+  }
+  return equipo
+}
+
+/* ── Que el plantel envejezca y crezca ────────────────────────────────────── */
+
+export interface CambioJugador {
+  jugadorId: string
+  nombre: string
+  antes: number
+  ahora: number
+}
+
+export interface EvolucionPlantel {
+  /** Cuánto se le suma o resta al rating de cada jugador, acumulado en el estado. */
+  ajustes: Record<string, number>
+  crecieron: CambioJugador[]
+  bajaron: CambioJugador[]
+  /** Los que se retiran: pasados los 38, alguno cuelga los botines. */
+  retirados: CambioJugador[]
+}
+
+/**
+ * Un año más para el plantel.
+ *
+ * Sin esto, una carrera de veinte temporadas se juega con el mismo plantel congelado y el
+ * mercado de pases no significa nada: comprar da igual que no comprar.
+ *
+ * NO se modela por edad, y es a propósito. La base no la tiene: de 3.334 jugadores solo 1.861
+ * traen fecha de nacimiento —y justo los modernos, que son los que juegan la Liga Profesional,
+ * no la traen— y encima `players-core.json`, que es lo que llega al navegador, ni siquiera
+ * incluye el campo. Con una edad inventada, el mecanismo se apoyaría en un dato falso sobre
+ * personas reales, y en este juego los datos se cruzan contra tres fuentes antes de entrar.
+ *
+ * Lo que sí se modela es lo que importa para jugar: **el plantel se desgasta si no lo tocás**.
+ * El que está lejos de su techo tiene margen para crecer; el que ya está arriba solo puede
+ * caerse. Es la misma tensión —hay que trabajar el mercado— sin afirmar nada que no sepamos.
+ */
+export function evolucionarPlantel(
+  plantel: Player[],
+  ajustesPrevios: Record<string, number>,
+  _temporada: number,
+  rng: () => number,
+): EvolucionPlantel {
+  const ajustes = { ...ajustesPrevios }
+  const crecieron: CambioJugador[] = []
+  const bajaron: CambioJugador[] = []
+  const retirados: CambioJugador[] = []
+  if (plantel.length === 0) return { ajustes, crecieron, bajaron, retirados }
+
+  const media = plantel.reduce((a, p) => a + (p.rating ?? 60), 0) / plantel.length
+
+  for (const p of plantel) {
+    const base = p.rating ?? 60
+    const acumulado = ajustes[p.id] ?? 0
+    const antes = Math.max(35, Math.min(99, base + acumulado))
+
+    // Cuánto margen le queda: el suplente de 62 puede dar un salto, el crack de 84 no.
+    const margen = Math.max(0, 1 - (antes - media + 6) / 16)
+    const chanceCrecer = 0.1 + margen * 0.3
+    const chanceCaer = 0.1 + (1 - margen) * 0.22
+    // Y cuanto más lejos del punto de partida, más cuesta seguir en esa dirección: así nadie
+    // termina la carrera en 99 ni en 35 por acumulación.
+    const tirón = 1 - Math.min(Math.abs(acumulado) / 9, 0.85)
+
+    let delta = 0
+    const d = rng()
+    if (d < chanceCrecer * tirón) delta = 1
+    else if (d > 1 - chanceCaer * tirón) delta = -1
+
+    const ahora = Math.max(35, Math.min(Math.min(99, base + 8), Math.max(base - 10, antes + delta)))
+    ajustes[p.id] = ahora - base
+
+    if (ahora > antes) crecieron.push({ jugadorId: p.id, nombre: p.name, antes, ahora })
+    else if (ahora < antes) bajaron.push({ jugadorId: p.id, nombre: p.name, antes, ahora })
+  }
+
+  // El que se cayó mucho respecto de lo que era, cuelga los botines. Es la salida natural de un
+  // veterano sin nombrar una edad que no tenemos.
+  for (const b of bajaron) {
+    if (b.ahora <= (plantel.find((x) => x.id === b.jugadorId)?.rating ?? 60) - 8 && rng() < 0.5) {
+      retirados.push(b)
+    }
+  }
+
+  crecieron.sort((a, b) => b.ahora - b.antes - (a.ahora - a.antes))
+  bajaron.sort((a, b) => a.ahora - a.antes - (b.ahora - b.antes))
+  return { ajustes, crecieron, bajaron, retirados }
+}
+
+/** El plantel con los ajustes de las temporadas aplicados. */
+export function aplicarAjustes(plantel: Player[], ajustes: Record<string, number>): Player[] {
+  return plantel.map((p) => {
+    const d = ajustes[p.id] ?? 0
+    if (d === 0) return p
+    return { ...p, rating: Math.max(35, Math.min(99, (p.rating ?? 60) + d)) }
+  })
+}
+
+/* ── Lesiones ─────────────────────────────────────────────────────────────── */
+
+export interface Lesion {
+  jugadorId: string
+  nombre: string
+  tipo: string
+  /** Cuántos partidos de los ~46 de la temporada se pierde. */
+  partidos: number
+}
+
+const LESIONES = [
+  { tipo: 'Rotura de ligamento cruzado', partidos: 40 },
+  { tipo: 'Fractura de peroné', partidos: 28 },
+  { tipo: 'Rotura de menisco', partidos: 22 },
+  { tipo: 'Desgarro grado 3', partidos: 14 },
+  { tipo: 'Pubalgia', partidos: 12 },
+]
+
+/**
+ * La lesión de la temporada.
+ *
+ * Es lo que hace que el fondo del plantel valga algo: sin lesiones da lo mismo tener once
+ * jugadores que veintitrés, y vender al suplente es gratis. Cae sobre alguien del once ideal —si
+ * cayera sobre el número 20 no cambiaría nada y no sería una noticia.
+ */
+export function sortearLesion(once: Player[], rng: () => number): Lesion | null {
+  if (once.length === 0 || rng() > 0.45) return null
+  const victima = once[Math.floor(rng() * once.length)]
+  const l = LESIONES[Math.floor(rng() * LESIONES.length)]
+  return { jugadorId: victima.id, nombre: victima.name, tipo: l.tipo, partidos: l.partidos }
+}
+
 /* ── Lo que te pide la dirigencia ─────────────────────────────────────────── */
 
 export type ObjetivoId = 'campeon' | 'copas' | 'mitad' | 'permanencia'
@@ -535,6 +706,8 @@ export interface TemporadaDT {
   golesContra: number
   fichajes: string[]
   ventas: string[]
+  formacion?: FormacionDT
+  lesion?: Lesion | null
 }
 
 /** Cómo le fue en la copa, leído del resultado que devuelve el motor. */
@@ -595,6 +768,12 @@ export interface DTState {
    * carrera puede terminarse de verdad en vez de durar siempre veinte temporadas.
    */
   echaronDe: string[]
+  /** El dibujo con el que se juega. Es la decisión de manager que faltaba. */
+  formacion: FormacionDT
+  /** Cuánto creció o bajó cada jugador desde que arrancó la carrera. */
+  ajustes: Record<string, number>
+  /** El lesionado de esta temporada, si lo hay. */
+  lesion: Lesion | null
   despedido: boolean
   ofertas: OfertaTrabajo[]
   terminada: boolean
@@ -627,6 +806,9 @@ export function iniciarDT(o: {
     historia: [],
     trayectoria: [o.club.id],
     echaronDe: [],
+    formacion: '4-3-3',
+    ajustes: {},
+    lesion: null,
     despedido: false,
     ofertas: [],
     terminada: false,
