@@ -16,6 +16,7 @@ import {
   clubesQueTeLlaman,
   PRESTIGIO_MINIMO_PARA_QUE_TE_LLAMEN,
   DESPIDOS_ANTES_DE_QUEDARTE_SIN_PUERTAS,
+  TECHO_SOBRE_EL_NIVEL,
   resumenDeTemporada,
   resumenDeCopa,
   onceDeFormacion,
@@ -310,6 +311,43 @@ describe('el presupuesto y el mercado', () => {
         if (m.tipo === 'compra') expect(ids.has(m.jugadorId)).toBe(false)
       }
     }
+  })
+
+  /**
+   * Los dos defectos que se vieron jugando en el teléfono, no acá. Dirigiendo a Boca, ocho
+   * temporadas seguidas ofrecían lo mismo: "comprar a Lionel Messi (98) por 4M" y el mismo juvenil.
+   */
+  it('no te ofrecen un jugador muy por encima del nivel de tu plantel', () => {
+    for (const c of CLUBES) {
+      const plantel = getSquadPlayers(squadDe(c.id), TODOS_P)
+      const nivel = Math.round(
+        plantel
+          .map((p) => p.rating ?? 0)
+          .sort((a, b) => b - a)
+          .slice(0, 11)
+          .reduce((a, b) => a + b, 0) / 11,
+      )
+      for (let t = 1; t <= 6; t++) {
+        for (const m of mercadoDePases(plantel, TODOS_P, 40, makeRng(99 + t * 7919))) {
+          if (m.tipo === 'compra') {
+            expect(m.rating, `${c.nombre} (nivel ${nivel}) no puede fichar a ${m.nombre}`)
+              .toBeLessThanOrEqual(nivel + TECHO_SOBRE_EL_NIVEL)
+          }
+        }
+      }
+    }
+  })
+
+  it('el mercado cambia de una temporada a la otra', () => {
+    const plantel = getSquadPlayers(squadDe('boca-juniors'), TODOS_P)
+    const compras = new Set<string>()
+    for (let t = 1; t <= 8; t++) {
+      // La misma mezcla de semilla que usa `prepararMercado` en el store.
+      for (const m of mercadoDePases(plantel, TODOS_P, 12, makeRng(12345 + t * 7919))) {
+        if (m.tipo === 'compra') compras.add(m.nombre)
+      }
+    }
+    expect(compras.size, 'ocho temporadas ofreciendo los mismos dos nombres').toBeGreaterThan(4)
   })
 
   it('el puesto más flojo es el que de verdad falta', () => {

@@ -2,7 +2,7 @@
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { Player, Squad } from './types'
+import type { Player, ScheduleMatch, Squad } from './types'
 import { formations, simulateSeasonWithStats, simulateCopaWithStats, calculateFullTeamScore } from './game-engine'
 import {
   fuerzaDeClub,
@@ -54,6 +54,22 @@ export interface RevelacionDT {
   /** Quién creció y quién bajó: lo que hace que el plantel se sienta vivo entre temporadas. */
   evolucion: EvolucionPlantel
   lesion: Lesion | null
+  /**
+   * Los partidos de liga de tu club, para mostrarlos uno por uno antes del cartel.
+   *
+   * La temporada se calcula entera en un milisegundo, así que sin esto tocabas "Jugar la
+   * temporada" y aparecía el resultado: no había un solo momento de "¿cómo vamos?".
+   */
+  partidos: ScheduleMatch[]
+  /** Los equipos de la liga, para armar el fixture y la tabla en vivo. */
+  equipos: string[]
+  /**
+   * Cómo te nombra la tabla.
+   *
+   * No es el nombre del club: el motor usa el `label` del plantel ("Boca Juniors 2026"), así que
+   * buscar tus partidos por el nombre lindo no encuentra ninguno.
+   */
+  miEquipo: string
 }
 
 interface DTStore {
@@ -306,6 +322,11 @@ export const useDTStore = create<DTStore>()(
             ofertas,
             evolucion,
             lesion,
+            // Van TODOS los de la zona, no solo los tuyos: con ellos se arma el fixture y la
+            // tabla que se ve fecha a fecha mientras corre la temporada.
+            partidos: resultado.schedule ?? [],
+            equipos: (resultado.table ?? []).map((t) => t.name),
+            miEquipo: squadBase.label,
           },
           simulando: false,
         })

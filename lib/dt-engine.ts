@@ -424,7 +424,39 @@ const CATEGORIA: Record<string, string> = {
  *
  * Siempre hay al menos una venta: sin vender, el presupuesto de un club chico no alcanza para
  * nada y la temporada se juega igual que la anterior.
+ *
+ * Dos cosas que estaban mal y se vieron jugando en el teléfono, no en un test. Dirigiendo a Boca,
+ * ocho temporadas seguidas ofrecían LO MISMO: "comprar a Lionel Messi (98) por 4M" y el mismo
+ * juvenil, temporada tras temporada.
+ *
+ * · El pozo era la base entera y sin techo. Messi sale 4M porque `valorDe` castiga la edad —38
+ *   años, factor 0,25— y esa curva es la del modo carrera, donde un veterano barato tiene sentido.
+ *   Acá convertía el mercado en un menú de trampas. Ahora hay un techo atado al nivel del plantel:
+ *   a un club de 74 no viene un 98, como no viene en la vida.
+ * · Las compras salían de un `.find()` sobre una lista ordenada por rating, sin azar. El mejor
+ *   disponible para el puesto flojo es siempre el mismo jugador, así que la oferta no podía
+ *   cambiar aunque cambiara la semilla. Ahora se sortea entre los mejores candidatos.
  */
+/** Cuánto por encima del nivel de tu plantel podés estirarte para fichar. */
+export const TECHO_SOBRE_EL_NIVEL = 4
+
+/** El nivel del plantel: la media de los once mejores. Es la vara con la que mide el mercado. */
+function nivelDelPlantel(plantel: Player[]): number {
+  const rs = plantel
+    .map((p) => p.rating ?? 0)
+    .filter((r) => r > 0)
+    .sort((a, b) => b - a)
+    .slice(0, 11)
+  if (rs.length === 0) return 60
+  return Math.round(rs.reduce((a, b) => a + b, 0) / rs.length)
+}
+
+/** Uno al azar entre los mejores, para que la oferta no sea la misma todos los años. */
+function unoDeLosMejores<T>(lista: T[], rng: () => number, entre = 6): T | undefined {
+  if (lista.length === 0) return undefined
+  return lista[Math.floor(rng() * Math.min(entre, lista.length))]
+}
+
 export function mercadoDePases(
   plantel: Player[],
   mercado: Player[],
@@ -433,6 +465,7 @@ export function mercadoDePases(
 ): Movimiento[] {
   const movimientos: Movimiento[] = []
   const enPlantel = new Set(plantel.map((p) => p.id))
+  const techo = nivelDelPlantel(plantel) + TECHO_SOBRE_EL_NIVEL
 
   // ── Una venta: el que te quieren comprar ──
   // El más valioso, que es el que duele vender. Un club de afuera paga por encima del valor.
@@ -454,14 +487,17 @@ export function mercadoDePases(
 
   // ── Dos compras: una por lo que falta, otra por lo que se puede pagar ──
   const flojoPor = puestoMasFlojo(plantel)
-  const candidatos = mercado.filter((p) => !enPlantel.has(p.id) && (p.rating ?? 0) > 0)
+  const candidatos = mercado.filter(
+    (p) => !enPlantel.has(p.id) && (p.rating ?? 0) > 0 && (p.rating ?? 0) <= techo,
+  )
 
+  const asequible = (p: Player) => valorDe(p.rating ?? 60, edadDe(p)) <= presupuesto * 1.6
   const paraElHueco = candidatos
     .filter((p) => CATEGORIA[p.position] === flojoPor)
+    .filter(asequible)
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
-  const asequible = (p: Player) => valorDe(p.rating ?? 60, edadDe(p)) <= presupuesto * 1.6
 
-  const elegido = paraElHueco.find(asequible)
+  const elegido = unoDeLosMejores(paraElHueco, rng)
   if (elegido) {
     const edad = edadDe(elegido)
     movimientos.push({
@@ -477,10 +513,13 @@ export function mercadoDePases(
   }
 
   // Una joven, más barata, que es la apuesta a futuro.
-  const joven = candidatos
-    .filter((p) => edadDe(p) <= 22 && (p.rating ?? 0) >= 68 && p.id !== elegido?.id)
-    .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
-    .find(asequible)
+  const joven = unoDeLosMejores(
+    candidatos
+      .filter((p) => edadDe(p) <= 22 && (p.rating ?? 0) >= 68 && p.id !== elegido?.id)
+      .filter(asequible)
+      .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)),
+    rng,
+  )
   if (joven) {
     const edad = edadDe(joven)
     movimientos.push({

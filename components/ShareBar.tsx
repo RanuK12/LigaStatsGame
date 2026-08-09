@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 import type { FormatoFicha } from "@/lib/story-card"
 
@@ -45,8 +45,49 @@ export default function ShareBar({
    */
   campana?: string
 }) {
-  const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "error">("")
+  const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "compartida" | "error">("")
   const [copiado, setCopiado] = useState(false)
+
+  /**
+   * La ficha apaisada, generada ANTES de que toquen el botón.
+   *
+   * En el teléfono, el tweet salía con texto y link y la imagen quedaba descargada para adjuntarla
+   * a mano. La causa no es nuestra: el intent web de X no acepta adjuntos, y punto. La única forma
+   * de que la imagen viaje en el tweet es la hoja de compartir del sistema con el archivo, que es
+   * lo que hacen las otras apps.
+   *
+   * Y esa hoja exige que `navigator.share` se llame DENTRO del gesto que la abre. Generar el PNG
+   * tarda, así que si se genera al tocar, para cuando termina el gesto ya venció y iOS la rechaza.
+   * Por eso se prepara en cuanto aparece la barra, y el toque solo la reparte.
+   */
+  const fichaLista = useRef<File | null>(null)
+  const [conArchivo, setConArchivo] = useState(false)
+
+  useEffect(() => {
+    if (!imagen) return
+    let vivo = true
+    const preparar = async () => {
+      try {
+        const blob = await imagen("ancha")
+        if (!vivo) return
+        const file = new File([blob], "gambeta.png", { type: "image/png" })
+        const nav = navigator as Navigator & { share?: unknown; canShare?: (d: unknown) => boolean }
+        if (typeof nav.share === "function" && nav.canShare?.({ files: [file] })) {
+          fichaLista.current = file
+          setConArchivo(true)
+        }
+      } catch {
+        /* sin imagen lista: el botón de X abre el compositor como siempre */
+      }
+    }
+    // Sin robarle cuadros a la animación del resultado, que es lo primero que se ve.
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }
+    if (w.requestIdleCallback) w.requestIdleCallback(preparar, { timeout: 2500 })
+    else setTimeout(preparar, 1200)
+    return () => {
+      vivo = false
+    }
+  }, [imagen])
 
   const urlBase = destino || SITE_URL
 
@@ -119,18 +160,37 @@ export default function ShareBar({
   }
 
   /**
-   * Compartir en X con la imagen.
+   * Compartir en X con la imagen adentro.
    *
-   * El intent de X no acepta adjuntos: solo texto y link. Un tweet con imagen rinde mucho más que
-   * uno con link pelado, así que se prepara la imagen antes de abrir el compositor. En el celular
-   * va por el share nativo (que sí adjunta); en escritorio se deja en el portapapeles para pegar
-   * con ⌘V, y si el navegador no lo permite, se descarga. Nunca se queda sin abrir el compositor.
+   * Dos caminos, porque las dos plataformas permiten cosas distintas:
+   *
+   * · Teléfono, con la ficha ya preparada: se abre la hoja del sistema con el PNG adjunto. El que
+   *   comparte elige X ahí y el tweet sale CON la imagen. Es el único camino que existe: el intent
+   *   web de X no acepta adjuntos por más que se lo pidas.
+   * · Escritorio: se abre el compositor y la ficha queda en el portapapeles para pegarla con ⌘V.
+   *   Ahí no hay hoja de compartir, y pegar es un solo gesto.
+   *
+   * En los dos casos, si algo falla se termina descargando la imagen: nunca se queda sin nada.
    */
   async function compartirEnX(e: React.MouseEvent<HTMLAnchorElement>) {
     trackEvent(EVENTOS.compartido, { red: "x" })
     if (!imagen) return // sin imagen, el link abre normal
 
-    // Abrimos Twitter inmediatamente para evitar bloqueos del navegador o esperas de 3 segundos
+    const file = fichaLista.current
+    if (file) {
+      // Sin `await` antes de `share`: el gesto tiene que seguir vivo o iOS la rechaza.
+      e.preventDefault()
+      try {
+        await navigator.share({ files: [file], text: `${textoX}\n\n${conEtiqueta("x")}` })
+        setEstado("compartida")
+      } catch {
+        // Canceló, o el navegador la rechazó: le queda el compositor de siempre.
+        window.open(xUrl, "_blank", "noopener,noreferrer")
+      }
+      return
+    }
+
+    // Abrimos X inmediatamente para evitar bloqueos del navegador o esperas de 3 segundos
     window.open(xUrl, "_blank", "noopener,noreferrer")
 
     setEstado("generando")
@@ -193,7 +253,7 @@ export default function ShareBar({
             <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
-            {estado === "generando" ? "Preparando" : "Postear"}
+            {estado === "generando" ? "Preparando" : conArchivo ? "Postear con imagen" : "Postear"}
           </a>
 
           {imagen && (
@@ -246,6 +306,11 @@ export default function ShareBar({
         {estado === "listo" && (
           <p className="mt-2 text-[10px] text-emerald-300 font-sport uppercase tracking-wider">
             Imagen lista: subila a tu historia
+          </p>
+        )}
+        {estado === "compartida" && (
+          <p className="mt-2 text-[10px] text-emerald-300 font-sport uppercase tracking-wider">
+            Compartido con la ficha adjunta
           </p>
         )}
         {estado === "copiada" && (

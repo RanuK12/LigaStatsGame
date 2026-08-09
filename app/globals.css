@@ -669,8 +669,15 @@ button, input, select, textarea {
 @keyframes barraCrece { from { transform: scaleX(0) } to { transform: scaleX(1) } }
 .barra-crece { transform-origin: left; animation: barraCrece 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
+/* Cada resultado del torneo entra de costado, como una fecha que se acaba de jugar */
+@keyframes resultadoIn {
+  0% { transform: translateX(-10px); opacity: 0 }
+  100% { transform: none; opacity: 1 }
+}
+.resultado-in { animation: resultadoIn 220ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
 @media (prefers-reduced-motion: reduce) {
-  .share-btn:hover::after, .panel-in, .latido, .contador-in, .barra-crece { animation: none !important; }
+  .share-btn:hover::after, .panel-in, .latido, .contador-in, .barra-crece, .resultado-in { animation: none !important; }
   .share-btn:hover { transform: none; }
 }
 

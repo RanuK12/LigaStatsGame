@@ -10,6 +10,8 @@ import FichaFinalDT from "@/components/dt/FichaFinalDT"
 import ShareBar from "@/components/ShareBar"
 import { storyBlob, type FormatoFicha } from "@/lib/story-card"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
+import TorneoEnVivo from "@/components/tournament/TorneoEnVivo"
+import type { ScheduleMatch } from "@/lib/types"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 
 /**
@@ -190,6 +192,18 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
     elegirFormacion,
   } = useDTStore()
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
+  /**
+   * La temporada revelándose fecha por fecha, antes del cartel de cierre.
+   *
+   * El motor juega el año entero en un milisegundo, así que sin esto tocabas "Jugar la temporada"
+   * y aparecía el resultado: no había un solo momento de "¿cómo vamos?" ni una tabla que mirar.
+   */
+  const [revelando, setRevelando] = useState<{
+    partidos: ScheduleMatch[]
+    equipos: string[]
+    equipo: string
+    celebrar: () => void
+  } | null>(null)
 
   if (!estado) return null
   const club = clubes.find((c) => c.id === estado.clubId)
@@ -467,9 +481,16 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
         onClick={() => {
           jugarTemporada({ squads, players })
           const r = useDTStore.getState().revelacion
-          if (r?.temporada.campeon) setBurst({ label: "¡CAMPEONES!", tone: "oro" })
-          // No hay tono rojo en EventBurst: el despido ya se cuenta con el cartel entero en rojo.
-          else if (r?.evaluacion.despedido) setBurst({ label: "TE ECHARON", tone: "plata" })
+          // Primero se ven los partidos, después el cartel. Anunciar "¡CAMPEONES!" antes de
+          // revelar la temporada es contarle el final a alguien que todavía la está mirando.
+          const celebrar = () => {
+            if (r?.temporada.campeon) setBurst({ label: "¡CAMPEONES!", tone: "oro" })
+            // No hay tono rojo en EventBurst: el despido ya se cuenta con el cartel entero en rojo.
+            else if (r?.evaluacion.despedido) setBurst({ label: "TE ECHARON", tone: "plata" })
+          }
+          if (r && r.partidos.length >= 3)
+            setRevelando({ partidos: r.partidos, equipos: r.equipos, equipo: r.miEquipo, celebrar })
+          else celebrar()
           trackEvent(EVENTOS.carreraTemporada, { modo: "dt", temporada: estado.temporada })
         }}
         className="btn-primary latido font-sport w-full rounded-2xl py-5 text-sm font-black uppercase tracking-widest shadow-xl disabled:opacity-50"
@@ -531,8 +552,21 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
       )}
 
       {/* El cartel del final de temporada */}
+      {revelando && (
+        <TorneoEnVivo
+          partidos={revelando.partidos}
+          equipos={revelando.equipos}
+          equipo={revelando.equipo}
+          torneo={`Liga Profesional ${estado.anio}`}
+          onListo={() => {
+            setRevelando(null)
+            revelando.celebrar()
+          }}
+        />
+      )}
+
       <AnimatePresence>
-        {revelacion && (
+        {revelacion && !revelando && (
           <motion.div
             className="fixed inset-0 z-[120] flex items-end justify-center p-4 sm:items-center"
             initial={{ opacity: 0 }}
