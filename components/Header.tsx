@@ -20,6 +20,7 @@ import BotonSonido from './BotonSonido'
 const NAV_ITEMS = [
   { href: '/draft?mode=clasico', match: '/draft', label: 'DRAFT' },
   { href: '/carrera', label: 'CARRERA' },
+  { href: '/dt', label: 'DT' },
   { href: '/daily', label: 'RETO' },
   { href: '/leaderboard', label: 'RANKING' },
 ]

@@ -20,6 +20,7 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   ['/', 1.0, 'daily'],
   ['/draft/', 0.9, 'weekly'],
   ['/carrera/', 0.9, 'weekly'],
+  ['/dt/', 0.9, 'weekly'],
   // La única página escrita para que la encuentre alguien que NO sabe que existimos. Medido el
   // 8/8: las diez consultas que traen tráfico son las diez la marca, así que esta es la apuesta
   // a la intención de jugar ("juegos de fútbol argentino", "sin descargar").
