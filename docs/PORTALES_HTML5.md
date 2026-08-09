@@ -143,6 +143,19 @@ Hecho: motor **"Externally hosted (iframe)"** —una opción oficial de ellos, a
 falta subir ningún bundle— apuntando a gambetafutbol.games, soporte móvil, orientación ambas,
 y **el QA pasado**: el juego carga en su reproductor y el botón INGRESAR ya no aparece.
 
+**Las 3 portadas hay que arrastrarlas a mano.** Queda anotado para no volver a perder una hora:
+en su formulario, el campo de **video** acepta el archivo asignándoselo al input por código
+(`input.files = dt.files` + evento `change`, ejecutado en el mundo de la página y no en el
+mundo aislado de la extensión, que es donde todo falla en silencio). El campo de **portada, con
+el mismo código exacto, no lo acepta**: se probaron cinco caminos —asignar y disparar `change`,
+soltar el archivo sobre el contenedor, soltarlo sobre el elemento que tiene el `onDrop` de React
+(está tres niveles arriba del input, no en el padre), llamar al manejador de React directamente
+con un evento falso, y de a un archivo por vez para descartar los redibujos— y ninguno entró.
+
+Comprobado además que el archivo llega perfecto: decodificado dentro de la página da un PNG
+válido de 1920x1080 y 231.632 bytes. El problema es el componente, no el dato. Los videos sí
+muestran su vista previa y el rótulo cambia de "Upload" a "Update"; las portadas no.
+
 **Frenado en el paso 3.** Es un checklist que se firma: *"I confirm that these results are
 correct. I understand that my submission will not be accepted if it does not comply with the
 requirements or if I have marked any checks incorrectly."* Tres casillas no se pueden marcar
