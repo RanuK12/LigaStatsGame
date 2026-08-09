@@ -121,6 +121,44 @@ Las que conviene mandar, en este orden: `draft`, `carrera`, `home`, `equipos`, `
 **El icono** es `public/logos/gambeta.svg`. CrazyGames pide PNG cuadrado; hay que exportarlo a
 512×512 antes de subirlo.
 
+## 4 bis. Estado al 2026-08-09
+
+### itch.io — PUBLICADO ✅
+
+**<https://gambeta-futbol.itch.io/gambeta>** · cuenta `Gambeta-Futbol` · estado PUBLISHED.
+
+Subido el zip, marcado "This file will be played in the browser", mobile friendly y botón de
+pantalla completa. Portada apaisada cargada. Probado con "Run game": el juego levanta dentro
+del reproductor de itch.io.
+
+En la declaración de IA se marcó **"Yes — This project contains the output of Generative AI"**,
+porque este código lo escribimos con LLMs y la pregunta abarca el contenido "even if you
+hand-edited it".
+
+### CrazyGames — a un paso, frenado en la declaración
+
+Envío en borrador: `developer.crazygames.com/games/b356b1b8-8b2c-4c31-afb9-f14507c34102`.
+
+Hecho: motor **"Externally hosted (iframe)"** —una opción oficial de ellos, así que no hace
+falta subir ningún bundle— apuntando a gambetafutbol.games, soporte móvil, orientación ambas,
+y **el QA pasado**: el juego carga en su reproductor y el botón INGRESAR ya no aparece.
+
+**Frenado en el paso 3.** Es un checklist que se firma: *"I confirm that these results are
+correct. I understand that my submission will not be accepted if it does not comply with the
+requirements or if I have marked any checks incorrectly."* Tres casillas no se pueden marcar
+con honestidad todavía:
+
+| Casilla | Por qué |
+|---|---|
+| **Complies to Gameplay requirements** | Su regla dice *"The game should not include cross-promotions for external or internal games/platforms"* y solo permite links al sitio del desarrollador *"as long they don't lead directly to a playable web version"*. Gambeta tiene botones de compartir a X, Facebook, WhatsApp e Instagram y una sección de donaciones, y su documentación no las contempla ni a favor ni en contra. Es una zona gris real |
+| **Browser checks** | Probado en Chrome. Ellos piden Chrome **y Edge**, y avisan que lo desactivan en Safari si no anda bien |
+| **Device checks: Mobile** | Probado a 390 px en un navegador de escritorio. No en un teléfono de verdad |
+
+Si se decide que los botones de compartir y la donación también se ocultan embebido —el mismo
+`useEmbebido()` que ya usa el login—, la primera casilla deja de ser gris. Es una decisión de
+producto: la ShareBar es justo la palanca de crecimiento del `PLAN_MARKETING_0808.md`, aunque
+para el que llega desde CrazyGames el link compartido llevaría a nuestro sitio igual.
+
 ## 5. Lo que falta y necesita a Emilio
 
 Todo lo de arriba está hecho y probado. Lo que queda son los pasos que piden **crear una cuenta
