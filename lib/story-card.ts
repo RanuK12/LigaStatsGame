@@ -34,6 +34,76 @@ export interface StoryData {
   pie?: string
   /** Acento principal (dorado si hay título, celeste si no) */
   acento?: string
+  /**
+   * Las copas ganadas, con su escudo.
+   *
+   * Un número que dice "3" no cuenta nada; tres Libertadores dibujadas sí. Es lo que tienen las
+   * fichas de las otras apps y lo que hace que un tercero que nunca jugó entienda en dos
+   * segundos de qué se trata. Los ids son los de `public/logos/trofeos`.
+   */
+  trofeos?: { id: string; cantidad: number }[]
+}
+
+/**
+ * Los trofeos, cargados antes de dibujar.
+ *
+ * El canvas no puede dibujar un SVG sin que la imagen esté lista, así que se resuelven acá y se
+ * le pasan ya cargados al que dibuja. Si alguno falla —un id que no existe, la red— se saltea:
+ * una ficha sin trofeos es peor que una linda, pero una ficha que nunca se genera es peor que
+ * las dos.
+ */
+async function cargarTrofeos(trofeos: { id: string; cantidad: number }[]): Promise<Map<string, HTMLImageElement>> {
+  const cargadas = new Map<string, HTMLImageElement>()
+  await Promise.all(
+    trofeos.map(
+      (t) =>
+        new Promise<void>((listo) => {
+          const img = new Image()
+          img.onload = () => {
+            cargadas.set(t.id, img)
+            listo()
+          }
+          img.onerror = () => listo()
+          img.src = `/logos/trofeos/${t.id}.svg`
+        }),
+    ),
+  )
+  return cargadas
+}
+
+/**
+ * Una fila de copas: el dibujo y, si hay más de una, el ×N al lado.
+ *
+ * Devuelve el alto ocupado, para que quien la llama siga acomodando debajo.
+ */
+function dibujarTrofeos(
+  ctx: CanvasRenderingContext2D,
+  trofeos: { id: string; cantidad: number }[],
+  cargadas: Map<string, HTMLImageElement>,
+  cx: number,
+  y: number,
+  lado: number,
+  acento: string,
+): number {
+  const visibles = trofeos.filter((t) => t.cantidad > 0 && cargadas.has(t.id))
+  if (visibles.length === 0) return 0
+
+  ctx.font = `900 ${Math.round(lado * 0.42)}px Impact, 'Arial Black', sans-serif`
+  const anchos = visibles.map((t) => lado + (t.cantidad > 1 ? ctx.measureText(`×${t.cantidad}`).width + 10 : 0))
+  const sep = Math.round(lado * 0.34)
+  const total = anchos.reduce((a, b) => a + b, 0) + sep * (visibles.length - 1)
+
+  let x = cx - total / 2
+  ctx.textAlign = "left"
+  visibles.forEach((t, i) => {
+    ctx.drawImage(cargadas.get(t.id)!, x, y, lado, lado)
+    if (t.cantidad > 1) {
+      ctx.fillStyle = acento
+      ctx.fillText(`×${t.cantidad}`, x + lado + 10, y + lado * 0.72)
+    }
+    x += anchos[i] + sep
+  })
+  return lado
 }
 
 function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
@@ -63,8 +133,12 @@ function wrap(ctx: CanvasRenderingContext2D, texto: string, max: number): string
   return lineas
 }
 
-export function renderStoryCard(data: StoryData, formato: FormatoFicha = "historia"): HTMLCanvasElement {
-  if (formato === "ancha") return renderFichaAncha(data)
+export function renderStoryCard(
+  data: StoryData,
+  formato: FormatoFicha = "historia",
+  trofeos: Map<string, HTMLImageElement> = new Map(),
+): HTMLCanvasElement {
+  if (formato === "ancha") return renderFichaAncha(data, trofeos)
 
   const { W, H } = MEDIDAS.historia
   const acento = data.acento || "#F6C750"
@@ -141,6 +215,11 @@ export function renderStoryCard(data: StoryData, formato: FormatoFicha = "histor
       .forEach((l, i) => ctx.fillText(l, W / 2, 650 + tituloLineas.length * alto + 20 + i * 50))
   }
 
+  // Las copas, arriba de las métricas: es lo primero que mira alguien que no jugó nunca.
+  if (data.trofeos?.length) {
+    dibujarTrofeos(ctx, data.trofeos, trofeos, W / 2, 930, 118, acento)
+  }
+
   // Métricas
   const stats = data.stats.slice(0, 4)
   if (stats.length) {
@@ -206,7 +285,7 @@ export function renderStoryCard(data: StoryData, formato: FormatoFicha = "histor
  * No es la vertical escalada: en 675 px de alto no entra la misma composición. Acá el texto va a
  * la izquierda y las métricas a la derecha, que es lo que se lee de un vistazo al pasar el dedo.
  */
-function renderFichaAncha(data: StoryData): HTMLCanvasElement {
+function renderFichaAncha(data: StoryData, trofeos: Map<string, HTMLImageElement> = new Map()): HTMLCanvasElement {
   const { W, H } = MEDIDAS.ancha
   const acento = data.acento || "#F6C750"
   const canvas = document.createElement("canvas")
@@ -306,6 +385,13 @@ function renderFichaAncha(data: StoryData): HTMLCanvasElement {
     ctx.textAlign = "left"
   })
 
+  // Las copas van ARRIBA de las métricas, no abajo.
+  // Debajo chocaban con el "JUGÁ GRATIS" del pie —el ×2 quedaba encima de la G— y acá arriba,
+  // en la columna derecha, no hay nada: la marca va toda del lado izquierdo.
+  if (data.trofeos?.length) {
+    dibujarTrofeos(ctx, data.trofeos, trofeos, x0 + cajaW + 10, 92, 66, acento)
+  }
+
   // El link, abajo a la derecha: es lo que tiene que quedar cuando alguien ve la captura.
   ctx.textAlign = "right"
   ctx.fillStyle = "#FFFFFF"
@@ -324,9 +410,11 @@ function renderFichaAncha(data: StoryData): HTMLCanvasElement {
 }
 
 /** Ficha lista para compartir. Por defecto, la vertical de historias. */
-export function storyBlob(data: StoryData, formato: FormatoFicha = "historia"): Promise<Blob> {
+export async function storyBlob(data: StoryData, formato: FormatoFicha = "historia"): Promise<Blob> {
+  // Los SVG de las copas se cargan antes: el canvas no dibuja una imagen que todavía no llegó.
+  const cargadas = data.trofeos?.length ? await cargarTrofeos(data.trofeos) : new Map()
   return new Promise((resolve, reject) => {
-    renderStoryCard(data, formato).toBlob(
+    renderStoryCard(data, formato, cargadas).toBlob(
       (b) => (b ? resolve(b) : reject(new Error("no blob"))),
       "image/png",
     )

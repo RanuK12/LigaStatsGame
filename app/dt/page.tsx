@@ -252,6 +252,12 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                     ? `Campeón con ${ficha.mejorTemporada.clubNombre} en ${ficha.mejorTemporada.anio}.`
                     : `Su mejor año: ${ficha.mejorTemporada.puesto}º con ${ficha.mejorTemporada.clubNombre} en ${ficha.mejorTemporada.anio}.`
                   : undefined,
+                // Las copas dibujadas, no contadas: es lo que hace que la ficha se entienda de
+                // un vistazo, y lo que tienen las fichas de las otras apps.
+                trofeos: [
+                  { id: "lpf", cantidad: titulos },
+                  { id: "copa-arg", cantidad: ficha.copas },
+                ],
                 acento: titulos > 0 ? "#D4AF37" : undefined,
               },
               formato,

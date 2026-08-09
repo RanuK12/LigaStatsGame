@@ -971,6 +971,11 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                         : { valor: goleador?.goals ? `${goleador.goals}` : "0", label: "Goleador" },
                     ],
                     pie: cierreFicha,
+                    // La copa dibujada, no la palabra "campeón". Cada torneo tiene la suya, y sin
+                    // título no va ninguna: una copa de adorno le saca valor a la de verdad.
+                    trofeos: isChamp
+                      ? [{ id: result.continental ?? (result.type === "liga" ? "lpf" : "copa-arg"), cantidad: 1 }]
+                      : undefined,
                     acento: isChamp ? "#F6C750" : "#74ACDF",
                   }, formato)
                 }

@@ -288,6 +288,14 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
                       { valor: `${clubCount}`, label: "Clubes" },
                     ],
                     pie: retirementStory(career),
+                    // Las copas dibujadas. `career.trophies` ya viene con las claves de
+                    // /logos/trofeos, así que van tal cual, las cuatro más ganadas: con más de
+                    // cuatro la fila se aprieta y no se reconoce ninguna.
+                    trofeos: Object.entries(career.trophies)
+                      .filter(([, n]) => n > 0)
+                      .sort((a, b) => b[1] - a[1])
+                      .slice(0, 4)
+                      .map(([id, cantidad]) => ({ id, cantidad })),
                     acento: titlesTotal > 0 ? "#F6C750" : "#74ACDF",
                   }, formato)
                 }
