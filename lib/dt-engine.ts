@@ -825,8 +825,11 @@ export interface FichaDT {
   titulos: number
   /** Copas nacionales. Se cuentan aparte: no es lo mismo una liga que una copa. */
   copas: number
-  /** Ligas ganadas por club, que es lo que hace reconocible la ficha de un hincha. */
-  titulosPorClub: { clubId: string; clubNombre: string; cantidad: number }[]
+  /**
+   * Lo ganado por club, separando ligas de copas. Es lo que hace reconocible la ficha de un
+   * hincha: el escudo dice más que la palabra "campeón".
+   */
+  titulosPorClub: { clubId: string; clubNombre: string; ligas: number; copas: number }[]
   despidos: number
   objetivosCumplidos: number
   prestigio: number
@@ -860,8 +863,16 @@ export function fichaDT(estado: DTState, nombreDeClub: (id: string) => string): 
   const copas = h.filter((t) => t.copa?.campeon).length
   const despidos = h.filter((t) => t.despedido).length
 
-  const porClub = new Map<string, number>()
-  h.filter((t) => t.campeon).forEach((t) => porClub.set(t.clubId, (porClub.get(t.clubId) ?? 0) + 1))
+  // Un DT que ganó dos copas y ninguna liga tenía la sección "lo que ganó" VACÍA, justo en la
+  // ficha de "Copero". Las copas cuentan igual que las ligas para lo que se muestra.
+  const porClub = new Map<string, { ligas: number; copas: number }>()
+  for (const t of h) {
+    if (!t.campeon && !t.copa?.campeon) continue
+    const cur = porClub.get(t.clubId) ?? { ligas: 0, copas: 0 }
+    if (t.campeon) cur.ligas++
+    if (t.copa?.campeon) cur.copas++
+    porClub.set(t.clubId, cur)
+  }
 
   const mejor = [...h].sort((a, b) => {
     if (a.campeon !== b.campeon) return a.campeon ? -1 : 1
@@ -875,8 +886,8 @@ export function fichaDT(estado: DTState, nombreDeClub: (id: string) => string): 
     titulos,
     copas,
     titulosPorClub: [...porClub.entries()]
-      .map(([clubId, cantidad]) => ({ clubId, clubNombre: nombreDeClub(clubId), cantidad }))
-      .sort((a, b) => b.cantidad - a.cantidad),
+      .map(([clubId, x]) => ({ clubId, clubNombre: nombreDeClub(clubId), ligas: x.ligas, copas: x.copas }))
+      .sort((a, b) => b.ligas + b.copas - (a.ligas + a.copas)),
     despidos,
     objetivosCumplidos: h.filter((t) => t.cumplio).length,
     prestigio: estado.prestigio,

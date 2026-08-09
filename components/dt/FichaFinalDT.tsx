@@ -89,9 +89,16 @@ export default function FichaFinalDT({ ficha, escudoDe }: { ficha: FichaDT; escu
                 <span className="font-sport text-[11px] font-bold uppercase tracking-wide text-white">
                   {t.clubNombre}
                 </span>
-                <span className="flex items-center gap-1 font-display text-sm font-black text-[#D4AF37]">
-                  <Trofeo id="lpf" className="h-4 w-4" />×{t.cantidad}
-                </span>
+                {t.ligas > 0 && (
+                  <span className="flex items-center gap-1 font-display text-sm font-black text-[#D4AF37]">
+                    <Trofeo id="lpf" className="h-4 w-4" />×{t.ligas}
+                  </span>
+                )}
+                {t.copas > 0 && (
+                  <span className="flex items-center gap-1 font-display text-sm font-black text-[#74ACDF]">
+                    <Trofeo id="copa-arg" className="h-4 w-4" />×{t.copas}
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -103,16 +110,19 @@ export default function FichaFinalDT({ ficha, escudoDe }: { ficha: FichaDT; escu
         <h3 className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#74ACDF]">
           Por dónde pasó
         </h3>
-        <div className="mt-3 flex flex-wrap items-center gap-2">
+        {/* La flecha va DESPUÉS de cada escudo, no antes del siguiente. Con seis clubes la fila
+            se parte en dos, y con la flecha adelante la segunda línea arrancaba con "→ escudo",
+            que se lee como si faltara algo. Así, a lo sumo una línea termina en flecha. */}
+        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-3">
           {ficha.clubes.map((id, i) => (
             <div key={`${id}-${i}`} className="flex items-center gap-2">
-              {i > 0 && <span className="text-slate-600">→</span>}
               <img
                 src={escudoDe(id)}
                 alt=""
                 className="h-9 w-9 object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
                 onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
               />
+              {i < ficha.clubes.length - 1 && <span className="text-slate-600">→</span>}
             </div>
           ))}
         </div>
@@ -144,9 +154,11 @@ export default function FichaFinalDT({ ficha, escudoDe }: { ficha: FichaDT; escu
         </section>
       )}
 
-      <footer className="relative mt-6 flex items-center justify-between border-t border-white/[0.07] pt-4">
-        <span className="font-sport text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500">
-          {ficha.partidos} partidos · {ficha.efectividad}% de efectividad
+      {/* En teléfono el pie no entra en una línea: "468 partidos · 62% de efectividad" se partía
+          en dos y quedaba encimado contra el link. Apilado arriba de 400 px y en fila abajo. */}
+      <footer className="relative mt-6 flex flex-col items-center gap-1.5 border-t border-white/[0.07] pt-4 sm:flex-row sm:justify-between sm:gap-3">
+        <span className="font-sport whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+          {ficha.partidos} partidos · {ficha.efectividad}% efectividad
         </span>
         <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-[#74ACDF]">
           gambetafutbol.games
