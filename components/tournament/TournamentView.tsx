@@ -1011,7 +1011,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   la acaba de pasar bien. En el footer del home no lo veía casi nadie. */}
               <DonationSection compacta />
 
-              <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">
+              <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center inline-block py-2.5 px-3">
                 Volver al inicio
               </Link>
             </motion.div>

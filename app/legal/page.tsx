@@ -105,7 +105,7 @@ export default function LegalPage() {
         </p>
         <Link
           href="/"
-          className="mt-6 block font-sport text-xs font-bold uppercase tracking-wider text-slate-400 transition-colors hover:text-white"
+          className="mt-6 block font-sport text-xs font-bold uppercase tracking-wider text-slate-400 transition-colors hover:text-white inline-block py-2.5 px-3"
         >
           ← Volver al inicio
         </Link>

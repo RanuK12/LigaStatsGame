@@ -937,7 +937,7 @@ export default function VersusPage() {
         {/* Back Link */}
         {phase === "setup" && (
           <div className="text-center mt-6">
-            <Link href="/" className="text-xs text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider">
+            <Link href="/" className="text-xs text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider inline-block py-2.5 px-3">
               ← Volver al inicio
             </Link>
           </div>

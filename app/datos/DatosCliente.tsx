@@ -196,7 +196,7 @@ export default function DatosCliente() {
 
         <Link
           href="/"
-          className="mt-10 block text-center font-sport text-xs font-bold uppercase tracking-wider text-slate-400 transition-colors hover:text-white"
+          className="mt-10 block text-center font-sport text-xs font-bold uppercase tracking-wider text-slate-400 transition-colors hover:text-white inline-block py-2.5 px-3"
         >
           ← Volver al inicio
         </Link>

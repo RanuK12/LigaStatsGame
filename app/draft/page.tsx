@@ -605,7 +605,7 @@ function DraftInner() {
           {playersError && (
             <p className="mt-3 text-xs text-red-400">No se pudo cargar la base de jugadores: {playersError}. Recargá la página.</p>
           )}
-          <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider">Volver al inicio</Link>
+          <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider inline-block py-2.5 px-3">Volver al inicio</Link>
         </motion.div>
 
         {/* En el teléfono, no.
@@ -1040,7 +1040,7 @@ function DraftInner() {
                 .
               </p>
             )}
-            <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center">Volver al inicio</Link>
+            <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center inline-block py-2.5 px-3">Volver al inicio</Link>
           </motion.div>
         )}
       </main>
