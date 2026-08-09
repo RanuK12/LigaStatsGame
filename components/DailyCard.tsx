@@ -104,7 +104,7 @@ export default function DailyCard() {
               </Link>
               <Link
                 href="/daily"
-                className="font-sport text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors hover:text-[#74ACDF]"
+                className="font-sport inline-block py-2.5 text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors hover:text-[#74ACDF]"
               >
                 Cómo suma al ranking
               </Link>

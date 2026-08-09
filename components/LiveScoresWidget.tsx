@@ -104,7 +104,7 @@ export default function LiveScoresWidget() {
             <button
               key={d.dateStr}
               onClick={() => setSelectedDate(d.dateStr)}
-              className={`px-4 py-2 rounded-xl text-[10px] sm:text-[11px] font-bold font-sport uppercase tracking-wider whitespace-nowrap transition-all ${
+              className={`px-4 py-2.5 rounded-xl text-[10px] sm:text-[11px] font-bold font-sport uppercase tracking-wider whitespace-nowrap transition-all ${
                 isSelected
                   ? "bg-slate-900 text-white border border-[#74ACDF]/50 shadow-[0_0_12px_rgba(116,172,223,0.25)] font-black"
                   : "text-slate-400 hover:text-white hover:bg-white/5"

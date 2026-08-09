@@ -306,10 +306,10 @@ function CareerSetupWizard() {
                 />
               </Field>
               <Field label={`OVR inicial: ${ovr} (máx ${ovrCapForAge(age)} a los ${age})`}>
-                <input type="range" min={55} max={ovrCapForAge(age)} value={Math.min(ovr, ovrCapForAge(age))} onChange={(e) => setOvr(parseInt(e.target.value))} className="w-full accent-[#74ACDF]" />
+                <input type="range" min={55} max={ovrCapForAge(age)} value={Math.min(ovr, ovrCapForAge(age))} onChange={(e) => setOvr(parseInt(e.target.value))} className="rango-tocable w-full accent-[#74ACDF]" />
               </Field>
               <Field label={`Edad: ${age} · Valor ~${formatMarketValue(previewValue)}`}>
-                <input type="range" min={16} max={30} value={age} onChange={(e) => { const a = parseInt(e.target.value); setAge(a); setOvr((o) => Math.min(o, ovrCapForAge(a))) }} className="w-full accent-[#74ACDF]" />
+                <input type="range" min={16} max={30} value={age} onChange={(e) => { const a = parseInt(e.target.value); setAge(a); setOvr((o) => Math.min(o, ovrCapForAge(a))) }} className="rango-tocable w-full accent-[#74ACDF]" />
               </Field>
             </div>
           </div>

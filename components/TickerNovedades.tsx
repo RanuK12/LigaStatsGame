@@ -55,7 +55,11 @@ export default function TickerNovedades() {
                 // un lector de pantalla no tiene por qué leer todo dos veces.
                 aria-hidden={i >= novedades.length}
                 tabIndex={i >= novedades.length ? -1 : undefined}
-                className="flex shrink-0 items-center gap-2 text-[11px] text-slate-300 transition-colors hover:text-white"
+                // `py-2 -my-2` agranda el área que se toca sin engordar la cinta: medido en un
+                // teléfono de 390 px, cada título era un blanco de 17 px de alto —y encima en
+                // movimiento—, o sea imposible de acertar. Son doce por página, en las diez
+                // páginas: la mayor parte de los 176 tocables chicos que tenía el sitio.
+                className="flex shrink-0 items-center gap-2 py-2 -my-2 text-[11px] text-slate-300 transition-colors hover:text-white"
               >
                 <span className="text-[#74ACDF]">▸</span>
                 <span className="whitespace-nowrap font-bold">{n.titulo}</span>

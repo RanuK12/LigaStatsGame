@@ -673,3 +673,44 @@ button, input, select, textarea {
   .share-btn:hover::after, .panel-in, .latido, .contador-in, .barra-crece { animation: none !important; }
   .share-btn:hover { transform: none; }
 }
+
+/* Los dos deslizadores de la creación del jugador (OVR y edad).
+   Medido en un teléfono de 390 px: la barra daba 16 px de alto, así que el pulgar tapaba el
+   control entero y arrastrarlo era pura suerte. Se le da 44 px de alto tocable —la medida que
+   recomienda Apple— sin engordar la barra, que sigue fina, y un pulsador grande y visible. */
+.rango-tocable {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+}
+.rango-tocable::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+.rango-tocable::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+.rango-tocable::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: #74acdf;
+  border: 3px solid #0a1424;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.rango-tocable::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #74acdf;
+  border: 3px solid #0a1424;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
