@@ -53,18 +53,30 @@ export default function DTPage() {
   return (
     <div className="min-h-screen gradient-bg arg-stripe-bg px-4 py-8 font-sans text-white">
       <div className="mx-auto max-w-3xl space-y-6">
-        <header className="card-gradient relative overflow-hidden rounded-3xl border border-[#D4AF37]/20 p-6 text-center shadow-2xl sm:p-8">
+        {/* La portada del modo, entera, va SOLO antes de empezar.
+            Medido en 390x844: con este cartel arriba, el dibujo del equipo caía en el píxel 610
+            y el mercado de pases en el 935, o sea fuera del primer pantallazo en las dos cosas
+            que hay para decidir. Se entraba a la temporada, se veía "te echan si no cumplís" y
+            el botón de jugar, y parecía que el modo simulaba solo. Una vez que estás dirigiendo,
+            explicar el modo ocupa la pantalla que necesitan la táctica y el mercado. */}
+        <header className={`card-gradient relative overflow-hidden rounded-3xl border border-[#D4AF37]/20 text-center shadow-2xl ${estado ? "px-6 py-3" : "p-6 sm:p-8"}`}>
           <div className="banda-argentina absolute inset-x-0 top-0 h-1 opacity-80" />
           <span className="font-sport block text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">
             Modo DT · Liga Profesional
           </span>
-          <h1 className="font-display text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">
+          <h1
+            className={`font-display font-black uppercase tracking-tight text-white ${
+              estado ? "text-xl sm:text-2xl" : "text-3xl sm:text-5xl"
+            }`}
+          >
             El banco quema
           </h1>
-          <p className="mx-auto mt-2 max-w-lg font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
-            Te dan un club y un objetivo. Manejás el presupuesto, comprás y vendés, y dirigís la
-            temporada. Si no cumplís, te echan y arrancás de nuevo en otro lado.
-          </p>
+          {!estado && (
+            <p className="mx-auto mt-2 max-w-lg font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
+              Te dan un club y un objetivo. Manejás el presupuesto, comprás y vendés, y dirigís la
+              temporada. Si no cumplís, te echan y arrancás de nuevo en otro lado.
+            </p>
+          )}
         </header>
 
         {!listo && (
