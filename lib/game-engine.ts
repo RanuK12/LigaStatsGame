@@ -325,8 +325,21 @@ export function simulateMatchGoals(home: TeamStrength, away: TeamStrength): { ho
   const homeDefense = home.defense * 0.55 + home.goalkeeper * 0.3 + home.chemistry * 0.15;
   const awayDefense = away.defense * 0.55 + away.goalkeeper * 0.3 + away.chemistry * 0.15;
 
-  const homeExpected = clamp((homeAttack - awayDefense + 52) / 28, 0.35, 2.85);
-  const awayExpected = clamp((awayAttack - homeDefense + 50) / 29, 0.25, 2.55);
+  // Cuánto pesa la diferencia de planteles contra el azar.
+  //
+  // El problema medido: los siete puntos de overall que separan al mejor plantel de la Liga
+  // Profesional del peor se traducían en 0,25 goles esperados por partido, y la varianza de
+  // Poisson se los comía. River le ganaba a Aldosivi de local el 47 % de las veces y promediaba
+  // 11º de 24 en la temporada. Elegir club casi no cambiaba la partida.
+  //
+  // Se amplifica la DIFERENCIA y no se toca el divisor: bajar el divisor sube los goles de todos
+  // los partidos —medido: de 1,92 a 2,16 por equipo— y eso cambia cómo se siente el draft, que
+  // usa el mismo modelo. Con el factor sobre la diferencia, dos equipos parejos siguen dando el
+  // mismo marcador de siempre (la diferencia vale 0) y solo se separa lo que de verdad es
+  // distinto. Sigue habiendo batacazos: es lo que hace que valga la pena jugar la temporada.
+  const VENTAJA = 2.1
+  const homeExpected = clamp(((homeAttack - awayDefense) * VENTAJA + 52) / 28, 0.35, 2.85);
+  const awayExpected = clamp(((awayAttack - homeDefense) * VENTAJA + 50) / 29, 0.25, 2.55);
 
   const homeGoals = samplePoissonGoals(homeExpected);
   const awayGoals = samplePoissonGoals(awayExpected);
