@@ -93,8 +93,16 @@ export function tirar(): Curiosidad | null {
   const tope = TIRADAS_BASE + (completadoHoy() ? TIRADA_EXTRA_POR_RETO : 0)
   if (e.tiradas >= tope) return null
 
-  const noVistos = MAZO.filter((c) => !e.vistos.includes(c.id))
-  const bolsa = noVistos.length > 0 ? noVistos : MAZO
+  // El dato de "un día como hoy" no puede volver a salir en el dado: está escrito arriba, en la
+  // misma pantalla. Pasó en la primera tirada de la captura de prensa —la efeméride decía "Boca
+  // 1998, campeón del Apertura, arranque de la era Bianchi" y el dado devolvió exactamente eso—,
+  // y tirar el dado para que te den lo que ya estabas leyendo es lo contrario de una sorpresa.
+  // El mazo y las efemérides comparten los hitos: el id del mazo es `hito-` + el squadId.
+  const delDia = efemerideDelDia()
+  const idDelDia = delDia ? `hito-${delDia.squadId}` : null
+
+  const noVistos = MAZO.filter((c) => !e.vistos.includes(c.id) && c.id !== idDelDia)
+  const bolsa = noVistos.length > 0 ? noVistos : MAZO.filter((c) => c.id !== idDelDia)
   // Si el mazo se agotó, se empieza de nuevo pero sin perder el conteo de la colección.
   const elegido = bolsa[Math.floor(Math.random() * bolsa.length)]
 

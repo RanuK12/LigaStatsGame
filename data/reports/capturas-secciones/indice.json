@@ -4,12 +4,34 @@
   "titulo": "¿Sabías que?",
   "archivo": "sabias-que.png",
   "link": "gambetafutbol.games/datos/",
-  "de_que_habla": "Datos del fútbol argentino con dos fuentes cada uno. Se tira un dado y sale uno.",
+  "de_que_habla": "Datos de fútbol con dos fuentes cada uno. Se tira un dado y sale uno; son 74 y no se repiten.",
   "angulos": [
    "El Vélez del 94 le ganó al Milan de Capello en la Intercontinental.",
    "Cada dato del mazo está cruzado contra dos fuentes: no hay ninguno inventado."
-  ],
-  "revisar": "la captura pesa 12473 bytes, puede estar vacía"
+  ]
+ },
+ {
+  "id": "draft",
+  "titulo": "El draft",
+  "archivo": "draft.png",
+  "link": "gambetafutbol.games/draft/",
+  "de_que_habla": "La ruleta te da un plantel y elegís un jugador de ahí para cada puesto. Once vueltas y se juega la Liga.",
+  "angulos": [
+   "No elegís a quien querés: elegís entre los que te tocaron.",
+   "Salen planteles de 2015 a 2026 y los históricos."
+  ]
+ },
+ {
+  "id": "dt",
+  "titulo": "Modo DT",
+  "archivo": "dt.png",
+  "link": "gambetafutbol.games/dt/",
+  "de_que_habla": "Dirigís un club de la Liga Profesional: elegís el dibujo, manejás el mercado y la temporada se juega fecha por fecha con su tabla. Si no cumplís, te echan.",
+  "angulos": [
+   "La dirigencia te pide un puesto. Si no llegás, se le acaba la paciencia.",
+   "Tres movimientos de mercado por temporada, no una base de datos.",
+   "Podés terminar con cuatro ligas o sin trabajo."
+  ]
  },
  {
   "id": "leyendas",
