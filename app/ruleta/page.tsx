@@ -205,7 +205,18 @@ export default function RuletaPage() {
                   const textX = r3(50 + 34 * Math.cos(midRad))
                   const textY = r3(50 + 34 * Math.sin(midRad))
                   // Paleta celeste/navy visible sobre el fondo oscuro (el texto es blanco).
+                  //
+                  // Y los íconos van en dorado. Con los doce sectores del mismo azul, la rueda no
+                  // decía que hubiera algo mejor que otra cosa: girabas sin nada que esperar. Con
+                  // Messi y Maradona en oro se ve DÓNDE está el premio antes de tirar, que es la
+                  // mitad de las ganas de tirar.
+                  //
+                  // Solo ellos dos. Probé pintando también a las leyendas en bronce y la rueda
+                  // quedó dorada entera: la rueda son los doce de mejor OVR, así que casi todos
+                  // pasan de 89 y el dorado dejaba de significar nada.
                   const colors = ['#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73','#3a6ea5','#1e3a5f','#4f86bd','#274b73']
+                  const esIcono = ICONS.has(player.id)
+                  const color = esIcono ? '#D4AF37' : colors[i % colors.length]
                   const textAngle = (startAngle + endAngle) / 2
                   const selected = targetIndex === i && spinning
 
@@ -213,16 +224,16 @@ export default function RuletaPage() {
                     <g key={player.id}>
                       <path
                         d={`M50,50 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`}
-                        fill={selected ? '#74ACDF' : colors[i % colors.length]}
-                        stroke="#94a3b8"
-                        strokeWidth="0.25"
+                        fill={selected ? '#74ACDF' : color}
+                        stroke={esIcono ? '#FFE79A' : '#94a3b8'}
+                        strokeWidth={esIcono ? 0.5 : 0.25}
                       />
                       <text
                         x={textX}
                         y={textY}
                         textAnchor="middle"
                         dominantBaseline="middle"
-                        fill="white"
+                        fill={esIcono ? '#1a1206' : 'white'}
                         fontSize="3"
                         fontWeight="900"
                         letterSpacing="0.1"
@@ -234,13 +245,20 @@ export default function RuletaPage() {
                   )
                 })}
 
+                {/* El eje: solo el disco. La estrella la pone el que va encima y no gira; con
+                    las dos se veían dos estrellas, una girando y otra quieta. */}
                 <circle cx="50" cy="50" r="10" fill="#020617" stroke="#D4AF37" strokeWidth="0.8"/>
-                <path d="M50,46.5 L51.2,49.5 L54.5,49.5 L51.8,51.5 L52.8,54.5 L50,52.5 L47.2,54.5 L48.2,51.5 L45.5,49.5 L48.8,49.5 Z" fill="#D4AF37" />
               </svg>
             </motion.div>
 
+            {/* El centrado va en un div normal y el giro adentro.
+                Estaba todo junto en el `motion.div`, y framer-motion escribe su propio
+                `transform` para animar el `rotate`, que pisa el `-translate-x-1/2
+                -translate-y-1/2` de Tailwind: el eje quedaba corrido media caja para abajo y a la
+                derecha, como una segunda estrella suelta al costado. */}
+            <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -ml-10 -mt-10 h-20 w-20">
             <motion.div
-              className="absolute left-1/2 top-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-slate-950/70 shadow-[0_0_24px_rgba(116,172,223,0.16)]"
+              className="flex h-full w-full items-center justify-center rounded-full border border-white/10 bg-slate-950/70 shadow-[0_0_24px_rgba(116,172,223,0.16)]"
               animate={spinning ? { rotate: [0, -8, 8, -4, 4, 0] } : { rotate: 0 }}
               transition={{ duration: 0.35, repeat: spinning ? Infinity : 0 }}
             >
@@ -248,6 +266,7 @@ export default function RuletaPage() {
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
               </svg>
             </motion.div>
+            </div>
           </div>
 
           {spinning && (
@@ -275,7 +294,9 @@ export default function RuletaPage() {
           </motion.button>
 
           <div className="mt-4 text-sm text-slate-500">
-            {spinCount > 0 ? `${spinCount} giros realizados` : `${wheelPlayers.length} candidatos en la rueda`}
+            {spinCount > 0
+              ? `${spinCount} ${spinCount === 1 ? 'giro' : 'giros'} · ${wheelPlayers.filter((p) => ICONS.has(p.id)).length} en oro te dan el ícono`
+              : `${wheelPlayers.length} en la rueda · los dorados son los íconos`}
           </div>
         </motion.section>
 

@@ -53,7 +53,7 @@ export default function DatosCliente() {
 
   const compartir = async () => {
     if (!dato) return
-    const texto = `${dato.texto}\n\nMás datos del fútbol argentino en gambetafutbol.games/datos?utm_source=directo&utm_medium=social&utm_campaign=dato`
+    const texto = `${dato.texto}\n\nMás datos de fútbol en gambetafutbol.games/datos?utm_source=directo&utm_medium=social&utm_campaign=dato`
     trackEvent("compartido", { red: "dato" })
     try {
       if (navigator.share) await navigator.share({ text: texto })
@@ -73,8 +73,12 @@ export default function DatosCliente() {
             ¿Sabías <span className="gradient-text">que?</span>
           </h1>
           <p className="mx-auto mt-3 max-w-md font-sans text-[13px] leading-relaxed text-slate-400">
-            Tirá el dado 3D y sacá un dato del fútbol argentino. Ninguno está inventado: los que
-            contamos nosotros salen de la base del juego, y los demás tienen dos fuentes.
+            {/* Antes decía "un dato del fútbol argentino" y salían el Milan de Sacchi, el Ajax de
+                van Gaal y el Barcelona de Guardiola: 14 de los 74 no son argentinos. El mazo está
+                bien, lo que estaba mal era la promesa. */}
+            Tirá el dado 3D y sacá un dato del fútbol argentino y del mundo. Ninguno está
+            inventado: los que contamos nosotros salen de la base del juego, y los demás tienen
+            dos fuentes.
           </p>
         </header>
 

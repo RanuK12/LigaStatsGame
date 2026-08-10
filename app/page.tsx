@@ -596,7 +596,7 @@ export default function HomePage() {
             { href: '/como-jugar', title: 'CÓMO SE JUEGA', text: 'Aprendé el flujo del draft, las posiciones y la simulación táctica.', color: 'border-slate-900 hover:border-slate-800' },
             { href: '/records', title: 'RECORDS HISTÓRICOS', text: 'Consulta el ranking de mejores puntuaciones y leyendas de la liga.', color: 'border-slate-900 hover:border-slate-800' },
             { href: '/daily', title: 'RETO DIARIO', text: 'Competí en el desafío de simulación del día en igualdad de condiciones.', color: 'border-slate-900 hover:border-slate-800' },
-            { href: '/datos', title: '¿SABÍAS QUE?', text: 'Tirá el dado y sacá un dato del fútbol argentino. Ninguno inventado.', color: 'border-slate-900 hover:border-slate-800' },
+            { href: '/datos', title: '¿SABÍAS QUE?', text: 'Tirá el dado y sacá un dato del fútbol argentino y del mundo. Ninguno inventado.', color: 'border-slate-900 hover:border-slate-800' },
           ].map((item, i) => (
             <motion.div
               key={item.href}

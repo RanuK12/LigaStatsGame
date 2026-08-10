@@ -155,7 +155,10 @@ export default function LegendCardReveal({ player, club, isIcon, biography, onCl
                   <div className="text-left leading-none">
                     <div className="font-black" style={{ fontSize: 46, color: gold, textShadow: `0 2px 10px ${gold}55` }}>{player.rating}</div>
                     <div className="mt-1 rounded px-1.5 py-0.5 text-center text-[11px] font-black text-white" style={{ background: posColors[player.position] || '#555' }}>{player.position}</div>
-                    {club && <div className="mt-1 text-[10px] text-slate-400">{club.nickname || club.name}</div>}
+                    {/* El nombre del club, no su apodo. Debajo del puesto y en letra chica, "El
+                        Taladro" se lee como el alias del jugador: en la ficha de Zanetti decía
+                        "El Taladro" —que es Banfield— cuando a él le dicen Pupi. */}
+                    {club && <div className="mt-1 text-[10px] text-slate-400">{club.name}</div>}
                   </div>
                   <div className="relative">
                     {player.image ? (

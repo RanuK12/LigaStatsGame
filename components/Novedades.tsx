@@ -1,10 +1,18 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
 import novedadesData from "@/data/novedades.json"
 
-type Novedad = { fecha: string; titulo: string; texto: string }
+/**
+ * Una novedad, con a dónde se prueba lo que cuenta.
+ *
+ * `href` y `cta` son opcionales porque no toda novedad tiene una pantalla propia, pero cuando la
+ * tiene el botón cambia todo: antes la sección contaba que existía el reto diario y el que lo
+ * leía tenía que ir a buscarlo al menú. Contar algo sin dar la puerta es la mitad del trabajo.
+ */
+type Novedad = { fecha: string; titulo: string; texto: string; href?: string; cta?: string }
 
 const novedades = novedadesData as Novedad[]
 const VISIBLES = 4
@@ -69,6 +77,15 @@ export default function Novedades() {
                     {n.titulo}
                   </h3>
                   <p className="mt-1 font-sans text-[12px] leading-relaxed text-slate-400">{n.texto}</p>
+                  {n.href && (
+                    <Link
+                      href={n.href}
+                      className="font-sport relative mt-2.5 inline-flex min-h-[36px] items-center gap-1.5 rounded-xl border border-[#74ACDF]/30 bg-[#74ACDF]/[0.08] px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#9CCBF0] transition-colors hover:border-[#74ACDF] hover:bg-[#74ACDF]/20 hover:text-white"
+                    >
+                      {n.cta || "Probarlo"}
+                      <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+                    </Link>
+                  )}
                 </motion.li>
               )
             })}
