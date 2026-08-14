@@ -12,6 +12,7 @@ import {
 } from "@/lib/daily-challenge"
 import { loadDaily, completadoHoy, bonusForStreak, DAILY_BASE_ELO, DAILY_MAX_ELO } from "@/lib/daily-progress"
 import { useUserStore } from "@/lib/user-store"
+import TablasDelDia from "@/components/retos/TablasDelDia"
 
 const DIFF_STYLE: Record<Difficulty, string> = {
   Fácil: "text-emerald-300 border-emerald-400/40 bg-emerald-500/10",
@@ -206,6 +207,9 @@ export default function DailyPage() {
             {fmt(countdown)}
           </span>
         </motion.div>
+
+        {/* Las tres tablas del día: general, fuerza y eficiencia */}
+        {today && <TablasDelDia fecha={today} />}
 
         {/* Cómo suma al ranking */}
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
