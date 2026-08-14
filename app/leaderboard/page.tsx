@@ -10,6 +10,7 @@ import TierBadge from '@/components/TierBadge'
 import EloExplainer from '@/components/EloExplainer'
 import Podio from '@/components/leaderboard/Podio'
 import { trackEvent, EVENTOS } from '@/components/Analytics'
+import { useT } from "@/lib/i18n"
 
 function LeaderboardRow({ rank, s, esVos, historial }: {
   rank: number
@@ -18,6 +19,7 @@ function LeaderboardRow({ rank, s, esVos, historial }: {
   /** En "mis partidas" cada fila es una partida, no un puesto del ranking. */
   historial?: boolean
 }) {
+  const t = useT()
   const top3 = !historial && rank < 3
   const medal = historial ? `${rank + 1}` : ['🥇', '🥈', '🥉'][rank] || `${rank + 1}°`
   const fecha = historial && s.date ? new Date(s.date).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' }) : null
@@ -35,7 +37,7 @@ function LeaderboardRow({ rank, s, esVos, historial }: {
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-bold text-sm truncate max-w-[160px]">{s.username}</span>
           {esVos && <span className="text-[11px] font-black font-sport uppercase tracking-wider text-[#74ACDF] bg-[#74ACDF]/10 border border-[#74ACDF]/30 rounded px-1.5 py-0.5">VOS</span>}
-          {s.seed && <span className="text-[11px] font-black font-sport uppercase tracking-wider text-slate-500 border border-slate-700 rounded px-1.5 py-0.5">DT de la casa</span>}
+          {s.seed && <span className="text-[11px] font-black font-sport uppercase tracking-wider text-slate-500 border border-slate-700 rounded px-1.5 py-0.5">{t('leaderboard.dtDeLaCasa', 'DT de la casa')}</span>}
           <TierBadge elo={s.elo} />
         </div>
         <div className="text-[11px] text-slate-400 mt-0.5">
@@ -57,6 +59,7 @@ function LeaderboardRow({ rank, s, esVos, historial }: {
 }
 
 export default function LeaderboardPage() {
+  const t = useT()
   // DOS estados, no uno. Compartían `scores`, así que al entrar (que ahora abre en el global) se
   // llenaba con las filas de Supabase y al tocar "mis partidas" seguían ahí: el jugador veía 200
   // partidas de gente que no era él. Cada pestaña tiene su fuente y no se pisan.
@@ -140,8 +143,8 @@ export default function LeaderboardPage() {
     <div className="min-h-screen gradient-bg">
       <header className="pt-12 pb-6 px-4 text-center">
         <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h1 className="text-4xl md:text-5xl font-black tracking-wider font-display uppercase"><span className="gradient-text">TABLA DE LÍDERES</span></h1>
-          <p className="mt-3 text-sm text-slate-400">Rankeá tu ELO y peleá por llegar a Leyenda</p>
+          <h1 className="text-4xl md:text-5xl font-black tracking-wider font-display uppercase"><span className="gradient-text">{t('leaderboard.tablaDeLideres', 'TABLA DE LÍDERES')}</span></h1>
+          <p className="mt-3 text-sm text-slate-400">{t('leaderboard.rankeaTuEloY', 'Rankeá tu ELO y peleá por llegar a Leyenda')}</p>
         </motion.div>
       </header>
       <main className="max-w-3xl mx-auto px-4 pb-20">
@@ -149,7 +152,7 @@ export default function LeaderboardPage() {
         {miPuesto && (
           <div className="card-gradient rounded-2xl border border-[#74ACDF]/30 p-4 mb-6 flex items-center justify-between gap-4">
             <div>
-              <div className="text-[10px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">Tu puesto</div>
+              <div className="text-[10px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">{t('leaderboard.tuPuesto', 'Tu puesto')}</div>
               <div className="font-display text-2xl font-black text-white leading-none mt-1">
                 #{miPuesto.puesto} <span className="text-slate-500 text-base">de {miPuesto.total}</span>
               </div>
@@ -183,12 +186,12 @@ export default function LeaderboardPage() {
         </div>
 
         {loadingOnline ? (
-          <p className="text-center text-sm text-slate-400 py-10">Cargando ranking global...</p>
+          <p className="text-center text-sm text-slate-400 py-10">{t('leaderboard.cargandoRankingGlobal', 'Cargando ranking global...')}</p>
         ) : ranked.length === 0 ? (
           <div className="text-center py-14">
             <p className="text-slate-300 font-bold">{tab === 'online' ? 'Todavía no hay ranking global.' : 'Todavía no jugaste ninguna partida.'}</p>
             <p className="mt-1.5 text-xs text-slate-500">{tab === 'online' ? 'Sé el primero en entrar.' : 'Armá tu 11, simulá un torneo y acá te va a quedar el historial.'}</p>
-            <Link href="/draft?mode=liga" className="btn-primary inline-block mt-5 px-7 py-3 text-xs">JUGAR AHORA</Link>
+            <Link href="/draft?mode=liga" className="btn-primary inline-block mt-5 px-7 py-3 text-xs">{t('leaderboard.jugarAhora', 'JUGAR AHORA')}</Link>
           </div>
         ) : (
           <>
@@ -213,7 +216,7 @@ export default function LeaderboardPage() {
             : `${ranked.length} ${ranked.length === 1 ? 'partida jugada' : 'partidas jugadas'} en este dispositivo`}</p>
           {tab === 'online' && !user?.isLoggedIn && (
             <p className="mt-2 text-[11px] text-amber-300/80">
-              Como invitado no entrás acá. Creá una cuenta para que tus torneos cuenten.
+              {t('leaderboard.comoInvitadoNoEntras', 'Como invitado no entrás acá. Creá una cuenta para que tus torneos cuenten.')}
             </p>
           )}
         </div>
@@ -223,7 +226,7 @@ export default function LeaderboardPage() {
           <EloExplainer />
         </div>
       </main>
-      <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm py-2.5 px-4 inline-block">← Volver al inicio</Link></div>
+      <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm py-2.5 px-4 inline-block">{t('comun.volverAlInicio', '← Volver al inicio')}</Link></div>
     </div>
   )
 }

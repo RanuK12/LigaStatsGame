@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useT } from "@/lib/i18n"
 
 const STEPS = [
   {
@@ -27,6 +28,7 @@ const STEPS = [
 ]
 
 export default function ComoJugarPage() {
+  const t = useT()
   return (
     <div className="min-h-[calc(100vh-6rem)] py-10">
       <section className="mx-auto max-w-4xl text-center">
@@ -35,7 +37,7 @@ export default function ComoJugarPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-sm font-bold uppercase tracking-[0.3em] text-[#75AADB]"
         >
-          Guía rápida
+          {t('comojugar.guiaRapida', 'Guía rápida')}
         </motion.p>
 
         <motion.h1
@@ -44,7 +46,7 @@ export default function ComoJugarPage() {
           transition={{ delay: 0.05 }}
           className="mt-4 font-display text-4xl font-black text-white md:text-6xl"
         >
-          Cómo se juega
+          {t('comojugar.comoSeJuega', 'Cómo se juega')}
         </motion.h1>
 
         <motion.p
@@ -76,24 +78,24 @@ export default function ComoJugarPage() {
 
       <section className="mx-auto mt-10 max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8">
         <h2 className="font-display text-2xl font-black text-white text-center mb-5">
-          Puntaje y Química
+          {t('comojugar.puntajeYQuimica', 'Puntaje y Química')}
         </h2>
         <div className="space-y-4 text-sm text-slate-300 leading-relaxed">
           <p>
-            <span className="font-bold text-[#74ACDF]">El puntaje de tu equipo</span> combina el
-            promedio de rating de tus 11 con la <span className="font-bold text-amber-300">química</span>.
+            <span className="font-bold text-[#74ACDF]">{t('comojugar.elPuntajeDeTu', 'El puntaje de tu equipo')}</span> combina el
+            promedio de rating de tus 11 con la <span className="font-bold text-amber-300">{t('comojugar.quimica', 'química')}</span>.
             No alcanza con juntar cracks sueltos: armar con lógica es lo que te hace competitivo. Llegar
             a 90+ es difícil a propósito.
           </p>
           <p>
-            <span className="font-bold text-amber-300">La química</span> premia tres cosas entre jugadores
-            cercanos en la cancha: que hayan compartido <span className="text-white">club</span>, que sean de
-            la misma <span className="text-white">nacionalidad</span>, y que cada uno juegue en su
-            <span className="text-white"> puesto natural</span>. Un jugador fuera de posición baja la química
+            <span className="font-bold text-amber-300">{t('comojugar.laQuimica', 'La química')}</span> premia tres cosas entre jugadores
+            cercanos en la cancha: que hayan compartido <span className="text-white">{t('comojugar.club', 'club')}</span>, que sean de
+            la misma <span className="text-white">{t('comojugar.nacionalidad', 'nacionalidad')}</span>, y que cada uno juegue en su
+            <span className="text-white"> {t('comojugar.puestoNatural', 'puesto natural')}</span>. Un jugador fuera de posición baja la química
             (y el rendimiento).
           </p>
           <p>
-            La química no es decorativa: <span className="font-bold text-white">afecta de verdad la simulación</span>.
+            {t('comojugar.laQuimicaNoEs', 'La química no es decorativa:')} <span className="font-bold text-white">{t('comojugar.afectaDeVerdadLa', 'afecta de verdad la simulación')}</span>.
             Un equipo con buena química ataca y defiende mejor, y gana más partidos. Fijate el panel de química
             (las líneas entre jugadores) mientras armás.
           </p>
@@ -102,21 +104,21 @@ export default function ComoJugarPage() {
 
       <section className="mx-auto mt-10 max-w-3xl rounded-3xl border border-[#75AADB]/15 bg-[#75AADB]/5 p-6 text-center">
         <h2 className="font-display text-2xl font-black text-white">
-          Modos principales
+          {t('comojugar.modosPrincipales', 'Modos principales')}
         </h2>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           <Link href="/draft?mode=clasico" className="btn-primary">
-            Modo Clásico
+            {t('comojugar.modoClasico', 'Modo Clásico')}
           </Link>
           <Link href="/draft?mode=almanaque" className="btn-secondary">
-            Modo Almanaque
+            {t('comojugar.modoAlmanaque', 'Modo Almanaque')}
           </Link>
           <Link href="/draft?mode=liga" className="btn-secondary">
-            Liga Argentina
+            {t('comojugar.ligaArgentina', 'Liga Argentina')}
           </Link>
           <Link href="/draft?mode=copa" className="btn-secondary">
-            Copa Argentina
+            {t('comojugar.copaArgentina', 'Copa Argentina')}
           </Link>
         </div>
       </section>

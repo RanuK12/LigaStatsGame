@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useUserStore } from '@/lib/user-store'
 import { useEmbebido } from '@/lib/embebido'
+import { useT, useRuta, rutaSinLocale } from '@/lib/i18n'
+import SelectorIdioma from './SelectorIdioma'
 import { supabase } from '@/lib/supabase'
 import { profileFromSupabaseUser } from '@/lib/auth'
 import TierBadge from './TierBadge'
@@ -18,26 +20,30 @@ import BotonSonido from './BotonSonido'
 // competir— y el resto pasa a un menú. INICIO se va: el logo ya lleva al home, que es lo que
 // todo el mundo espera.
 const NAV_ITEMS = [
-  { href: '/draft?mode=clasico', match: '/draft', label: 'DRAFT' },
-  { href: '/carrera', label: 'CARRERA' },
-  { href: '/dt', label: 'DT' },
-  { href: '/daily', label: 'RETO' },
-  { href: '/leaderboard', label: 'RANKING' },
+  { href: '/draft?mode=clasico', match: '/draft', label: 'DRAFT', clave: 'nav.draft' },
+  { href: '/carrera', label: 'CARRERA', clave: 'nav.carrera' },
+  { href: '/dt', label: 'DT', clave: 'nav.dt' },
+  { href: '/daily', label: 'RETO', clave: 'nav.reto' },
+  { href: '/leaderboard', label: 'RANKING', clave: 'nav.ranking' },
 ]
 
 // Consulta y modos sueltos: se visitan una vez, no compiten por la atención con DRAFT.
-const NAV_MAS: { href: string; label: string; match?: string }[] = [
-  { href: '/retos', label: 'RETOS 🏆' },
-  { href: '/equipos', label: 'EQUIPOS' },
-  { href: '/datos', label: '¿SABÍAS QUE?' },
-  { href: '/ruleta', label: 'RULETA' },
-  { href: '/versus', label: 'VERSUS' },
-  { href: '/records', label: 'LEYENDAS' },
-  { href: '/como-jugar', label: 'CÓMO SE JUEGA' },
+const NAV_MAS: { href: string; label: string; clave: string; match?: string }[] = [
+  { href: '/retos', label: 'RETOS 🏆', clave: 'nav.retos' },
+  { href: '/equipos', label: 'EQUIPOS', clave: 'nav.equipos' },
+  { href: '/datos', label: '¿SABÍAS QUE?', clave: 'nav.datos' },
+  { href: '/ruleta', label: 'RULETA', clave: 'nav.ruleta' },
+  { href: '/versus', label: 'VERSUS', clave: 'nav.versus' },
+  { href: '/records', label: 'LEYENDAS', clave: 'nav.records' },
+  { href: '/como-jugar', label: 'CÓMO SE JUEGA', clave: 'nav.comoJugar' },
 ]
 
 export default function Header() {
-  const pathname = usePathname()
+  const pathnameCrudo = usePathname()
+  // Sin el prefijo de idioma: en /en/draft/ el item activo sigue siendo /draft.
+  const pathname = rutaSinLocale(pathnameCrudo || '/')
+  const t = useT()
+  const ruta = useRuta()
   const [menuOpen, setMenuOpen] = useState(false)
   const [masOpen, setMasOpen] = useState(false)
   const cierre = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -71,7 +77,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-white/[0.07] bg-[#020813]/[0.93] shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-3 px-4">
         {/* Brand Logo */}
-        <Link href="/" className="flex shrink-0 basis-0 grow items-center gap-2.5 group transition-transform">
+        <Link href={ruta("/")} className="flex shrink-0 basis-0 grow items-center gap-2.5 group transition-transform">
           <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0">
             <img
               src="/logos/gambeta.svg"
@@ -96,7 +102,7 @@ export default function Header() {
             {/* En teléfono la bajada quedaba a tres píxeles del botón INGRESAR, y en 360px se
                 solapaban. Se oculta: el hero repite el mismo texto palabra por palabra. */}
             <span className="hidden sm:block text-[11px] sm:text-[10px] text-[#74ACDF] font-bold tracking-[0.22em] leading-none font-sport uppercase whitespace-nowrap mt-1">
-              EL JUEGO DEL FÚTBOL ARGENTINO
+              {t('marca.bajada', 'EL JUEGO DEL FÚTBOL ARGENTINO')}
             </span>
           </div>
         </Link>
@@ -115,7 +121,7 @@ export default function Header() {
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={ruta(item.href)}
                 // 12px con poco tracking en vez de 11px con 0.1em: las mayúsculas espaciadas se
                 // leen palabra por palabra, y una nav se lee de un vistazo o no se lee.
                 className={`relative rounded-2xl px-3.5 py-2.5 font-sport text-[12px] font-bold uppercase tracking-[0.04em] transition-all duration-300 ease-out ${
@@ -129,7 +135,7 @@ export default function Header() {
                     transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
                   />
                 )}
-                <span className="relative z-10">{item.label}</span>
+                <span className="relative z-10">{t(item.clave, item.label)}</span>
               </Link>
             )
           })}
@@ -158,7 +164,7 @@ export default function Header() {
                   transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
                 />
               )}
-              <span className="relative z-10">MÁS</span>
+              <span className="relative z-10">{t('nav.mas', 'MÁS')}</span>
               <svg className={`relative z-10 h-2.5 w-2.5 transition-transform ${masOpen ? 'rotate-180' : ''}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M2 4l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -175,13 +181,13 @@ export default function Header() {
                   {NAV_MAS.map((item) => (
                     <Link
                       key={item.href}
-                      href={item.href}
+                      href={ruta(item.href)}
                       onClick={() => setMasOpen(false)}
                       className={`block rounded-xl px-3 py-2.5 font-sport text-[10px] font-bold uppercase tracking-[0.18em] transition-colors ${
                         pathname.startsWith(item.href) ? 'bg-[#74ACDF]/12 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'
                       }`}
                     >
-                      {item.label}
+                      {t(item.clave, item.label)}
                     </Link>
                   ))}
                 </motion.div>
@@ -192,6 +198,9 @@ export default function Header() {
 
         {/* User profile / Login button */}
         <div className="flex shrink-0 basis-0 grow items-center justify-end gap-2">
+          {/* El idioma, al lado de la sesión. Se esconde en teléfono chico: ahí la barra ya venía
+              justa y el botón de ingresar es lo que no puede faltar. */}
+          <SelectorIdioma className="hidden sm:flex" />
           {user?.isLoggedIn ? (
             <button
               onClick={openProfileModal}
@@ -223,7 +232,7 @@ export default function Header() {
               // dos con `!`, sin tocar el global que usa el resto del sitio.
               className="btn-primary min-h-0 rounded-xl px-4 py-2 !font-sport text-[11px] font-bold uppercase !tracking-[0.06em] shadow-md"
             >
-              INGRESAR
+              {t('nav.ingresar', 'INGRESAR')}
             </button>
           )}
 
@@ -264,7 +273,7 @@ export default function Header() {
                 return (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={ruta(item.href)}
                     onClick={() => setMenuOpen(false)}
                     className={`flex items-center rounded-2xl px-4 py-3.5 text-xs font-bold tracking-[0.35em] transition-all duration-300 ease-out uppercase ${
                       isActive
@@ -272,7 +281,7 @@ export default function Header() {
                         : 'text-slate-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <span>{item.label}</span>
+                    <span>{t(item.clave, item.label)}</span>
                   </Link>
                 )
               })}
@@ -282,13 +291,13 @@ export default function Header() {
                 {NAV_MAS.map((item) => (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={ruta(item.href)}
                     onClick={() => setMenuOpen(false)}
                     className={`flex items-center rounded-2xl px-4 py-3 text-[10px] font-bold uppercase tracking-[0.25em] transition-colors ${
                       pathname.startsWith(item.href) ? 'text-white' : 'text-slate-500 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <span>{item.label}</span>
+                    <span>{t(item.clave, item.label)}</span>
                   </Link>
                 ))}
               </div>

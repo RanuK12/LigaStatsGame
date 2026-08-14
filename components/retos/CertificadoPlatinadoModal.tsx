@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useUserStore } from "@/lib/user-store"
 import { trackEvent } from "@/components/Analytics"
 import { tocar } from "@/lib/sonido"
+import { useT } from "@/lib/i18n"
 
 export default function CertificadoPlatinadoModal({
   isOpen,
@@ -17,6 +18,7 @@ export default function CertificadoPlatinadoModal({
   pct: number
   completados: number
 }) {
+  const t = useT()
   const user = useUserStore((s) => s.user)
 
   if (!isOpen) return null
@@ -72,26 +74,26 @@ export default function CertificadoPlatinadoModal({
               </div>
 
               <span className="mt-4 inline-block font-sport text-[10px] font-black uppercase tracking-[0.3em] text-amber-400">
-                CERTIFICADO DE LEYENDA ABSOLUTA
+                {t('CertificadoPlatinadoModal.certificadoDeLeyendaAbsoluta', 'CERTIFICADO DE LEYENDA ABSOLUTA')}
               </span>
 
               <h2 className="mt-1 font-display text-2xl font-black uppercase text-white sm:text-3xl">
-                ¡PLATINASTE <span className="gradient-text">GAMBETA!</span>
+                {t('CertificadoPlatinadoModal.platinaste', '¡PLATINASTE')} <span className="gradient-text">{t('CertificadoPlatinadoModal.gambeta', 'GAMBETA!')}</span>
               </h2>
 
               <p className="mt-2 font-sans text-xs leading-relaxed text-slate-300">
-                Otorgado a <strong className="text-amber-300">{user?.username || "Crack de Gambeta"}</strong> por completar exitosamente los{" "}
-                <strong className="text-white">{completados} de 52 retos</strong> del juego del fútbol argentino.
+                {t('CertificadoPlatinadoModal.otorgadoA', 'Otorgado a')} <strong className="text-amber-300">{user?.username || "Crack de Gambeta"}</strong> por completar exitosamente los{" "}
+                <strong className="text-white">{completados} de 52 retos</strong> {t('CertificadoPlatinadoModal.delJuegoDelFutbol', 'del juego del fútbol argentino.')}
               </p>
 
               {/* Stats Bar */}
               <div className="mt-6 grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-slate-950/80 p-3 font-sport">
                 <div>
-                  <span className="block text-[9px] font-bold text-slate-500 uppercase">RETOS</span>
+                  <span className="block text-[9px] font-bold text-slate-500 uppercase">{t('CertificadoPlatinadoModal.retos', 'RETOS')}</span>
                   <span className="font-display text-lg font-black text-amber-400">{completados}/52</span>
                 </div>
                 <div>
-                  <span className="block text-[9px] font-bold text-slate-500 uppercase">PROGRESO</span>
+                  <span className="block text-[9px] font-bold text-slate-500 uppercase">{t('CertificadoPlatinadoModal.progreso', 'PROGRESO')}</span>
                   <span className="font-display text-lg font-black text-emerald-400">{pct}%</span>
                 </div>
                 <div>
@@ -122,7 +124,7 @@ export default function CertificadoPlatinadoModal({
                   onClick={onClose}
                   className="btn-secondary py-3 px-6 font-sport text-xs font-bold uppercase tracking-wider"
                 >
-                  CERRAR
+                  {t('CertificadoPlatinadoModal.cerrar', 'CERRAR')}
                 </button>
               </div>
             </>
@@ -138,18 +140,18 @@ export default function CertificadoPlatinadoModal({
               </span>
 
               <h2 className="mt-1 font-display text-2xl font-black uppercase text-white sm:text-3xl">
-                CERTIFICADO <span className="text-slate-400">BLOQUEADO</span>
+                {t('CertificadoPlatinadoModal.certificado', 'CERTIFICADO')} <span className="text-slate-400">{t('CertificadoPlatinadoModal.bloqueado', 'BLOQUEADO')}</span>
               </h2>
 
               <p className="mt-2 font-sans text-xs leading-relaxed text-slate-300 max-w-sm mx-auto">
-                El <strong className="text-amber-400">Certificado Oficial de Leyenda</strong> se desbloquea al platinar el 100% de los 52 Retos del juego.
-                ¡Te faltan <strong className="text-white">{52 - completados} retos</strong> para graduarte!
+                El <strong className="text-amber-400">{t('CertificadoPlatinadoModal.certificadoOficialDeLeyenda', 'Certificado Oficial de Leyenda')}</strong> se desbloquea al platinar el 100% de los 52 Retos del juego.
+                ¡Te faltan <strong className="text-white">{52 - completados} retos</strong> {t('CertificadoPlatinadoModal.paraGraduarte', 'para graduarte!')}
               </p>
 
               {/* Progress visual */}
               <div className="mt-5 space-y-2 rounded-2xl border border-white/5 bg-slate-950 p-4">
                 <div className="flex justify-between text-xs font-sport">
-                  <span className="text-slate-400">Tu avance:</span>
+                  <span className="text-slate-400">{t('CertificadoPlatinadoModal.tuAvance', 'Tu avance:')}</span>
                   <span className="font-black text-amber-400">{pct}% ({completados}/52)</span>
                 </div>
                 <div className="h-2.5 w-full bg-slate-900 rounded-full overflow-hidden border border-white/10">

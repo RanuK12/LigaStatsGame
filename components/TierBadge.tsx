@@ -1,8 +1,10 @@
 "use client"
 import { rankFromElo } from "@/lib/ranking"
+import { useRango } from "@/lib/i18n"
 
 /** Chip de tier/división derivado del ELO. */
 export default function TierBadge({ elo, showElo = false, className = "" }: { elo: number; showElo?: boolean; className?: string }) {
+  const rango = useRango()
   const r = rankFromElo(elo)
   return (
     <span
@@ -11,7 +13,7 @@ export default function TierBadge({ elo, showElo = false, className = "" }: { el
       title={`${r.label}${r.toNext > 0 ? ` · faltan ${r.toNext} para ${r.nextLabel}` : ""}`}
     >
       <span>{r.tier.icon}</span>
-      {r.label}
+      {rango(r.label)}
       {showElo && <span className="opacity-70">· {elo}</span>}
     </span>
   )

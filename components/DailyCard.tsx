@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { challengeForDate, challengeNumber, localYmd, msUntilNextDay } from "@/lib/daily-challenge"
 import { loadDaily, completadoHoy, bonusForStreak } from "@/lib/daily-progress"
+import { useReto } from "@/lib/i18n"
 
 /**
  * El reto de hoy, arriba de todo en el home.
@@ -16,6 +17,7 @@ import { loadDaily, completadoHoy, bonusForStreak } from "@/lib/daily-progress"
  * mostrar y pintarla en el HTML daría un número equivocado durante un instante.
  */
 export default function DailyCard() {
+  const traducirReto = useReto()
   const [datos, setDatos] = useState<{ streak: number; hecho: boolean } | null>(null)
   const [faltan, setFaltan] = useState("")
   // El reto del día y su número dependen de la fecha DEL USUARIO, y el sitio se genera estático
@@ -74,9 +76,9 @@ export default function DailyCard() {
               )}
             </div>
             <h3 className="mt-1.5 font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-              {reto.icon} {reto.title}
+              {reto.icon} {traducirReto(reto.id, 'titulo', reto.title)}
             </h3>
-            <p className="mt-1 text-[12px] leading-relaxed text-slate-400 font-sans">{reto.rule}</p>
+            <p className="mt-1 text-[12px] leading-relaxed text-slate-400 font-sans">{traducirReto(reto.id, 'regla', reto.rule)}</p>
             <p className="mt-1.5 text-[10px] text-slate-500 font-sport uppercase tracking-wider">
               {hecho ? `Cambia en ${faltan}` : `Te quedan ${faltan} · +${bonusForStreak(streak + 1)} ELO`}
             </p>

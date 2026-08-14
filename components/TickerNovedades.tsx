@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import novedadesData from "@/data/novedades.json"
+import { useLocale } from "@/lib/i18n"
 
 type Novedad = { fecha: string; titulo: string; texto: string }
 
@@ -18,7 +19,11 @@ const CUANTAS = 6
 const novedades = (novedadesData as Novedad[]).slice(0, CUANTAS)
 
 export default function TickerNovedades() {
-  if (novedades.length === 0) return null
+  // Los títulos salen de data/novedades.json, escritos a mano en castellano. En la versión
+  // inglesa o portuguesa una cinta en español arriba de todo es lo primero que se ve y lo
+  // primero que delata que la traducción es a medias: mejor no mostrarla.
+  const locale = useLocale()
+  if (locale !== "es" || novedades.length === 0) return null
 
   // La lista va DOS veces: la animación desplaza exactamente la mitad, así que cuando la
   // primera copia termina de salir, la segunda está justo donde arrancó la primera y el bucle

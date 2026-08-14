@@ -14,8 +14,10 @@ import { useUserStore } from "@/lib/user-store"
 import { useEmbebido } from '@/lib/embebido'
 import CertificadoPlatinadoModal from "@/components/retos/CertificadoPlatinadoModal"
 import { tocar } from "@/lib/sonido"
+import { useT } from "@/lib/i18n"
 
 export default function RetosPage() {
+  const t = useT()
   const user = useUserStore((s) => s.user)
   const openAuthModal = useUserStore((s) => s.openAuthModal)
   const embebido = useEmbebido()
@@ -64,10 +66,10 @@ export default function RetosPage() {
             🏆 PLATINAR GAMBETA · 52 DESAFÍOS
           </span>
           <h1 className="font-display text-3xl sm:text-4xl font-black uppercase tracking-tight">
-            Retos y <span className="gradient-text">Logros</span>
+            {t('retos.retosY', 'Retos y')} <span className="gradient-text">{t('retos.logros', 'Logros')}</span>
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto font-sans leading-relaxed">
-            Completá los 52 desafíos del fútbol argentino para desbloquear el Certificado Oficial de Leyenda firmado por el Equipo de Gambeta.
+            {t('retos.completaLos52Desafios', 'Completá los 52 desafíos del fútbol argentino para desbloquear el Certificado Oficial de Leyenda firmado por el Equipo de Gambeta.')}
           </p>
         </header>
 
@@ -80,10 +82,10 @@ export default function RetosPage() {
             </div>
             <div className="space-y-2 max-w-lg mx-auto">
               <span className="text-[10px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">
-                ACCESO RESERVADO A JUGADORES REGISTRADOS
+                {t('retos.accesoReservadoAJugadores', 'ACCESO RESERVADO A JUGADORES REGISTRADOS')}
               </span>
               <h2 className="font-display text-2xl font-black uppercase text-white sm:text-3xl">
-                Iniciá Sesión para <span className="gradient-text">Platinar Gambeta</span>
+                {t('retos.iniciaSesionPara', 'Iniciá Sesión para')} <span className="gradient-text">{t('retos.platinarGambeta', 'Platinar Gambeta')}</span>
               </h2>
               <p className="text-xs text-slate-300 font-sans leading-relaxed">
                 Para registrar tus retos completados, guardar tu progreso de platinado en la nube y desbloquear tu Certificado Oficial de Leyenda, necesitás ingresar con tu cuenta.
@@ -95,7 +97,7 @@ export default function RetosPage() {
             <div className="pt-2">
               {embebido ? (
                 <p className="font-sport text-[11px] uppercase tracking-wider text-slate-400">
-                  Los retos necesitan una cuenta. Se juegan en gambetafutbol.games
+                  {t('retos.losRetosNecesitanUna', 'Los retos necesitan una cuenta. Se juegan en gambetafutbol.games')}
                 </p>
               ) : (
                 <button
@@ -113,7 +115,7 @@ export default function RetosPage() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
                 <span className="text-[10px] font-sport font-bold text-slate-400 uppercase tracking-wider">
-                  TU PROGRESO OFICIAL DE PLATINADO
+                  {t('retos.tuProgresoOficialDe', 'TU PROGRESO OFICIAL DE PLATINADO')}
                 </span>
                 <div className="font-display text-2xl font-black text-white">
                   {completados.length} <span className="text-slate-500 text-lg">/ {total} RETOS</span>
@@ -150,8 +152,8 @@ export default function RetosPage() {
             </div>
 
             <div className="flex items-center justify-between text-[11px] font-sport text-slate-400">
-              <span>Completado: <strong className="text-emerald-400">{pct}%</strong></span>
-              <span>Estatus: <strong className="text-amber-400">{pct === 100 ? "👑 LEYENDA PLATINADA" : "⚽ EN CAMINO"}</strong></span>
+              <span>{t('retos.completado', 'Completado:')} <strong className="text-emerald-400">{pct}%</strong></span>
+              <span>{t('retos.estatus', 'Estatus:')} <strong className="text-amber-400">{pct === 100 ? "👑 LEYENDA PLATINADA" : "⚽ EN CAMINO"}</strong></span>
             </div>
           </div>
         )}

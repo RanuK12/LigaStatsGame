@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { loadLifetimeStats, type LifetimeStats } from '@/lib/storage'
+import { useT } from "@/lib/i18n"
 
 function StatBox({ label, value }: { label: string; value: string | number }) {
   return (
@@ -14,6 +15,7 @@ function StatBox({ label, value }: { label: string; value: string | number }) {
 }
 
 export default function LifetimeStatsPanel() {
+  const t = useT()
   const [stats, setStats] = useState<LifetimeStats | null>(null)
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function LifetimeStatsPanel() {
       className="mx-auto mt-10 max-w-5xl"
     >
       <article className="card-gradient rounded-2xl p-5">
-        <h2 className="font-display text-xl font-black text-white uppercase tracking-wider">TUS RÉCORDS HISTÓRICOS</h2>
+        <h2 className="font-display text-xl font-black text-white uppercase tracking-wider">{t('LifetimeStatsPanel.tusRecordsHistoricos', 'TUS RÉCORDS HISTÓRICOS')}</h2>
 
         <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
           <StatBox label="Drafts jugados" value={stats.draftsCompleted} />
@@ -45,7 +47,7 @@ export default function LifetimeStatsPanel() {
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {stats.biggestWin && (
             <div className="rounded-xl bg-slate-900/40 px-4 py-3">
-              <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">Mayor goleada</p>
+              <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">{t('LifetimeStatsPanel.mayorGoleada', 'Mayor goleada')}</p>
               <p className="mt-1 font-bold text-white">
                 {stats.biggestWin.score} vs {stats.biggestWin.rival}
                 <span className="ml-2 text-xs text-slate-500">({stats.biggestWin.type} · {stats.biggestWin.date})</span>
@@ -54,7 +56,7 @@ export default function LifetimeStatsPanel() {
           )}
           {stats.bestPlayer && (
             <div className="rounded-xl bg-slate-900/40 px-4 py-3">
-              <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">Mejor jugador de tu historia</p>
+              <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">{t('LifetimeStatsPanel.mejorJugadorDeTu', 'Mejor jugador de tu historia')}</p>
               <p className="mt-1 font-bold text-white">
                 {stats.bestPlayer.playerName}
                 <span className="ml-2 font-display font-black text-yellow-400">{stats.bestPlayer.rating}</span>
@@ -65,7 +67,7 @@ export default function LifetimeStatsPanel() {
 
         {topPlayers.length > 0 && (
           <div className="mt-4">
-            <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">Goleadores históricos de tus drafts</p>
+            <p className="text-xs uppercase tracking-wider text-slate-400 font-sport">{t('LifetimeStatsPanel.goleadoresHistoricosDeTus', 'Goleadores históricos de tus drafts')}</p>
             <div className="mt-2 space-y-2 font-sans">
               {topPlayers.map((p, i) => (
                 <div key={p.name} className="flex items-center justify-between rounded-xl bg-slate-900/40 px-4 py-2">

@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import type { Player, FormationConfig } from "@/lib/types"
 import type { ChemistryBreakdown } from "@/lib/chemistry"
 import { POS_LABELS } from "@/lib/game-engine"
+import { usePuesto } from "@/lib/i18n"
 import { getPC, getNationalityFlag } from "@/lib/ui-constants"
 
 /**
@@ -16,6 +17,7 @@ export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemis
   onSlotClick: (idx: number) => void; phase: string; chemistry?: ChemistryBreakdown
 }) {
   const reducedMotion = useReducedMotion()
+  const puesto = usePuesto()
   const links = (chemistry?.links || []).filter(l => draft[l.aIndex] && draft[l.bIndex])
 
   return (
@@ -80,16 +82,16 @@ export default function Pitch({ f, draft, activeSlot, onSlotClick, phase, chemis
                 <div className="text-[11px] text-white font-semibold mt-0.5 bg-black/40 px-1 rounded max-w-[70px] truncate text-center">
                   {pl.name.split(" ").pop()}
                 </div>
-                <div className="text-[10px] font-semibold text-slate-100 [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]">{POS_LABELS[pos.pos] || pos.pos}</div>
+                <div className="text-[10px] font-semibold text-slate-100 [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]">{puesto.corto(pos.pos, POS_LABELS[pos.pos] || pos.pos)}</div>
               </motion.div>
             ) : (
               <div className={`flex flex-col items-center ${isActive ? "scale-110" : ""}`}>
                 <div className={`w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold border-2 border-dashed transition-all ${
                   isActive ? "border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37] animate-pulse" : "border-[#74ACDF]/50 bg-[#020813]/60 text-[#9CCBF0]"
                 }`}>
-                  {POS_LABELS[pos.pos] || pos.pos}
+                  {puesto.corto(pos.pos, POS_LABELS[pos.pos] || pos.pos)}
                 </div>
-                <div className="text-[11px] font-medium text-slate-200 mt-0.5 [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]">{pos.label}</div>
+                <div className="text-[11px] font-medium text-slate-200 mt-0.5 [text-shadow:0_1px_3px_rgba(0,0,0,0.85)]">{puesto.largo(pos.pos, pos.label)}</div>
               </div>
             )}
           </div>

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import { useT } from "@/lib/i18n"
 
 interface Props {
   data: { year: number; playerName: string; flag: string; ovr: number } | null
@@ -10,6 +11,7 @@ interface Props {
 
 // Carta impactante del Balón de Oro: rayos dorados girando, balón dorado, confeti.
 export default function BallonDorReveal({ data, onClose }: Props) {
+  const t = useT()
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose() }
     window.addEventListener("keydown", onKey)
@@ -71,7 +73,7 @@ export default function BallonDorReveal({ data, onClose }: Props) {
               <span className="text-6xl drop-shadow">⚽</span>
             </motion.div>
 
-            <div className="text-[11px] font-black uppercase tracking-[0.4em]" style={{ color: gold }}>Balón de Oro</div>
+            <div className="text-[11px] font-black uppercase tracking-[0.4em]" style={{ color: gold }}>{t('BallonDorReveal.balonDeOro', 'Balón de Oro')}</div>
             <div className="font-impact text-5xl font-black text-white leading-none mt-1" style={{ textShadow: `0 2px 24px ${gold}66` }}>{data.year}</div>
 
             <div className="mt-4 rounded-2xl border p-4" style={{ borderColor: `${gold}55`, background: `${gold}12` }}>
@@ -84,7 +86,7 @@ export default function BallonDorReveal({ data, onClose }: Props) {
               className="mt-6 w-full rounded-2xl py-3 text-xs font-black uppercase tracking-[0.3em] text-slate-950"
               style={{ background: `linear-gradient(90deg, ${gold}, #fff0a0, ${gold})` }}
             >
-              Continuar
+              {t('BallonDorReveal.continuar', 'Continuar')}
             </button>
           </motion.div>
         </motion.div>

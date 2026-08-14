@@ -6,6 +6,7 @@ import type { Squad } from "@/lib/types"
 import { tocar } from "@/lib/sonido"
 import { storyBlob } from "@/lib/story-card"
 import type { SquadTier } from "@/lib/game-engine"
+import { useT } from "@/lib/i18n"
 
 const TIER_STYLE: Record<SquadTier, { border: string; glow: string; label: string | null }> = {
   comun: { border: "border-slate-600", glow: "", label: null },
@@ -26,6 +27,7 @@ function epoca(season: string): { label: string; clase: string } | null {
 export default function PackReveal({ squad, tier, avg, onContinue }: {
   squad: Squad; tier: SquadTier; avg: number; onContinue: () => void
 }) {
+  const t = useT()
   const reducedMotion = useReducedMotion()
   const style = TIER_STYLE[tier]
   const isGold = tier === "legendario"
@@ -191,15 +193,15 @@ export default function PackReveal({ squad, tier, avg, onContinue }: {
         <div className="flex justify-center gap-6 mb-6 text-sm">
           <div>
             <div className={`font-display text-2xl font-black ${isGold ? "text-[#FFD700]" : "text-[#75AADB]"}`}>{avg}</div>
-            <div className="text-[10px] uppercase tracking-wider text-slate-500">Rating prom.</div>
+            <div className="text-[10px] uppercase tracking-wider text-slate-500">{t('PackReveal.ratingProm', 'Rating prom.')}</div>
           </div>
           <div>
             <div className="font-display text-2xl font-black text-white">{squad.playerIds.length}</div>
-            <div className="text-[10px] uppercase tracking-wider text-slate-500">Jugadores</div>
+            <div className="text-[10px] uppercase tracking-wider text-slate-500">{t('PackReveal.jugadores', 'Jugadores')}</div>
           </div>
         </div>
         <button onClick={onContinue} className="btn-primary w-full py-3 font-sport">
-          Elegir jugador
+          {t('PackReveal.elegirJugador', 'Elegir jugador')}
         </button>
 
         {/* El momento más "figurita" del juego terminaba en un botón que dice "Elegir jugador" y
