@@ -10,6 +10,7 @@ import LiveScoresWidget from '@/components/LiveScoresWidget'
 import DonationSection from '@/components/DonationSection'
 import DailyCard from '@/components/DailyCard'
 import CarreraEnCursoCard from '@/components/CarreraEnCursoCard'
+import PartidasJugadas from '@/components/PartidasJugadas'
 import Novedades from '@/components/Novedades'
 import ContinentalBanner from '@/components/ContinentalBanner'
 import LigasBanner from '@/components/LigasBanner'
@@ -247,6 +248,8 @@ function WorldCupBanner() {
                 </Link>
               </div>
             </div>
+
+            <PartidasJugadas />
           </div>
 
           {/* Right: stats de la base, integradas con la estética argentina */}

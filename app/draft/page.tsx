@@ -33,6 +33,7 @@ import { trackEvent, EVENTOS } from "@/components/Analytics"
 import { tocar } from "@/lib/sonido"
 import { challengeForDate, challengeNumber, localYmd, CHALLENGES } from "@/lib/daily-challenge"
 import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
+import { guardarResultadoReto } from "@/lib/reto-ranking"
 import { textoDeBloques, lineaDePuesto } from "@/lib/reto-bloques"
 import { calculateChemistry } from "@/lib/chemistry"
 import ChemistryPanel from "@/components/ChemistryPanel"
@@ -536,6 +537,17 @@ function DraftInner() {
         celebraciones.push({ label: `¡RETO DIARIO! +${premio.elo} ELO`, tone: "celeste" })
         setRetoGanado(premio)
       }
+      // A las tres tablas del día entra TODO el mundo, con cuenta o sin ella. El ranking global
+      // es de los registrados a propósito, pero una tabla diaria vacía no la mira nadie y el que
+      // juega el reto casi nunca tiene cuenta.
+      void guardarResultadoReto({
+        reto: retoId,
+        fecha: localYmd(),
+        username: user?.username || "Invitado",
+        pts,
+        ovr: teamScore,
+        pos,
+      })
     }
 
     // ── El torneo, fecha por fecha ──

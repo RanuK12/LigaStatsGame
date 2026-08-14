@@ -158,3 +158,29 @@ export async function submitOnlineScore(entry: Omit<OnlineScore, 'id'>): Promise
     return false
   }
 }
+
+/**
+ * Cuántas partidas hay registradas, para mostrarlo en la portada.
+ *
+ * Toda la prensa que consiguieron Copero, El Ídolo y 7a0 se construyó sobre un número que dieron
+ * los creadores ("5,3 millones de usuarios, 130 millones de partidas"). Sin un número no hay
+ * nota, y sin nota no hay nadie nuevo.
+ *
+ * Cuenta lo que se puede defender: las partidas que quedaron guardadas en el ranking global más
+ * los retos del día jugados. El total real es mayor —el que juega sin cuenta y sin reto no deja
+ * fila—, así que el número que se publica es un piso, no una estimación.
+ */
+export async function contarPartidas(): Promise<number | null> {
+  if (!supabase) return null
+  try {
+    const [torneos, retos] = await Promise.all([
+      supabase.from('leaderboard').select('*', { count: 'exact', head: true }),
+      supabase.from('reto_diario').select('*', { count: 'exact', head: true }),
+    ])
+    if (torneos.error) return null
+    // La tabla del reto puede no existir todavía: no es motivo para esconder el contador.
+    return (torneos.count ?? 0) + (retos.error ? 0 : retos.count ?? 0)
+  } catch {
+    return null
+  }
+}
