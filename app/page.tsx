@@ -223,9 +223,30 @@ function WorldCupBanner() {
               </motion.div>
             </div>
 
-            <Link href="/draft?mode=clasico" className="btn-gold px-8 py-4 rounded-xl shadow-[0_4px_20px_rgba(212,175,55,0.25)]">
-              ARMÁ TU 11 Y CLASIFICÁ
-            </Link>
+            {/* Los tres modos, acá arriba.
+                La portada solo ofrecía el draft: carrera y DT vivían en el menú de arriba y en
+                ningún otro lado. Medido del 7 al 13/8: 265 usuarios entraron al draft, 129 a la
+                carrera y 26 al DT, que es el modo más nuevo y ya tiene búsquedas propias en
+                Google ("carrera dt juego"). No es que no gusten: no se ven. */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+              <Link href="/draft?mode=clasico" className="btn-gold px-8 py-4 rounded-xl shadow-[0_4px_20px_rgba(212,175,55,0.25)] text-center">
+                ARMÁ TU 11 Y CLASIFICÁ
+              </Link>
+              <div className="flex gap-3">
+                <Link
+                  href="/carrera"
+                  className="font-sport flex-1 rounded-xl border border-[#74ACDF]/40 bg-[#74ACDF]/10 px-5 py-4 text-center text-[12px] font-black uppercase tracking-widest text-[#a8ccec] transition-colors hover:bg-[#74ACDF]/20 hover:text-white"
+                >
+                  Modo Carrera
+                </Link>
+                <Link
+                  href="/dt"
+                  className="font-sport flex-1 rounded-xl border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-5 py-4 text-center text-[12px] font-black uppercase tracking-widest text-[#D4AF37] transition-colors hover:bg-[#D4AF37]/20 hover:text-white"
+                >
+                  Modo DT
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Right: stats de la base, integradas con la estética argentina */}

@@ -4,9 +4,11 @@ import { useState } from "react"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 import { motion } from "framer-motion"
 import { mpAlias, mpTiers } from "@/lib/donations"
+import { useEmbebido } from "@/lib/embebido"
 
 export default function DonationSection({ compacta = false }: { compacta?: boolean } = {}) {
   const [copied, setCopied] = useState(false)
+  const embebido = useEmbebido()
 
   function copyAlias() {
     if (typeof navigator === "undefined") return
@@ -15,6 +17,10 @@ export default function DonationSection({ compacta = false }: { compacta?: boole
       setTimeout(() => setCopied(false), 1800)
     })
   }
+
+  // Embebido en un portal no se pide plata: es un cobro afuera de su plataforma, que es
+  // justo lo que su revisión no deja pasar. En el sitio propio queda igual.
+  if (embebido) return null
 
   return (
     <section id="apoyar" className={`relative z-10 mx-auto scroll-mt-20 ${compacta ? "max-w-2xl px-0 pt-6" : "max-w-4xl px-4 pb-20"}`}>

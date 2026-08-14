@@ -85,6 +85,9 @@ export const EVENTOS = {
   carreraIniciada: "carrera_iniciada",
   carreraTemporada: "carrera_temporada_fin",
   carreraRetiro: "carrera_retiro",
+  // El final que llega jugando las 15 temporadas. `carrera_retiro` es el que se va antes: son
+  // dos cosas distintas y contarlas juntas era lo que hacía parecer que nadie termina.
+  carreraFinalizada: "carrera_finalizada",
   fichaDescargada: "ficha_descargada",
   compartido: "compartido",
   // El link de una carrera abierto por otra persona. Es la métrica del circuito viral: si

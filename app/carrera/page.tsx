@@ -780,6 +780,14 @@ function CareerDashboard() {
       trackEvent(EVENTOS.carreraTemporada, { temporada: fin.history.length, edad: fin.player.age })
     }
     if (fin?.finished) {
+      // El final natural, a las 15 temporadas, no disparaba nada: `carrera_retiro` sale del
+      // botón "Retirarme del fútbol", así que solo medía a los que se van antes. Medido del
+      // 7 al 13/8: 78 personas terminaron temporadas y 3 dispararon `carrera_retiro`, y con
+      // eso se estaba concluyendo que nadie termina la carrera. Se cuenta acá el final que
+      // llega jugando. `simuladas > 0` para no contar dos veces si se vuelve a esta vista.
+      if (simuladas > 0) {
+        trackEvent(EVENTOS.carreraFinalizada, { temporadas: fin.history.length, edad: fin.player.age })
+      }
       // Llegó al final de la carrera: ficha final directo.
       setShowFinale(true)
       return
