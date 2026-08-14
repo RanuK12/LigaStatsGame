@@ -17,6 +17,7 @@ import LigasBanner from '@/components/LigasBanner'
 import SuggestionBox from '@/components/SuggestionBox'
 import SolDeMayo from '@/components/ui/SolDeMayo'
 import dbStats from '@/data/derived/stats.json'
+import { useT, useRuta, useLocale, useLocaleIntl } from '@/lib/i18n'
 
 const clubs: Club[] = clubsData as Club[]
 
@@ -24,6 +25,7 @@ const clubs: Club[] = clubsData as Club[]
 const MODES = [
   {
     id: 'draft',
+    clave: 'draft',
     name: 'Draft de Leyendas',
     desc: 'Armá tu XI de ensueño eligiendo de planteles reales año por año',
     initials: 'DL',
@@ -37,6 +39,7 @@ const MODES = [
   },
   {
     id: 'almanaque',
+    clave: 'almanaque',
     name: 'El Almanaque',
     desc: 'Ratings ocultos, gana la memoria al recordar la historia de los planteles',
     initials: 'EA',
@@ -50,6 +53,7 @@ const MODES = [
   },
   {
     id: 'liga',
+    clave: 'liga',
     name: 'Liga Argentina',
     desc: 'Competí en el campeonato tradicional de la Liga Profesional',
     initials: 'LA',
@@ -63,6 +67,7 @@ const MODES = [
   },
   {
     id: 'copa',
+    clave: 'copa',
     name: 'Copa Argentina',
     desc: 'El torneo más federal de eliminación directa con definiciones por penales',
     initials: 'CA',
@@ -76,6 +81,7 @@ const MODES = [
   },
   {
     id: 'versus',
+    clave: 'versus',
     name: 'Duelo Versus (Local)',
     desc: 'Armá tu 11 y competí contra un amigo en el mismo dispositivo',
     initials: 'VS',
@@ -90,16 +96,16 @@ const MODES = [
 ]
 
 /* ─── TICKER ITEMS ───────────────────────────────────────────── */
-const TICKER_ITEMS = [
-  "MUNDIAL 2026 — ARGENTINA BUSCA LA 4TA ESTRELLA",
-  "LIGA PROFESIONAL TEMPORADA 2026 — ACTUALIZADO",
-  "GAMBETA — ARMÁ TU MEJOR ONCE HISTÓRICO",
-  `LOS MEJORES EQUIPOS ARGENTINOS DE LOS ÚLTIMOS 35 AÑOS — ${dbStats.historicos} PLANTELES`,
-  "EL VÉLEZ DEL 94 · LOS BOCA DE BIANCHI · EL RIVER DEL 96 · EL ESTUDIANTES DE VERÓN",
-  "LIBERTADORES Y SUDAMERICANA — SE CLASIFICA, NO SE ELIGE",
-  "CAMPEONES DE AMÉRICA Y DEL MUNDO EN LA BASE",
-  "COPA ARGENTINA — MODO DE ELIMINACIÓN DIRECTA ACTIVADO",
-  `+${dbStats.players} JUGADORES REALES · ${dbStats.squads} PLANTELES FILTRADOS`,
+const TICKER_ITEMS: { clave: string; es: string }[] = [
+  { clave: 'ticker.mundial', es: "MUNDIAL 2026 — ARGENTINA BUSCA LA 4TA ESTRELLA" },
+  { clave: 'ticker.liga', es: "LIGA PROFESIONAL TEMPORADA 2026 — ACTUALIZADO" },
+  { clave: 'ticker.armar', es: "GAMBETA — ARMÁ TU MEJOR ONCE HISTÓRICO" },
+  { clave: 'ticker.historicos', es: `LOS MEJORES EQUIPOS ARGENTINOS DE LOS ÚLTIMOS 35 AÑOS — {n} PLANTELES` },
+  { clave: 'ticker.equipos', es: "EL VÉLEZ DEL 94 · LOS BOCA DE BIANCHI · EL RIVER DEL 96 · EL ESTUDIANTES DE VERÓN" },
+  { clave: 'ticker.copas', es: "LIBERTADORES Y SUDAMERICANA — SE CLASIFICA, NO SE ELIGE" },
+  { clave: 'ticker.campeones', es: "CAMPEONES DE AMÉRICA Y DEL MUNDO EN LA BASE" },
+  { clave: 'ticker.copa', es: "COPA ARGENTINA — MODO DE ELIMINACIÓN DIRECTA ACTIVADO" },
+  { clave: 'ticker.base', es: `+{p} JUGADORES REALES · {s} PLANTELES FILTRADOS` },
 ]
 
 /* ─── FRAMER VARIANTS ────────────────────────────────────────── */
@@ -120,7 +126,15 @@ const fadeIn = {
    TICKER STRIP
    ═══════════════════════════════════════════════════════════════ */
 function TickerStrip() {
-  const items = [...TICKER_ITEMS, ...TICKER_ITEMS]
+  const t = useT()
+  // Los números se meten después de traducir: en inglés y en portugués la cifra no va en el
+  // mismo lugar de la frase que en castellano.
+  const conNumeros = (texto: string) =>
+    texto
+      .replace('{n}', String(dbStats.historicos))
+      .replace('{p}', String(dbStats.players))
+      .replace('{s}', String(dbStats.squads))
+  const items = [...TICKER_ITEMS, ...TICKER_ITEMS].map((i) => conNumeros(t(i.clave, i.es)))
   return (
     <div className="ticker-strip py-3 overflow-hidden bg-[#020813]/60">
       <div className="animate-ticker flex gap-16 text-[10px] font-bold tracking-widest uppercase text-[#74ACDF]/70 font-sport">
@@ -141,6 +155,9 @@ function TickerStrip() {
    WORLD CUP BANNER
    ═══════════════════════════════════════════════════════════════ */
 function WorldCupBanner() {
+  const t = useT()
+  const ruta = useRuta()
+  const localeNumero = useLocaleIntl()
   return (
     <motion.section
       initial={{ y: 20 }}
@@ -177,7 +194,7 @@ function WorldCupBanner() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
-                <span className="text-[11px] font-black uppercase tracking-widest text-red-400 font-sport">MUNDIAL 2026</span>
+                <span className="text-[11px] font-black uppercase tracking-widest text-red-400 font-sport">{t('home.badgeMundial', 'MUNDIAL 2026')}</span>
               </div>
               <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#74ACDF]/20 via-white/10 to-[#74ACDF]/20 border border-[#74ACDF]/40 px-3 py-1 rounded-full">
                 <span className="text-sm leading-none">🇦🇷</span>
@@ -186,11 +203,11 @@ function WorldCupBanner() {
             </div>
 
             <h2 className="font-malvinas text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.04] mb-2 tracking-[0.04em] drop-shadow-[0_2px_20px_rgba(116,172,223,0.3)]">
-              Vamos{' '}
-              <span className="gradient-text-gold">Argentina</span>
+              {t('home.tituloA', 'Vamos')}{' '}
+              <span className="gradient-text-gold">{t('home.tituloB', 'Argentina')}</span>
             </h2>
             <p className="text-[#74ACDF] text-lg sm:text-xl font-bold mb-6 tracking-wide uppercase font-sport">
-              Por la 4ta Copa del Mundo
+              {t('home.subtitulo', 'Por la 4ta Copa del Mundo')}
             </p>
 
             {/* Stars row */}
@@ -230,21 +247,21 @@ function WorldCupBanner() {
                 carrera y 26 al DT, que es el modo más nuevo y ya tiene búsquedas propias en
                 Google ("carrera dt juego"). No es que no gusten: no se ven. */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-              <Link href="/draft?mode=clasico" className="btn-gold px-8 py-4 rounded-xl shadow-[0_4px_20px_rgba(212,175,55,0.25)] text-center">
-                ARMÁ TU 11 Y CLASIFICÁ
+              <Link href={ruta('/draft?mode=clasico')} className="btn-gold px-8 py-4 rounded-xl shadow-[0_4px_20px_rgba(212,175,55,0.25)] text-center">
+                {t('home.jugar', 'ARMÁ TU 11 Y CLASIFICÁ')}
               </Link>
               <div className="flex gap-3">
                 <Link
-                  href="/carrera"
+                  href={ruta('/carrera')}
                   className="font-sport flex-1 rounded-xl border border-[#74ACDF]/40 bg-[#74ACDF]/10 px-5 py-4 text-center text-[12px] font-black uppercase tracking-widest text-[#a8ccec] transition-colors hover:bg-[#74ACDF]/20 hover:text-white"
                 >
-                  Modo Carrera
+                  {t('home.modoCarrera', 'Modo Carrera')}
                 </Link>
                 <Link
-                  href="/dt"
+                  href={ruta('/dt')}
                   className="font-sport flex-1 rounded-xl border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-5 py-4 text-center text-[12px] font-black uppercase tracking-widest text-[#D4AF37] transition-colors hover:bg-[#D4AF37]/20 hover:text-white"
                 >
-                  Modo DT
+                  {t('home.modoDT', 'Modo DT')}
                 </Link>
               </div>
             </div>
@@ -255,10 +272,10 @@ function WorldCupBanner() {
           {/* Right: stats de la base, integradas con la estética argentina */}
           <div className="grid grid-cols-2 gap-3 w-full max-w-xs shrink-0">
             {[
-              { icon: '⚽', label: 'Jugadores', value: dbStats.players.toLocaleString('es-AR'), sub: 'Reales, auditados' },
-              { icon: '📋', label: 'Planteles', value: `${dbStats.squads}`, sub: 'Temporadas oficiales' },
-              { icon: '🛡️', label: 'Clubes', value: `${clubs.length}`, sub: 'Primera & Ascenso' },
-              { icon: '🏆', label: 'Históricos', value: `${dbStats.historicos}`, sub: 'Equipos que hicieron historia' },
+              { icon: '⚽', label: t('home.stats.jugadores', 'Jugadores'), value: dbStats.players.toLocaleString(localeNumero), sub: t('home.stats.jugadoresSub', 'Reales, auditados') },
+              { icon: '📋', label: t('home.stats.planteles', 'Planteles'), value: `${dbStats.squads}`, sub: t('home.stats.plantelesSub', 'Temporadas oficiales') },
+              { icon: '🛡️', label: t('home.stats.clubes', 'Clubes'), value: `${clubs.length}`, sub: t('home.stats.clubesSub', 'Primera & Ascenso') },
+              { icon: '🏆', label: t('home.stats.historicos', 'Históricos'), value: `${dbStats.historicos}`, sub: t('home.stats.historicosSub', 'Equipos que hicieron historia') },
             ].map((s, i) => (
               <motion.div
                 key={i}
@@ -286,6 +303,8 @@ function WorldCupBanner() {
    ═══════════════════════════════════════════════════════════════ */
 function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
   const [hovered, setHovered] = useState(false)
+  const t = useT()
+  const ruta = useRuta()
   return (
     <motion.div
       variants={item}
@@ -293,7 +312,7 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
       onMouseLeave={() => setHovered(false)}
       className="h-full"
     >
-          <Link href={mode.href} className="block h-full group">
+          <Link href={ruta(mode.href)} className="block h-full group">
             <div
               className="mode-card card-glass h-full flex flex-col"
           style={{
@@ -308,7 +327,7 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
             {/* Badge row */}
             <div className="flex items-start justify-between mb-5">
               <div className={`text-[11px] font-bold px-2 py-0.5 rounded border tracking-widest font-sport uppercase ${mode.badgeColor}`}>
-                {mode.badge}
+                {t(`modo.${mode.clave}.badge`, mode.badge)}
               </div>
             </div>
 
@@ -333,15 +352,15 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
             </div>
 
             <h4 className="font-display text-lg font-bold text-white mb-2 tracking-tight group-hover:text-white transition-colors">
-              {mode.name}
+              {t(`modo.${mode.clave}.nombre`, mode.name)}
             </h4>
             <p className="text-slate-400 text-xs flex-1 leading-relaxed group-hover:text-slate-300 transition-colors font-sans">
-              {mode.desc}
+              {t(`modo.${mode.clave}.desc`, mode.desc)}
             </p>
 
             {/* CTA row */}
             <div className="mt-6 flex items-center gap-1.5 text-[11px] font-bold tracking-widest font-sport uppercase" style={{ color: mode.accent }}>
-              <span>JUGAR AHORA</span>
+              <span>{t('modo.jugarAhora', 'JUGAR AHORA')}</span>
               <motion.span
                 animate={hovered ? { x: 5 } : { x: 0 }}
                 transition={{ duration: 0.2 }}
@@ -359,6 +378,8 @@ function ModeCard({ mode, index }: { mode: typeof MODES[0]; index: number }) {
    HERO SECTION
    ═══════════════════════════════════════════════════════════════ */
 function HeroSection() {
+  const t = useT()
+  const ruta = useRuta()
   return (
     <section className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-16 sm:pt-20">
       {/* Fondo: grid de cancha sutil + glows pulsantes */}
@@ -399,36 +420,37 @@ function HeroSection() {
             <Image src="/logos/lpf.png" alt="LPF" fill className="object-contain" />
           </span>
           <span className="text-[11px] font-bold text-white uppercase tracking-[0.2em] font-sport">
-            GAMBETA · EL JUEGO DEL FÚTBOL ARGENTINO
+            {t('hero.volanta', 'GAMBETA · EL JUEGO DEL FÚTBOL ARGENTINO')}
           </span>
         </motion.div>
 
         {/* Hero Title */}
         <h1 className="font-impact text-[3.4rem] leading-[1.04] sm:text-7xl lg:text-[7.5rem] lg:leading-[1.0] mb-6 tracking-[-0.02em] font-black">
-          <span className="block text-white drop-shadow-[0_2px_30px_rgba(255,255,255,0.15)]">ARMÁ TU</span>
+          <span className="block text-white drop-shadow-[0_2px_30px_rgba(255,255,255,0.15)]">{t('hero.tituloA', 'ARMÁ TU')}</span>
           <span
             className="block bg-clip-text text-transparent drop-shadow-[0_2px_30px_rgba(116,172,223,0.35)]"
             style={{ backgroundImage: 'linear-gradient(180deg, #9CCBF0 0%, #FFFFFF 48%, #74ACDF 100%)' }}
           >
-            EQUIPO SOÑADO
+            {t('hero.tituloB', 'EQUIPO SOÑADO')}
           </span>
         </h1>
 
         <p className="text-slate-300/90 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium">
-          Drafteá los mejores planteles del fútbol argentino, simulá tu carrera y competí con
-          <span className="text-white font-semibold"> estadísticas reales</span> temporada por temporada.
+          {t('hero.bajadaA', 'Drafteá los mejores planteles del fútbol argentino, simulá tu carrera y competí con')}
+          <span className="text-white font-semibold">{t('hero.bajadaResaltada', ' estadísticas reales')}</span>
+          {t('hero.bajadaB', ' temporada por temporada.')}
         </p>
 
         {/* Primary Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 font-sport">
-          <Link href="/draft?mode=clasico" className="btn-primary px-9 py-4 text-xs font-bold tracking-widest uppercase shadow-[0_4px_30px_rgba(116,172,223,0.25)] hover:scale-[1.02] transition-transform">
-            DRAFT CLÁSICO 11
+          <Link href={ruta('/draft?mode=clasico')} className="btn-primary px-9 py-4 text-xs font-bold tracking-widest uppercase shadow-[0_4px_30px_rgba(116,172,223,0.25)] hover:scale-[1.02] transition-transform">
+            {t('hero.ctaDraft', 'DRAFT CLÁSICO 11')}
           </Link>
-          <Link href="/draft?mode=liga" className="btn-secondary px-8 py-4 text-xs font-bold tracking-widest uppercase flex items-center gap-2.5 hover:scale-[1.02] transition-transform">
+          <Link href={ruta('/draft?mode=liga')} className="btn-secondary px-8 py-4 text-xs font-bold tracking-widest uppercase flex items-center gap-2.5 hover:scale-[1.02] transition-transform">
             <span className="relative w-4 h-5 inline-block shrink-0">
               <Image src="/logos/lpf.png" alt="LPF" fill className="object-contain" />
             </span>
-            JUGAR LIGA ARGENTINA
+            {t('hero.ctaLiga', 'JUGAR LIGA ARGENTINA')}
           </Link>
         </div>
 
@@ -448,6 +470,7 @@ function HeroSection() {
    CLUB GRID
    ═══════════════════════════════════════════════════════════════ */
 function ClubGrid() {
+  const t = useT()
   const [hovered, setHovered] = useState<string | null>(null)
   const [filter, setFilter] = useState('')
   const filtered = filter
@@ -473,7 +496,7 @@ function ClubGrid() {
           </svg>
           <input
             type="text"
-            placeholder="BUSCAR CLUB..."
+            placeholder={t('home.buscarClub', 'BUSCAR CLUB...')}
             value={filter}
             onChange={e => setFilter(e.target.value)}
             className="input-field pl-9 py-2.5 text-xs tracking-wider font-sport"
@@ -534,7 +557,7 @@ function ClubGrid() {
       </div>
 
       {filtered.length === 0 && (
-        <p className="text-center text-xs text-slate-600 py-8 font-sans font-medium">No se encontró ningún club con ese nombre</p>
+        <p className="text-center text-xs text-slate-600 py-8 font-sans font-medium">{t('home.sinClub', 'No se encontró ningún club con ese nombre')}</p>
       )}
     </section>
   )
@@ -556,6 +579,9 @@ function ClubGrid() {
    MAIN PAGE
    ═══════════════════════════════════════════════════════════════ */
 export default function HomePage() {
+  const t = useT()
+  const ruta = useRuta()
+  const locale = useLocale()
   return (
     <div className="gradient-bg arg-stripe-bg min-h-screen">
       {/* ── TOP TICKER ── */}
@@ -582,10 +608,10 @@ export default function HomePage() {
           className="text-center mb-10"
         >
           <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2 uppercase tracking-tight">
-            Modos de <span className="gradient-text">Juego</span>
+            {t('home.modos.titulo', 'Modos de')} <span className="gradient-text">{t('home.modos.tituloResaltado', 'Juego')}</span>
           </h3>
           <p className="text-slate-400 text-xs max-w-md mx-auto font-sans">
-            Seleccioná tu formato y demostrá tus conocimientos tácticos
+            {t('home.modos.bajada', 'Seleccioná tu formato y demostrá tus conocimientos tácticos')}
           </p>
         </motion.div>
 
@@ -617,10 +643,10 @@ export default function HomePage() {
       <section className="relative z-10 max-w-6xl mx-auto px-4 pb-16">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
-            { href: '/como-jugar', title: 'CÓMO SE JUEGA', text: 'Aprendé el flujo del draft, las posiciones y la simulación táctica.', color: 'border-slate-900 hover:border-slate-800' },
-            { href: '/records', title: 'RECORDS HISTÓRICOS', text: 'Consulta el ranking de mejores puntuaciones y leyendas de la liga.', color: 'border-slate-900 hover:border-slate-800' },
-            { href: '/daily', title: 'RETO DIARIO', text: 'Competí en el desafío de simulación del día en igualdad de condiciones.', color: 'border-slate-900 hover:border-slate-800' },
-            { href: '/datos', title: '¿SABÍAS QUE?', text: 'Tirá el dado y sacá un dato del fútbol argentino y del mundo. Ninguno inventado.', color: 'border-slate-900 hover:border-slate-800' },
+            { href: '/como-jugar', title: t('extra.comoJugar.titulo', 'CÓMO SE JUEGA'), text: t('extra.comoJugar.texto', 'Aprendé el flujo del draft, las posiciones y la simulación táctica.'), color: 'border-slate-900 hover:border-slate-800' },
+            { href: '/records', title: t('extra.records.titulo', 'RECORDS HISTÓRICOS'), text: t('extra.records.texto', 'Consulta el ranking de mejores puntuaciones y leyendas de la liga.'), color: 'border-slate-900 hover:border-slate-800' },
+            { href: '/daily', title: t('extra.daily.titulo', 'RETO DIARIO'), text: t('extra.daily.texto', 'Competí en el desafío de simulación del día en igualdad de condiciones.'), color: 'border-slate-900 hover:border-slate-800' },
+            { href: '/datos', title: t('extra.datos.titulo', '¿SABÍAS QUE?'), text: t('extra.datos.texto', 'Tirá el dado y sacá un dato del fútbol argentino y del mundo. Ninguno inventado.'), color: 'border-slate-900 hover:border-slate-800' },
           ].map((item, i) => (
             <motion.div
               key={item.href}
@@ -630,14 +656,14 @@ export default function HomePage() {
               transition={{ delay: i * 0.08 }}
               whileHover={{ y: -4 }}
             >
-              <Link href={item.href} className="group block h-full">
+              <Link href={ruta(item.href)} className="group block h-full">
                 <div className={`card-gradient rounded-2xl p-6 h-full transition-all duration-300 border ${item.color} hover:shadow-lg`}>
                   <h4 className="font-sport text-[10px] font-bold tracking-widest text-white group-hover:text-[#74ACDF] transition-colors mb-3">
                     {item.title}
                   </h4>
                   <p className="text-xs text-slate-400 leading-relaxed font-sans mb-4">{item.text}</p>
                   <div className="text-[#74ACDF]/60 text-[11px] font-bold tracking-widest font-sport group-hover:text-[#74ACDF] transition-colors uppercase">
-                    VER MÁS →
+                    {t('home.verMas', 'VER MÁS →')}
                   </div>
                 </div>
               </Link>
@@ -654,8 +680,11 @@ export default function HomePage() {
         <LiveScoresWidget />
       </div>
 
-      {/* ── NOVEDADES ── al pie: le interesa al que ya juega, no al que entra por primera vez */}
-      <Novedades />
+      {/* ── NOVEDADES ── al pie: le interesa al que ya juega, no al que entra por primera vez.
+          Solo en castellano: los textos salen de data/novedades.json y están escritos a mano en
+          rioplatense. Mostrar un bloque en español dentro de la versión inglesa es peor que no
+          mostrarlo. */}
+      {locale === 'es' && <Novedades />}
 
       {/* ── SUGERENCIAS ── */}
       <SuggestionBox />

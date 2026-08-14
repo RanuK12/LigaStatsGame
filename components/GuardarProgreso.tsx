@@ -2,6 +2,7 @@
 
 import { useUserStore } from "@/lib/user-store"
 import { useEmbebido } from "@/lib/embebido"
+import { useT } from "@/lib/i18n"
 
 /**
  * El pedido de cuenta, justo después de que la persona terminó un torneo.
@@ -14,6 +15,7 @@ import { useEmbebido } from "@/lib/embebido"
  * El momento correcto es este: acaba de conseguir algo y lo tiene en pantalla.
  */
 export default function GuardarProgreso({ elo }: { elo?: number }) {
+  const t = useT()
   const { user, openAuthModal } = useUserStore()
   const embebido = useEmbebido()
 
@@ -26,28 +28,28 @@ export default function GuardarProgreso({ elo }: { elo?: number }) {
   return (
     <div className="mb-5 rounded-3xl border border-[#74ACDF]/30 bg-gradient-to-b from-[#74ACDF]/[0.09] to-slate-950/50 p-5 text-center">
       <p className="font-sport text-[10px] font-black uppercase tracking-[0.28em] text-[#74ACDF]">
-        Esto no se está guardando
+        {t('GuardarProgreso.estoNoSeEsta', 'Esto no se está guardando')}
       </p>
       <p className="mx-auto mt-2 max-w-sm font-sans text-[13px] leading-relaxed text-slate-300">
         {typeof elo === "number" && elo !== 0 ? (
           <>
-            Ganaste <strong className="text-white">{elo > 0 ? `+${elo}` : elo} de ELO</strong> y ahora
+            {t('GuardarProgreso.ganaste', 'Ganaste')} <strong className="text-white">{elo > 0 ? `+${elo}` : elo} de ELO</strong> y ahora
             mismo vive solo en este navegador.{" "}
           </>
         ) : (
-          <>Tu ELO, tu racha y tus partidas viven solo en este navegador. </>
+          <>{t('GuardarProgreso.tuEloTuRacha', 'Tu ELO, tu racha y tus partidas viven solo en este navegador.')} </>
         )}
-        Con una cuenta entrás al <strong className="text-white">ranking global</strong>, guardás la
-        plaza a la <strong className="text-white">Libertadores</strong> y no perdés nada al cambiar de
+        Con una cuenta entrás al <strong className="text-white">{t('GuardarProgreso.rankingGlobal', 'ranking global')}</strong>, guardás la
+        plaza a la <strong className="text-white">{t('GuardarProgreso.libertadores', 'Libertadores')}</strong> y no perdés nada al cambiar de
         teléfono.
       </p>
       <button
         onClick={openAuthModal}
         className="btn-primary mt-4 px-8 py-3 font-sport text-[11px] font-black uppercase"
       >
-        Guardar mi progreso
+        {t('GuardarProgreso.guardarMiProgreso', 'Guardar mi progreso')}
       </button>
-      <p className="mt-2 font-sans text-[11px] text-slate-500">Es gratis y tarda diez segundos</p>
+      <p className="mt-2 font-sans text-[11px] text-slate-500">{t('GuardarProgreso.esGratisYTarda', 'Es gratis y tarda diez segundos')}</p>
     </div>
   )
 }

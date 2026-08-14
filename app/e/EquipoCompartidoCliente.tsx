@@ -5,6 +5,7 @@ import Link from "next/link"
 import { decodeEquipo, type EquipoCompartido } from "@/lib/equipo-link"
 import { formations } from "@/lib/game-engine"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import { useT, useRuta } from "@/lib/i18n"
 
 /** El escudo del club, con las tres carpetas donde pueden vivir, como en el resto del sitio. */
 function alFallarElEscudo(e: React.SyntheticEvent<HTMLImageElement>, clubId: string) {
@@ -21,6 +22,8 @@ export default function EquipoCompartidoCliente() {
   // el build, donde no hay URL, y leerlo directo rompería la hidratación.
   const [estado, setEstado] = useState<"cargando" | "ok" | "rota">("cargando")
   const [data, setData] = useState<EquipoCompartido | null>(null)
+  const t = useT()
+  const ruta = useRuta()
 
   useEffect(() => {
     const param = new URLSearchParams(window.location.search).get("e")
@@ -49,13 +52,15 @@ export default function EquipoCompartidoCliente() {
 
         {estado === "rota" && (
           <div className="card-gradient rounded-3xl border border-white/10 p-8 text-center shadow-2xl">
-            <h1 className="font-display text-2xl font-black uppercase">Este link no anda</h1>
+            <h1 className="font-display text-2xl font-black uppercase">{t("link.equipo.roto", "Este link no anda")}</h1>
             <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-slate-400">
-              El equipo viaja dentro del link, así que si se cortó al copiarlo no se puede
-              recuperar. Pedile a quien te lo pasó que lo mande de nuevo entero.
+              {t(
+                "link.equipo.rotoTexto",
+                "El equipo viaja dentro del link, así que si se cortó al copiarlo no se puede recuperar. Pedile a quien te lo pasó que lo mande de nuevo entero.",
+              )}
             </p>
-            <Link href="/draft?mode=clasico" className="btn-primary mt-6 inline-block px-8 py-3 font-sport">
-              Armar mi 11
+            <Link href={ruta("/draft?mode=clasico")} className="btn-primary mt-6 inline-block px-8 py-3 font-sport">
+              {t("link.equipo.armarMio", "Armar mi 11")}
             </Link>
           </div>
         )}
@@ -71,7 +76,7 @@ export default function EquipoCompartidoCliente() {
                 {data.resultado}
               </h1>
               <p className="font-sport mt-2 text-xs uppercase tracking-wider text-slate-400">
-                {[`${data.ovr} de OVR`, data.formacion].filter(Boolean).join(" · ")}
+                {[`${data.ovr} ${t("link.equipo.ovr", "de OVR")}`, data.formacion].filter(Boolean).join(" · ")}
               </p>
             </div>
 
@@ -128,18 +133,24 @@ export default function EquipoCompartidoCliente() {
 
             {/* El motivo por el que existe la página: el que la abre tiene que poder jugar. */}
             <div className="card-gradient rounded-3xl border border-[#F6C750]/30 p-6 text-center shadow-2xl">
-              <h2 className="font-display text-xl font-black uppercase">¿Armás uno mejor?</h2>
+              <h2 className="font-display text-xl font-black uppercase">{t("link.equipo.mejor", "¿Armás uno mejor?")}</h2>
               <p className="mx-auto mt-1.5 max-w-sm text-sm leading-relaxed text-slate-400">
                 {data.reto
-                  ? "Jugá el mismo bombo de hoy, con los mismos jugadores en juego, y fijate si lo superás."
-                  : "Elegí de planteles reales del fútbol argentino, armá tu once y jugá el torneo. Gratis y sin registrarte."}
+                  ? t(
+                      "link.equipo.bajadaReto",
+                      "Jugá el mismo bombo de hoy, con los mismos jugadores en juego, y fijate si lo superás.",
+                    )
+                  : t(
+                      "link.equipo.bajada",
+                      "Elegí de planteles reales del fútbol argentino, armá tu once y jugá el torneo. Gratis y sin registrarte.",
+                    )}
               </p>
               <Link
-                href={destinoCta}
+                href={ruta(destinoCta)}
                 onClick={() => trackEvent(EVENTOS.equipoLinkCta, { reto: data.reto ? 1 : 0 })}
                 className="btn-primary mt-5 inline-block px-10 py-4 font-sport"
               >
-                {data.reto ? "Jugar el mismo bombo" : "Armar mi 11"}
+                {data.reto ? t("link.equipo.mismoBombo", "Jugar el mismo bombo") : t("link.equipo.armarMio", "Armar mi 11")}
               </Link>
             </div>
           </>
@@ -147,10 +158,10 @@ export default function EquipoCompartidoCliente() {
 
         <div className="pt-2 text-center">
           <Link
-            href="/"
+            href={ruta("/")}
             className="font-sport inline-block px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-400 transition-colors hover:text-white"
           >
-            ← Ir a Gambeta
+            {t("link.ir", "← Ir a Gambeta")}
           </Link>
         </div>
       </div>

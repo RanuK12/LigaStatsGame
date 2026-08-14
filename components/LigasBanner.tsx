@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import banner from "@/data/derived/ligas-banner.json"
+import { useT } from "@/lib/i18n"
 
 /**
  * Las ligas del modo carrera, en la portada.
@@ -27,6 +28,7 @@ import banner from "@/data/derived/ligas-banner.json"
 const { paises: PAISES, totalLigas: TOTAL_LIGAS, totalClubes: TOTAL_CLUBES } = banner
 
 export default function LigasBanner() {
+  const t = useT()
   return (
     <section className="relative z-10 mx-auto max-w-6xl px-4 pb-14 pt-2">
       <motion.div
@@ -35,9 +37,9 @@ export default function LigasBanner() {
         viewport={{ once: true }}
         className="text-center"
       >
-        <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#34d399]">Nuevo</p>
+        <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#34d399]">{t('LigasBanner.nuevo', 'Nuevo')}</p>
         <h3 className="mt-1.5 font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl">
-          De la <span className="gradient-text">B del ascenso</span> al Maracaná
+          De la <span className="gradient-text">{t('LigasBanner.bDelAscenso', 'B del ascenso')}</span> {t('LigasBanner.alMaracana', 'al Maracaná')}
         </h3>
         <p className="mx-auto mt-2.5 max-w-2xl text-sm leading-relaxed text-slate-400">
           El modo carrera se juega en{" "}
@@ -101,10 +103,10 @@ export default function LigasBanner() {
 
       <div className="mt-7 text-center">
         <Link href="/carrera/" className="btn-primary inline-block px-10 py-4 font-sport">
-          Empezar mi carrera
+          {t('LigasBanner.empezarMiCarrera', 'Empezar mi carrera')}
         </Link>
         <p className="mt-2.5 text-[11px] text-slate-500">
-          Gratis, sin registrarte. Ascensos y descensos de verdad.
+          {t('LigasBanner.gratisSinRegistrarteAscensos', 'Gratis, sin registrarte. Ascensos y descensos de verdad.')}
         </p>
       </div>
     </section>

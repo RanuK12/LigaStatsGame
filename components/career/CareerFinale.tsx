@@ -11,6 +11,7 @@ import { clubDeLaVida } from "@/lib/career-idolatria"
 import Trofeo, { nombreDeTrofeo } from "@/components/ui/Trofeo"
 import { urlDeCarrera } from "@/lib/career-link"
 import { buildCareerCardData } from "@/lib/career-store"
+import { useT } from "@/lib/i18n"
 
 function useCountUp(to: number, ms: number, start: boolean) {
   const [v, setV] = useState(0)
@@ -51,6 +52,7 @@ interface Props {
 }
 
 export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
+  const t = useT()
   const [phase, setPhase] = useState(0)
   useEffect(() => {
     if (!career) { setPhase(0); return }
@@ -150,13 +152,13 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
                 encontrar "Ver ficha", que nadie encuentra. */}
             <button
               onClick={onClose}
-              aria-label="Cerrar"
+              aria-label={t('CareerFinale.cerrar', 'Cerrar')}
               className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/40 text-lg text-slate-300 transition-colors hover:border-white/40 hover:text-white"
             >
               ✕
             </button>
 
-            <div className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 font-sport">Fin de la carrera</div>
+            <div className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 font-sport">{t('CareerFinale.finDeLaCarrera', 'Fin de la carrera')}</div>
             <h2 className="mt-1 font-display text-3xl font-black uppercase text-white">
               {career.player.flag} {career.player.name}
             </h2>
@@ -174,7 +176,7 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
 
             {/* OVR pico */}
             <div className="mt-5 flex items-center justify-center gap-3">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-sport">OVR pico</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-sport">{t('CareerFinale.ovrPico', 'OVR pico')}</span>
               <span className="font-display text-5xl font-black tabular-nums" style={{ color: v.c }}>{peakShown}</span>
             </div>
 
@@ -230,7 +232,7 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
                 className="mx-auto mt-5 max-w-sm rounded-2xl border border-[#F6C750]/35 bg-gradient-to-b from-[#F6C750]/[0.10] to-transparent px-4 py-4"
               >
                 <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#F6C750]">
-                  Te pareciste a
+                  {t('CareerFinale.teParecisteA', 'Te pareciste a')}
                 </p>
                 <p className="mt-1 font-display text-2xl font-black leading-tight text-white">
                   {parecido.leyenda.nombre}
@@ -308,10 +310,10 @@ export default function CareerFinale({ career, onClose, onNewCareer }: Props) {
 
             <div className="mt-4 flex gap-2 font-sport">
               <button onClick={onClose} className="flex-1 rounded-2xl border border-white/10 bg-white/5 py-3 text-xs font-black uppercase tracking-widest text-slate-300 hover:text-white transition-colors">
-                Ver ficha
+                {t('CareerFinale.verFicha', 'Ver ficha')}
               </button>
               <button onClick={onNewCareer} className="btn-primary flex-1 py-3 text-xs font-black uppercase tracking-widest rounded-2xl">
-                Nueva carrera
+                {t('CareerFinale.nuevaCarrera', 'Nueva carrera')}
               </button>
             </div>
           </motion.div>

@@ -8,6 +8,7 @@ import clubsData from '@/data/clubs.json'
 import type { Player, Club } from '@/lib/types'
 import { normalizePlayers, normalizeClubs } from '@/lib/data-normalizers'
 import LegendCardReveal from '@/components/roulette/LegendCardReveal'
+import { useT } from "@/lib/i18n"
 
 const posColors: Record<string, string> = {
   GK: '#f59e0b',
@@ -67,6 +68,7 @@ const FULL_SPINS = 7
 const ANIMATION_DURATION_MS = 3600
 
 export default function RuletaPage() {
+  const t = useT()
   const allPlayers = useMemo(() => normalizePlayers(wheelData), [])
   const allClubs = useMemo(() => normalizeClubs(clubsData), [])
   const [spinning, setSpinning] = useState(false)
@@ -146,15 +148,15 @@ export default function RuletaPage() {
       <header className="pt-12 pb-6 px-4 text-center">
         <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-[#74ACDF]">
-            Scouting argentino
+            {t('ruleta.scoutingArgentino', 'Scouting argentino')}
           </p>
 
           <h1 className="font-display text-5xl md:text-7xl font-black tracking-tight uppercase">
-            <span className="bg-gradient-to-r from-[#74ACDF] via-white to-[#D4AF37] bg-clip-text text-transparent">Ruleta del Fútbol</span>
+            <span className="bg-gradient-to-r from-[#74ACDF] via-white to-[#D4AF37] bg-clip-text text-transparent">{t('ruleta.ruletaDelFutbol', 'Ruleta del Fútbol')}</span>
           </h1>
 
           <p className="mt-3 text-lg text-slate-400 max-w-2xl mx-auto">
-            Girá la ruleta y descubrí una leyenda o figura histórica del fútbol argentino.
+            {t('ruleta.giraLaRuletaY', 'Girá la ruleta y descubrí una leyenda o figura histórica del fútbol argentino.')}
           </p>
         </motion.div>
       </header>
@@ -275,7 +277,7 @@ export default function RuletaPage() {
               animate={{ opacity: 1, y: 0 }}
               className="mt-6 rounded-full border border-orange-400/20 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-200"
             >
-              Buscando una joya del fútbol argentino...
+              {t('ruleta.buscandoUnaJoyaDel', 'Buscando una joya del fútbol argentino...')}
             </motion.div>
           )}
 
@@ -360,7 +362,7 @@ export default function RuletaPage() {
                   </div>
 
                   {result.legendary && (
-                    <div className="mt-2 text-xs font-bold uppercase tracking-wider text-yellow-400 font-sport">Jugador legendario</div>
+                    <div className="mt-2 text-xs font-bold uppercase tracking-wider text-yellow-400 font-sport">{t('ruleta.jugadorLegendario', 'Jugador legendario')}</div>
                   )}
                 </div>
 
@@ -373,33 +375,33 @@ export default function RuletaPage() {
                 <div className="mb-6 grid grid-cols-3 gap-4">
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-yellow-400">{result.rating}</div>
-                    <div className="text-xs text-slate-400">Rating</div>
+                    <div className="text-xs text-slate-400">{t('ruleta.rating', 'Rating')}</div>
                   </div>
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-green-400">{result.goalsClub}</div>
-                    <div className="text-xs text-slate-400">Goles Club</div>
+                    <div className="text-xs text-slate-400">{t('ruleta.golesClub', 'Goles Club')}</div>
                   </div>
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-blue-400">{result.capsClub}</div>
-                    <div className="text-xs text-slate-400">Partidos</div>
+                    <div className="text-xs text-slate-400">{t('ruleta.partidos', 'Partidos')}</div>
                   </div>
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-purple-400">{result.goalsNationalTeam}</div>
-                    <div className="text-xs text-slate-400">Goles Selección</div>
+                    <div className="text-xs text-slate-400">{t('ruleta.golesSeleccion', 'Goles Selección')}</div>
                   </div>
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-cyan-400">{result.capsNationalTeam}</div>
-                    <div className="text-xs text-slate-400">Partidos Selección</div>
+                    <div className="text-xs text-slate-400">{t('ruleta.partidosSeleccion', 'Partidos Selección')}</div>
                   </div>
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-3 text-center backdrop-blur-md">
                     <div className="text-2xl font-black text-orange-400">{result.assistsClub}</div>
-                    <div className="text-xs text-slate-400">Asistencias</div>
+                    <div className="text-xs text-slate-400">{t('ruleta.asistencias', 'Asistencias')}</div>
                   </div>
                 </div>
 
                 {result.clubs && result.clubs.length > 0 && (
                   <div className="mb-4 rounded-2xl bg-white/5 border border-white/5 p-4 backdrop-blur-md">
-                    <div className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500 font-sport text-left">Trayectoria de Clubes</div>
+                    <div className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500 font-sport text-left">{t('ruleta.trayectoriaDeClubes', 'Trayectoria de Clubes')}</div>
                     {result.clubs.map((club, i) => (
                       <div key={i} className="flex justify-between text-sm">
                         <span className="font-semibold">{club.name}</span>
@@ -411,7 +413,7 @@ export default function RuletaPage() {
 
                 {result.trophies && result.trophies.length > 0 && (
                   <div className="rounded-2xl bg-white/5 border border-white/5 p-4 backdrop-blur-md">
-                    <div className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500 font-sport text-left">Títulos y Palmarés</div>
+                    <div className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500 font-sport text-left">{t('ruleta.titulosYPalmares', 'Títulos y Palmarés')}</div>
                     <div className="flex flex-wrap gap-2">
                       {result.trophies.slice(0, 6).map((t, i) => (
                         <span key={i} className="rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 text-xs text-yellow-300">
@@ -471,7 +473,7 @@ export default function RuletaPage() {
               whileTap={{ scale: 0.98 }}
               className="btn-secondary px-8 py-4 text-xs font-sport"
             >
-              VOLVER AL INICIO
+              {t('ruleta.volverAlInicio', 'VOLVER AL INICIO')}
             </motion.button>
           </Link>
         </div>

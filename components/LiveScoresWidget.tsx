@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react"
 import { motion } from "framer-motion"
 import { fetchDayAll, type AgendaMatch } from "@/lib/live-scores"
+import { useT } from "@/lib/i18n"
 
 function ymdLocal(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
@@ -24,6 +25,7 @@ function buildDates() {
 }
 
 export default function LiveScoresWidget() {
+  const t = useT()
   // La agenda se arma con el día del USUARIO, y el sitio se genera estático desde un servidor que
   // está en otra zona horaria. Calcularla en el render hacía que el HTML del servidor y el del
   // navegador no coincidieran: React tiraba los errores 418/423/425 y volvía a dibujar la página
@@ -79,7 +81,7 @@ export default function LiveScoresWidget() {
         <div className="flex items-center gap-2 mb-4">
           <span className="text-xl">📅</span>
           <h3 className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-            AGENDA DE RESULTADOS
+            {t('LiveScoresWidget.agendaDeResultados2', 'AGENDA DE RESULTADOS')}
           </h3>
         </div>
         <div className="h-40 animate-pulse rounded-2xl border border-white/5 bg-slate-950/40" />
@@ -92,7 +94,7 @@ export default function LiveScoresWidget() {
       <div className="flex items-center gap-2 mb-4">
         <span className="text-xl">📅</span>
         <h3 className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-          AGENDA DE RESULTADOS
+          {t('LiveScoresWidget.agendaDeResultados2', 'AGENDA DE RESULTADOS')}
         </h3>
       </div>
 
@@ -127,8 +129,8 @@ export default function LiveScoresWidget() {
       {matches !== null && groups.length === 0 && (
         <div className="card-gradient rounded-2xl p-10 border border-white/10 text-center">
           <div className="text-3xl mb-2 opacity-60">⚽</div>
-          <p className="text-slate-400 text-sm font-sport uppercase tracking-wider">Sin partidos para esta fecha</p>
-          <p className="text-slate-600 text-[11px] mt-1">Probá otro día de la agenda</p>
+          <p className="text-slate-400 text-sm font-sport uppercase tracking-wider">{t('LiveScoresWidget.sinPartidosParaEsta', 'Sin partidos para esta fecha')}</p>
+          <p className="text-slate-600 text-[11px] mt-1">{t('LiveScoresWidget.probaOtroDiaDe', 'Probá otro día de la agenda')}</p>
         </div>
       )}
 

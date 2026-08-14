@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 import { useEmbebido } from "@/lib/embebido"
+import { useT } from "@/lib/i18n"
 import type { FormatoFicha } from "@/lib/story-card"
 
 const SITE_URL = "https://gambetafutbol.games/"
@@ -49,6 +50,7 @@ export default function ShareBar({
   const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "compartida" | "error">("")
   const [copiado, setCopiado] = useState(false)
   const embebido = useEmbebido()
+  const t = useT()
 
   /**
    * La ficha apaisada, generada ANTES de que toquen el botón.
@@ -313,22 +315,22 @@ export default function ShareBar({
 
         {estado === "listo" && (
           <p className="mt-2 text-[10px] text-emerald-300 font-sport uppercase tracking-wider">
-            Imagen lista: subila a tu historia
+            {t('ShareBar.imagenLista', 'Imagen lista: subila a tu historia')}
           </p>
         )}
         {estado === "compartida" && (
           <p className="mt-2 text-[10px] text-emerald-300 font-sport uppercase tracking-wider">
-            Compartido con la ficha adjunta
+            {t('ShareBar.compartido', 'Compartido con la ficha adjunta')}
           </p>
         )}
         {estado === "copiada" && (
           <p className="mt-2 text-[10px] text-emerald-300 font-sport uppercase tracking-wider">
-            Imagen copiada: pegala en el tweet con ⌘V
+            {t('ShareBar.imagenCopiada', 'Imagen copiada: pegala en el tweet con ⌘V')}
           </p>
         )}
         {estado === "error" && (
           <p className="mt-2 text-[10px] text-red-300 font-sport uppercase tracking-wider">
-            No se pudo generar la imagen
+            {t('ShareBar.errorImagen', 'No se pudo generar la imagen')}
           </p>
         )}
       </div>

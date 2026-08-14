@@ -5,12 +5,14 @@ import { motion, AnimatePresence } from "framer-motion"
 import { supabase } from "@/lib/supabase"
 import { useUserStore } from "@/lib/user-store"
 import { tocar } from "@/lib/sonido"
+import { useT } from "@/lib/i18n"
 
 export default function VersusRealtimeLobby({
   onStartMatch,
 }: {
   onStartMatch: (roomCode: string, isHost: boolean, opponentName: string) => void
 }) {
+  const t = useT()
   const user = useUserStore((s) => s.user)
   const [roomCode, setRoomCode] = useState("")
   const [joinCode, setJoinCode] = useState("")
@@ -101,10 +103,10 @@ export default function VersusRealtimeLobby({
           🌐 MULTIJUGADOR 1V1 REALTIME
         </span>
         <h3 className="font-display text-2xl font-black text-white uppercase tracking-tight">
-          Salas de Duelo <span className="gradient-text">En Vivo</span>
+          {t('VersusRealtimeLobby.salasDeDuelo', 'Salas de Duelo')} <span className="gradient-text">{t('VersusRealtimeLobby.enVivo', 'En Vivo')}</span>
         </h3>
         <p className="text-slate-400 text-xs font-sans max-w-md mx-auto">
-          Armá tu 11 en tiempo real contra un amigo desde cualquier dispositivo.
+          {t('VersusRealtimeLobby.armaTu11En', 'Armá tu 11 en tiempo real contra un amigo desde cualquier dispositivo.')}
         </p>
       </div>
 
@@ -114,9 +116,9 @@ export default function VersusRealtimeLobby({
           <div className="rounded-2xl bg-slate-950/60 border border-amber-500/20 p-5 text-center flex flex-col justify-between space-y-4">
             <div>
               <div className="text-3xl mb-2">🏆</div>
-              <h4 className="font-display text-base font-black text-amber-400 uppercase">Crear Sala</h4>
+              <h4 className="font-display text-base font-black text-amber-400 uppercase">{t('VersusRealtimeLobby.crearSala', 'Crear Sala')}</h4>
               <p className="text-[11px] text-slate-400 mt-1 font-sans">
-                Generá un código único y compartilo con tu rival por WhatsApp o X.
+                {t('VersusRealtimeLobby.generaUnCodigoUnico', 'Generá un código único y compartilo con tu rival por WhatsApp o X.')}
               </p>
             </div>
             <button
@@ -131,9 +133,9 @@ export default function VersusRealtimeLobby({
           <div className="rounded-2xl bg-slate-950/60 border border-[#74ACDF]/20 p-5 text-center flex flex-col justify-between space-y-4">
             <div>
               <div className="text-3xl mb-2">⚔️</div>
-              <h4 className="font-display text-base font-black text-[#74ACDF] uppercase">Unirse a Sala</h4>
+              <h4 className="font-display text-base font-black text-[#74ACDF] uppercase">{t('VersusRealtimeLobby.unirseASala', 'Unirse a Sala')}</h4>
               <p className="text-[11px] text-slate-400 mt-1 font-sans">
-                Ingresá el código de 6 letras que te envió tu amigo.
+                {t('VersusRealtimeLobby.ingresaElCodigoDe', 'Ingresá el código de 6 letras que te envió tu amigo.')}
               </p>
             </div>
             <div className="space-y-2">
@@ -142,7 +144,7 @@ export default function VersusRealtimeLobby({
                 maxLength={6}
                 value={joinCode}
                 onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
-                placeholder="CÓDIGO (EJ: GAMB77)"
+                placeholder={t('VersusRealtimeLobby.codigoEjGamb77', 'CÓDIGO (EJ: GAMB77)')}
                 className="w-full text-center bg-slate-900 border border-slate-700 rounded-xl py-2 text-xs font-mono font-bold tracking-widest text-white uppercase"
               />
               <button
@@ -165,7 +167,7 @@ export default function VersusRealtimeLobby({
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div>
               <span className="text-[10px] font-sport font-bold text-slate-400 uppercase tracking-wider">
-                CÓDIGO DE SALA
+                {t('VersusRealtimeLobby.codigoDeSala', 'CÓDIGO DE SALA')}
               </span>
               <div className="font-mono text-2xl font-black text-[#74ACDF] tracking-widest">
                 {roomCode}
@@ -216,7 +218,7 @@ export default function VersusRealtimeLobby({
               }}
               className="w-1/3 py-2.5 rounded-xl border border-red-500/30 text-red-400 font-sport text-[10px] font-bold uppercase tracking-wider hover:bg-red-500/10 transition-colors"
             >
-              SALIR DE SALA
+              {t('VersusRealtimeLobby.salirDeSala', 'SALIR DE SALA')}
             </button>
             <button
               onClick={handleStartGame}

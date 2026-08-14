@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react"
 import { motion } from "framer-motion"
 import PlayerRadarChart from "@/components/charts/PlayerRadarChart"
+import { useT } from "@/lib/i18n"
 
 export interface CareerCardData {
   playerName: string
@@ -24,6 +25,7 @@ export interface CareerCardData {
 }
 
 export default function CareerCardView({ data }: { data: CareerCardData }) {
+  const t = useT()
   const cardRef = useRef<HTMLDivElement>(null)
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
@@ -115,7 +117,7 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
                 onClick={() => setShowRadar(!showRadar)}
                 className="px-2 py-0.5 rounded-lg bg-amber-400/20 border border-amber-400/40 text-[9px] font-bold text-amber-300 font-sport uppercase hover:bg-amber-400/30 transition-colors"
               >
-                {showRadar ? "👕 Ver Camiseta" : "📊 Ver Radar"}
+                {showRadar ? t('CareerCardView.verCamiseta', '👕 Ver Camiseta') : t('CareerCardView.verRadar', '📊 Ver Radar')}
               </button>
             </div>
           </div>
@@ -297,8 +299,8 @@ export default function CareerCardView({ data }: { data: CareerCardData }) {
           className="pt-3 border-t border-white/10 flex justify-between items-center text-[10px] font-sport font-bold uppercase tracking-wider relative z-10"
           style={{ transform: "translateZ(20px)" }}
         >
-          <span className="font-display font-black text-white tracking-[0.15em]">GAMBETA</span>
-          <span className="text-[#74ACDF] text-[9px] tracking-[0.2em]">EL JUEGO DEL FÚTBOL ARGENTINO</span>
+          <span className="font-display font-black text-white tracking-[0.15em]">{t('CareerCardView.gambeta', 'GAMBETA')}</span>
+          <span className="text-[#74ACDF] text-[9px] tracking-[0.2em]">{t('CareerCardView.elJuegoDelFutbol', 'EL JUEGO DEL FÚTBOL ARGENTINO')}</span>
         </div>
       </motion.div>
     </div>
