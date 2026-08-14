@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import { useEmbebido } from "@/lib/embebido"
 import type { FormatoFicha } from "@/lib/story-card"
 
 const SITE_URL = "https://gambetafutbol.games/"
@@ -47,6 +48,7 @@ export default function ShareBar({
 }) {
   const [estado, setEstado] = useState<"" | "generando" | "listo" | "copiada" | "compartida" | "error">("")
   const [copiado, setCopiado] = useState(false)
+  const embebido = useEmbebido()
 
   /**
    * La ficha apaisada, generada ANTES de que toquen el botón.
@@ -222,6 +224,12 @@ export default function ShareBar({
 
   const base =
     "share-btn inline-flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-[11px] font-black uppercase tracking-widest font-sport"
+
+  // Adentro del reproductor de un portal no va: CrazyGames prohíbe las promociones cruzadas y
+  // los links que llevan a una versión jugable afuera ("The game should not include
+  // cross-promotions for external or internal games/platforms"), y estos botones son las dos
+  // cosas. En gambetafutbol.games la barra sigue igual: es la palanca de crecimiento del sitio.
+  if (embebido) return null
 
   return (
     <div className={`panel-in relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#0c1728]/90 to-[#050a14]/90 p-5 ${className}`}>

@@ -217,6 +217,12 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
     celebrar: () => void
   } | null>(null)
 
+  /** Colgar el buzo es el retiro anticipado del DT: se mide igual que el del jugador. */
+  function colgarElBuzo() {
+    trackEvent(EVENTOS.carreraRetiro, { modo: "dt", temporadas: estado?.historia.length ?? 0 })
+    retirarse()
+  }
+
   if (!estado) return null
   const club = clubes.find((c) => c.id === estado.clubId)
   const ficha = useMemo(
@@ -320,7 +326,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
           </button>
         ))}
         <button
-          onClick={retirarse}
+          onClick={colgarElBuzo}
           className="font-sport w-full rounded-2xl border border-white/10 py-3 text-[11px] font-bold uppercase tracking-wider text-slate-500 transition-colors hover:text-white"
         >
           Colgar el buzo y ver mi carrera
@@ -510,6 +516,12 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
             setRevelando({ partidos: r.partidos, equipos: r.equipos, equipo: r.miEquipo, celebrar })
           else celebrar()
           trackEvent(EVENTOS.carreraTemporada, { modo: "dt", temporada: estado.temporada })
+          // El final que llega solo: te echaron y no quedó ningún club, o se acabó el ciclo.
+          // Sin esto la única señal del modo era "jugó una temporada más".
+          const despues = useDTStore.getState().estado
+          if (despues?.terminada) {
+            trackEvent(EVENTOS.carreraFinalizada, { modo: "dt", temporadas: despues.historia.length })
+          }
         }}
         className="btn-primary latido font-sport w-full rounded-2xl py-5 text-sm font-black uppercase tracking-widest shadow-xl disabled:opacity-50"
       >
@@ -523,7 +535,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
           Acá se puede cerrar la carrera y ver la ficha en cualquier momento. */}
       {estado.historia.length > 0 && (
         <button
-          onClick={retirarse}
+          onClick={colgarElBuzo}
           className="font-sport w-full rounded-2xl border border-[#D4AF37]/30 bg-[#D4AF37]/[0.07] py-3 text-[11px] font-bold uppercase tracking-wider text-[#D4AF37] transition-colors hover:bg-[#D4AF37]/15"
         >
           🎬 Colgar el buzo y ver mi ficha

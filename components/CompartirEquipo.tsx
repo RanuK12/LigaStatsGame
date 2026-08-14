@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import { useEmbebido } from "@/lib/embebido"
 
 /**
  * Compartir la página de un equipo histórico.
@@ -23,6 +24,7 @@ export default function CompartirEquipo({
   slug: string
 }) {
   const [copiado, setCopiado] = useState(false)
+  const embebido = useEmbebido()
 
   const url = `https://gambetafutbol.games/equipos/${slug}/?utm_source=directo&utm_medium=social&utm_campaign=equipo`
   const texto = hito ? `${label}. ${hito}` : `El plantel completo del ${label}.`
@@ -56,6 +58,10 @@ export default function CompartirEquipo({
       /* el usuario canceló, o el navegador no deja: no hay nada que avisar */
     }
   }
+
+  // Igual que ShareBar: adentro del reproductor de un portal, un link a nuestro sitio es un
+  // link a la versión jugable de afuera, que es lo que su reglamento no permite.
+  if (embebido) return null
 
   const boton =
     "rounded-xl border border-white/10 px-4 py-2.5 font-sport text-[11px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-[#74ACDF]/40 hover:text-white"
