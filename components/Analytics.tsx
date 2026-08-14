@@ -94,6 +94,11 @@ export const EVENTOS = {
   // `carrera_link_visto` no sube, la ficha no está circulando y lo demás no importa.
   carreraLinkVisto: "carrera_link_visto",
   carreraLinkCta: "carrera_link_cta",
+  // Lo mismo para el once del draft. El link del draft llevaba a la portada, así que el que lo
+  // abría no veía el equipo de nadie: 13 personas compartieron en una semana y la página que los
+  // recibía tuvo 1 visita.
+  equipoLinkVisto: "equipo_link_visto",
+  equipoLinkCta: "equipo_link_cta",
   retoDiario: "reto_diario_jugado",
   rankingVisto: "ranking_visto",
   sugerenciaEnviada: "sugerencia_enviada",

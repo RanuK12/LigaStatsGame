@@ -692,6 +692,10 @@ function DraftInner() {
         onDownloadPDF={() => generatePDF(simResult, drafted, f)}
         elo={eloTorneo}
         reto={retoDelDia ? { id: retoDelDia.id, titulo: retoDelDia.title } : undefined}
+        // El once que se armó, para que el link compartido lo muestre en vez de llevar al home.
+        once={drafted.flatMap((p, i) =>
+          p ? [{ n: p.name, p: String(f.positions[i].pos), o: p.rating || 0, c: p.clubs?.[0]?.id }] : [],
+        )}
         bloques={
           retoDelDia
             ? textoDeBloques({

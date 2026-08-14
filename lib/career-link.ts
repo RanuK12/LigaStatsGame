@@ -1,5 +1,6 @@
 import type { CareerCardData } from '@/components/pitch/CareerCardView'
 import { NIVELES } from './career-idolatria'
+import { aBase64Url, deBase64Url } from './link-base64'
 
 /**
  * El link de la carrera terminada.
@@ -33,21 +34,6 @@ const VERSION = '1'
 function imagenDeNivel(nombre: string): string | undefined {
   const n = NIVELES.find((x) => x.nombre === nombre)
   return n?.imagen
-}
-
-/** base64url: el base64 común lleva `+`, `/` y `=`, que en una URL hay que escapar. */
-function aBase64Url(bytes: Uint8Array): string {
-  let bin = ''
-  for (const b of bytes) bin += String.fromCharCode(b)
-  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
-}
-
-function deBase64Url(s: string): Uint8Array {
-  const b64 = s.replace(/-/g, '+').replace(/_/g, '/')
-  const bin = atob(b64 + '='.repeat((4 - (b64.length % 4)) % 4))
-  const out = new Uint8Array(bin.length)
-  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i)
-  return out
 }
 
 /**

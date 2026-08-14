@@ -8,6 +8,7 @@ import { POS_LABELS } from "@/lib/game-engine"
 import { getPC } from "@/lib/ui-constants"
 import MatchChronicleFeed from "./MatchChronicleFeed"
 import ShareBar from "@/components/ShareBar"
+import { urlDeEquipo, type JugadorCompartido } from "@/lib/equipo-link"
 import DonationSection from "@/components/DonationSection"
 import GuardarProgreso from "@/components/GuardarProgreso"
 import EventBurst from "@/components/ui/EventBurst"
@@ -16,7 +17,7 @@ import { storyBlob } from "@/lib/story-card"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 import Image from "next/image"
 
-export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto, bloques }: {
+export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto, bloques, once }: {
   result: TournamentResult
     onBack: () => void
   onReset: () => void
@@ -28,6 +29,8 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
   reto?: { id: string; titulo: string }
   /** El resultado del reto en cuadraditos de color, listo para pegar en un grupo. */
   bloques?: string
+  /** El once armado, para que el link compartido MUESTRE el equipo en vez de llevar a la portada. */
+  once?: JugadorCompartido[]
 }) {
   // Simulation modality state
   // "intro" = choosing mode, "interactive" = playing step-by-step, "animating" = showing match feed, "done" = final results
@@ -283,6 +286,33 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
   // El texto del reto va con el resultado y sin spoiler del once: es lo que hace comparable dos
   // partidas distintas. Sin esto, compartir era "jugué a algo" y el que abría no sabía a qué.
   const sufijoReto = reto ? `\n\nReto de hoy: ${reto.titulo}. Mismo bombo para todos. ¿Cuánto sacás vos?` : ""
+
+  // Cómo terminó, en tres palabras. Es el titular de la ficha y del link que se comparte.
+  const tituloResultado = isChamp
+    ? "¡Campeón!"
+    : result.type === "liga"
+    ? `${result.playerPos}° puesto`
+    : result.eliminated
+    ? `Eliminado en ${result.eliminatedRound}`
+    : "Subcampeón"
+
+  /**
+   * A dónde lleva el link que se comparte.
+   *
+   * Antes llevaba a la portada salvo en el reto del día, así que el que lo abría no veía el
+   * equipo de nadie. Ahora lleva al once, con el bombo del reto adentro cuando lo hubo: el que
+   * abre ve el equipo Y puede jugar la misma partida.
+   */
+  const urlDelOnce = once && once.length > 0
+    ? urlDeEquipo({
+        formacion: result.formation,
+        once,
+        ovr: result.teamScore,
+        resultado: tituloResultado,
+        torneo: result.type === "liga" ? "Liga Profesional" : "Copa Argentina",
+        reto: reto?.id,
+      })
+    : undefined
 
   const textoParaCompartir = copa
     ? isChamp
@@ -950,16 +980,16 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {/* Compartir el resultado */}
               <ShareBar
                 titulo={reto ? "Desafiá a alguien con el mismo bombo" : "Contá cómo te fue"}
+                campana={reto ? "reto_diario" : "equipo_share"}
                 destino={
-                  reto
-                    ? `https://gambetafutbol.games/draft?mode=liga&reto=${reto.id}`
-                    : undefined
+                  urlDelOnce ??
+                  (reto ? `https://gambetafutbol.games/draft?mode=liga&reto=${reto.id}` : undefined)
                 }
                 texto={(elo && elo.delta !== 0 ? `${textoParaCompartir} (${elo.delta > 0 ? "+" : ""}${elo.delta} ELO)` : textoParaCompartir) + sufijoReto}
                 imagen={(formato) =>
                   storyBlob({
                     volanta: result.type === "liga" ? "Liga Profesional" : "Copa Argentina",
-                    titulo: isChamp ? "¡Campeón!" : result.type === "liga" ? `${result.playerPos}° puesto` : result.eliminated ? `Eliminado en ${result.eliminatedRound}` : "Subcampeón",
+                    titulo: tituloResultado,
                     subtitulo: `${result.teamLabel} · ${result.formation}`,
                     stats: [
                       { valor: `${result.teamScore}`, label: "OVR del 11" },
