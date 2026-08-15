@@ -52,6 +52,7 @@ import { downloadFichaPng, downloadFichaJpg, downloadFichaPdf } from "@/lib/care
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 
 import CareerMomentumChart from "@/components/charts/CareerMomentumChart"
+import { useT } from "@/lib/i18n"
 
 const NATIONALITIES: { name: string; flag: string }[] = [
   { name: "Argentina", flag: "🇦🇷" },
@@ -86,6 +87,7 @@ function flagFor(nationality: string): string {
 }
 
 export default function CarreraPage() {
+  const t = useT()
   const career = useCareerStore((s) => s.career)
   return (
     <div className="min-h-screen gradient-bg arg-stripe-bg text-white px-4 py-8 font-sans">
@@ -95,13 +97,13 @@ export default function CarreraPage() {
               nuestra propia página, y menos en la portada del modo que compite con el suyo.
               El motor de la carrera es nuestro y está en lib/career-engine.ts. */}
           <span className="text-[10px] font-bold text-[#74ACDF] tracking-widest uppercase font-sport block mb-1">
-            SIMULADOR DE CARRERA · 409 CLUBES DE 8 PAÍSES
+            {t('carrera.simuladorDeCarrera409', 'SIMULADOR DE CARRERA · 409 CLUBES DE 8 PAÍSES')}
           </span>
           <h1 className="font-display text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            TU CAMINO A LA GLORIA
+            {t('carrera.tuCaminoALa', 'TU CAMINO A LA GLORIA')}
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed font-sans">
-            Creá tu crack en 3D, tomá decisiones clave de pretemporada y transferencias, y viví la simulación completa temporada a temporada.
+            {t('carrera.creaTuCrackEn', 'Creá tu crack en 3D, tomá decisiones clave de pretemporada y transferencias, y viví la simulación completa temporada a temporada.')}
           </p>
         </div>
 
@@ -130,6 +132,7 @@ const RANDOM_PLAYER_NAMES = [
 ]
 
 function CareerSetupWizard() {
+  const t = useT()
   const startCareer = useCareerStore((s) => s.startCareer)
   const [mode, setMode] = useState<"create" | "real">("create")
 
@@ -206,7 +209,7 @@ function CareerSetupWizard() {
       <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-5 shadow-2xl">
         <div className="flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm font-sport">1</span>
-          <h3 className="font-display text-xl font-black uppercase">Creación de Jugador & Camiseta 3D</h3>
+          <h3 className="font-display text-xl font-black uppercase">{t('carrera.creacionDeJugadorCamiseta', 'Creación de Jugador & Camiseta 3D')}</h3>
         </div>
 
         <div className="flex gap-2 font-sport">
@@ -214,25 +217,25 @@ function CareerSetupWizard() {
             onClick={() => setMode("create")}
             className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${mode === "create" ? "bg-[#74ACDF] text-white shadow-lg" : "bg-slate-900 text-slate-400 border border-slate-800"}`}
           >
-            Crear Jugador & Camiseta
+            {t('carrera.crearJugadorCamiseta', 'Crear Jugador & Camiseta')}
           </button>
           <button
             onClick={() => setMode("real")}
             className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${mode === "real" ? "bg-[#74ACDF] text-white shadow-lg" : "bg-slate-900 text-slate-400 border border-slate-800"}`}
           >
-            Elegir Real
+            {t('carrera.elegirReal', 'Elegir Real')}
           </button>
         </div>
 
         {/* Modo debug: cargar carrera de leyenda (valores aproximados). */}
         {process.env.NODE_ENV === "development" && (
           <div className="flex items-center gap-2 font-sport text-[10px]">
-            <span className="uppercase tracking-wider text-slate-500">Debug:</span>
+            <span className="uppercase tracking-wider text-slate-500">{t('carrera.debug', 'Debug:')}</span>
             <button onClick={() => loadLegend("messi")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 transition-all hover:border-[#74ACDF]/40 hover:text-white">
-              Carrera de Messi
+              {t('carrera.carreraDeMessi', 'Carrera de Messi')}
             </button>
             <button onClick={() => loadLegend("maradona")} className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 font-bold text-slate-300 transition-all hover:border-[#D4AF37]/40 hover:text-white">
-              Carrera de Maradona
+              {t('carrera.carreraDeMaradona', 'Carrera de Maradona')}
             </button>
           </div>
         )}
@@ -242,13 +245,13 @@ function CareerSetupWizard() {
             {/* 3D JERSEY GRAPHIC DISPLAY */}
             <div className="card-glass p-5 rounded-2xl border border-white/10 text-center flex flex-col items-center justify-center space-y-3 shadow-2xl">
               <span className="text-[10px] font-bold text-[#74ACDF] font-sport uppercase tracking-wider">
-                VISTA PREVIA CAMISETA 3D
+                {t('carrera.vistaPreviaCamiseta3d', 'VISTA PREVIA CAMISETA 3D')}
               </span>
 
               <div className="relative h-60 w-52 filter drop-shadow-[0_16px_28px_rgba(0,0,0,0.85)]">
                 <Jersey3D color={jerseyColor} pattern={jerseyPattern} number={number} name={name} />
               </div>
-              <span className="text-[11px] text-slate-500 font-sans">Arrastrá para girar</span>
+              <span className="text-[11px] text-slate-500 font-sans">{t('carrera.arrastraParaGirar', 'Arrastrá para girar')}</span>
 
               <div className="text-xs font-bold text-white font-display uppercase tracking-wider">
                 #{number} · {name || "JUGADOR"}
@@ -262,7 +265,7 @@ function CareerSetupWizard() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Tu nombre de crack"
+                  placeholder={t('carrera.tuNombreDeCrack', 'Tu nombre de crack')}
                   className="input-dark"
                 />
               </Field>
@@ -321,11 +324,11 @@ function CareerSetupWizard() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar jugador (ej: Riquelme, Messi, Francescoli)"
+              placeholder={t('carrera.buscarJugadorEjRiquelme', 'Buscar jugador (ej: Riquelme, Messi, Francescoli)')}
               className="input-dark"
             />
             {error && <p className="text-xs text-red-400">{error}</p>}
-            {!players && !error && <p className="text-xs text-slate-400">Cargando base de jugadores...</p>}
+            {!players && !error && <p className="text-xs text-slate-400">{t('carrera.cargandoBaseDeJugadores', 'Cargando base de jugadores...')}</p>}
             <div className="space-y-1.5 max-h-64 overflow-y-auto">
               {results.map((p) => (
                 <button
@@ -346,7 +349,7 @@ function CareerSetupWizard() {
       <div className="card-gradient rounded-3xl p-6 border border-white/10 space-y-4 shadow-2xl">
         <div className="flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#74ACDF] text-slate-950 font-black flex items-center justify-center text-sm font-sport">2</span>
-          <h3 className="font-display text-xl font-black uppercase">Club de Inicio</h3>
+          <h3 className="font-display text-xl font-black uppercase">{t('carrera.clubDeInicio', 'Club de Inicio')}</h3>
         </div>
 
         {/* Interés de la cantera: clubes que te quieren desde las inferiores. */}
@@ -359,7 +362,7 @@ function CareerSetupWizard() {
               onClick={() => setRotarCantera((c) => c + 1)}
               className="px-2.5 py-1 bg-[#74ACDF]/20 hover:bg-[#74ACDF]/30 text-[#74ACDF] text-[10px] font-black uppercase tracking-wider font-sport rounded-lg border border-[#74ACDF]/40 transition-all flex items-center gap-1 shrink-0"
             >
-              <span>🔄 Rotar Ofertas</span>
+              <span>{t('carrera.rotarOfertas', '🔄 Rotar Ofertas')}</span>
             </button>
           </div>
 
@@ -398,6 +401,7 @@ function CareerSetupWizard() {
 }
 
 function ClubPicker({ selected, onSelect, initialPais }: { selected: string; onSelect: (id: string) => void; initialPais?: string }) {
+  const t = useT()
   const [paso, setPaso] = useState<"pais" | "liga" | "club">("pais")
   const [pais, setPais] = useState<string | null>(null)
   const [ligaId, setLigaId] = useState<string | null>(null)
@@ -463,7 +467,7 @@ function ClubPicker({ selected, onSelect, initialPais }: { selected: string; onS
         {liga && (
           <>
             <span className="text-slate-600">›</span>
-            <span className={paso === "club" ? "text-white" : "text-slate-500"}>Club</span>
+            <span className={paso === "club" ? "text-white" : "text-slate-500"}>{t('carrera.club', 'Club')}</span>
           </>
         )}
       </div>
@@ -587,6 +591,7 @@ function ClubGroup({
 // ---------------- DASHBOARD MULTI-TAB ----------------
 
 function CareerDashboard() {
+  const t = useT()
   const { career, simulateNextSeason, acceptOffer, declineOffers, retire, resetCareer } = useCareerStore()
   const fichaRef = useRef<HTMLDivElement>(null)
   const [exporting, setExporting] = useState(false)
@@ -860,7 +865,7 @@ function CareerDashboard() {
             {/* Progreso de la carrera: se llena temporada a temporada */}
             <div className="relative mt-4">
               <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-slate-500 font-sport">
-                <span>Camino a la gloria</span>
+                <span>{t('carrera.caminoALaGloria', 'Camino a la gloria')}</span>
                 <span className="text-[#74ACDF]">{career.seasonsPlayed}/{MAX_SEASONS}</span>
               </div>
               <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
@@ -889,11 +894,11 @@ function CareerDashboard() {
                     ✈️ Te vienen a buscar de Europa
                   </div>
                   <div className="mt-1 text-[12px] text-slate-300 font-sans leading-snug">
-                    Es el salto que cambia una carrera. Del otro lado del charco se juega otro fútbol.
+                    {t('carrera.esElSaltoQue', 'Es el salto que cambia una carrera. Del otro lado del charco se juega otro fútbol.')}
                   </div>
                 </div>
               )}
-              <h4 className="text-xs font-black text-[#74ACDF] font-sport uppercase tracking-wider">📩 Te llegaron ofertas</h4>
+              <h4 className="text-xs font-black text-[#74ACDF] font-sport uppercase tracking-wider">{t('carrera.teLlegaronOfertas', '📩 Te llegaron ofertas')}</h4>
               <div className="space-y-2.5 font-sport">
                 {career.pendingOffers.map((o) => {
                   const euro = o.region === "euro"
@@ -903,11 +908,11 @@ function CareerDashboard() {
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-bold text-white truncate flex items-center gap-1.5 font-display">
                           {o.clubName}
-                          {euro && <span className="text-[10px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase">Europa</span>}
+                          {euro && <span className="text-[10px] font-black bg-amber-400 text-slate-950 px-1 rounded uppercase">{t('carrera.europa', 'Europa')}</span>}
                         </div>
                         <div className="text-[10px] text-slate-400 font-sport">Oferta {formatMarketValue(o.valueM)}</div>
                       </div>
-                      <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">Fichar</button>
+                      <button onClick={() => acceptOffer(o.clubId)} className="btn-primary px-3 py-1.5 text-[10px] font-bold uppercase rounded-lg">{t('carrera.fichar', 'Fichar')}</button>
                     </div>
                   )
                 })}
@@ -924,7 +929,7 @@ function CareerDashboard() {
           {!career.finished && !hasOffers && eventoDeLaTemporada && (
             <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-center">
               <span className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
-                Al simular vas a tener que decidir
+                {t('carrera.alSimularVasA', 'Al simular vas a tener que decidir')}
               </span>
             </div>
           )}
@@ -965,7 +970,7 @@ function CareerDashboard() {
               Cada puesto muestra lo suyo: el arquero vallas invictas y penales atajados. */}
           {career.history.length > 0 && (
             <div className="space-y-3 pt-2">
-              <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.3em] px-1">Tu historia</h4>
+              <h4 className="text-[10px] font-bold text-slate-400 font-sport uppercase tracking-[0.3em] px-1">{t('carrera.tuHistoria', 'Tu historia')}</h4>
               {[...career.history].reverse().map((s, i) => {
                 const cat = positionCategory(career.player.position)
                 const esArquero = cat === "GK"
@@ -1095,7 +1100,7 @@ function CareerDashboard() {
               onClick={() => { if (confirmReset()) resetCareer() }}
               className="w-full py-2.5 bg-red-600/10 border border-red-500/20 text-red-300/80 rounded-xl text-[11px] font-bold font-sport uppercase tracking-wider hover:bg-red-600/20 transition-colors"
             >
-              Reiniciar carrera
+              {t('carrera.reiniciarCarrera', 'Reiniciar carrera')}
             </button>
           </div>
       </div>
@@ -1124,7 +1129,7 @@ function CareerDashboard() {
 
       {lote && (
         <div className="fixed bottom-5 left-1/2 z-[130] -translate-x-1/2 cartel-in rounded-2xl border border-[#74ACDF]/40 bg-[#0b1526] px-5 py-3 text-center shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-          <div className="font-sport text-[10px] font-black uppercase tracking-widest text-[#74ACDF]">Simulación rápida</div>
+          <div className="font-sport text-[10px] font-black uppercase tracking-widest text-[#74ACDF]">{t('carrera.simulacionRapida', 'Simulación rápida')}</div>
           <div className="font-display text-lg font-black text-white">
             {lote.temporadas} {lote.temporadas === 1 ? "temporada jugada" : "temporadas jugadas"}
           </div>

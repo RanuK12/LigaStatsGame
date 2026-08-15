@@ -40,6 +40,11 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   ['/legal/', 0.3, 'yearly'],
 ]
 
+// Los idiomas que tienen páginas propias, y cuáles están traducidas. El español vive en la raíz
+// y no lleva prefijo: mudarlo a /es/ sería tirar las URLs por las que hoy entra todo el tráfico.
+const LOCALES_TRADUCIDOS = ['en', 'pt'] as const
+const RUTAS_TRADUCIDAS = ['/', '/draft/', '/carrera/', '/dt/', '/daily/', '/como-jugar/', '/leaderboard/', '/records/', '/versus/', '/ruleta/', '/datos/', '/retos/']
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Sin hora: el sitemap se genera en cada build y una marca con hora haría que Google viera
   // "cambió todo" cada vez que se despliega, aunque no haya cambiado nada.
@@ -61,5 +66,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...fijas, ...deEquipos]
+  // Las versiones en inglés y en portugués de las rutas que existen traducidas. Van con
+  // prioridad más baja que el español: son las mismas páginas y el contenido es del fútbol
+  // argentino, así que la versión canónica para Google sigue siendo la castellana.
+  const traducidas = LOCALES_TRADUCIDOS.flatMap((locale) =>
+    RUTAS_TRADUCIDAS.map((ruta) => ({
+      url: `${BASE}/${locale}${ruta === '/' ? '/' : ruta}`,
+      lastModified: hoy,
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
+    })),
+  )
+
+  return [...fijas, ...deEquipos, ...traducidas]
 }

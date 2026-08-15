@@ -16,6 +16,7 @@ import { tocar } from "@/lib/sonido"
 import { storyBlob } from "@/lib/story-card"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
 import Image from "next/image"
+import { useT } from "@/lib/i18n"
 
 export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto, bloques, once }: {
   result: TournamentResult
@@ -32,6 +33,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
   /** El once armado, para que el link compartido MUESTRE el equipo en vez de llevar a la portada. */
   once?: JugadorCompartido[]
 }) {
+  const t = useT()
   // Simulation modality state
   // "intro" = choosing mode, "interactive" = playing step-by-step, "animating" = showing match feed, "done" = final results
   const [simState, setSimState] = useState<"intro" | "interactive" | "animating" | "done">("intro")
@@ -346,7 +348,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 <Image src="/logos/afa.png" alt="AFA" fill className="object-contain animate-pulse drop-shadow-lg" />
               </div>
               <h2 className="font-bandera text-2xl sm:text-4xl text-white mb-3 uppercase tracking-[0.14em]">
-                MODO DE SIMULACIÓN
+                {t('TournamentView.modoDeSimulacion', 'MODO DE SIMULACIÓN')}
               </h2>
               <p className="text-slate-400 text-xs sm:text-sm mb-6 max-w-sm mx-auto font-sans leading-relaxed">
                 Elegí cómo querés vivir el torneo de tu 11 ideal en la {result.type === "liga" ? "Liga Profesional" : "Copa Argentina"}.
@@ -377,13 +379,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               })()}
               <div className="flex flex-col gap-3.5 max-w-xs mx-auto font-sport">
                 <button onClick={handleStartStepSim} className="btn-primary py-4 text-xs font-bold tracking-widest uppercase">
-                  Partido a Partido
+                  {t('TournamentView.partidoAPartido', 'Partido a Partido')}
                 </button>
                 <button onClick={handleStartHalfSim} className="btn-secondary py-4 text-xs font-bold tracking-widest uppercase">
-                  Simular Mitad de Torneo
+                  {t('TournamentView.simularMitadDeTorneo', 'Simular Mitad de Torneo')}
                 </button>
                 <button onClick={handleStartFullSim} className="btn-secondary py-4 text-xs font-bold tracking-widest uppercase">
-                  Simular Torneo Entero
+                  {t('TournamentView.simularTorneoEntero', 'Simular Torneo Entero')}
                 </button>
               </div>
             </motion.div>
@@ -401,7 +403,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               <div className="card-gradient rounded-2xl p-5 border border-white/5 flex items-center justify-between">
                 <div>
                   <div className="text-[10px] font-bold text-[#74ACDF] tracking-widest uppercase font-sport">
-                    Simulando
+                    {t('TournamentView.simulando', 'Simulando')}
                   </div>
                   <h3 className="font-display text-xl font-black uppercase tracking-tight">
                     {activeRound.round}
@@ -412,7 +414,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     +5 fechas
                   </button>
                   <button onClick={handleStartFullSim} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
-                    Saltar simulación ⏩
+                    {t('TournamentView.saltarSimulacion', 'Saltar simulación ⏩')}
                   </button>
                 </div>
               </div>
@@ -421,21 +423,21 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {userMatchInRound && (
                 <div className="card-gradient rounded-3xl p-6 border border-[#74ACDF]/20 shadow-[0_0_20px_rgba(116,172,223,0.06)] text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#74ACDF]/40 to-transparent" />
-                  <span className="text-[11px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport block mb-3">TU PARTIDO</span>
+                  <span className="text-[11px] font-bold text-[#74ACDF] uppercase tracking-widest font-sport block mb-3">{t('TournamentView.tuPartido', 'TU PARTIDO')}</span>
                   <div className="flex items-center justify-center gap-4 sm:gap-6">
                     <span className="font-display font-black text-sm sm:text-base text-white max-w-[140px] truncate">{userMatchInRound.home}</span>
                     <span className="px-3.5 py-1.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs font-black text-[#74ACDF] font-sport">VS</span>
                     <span className="font-display font-black text-sm sm:text-base text-white max-w-[140px] truncate">{userMatchInRound.away}</span>
                   </div>
                   <button onClick={handlePlayRound} className="btn-primary mt-6 px-10 py-3.5 text-[11px] font-bold tracking-widest uppercase font-sport">
-                    JUGAR PARTIDO
+                    {t('TournamentView.jugarPartido', 'JUGAR PARTIDO')}
                   </button>
                 </div>
               )}
 
               {/* Rest of Matches in Round */}
               <div className="card-gradient rounded-2xl p-4 border border-white/5">
-                <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">OTROS CRUCES DE LA FECHA</h4>
+                <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">{t('TournamentView.otrosCrucesDeLa', 'OTROS CRUCES DE LA FECHA')}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {activeRound.matches
                     .filter(m => m.home !== result.teamLabel && m.away !== result.teamLabel)
@@ -460,7 +462,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                       <thead>
                         <tr className="table-header-sticky text-slate-600 border-b border-white/5 font-bold uppercase">
                           <th className="py-1 text-left">#</th>
-                          <th className="py-1 text-left">Equipo</th>
+                          <th className="py-1 text-left">{t('TournamentView.equipo2', 'Equipo')}</th>
                           <th className="py-1 text-center">Pts</th>
                           <th className="py-1 text-center">PJ</th>
                           <th className="py-1 text-center">DG</th>
@@ -493,7 +495,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {/* Goleadores y asistidores del plantel, actualizados fecha a fecha */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="card-gradient rounded-xl p-4 border border-slate-900">
-                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">GOLEADORES</h4>
+                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">{t('TournamentView.goleadores', 'GOLEADORES')}</h4>
                   <div className="space-y-1.5">
                     {intermediatePlayerStats.topScorers.slice(0, 5).map((p: any) => (
                       <div key={p.playerId} className="flex items-center justify-between text-xs">
@@ -504,7 +506,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   </div>
                 </div>
                 <div className="card-gradient rounded-xl p-4 border border-slate-900">
-                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">ASISTIDORES</h4>
+                  <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">{t('TournamentView.asistidores', 'ASISTIDORES')}</h4>
                   <div className="space-y-1.5">
                     {intermediatePlayerStats.topAssisters.slice(0, 5).map((p: any) => (
                       <div key={p.playerId} className="flex items-center justify-between text-xs">
@@ -531,7 +533,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
 
                 {/* Show score when feed concludes */}
                 <div className="mt-8 pt-6 border-t border-slate-900 text-center flex flex-col items-center">
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">RESULTADO FINAL</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">{t('TournamentView.resultadoFinal', 'RESULTADO FINAL')}</span>
                   <div className="flex items-center gap-4 justify-center text-2xl font-black font-display mb-6">
                     <span className="text-white">{result.teamLabel}</span>
                     <span className="text-[#74ACDF]">{chroniclePlaying.myGoals} - {chroniclePlaying.oppGoals}</span>
@@ -650,13 +652,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                     <p className="mt-1.5 text-[12px] leading-relaxed text-slate-300 font-sans">
                       {isChamp ? (
                         <>
-                          Diste la vuelta con <strong className="text-white">{result.teamLabel.replace(/ \(.*\)$/, "")}</strong>.
+                          {t('TournamentView.disteLaVueltaCon', 'Diste la vuelta con')} <strong className="text-white">{result.teamLabel.replace(/ \(.*\)$/, "")}</strong>.
                           No la elegiste de un menú: la clasificación te la ganaste en la Liga, la jugaste con este
                           mismo once y lo ganaste todo.
                         </>
                       ) : (
                         <>
-                          Llegaste hasta <strong className="text-white">{result.eliminatedRound}</strong> con un once
+                          {t('TournamentView.llegasteHasta', 'Llegaste hasta')} <strong className="text-white">{result.eliminatedRound}</strong> con un once
                           que armaste vos y una plaza que te ganaste jugando. El campeón fue{" "}
                           <strong className="text-white">{result.champion}</strong>.
                         </>
@@ -674,22 +676,22 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 {/* Division Outcome Banners for Liga */}
                 {result.type === "liga" && result.playerPos && result.playerPos >= (result.table?.length ? result.table.length - 1 : 27) && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-red-500/40 bg-red-500/10 text-red-200 text-xs font-bold leading-relaxed text-center shadow-[0_0_12px_rgba(239,68,68,0.1)] uppercase font-sport tracking-wider">
-                    ZONA DE DESCENSO — Tu equipo quedó en los últimos dos puestos y desciende a la Primera Nacional.
+                    {t('TournamentView.zonaDeDescensoTu', 'ZONA DE DESCENSO — Tu equipo quedó en los últimos dos puestos y desciende a la Primera Nacional.')}
                   </div>
                 )}
                 {result.type === "liga" && result.playerPos && result.playerPos <= 4 && !isChamp && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-blue-500/40 bg-blue-500/10 text-blue-200 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
-                    CLASIFICADO A LA COPA LIBERTADORES — Tu once jugará el torneo continental más prestigioso.
+                    {t('TournamentView.clasificadoALaCopa', 'CLASIFICADO A LA COPA LIBERTADORES — Tu once jugará el torneo continental más prestigioso.')}
                   </div>
                 )}
                 {result.type === "liga" && result.playerPos && result.playerPos >= 5 && result.playerPos <= 10 && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-200 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
-                    CLASIFICADO A LA COPA SUDAMERICANA — Aseguraste competencia internacional para la próxima temporada.
+                    {t('TournamentView.clasificadoALaCopa2', 'CLASIFICADO A LA COPA SUDAMERICANA — Aseguraste competencia internacional para la próxima temporada.')}
                   </div>
                 )}
                 {result.type === "liga" && result.playerPos && result.playerPos >= 11 && result.playerPos <= (result.table?.length ? result.table.length - 2 : 26) && (
                   <div className="mt-3.5 mb-2.5 p-3 rounded-xl border border-slate-700 bg-slate-800/20 text-slate-300 text-xs font-bold leading-relaxed text-center uppercase font-sport tracking-wider">
-                    PERMANENCIA ASEGURADA — Mantuviste la categoría en la Liga Profesional de Fútbol.
+                    {t('TournamentView.permanenciaAseguradaMantuvisteLa', 'PERMANENCIA ASEGURADA — Mantuviste la categoría en la Liga Profesional de Fútbol.')}
                   </div>
                 )}
 
@@ -706,15 +708,15 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               <div className="grid grid-cols-3 gap-3">
                 <div className="card-gradient rounded-xl p-3 text-center border border-slate-900">
                   <div className="text-2xl font-black text-green-400 font-display">{result.playerStats.reduce((s, p) => s + p.goals, 0)}</div>
-                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Goles</div>
+                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">{t('TournamentView.goles', 'Goles')}</div>
                 </div>
                 <div className="card-gradient rounded-xl p-3 text-center border border-slate-900">
                   <div className="text-2xl font-black text-blue-400 font-display">{result.playerStats.reduce((s, p) => s + p.assists, 0)}</div>
-                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Asistencias</div>
+                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">{t('TournamentView.asistencias', 'Asistencias')}</div>
                 </div>
                 <div className="card-gradient rounded-xl p-3 text-center border border-slate-900">
                   <div className="text-2xl font-black text-yellow-400 font-display">{result.playerStats[0]?.matchesPlayed || 0}</div>
-                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">Partidos</div>
+                  <div className="text-[11px] text-[#74ACDF]/60 font-bold uppercase tracking-widest font-sport mt-0.5">{t('TournamentView.partidos', 'Partidos')}</div>
                 </div>
               </div>
 
@@ -738,13 +740,13 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                       <thead>
                         <tr className="table-header-sticky text-slate-400 font-bold uppercase text-[10px] tracking-wider">
                           <th className="py-2.5 pl-2 text-left w-8">#</th>
-                          <th className="py-2.5 text-left">Equipo</th>
+                          <th className="py-2.5 text-left">{t('TournamentView.equipo2', 'Equipo')}</th>
                           <th className="py-2.5 text-center w-8">PJ</th>
                           <th className="py-2.5 text-center w-10">Pts</th>
                           <th className="py-2.5 text-center w-8">GF</th>
                           <th className="py-2.5 text-center w-8">GC</th>
                           <th className="py-2.5 text-center w-10">DG</th>
-                          <th className="py-2.5 text-center pr-2">Forma</th>
+                          <th className="py-2.5 text-center pr-2">{t('TournamentView.forma', 'Forma')}</th>
                         </tr>
                       </thead>
                       <tbody className="table-zebra">
@@ -793,7 +795,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   <div className="mt-4 pt-3 border-t border-[#74ACDF]/10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[11px] font-bold font-sport uppercase tracking-wider text-slate-400">
                     <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-blue-600/30 border border-blue-500/40" /> 1-4: Libertadores</span>
                     <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-600/30 border border-emerald-500/40" /> 5-10: Sudamericana</span>
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-600/30 border border-red-500/40" /> Últimos 2: Descenso</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-600/30 border border-red-500/40" /> {t('TournamentView.ultimos2Descenso', 'Últimos 2: Descenso')}</span>
                   </div>
                 </div>
               )}
@@ -801,7 +803,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {/* SCORERS TAB */}
               {tab === "stats" && (
                 <div className="card-gradient rounded-2xl p-4 border border-slate-900">
-                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">TABLA DE GOLEADORES</h3>
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">{t('TournamentView.tablaDeGoleadores', 'TABLA DE GOLEADORES')}</h3>
                   <div className="space-y-2">
                     {result.topScorers.slice(0, 10).map((p, idx) => (
                       <div key={p.playerId} className={`flex items-center gap-3 p-2.5 rounded-xl ${
@@ -831,7 +833,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {/* ASSISTERS TAB */}
               {tab === "assisters" && (
                 <div className="card-gradient rounded-2xl p-4 border border-slate-900">
-                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">TABLA DE ASISTENCIAS</h3>
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-4">{t('TournamentView.tablaDeAsistencias', 'TABLA DE ASISTENCIAS')}</h3>
                   <div className="space-y-2">
                     {result.topAssisters.slice(0, 10).map((p, idx) => (
                       <div key={p.playerId} className={`flex items-center gap-3 p-2.5 rounded-xl ${
@@ -862,7 +864,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               {result.type === "copa" && result.groupTable && tab === "stats" && (
                 <div className="card-gradient rounded-2xl p-4 border border-white/5 mt-4">
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest font-sport mb-3">
-                    FASE DE GRUPOS · PASAN LOS DOS PRIMEROS
+                    {t('TournamentView.faseDeGruposPasan', 'FASE DE GRUPOS · PASAN LOS DOS PRIMEROS')}
                   </h3>
                   <div className="space-y-1">
                     {result.groupTable.map((row, i) => {
@@ -945,7 +947,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                 <div className="mb-5 flex items-center justify-between gap-4 rounded-2xl border border-[#74ACDF]/25 bg-slate-950/50 px-5 py-4">
                   <div>
                     <div className="text-[11px] font-black uppercase tracking-[0.3em] text-[#74ACDF] font-sport">
-                      Ranking
+                      {t('TournamentView.ranking', 'Ranking')}
                     </div>
                     <div className="mt-1 font-display text-xl font-black leading-none text-white">
                       {elo.nuevo} <span className="text-sm text-slate-500">ELO</span>
@@ -964,7 +966,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                       href="/leaderboard"
                       className="mt-1 block text-[10px] font-black uppercase tracking-wider text-slate-500 font-sport transition-colors hover:text-white"
                     >
-                      Ver el ranking →
+                      {t('TournamentView.verElRanking', 'Ver el ranking →')}
                     </Link>
                   </div>
                 </div>
@@ -1021,19 +1023,19 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   onClick={onDownloadPDF}
                   className="btn-gold rounded-2xl px-6 py-3 text-[11px] font-bold uppercase tracking-widest shadow-lg"
                 >
-                  Descargar PDF
+                  {t('TournamentView.descargarPdf', 'Descargar PDF')}
                 </button>
                 <button
                   onClick={onBack}
                   className="btn-secondary rounded-2xl border-[#74ACDF]/25 px-6 py-3 text-[11px] font-bold uppercase tracking-widest hover:border-[#74ACDF]/50"
                 >
-                  Ver equipo
+                  {t('TournamentView.verEquipo', 'Ver equipo')}
                 </button>
                 <button
                   onClick={onReset}
                   className="btn-secondary rounded-2xl border-[#74ACDF]/25 px-6 py-3 text-[11px] font-bold uppercase tracking-widest hover:border-[#74ACDF]/50"
                 >
-                  Nuevo draft
+                  {t('TournamentView.nuevoDraft', 'Nuevo draft')}
                 </button>
               </div>
 
@@ -1047,7 +1049,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               <DonationSection compacta />
 
               <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center inline-block py-2.5 px-3">
-                Volver al inicio
+                {t('TournamentView.volverAlInicio', 'Volver al inicio')}
               </Link>
             </motion.div>
           )}
@@ -1065,6 +1067,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
  * que ve acá es exactamente lo que va a ver el grupo, y eso es lo que da ganas de mandarlo.
  */
 function BloquesDelReto({ texto }: { texto: string }) {
+  const t = useT()
   const [copiado, setCopiado] = useState(false)
 
   async function copiar() {
@@ -1081,7 +1084,7 @@ function BloquesDelReto({ texto }: { texto: string }) {
   return (
     <div className="panel-in rounded-3xl border border-white/10 bg-gradient-to-b from-[#0c1728]/90 to-[#050a14]/90 p-5 text-center">
       <span className="font-sport text-[11px] font-black uppercase tracking-[0.3em] text-[#74ACDF]">
-        Tu resultado, sin spoilers
+        {t('TournamentView.tuResultadoSinSpoilers', 'Tu resultado, sin spoilers')}
       </span>
       <pre className="mx-auto mt-3 w-fit whitespace-pre rounded-2xl border border-white/[0.06] bg-black/30 px-5 py-3 text-left font-sans text-[13px] leading-relaxed text-slate-200">
         {texto}

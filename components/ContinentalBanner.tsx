@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { useT } from "@/lib/i18n"
 
 /**
  * Las dos copas continentales, en el home.
@@ -32,6 +33,7 @@ const COPAS = [
 ]
 
 export default function ContinentalBanner() {
+  const t = useT()
   return (
     <section className="relative z-10 mx-auto max-w-6xl px-4 pb-16 pt-2">
       <motion.div
@@ -40,9 +42,9 @@ export default function ContinentalBanner() {
         viewport={{ once: true }}
         className="text-center"
       >
-        <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#F6C750]">Nuevo</p>
+        <p className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-[#F6C750]">{t('ContinentalBanner.nuevo', 'Nuevo')}</p>
         <h3 className="mt-1.5 font-display text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl">
-          Las copas <span className="gradient-text">no se eligen</span>
+          {t('ContinentalBanner.lasCopas', 'Las copas')} <span className="gradient-text">{t('ContinentalBanner.noSeEligen', 'no se eligen')}</span>
         </h3>
         <p className="mx-auto mt-2 max-w-lg font-sans text-xs leading-relaxed text-slate-400">
           Se clasifica. Terminá entre los ocho primeros de la Liga con tu once y te ganás la plaza. Es lo que más
@@ -87,7 +89,7 @@ export default function ContinentalBanner() {
                     <div className="font-display text-2xl font-black leading-none" style={{ color: c.color }}>
                       {c.puntos}
                     </div>
-                    <div className="font-sport text-[11px] uppercase tracking-wider text-slate-500">puntos base</div>
+                    <div className="font-sport text-[11px] uppercase tracking-wider text-slate-500">{t('ContinentalBanner.puntosBase', 'puntos base')}</div>
                   </div>
                   <div className="h-8 w-px bg-white/10" />
                   <div className="text-left">
@@ -95,13 +97,13 @@ export default function ContinentalBanner() {
                       {c.como}
                     </div>
                     <div className="font-sport text-[11px] uppercase tracking-wider text-slate-500">
-                      con cuenta, para guardarla
+                      {t('ContinentalBanner.conCuentaParaGuardarla', 'con cuenta, para guardarla')}
                     </div>
                   </div>
                 </div>
 
                 <span className="mt-5 font-sport text-[10px] font-black uppercase tracking-widest text-[#74ACDF] transition-colors group-hover:text-white">
-                  Jugar la Liga y clasificar →
+                  {t('ContinentalBanner.jugarLaLigaY', 'Jugar la Liga y clasificar →')}
                 </span>
               </div>
             </Link>

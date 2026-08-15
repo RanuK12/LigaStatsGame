@@ -13,6 +13,7 @@ import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
 import TorneoEnVivo from "@/components/tournament/TorneoEnVivo"
 import type { ScheduleMatch } from "@/lib/types"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import { useT } from "@/lib/i18n"
 
 /**
  * El modo DT.
@@ -39,6 +40,7 @@ function alFallarElEscudo(e: React.SyntheticEvent<HTMLImageElement>, clubId: str
 }
 
 export default function DTPage() {
+  const t = useT()
   const { players } = usePlayersCore()
   const { squads } = useSquads()
   const listo = Boolean(players && squads)
@@ -62,14 +64,14 @@ export default function DTPage() {
         <header className={`card-gradient relative overflow-hidden rounded-3xl border border-[#D4AF37]/20 text-center shadow-2xl ${estado ? "px-6 py-3" : "p-6 sm:p-8"}`}>
           <div className="banda-argentina absolute inset-x-0 top-0 h-1 opacity-80" />
           <span className="font-sport block text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">
-            Modo DT · Liga Profesional
+            {t('dt.modoDtLigaProfesional', 'Modo DT · Liga Profesional')}
           </span>
           <h1
             className={`font-display font-black uppercase tracking-tight text-white ${
               estado ? "text-xl sm:text-2xl" : "text-3xl sm:text-5xl"
             }`}
           >
-            El banco quema
+            {t('dt.elBancoQuema', 'El banco quema')}
           </h1>
           {!estado && (
             <p className="mx-auto mt-2 max-w-lg font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
@@ -82,7 +84,7 @@ export default function DTPage() {
         {!listo && (
           <div className="card-gradient rounded-3xl border border-white/10 p-8 text-center">
             <p className="font-sport text-xs uppercase tracking-widest text-slate-400">
-              Cargando planteles…
+              {t('dt.cargandoPlanteles', 'Cargando planteles…')}
             </p>
           </div>
         )}
@@ -106,6 +108,7 @@ export default function DTPage() {
 /* ── 1. Elegir club ───────────────────────────────────────────────────────── */
 
 function ElegirClub({ clubes, players, squads }: { clubes: ClubDT[]; players: any[]; squads: any[] }) {
+  const t = useT()
   const empezar = useDTStore((s) => s.empezar)
   const [nombre, setNombre] = useState("")
   const [clubId, setClubId] = useState<string | null>(null)
@@ -126,12 +129,12 @@ function ElegirClub({ clubes, players, squads }: { clubes: ClubDT[]; players: an
     <div className="space-y-5">
       <div className="card-gradient rounded-3xl border border-white/10 p-5 shadow-xl">
         <label className="font-sport block text-[10px] font-black uppercase tracking-[0.3em] text-[#74ACDF]">
-          Tu nombre
+          {t('dt.tuNombre', 'Tu nombre')}
         </label>
         <input
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
-          placeholder="El DT"
+          placeholder={t('dt.placeholderNombre', 'El DT')}
           maxLength={28}
           className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 font-sans text-sm text-white outline-none transition-colors focus:border-[#74ACDF]"
         />
@@ -139,10 +142,10 @@ function ElegirClub({ clubes, players, squads }: { clubes: ClubDT[]; players: an
 
       <div className="card-gradient rounded-3xl border border-white/10 p-5 shadow-xl">
         <h2 className="font-display text-xl font-black uppercase tracking-tight text-white">
-          ¿Qué club agarrás?
+          {t('dt.queClubAgarras', '¿Qué club agarrás?')}
         </h2>
         <p className="mt-1 font-sans text-xs text-slate-400">
-          En un grande te exigen salir campeón desde el primer año. En un chico te dejan crecer.
+          {t('dt.enUnGrandeTe', 'En un grande te exigen salir campeón desde el primer año. En un chico te dejan crecer.')}
         </p>
 
         <div className="mt-4 grid gap-2 sm:grid-cols-2">
@@ -198,6 +201,7 @@ function ElegirClub({ clubes, players, squads }: { clubes: ClubDT[]; players: an
 /* ── 2, 3 y 4. Mercado, temporada y resultado ─────────────────────────────── */
 
 function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any[]; squads: any[] }) {
+  const t = useT()
   const {
     estado, mercado, aceptados, caja, revelacion, simulando,
     alternarMovimiento, jugarTemporada, cerrarRevelacion, aceptarOferta, retirarse, reiniciar,
@@ -286,7 +290,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
           onClick={reiniciar}
           className="font-sport w-full rounded-2xl border border-white/10 bg-slate-950/60 py-3 text-[11px] font-bold uppercase tracking-wider text-slate-300 transition-colors hover:text-white"
         >
-          Empezar otra carrera
+          {t('dt.empezarOtraCarrera', 'Empezar otra carrera')}
         </button>
       </div>
     )
@@ -298,10 +302,10 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
       <div className="space-y-5">
         <div className="card-gradient rounded-3xl border border-red-500/30 p-6 text-center shadow-xl">
           <span className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-red-300">
-            Te quedaste sin club
+            {t('dt.teQuedasteSinClub', 'Te quedaste sin club')}
           </span>
           <h2 className="mt-2 font-display text-2xl font-black uppercase text-white">
-            ¿Quién te llama ahora?
+            {t('dt.quienTeLlamaAhora', '¿Quién te llama ahora?')}
           </h2>
           <p className="mt-2 font-sans text-xs text-slate-400">
             Con {estado.prestigio} de prestigio, estos son los que te abren la puerta.
@@ -329,7 +333,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
           onClick={colgarElBuzo}
           className="font-sport w-full rounded-2xl border border-white/10 py-3 text-[11px] font-bold uppercase tracking-wider text-slate-500 transition-colors hover:text-white"
         >
-          Colgar el buzo y ver mi carrera
+          {t('dt.colgarElBuzoY', 'Colgar el buzo y ver mi carrera')}
         </button>
       </div>
     )
@@ -358,13 +362,13 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
           </div>
           <div className="shrink-0 text-right">
             <div className="font-display text-xl font-black text-emerald-300">€{estado.presupuesto}M</div>
-            <div className="font-sport text-[9px] uppercase tracking-wider text-slate-500">Presupuesto</div>
+            <div className="font-sport text-[9px] uppercase tracking-wider text-slate-500">{t('dt.presupuesto', 'Presupuesto')}</div>
           </div>
         </div>
 
         <div className="mt-4 rounded-2xl border border-[#D4AF37]/25 bg-[#D4AF37]/[0.07] px-4 py-3">
           <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-[#D4AF37]">
-            La dirigencia pide
+            {t('dt.laDirigenciaPide', 'La dirigencia pide')}
           </span>
           <p className="mt-1 font-display text-lg font-black uppercase text-white">{estado.objetivo.texto}</p>
         </div>
@@ -373,7 +377,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
         <div className="mt-4">
           <div className="flex items-baseline justify-between">
             <span className="font-sport text-[10px] font-bold uppercase tracking-wider text-slate-400">
-              Paciencia de la dirigencia
+              {t('dt.pacienciaDeLaDirigencia', 'Paciencia de la dirigencia')}
             </span>
             <span
               className={`font-sport text-[11px] font-black ${
@@ -395,7 +399,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
           </div>
           {estado.paciencia <= 25 && (
             <p className="mt-1.5 font-sport text-[10px] uppercase tracking-wider text-red-300">
-              Una más y te van a echar
+              {t('dt.unaMasYTe', 'Una más y te van a echar')}
             </p>
           )}
         </div>
@@ -405,9 +409,9 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
           No es cosmética: `teamToStrength` reparte a los once en los puestos del dibujo, así que
           un 3-5-2 con el mismo plantel da otro ataque y otra defensa que un 4-3-3. */}
       <div className="card-gradient rounded-3xl border border-white/10 p-5 shadow-xl">
-        <h3 className="font-display text-lg font-black uppercase text-white">Tu dibujo</h3>
+        <h3 className="font-display text-lg font-black uppercase text-white">{t('dt.tuDibujo', 'Tu dibujo')}</h3>
         <p className="mt-1 font-sans text-[11px] text-slate-500">
-          Cambia quién entra al once y cómo se para el equipo.
+          {t('dt.cambiaQuienEntraAl', 'Cambia quién entra al once y cómo se para el equipo.')}
         </p>
         <div className="mt-3 grid grid-cols-2 gap-2">
           {FORMACIONES_DT.map((f) => (
@@ -435,13 +439,13 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
       {mercado.length > 0 && (
         <div className="card-gradient rounded-3xl border border-white/10 p-5 shadow-xl">
           <div className="flex items-baseline justify-between">
-            <h3 className="font-display text-lg font-black uppercase text-white">Mercado de pases</h3>
+            <h3 className="font-display text-lg font-black uppercase text-white">{t('dt.mercadoDePases', 'Mercado de pases')}</h3>
             <span className="font-sport text-[11px] font-black text-emerald-300">
               Te queda €{caja.toFixed(1)}M
             </span>
           </div>
           <p className="mt-1 font-sans text-[11px] text-slate-500">
-            Vender suma plata. Comprar la gasta. Lo que no toques, queda como está.
+            {t('dt.venderSumaPlataComprar', 'Vender suma plata. Comprar la gasta. Lo que no toques, queda como está.')}
           </p>
 
           <div className="mt-4 space-y-2">
@@ -490,7 +494,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                   <p className="mt-1.5 font-sans text-[11px] leading-snug text-slate-400">{m.nota}</p>
                   {noAlcanza && (
                     <p className="mt-1 font-sport text-[10px] uppercase tracking-wider text-amber-300">
-                      No te alcanza. Vendé a alguien primero.
+                      {t('dt.noTeAlcanzaVende', 'No te alcanza. Vendé a alguien primero.')}
                     </p>
                   )}
                 </button>
@@ -546,7 +550,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
       {estado.historia.length > 0 && (
         <div className="card-gradient rounded-3xl border border-white/10 p-5 shadow-xl">
           <h3 className="font-sport text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
-            Tu carrera
+            {t('dt.tuCarrera', 'Tu carrera')}
           </h3>
           <div className="mt-3 space-y-2">
             {[...estado.historia].reverse().map((t) => (
@@ -661,7 +665,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                   }`}
                 >
                   <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">
-                    Copa Argentina
+                    {t('dt.copaArgentina', 'Copa Argentina')}
                   </span>
                   <p
                     className={`mt-1 font-display text-lg font-black uppercase ${
@@ -689,7 +693,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
               {(revelacion.evolucion.crecieron.length > 0 || revelacion.evolucion.retirados.length > 0) && (
                 <div className="mt-4 rounded-2xl border border-white/[0.07] bg-black/25 px-4 py-3">
                   <span className="font-sport text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">
-                    El plantel
+                    {t('dt.elPlantel', 'El plantel')}
                   </span>
                   {revelacion.evolucion.crecieron.slice(0, 3).map((c) => (
                     <p key={c.jugadorId} className="mt-1 font-sans text-[12px] text-slate-200">
@@ -698,7 +702,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                   ))}
                   {revelacion.evolucion.retirados.slice(0, 2).map((c) => (
                     <p key={c.jugadorId} className="mt-1 font-sans text-[12px] text-slate-400">
-                      🎬 <strong className="text-slate-200">{c.nombre}</strong> colgó los botines
+                      🎬 <strong className="text-slate-200">{c.nombre}</strong> {t('dt.colgoLosBotines', 'colgó los botines')}
                     </p>
                   ))}
                 </div>
@@ -716,7 +720,7 @@ function Temporada({ clubes, players, squads }: { clubes: ClubDT[]; players: any
                 onClick={cerrarRevelacion}
                 className="btn-primary font-sport mt-6 w-full rounded-2xl py-3 text-xs font-black uppercase tracking-widest"
               >
-                Continuar
+                {t('dt.continuar', 'Continuar')}
               </button>
             </motion.div>
           </motion.div>

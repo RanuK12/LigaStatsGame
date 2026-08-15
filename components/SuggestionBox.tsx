@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { submitSuggestion } from "@/lib/supabase"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import { useT } from "@/lib/i18n"
 
 const TEMAS = ["Draft", "Modo carrera", "Ranking", "Un bug", "Otra cosa"]
 
@@ -16,6 +17,7 @@ const TEMAS = ["Draft", "Modo carrera", "Ranking", "Un bug", "Otra cosa"]
  * sugerencias, y lo que queremos es que la gente escriba.
  */
 export default function SuggestionBox() {
+  const t = useT()
   const [mensaje, setMensaje] = useState("")
   const [contacto, setContacto] = useState("")
   const [tema, setTema] = useState(TEMAS[0])
@@ -47,7 +49,7 @@ export default function SuggestionBox() {
         <div className="banda-argentina absolute inset-x-0 top-0 h-1 opacity-70" />
 
         <h3 className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-          ¿Qué le agregarías al juego?
+          {t('SuggestionBox.queLeAgregariasAl', '¿Qué le agregarías al juego?')}
         </h3>
         <p className="mt-1.5 text-[12px] leading-relaxed text-slate-400 font-sans max-w-xl">
           Lo leemos nosotros y de acá salen las mejoras. Si encontraste algo roto, también contanos:
@@ -56,13 +58,13 @@ export default function SuggestionBox() {
 
         {estado === "listo" ? (
           <div className="mt-5 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-5 text-center">
-            <p className="font-display text-lg font-black text-emerald-300">¡Gracias, che!</p>
-            <p className="mt-1 text-[12px] text-slate-400 font-sans">Lo vamos a leer.</p>
+            <p className="font-display text-lg font-black text-emerald-300">{t('SuggestionBox.graciasChe', '¡Gracias, che!')}</p>
+            <p className="mt-1 text-[12px] text-slate-400 font-sans">{t('SuggestionBox.loVamosALeer', 'Lo vamos a leer.')}</p>
             <button
               onClick={() => setEstado("")}
               className="mt-3 text-[10px] font-black uppercase tracking-widest text-slate-500 font-sport hover:text-white"
             >
-              Escribir otra
+              {t('SuggestionBox.escribirOtra', 'Escribir otra')}
             </button>
           </div>
         ) : (
@@ -89,7 +91,7 @@ export default function SuggestionBox() {
               onChange={(e) => setMensaje(e.target.value)}
               maxLength={2000}
               rows={4}
-              placeholder="Escribí lo que se te ocurra..."
+              placeholder={t('SuggestionBox.escribiLoQueSe', 'Escribí lo que se te ocurra...')}
               className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-[13px] text-slate-200 placeholder:text-slate-600 font-sans outline-none focus:border-[#74ACDF]/60"
             />
 
@@ -97,7 +99,7 @@ export default function SuggestionBox() {
               value={contacto}
               onChange={(e) => setContacto(e.target.value)}
               maxLength={200}
-              placeholder="Tu mail o tu @ (opcional, solo si querés que te contestemos)"
+              placeholder={t('SuggestionBox.tuMailOTu', 'Tu mail o tu @ (opcional, solo si querés que te contestemos)')}
               className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-[12px] text-slate-200 placeholder:text-slate-600 font-sans outline-none focus:border-[#74ACDF]/60"
             />
 

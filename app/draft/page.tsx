@@ -55,6 +55,7 @@ const NOMBRE_TORNEO: Record<TorneoTipo, string> = {
 import { getPC, POS_GROUPS } from "@/lib/ui-constants"
 import MagneticButton from "@/components/ui/MagneticButton"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
+import { useT, usePuesto, useReto } from "@/lib/i18n"
 
 /* ═══════════════════════════════════════════════════════════════
    CONSTANTS & HELPERS
@@ -87,6 +88,7 @@ interface PityState {
    PITY INDICATOR
    ═══════════════════════════════════════════════════════════════ */
 function PityIndicator({ pity }: { pity: PityState }) {
+  const t = useT()
   if (pity.consecutiveLow === 0) return null
   const isPityActive = pity.pityActive
   return (
@@ -99,8 +101,8 @@ function PityIndicator({ pity }: { pity: PityState }) {
           : "bg-blue-500/10 border-blue-400/20 text-[#74ACDF]"
       }`}>
       <div className="flex items-center gap-1.5 uppercase tracking-wider">
-        <span className="font-bold text-[10px] text-yellow-400 font-sport uppercase tracking-widest">CÁBALA:</span>
-        <span>LA CÁBALA (ANTI-MUFA):</span>
+        <span className="font-bold text-[10px] text-yellow-400 font-sport uppercase tracking-widest">{t('draft.cabala', 'CÁBALA:')}</span>
+        <span>{t('draft.laCabalaAntiMufa', 'LA CÁBALA (ANTI-MUFA):')}</span>
       </div>
       <span className="font-medium text-[11px] text-slate-300">
         {isPityActive
@@ -121,6 +123,8 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
   onClose: () => void
   currentPos: string
 }) {
+  const puesto = usePuesto()
+  const t = useT()
   // Get unique positions from the formation's remaining empty slots
   const positions = formation.positions
     .filter((p: any, i: number) => !drafted[i])
@@ -140,8 +144,8 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
         exit={{ scale: 0.85, y: 20 }}
         className="w-full max-w-sm card-glass p-6 shadow-2xl"
         onClick={e => e.stopPropagation()}>
-        <h3 className="font-display font-black text-xl mb-1 text-center">¿Qué posición sorteás?</h3>
-        <p className="text-slate-400 text-sm text-center mb-5">Elegí la posición para el próximo spin</p>
+        <h3 className="font-display font-black text-xl mb-1 text-center">{t('draft.quePosicionSorteas', '¿Qué posición sorteás?')}</h3>
+        <p className="text-slate-400 text-sm text-center mb-5">{t('draft.elegiLaPosicionPara', 'Elegí la posición para el próximo spin')}</p>
         <div className="space-y-3">
           {POS_GROUPS.map(group => {
             const available = group.positions.filter(p => unique.includes(p))
@@ -161,9 +165,9 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
                       }`}
                       style={{ borderColor: pos === currentPos ? undefined : getPC(pos) + "55" }}>
                       <span className="inline-block w-5 h-5 rounded-full text-white text-[11px] font-black mr-1 leading-5 text-center" style={{ backgroundColor: getPC(pos) }}>
-                        {POS_LABELS[pos]?.slice(0, 3) || pos.slice(0, 3)}
+                        {puesto.corto(pos, POS_LABELS[pos] || pos).slice(0, 3)}
                       </span>
-                      {POS_LABELS[pos] || pos}
+                      {puesto.corto(pos, POS_LABELS[pos] || pos)}
                     </button>
                   ))}
                 </div>
@@ -172,7 +176,7 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
           })}
         </div>
         <button onClick={onClose} className="w-full mt-5 py-2 rounded-2xl btn-secondary text-sm">
-          Cancelar
+          {t('draft.cancelar', 'Cancelar')}
         </button>
       </motion.div>
     </motion.div>
@@ -183,6 +187,9 @@ function PositionSelector({ formation, drafted, onSelect, onClose, currentPos }:
    MAIN DRAFT COMPONENT
    ═══════════════════════════════════════════════════════════════ */
 function DraftInner() {
+  const puesto = usePuesto()
+  const traducirReto = useReto()
+  const t = useT()
   const sp = useSearchParams()
   const modeId = (sp.get("mode") || "clasico") as string
   const mode = GAME_MODES[modeId] || GAME_MODES.clasico
@@ -599,10 +606,10 @@ function DraftInner() {
       <div className="min-h-screen gradient-bg flex items-center justify-center px-4 pb-28 sm:pb-0">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg w-full text-center">
           <img src="/logos/afa.png" alt="AFA" className="h-20 w-auto object-contain mx-auto block mb-6 opacity-80" />
-          <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">Liga Argentina Fans</h1>
+          <h1 className="font-display text-4xl md:text-5xl font-black gradient-text mb-4">{t('draft.ligaArgentinaFans', 'Liga Argentina Fans')}</h1>
           <p className="text-slate-400 mb-6">{mode.icon} {mode.name}</p>
           <div className="card-gradient rounded-3xl p-6 mb-6">
-            <h3 className="font-display font-bold text-lg mb-4">Elegí tu formación</h3>
+            <h3 className="font-display font-bold text-lg mb-4">{t('draft.elegiTuFormacion', 'Elegí tu formación')}</h3>
             <div className="flex gap-2 justify-center flex-wrap">
               {Object.values(formations).map((fmt: any) => (
                 <button key={fmt.id} onClick={() => setFm(fmt.id)}
@@ -614,33 +621,33 @@ function DraftInner() {
             <div className="mt-4"><Pitch f={f} draft={[]} activeSlot={-1} onSlotClick={() => {}} phase="start" /></div>
           </div>
           <div className="card-gradient rounded-3xl p-6 mb-6 text-left">
-            <h3 className="font-display font-bold text-lg mb-3">Cómo Jugar</h3>
+            <h3 className="font-display font-bold text-lg mb-3">{t('draft.comoJugar', 'Cómo Jugar')}</h3>
             <ol className="text-sm text-slate-400 space-y-2">
-              <li>1. Elegís la <strong className="text-slate-200">posición</strong> que querés sortear</li>
-              <li>2. Girás la ruleta — te toca un <strong className="text-slate-200">equipo + año</strong></li>
-              <li>3. Elegís <strong className="text-slate-200">un solo jugador</strong> de esa posición</li>
-              <li>4. El sistema de <strong className="text-yellow-300">La Cábala (Anti-Mufa)</strong> garantiza que no te salgan solo jugadores de bajo nivel seguidos</li>
-              <li>5. Armá los 11 y <strong className="text-slate-200">simulá el torneo con estadísticas</strong></li>
+              <li>1. {t('draft.paso1', 'Elegís la')} <strong className="text-slate-200">{t('draft.posicion', 'posición')}</strong> {t('draft.queQueresSortear', 'que querés sortear')}</li>
+              <li>2. {t('draft.paso2', 'Girás la ruleta — te toca un')} <strong className="text-slate-200">{t('draft.equipoAno', 'equipo + año')}</strong></li>
+              <li>3. {t('draft.paso3', 'Elegís')} <strong className="text-slate-200">{t('draft.unSoloJugador', 'un solo jugador')}</strong> {t('draft.deEsaPosicion', 'de esa posición')}</li>
+              <li>4. {t('draft.paso4', 'El sistema de')} <strong className="text-yellow-300">{t('draft.laCabalaAntiMufa2', 'La Cábala (Anti-Mufa)')}</strong> {t('draft.garantizaQueNoTe', 'garantiza que no te salgan solo jugadores de bajo nivel seguidos')}</li>
+              <li>5. {t('draft.paso5', 'Armá los 11 y')} <strong className="text-slate-200">{t('draft.simulaElTorneoCon', 'simulá el torneo con estadísticas')}</strong></li>
             </ol>
           </div>
           {/* Lo que hay en juego, antes de empezar. El que arranca sin saber que puede clasificar
               a la Libertadores juega un draft suelto; el que lo sabe, juega una temporada. */}
           <div className="card-gradient rounded-3xl p-6 mb-6 text-left border border-[#F6C750]/25">
-            <h3 className="font-display font-bold text-lg mb-3 text-[#F6C750]">Lo que está en juego</h3>
+            <h3 className="font-display font-bold text-lg mb-3 text-[#F6C750]">{t('draft.loQueEstaEn', 'Lo que está en juego')}</h3>
             <ul className="text-sm text-slate-400 space-y-2.5">
               <li>
-                🏆 <strong className="text-slate-200">Clasificá a la Libertadores.</strong> Si terminás entre los
+                🏆 <strong className="text-slate-200">{t('draft.clasificaALaLibertadores', 'Clasificá a la Libertadores.')}</strong> Si terminás entre los
                 cuatro primeros de la Liga te ganás la plaza (5° a 8°, la Sudamericana). No se eligen desde un
                 menú: se clasifica, y valen <strong className="text-white">150 y 120</strong> puntos contra los
                 100 de la Liga. Es lo que más ELO reparte del juego.
               </li>
               <li>
-                ⭐ <strong className="text-slate-200">Los mejores equipos argentinos de los últimos 35 años</strong>{" "}
+                ⭐ <strong className="text-slate-200">{t('draft.losMejoresEquiposArgentinos', 'Los mejores equipos argentinos de los últimos 35 años')}</strong>{" "}
                 están en el bombo: el Vélez del 94, los Boca de Bianchi, el River del 96, el Estudiantes de Verón.
                 Sale uno cada cuatro giros, más o menos tres por draft.
               </li>
               <li>
-                📈 <strong className="text-slate-200">Todo suma al ranking.</strong> Cada torneo mueve tu ELO según
+                📈 <strong className="text-slate-200">{t('draft.todoSumaAlRanking', 'Todo suma al ranking.')}</strong> Cada torneo mueve tu ELO según
                 dónde termines.{" "}
                 {user?.isLoggedIn ? "Ya tenés cuenta: te cuenta todo." : "Como invitado no entrás al ranking global ni guardás la plaza continental."}
               </li>
@@ -660,7 +667,7 @@ function DraftInner() {
           {(playersError || squadsError) && (
             <p className="mt-3 text-xs text-red-400">No se pudo cargar la base: {playersError || squadsError}. Recargá la página.</p>
           )}
-          <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider inline-block py-2.5 px-3">Volver al inicio</Link>
+          <Link href="/" className="block mt-6 text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider inline-block py-2.5 px-3">{t('draft.volverAlInicio2', 'Volver al inicio')}</Link>
         </motion.div>
 
         {/* En el teléfono, no.
@@ -688,12 +695,12 @@ function DraftInner() {
       <>
         {retoGanado && (
           <div className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 cartel-in cartel-shine rounded-2xl border border-[#74ACDF]/40 bg-[#0b1526] px-5 py-3 text-center shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-            <div className="font-sport text-[10px] font-black uppercase tracking-widest text-[#74ACDF]">Reto diario completado</div>
+            <div className="font-sport text-[10px] font-black uppercase tracking-widest text-[#74ACDF]">{t('draft.retoDiarioCompletado', 'Reto diario completado')}</div>
             <div className="font-display text-lg font-black text-white">
               +{retoGanado.elo} ELO · racha de {retoGanado.streak} {retoGanado.streak === 1 ? "día" : "días"}
             </div>
             {!user?.isLoggedIn && (
-              <div className="mt-1 text-[10px] text-amber-300 font-sport uppercase tracking-wider">Ingresá para que sume a tu ranking</div>
+              <div className="mt-1 text-[10px] text-amber-300 font-sport uppercase tracking-wider">{t('draft.ingresaParaQueSume', 'Ingresá para que sume a tu ranking')}</div>
             )}
           </div>
         )}
@@ -770,14 +777,14 @@ function DraftInner() {
           <img src="/logos/afa.png" alt="AFA" className="w-[18px] h-[25px] object-contain drop-shadow" />
           <span className="text-[10px] font-bold text-slate-500 tracking-widest font-sport uppercase">{mode.name}</span>
         </div>
-        <h1 className="font-bandera text-2xl md:text-4xl text-white tracking-[0.14em] uppercase">ARMÁ TU 11 DE SELECCIÓN</h1>
+        <h1 className="font-bandera text-2xl md:text-4xl text-white tracking-[0.14em] uppercase">{t('draft.armaTu11De', 'ARMÁ TU 11 DE SELECCIÓN')}</h1>
         <div className="flex items-center justify-center gap-4 mt-2 text-xs flex-wrap font-sport uppercase tracking-widest text-slate-400">
           <span>
-            Posición: <strong className="text-white font-bold">{POS_LABELS[currentPos.pos] || currentPos.pos}</strong>
+            {t('draft.posicion2', 'Posición:')} <strong className="text-white font-bold">{puesto.corto(currentPos.pos, POS_LABELS[currentPos.pos] || currentPos.pos)}</strong>
             <span className="text-slate-500 ml-1">({activeSlotIdx + 1}/{totalSlots})</span>
           </span>
           <span>·</span>
-          <span>Equipo: <strong className="text-[#75AADB] font-bold">{filledCount}/11</strong></span>
+          <span>{t('draft.equipo', 'Equipo:')} <strong className="text-[#75AADB] font-bold">{filledCount}/11</strong></span>
           {teamScore > 0 && (
             <>
               <span>·</span>
@@ -814,7 +821,7 @@ function DraftInner() {
               <div className="text-sm text-slate-400 mb-1">Posición {filledCount + 1} de {totalSlots}:</div>
               <div className="flex items-center justify-center gap-2">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                  style={{ backgroundColor: getPC(currentPos.pos) }}>{POS_LABELS[currentPos.pos]}</div>
+                  style={{ backgroundColor: getPC(currentPos.pos) }}>{puesto.corto(currentPos.pos, POS_LABELS[currentPos.pos] || currentPos.pos)}</div>
                 <span className="font-display font-bold text-xl text-white">{currentPos.label}</span>
               </div>
             </div>
@@ -822,11 +829,11 @@ function DraftInner() {
             {retoDelDia && (
               <div className="mb-4 rounded-2xl border border-orange-400/30 bg-orange-500/[0.07] px-4 py-3 text-center">
                 <p className="font-sport text-[10px] font-black uppercase tracking-[0.28em] text-orange-300">
-                  {retoDelDia.icon} Reto de hoy · {retoDelDia.title}
+                  {retoDelDia.icon} {t('draft.retoDeHoy', 'Reto de hoy')} · {traducirReto(retoDelDia.id, 'titulo', retoDelDia.title)}
                 </p>
-                <p className="mt-1 font-sans text-[12px] leading-relaxed text-slate-300">{retoDelDia.rule}</p>
+                <p className="mt-1 font-sans text-[12px] leading-relaxed text-slate-300">{traducirReto(retoDelDia.id, 'regla', retoDelDia.rule)}</p>
                 <p className="mt-1 font-sport text-[10px] uppercase tracking-wider text-slate-500">
-                  Bombo recortado: hoy todos juegan con los mismos jugadores
+                  {t('draft.bomboRecortadoHoyTodos', 'Bombo recortado: hoy todos juegan con los mismos jugadores')}
                 </p>
               </div>
             )}
@@ -835,11 +842,11 @@ function DraftInner() {
             <div className="flex gap-3 justify-center flex-wrap font-sport">
               <MagneticButton>
                 <button onClick={() => spinWheel()} className="btn-primary px-10 py-4">
-                  Girar Ruleta
+                  {t('draft.girarRuleta', 'Girar Ruleta')}
                 </button>
               </MagneticButton>
               <button onClick={() => setShowPosSelector(true)} className="btn-secondary px-6 py-4">
-                Elegir posición
+                {t('draft.elegirPosicion', 'Elegir posición')}
               </button>
             </div>
 
@@ -854,13 +861,13 @@ function DraftInner() {
                   ⚡ Completar los {totalSlots - filledCount} que faltan y jugar
                 </button>
                 <p className="mt-1.5 font-sans text-[11px] text-slate-500">
-                  Te llena los puestos vacíos con lo mejor que haya y vas directo al torneo
+                  {t('draft.teLlenaLosPuestos', 'Te llena los puestos vacíos con lo mejor que haya y vas directo al torneo')}
                 </p>
               </div>
             )}
 
             <p className="text-xs text-slate-400 mt-3 text-center">
-              Girá para la posición actual · o elegí otra posición manualmente
+              {t('draft.giraParaLaPosicion', 'Girá para la posición actual · o elegí otra posición manualmente')}
             </p>
           </motion.div>
         )}
@@ -873,7 +880,7 @@ function DraftInner() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-4 px-4 py-2 bg-yellow-500/20 border border-yellow-400/40 rounded-xl text-yellow-300 text-xs font-bold tracking-wider uppercase font-sport shadow-[0_0_20px_rgba(251,191,36,0.15)]">
-                LA CÁBALA ACTIVADA - GENERANDO JUGADORES DE ÉLITE
+                {t('draft.laCabalaActivadaGenerando', 'LA CÁBALA ACTIVADA - GENERANDO JUGADORES DE ÉLITE')}
               </motion.div>
             )}
             <p className="text-slate-400 mb-4 text-xs font-bold uppercase tracking-widest font-sport">SORTEANDO PLANTEL COMPATIBLE PARA{" "}
@@ -882,7 +889,7 @@ function DraftInner() {
             </p>
             <SquadRoulette squads={eligibleSquads} spinning={true} result={currentSquad}
               onSpinComplete={() => { setSpinning(false); setPhase("reveal"); setSearch("") }} />
-            <p className="mt-4 text-xs text-slate-500 font-bold uppercase tracking-wider font-sport">Buscando el plantel perfecto para tu equipo...</p>
+            <p className="mt-4 text-xs text-slate-500 font-bold uppercase tracking-wider font-sport">{t('draft.buscandoElPlantelPerfecto', 'Buscando el plantel perfecto para tu equipo...')}</p>
           </motion.div>
         )}
 
@@ -930,7 +937,7 @@ function DraftInner() {
                 </h3>
                 <span className="text-xs text-slate-500 font-sport">{pickerPlayers.length} disp. · {filledCount}/{totalSlots}</span>
               </div>
-              <input type="text" placeholder="Buscar jugador..."
+              <input type="text" placeholder={t('draft.buscarJugador', 'Buscar jugador...')}
                 value={search} onChange={e => setSearch(e.target.value)}
                 className="input-field mb-3 text-sm font-sans" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-[40vh] overflow-y-auto pr-1">
@@ -963,8 +970,8 @@ function DraftInner() {
         {phase === "done" && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-6">
             <div className="card-gradient rounded-3xl p-6">
-              <h2 className="font-display text-3xl font-black gradient-text mb-2">¡11 Armado!</h2>
-              <p className="text-slate-400 text-sm mb-4">Tu equipo está listo para competir por el ranking ELO.</p>
+              <h2 className="font-display text-3xl font-black gradient-text mb-2">{t('draft.11Armado', '¡11 Armado!')}</h2>
+              <p className="text-slate-400 text-sm mb-4">{t('draft.tuEquipoEstaListo', 'Tu equipo está listo para competir por el ranking ELO.')}</p>
 
               {/* TEAM TACTICAL RADAR (DATA SCIENCE ANALYTICS) */}
               {(() => {
@@ -981,7 +988,7 @@ function DraftInner() {
                 }
                 return <TeamTacticalRadar metrics={metrics} />
               })()}
-              <p className="text-slate-400 text-sm mb-4">Tocá cualquier posición para cambiar el jugador</p>
+              <p className="text-slate-400 text-sm mb-4">{t('draft.tocaCualquierPosicionPara', 'Tocá cualquier posición para cambiar el jugador')}</p>
               <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
               <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>
               {/* Player chips */}
@@ -998,7 +1005,7 @@ function DraftInner() {
                       </div>
                       <div>
                         <div className="text-[10px] font-semibold text-white truncate max-w-[80px]">
-                          {pl ? pl.name.split(" ").pop() : <span className="text-slate-500 italic">vacío</span>}
+                          {pl ? pl.name.split(" ").pop() : <span className="text-slate-500 italic">{t('draft.vacio', 'vacío')}</span>}
                         </div>
                         <div className="text-[10px] text-slate-500">{POS_LABELS[pos.pos] || pos.pos}</div>
                       </div>
@@ -1015,10 +1022,10 @@ function DraftInner() {
             {user?.plaza && (
               <div className="cartel-in cartel-shine mx-auto mb-5 max-w-xl rounded-2xl border-2 border-amber-400/60 bg-gradient-to-b from-amber-400/20 to-slate-950/40 px-5 py-5 text-center shadow-[0_0_40px_rgba(246,199,80,0.18)]">
                 <p className="text-[10px] font-black font-sport uppercase tracking-widest text-[#F6C750]">
-                  Clasificaste
+                  {t('draft.clasificaste', 'Clasificaste')}
                 </p>
                 <p className="mt-1.5 text-[12px] leading-relaxed text-slate-300 font-sans">
-                  Saliste <strong className="text-white">{user.plaza.puesto}°</strong> con{" "}
+                  {t('draft.saliste', 'Saliste')} <strong className="text-white">{user.plaza.puesto}°</strong> con{" "}
                   {user.plaza.equipo}: te ganaste un lugar en la{" "}
                   <strong className="text-white">
                     {user.plaza.torneo === "libertadores" ? "Copa Libertadores" : "Copa Sudamericana"}
@@ -1040,7 +1047,7 @@ function DraftInner() {
                 se ganan los puntos, y sin esto el número del ranking no se entiende. */}
             <div className="max-w-xl mx-auto mb-5 rounded-2xl border border-[#74ACDF]/20 bg-slate-950/50 px-4 py-3 text-center">
               <p className="text-[10px] font-black font-sport uppercase tracking-widest text-[#74ACDF]">
-                Esto suma al ranking
+                {t('draft.estoSumaAlRanking', 'Esto suma al ranking')}
               </p>
               <p className="mt-1.5 text-[11px] leading-relaxed text-slate-400 font-sans">
                 Tu <strong className="text-slate-200">ELO</strong> se mueve según en qué puesto termines: salir
@@ -1069,13 +1076,13 @@ function DraftInner() {
                 ))}
               </div>
               <p className="mt-2.5 text-[11px] leading-relaxed text-slate-400 font-sans">
-                Las dos copas continentales <strong className="text-slate-200">no se eligen</strong>: se clasifica
+                {t('draft.lasDosCopasContinentales', 'Las dos copas continentales')} <strong className="text-slate-200">{t('draft.noSeEligen', 'no se eligen')}</strong>: se clasifica
                 terminando entre los 8 primeros de la Liga, y la plaza queda guardada en tu cuenta.{" "}
                 {user?.isLoggedIn
                   ? "Se juega con el 11 que tengas armado, y la plaza se gasta al usarla."
                   : "Como invitado no se guarda: hay que tener cuenta para jugarlas y para entrar al ranking."}{" "}
                 <Link href="/leaderboard" className="text-[#74ACDF] hover:text-white underline underline-offset-2">
-                  Ver el ranking
+                  {t('draft.verElRanking', 'Ver el ranking')}
                 </Link>
               </p>
             </div>
@@ -1098,18 +1105,18 @@ function DraftInner() {
                   </MagneticButton>
                 )
               })}
-              <button onClick={resetGame} className="btn-secondary w-full px-6 py-3 sm:w-auto">Nuevo Draft</button>
+              <button onClick={resetGame} className="btn-secondary w-full px-6 py-3 sm:w-auto">{t('draft.nuevoDraft', 'Nuevo Draft')}</button>
             </div>
             {torneosJugados.size > 0 && (
               <p className="mb-5 text-center text-[11px] leading-relaxed text-slate-400 font-sans">
                 Cada equipo juega cada torneo una sola vez. Para volver a competir,{" "}
                 <button onClick={resetGame} className="text-[#74ACDF] underline underline-offset-2 hover:text-white">
-                  armá otro draft
+                  {t('draft.armaOtroDraft', 'armá otro draft')}
                 </button>
                 .
               </p>
             )}
-            <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center inline-block py-2.5 px-3">Volver al inicio</Link>
+            <Link href="/" className="text-slate-400 hover:text-white transition-colors text-xs font-bold font-sport uppercase tracking-wider block text-center inline-block py-2.5 px-3">{t('draft.volverAlInicio2', 'Volver al inicio')}</Link>
           </motion.div>
         )}
       </main>
@@ -1121,8 +1128,9 @@ function DraftInner() {
    WRAPPER
    ═══════════════════════════════════════════════════════════════ */
 export default function DraftPage() {
+  const t = useT()
   return (
-    <Suspense fallback={<div className="min-h-screen gradient-bg flex items-center justify-center text-slate-400">Cargando...</div>}>
+    <Suspense fallback={<div className="min-h-screen gradient-bg flex items-center justify-center text-slate-400">{t('draft.cargando', 'Cargando...')}</div>}>
       <DraftInner />
     </Suspense>
   )

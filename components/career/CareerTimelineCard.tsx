@@ -2,6 +2,7 @@
 
 import { findClub, retirementStory, formatMarketValue, positionCategory, type CareerState } from "@/lib/career-engine"
 import Trofeo, { nombreDeTrofeo } from "@/components/ui/Trofeo"
+import { useT } from "@/lib/i18n"
 
 // Abreviatura de posición en español (estilo Copero: ED, DC, ARQ...).
 const POS_ES: Record<string, string> = {
@@ -52,6 +53,7 @@ function paisDeCarrera(career: CareerState): string | undefined {
 }
 
 export default function CareerTimelineCard({ career }: { career: CareerState }) {
+  const t = useT()
   const { player } = career
   const club = findClub(career.clubId)
   // La carta muestra su MEJOR versión: el pico. El resumen de carrera mostraba el pico y la
@@ -79,7 +81,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
             <span className="text-[#F6C750] text-[11px] leading-none tracking-[0.15em]">★★★</span>
           </div>
           <div className="text-[10px] font-sport font-bold uppercase tracking-[0.28em] text-[#74ACDF] mt-1">
-            El juego del fútbol argentino
+            {t('ficha.bajada', 'El juego del fútbol argentino')}
           </div>
         </div>
         <div className="ml-auto banda-argentina h-8 w-16 rounded-md opacity-80" />
@@ -88,7 +90,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
       {/* HEADER */}
       <div className="flex items-center gap-4 pb-5 border-b border-white/10">
         <div className="shrink-0 w-24 h-24 rounded-[22px] flex flex-col items-center justify-center shadow-lg" style={{ background: oc.bg, color: oc.text }}>
-          <span className="text-[10px] font-black tracking-widest font-sport">OVR PICO</span>
+          <span className="text-[10px] font-black tracking-widest font-sport">{t('ficha.ovrPico', 'OVR PICO')}</span>
           <span className="font-impact text-5xl font-black leading-none">{peak}</span>
           {peak !== player.ovr && (
             <span className="text-[11px] font-bold font-sport opacity-70">se retiró en {player.ovr}</span>
@@ -109,9 +111,9 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
           </div>
         </div>
         <div className="text-right shrink-0">
-          <div className="text-[10px] text-slate-400 font-sport tracking-widest">EDAD</div>
+          <div className="text-[10px] text-slate-400 font-sport tracking-widest">{t('ficha.edadMayus', 'EDAD')}</div>
           <div className="font-impact text-3xl font-black leading-none">{player.age}</div>
-          <div className="text-[10px] text-slate-400 font-sport tracking-widest mt-1">VALOR</div>
+          <div className="text-[10px] text-slate-400 font-sport tracking-widest mt-1">{t('ficha.valor', 'VALOR')}</div>
           <div className="font-impact text-xl font-black leading-none">{value}</div>
         </div>
       </div>
@@ -134,7 +136,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
 
       {/* COLUMNAS */}
       <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-x-2 sm:gap-x-3 items-center px-1 pt-4 pb-2 text-[11px] font-black text-slate-500 font-sport uppercase tracking-widest">
-        <span>Edad</span><span>Club</span><span className="text-center">OVR</span>
+        <span>{t('ficha.edad', 'Edad')}</span><span>{t('ficha.club', 'Club')}</span><span className="text-center">OVR</span>
         <span className="text-center">🟩 PJ</span>
         <span className="text-center">{esArquero || esDefensor ? "🧤 VI" : "⚽ G"}</span>
         <span className="text-center">{esArquero ? "🖐️ PA" : esDefensor ? "⚽ G" : "👟 A"}</span>
@@ -196,7 +198,7 @@ export default function CareerTimelineCard({ career }: { career: CareerState }) 
       {/* MINI-HISTORIA DE RETIRO */}
       {career.finished && (
         <div className="mt-4 rounded-xl bg-white/[0.03] border border-white/[0.07] px-4 py-3">
-          <div className="text-[11px] font-black text-slate-500 font-sport uppercase tracking-widest mb-1">Tras el retiro</div>
+          <div className="text-[11px] font-black text-slate-500 font-sport uppercase tracking-widest mb-1">{t('ficha.trasElRetiro', 'Tras el retiro')}</div>
           <p className="text-[13px] leading-snug text-slate-200">📖 {retirementStory(career)}</p>
         </div>
       )}

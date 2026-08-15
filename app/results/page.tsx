@@ -5,11 +5,13 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { appendScore } from '@/lib/storage'
 import { shareImage, downloadShareImage, downloadSharePDF, type ShareData } from '@/lib/share-card'
+import { useT } from "@/lib/i18n"
 
 interface ResPlayer { name?: string; rating?: number; position?: string; club?: string }
 interface ResTeam { label?: string; score?: number; formation?: string; players?: ResPlayer[] }
 
 export default function ResultsPage() {
+  const t = useT()
   const [team, setTeam] = useState<ResTeam | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -53,16 +55,16 @@ export default function ResultsPage() {
   if (loading) return wrap(
     <>
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto"></div>
-      <p className="mt-4 text-slate-400">Cargando resultados...</p>
+      <p className="mt-4 text-slate-400">{t('results.cargandoResultados', 'Cargando resultados...')}</p>
     </>
   )
 
   if (error || !team) return wrap(
     <>
-      <h2 className="text-3xl font-bold text-yellow-500 uppercase tracking-wider font-sport">SIN DATOS DE EQUIPO</h2>
+      <h2 className="text-3xl font-bold text-yellow-500 uppercase tracking-wider font-sport">{t('results.sinDatosDeEquipo', 'SIN DATOS DE EQUIPO')}</h2>
       <p className="mt-2 text-slate-400 font-sans">{error || "No encontramos tu equipo. Armá tu 11 primero."}</p>
       <Link href="/draft" className="mt-6 inline-block px-6 py-3 bg-cyan-600 rounded-xl hover:bg-cyan-500 transition-colors font-bold font-sport uppercase">
-        Armar mi 11
+        {t('results.armarMi11', 'Armar mi 11')}
       </Link>
     </>
   )
@@ -87,7 +89,7 @@ export default function ResultsPage() {
     <div className="min-h-screen gradient-bg py-10 px-4 font-sans">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <p className="text-slate-400 text-xs uppercase tracking-widest font-sport">Tu resultado de la temporada</p>
+          <p className="text-slate-400 text-xs uppercase tracking-widest font-sport">{t('results.tuResultadoDeLa', 'Tu resultado de la temporada')}</p>
           <h1 className="text-6xl font-black bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent font-display">{score}<span className="text-2xl text-slate-500">/99</span></h1>
           {team.label && <p className="mt-1 text-lg text-slate-300 font-bold">{team.label} · {team.formation}</p>}
           {best?.name && <p className="mt-2 text-xs font-bold text-amber-400 font-sport uppercase tracking-wider">FIGURA DE LA CANCHA: {best.name} ({best.rating})</p>}
@@ -118,10 +120,10 @@ export default function ResultsPage() {
         </div>
         <div className="flex flex-wrap gap-3 justify-center mt-3 font-sport uppercase tracking-wider text-xs">
           <Link href="/draft" className="px-6 py-3 bg-slate-800 rounded-xl font-bold hover:bg-slate-700 transition-colors text-slate-300">
-            JUGAR DE NUEVO
+            {t('results.jugarDeNuevo', 'JUGAR DE NUEVO')}
           </Link>
           <Link href="/" className="px-6 py-3 bg-slate-800 rounded-xl hover:bg-slate-700 transition-colors text-slate-300">
-            VOLVER AL INICIO
+            {t('results.volverAlInicio', 'VOLVER AL INICIO')}
           </Link>
         </div>
       </motion.div>

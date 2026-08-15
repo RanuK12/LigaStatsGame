@@ -13,6 +13,7 @@ import {
 import { loadDaily, completadoHoy, bonusForStreak, DAILY_BASE_ELO, DAILY_MAX_ELO } from "@/lib/daily-progress"
 import { useUserStore } from "@/lib/user-store"
 import TablasDelDia from "@/components/retos/TablasDelDia"
+import { useT, useRuta, useReto, useLocaleIntl } from "@/lib/i18n"
 
 const DIFF_STYLE: Record<Difficulty, string> = {
   Fácil: "text-emerald-300 border-emerald-400/40 bg-emerald-500/10",
@@ -39,6 +40,10 @@ export default function DailyPage() {
   const user = useUserStore((s) => s.user)
   const [progreso, setProgreso] = useState<{ hecho: boolean; streak: number }>({ hecho: false, streak: 0 })
   const [copiado, setCopiado] = useState(false)
+  const t = useT()
+  const ruta = useRuta()
+  const reto = useReto()
+  const localeFecha = useLocaleIntl()
 
   useEffect(() => {
     setToday(localYmd())
@@ -83,7 +88,7 @@ export default function DailyPage() {
 
   const challenge = challengeForDate(today)
   const number = challengeNumber()
-  const fecha = new Date().toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })
+  const fecha = new Date().toLocaleDateString(localeFecha, { weekday: "long", day: "numeric", month: "long" })
 
   return (
     <div className="min-h-[calc(100vh-6rem)] px-4 py-10">
@@ -103,7 +108,7 @@ export default function DailyPage() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500" />
             </span>
             <span className="text-[11px] font-black uppercase tracking-[0.3em] text-orange-300 font-sport">
-              Reto Diario · #{number}
+              {t('daily.volanta', 'Reto Diario')} · #{number}
             </span>
           </motion.div>
 
@@ -112,7 +117,7 @@ export default function DailyPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-5 font-display text-4xl font-black uppercase tracking-wider text-white md:text-6xl"
           >
-            El Reto del Día
+            {t('daily.titulo', 'El Reto del Día')}
           </motion.h1>
           <p className="mt-2 text-sm capitalize text-slate-400 font-sans">{fecha}</p>
         </div>
@@ -134,16 +139,16 @@ export default function DailyPage() {
           <div
             className={`mt-4 inline-block rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-widest font-sport ${DIFF_STYLE[challenge.difficulty]}`}
           >
-            {challenge.difficulty}
+            {t(`daily.dificultad.${challenge.difficulty}`, challenge.difficulty)}
           </div>
 
-          <h2 className="mt-4 font-display text-3xl font-black uppercase tracking-wide text-white">{challenge.title}</h2>
-          <p className="mx-auto mt-3 max-w-md text-slate-300 leading-relaxed font-sans">{challenge.rule}</p>
+          <h2 className="mt-4 font-display text-3xl font-black uppercase tracking-wide text-white">{reto(challenge.id, 'titulo', challenge.title)}</h2>
+          <p className="mx-auto mt-3 max-w-md text-slate-300 leading-relaxed font-sans">{reto(challenge.id, 'regla', challenge.rule)}</p>
 
           {/* Premio: el reto suma al ranking */}
           <div className="mx-auto mt-6 flex max-w-md flex-wrap items-center justify-center gap-2">
             <span className="rounded-full border border-[#74ACDF]/40 bg-[#74ACDF]/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#74ACDF] font-sport">
-              ⚡ +{bonusForStreak(progreso.streak + (progreso.hecho ? 0 : 1))} ELO al completarlo
+              ⚡ +{bonusForStreak(progreso.streak + (progreso.hecho ? 0 : 1))} {t('daily.eloAlCompletarlo', 'ELO al completarlo')}
             </span>
             {progreso.streak > 0 && (
               <span className="rounded-full border border-orange-400/40 bg-orange-500/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-orange-300 font-sport">
@@ -156,21 +161,21 @@ export default function DailyPage() {
             <div className="mt-6">
               <div className="inline-flex items-center gap-2 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 px-5 py-3 text-emerald-300">
                 <span className="text-lg">✅</span>
-                <span className="font-sport text-[11px] font-black uppercase tracking-widest">Reto de hoy completado</span>
+                <span className="font-sport text-[11px] font-black uppercase tracking-widest">{t("daily.completado", "Reto de hoy completado")}</span>
               </div>
               <Link
-                href={`/draft?mode=clasico&reto=${challenge.id}`}
+                href={ruta(`/draft?mode=clasico&reto=${challenge.id}`)}
                 className="btn-secondary mt-4 block px-10 py-3 text-xs font-black uppercase tracking-widest"
               >
-                Volver a jugarlo (sin bono)
+                {t("daily.jugarDeNuevo", "Volver a jugarlo (sin bono)")}
               </Link>
             </div>
           ) : (
             <Link
-              href={`/draft?mode=clasico&reto=${challenge.id}`}
+              href={ruta(`/draft?mode=clasico&reto=${challenge.id}`)}
               className="btn-primary mt-6 inline-block px-10 py-4 text-xs font-black uppercase tracking-widest"
             >
-              Jugar el reto
+              {t("daily.jugar", "Jugar el reto")}
             </Link>
           )}
 
@@ -186,10 +191,10 @@ export default function DailyPage() {
             onClick={desafiar}
             className="mx-auto mt-5 flex items-center gap-2 rounded-2xl border border-white/10 px-5 py-2.5 font-sport text-[11px] font-black uppercase tracking-widest text-slate-300 transition-colors hover:border-[#74ACDF]/40 hover:text-white"
           >
-            {copiado ? "¡Link copiado!" : "Desafiar a un amigo"}
+            {copiado ? t("daily.copiado", "¡Link copiado!") : t("daily.desafiar", "Desafiar a un amigo")}
           </button>
           <p className="mt-1.5 font-sans text-[11px] text-slate-500">
-            Le llega el mismo bombo que a vos. Después comparan.
+            {t("daily.desafiarPie", "Le llega el mismo bombo que a vos. Después comparan.")}
           </p>
         </motion.div>
 
@@ -201,7 +206,7 @@ export default function DailyPage() {
           className="mt-6 flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4"
         >
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 font-sport">
-            Próximo reto en
+            {t("daily.proximo", "Próximo reto en")}
           </span>
           <span className="font-display text-2xl font-black tabular-nums text-white tracking-widest">
             {fmt(countdown)}
@@ -222,13 +227,13 @@ export default function DailyPage() {
               (armás el 11 con la consigna y simulás el torneo).
             </li>
             <li>
-              <strong className="text-white">+3 ELO por cada día de racha</strong>, hasta {DAILY_MAX_ELO} ELO. Si te
+              <strong className="text-white">{t('daily.bonoRacha', '+3 ELO por cada día de racha')}</strong>, hasta {DAILY_MAX_ELO} ELO. Si te
               salteás un día, la racha vuelve a empezar.
             </li>
-            <li>El bono es uno por día y se suma a los puntos que ya deja el torneo en la tabla de líderes.</li>
+            <li>{t('daily.bonoUnoPorDia', 'El bono es uno por día y se suma a los puntos que ya deja el torneo en la tabla de líderes.')}</li>
           </ul>
           <Link
-            href="/leaderboard"
+            href={ruta("/leaderboard")}
             className="mt-4 inline-block text-[11px] font-black uppercase tracking-widest text-[#74ACDF] font-sport hover:text-white transition-colors"
           >
             Ver la tabla de líderes →
@@ -236,7 +241,7 @@ export default function DailyPage() {
         </div>
 
         <p className="mt-6 text-center text-xs text-slate-500 font-sans">
-          Un reto nuevo cada día · el mismo para todos · a las 00:00 rota solo.
+          {t("daily.pie", "Un reto nuevo cada día · el mismo para todos · a las 00:00 rota solo.")}
         </p>
       </section>
     </div>

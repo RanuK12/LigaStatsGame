@@ -22,6 +22,7 @@ import { getPC } from "@/lib/ui-constants"
 import MatchChronicleFeed from "@/components/tournament/MatchChronicleFeed"
 import RuedaDeClubes from "@/components/ui/RuedaDeClubes"
 import clubsData from "@/data/clubs.json"
+import { useT } from "@/lib/i18n"
 
 function getEligibleSquadsForSlot(
   squads: Squad[], players: Player[], slotPosition: string, draftedIds: Set<string>
@@ -65,6 +66,7 @@ function clubColors(clubId: string): string[] | undefined {
 }
 
 export default function VersusPage() {
+  const t = useT()
   const { players: playersCore } = usePlayersCore()
   const allP = useMemo(() => playersCore ?? [], [playersCore])
   const { squads: squadsCore } = useSquads()
@@ -429,15 +431,15 @@ export default function VersusPage() {
         {/* Header Title */}
         <div className="text-center mb-8">
           <span className="text-[10px] font-bold text-[#74ACDF] tracking-widest uppercase font-sport block mb-1">
-            MODO MULTIJUGADOR LOCAL
+            {t('versus.modoMultijugadorLocal', 'MODO MULTIJUGADOR LOCAL')}
           </span>
           {/* h1 y no h2: es el título de la página y era la única ruta del sitio sin ninguno,
               así que para Google y para un lector de pantalla /versus no tenía encabezado. */}
           <h1 className="font-display text-3xl font-black uppercase tracking-tight">
-            DUELO VERSUS 1V1
+            {t('versus.dueloVersus1v1', 'DUELO VERSUS 1V1')}
           </h1>
           <p className="text-slate-500 text-xs mt-1 font-sport uppercase tracking-wider">
-            Armá tu equipo con un amigo en la misma pantalla y simulen el partido de la fecha
+            {t('versus.armaTuEquipoCon', 'Armá tu equipo con un amigo en la misma pantalla y simulen el partido de la fecha')}
           </p>
         </div>
 
@@ -487,17 +489,17 @@ export default function VersusPage() {
                 />
               ) : (
                 <div className="card-gradient rounded-3xl p-6 sm:p-8 border border-white/5">
-                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sport mb-6 text-center">Configurá a los Directores Técnicos</h3>
+                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sport mb-6 text-center">{t('versus.configuraALosDirectores', 'Configurá a los Directores Técnicos')}</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 {/* DT 1 Setup */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-900">
-                    <span className="text-xs font-bold text-[#75AADB] font-sport">LOCAL</span>
-                    <h4 className="font-display font-bold text-white uppercase tracking-wider text-sm">DT LOCAL</h4>
+                    <span className="text-xs font-bold text-[#75AADB] font-sport">{t('versus.local', 'LOCAL')}</span>
+                    <h4 className="font-display font-bold text-white uppercase tracking-wider text-sm">{t('versus.dtLocal', 'DT LOCAL')}</h4>
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">Nombre del DT</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">{t('versus.nombreDelDt2', 'Nombre del DT')}</label>
                     <input
                       type="text"
                       value={dt1.name}
@@ -506,7 +508,7 @@ export default function VersusPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">Formación Táctica</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">{t('versus.formacionTactica2', 'Formación Táctica')}</label>
                     <select
                       value={dt1.formationKey}
                       onChange={e => setDt1(prev => ({ ...prev, formationKey: e.target.value }))}
@@ -522,11 +524,11 @@ export default function VersusPage() {
                 {/* DT 2 Setup */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 pb-2 border-b border-slate-900">
-                    <span className="text-xs font-bold text-[#75AADB] font-sport">VISITANTE</span>
-                    <h4 className="font-display font-bold text-white uppercase tracking-wider text-sm">DT VISITANTE</h4>
+                    <span className="text-xs font-bold text-[#75AADB] font-sport">{t('versus.visitante', 'VISITANTE')}</span>
+                    <h4 className="font-display font-bold text-white uppercase tracking-wider text-sm">{t('versus.dtVisitante', 'DT VISITANTE')}</h4>
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">Nombre del DT</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">{t('versus.nombreDelDt2', 'Nombre del DT')}</label>
                     <input
                       type="text"
                       value={dt2.name}
@@ -535,7 +537,7 @@ export default function VersusPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">Formación Táctica</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5 font-sport">{t('versus.formacionTactica2', 'Formación Táctica')}</label>
                     <select
                       value={dt2.formationKey}
                       onChange={e => setDt2(prev => ({ ...prev, formationKey: e.target.value }))}
@@ -553,7 +555,7 @@ export default function VersusPage() {
                     onClick={() => setPhase("draft1")}
                     className="btn-primary w-full py-4 text-xs font-bold tracking-widest uppercase font-sport"
                   >
-                    Comenzar Draft Versus
+                    {t('versus.comenzarDraftVersus', 'Comenzar Draft Versus')}
                   </button>
                 </div>
               )}
@@ -576,7 +578,7 @@ export default function VersusPage() {
                 <div className="card-gradient rounded-2xl p-4 border border-white/5 flex justify-between items-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 bottom-0 w-[4px]" style={{ backgroundColor: activeDTKey === "dt1" ? "#74ACDF" : "#a855f7" }} />
                   <div>
-                    <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport">Cancha de Selección</div>
+                    <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport">{t('versus.canchaDeSeleccion', 'Cancha de Selección')}</div>
                     <h3 className="font-display text-lg font-black uppercase text-white mt-0.5 font-sport tracking-wider">
                       TURNO DE {activeDT.name}
                     </h3>
@@ -677,7 +679,7 @@ export default function VersusPage() {
                 {/* 1. WHEEL CONTROL CARD */}
                 <div className="card-gradient rounded-3xl p-5 border border-white/5 text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-slate-900 via-[#74ACDF]/20 to-slate-900" />
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-1">RULETA DE CLUBES</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-1">{t('versus.ruletaDeClubes', 'RULETA DE CLUBES')}</span>
                   <h4 className="font-display font-black text-xs text-[#74ACDF] uppercase tracking-wider mb-4">
                     Buscando para: {POS_LABELS[currentSlot.pos] || currentSlot.pos}
                   </h4>
@@ -705,7 +707,7 @@ export default function VersusPage() {
                     </div>
                   ) : (
                     <div className="mb-5 text-[10px] text-slate-500 font-sans italic leading-relaxed py-1.5">
-                      Girá la ruleta para conseguir un plantel real del fútbol argentino y elegir tu jugador.
+                      {t('versus.giraLaRuletaPara', 'Girá la ruleta para conseguir un plantel real del fútbol argentino y elegir tu jugador.')}
                     </div>
                   )}
 
@@ -732,7 +734,7 @@ export default function VersusPage() {
                 {activeDT.currentSquad && (
                   <div className="card-gradient rounded-2xl p-5 border border-slate-900">
                     <div className="flex justify-between items-center mb-3">
-                      <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport">JUGADORES DISPONIBLES</h4>
+                      <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport">{t('versus.jugadoresDisponibles', 'JUGADORES DISPONIBLES')}</h4>
                       <span className="text-[11px] text-[#74ACDF] font-bold">{compatiblePlayersInSquad.length} disponibles</span>
                     </div>
 
@@ -762,7 +764,7 @@ export default function VersusPage() {
 
                       {compatiblePlayersInSquad.length === 0 && (
                         <div className="text-center py-6 text-xs text-slate-600 font-sans italic">
-                          Ningún jugador compatible o libre en esta plantilla. ¡Volvé a girar!
+                          {t('versus.ningunJugadorCompatibleO', 'Ningún jugador compatible o libre en esta plantilla. ¡Volvé a girar!')}
                         </div>
                       )}
                     </div>
@@ -783,23 +785,23 @@ export default function VersusPage() {
               className="card-gradient rounded-2xl p-8 sm:p-12 border border-slate-900 text-center"
             >
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#74ACDF]/30 bg-[#74ACDF]/10 text-xs font-black text-[#74ACDF] font-sport uppercase tracking-widest animate-pulse">
-                PASAR DISPOSITIVO
+                {t('versus.pasarDispositivo', 'PASAR DISPOSITIVO')}
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight mb-2">
-                TURNO DEL JUGADOR 2
+                {t('versus.turnoDelJugador2', 'TURNO DEL JUGADOR 2')}
               </h3>
               <p className="text-[#a855f7] text-sm font-bold uppercase tracking-wider font-sport mb-4">
                 {dt2.name}
               </p>
               <p className="text-slate-400 text-xs sm:text-sm mb-10 max-w-sm mx-auto leading-relaxed">
-                Entregá el teléfono o dispositivo a tu amigo para que pueda hacer su draft táctico con las cartas restantes.
+                {t('versus.entregaElTelefonoO', 'Entregá el teléfono o dispositivo a tu amigo para que pueda hacer su draft táctico con las cartas restantes.')}
               </p>
 
               <button
                 onClick={handleStartP2}
                 className="px-12 py-4 bg-[#a855f7] hover:bg-[#9333ea] text-white rounded-xl text-xs font-bold tracking-widest uppercase font-sport transition-all shadow-[0_4px_25px_rgba(168,85,247,0.25)]"
               >
-                Comenzar Turno
+                {t('versus.comenzarTurno', 'Comenzar Turno')}
               </button>
             </motion.div>
           )}
@@ -873,13 +875,13 @@ export default function VersusPage() {
                   onClick={handleStartSim}
                   className="btn-primary flex-1 py-4 text-xs font-bold tracking-widest uppercase shadow-[0_4px_25px_rgba(116,172,223,0.15)]"
                 >
-                  SIMULAR DUELO VERSUS
+                  {t('versus.simularDueloVersus', 'SIMULAR DUELO VERSUS')}
                 </button>
                 <button
                   onClick={handleRestart}
                   className="px-6 py-4 bg-slate-900 border border-slate-800 rounded-xl hover:border-slate-700 text-xs font-bold tracking-widest uppercase transition-colors"
                 >
-                  Reiniciar todo
+                  {t('versus.reiniciarTodo', 'Reiniciar todo')}
                 </button>
               </div>
             </motion.div>
@@ -900,7 +902,7 @@ export default function VersusPage() {
 
                 {/* Conclusion summary */}
                 <div className="mt-8 pt-6 border-t border-slate-900 text-center flex flex-col items-center">
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">RESULTADO DEL DUELO</span>
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">{t('versus.resultadoDelDuelo', 'RESULTADO DEL DUELO')}</span>
                   <div className="flex items-center gap-4 sm:gap-6 justify-center font-display mb-8">
                     <span className="text-base sm:text-lg font-black text-white max-w-[140px] truncate">{dt1.name}</span>
                     <span className="px-4 py-2 bg-slate-950 border border-slate-850 rounded-xl text-xl sm:text-2xl font-black text-[#74ACDF] font-sport">
@@ -924,13 +926,13 @@ export default function VersusPage() {
                       onClick={handleStartSim}
                       className="btn-primary flex-1 py-3.5 text-xs font-bold tracking-widest uppercase"
                     >
-                      Jugar Revancha (Simular otra vez)
+                      {t('versus.jugarRevanchaSimularOtra', 'Jugar Revancha (Simular otra vez)')}
                     </button>
                     <button
                       onClick={handleRestart}
                       className="px-6 py-3.5 bg-slate-900 border border-slate-800 rounded-xl hover:border-slate-700 text-xs font-bold tracking-widest uppercase transition-colors"
                     >
-                      Volver al inicio / Nuevo Draft
+                      {t('versus.volverAlInicioNuevo', 'Volver al inicio / Nuevo Draft')}
                     </button>
                   </div>
                 </div>

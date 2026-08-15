@@ -61,7 +61,12 @@ export const metadata: Metadata = {
   // ("gambeta juego", "gambeta"), así que lo que falta no son etiquetas sino páginas que
   // respondan a una intención de juego. Esas se escriben, no se declaran.
   manifest: '/manifest.json',
-  alternates: { canonical: '/' },
+  // Las tres versiones se declaran entre sí: sin hreflang, Google trata la inglesa y la
+  // portuguesa como copias de la castellana y elige una sola.
+  alternates: {
+    canonical: '/',
+    languages: { es: '/', en: '/en', 'pt-BR': '/pt' },
+  },
   openGraph: {
     title: 'Gambeta ⚽ El Juego del Fútbol Argentino',
     description: 'Armá tu 11 ideal, viví tu carrera y competí por el ranking.',
