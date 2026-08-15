@@ -527,5 +527,13 @@
   "daily.dificultad.Media": "Medium",
   "daily.dificultad.Difícil": "Hard",
   "daily.dificultad.Leyenda": "Legend",
-  "daily.eloAlCompletarlo": "ELO when you finish it"
+  "daily.eloAlCompletarlo": "ELO when you finish it",
+  "once.volanta": "The all-time best XI",
+  "once.titulo": "Eleven shirts, eleven legends",
+  "once.bajada": "This is the best team you can build from the whole database: the keeper of '78, the captain of '78, the number 10 of '86 and the best of them all. You can build yours from real squads, year by year.",
+  "once.ovrDelOnce": "Squad rating",
+  "once.formacion": "Formation",
+  "once.cta": "BUILD YOURS",
+  "once.pie": "Free, in your browser, no sign-up.",
+  "once.tocaUno": "Tap a player to see who it is"
 }

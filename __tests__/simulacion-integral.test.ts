@@ -118,7 +118,10 @@ describe('simulación integral con datos reales', () => {
     expect(plazas).toBeGreaterThan(0) // la plaza tiene que ser alcanzable o la copa no existe
   })
 
-  it('la Libertadores y la Sudamericana se pueden ganar, y la Sudamericana es la más accesible', { timeout: 300_000 }, () => {
+  // 600 s y no 300: con los planteles históricos que entraron el 15/8 la base pasó de 3.334 a
+  // 3.758 jugadores y de 206 a 215 planteles, y las 200 copas tardan 308 s. Lo que falló fue el
+  // reloj, no el balance: bajar la cantidad de simulaciones haría el test menos confiable.
+  it('la Libertadores y la Sudamericana se pueden ganar, y la Sudamericana es la más accesible', { timeout: 600_000 }, () => {
     const N = 200
     const medir = (tipo: 'libertadores' | 'sudamericana') => {
       const rondas: Record<string, number> = {}

@@ -2,50 +2,50 @@
 
 ## Totals
 - Clubs: 35
-- Players: 3334
-- Squads: 206
+- Players: 3745
+- Squads: 215
 
 ## Health Score
-- Score: 90
-- Critical issues: 5
+- Score: 100
+- Critical issues: 0
 - Warnings: 0
 
 ## Critical Issues
 - Missing club: 0
 - Less than 11 players: 0
 - Broken player refs: 0
-- Without goalkeeper: 5
+- Without goalkeeper: 0
 - Invalid rating: 0
 - Invalid position: 0
 
 ## Coverage
-- Players with rating: 3334
-- Players with clubs: 3334
-- Players with valid position: 3334
-- Playable squads: 201
+- Players with rating: 3745
+- Players with clubs: 3745
+- Players with valid position: 3745
+- Playable squads: 215
 
 ## Players by club
-- banfield: 386
-- huracan: 326
-- boca-juniors: 311
-- rosario-central: 273
-- lanus: 272
-- river-plate: 268
-- independiente: 265
-- velez: 251
-- talleres-cba: 247
-- newells: 246
-- racing-club: 246
-- san-lorenzo: 235
-- belgrano: 219
+- banfield: 395
+- boca-juniors: 389
+- huracan: 339
+- independiente: 327
+- river-plate: 318
+- velez: 289
+- lanus: 285
+- newells: 284
+- racing-club: 279
+- rosario-central: 276
+- san-lorenzo: 264
+- talleres-cba: 258
+- estudiantes-lp: 238
+- belgrano: 224
+- godoy-cruz: 217
 - gimnasia-lp: 215
-- godoy-cruz: 214
-- estudiantes-lp: 211
-- argentinos-jrs: 75
-- arsenal: 61
+- argentinos-jrs: 85
+- arsenal: 55
 - defensa-y-justicia: 50
+- tigre: 48
 - colon: 46
-- tigre: 40
 - union-sf: 26
 - atl-tucuman: 19
 - central-cordoba: 19
@@ -164,10 +164,10 @@
 - zaragoza: 1
 
 ## Players by decade
-- 2010s: 1081
+- 2010s: 1201
+- 2000s: 991
 - 2020s: 769
-- 2000s: 766
-- 1990s: 686
+- 1990s: 752
 - 1970s: 9
 - 1980s: 8
 - 1950s: 6
@@ -176,7 +176,6 @@
 - 1920s: 1
 
 ## Top Recommendations
-- Ensure every squad has at least one goalkeeper.
 
 ## Player Problems
 - Missing rating: 0
@@ -188,7 +187,7 @@
 - Missing club: 0
 - Less than 11 players: 0
 - Broken player refs: 0
-- Without goalkeeper: 5
+- Without goalkeeper: 0
 - Without enough defenders: 0
 - Without enough midfielders: 0
 - Without attackers: 0

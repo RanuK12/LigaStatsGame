@@ -21,6 +21,7 @@
 //   node scripts/data/cruzar-historicos.mjs [--limit N]
 import fs from 'node:fs'
 import path from 'node:path'
+import { fichasDeWikipedia } from './wiki-ficha.mjs'
 
 const ROOT = process.cwd()
 const DIR = path.join(ROOT, 'data', 'historicos')
@@ -261,8 +262,14 @@ for (const eq of aCruzar) {
   await dormir(900)
 
   // Artículo propio de cada jugador: la confirmación independiente de que jugó en ese club.
+  //
+  // Antes se miraba solo la INTRODUCCIÓN del artículo. Medido el 15/8 sobre los 14 planteles que
+  // no entraban: 9 estaban completos en Wikidata —con arquero— y se caían acá, porque la
+  // introducción de un futbolista muchas veces no nombra ningún club. La ficha sí los nombra, y
+  // con los años, así que confirma la TEMPORADA y no solo el club: es una prueba más fuerte, no
+  // más laxa.
   const titulos = [...new Set(Object.values(datos).map(d => d.articulo).filter(Boolean))]
-  const fichas = await extractosDe(titulos)
+  const fichas = await fichasDeWikipedia(titulos)
   // El club se nombra de varias formas ("Vélez Sarsfield", "Vélez"); alcanza con la parte fuerte.
   const nombreClub = norm(eq.clubWikidata || eq.wiki).replace(/^(club|asociacion|atletico|deportivo|social|y|de|la|el)\s+/g, '')
   const claveClub = nombreClub.split(' ').filter(w => w.length > 4).pop() || nombreClub
@@ -282,20 +289,38 @@ for (const eq of aCruzar) {
     const d = datos[p.qid] || { posiciones: new Set(), apps: 0, goles: 0, caps: 0 }
     const mio = deNuestraBase(p.nombre, eq.season)
     const apellido = norm(p.nombre).split(' ').pop()
-    const ficha = norm((d.articulo && fichas[d.articulo]) || '')
-    // Confirmado por prosa: su propio artículo nombra al club, o el del club lo nombra a él.
-    const enWiki = (ficha && claveClub && ficha.includes(claveClub)) || (apellido.length > 3 && wikiNorm.includes(apellido))
+    const entrada = d.articulo ? fichas[d.articulo] : null
+    const ficha = entrada?.ficha || null
+    const textoFicha = norm(entrada?.texto || '')
+    // Confirmado por la ficha de su artículo: ese club, en esa temporada. Es lo más fuerte que
+    // hay sin salir de Wikipedia, porque cruza el club Y el año.
+    const enFicha = !!(ficha && claveClub && ficha.clubes.some(c =>
+      norm(c.nombre).includes(claveClub) &&
+      c.desde <= Number(eq.season) &&
+      (c.hasta ?? c.desde + 2) >= Number(eq.season)))
+    // Si la ficha no lo dice, sirve el cuerpo del artículo nombrando al club, o el artículo del
+    // club nombrándolo a él.
+    const enWiki = enFicha
+      || (textoFicha && claveClub && textoFicha.includes(claveClub))
+      || (apellido.length > 3 && wikiNorm.includes(apellido))
 
     // Dos fuentes de tres: Wikidata siempre cuenta (de ahí salió), así que hace falta que lo
     // respalde nuestra base o el texto de Wikipedia.
     const fuentes = ['wikidata', mio ? 'base' : null, enWiki ? 'wikipedia' : null].filter(Boolean)
     if (fuentes.length < 2) continue
 
-    const pos = mio?.position || posDelJuego(d.posiciones)
+    // La ficha es la tercera fuente de posición, y para los viejos suele ser la única que dice
+    // "Arquero" con todas las letras.
+    const pos = mio?.position || posDelJuego(d.posiciones) || (ficha ? posDelJuego([ficha.posicion]) : null)
     if (!pos) continue // sin posición no se puede poner en la cancha
 
     // El OVR de nuestra base gana: ya está calculado con estas mismas stats y además curado.
-    const rating = mio?.rating ?? ovrDesdeStats(d, pos)
+    // Si Wikidata no tiene partidos ni goles —le pasa a la mitad de los jugadores de los 90—, se
+    // usan los de la ficha, que trae "195 (533 PJ)" en el campo de goles de clubes.
+    const stats = (d.apps || d.goles)
+      ? d
+      : { apps: ficha?.partidosClub || 0, goles: ficha?.golesClub || 0, caps: ficha?.caps || d.caps || 0 }
+    const rating = mio?.rating ?? ovrDesdeStats(stats, pos)
     if (rating == null) continue
 
     jugadores.push({
