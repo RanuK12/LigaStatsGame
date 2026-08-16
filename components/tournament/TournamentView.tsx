@@ -479,7 +479,9 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   <button onClick={handleSkipFive} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
                     +5 fechas
                   </button>
-                  <button onClick={handleStartFullSim} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
+                  {/* Saltar es ir al resultado, no arrancar el reveal: el que ya está jugando
+                      fecha por fecha y toca esto quiere la tabla final, no otros cinco segundos. */}
+                  <button onClick={() => setSimState("done")} className="text-[10px] text-slate-500 hover:text-white transition-colors font-sport uppercase tracking-wider font-bold">
                     {t('TournamentView.saltarSimulacion', 'Saltar simulación ⏩')}
                   </button>
                 </div>
