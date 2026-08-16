@@ -9,19 +9,21 @@ const once = (ratings: number[]) => {
 const base: RetoParaCompartir = {
   numero: 47,
   titulo: 'Clásico Eterno',
-  jugadores: once([88, 86, 79, 72, 68, 90, 81, 75, 91, 84, 77]),
-  puntaje: 81.4,
+  jugadores: once([78, 76, 71, 66, 62, 80, 72, 68, 81, 73, 69]),
+  puntaje: 72.5,
 }
 
 describe('el resultado del reto en bloques', () => {
   it('cada nivel tiene su color', () => {
-    expect(bloqueDe(92)).toBe('🟩')
-    expect(bloqueDe(85)).toBe('🟩')
-    expect(bloqueDe(84)).toBe('🟨')
-    expect(bloqueDe(78)).toBe('🟨')
-    expect(bloqueDe(77)).toBe('🟧')
-    expect(bloqueDe(70)).toBe('🟧')
-    expect(bloqueDe(69)).toBe('⬜')
+    // Los cortes siguen a la escala real de la liga (p75=67, p90=72, p95=74), no a números
+    // redondos: si se vuelve a mover la escala, esto tiene que moverse con ella.
+    expect(bloqueDe(82)).toBe('🟩')
+    expect(bloqueDe(74)).toBe('🟩')
+    expect(bloqueDe(73)).toBe('🟨')
+    expect(bloqueDe(70)).toBe('🟨')
+    expect(bloqueDe(69)).toBe('🟧')
+    expect(bloqueDe(65)).toBe('🟧')
+    expect(bloqueDe(64)).toBe('⬜')
   })
 
   /** Una fila por línea, en el orden en que salen a la cancha: se lee como una formación. */
@@ -32,7 +34,7 @@ describe('el resultado del reto en bloques', () => {
     expect(filas[2]).toBe('🟩🟨🟧⬜')
     expect(filas[3]).toBe('🟩🟨🟧')
     expect(filas[4]).toBe('🟩🟨🟧')
-    expect(filas[5]).toBe('Media 81')
+    expect(filas[5]).toBe('Media 73')
   })
 
   /**
@@ -48,11 +50,11 @@ describe('el resultado del reto en bloques', () => {
   })
 
   it('el campeonato y la racha van al pie', () => {
-    expect(textoDeBloques({ ...base, campeon: true, racha: 4 })).toContain('Media 81 · 🏆 Campeón · 🔥 4 días')
+    expect(textoDeBloques({ ...base, campeon: true, racha: 4 })).toContain('Media 73 · 🏆 Campeón · 🔥 4 días')
   })
 
   it('sin título, el puesto ocupa su lugar', () => {
-    expect(textoDeBloques({ ...base, puesto: 6 })).toContain('Media 81 · 6º')
+    expect(textoDeBloques({ ...base, puesto: 6 })).toContain('Media 73 · 6º')
   })
 
   /** "racha de 1 día" no impresiona a nadie y ensucia el mensaje. */

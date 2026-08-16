@@ -370,19 +370,19 @@ describe('getSquadTier()', () => {
    * "legendario" y la ruleta festejaba en cada giro. Ver draft-integridad.test.ts, que mide la
    * distribución sobre los datos de verdad para que esto no vuelva a pasar en silencio.
    */
-  it('avg >= 77 es legendario', () => {
-    expect(getSquadTier(squad, mk(78)).tier).toBe('legendario')
+  it('avg >= 71 es legendario', () => {
+    expect(getSquadTier(squad, mk(72)).tier).toBe('legendario')
   })
   it('3+ legendarios es legendario aunque el avg sea bajo', () => {
     const players = mk(50)
     players[0].legendary = true; players[1].legendary = true; players[2].legendary = true
     expect(getSquadTier(squad, players).tier).toBe('legendario')
   })
-  it('avg >= 74 es elite', () => {
-    expect(getSquadTier(squad, mk(75)).tier).toBe('elite')
+  it('avg >= 67 es elite', () => {
+    expect(getSquadTier(squad, mk(68)).tier).toBe('elite')
   })
   it('un plantel del montón es común', () => {
-    expect(getSquadTier(squad, mk(72)).tier).toBe('comun')
+    expect(getSquadTier(squad, mk(65)).tier).toBe('comun')
   })
   it('avg bajo es comun y reporta el promedio', () => {
     const t = getSquadTier(squad, mk(50))
