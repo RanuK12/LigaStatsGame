@@ -28,9 +28,15 @@ const cat = (pos) => {
 
 function computed(p) {
   const s = cache[p.id]
-  const hasStats = s && s.found && (s.apps > 0 || s.goals > 0)
-  if (!hasStats) return null
-  const { apps = 0, goals = 0, ntCaps = 0 } = s
+  // La caché de Wikidata cubre poco: el 15/8 quedaban 3.171 jugadores sin un solo gol cargado.
+  // Ahora la ficha de Wikipedia llena eso (scripts/data/enriquecer-desde-wikipedia.mjs) y queda
+  // en el propio jugador, así que si la caché no lo tiene, se usan sus campos.
+  const deLaFicha = { apps: p.capsClub || 0, goals: p.goalsClub || 0, ntCaps: p.capsNationalTeam || 0 }
+  const fuente = (s && s.found && (s.apps > 0 || s.goals > 0))
+    ? s
+    : ((deLaFicha.apps > 0 || deLaFicha.goals > 0) ? deLaFicha : null)
+  if (!fuente) return null
+  const { apps = 0, goals = 0, ntCaps = 0 } = fuente
   const c = cat(p.position)
   // Piso de un jugador profesional real (66). Un titular de Primera con recorrido debe
   // rondar 70-76; los cracks se despegan por selección + goles.
@@ -59,7 +65,11 @@ for (const p of players) {
       to = nr
       dataDriven++
     }
-    else if (nr == null && (from || 0) > NO_STATS_CAP) { to = NO_STATS_CAP; capped++ }
+    // El tope de "desconocido" no aplica a los históricos: su rating salió del cruce contra
+    // Wikidata cuando entró el plantel, con partidos y goles de esa época, así que tienen
+    // respaldo aunque la caché de stats no los tenga. Sin esto, Gallardo y Burruchaga bajaban
+    // a 82 por no estar en un archivo que se llenó con jugadores modernos.
+    else if (nr == null && !p.historico && (from || 0) > NO_STATS_CAP) { to = NO_STATS_CAP; capped++ }
     else kept++
   }
   deltas.push({ name: p.name, pos: p.position, from, to, legendary: p.legendary })

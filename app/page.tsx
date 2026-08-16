@@ -11,6 +11,7 @@ import DonationSection from '@/components/DonationSection'
 import DailyCard from '@/components/DailyCard'
 import CarreraEnCursoCard from '@/components/CarreraEnCursoCard'
 import PartidasJugadas from '@/components/PartidasJugadas'
+import OnceIdeal from '@/components/OnceIdeal'
 import Novedades from '@/components/Novedades'
 import ContinentalBanner from '@/components/ContinentalBanner'
 import LigasBanner from '@/components/LigasBanner'
@@ -594,6 +595,11 @@ export default function HomePage() {
           Estaba a 2.342px en teléfono: casi tres pantallas de scroll antes de que el hincha se
           enterara de que hay cinco formas de jugar. Con 3 minutos de permanencia medidos, nunca
           llegaba. El menú del juego va arriba; lo que explica y promociona, abajo. */}
+      {/* ── EL ONCE IDEAL ── la vidriera del draft: mostrar el equipo que se puede armar convence
+          más que explicarlo. Va antes del reto porque es para el que llega por primera vez, que
+          son 87 de cada 100. */}
+      <OnceIdeal />
+
       {/* ── RETO DIARIO ── arriba de los modos: es la palanca principal de retención diaria */}
       <DailyCard />
 

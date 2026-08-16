@@ -20,6 +20,7 @@ const SALIDA = path.join(ROOT, 'data', 'reports', 'placas-x')
 const leer = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'))
 const ligas = leer('data/derived/ligas.json')
 const equipos = leer('data/derived/equipos.json')
+const onceIdeal = leer('data/derived/once-ideal.json')
 
 const F = 'Helvetica, Arial, sans-serif'
 const esc = (s) =>
@@ -240,6 +241,47 @@ ${cortar(e.hito ?? 'El plantel completo, jugador por jugador.', 56)
 
 // ─────────────────────────────────────────────────────────────────────────────
 
+/**
+ * El once ideal histórico, dibujado en la cancha.
+ *
+ * Es la única placa con los once puestos a la vez: las demás muestran una cosa sola a propósito,
+ * pero acá el equipo ES la cosa. Sale de data/derived/once-ideal.json, o sea de la base: si
+ * mañana entra una leyenda nueva, la placa cambia sin tocar este archivo.
+ */
+function placaOnceIdeal() {
+  const ORO = '#D4AF37'
+  // La cancha ocupa la mitad derecha; el texto, la izquierda.
+  const CX = 640, CY = 96, CW = 500, CH = 500
+  const px = (x) => CX + (x / 100) * CW
+  const py = (y) => CY + (y / 100) * CH
+
+  const fichas = onceIdeal.once.map((j) => {
+    const x = px(j.x), y = py(j.y)
+    const apellido = j.nombre.split(' ').slice(-1)[0]
+    return `  <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="24" fill="#02101d" stroke="${ORO}" stroke-opacity="0.75" stroke-width="2"/>
+  <text x="${x.toFixed(1)}" y="${(y + 7).toFixed(1)}" text-anchor="middle" font-family="${F}" font-size="21" font-weight="800" fill="${ORO}">${j.ovr}</text>
+  <text x="${x.toFixed(1)}" y="${(y + 42).toFixed(1)}" text-anchor="middle" font-family="${F}" font-size="16" font-weight="700" fill="#FFFFFF">${esc(apellido)}</text>`
+  }).join('\n')
+
+  return marco(
+    ORO,
+    `  <text x="64" y="112" font-family="${F}" font-size="19" font-weight="800" letter-spacing="7" fill="#74ACDF">EL ONCE IDEAL DE LA HISTORIA</text>
+  <text x="64" y="208" font-family="${F}" font-size="60" font-weight="800" fill="#FFFFFF">ONCE TÍTULOS,</text>
+  <text x="64" y="276" font-family="${F}" font-size="60" font-weight="800" fill="${ORO}">ONCE LEYENDAS</text>
+  <text x="64" y="344" font-family="${F}" font-size="26" font-weight="500" fill="#B6C6DA">El mejor equipo que se puede armar</text>
+  <text x="64" y="382" font-family="${F}" font-size="26" font-weight="500" fill="#B6C6DA">con la base entera del juego.</text>
+  <text x="64" y="500" font-family="${F}" font-size="76" font-weight="800" fill="${ORO}">${onceIdeal.ovr}</text>
+  <text x="168" y="500" font-family="${F}" font-size="21" font-weight="700" letter-spacing="3" fill="#8FA3BC">OVR DEL ONCE</text>
+  <text x="168" y="470" font-family="${F}" font-size="21" font-weight="700" letter-spacing="3" fill="#8FA3BC">${onceIdeal.formacion}</text>
+  <rect x="${CX}" y="${CY}" width="${CW}" height="${CH}" rx="18" fill="#0b2a17" stroke="#1f5c36" stroke-width="2"/>
+  <line x1="${CX}" y1="${CY + CH / 2}" x2="${CX + CW}" y2="${CY + CH / 2}" stroke="#2f7a4c" stroke-width="2"/>
+  <circle cx="${CX + CW / 2}" cy="${CY + CH / 2}" r="56" fill="none" stroke="#2f7a4c" stroke-width="2"/>
+  <rect x="${CX + CW * 0.22}" y="${CY + CH - 78}" width="${CW * 0.56}" height="78" fill="none" stroke="#2f7a4c" stroke-width="2"/>
+  <rect x="${CX + CW * 0.22}" y="${CY}" width="${CW * 0.56}" height="78" fill="none" stroke="#2f7a4c" stroke-width="2"/>
+${fichas}`,
+  )
+}
+
 const familias = {
   dilema: DILEMAS.map((d) => ({ nombre: `dilema-${d.id}`, svg: placaDilema(d) })),
   numero: NUMEROS.map((d) => ({ nombre: `numero-${d.id}`, svg: placaNumero(d) })),
@@ -248,6 +290,7 @@ const familias = {
   pregunta: PREGUNTAS.map((p) => ({ nombre: `pregunta-${p.id}`, svg: placaPregunta(p) })),
   novedad: NOVEDADES.map((n) => ({ nombre: `novedad-${n.id}`, svg: placaNovedad(n) })),
   equipo: equipos.map((e) => ({ nombre: `equipo-${e.slug}`, svg: placaEquipo(e) })),
+  once: [{ nombre: 'once-ideal', svg: placaOnceIdeal() }],
 }
 
 const pedida = process.argv.includes('--familia') ? process.argv[process.argv.indexOf('--familia') + 1] : null
