@@ -85,18 +85,35 @@ for (const slot of FORMACION) {
   if (!elegido) throw new Error(`sin candidato para ${slot.pos}`)
   usados.add(elegido.id)
 
-  // El club con el que se lo identifica es en el que más tiempo estuvo, no el primero: Fillol
-  // debutó en Quilmes y es de River, y Passarella salió de Sarmiento y es de River.
-  // La selección no es un club: sin sacarla, Maradona, Messi y Batistuta figuraban en
-  // "Argentina", que en una carta de club se lee como un error.
+  // El club que se muestra: aquel del que TENEMOS escudo y en el que más tiempo estuvo.
+  //
+  // Dos correcciones que vinieron de mirar la placa. La selección no es un club: sin sacarla,
+  // Maradona, Messi y Batistuta figuraban en "Argentina". Y los escudos del juego son de clubes
+  // argentinos, así que Zanetti (Inter), Maradona (Napoli) y Batistuta (Fiorentina) quedaban sin
+  // nada al lado del número; en un once del fútbol argentino corresponde mostrar el club de acá
+  // igual: Zanetti es de Banfield, Maradona de Boca y Batistuta de River.
+  //
+  // El tiempo desempata dentro de los que tienen escudo: Fillol debutó en Quilmes y es de River.
   const esSeleccion = (c) => /^(argentina|seleccion|selección)/i.test(c.id || '') || /^(argentina|selección)/i.test(c.name || '')
+  // Y entre los que tienen escudo gana el argentino: Maradona con la de Barcelona en un once del
+  // fútbol argentino es exactamente lo que este once no quiere decir. Es de Boca.
+  const tieneEscudo = (c) => fs.existsSync(path.join(ROOT, 'public', 'logos', 'clubs', `${c.id}.png`))
   const club = [...(elegido.clubs || [])]
     .filter((c) => !esSeleccion(c))
     .map((c) => {
       const m = String(c.years || '').match(/(\d{4})\s*[-–]?\s*(\d{4})?/)
-      return { ...c, temporadas: m ? (Number(m[2] || m[1]) - Number(m[1]) + 1) : 0 }
+      return {
+        ...c,
+        temporadas: m ? (Number(m[2] || m[1]) - Number(m[1]) + 1) : 0,
+        escudo: tieneEscudo(c),
+        argentino: clubPorId.has(c.id),
+      }
     })
-    .sort((a, b) => b.temporadas - a.temporadas)[0]
+    .sort((a, b) =>
+      (b.argentino && b.escudo ? 1 : 0) - (a.argentino && a.escudo ? 1 : 0) ||
+      (b.escudo ? 1 : 0) - (a.escudo ? 1 : 0) ||
+      b.temporadas - a.temporadas,
+    )[0]
   once.push({
     id: elegido.id,
     nombre: elegido.name,
