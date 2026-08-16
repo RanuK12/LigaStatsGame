@@ -5,7 +5,7 @@ import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "rea
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import TeamTacticalRadar from "@/components/charts/TeamTacticalRadar"
-import type { Player, ScheduleMatch, Squad, TournamentResult } from "@/lib/types"
+import type { Player, Squad, TournamentResult } from "@/lib/types"
 import { usePlayersCore, useSquads } from "@/lib/data-loader"
 import { useUserStore } from "@/lib/user-store"
 import { calculateElo, submitOnlineScore } from "@/lib/supabase"
@@ -43,15 +43,6 @@ import PackReveal from "@/components/roulette/PackReveal"
 import Pitch from "@/components/pitch/Pitch"
 import PlayerTradingCard from "@/components/pitch/PlayerTradingCard"
 import { generatePDF } from "@/lib/pdf"
-import TorneoEnVivo from "@/components/tournament/TorneoEnVivo"
-
-/** Cómo se llama cada torneo en el cartel del partido a partido. */
-const NOMBRE_TORNEO: Record<TorneoTipo, string> = {
-  liga: "Liga Profesional",
-  copa: "Copa Argentina",
-  libertadores: "Copa Libertadores",
-  sudamericana: "Copa Sudamericana",
-}
 import { getPC, POS_GROUPS } from "@/lib/ui-constants"
 import MagneticButton from "@/components/ui/MagneticButton"
 import EventBurst, { type BurstTone } from "@/components/ui/EventBurst"
@@ -254,19 +245,13 @@ function DraftInner() {
   // Lo que movió el último torneo en el ranking, para mostrarlo en la ficha de cierre.
   const [eloTorneo, setEloTorneo] = useState<{ nuevo: number; delta: number; pts: number } | null>(null)
   /**
-   * El torneo revelándose partido a partido, antes de mostrar la tabla.
+   * Los carteles que hay que cantar cuando termine el torneo, no cuando se lo manda a jugar.
    *
-   * El motor calcula todo de una, así que sin esto tocabas "Simular Liga" y aparecía el resultado
-   * final sin un solo momento de "¿cómo vamos?". Los partidos ya están jugados: esto solo los
-   * muestra, y se puede saltar tocando la pantalla.
+   * Cómo se ve el torneo lo elige el jugador en la pantalla del resultado (partido a partido,
+   * media temporada o entero fecha por fecha), así que el momento en que aparece la ficha final
+   * lo sabe ella: la avisa con `onFinal`.
    */
-  const [enVivo, setEnVivo] = useState<{
-    partidos: ScheduleMatch[]
-    equipos?: string[]
-    equipo: string
-    torneo: string
-    onListo: () => void
-  } | null>(null)
+  const celebracionesPendientes = useRef<{ label: string; tone: BurstTone }[]>([])
 
   const f = formations[fm as keyof typeof formations] || formations["4-3-3"]
   const totalSlots = f.positions.length
@@ -557,21 +542,10 @@ function DraftInner() {
       })
     }
 
-    // ── El torneo, fecha por fecha ──
-    // Los partidos ya están jugados; esto solo los revela. En la liga van TODOS los de la zona,
-    // porque con ellos se arma el fixture y la tabla en vivo; en las copas, solo los tuyos.
-    const mostrarResultado = () => {
-      setEnVivo(null)
-      setPhase("sim")
-      // De a uno, no encimados: el segundo cartel pisaba al primero y no se leía ninguno.
-      celebraciones.forEach((c, i) => setTimeout(() => setBurst(c), i * 2600))
-    }
-    const todos = r.schedule ?? r.rounds?.flatMap((x) => x.matches) ?? []
-    const equipos = r.type === "liga" ? (r.table ?? []).map((t) => t.name) : undefined
-    const aMostrar = equipos ? todos : todos.filter((m) => m.home === virtualSquad.label || m.away === virtualSquad.label)
-    if (aMostrar.length >= 3) {
-      setEnVivo({ partidos: aMostrar, equipos, equipo: virtualSquad.label, torneo: NOMBRE_TORNEO[type], onListo: mostrarResultado })
-    } else mostrarResultado()
+    // Los carteles quedan guardados hasta que aparezca la ficha final del torneo: cantarlos antes
+    // sería contar el final mientras el torneo todavía se está mirando.
+    celebracionesPendientes.current = celebraciones
+    setPhase("sim")
   }, [drafted, allS, allP, f, teamScore, partialScore, user, updateElo, addTitle, retoId, torneosJugados])
 
   // ── RESET ──
@@ -707,6 +681,11 @@ function DraftInner() {
         <TournamentView
         result={simResult}
         onBack={() => { setPhase("done"); setSimResult(null) }}
+        // De a uno, no encimados: el segundo cartel pisaba al primero y no se leía ninguno.
+        onFinal={() => {
+          celebracionesPendientes.current.forEach((c, i) => setTimeout(() => setBurst(c), i * 2600))
+          celebracionesPendientes.current = []
+        }}
         onReset={resetGame}
         onDownloadPDF={() => generatePDF(simResult, drafted, f)}
         elo={eloTorneo}
@@ -738,16 +717,6 @@ function DraftInner() {
   /* ── RENDER: MAIN GAME ── */
   return (
     <div className="min-h-screen gradient-bg">
-      {enVivo && (
-        <TorneoEnVivo
-          partidos={enVivo.partidos}
-          equipos={enVivo.equipos}
-          equipo={enVivo.equipo}
-          torneo={enVivo.torneo}
-          onListo={enVivo.onListo}
-        />
-      )}
-
       <EventBurst
         show={burst !== null}
         label={burst?.label}

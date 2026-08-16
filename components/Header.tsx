@@ -5,7 +5,9 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { BookOpen, Crown, Dices, Lightbulb, Shield, Swords, Trophy, type LucideIcon } from 'lucide-react'
 import { useUserStore } from '@/lib/user-store'
+import { loadDaily, completadoHoy } from '@/lib/daily-progress'
 import { useEmbebido } from '@/lib/embebido'
 import { useT, useRuta, rutaSinLocale } from '@/lib/i18n'
 import SelectorIdioma from './SelectorIdioma'
@@ -27,16 +29,46 @@ const NAV_ITEMS = [
   { href: '/leaderboard', label: 'RANKING', clave: 'nav.ranking' },
 ]
 
-// Consulta y modos sueltos: se visitan una vez, no compiten por la atención con DRAFT.
-const NAV_MAS: { href: string; label: string; clave: string; match?: string }[] = [
-  { href: '/retos', label: 'RETOS 🏆', clave: 'nav.retos' },
-  { href: '/equipos', label: 'EQUIPOS', clave: 'nav.equipos' },
-  { href: '/datos', label: '¿SABÍAS QUE?', clave: 'nav.datos' },
-  { href: '/ruleta', label: 'RULETA', clave: 'nav.ruleta' },
-  { href: '/versus', label: 'VERSUS', clave: 'nav.versus' },
-  { href: '/records', label: 'LEYENDAS', clave: 'nav.records' },
-  { href: '/como-jugar', label: 'CÓMO SE JUEGA', clave: 'nav.comoJugar' },
+/**
+ * Lo que hay más allá de los cinco modos.
+ *
+ * Antes era una lista de siete palabras en mayúscula, una debajo de la otra, sin una sola pista de
+ * qué había del otro lado: "DATOS", "RULETA", "RECORDS" no dicen nada al que entra por primera vez,
+ * y el menú de un juego es el mapa del juego. Ahora cada destino va con su ícono y una línea que
+ * dice qué es, agrupado por para qué se entra: jugar otra cosa, o mirar.
+ */
+type ItemMas = { href: string; label: string; clave: string; desc: string; claveDesc: string; Icono: LucideIcon }
+
+const GRUPOS_MAS: { titulo: string; clave: string; items: ItemMas[] }[] = [
+  {
+    titulo: 'OTROS MODOS',
+    clave: 'nav.grupoModos',
+    items: [
+      { href: '/retos', label: 'RETOS', clave: 'nav.retos', Icono: Trophy,
+        desc: 'Los trofeos que se desbloquean jugando', claveDesc: 'nav.retosDesc' },
+      { href: '/versus', label: 'VERSUS', clave: 'nav.versus', Icono: Swords,
+        desc: 'Tu 11 contra el de otro, con el mismo bombo', claveDesc: 'nav.versusDesc' },
+      { href: '/ruleta', label: 'RULETA', clave: 'nav.ruleta', Icono: Dices,
+        desc: 'Girala y mirá qué leyenda te toca', claveDesc: 'nav.ruletaDesc' },
+    ],
+  },
+  {
+    titulo: 'PARA MIRAR',
+    clave: 'nav.grupoMirar',
+    items: [
+      { href: '/equipos', label: 'EQUIPOS', clave: 'nav.equipos', Icono: Shield,
+        desc: 'Los planteles campeones, jugador por jugador', claveDesc: 'nav.equiposDesc' },
+      { href: '/records', label: 'LEYENDAS', clave: 'nav.records', Icono: Crown,
+        desc: 'Los récords del fútbol argentino', claveDesc: 'nav.recordsDesc' },
+      { href: '/datos', label: '¿SABÍAS QUE?', clave: 'nav.datos', Icono: Lightbulb,
+        desc: 'Un dato por tirada, con sus fuentes', claveDesc: 'nav.datosDesc' },
+      { href: '/como-jugar', label: 'CÓMO SE JUEGA', clave: 'nav.comoJugar', Icono: BookOpen,
+        desc: 'Las reglas del juego en dos minutos', claveDesc: 'nav.comoJugarDesc' },
+    ],
+  },
 ]
+
+const NAV_MAS: ItemMas[] = GRUPOS_MAS.flatMap((g) => g.items)
 
 export default function Header() {
   const pathnameCrudo = usePathname()
@@ -48,6 +80,10 @@ export default function Header() {
   const [masOpen, setMasOpen] = useState(false)
   const cierre = useRef<ReturnType<typeof setTimeout> | null>(null)
   const masActivo = NAV_MAS.some((i) => pathname.startsWith(i.href))
+  // Se lee en el cliente y después del primer render: el reto vive en localStorage y pintarlo en
+  // el servidor rompería la hidratación.
+  const [retoPendiente, setRetoPendiente] = useState(false)
+  useEffect(() => { setRetoPendiente(!completadoHoy(loadDaily())) }, [])
   const { user, openAuthModal, openProfileModal, setUser, closeAuthModal } = useUserStore()
   // Dentro del reproductor de un portal no se ofrece login: CrazyGames lo prohíbe y el juego
   // anda entero de invitado. Ver lib/embebido.ts.
@@ -108,7 +144,9 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation — a lg, no a md: con md se encendía a 768px, donde no entraba */}
-        <nav className="hidden shrink-0 items-center gap-1 lg:flex">
+        {/* Los modos van adentro de una misma pista: así se leen como los botones de un juego y no
+            como los links sueltos de un sitio corporativo, y MÁS queda claramente del otro lado. */}
+        <nav className="hidden shrink-0 items-center gap-0.5 rounded-[20px] border border-white/[0.06] bg-white/[0.025] p-1 lg:flex">
           {NAV_ITEMS.map((item) => {
             // SOLO los cuatro modos de juego. Antes, de 1280px para arriba, se mostraban los
             // diez destinos con el mismo peso: DRAFT pesaba igual que CÓMO SE JUEGA y la barra
@@ -124,21 +162,33 @@ export default function Header() {
                 href={ruta(item.href)}
                 // 12px con poco tracking en vez de 11px con 0.1em: las mayúsculas espaciadas se
                 // leen palabra por palabra, y una nav se lee de un vistazo o no se lee.
-                className={`relative rounded-2xl px-3.5 py-2.5 font-sport text-[12px] font-bold uppercase tracking-[0.04em] transition-all duration-300 ease-out ${
-                  isActive ? 'text-white' : 'text-slate-400 hover:text-white'
+                className={`relative rounded-[14px] px-3.5 py-2 font-sport text-[12px] font-bold uppercase tracking-[0.04em] transition-all duration-300 ease-out ${
+                  isActive ? 'text-white' : 'text-slate-400 hover:bg-white/[0.04] hover:text-white'
                 } ${secundario ? 'hidden xl:block' : ''}`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#74ACDF]/16 via-[#74ACDF]/10 to-transparent border border-[#74ACDF]/25 shadow-[0_0_20px_rgba(116,172,223,0.12)]"
+                    className="absolute inset-0 rounded-[14px] border border-[#74ACDF]/30 bg-gradient-to-b from-[#74ACDF]/20 to-[#74ACDF]/[0.06] shadow-[0_2px_14px_rgba(116,172,223,0.18)]"
                     transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
                   />
                 )}
-                <span className="relative z-10">{t(item.clave, item.label)}</span>
+                <span className="relative z-10 flex items-center gap-1.5">
+                  {t(item.clave, item.label)}
+                  {/* El reto de hoy sin jugar: un punto que respira. Es el único motivo del juego
+                      para volver mañana y no había forma de enterarse sin entrar a la página. */}
+                  {item.href === '/daily' && retoPendiente && (
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#F6C750] opacity-70" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#F6C750]" />
+                    </span>
+                  )}
+                </span>
               </Link>
             )
           })}
+
+          <span className="mx-1 h-5 w-px shrink-0 bg-white/[0.08]" />
 
           {/* MÁS: lo que se visita una vez y no pelea con DRAFT por la atención */}
           {/* Se cerraba con onMouseLeave a secas: apenas el mouse salía un píxel el menú
@@ -152,15 +202,15 @@ export default function Header() {
             <button
               onMouseEnter={() => { if (cierre.current) clearTimeout(cierre.current); setMasOpen(true) }}
               onClick={() => setMasOpen((v) => !v)}
-              className={`relative flex items-center gap-1.5 rounded-2xl px-3.5 py-2.5 font-sport text-[12px] font-bold uppercase tracking-[0.04em] transition-all duration-300 ease-out ${
-                masActivo ? 'text-white' : 'text-slate-400 hover:text-white'
+              className={`relative flex items-center gap-1.5 rounded-[14px] px-3.5 py-2 font-sport text-[12px] font-bold uppercase tracking-[0.04em] transition-all duration-300 ease-out ${
+                masActivo ? 'text-white' : 'text-slate-400 hover:bg-white/[0.04] hover:text-white'
               }`}
               aria-expanded={masOpen}
             >
               {masActivo && (
                 <motion.span
                   layoutId="nav-pill"
-                  className="absolute inset-0 rounded-2xl border border-[#74ACDF]/25 bg-gradient-to-r from-[#74ACDF]/16 via-[#74ACDF]/10 to-transparent shadow-[0_0_20px_rgba(116,172,223,0.12)]"
+                  className="absolute inset-0 rounded-[14px] border border-[#74ACDF]/30 bg-gradient-to-b from-[#74ACDF]/20 to-[#74ACDF]/[0.06] shadow-[0_2px_14px_rgba(116,172,223,0.18)]"
                   transition={{ type: 'spring', bounce: 0.18, duration: 0.4 }}
                 />
               )}
@@ -176,20 +226,49 @@ export default function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.16 }}
-                  className="absolute right-0 top-full z-[60] w-56 overflow-hidden rounded-2xl border border-[#74ACDF]/20 bg-[#050d1a] p-1.5 pt-2 shadow-[0_24px_60px_rgba(0,0,0,0.75)]"
+                  className="absolute right-0 top-full z-[60] mt-2 w-[560px] overflow-hidden rounded-3xl border border-white/10 bg-[#050d1a]/98 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.75)] backdrop-blur-xl"
                 >
-                  {NAV_MAS.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={ruta(item.href)}
-                      onClick={() => setMasOpen(false)}
-                      className={`block rounded-xl px-3 py-2.5 font-sport text-[10px] font-bold uppercase tracking-[0.18em] transition-colors ${
-                        pathname.startsWith(item.href) ? 'bg-[#74ACDF]/12 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'
-                      }`}
-                    >
-                      {t(item.clave, item.label)}
-                    </Link>
-                  ))}
+                  <div className="banda-argentina absolute inset-x-0 top-0 h-[2px] opacity-70" />
+                  <div className="grid grid-cols-2 gap-x-2">
+                    {GRUPOS_MAS.map((grupo) => (
+                      <div key={grupo.clave}>
+                        <div className="px-3 pb-1 pt-2 font-sport text-[9px] font-black uppercase tracking-[0.28em] text-slate-600">
+                          {t(grupo.clave, grupo.titulo)}
+                        </div>
+                        {grupo.items.map((item) => {
+                          const activo = pathname.startsWith(item.href)
+                          return (
+                            <Link
+                              key={item.href}
+                              href={ruta(item.href)}
+                              onClick={() => setMasOpen(false)}
+                              className={`group flex items-start gap-2.5 rounded-2xl px-3 py-2.5 transition-colors ${
+                                activo ? 'bg-[#74ACDF]/12' : 'hover:bg-white/[0.05]'
+                              }`}
+                            >
+                              <span
+                                className={`mt-[1px] shrink-0 rounded-xl border p-1.5 transition-colors ${
+                                  activo
+                                    ? 'border-[#74ACDF]/40 bg-[#74ACDF]/15 text-[#9CCBF0]'
+                                    : 'border-white/[0.07] bg-white/[0.03] text-slate-500 group-hover:border-[#74ACDF]/30 group-hover:text-[#9CCBF0]'
+                                }`}
+                              >
+                                <item.Icono className="h-3.5 w-3.5" strokeWidth={2} />
+                              </span>
+                              <span className="min-w-0">
+                                <span className={`block font-sport text-[11px] font-black uppercase tracking-[0.06em] ${activo ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
+                                  {t(item.clave, item.label)}
+                                </span>
+                                <span className="mt-0.5 block font-sans text-[10.5px] leading-snug text-slate-500">
+                                  {t(item.claveDesc, item.desc)}
+                                </span>
+                              </span>
+                            </Link>
+                          )
+                        })}
+                      </div>
+                    ))}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -275,32 +354,59 @@ export default function Header() {
                     key={item.href}
                     href={ruta(item.href)}
                     onClick={() => setMenuOpen(false)}
-                    className={`flex items-center rounded-2xl px-4 py-3.5 text-xs font-bold tracking-[0.35em] transition-all duration-300 ease-out uppercase ${
+                    // 0.35em de tracking era una palabra deletreada; a 0.08em se lee de un saque.
+                    className={`flex items-center justify-between gap-2 rounded-2xl px-4 py-3.5 text-[13px] font-black uppercase tracking-[0.08em] transition-all duration-300 ease-out ${
                       isActive
                         ? 'bg-gradient-to-r from-[#74ACDF]/20 to-transparent text-white border-l-4 border-[#74ACDF]'
-                        : 'text-slate-400 hover:text-white hover:bg-white/5'
+                        : 'text-slate-300 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     <span>{t(item.clave, item.label)}</span>
+                    {item.href === '/daily' && retoPendiente && (
+                      <span className="rounded-full bg-[#F6C750]/15 px-2 py-0.5 text-[9px] font-black tracking-[0.14em] text-[#F6C750]">
+                        {t('nav.hoy', 'HOY')}
+                      </span>
+                    )}
                   </Link>
                 )
               })}
 
-              {/* Lo secundario, más chico y separado: se ve que es otra categoría */}
-              <div className="mt-2 flex flex-col gap-0.5 border-t border-white/5 pt-2.5">
-                {NAV_MAS.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={ruta(item.href)}
-                    onClick={() => setMenuOpen(false)}
-                    className={`flex items-center rounded-2xl px-4 py-3 text-[10px] font-bold uppercase tracking-[0.25em] transition-colors ${
-                      pathname.startsWith(item.href) ? 'text-white' : 'text-slate-500 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    <span>{t(item.clave, item.label)}</span>
-                  </Link>
-                ))}
-              </div>
+              {/* Lo secundario: mismo mapa que el menú de escritorio, con el ícono y la línea que
+                  dice qué es cada cosa. En el teléfono es el único mapa que hay. */}
+              {GRUPOS_MAS.map((grupo) => (
+                <div key={grupo.clave} className="mt-2 flex flex-col gap-0.5 border-t border-white/5 pt-2.5">
+                  <div className="px-4 pb-1 text-[9px] font-black uppercase tracking-[0.28em] text-slate-600">
+                    {t(grupo.clave, grupo.titulo)}
+                  </div>
+                  {grupo.items.map((item) => {
+                    const activo = pathname.startsWith(item.href)
+                    return (
+                      <Link
+                        key={item.href}
+                        href={ruta(item.href)}
+                        onClick={() => setMenuOpen(false)}
+                        className={`flex items-start gap-3 rounded-2xl px-4 py-2.5 transition-colors ${
+                          activo ? 'bg-[#74ACDF]/10' : 'hover:bg-white/5'
+                        }`}
+                      >
+                        <span className={`mt-[1px] shrink-0 rounded-xl border p-1.5 ${
+                          activo ? 'border-[#74ACDF]/40 bg-[#74ACDF]/15 text-[#9CCBF0]' : 'border-white/[0.07] bg-white/[0.03] text-slate-500'
+                        }`}>
+                          <item.Icono className="h-3.5 w-3.5" strokeWidth={2} />
+                        </span>
+                        <span className="min-w-0">
+                          <span className={`block text-[11px] font-black uppercase tracking-[0.06em] ${activo ? 'text-white' : 'text-slate-300'}`}>
+                            {t(item.clave, item.label)}
+                          </span>
+                          <span className="mt-0.5 block font-sans text-[10.5px] normal-case leading-snug tracking-normal text-slate-500">
+                            {t(item.claveDesc, item.desc)}
+                          </span>
+                        </span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              ))}
             </div>
           </motion.nav>
         )}
