@@ -226,13 +226,13 @@ export default function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.16 }}
-                  className="absolute right-0 top-full z-[60] mt-2 w-[560px] overflow-hidden rounded-3xl border border-white/10 bg-[#050d1a]/98 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.75)] backdrop-blur-xl"
+                  className="absolute right-0 top-full z-[60] mt-2 w-[560px] overflow-hidden rounded-3xl border border-white/10 bg-[#050d1a]/[0.97] p-3 shadow-[0_24px_60px_rgba(0,0,0,0.75)] backdrop-blur-xl"
                 >
                   <div className="banda-argentina absolute inset-x-0 top-0 h-[2px] opacity-70" />
                   <div className="grid grid-cols-2 gap-x-2">
                     {GRUPOS_MAS.map((grupo) => (
                       <div key={grupo.clave}>
-                        <div className="px-3 pb-1 pt-2 font-sport text-[9px] font-black uppercase tracking-[0.28em] text-slate-600">
+                        <div className="px-3 pb-1 pt-2 font-sport text-[9px] font-black uppercase tracking-[0.28em] text-slate-500">
                           {t(grupo.clave, grupo.titulo)}
                         </div>
                         {grupo.items.map((item) => {
@@ -375,7 +375,7 @@ export default function Header() {
                   dice qué es cada cosa. En el teléfono es el único mapa que hay. */}
               {GRUPOS_MAS.map((grupo) => (
                 <div key={grupo.clave} className="mt-2 flex flex-col gap-0.5 border-t border-white/5 pt-2.5">
-                  <div className="px-4 pb-1 text-[9px] font-black uppercase tracking-[0.28em] text-slate-600">
+                  <div className="px-4 pb-1 text-[9px] font-black uppercase tracking-[0.28em] text-slate-500">
                     {t(grupo.clave, grupo.titulo)}
                   </div>
                   {grupo.items.map((item) => {
