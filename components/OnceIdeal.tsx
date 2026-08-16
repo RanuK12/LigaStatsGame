@@ -33,12 +33,12 @@ function alFallarElEscudo(e: React.SyntheticEvent<HTMLImageElement>, clubId: str
 }
 
 /**
- * La ficha mide 86 px sobre una cancha de ~300, o sea que ocupa un 29 % de ancho: las de los
- * laterales, que van al 12 % y al 88 %, se salían de la cancha y la tarjeta —que recorta para
- * mantener las esquinas redondeadas— les comía la mitad. Las coordenadas tácticas se mapean a
- * un rango donde la ficha entera entra, sin cambiar el dibujo del equipo.
+ * La ficha mide 86 px sobre una cancha de 360, o sea un 24 % de ancho: centrada en el 12 %, un
+ * lateral queda pegado al borde y la tarjeta —que recorta para mantener las esquinas
+ * redondeadas— le come un pedazo. Las coordenadas tácticas se mapean de 12-88 a 14-86, que deja
+ * dos puntos de aire de cada lado sin achatar el dibujo del equipo.
  */
-const xSeguro = (x: number) => 19 + ((x - 12) / 76) * 62
+const xSeguro = (x: number) => 14 + ((x - 12) / 76) * 72
 
 function Ficha({ j, activo, onHover }: { j: Jugador; activo: boolean; onHover: (id: string | null) => void }) {
   return (
@@ -52,8 +52,12 @@ function Ficha({ j, activo, onHover }: { j: Jugador; activo: boolean; onHover: (
       onMouseLeave={() => onHover(null)}
       onFocus={() => onHover(j.id)}
       onBlur={() => onHover(null)}
-      className="absolute z-10 flex w-[68px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 outline-none sm:w-[86px]"
-      style={{ left: `${xSeguro(j.x)}%`, top: `${j.y}%` }}
+      className="absolute z-10 flex w-[68px] flex-col items-center gap-1 outline-none sm:w-[86px]"
+      // El centrado va acá y no con `-translate-x-1/2` de Tailwind: framer-motion escribe su
+      // propio `transform` para animar la escala y pisa la clase, así que la ficha quedaba
+      // anclada por la esquina y todo el equipo aparecía corrido media ficha a la derecha y
+      // media hacia abajo. Pasándole `x` e `y`, framer los compone con la escala.
+      style={{ left: `${xSeguro(j.x)}%`, top: `${j.y}%`, x: "-50%", y: "-50%" }}
       aria-label={`${j.nombre}, ${j.etiqueta}, ${j.ovr}`}
     >
       <span
