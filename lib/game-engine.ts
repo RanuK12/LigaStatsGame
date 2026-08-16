@@ -237,6 +237,22 @@ export function getSquadPlayers(squad: Squad, allPlayers: Player[]): Player[] {
   return allPlayers.filter(p => squad.playerIds.includes(p.id));
 }
 
+/**
+ * El once que pone un rival: sus once mejores, no los once primeros del array.
+ *
+ * Los rivales se armaban con `getSquadPlayers(...).slice(0, 11)`, o sea con el orden en que los
+ * jugadores quedaron cargados. Mientras todos valían 72-75 daba igual; con la escala real de la
+ * liga (16/8) un plantel tiene gente de 58 y de 78, y sortear once al azar dejaba a los rivales
+ * mucho más flojos de lo que son: salir campeón pasó de 17 % a 28 % y clasificar a una copa de
+ * 67 % a 93 % sin que nadie tocara la simulación. Un equipo pone a sus mejores.
+ */
+export function mejorOnce(squad: Squad, allPlayers: Player[]): Player[] {
+  return getSquadPlayers(squad, allPlayers)
+    .slice()
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    .slice(0, 11);
+}
+
 export type SquadTier = 'comun' | 'elite' | 'legendario';
 
 /**
@@ -253,12 +269,16 @@ export function getSquadTier(squad: Squad, allPlayers: Player[]): { avg: number;
   // Los umbrales van con los OVR REALES, medidos: los planteles van de 70 a 79 y el medio es
   // 73,9. Con los viejos (64 / 58) el 100 % de los 206 planteles era "legendario" y la ruleta
   // festejaba siempre, que es lo mismo que no festejar nunca. Los de ahora salen de los
-  // percentiles: p95=77 y p50=74, así que legendario queda en el 5 % de arriba (más los 36
-  // históricos) y élite se lleva la mitad de arriba de lo que queda.
+  // percentiles del promedio de plantel, medidos: p50=66,4 · p75=67,9 · p95=70,6.
   //
-  // Si vuelven a recalcularse los OVR, estos números hay que recalcularlos también: es lo que
-  // pasó la vez anterior y nadie se enteró hasta que la ruleta gritaba en cada giro.
-  const tier: SquadTier = squad.historico || avg >= 77 || legendaryCount >= 3 ? 'legendario' : avg >= 74 ? 'elite' : 'comun';
+  // Los cortes no se eligen por gusto sino por el reparto que dejan, que es lo que decide si la
+  // ruleta emociona: con 67/71 queda 22 % legendario (los 45 históricos y los grandes de hoy),
+  // 26 % élite y 51 % común. Si legendario pasa del 30 % deja de significar algo.
+  //
+  // Cambiaron el 16/8 con el reescalado a la escala real de la liga (mediana 65 en vez de 73),
+  // que es justo lo que avisaba el comentario anterior: si se recalculan los OVR, estos cortes
+  // se recalculan también.
+  const tier: SquadTier = squad.historico || avg >= 71 || legendaryCount >= 3 ? 'legendario' : avg >= 67 ? 'elite' : 'comun';
   return { avg: Math.round(avg), legendaryCount, tier };
 }
 
@@ -365,7 +385,7 @@ export function simulateSeasonMatchByMatch(
   strengthByTeam[squad.label] = playerStrength;
   strengths[squad.label] = playerStrength.overall;
   opponents.forEach(o => {
-    const p = getSquadPlayers(o, allPlayers).slice(0, 11);
+    const p = mejorOnce(o, allPlayers);
     const opponentStrength = p.length >= 11 ? teamToStrength(p, formations['4-3-3'], 'liga') : { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 40, overall: 55 };
     strengthByTeam[o.label] = opponentStrength;
     strengths[o.label] = opponentStrength.overall;
@@ -415,7 +435,7 @@ export function simulateCopaArgentinaMatchByMatch(
   strengthByTeam[squad.label] = playerStrength;
   str[squad.label] = playerStrength.overall;
   opponents.forEach(o => {
-    const p = getSquadPlayers(o, allPlayers).slice(0, 11);
+    const p = mejorOnce(o, allPlayers);
     const opponentStrength = p.length >= 11 ? teamToStrength(p, formations['4-3-3'], 'copa') : { attack: 50, midfield: 50, defense: 50, goalkeeper: 50, chemistry: 35, overall: 50 };
     strengthByTeam[o.label] = opponentStrength;
     str[o.label] = opponentStrength.overall;
@@ -639,7 +659,7 @@ export function simulateSeasonWithStats(
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;
   opponents.forEach(o => {
-    const p = getSquadPlayers(o, allPlayers).slice(0, 11);
+    const p = mejorOnce(o, allPlayers);
     strengthByTeam[o.label] = p.length >= 11
       ? teamToStrength(p, formations['4-3-3'], 'liga')
       : { attack: 55, midfield: 55, defense: 55, goalkeeper: 55, chemistry: 40, overall: 55 };
@@ -759,7 +779,7 @@ export function simulateCopaWithStats(
   const strengthByTeam: Record<string, TeamStrength> = {};
   strengthByTeam[squad.label] = playerStrength;
   opponents.forEach(o => {
-    const p = getSquadPlayers(o, allPlayers).slice(0, 11);
+    const p = mejorOnce(o, allPlayers);
     strengthByTeam[o.label] = p.length >= 11
       ? teamToStrength(p, formations['4-3-3'], 'copa')
       : { attack: 50, midfield: 50, defense: 50, goalkeeper: 50, chemistry: 35, overall: 50 };

@@ -15,9 +15,11 @@ export type TierBloque = '🟩' | '🟨' | '🟧' | '⬜'
 
 /** Los cortes salen de cómo se reparte el OVR en data/players.json, no de números redondos. */
 export function bloqueDe(rating: number): TierBloque {
-  if (rating >= 85) return '🟩'
-  if (rating >= 78) return '🟨'
-  if (rating >= 70) return '🟧'
+  // Recalculados el 16/8 con la escala real de la liga: los jugadores están en p75=67, p90=72 y
+  // p95=74, así que verde es el 5 % de arriba y no un número que ya no alcanzaba nadie.
+  if (rating >= 74) return '🟩'
+  if (rating >= 70) return '🟨'
+  if (rating >= 65) return '🟧'
   return '⬜'
 }
 

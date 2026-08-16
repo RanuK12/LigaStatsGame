@@ -19,8 +19,22 @@ import path from 'node:path'
 const ROOT = process.cwd()
 const DATA = path.join(ROOT, 'data')
 
-const players = JSON.parse(fs.readFileSync(path.join(DATA, 'players.json'), 'utf8'))
+const todos = JSON.parse(fs.readFileSync(path.join(DATA, 'players.json'), 'utf8'))
+const squads = JSON.parse(fs.readFileSync(path.join(DATA, 'squads.json'), 'utf8'))
 const clubs = JSON.parse(fs.readFileSync(path.join(DATA, 'clubs.json'), 'utf8'))
+
+// Es el once ideal del fútbol ARGENTINO: un italiano no entra por más que tenga 83.
+// Y tiene que ser alguien que el juego use de verdad —una leyenda o alguien que está en algún
+// plantel—, porque en la base quedan fichas sueltas que no se pueden jugar: así se coló un
+// juvenil de Banfield al que el cruce con FIFA le había pegado la ficha de Lorenzo Insigne.
+const enAlgunPlantel = new Set(squads.flatMap((s) => s.playerIds))
+// La carrera también habilita: Caniggia no está marcado como leyenda ni juega en un plantel del
+// juego, pero 50 partidos con la selección son una carrera, y una ficha suelta sin un solo dato
+// no lo es.
+const carreraDeVerdad = (p) => (p.capsNationalTeam || 0) >= 20 || (p.goalsClub || 0) >= 50
+const players = todos.filter(
+  (p) => p.nationality === 'Argentina' && (p.legendary || enAlgunPlantel.has(p.id) || carreraDeVerdad(p)),
+)
 const clubPorId = new Map(clubs.map((c) => [c.id, c]))
 
 // 4-3-3, con las coordenadas de la cancha del juego (lib/game-engine.ts).
@@ -62,7 +76,10 @@ for (const slot of FORMACION) {
     .sort((a, b) =>
       (b.position === slot.pos ? 1 : 0) - (a.position === slot.pos ? 1 : 0) ||
       (b.legendary ? 1 : 0) - (a.legendary ? 1 : 0) ||
-      b.rating - a.rating,
+      b.rating - a.rating ||
+      // A igual valoración gana el de más partidos en la selección: es el desempate que
+      // distingue al histórico del jugador de paso.
+      (b.capsNationalTeam || 0) - (a.capsNationalTeam || 0),
     )
   const elegido = candidatos[0]
   if (!elegido) throw new Error(`sin candidato para ${slot.pos}`)
@@ -101,7 +118,7 @@ const salida = {
   formacion: '4-3-3',
   ovr,
   // De dónde salió, para que se pueda auditar de un vistazo.
-  fuente: `los ${players.length} jugadores de la base, por valoración y puesto`,
+  fuente: `los ${players.length} argentinos jugables de la base, por valoración y puesto`,
   once,
 }
 
