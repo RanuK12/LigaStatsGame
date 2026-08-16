@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import type { TournamentResult, RoundMatch, ScheduleMatch } from "@/lib/types"
 import { POS_LABELS } from "@/lib/game-engine"
 import { getPC } from "@/lib/ui-constants"
 import MatchChronicleFeed from "./MatchChronicleFeed"
+import TorneoEnVivo from "./TorneoEnVivo"
 import ShareBar from "@/components/ShareBar"
 import { urlDeEquipo, type JugadorCompartido } from "@/lib/equipo-link"
 import DonationSection from "@/components/DonationSection"
@@ -18,11 +19,18 @@ import { trackEvent, EVENTOS } from "@/components/Analytics"
 import Image from "next/image"
 import { useT } from "@/lib/i18n"
 
-export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto, bloques, once }: {
+export default function TournamentView({ result, onBack, onReset, onDownloadPDF, elo, reto, bloques, once, onFinal }: {
   result: TournamentResult
     onBack: () => void
   onReset: () => void
   onDownloadPDF: () => void
+  /**
+   * Se llama UNA vez, cuando aparece la ficha final.
+   *
+   * Los carteles de "¡CLASIFICASTE!" y del reto diario cuentan el final del torneo. Si se
+   * disparan al entrar acá, se leen mientras todavía se está eligiendo cómo verlo: spoiler.
+   */
+  onFinal?: () => void
   /** Lo que movió este torneo en el ranking. Sin esto la ficha no cierra: el jugador ve cómo
    *  le fue pero no qué se llevó. */
   elo?: { nuevo: number; delta: number; pts: number } | null
@@ -35,8 +43,9 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
 }) {
   const t = useT()
   // Simulation modality state
-  // "intro" = choosing mode, "interactive" = playing step-by-step, "animating" = showing match feed, "done" = final results
-  const [simState, setSimState] = useState<"intro" | "interactive" | "animating" | "done">("intro")
+  // "intro" = choosing mode, "interactive" = playing step-by-step, "animating" = showing match feed,
+  // "reveal" = el torneo entero corriendo fecha por fecha, "done" = final results
+  const [simState, setSimState] = useState<"intro" | "interactive" | "animating" | "reveal" | "done">("intro")
   const [currentStep, setCurrentStep] = useState(0)
   const [tab, setTab] = useState<"table" | "stats" | "assisters" | "schedule" | "relatos">("table")
   const [matchIdx, setMatchIdx] = useState(0)
@@ -175,6 +184,27 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
     return { list, topScorers, topAssisters }
   }, [result, currentStep, simState])
 
+  // Los partidos que se revelan fecha por fecha. En la liga van TODOS los de la zona, porque con
+  // ellos se arma el fixture y la tabla en vivo; en las copas, solo los del usuario.
+  const equiposDelReveal = result.type === "liga" ? (result.table ?? []).map((t) => t.name) : undefined
+  const partidosDelReveal = useMemo(() => {
+    const todos = result.schedule ?? result.rounds?.flatMap((x) => x.matches) ?? []
+    return equiposDelReveal ? todos : todos.filter((m) => m.home === result.teamLabel || m.away === result.teamLabel)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result])
+  const nombreTorneo = result.continental === "libertadores" ? "Copa Libertadores"
+    : result.continental === "sudamericana" ? "Copa Sudamericana"
+    : result.type === "liga" ? "Liga Profesional" : "Copa Argentina"
+
+  // La ficha final apareció: recién ahí se pueden cantar los carteles que cuentan cómo terminó.
+  const finalAvisado = useRef(false)
+  useEffect(() => {
+    if (simState !== "done" || finalAvisado.current) return
+    finalAvisado.current = true
+    onFinal?.()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [simState])
+
   // Get active round details
   const activeRound = result.rounds?.[currentStep]
   const userMatchInRound = useMemo(() => {
@@ -184,8 +214,16 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
 
   const userChronicleForRound = result.chronicle?.[currentStep]
 
+  /**
+   * El torneo entero, corriéndose fecha por fecha.
+   *
+   * Antes esto saltaba directo a la tabla final y el reveal lo lanzaba la página del draft ANTES
+   * de llegar acá: el torneo se corría solo y recién después esta pantalla preguntaba cómo querías
+   * verlo, o sea que ofrecía simular algo que ya habías visto. Ahora se elige primero y el reveal
+   * vive donde vive la decisión. Se saltea tocando la pantalla, que es el "ir al resultado".
+   */
   const handleStartFullSim = () => {
-    setSimState("done")
+    setSimState(partidosDelReveal.length >= 3 ? "reveal" : "done")
   }
 
   const handleStartStepSim = () => {
@@ -377,16 +415,44 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                   </div>
                 )
               })()}
-              <div className="flex flex-col gap-3.5 max-w-xs mx-auto font-sport">
-                <button onClick={handleStartStepSim} className="btn-primary py-4 text-xs font-bold tracking-widest uppercase">
-                  {t('TournamentView.partidoAPartido', 'Partido a Partido')}
-                </button>
-                <button onClick={handleStartHalfSim} className="btn-secondary py-4 text-xs font-bold tracking-widest uppercase">
-                  {t('TournamentView.simularMitadDeTorneo', 'Simular Mitad de Torneo')}
-                </button>
-                <button onClick={handleStartFullSim} className="btn-secondary py-4 text-xs font-bold tracking-widest uppercase">
-                  {t('TournamentView.simularTorneoEntero', 'Simular Torneo Entero')}
-                </button>
+              {/* Cada opción dice qué hace: antes eran tres botones que sonaban igual y no se
+                  sabía cuál era largo, cuál corto ni cuál te dejaba jugar los partidos. */}
+              <div className="mx-auto flex max-w-xs flex-col gap-2.5 font-sport">
+                {[
+                  {
+                    onClick: handleStartStepSim,
+                    label: t('TournamentView.partidoAPartido', 'Partido a Partido'),
+                    nota: t('TournamentView.notaPartidoAPartido', 'Jugás cada fecha con el relato en vivo'),
+                    primario: true,
+                  },
+                  {
+                    onClick: handleStartHalfSim,
+                    label: t('TournamentView.simularMitadDeTorneo', 'Simular Mitad de Torneo'),
+                    nota: t('TournamentView.notaMitad', 'Arrancás a jugar desde la mitad del torneo'),
+                    primario: false,
+                  },
+                  {
+                    onClick: handleStartFullSim,
+                    label: t('TournamentView.simularTorneoEntero', 'Simular Torneo Entero'),
+                    nota: t('TournamentView.notaEntero', 'Corre solo, fecha por fecha, en segundos'),
+                    primario: false,
+                  },
+                ].map((op) => (
+                  <button
+                    key={op.label}
+                    onClick={op.onClick}
+                    className={`group w-full rounded-2xl border px-5 py-3.5 text-left transition-all duration-300 ${
+                      op.primario
+                        ? 'border-[#74ACDF]/45 bg-[#74ACDF]/[0.10] hover:border-[#74ACDF] hover:bg-[#74ACDF]/[0.16]'
+                        : 'border-white/[0.08] bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.05]'
+                    }`}
+                  >
+                    <span className={`block text-[11px] font-black uppercase tracking-[0.12em] ${op.primario ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
+                      {op.label}
+                    </span>
+                    <span className="mt-1 block font-sans text-[10.5px] leading-snug text-slate-500">{op.nota}</span>
+                  </button>
+                ))}
               </div>
             </motion.div>
           )}
@@ -528,23 +594,30 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
               animate={{ opacity: 1 }}
               className="space-y-4"
             >
-              <div className="card-gradient rounded-2xl p-6 border border-slate-900">
-                <MatchChronicleFeed chronicle={chroniclePlaying} />
+              <div className="card-gradient rounded-2xl p-4 sm:p-6 border border-slate-900">
+                {/* El marcador ya lo lleva el relato y crece con los goles: repetirlo abajo, con el
+                    resultado final, contaba el partido antes de que terminara de contarse. */}
+                <MatchChronicleFeed chronicle={chroniclePlaying} local={result.teamLabel} />
 
-                {/* Show score when feed concludes */}
-                <div className="mt-8 pt-6 border-t border-slate-900 text-center flex flex-col items-center">
-                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-sport block mb-2">{t('TournamentView.resultadoFinal', 'RESULTADO FINAL')}</span>
-                  <div className="flex items-center gap-4 justify-center text-2xl font-black font-display mb-6">
-                    <span className="text-white">{result.teamLabel}</span>
-                    <span className="text-[#74ACDF]">{chroniclePlaying.myGoals} - {chroniclePlaying.oppGoals}</span>
-                    <span className="text-white">{chroniclePlaying.opponent}</span>
-                  </div>
+                <div className="mt-6 pt-5 border-t border-white/[0.06] text-center">
                   <button onClick={handleNextRound} className="btn-primary px-10 py-3.5 text-[11px] font-bold tracking-widest uppercase font-sport">
                     {currentStep + 1 >= totalRounds ? "Ver Resultados Finales" : "Siguiente Fecha"}
                   </button>
                 </div>
               </div>
             </motion.div>
+          )}
+
+          {/* 3 bis. EL TORNEO ENTERO, FECHA POR FECHA */}
+          {simState === "reveal" && (
+            <TorneoEnVivo
+              key="reveal"
+              partidos={partidosDelReveal}
+              equipos={equiposDelReveal}
+              equipo={result.teamLabel}
+              torneo={nombreTorneo}
+              onListo={() => setSimState("done")}
+            />
           )}
 
           {/* 4. FINAL RESULTS VIEW */}
@@ -937,7 +1010,7 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
                       </option>
                     ))}
                   </select>
-                  {currentChronicle && <MatchChronicleFeed chronicle={currentChronicle} />}
+                  {currentChronicle && <MatchChronicleFeed chronicle={currentChronicle} local={result.teamLabel} />}
                 </div>
               )}
 

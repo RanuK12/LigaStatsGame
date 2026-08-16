@@ -898,7 +898,7 @@ export default function VersusPage() {
               className="space-y-5"
             >
               <div className="card-gradient rounded-2xl p-6 border border-slate-900">
-                <MatchChronicleFeed chronicle={matchChronicle} />
+                <MatchChronicleFeed chronicle={matchChronicle} local={dt1.name} />
 
                 {/* Conclusion summary */}
                 <div className="mt-8 pt-6 border-t border-slate-900 text-center flex flex-col items-center">
