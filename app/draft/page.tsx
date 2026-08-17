@@ -594,6 +594,19 @@ function DraftInner() {
             </div>
             <div className="mt-4"><Pitch f={f} draft={[]} activeSlot={-1} onSlotClick={() => {}} phase="start" /></div>
           </div>
+
+          {/* Empezar sin leer, para el que ya sabe.
+              Medido con scripts/embudo-movil.mjs: en escritorio había que scrollear 766 px hasta
+              el botón de abajo, porque antes están las reglas y lo que está en juego. Eso sirve
+              para el que entra por primera vez; el que vuelve solo quiere elegir formación y
+              arrancar. El botón de abajo se queda donde está, después de todo lo que hay para leer.
+              En teléfono no va: ahí la barra fija de abajo ya tiene esta misma acción. */}
+          <div className="mb-6 hidden sm:block">
+            <button onClick={startGame} disabled={!datosListos} className="btn-primary px-10 py-4 font-sport">
+              {datosListos ? t('draft.comenzarDraft', 'Comenzar Draft') : t('draft.cargandoJugadores', 'Cargando jugadores...')}
+            </button>
+          </div>
+
           <div className="card-gradient rounded-3xl p-6 mb-6 text-left">
             <h3 className="font-display font-bold text-lg mb-3">{t('draft.comoJugar', 'Cómo Jugar')}</h3>
             <ol className="text-sm text-slate-400 space-y-2">
@@ -634,7 +647,7 @@ function DraftInner() {
           <div className="hidden sm:block">
             <MagneticButton>
               <button onClick={startGame} disabled={!datosListos} className="btn-primary px-10 py-4 font-sport">
-                {datosListos ? "Comenzar Draft" : "Cargando jugadores..."}
+                {datosListos ? t('draft.comenzarDraft', 'Comenzar Draft') : t('draft.cargandoJugadores', 'Cargando jugadores...')}
               </button>
             </MagneticButton>
           </div>
@@ -656,7 +669,7 @@ function DraftInner() {
             disabled={!datosListos}
             className="btn-primary w-full py-4 font-sport text-sm"
           >
-            {datosListos ? "Comenzar Draft" : "Cargando jugadores..."}
+            {datosListos ? t('draft.comenzarDraft', 'Comenzar Draft') : t('draft.cargandoJugadores', 'Cargando jugadores...')}
           </button>
         </div>
       </div>

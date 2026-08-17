@@ -559,5 +559,7 @@
   "hero.modoDtNota": "Run a club",
   "hero.modoReto": "TODAY'S CHALLENGE",
   "hero.modoRetoNota": "The same one for everyone",
-  "once.verLeyendas": "SEE THE LEGENDS"
+  "once.verLeyendas": "SEE THE LEGENDS",
+  "draft.comenzarDraft": "Start Draft",
+  "draft.cargandoJugadores": "Loading players..."
 }
