@@ -73,12 +73,17 @@ export default function Analytics() {
  * `window.gtag` todavía no existía. Justo la métrica del circuito viral era la que no se podía
  * medir, porque es la única que se manda al entrar y no al tocar algo.
  *
- * Se guardan y se sueltan cuando `ga-init` termina, después del `config`: un evento empujado
- * antes del config no tiene destino y GA lo tira.
+ * Se guardan y se sueltan cuando aparece `gtag`, o sea después del `config` de `ga-init`: un
+ * evento empujado antes del config no tiene destino y GA lo tira.
+ *
+ * La cola se vacía preguntando cada 200 ms y no en el `onReady` del <Script>: probado en
+ * producción el 17/8, con el `onReady` solo el evento seguía sin salir. Se deja de preguntar a los
+ * 10 segundos: si en diez segundos gtag no apareció, es que el visitante bloquea Analytics y los
+ * eventos guardados no van a ninguna parte.
  */
 const enCola: [string, Record<string, string | number | boolean>][] = []
+let reloj: ReturnType<typeof setInterval> | null = null
 
-/** La llama el <Script> de arriba cuando gtag ya está configurado. */
 function vaciarCola() {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return
   while (enCola.length) {
@@ -87,11 +92,29 @@ function vaciarCola() {
   }
 }
 
+function esperarAGtag() {
+  if (reloj) return
+  let intentos = 0
+  reloj = setInterval(() => {
+    intentos++
+    if (typeof window.gtag === "function") {
+      vaciarCola()
+    } else if (intentos < 50) {
+      return
+    } else {
+      enCola.length = 0
+    }
+    clearInterval(reloj!)
+    reloj = null
+  }, 200)
+}
+
 /** Evento propio (draft terminado, carrera finalizada, reto diario...). No hace nada sin GA. */
 export function trackEvent(name: string, params: Record<string, string | number | boolean> = {}) {
   if (!GA_ID || typeof window === "undefined") return
   if (typeof window.gtag !== "function") {
     enCola.push([name, params])
+    esperarAGtag()
     return
   }
   window.gtag("event", name, params)
