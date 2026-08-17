@@ -26,9 +26,10 @@ function PageViews() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (!GA_ID || typeof window.gtag !== "function") return
     const query = searchParams.toString()
-    window.gtag("event", "page_view", {
+    // Por `trackEvent` y no por `gtag` directo: la primera carga también puede llegar antes que
+    // los scripts de GA, y ahí la vista se perdía igual que los eventos de montaje.
+    trackEvent("page_view", {
       page_path: query ? `${pathname}?${query}` : pathname,
       page_location: window.location.href,
       page_title: document.title,
@@ -44,7 +45,7 @@ export default function Analytics() {
   return (
     <>
       <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-      <Script id="ga-init" strategy="afterInteractive">
+      <Script id="ga-init" strategy="afterInteractive" onReady={vaciarCola}>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -62,9 +63,37 @@ export default function Analytics() {
   )
 }
 
+/**
+ * Los eventos que se disparan ANTES de que cargue gtag.
+ *
+ * Medido el 17/8: `equipo_link_visto` y `carrera_link_visto` tenían CERO eventos en 28 días, con
+ * la instrumentación puesta y las páginas andando. El motivo no era que nadie abriera los links:
+ * los dos se disparan en el efecto de montaje de la página, los scripts de GA van
+ * `afterInteractive` —o sea después de la hidratación— y `trackEvent` se iba en silencio si
+ * `window.gtag` todavía no existía. Justo la métrica del circuito viral era la que no se podía
+ * medir, porque es la única que se manda al entrar y no al tocar algo.
+ *
+ * Se guardan y se sueltan cuando `ga-init` termina, después del `config`: un evento empujado
+ * antes del config no tiene destino y GA lo tira.
+ */
+const enCola: [string, Record<string, string | number | boolean>][] = []
+
+/** La llama el <Script> de arriba cuando gtag ya está configurado. */
+function vaciarCola() {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return
+  while (enCola.length) {
+    const [name, params] = enCola.shift()!
+    window.gtag("event", name, params)
+  }
+}
+
 /** Evento propio (draft terminado, carrera finalizada, reto diario...). No hace nada sin GA. */
 export function trackEvent(name: string, params: Record<string, string | number | boolean> = {}) {
-  if (!GA_ID || typeof window === "undefined" || typeof window.gtag !== "function") return
+  if (!GA_ID || typeof window === "undefined") return
+  if (typeof window.gtag !== "function") {
+    enCola.push([name, params])
+    return
+  }
   window.gtag("event", name, params)
 }
 
@@ -99,6 +128,9 @@ export const EVENTOS = {
   // recibía tuvo 1 visita.
   equipoLinkVisto: "equipo_link_visto",
   equipoLinkCta: "equipo_link_cta",
+  // Cómo elige el jugador vivir el torneo: partido a partido, media temporada o entero. Es lo
+  // que decide si las tres opciones tienen sentido o si sobra alguna.
+  torneoVista: "torneo_vista",
   retoDiario: "reto_diario_jugado",
   rankingVisto: "ranking_visto",
   sugerenciaEnviada: "sugerencia_enviada",

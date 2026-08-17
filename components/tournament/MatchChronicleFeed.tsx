@@ -71,18 +71,21 @@ function Glifo({ ev }: { ev: MatchEvent }) {
         <path d="M8 2.2l4.6 1.7v3.6c0 2.6-1.8 4.7-4.6 5.8-2.8-1.1-4.6-3.2-4.6-5.8V3.9L8 2.2z" {...p} />
       </svg>
     )
+  // Los penales van con el arco y no con otra pelota: a 14 píxeles dos círculos con un punto
+  // adentro se confunden con el gol, y son las dos cosas que más importan del relato.
   if (ev.type === "penales")
     return (
       <svg viewBox="0 0 16 16" className="h-3.5 w-3.5">
-        <circle cx="8" cy="8" r="5.4" {...p} />
-        <circle cx="8" cy="8" r="1.6" fill="currentColor" />
+        <path d="M2.2 12.8V4.4h11.6v8.4" {...p} />
+        <path d="M6.1 4.6v8.2M9.9 4.6v8.2M2.4 8.7h11.2" {...p} strokeWidth={0.9} />
       </svg>
     )
   // Pelota: para el gol y para cualquier cosa que quede suelta.
   return (
     <svg viewBox="0 0 16 16" className="h-3.5 w-3.5">
       <circle cx="8" cy="8" r="5.6" {...p} />
-      <path d="M8 4.6l2.3 1.7-.9 2.7H6.6l-.9-2.7L8 4.6z" fill="currentColor" stroke="none" />
+      <path d="M8 5.1l1.9 1.4-.7 2.2H6.8l-.7-2.2L8 5.1z" fill="currentColor" stroke="none" />
+      <path d="M8 2.4v2.7M12.9 6.2l-2.6 1.9M3.1 6.2l2.6 1.9M6.4 12.9l.7-2.4M9.6 12.9l-.7-2.4" {...p} strokeWidth={0.9} />
     </svg>
   )
 }

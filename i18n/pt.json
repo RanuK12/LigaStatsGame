@@ -552,5 +552,12 @@
   "relato.tuEquipo": "Seu time",
   "relato.partido": "Partida",
   "relato.final": "Fim de jogo",
-  "relato.verTodo": "Ver a partida inteira"
+  "relato.verTodo": "Ver a partida inteira",
+  "hero.modoCarrera": "CARREIRA",
+  "hero.modoCarreraNota": "De garoto a lenda",
+  "hero.modoDt": "MODO TÉCNICO",
+  "hero.modoDtNota": "Dirija um clube",
+  "hero.modoReto": "DESAFIO DE HOJE",
+  "hero.modoRetoNota": "O mesmo para todos",
+  "once.verLeyendas": "VER AS LENDAS"
 }

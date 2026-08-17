@@ -552,5 +552,12 @@
   "relato.tuEquipo": "Your team",
   "relato.partido": "Match",
   "relato.final": "Full time",
-  "relato.verTodo": "See the whole match"
+  "relato.verTodo": "See the whole match",
+  "hero.modoCarrera": "CAREER",
+  "hero.modoCarreraNota": "From kid to legend",
+  "hero.modoDt": "MANAGER MODE",
+  "hero.modoDtNota": "Run a club",
+  "hero.modoReto": "TODAY'S CHALLENGE",
+  "hero.modoRetoNota": "The same one for everyone",
+  "once.verLeyendas": "SEE THE LEGENDS"
 }
