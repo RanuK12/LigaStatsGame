@@ -808,7 +808,12 @@ function DraftInner() {
             )}
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
             {filledCount >= 2 && <div className="mb-4"><ChemistryPanel chemistry={chemBreakdown} /></div>}
-            <div className="flex gap-3 justify-center flex-wrap font-sport">
+            {/* En el teléfono, pegado abajo.
+                Medido con scripts/embudo-movil.mjs contra producción: en un iPhone el botón de
+                girar arrancaba 98 px por debajo del pliegue, o sea que la única acción de la
+                pantalla había que ir a buscarla scrolleando, con la cancha ocupando todo lo de
+                arriba. En escritorio queda donde estaba. */}
+            <div className="sticky bottom-0 z-30 -mx-4 flex flex-wrap justify-center gap-3 border-t border-white/10 bg-[#020813]/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md font-sport sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:pt-0 sm:backdrop-blur-none">
               <MagneticButton>
                 <button onClick={() => spinWheel()} className="btn-primary px-10 py-4">
                   {t('draft.girarRuleta', 'Girar Ruleta')}
