@@ -383,7 +383,7 @@ function HeroSection() {
   const t = useT()
   const ruta = useRuta()
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-16 pb-16 sm:pt-20">
+    <section className="relative z-10 max-w-6xl mx-auto px-4 pt-10 pb-16 sm:pt-20">
       {/* Fondo: grid de cancha sutil + glows pulsantes */}
       <div
         className="absolute inset-0 -z-10 pointer-events-none opacity-[0.12]"
@@ -437,7 +437,7 @@ function HeroSection() {
           </span>
         </h1>
 
-        <p className="text-slate-300/90 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-sans font-medium">
+        <p className="text-slate-300/90 text-base sm:text-xl max-w-2xl mx-auto mb-7 sm:mb-10 leading-relaxed font-sans font-medium">
           {t('hero.bajadaA', 'Drafteá los mejores planteles del fútbol argentino, simulá tu carrera y competí con')}
           <span className="text-white font-semibold">{t('hero.bajadaResaltada', ' estadísticas reales')}</span>
           {t('hero.bajadaB', ' temporada por temporada.')}

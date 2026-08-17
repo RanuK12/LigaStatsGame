@@ -2,8 +2,8 @@
   {
     "perfil": "teléfono",
     "paso": "home",
-    "ms": 3814,
-    "alto": 876,
+    "ms": 1074,
+    "alto": 864,
     "primerCta": "DRAFT CLÁSICO 11",
     "ctaY": 580,
     "problema": null
@@ -53,10 +53,10 @@
   {
     "perfil": "teléfono",
     "paso": "draft",
-    "ms": 1252,
+    "ms": 906,
     "girar": "GIRAR RULETA",
-    "girarY": 974,
-    "problema": "el botón de girar arranca 98 px por debajo del pliegue"
+    "girarY": 552,
+    "problema": null
   },
   {
     "perfil": "teléfono",
@@ -96,35 +96,29 @@
     "perfil": "teléfono",
     "paso": "draft · atajo",
     "ms": 0,
-    "express": null,
-    "expressY": null,
-    "problema": "no está el botón de completar equipo"
+    "express": "⚡ COMPLETAR LOS 10 QUE FALTAN ",
+    "expressY": 1084,
+    "problema": null
   },
   {
     "perfil": "teléfono",
     "paso": "peso",
     "ms": 0,
-    "kb": 745,
+    "kb": 1848,
     "problema": null
   },
   {
     "perfil": "teléfono",
     "paso": "consola",
     "ms": 0,
-    "errores": [
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard?dates=20260817' from ",
-      "Failed to load resource: net::ERR_FAILED",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard?dates=20260817' from origin 'h",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa/scoreboard?dates=20260817' from ori",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard?dates=20260817",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard?dates=20260817' from origin 'h"
-    ],
-    "problema": "30 errores"
+    "errores": [],
+    "externos": 30,
+    "problema": null
   },
   {
     "perfil": "escritorio",
     "paso": "home",
-    "ms": 2208,
+    "ms": 907,
     "alto": 900,
     "primerCta": "DRAFT",
     "ctaY": 49,
@@ -169,13 +163,13 @@
     "paso": "draft · empezar",
     "ms": 0,
     "boton": "COMENZAR DRAFT",
-    "botonY": 1666,
-    "problema": "hay que scrollear 766 px para empezar"
+    "botonY": 1046,
+    "problema": "hay que scrollear 146 px para empezar"
   },
   {
     "perfil": "escritorio",
     "paso": "draft",
-    "ms": 1193,
+    "ms": 667,
     "girar": "GIRAR RULETA",
     "girarY": 953,
     "problema": "el botón de girar arranca 53 px por debajo del pliegue"
@@ -218,29 +212,23 @@
     "perfil": "escritorio",
     "paso": "draft · atajo",
     "ms": 0,
-    "express": null,
-    "expressY": null,
-    "problema": "no está el botón de completar equipo"
+    "express": "⚡ COMPLETAR LOS 10 QUE FALTAN ",
+    "expressY": 1014,
+    "problema": null
   },
   {
     "perfil": "escritorio",
     "paso": "peso",
     "ms": 0,
-    "kb": 810,
+    "kb": 1907,
     "problema": null
   },
   {
     "perfil": "escritorio",
     "paso": "consola",
     "ms": 0,
-    "errores": [
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.copa_lpf/scoreboard?dates=20260817' from or",
-      "Failed to load resource: net::ERR_FAILED",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260817' from orig",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.2/scoreboard?dates=20260817' from origin 'h",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.copa/scoreboard?dates=20260817' from origin",
-      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.sudamericana/scoreboard?dates=20260817"
-    ],
-    "problema": "30 errores"
+    "errores": [],
+    "externos": 30,
+    "problema": null
   }
 ]

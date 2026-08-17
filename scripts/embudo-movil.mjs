@@ -165,7 +165,25 @@ async function recorrer(ctx, perfil) {
   )
   anotar(perfil, 'peso', { ms: 0, kb: Math.round(peso / 1024), problema: peso / 1024 > 2500 ? `${Math.round(peso / 1024)} kB en una pantalla` : null })
 
-  if (errores.length) anotar(perfil, 'consola', { ms: 0, errores: [...new Set(errores)].slice(0, 6), problema: `${errores.length} errores` })
+  /**
+   * Los errores del sitio, separados de los de la API de ESPN.
+   *
+   * El widget de partidos pide los resultados del día a `site.api.espn.com` desde el navegador.
+   * Desde el Chromium de Playwright esas llamadas vuelven bloqueadas y llenaban el informe con
+   * "30 errores" en cada corrida; comprobado el 17/8 desde el Chrome real en producción, la misma
+   * llamada devuelve 200, y el widget ya degrada a vacío si falla. Así que se cuentan aparte: si
+   * mañana aparece un error de verdad, no queda tapado por el ruido.
+   */
+  const externos = errores.filter((e) => /site\.api\.espn\.com|ERR_FAILED|ERR_BLOCKED/.test(e))
+  const propios = errores.filter((e) => !externos.includes(e))
+  if (errores.length) {
+    anotar(perfil, 'consola', {
+      ms: 0,
+      errores: [...new Set(propios)].slice(0, 6),
+      externos: externos.length,
+      problema: propios.length ? `${propios.length} errores` : null,
+    })
+  }
 
   await page.close()
 }
