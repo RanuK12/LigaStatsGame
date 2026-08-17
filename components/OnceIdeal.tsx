@@ -129,13 +129,25 @@ export default function OnceIdeal() {
               </div>
             </div>
 
-            <Link
-              href={ruta("/draft?mode=clasico")}
-              onClick={() => trackEvent("once_ideal_cta")}
-              className="btn-gold mt-6 self-center rounded-xl px-8 py-4 text-center shadow-[0_4px_24px_rgba(212,175,55,0.3)] lg:self-start"
-            >
-              {t("once.cta", "ARMÁ EL TUYO")}
-            </Link>
+            {/* Dos salidas y no una: el que se quedó mirando el once puede querer jugar o puede
+                querer seguir mirando. Antes solo se podía ir al draft, y el que no estaba para
+                armar un equipo no tenía a dónde ir desde la pieza más linda de la portada. */}
+            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
+              <Link
+                href={ruta("/draft?mode=clasico")}
+                onClick={() => trackEvent("once_ideal_cta")}
+                className="btn-gold rounded-xl px-8 py-4 text-center shadow-[0_4px_24px_rgba(212,175,55,0.3)]"
+              >
+                {t("once.cta", "ARMÁ EL TUYO")}
+              </Link>
+              <Link
+                href={ruta("/records")}
+                onClick={() => trackEvent("once_ideal_leyendas")}
+                className="font-sport rounded-xl border border-white/[0.08] px-6 py-4 text-center text-[11px] font-black uppercase tracking-[0.08em] text-slate-300 transition-colors hover:border-[#D4AF37]/40 hover:text-white"
+              >
+                {t("once.verLeyendas", "VER LAS LEYENDAS")}
+              </Link>
+            </div>
             <p className="mt-2 font-sans text-[11px] text-slate-500">
               {t("once.pie", "Gratis, en el navegador y sin registrarte.")}
             </p>

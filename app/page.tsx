@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { CalendarDays, ClipboardList, TrendingUp } from 'lucide-react'
 import clubsData from '@/data/clubs.json'
 import type { Club } from '@/lib/types'
 import LiveScoresWidget from '@/components/LiveScoresWidget'
@@ -443,7 +444,7 @@ function HeroSection() {
         </p>
 
         {/* Primary Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 font-sport">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-5 font-sport">
           <Link href={ruta('/draft?mode=clasico')} className="btn-primary px-9 py-4 text-xs font-bold tracking-widest uppercase shadow-[0_4px_30px_rgba(116,172,223,0.25)] hover:scale-[1.02] transition-transform">
             {t('hero.ctaDraft', 'DRAFT CLÁSICO 11')}
           </Link>
@@ -453,6 +454,38 @@ function HeroSection() {
             </span>
             {t('hero.ctaLiga', 'JUGAR LIGA ARGENTINA')}
           </Link>
+        </div>
+
+        {/*
+          Los otros tres modos, sin scrollear.
+
+          Medido en Analytics, 28 días: 474 usuarios arrancan un draft y 26 entran a /dt, que es el
+          modo más profundo del juego y ya tiene búsquedas propias en Google ("carrera dt juego").
+          La portada los tenía escondidos: los dos botones de arriba van los dos al draft y el
+          resto vivía en la barra de navegación. Van chicos y en una fila: la acción principal
+          sigue siendo el draft, pero el que no lo quiere ahora ve que hay otra cosa.
+        */}
+        <div className="mx-auto mb-14 grid max-w-xl grid-cols-3 gap-2 sm:gap-3">
+          {[
+            { href: '/carrera', Icono: TrendingUp, label: t('hero.modoCarrera', 'CARRERA'),
+              nota: t('hero.modoCarreraNota', 'De pibe a leyenda') },
+            { href: '/dt', Icono: ClipboardList, label: t('hero.modoDt', 'MODO DT'),
+              nota: t('hero.modoDtNota', 'Dirigí un club') },
+            { href: '/daily', Icono: CalendarDays, label: t('hero.modoReto', 'RETO DE HOY'),
+              nota: t('hero.modoRetoNota', 'El mismo para todos') },
+          ].map((m) => (
+            <Link
+              key={m.href}
+              href={ruta(m.href)}
+              className="group flex flex-col items-center gap-1 rounded-2xl border border-white/[0.07] bg-white/[0.03] px-2 py-3 transition-all duration-300 hover:border-[#74ACDF]/35 hover:bg-[#74ACDF]/[0.07] sm:px-3"
+            >
+              <m.Icono className="h-4 w-4 text-slate-500 transition-colors group-hover:text-[#9CCBF0]" strokeWidth={2} />
+              <span className="font-sport text-[11px] font-black uppercase tracking-[0.06em] text-slate-200 group-hover:text-white">
+                {m.label}
+              </span>
+              <span className="font-sans text-[10px] leading-tight text-slate-500">{m.nota}</span>
+            </Link>
+          ))}
         </div>
 
         {/* Bandera: franja celeste-blanca-celeste con el sol en el centro */}

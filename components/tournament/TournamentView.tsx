@@ -223,15 +223,18 @@ export default function TournamentView({ result, onBack, onReset, onDownloadPDF,
    * vive donde vive la decisión. Se saltea tocando la pantalla, que es el "ir al resultado".
    */
   const handleStartFullSim = () => {
+    trackEvent(EVENTOS.torneoVista, { vista: "entero", tipo: result.continental || result.type })
     setSimState(partidosDelReveal.length >= 3 ? "reveal" : "done")
   }
 
   const handleStartStepSim = () => {
+    trackEvent(EVENTOS.torneoVista, { vista: "partido", tipo: result.continental || result.type })
     setCurrentStep(0)
     setSimState("interactive")
   }
 
   const handleStartHalfSim = () => {
+    trackEvent(EVENTOS.torneoVista, { vista: "mitad", tipo: result.continental || result.type })
     const half = Math.floor(totalRounds / 2)
     setCurrentStep(half)
     setSimState("interactive")

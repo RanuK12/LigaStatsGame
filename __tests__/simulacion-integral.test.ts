@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest'
 import fs from 'node:fs'
 import { normalizePlayers, normalizeSquads } from '@/lib/data-normalizers'
 import {
@@ -28,6 +28,26 @@ const jugadoresDe = new Map<string, Player[]>(
   squads.map((sq) => [sq.id, players.filter((p) => sq.playerIds.includes(p.id))]),
 )
 const informe: string[] = []
+
+/**
+ * Semilla fija para todo el archivo.
+ *
+ * El informe de abajo se commitea, y con `Math.random` de verdad cambiaba en cada corrida: el
+ * `git diff` mostraba treinta números distintos aunque no se hubiera tocado una línea de código.
+ * Con la semilla, dos corridas seguidas dan el mismo informe y cualquier cambio en el diff es un
+ * cambio real del juego. Es el mismo generador que usa `makeRng` del modo carrera.
+ */
+beforeAll(() => {
+  let s = 20260817
+  vi.spyOn(Math, 'random').mockImplementation(() => {
+    s = (s + 0x6d2b79f5) | 0
+    let t = Math.imul(s ^ (s >>> 15), 1 | s)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  })
+})
+afterAll(() => { vi.restoreAllMocks() })
+
 const anotar = (linea: string) => { informe.push(linea) }
 
 /** Un draft completo: once giros, se elige el mejor disponible para el puesto. */
