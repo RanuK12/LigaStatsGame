@@ -93,24 +93,64 @@ async function recorrer(ctx, perfil) {
   await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {})
   const msDraft = Date.now() - t
 
+  // La pantalla del draft arranca en la portada del modo, con la formación y las reglas: hay que
+  // tocar "Comenzar Draft" para llegar al bombo. El script no lo hacía y venía diciendo "no
+  // encontré el botón de girar" en cada corrida, que era un problema del medidor y no del juego.
+  // De paso mide lo único que importa de esa primera pantalla: si se puede empezar sin scrollear.
+  const comenzar = await page.evaluate(() => {
+    const b = [...document.querySelectorAll('button')].find((x) => /comenzar/i.test(x.innerText) && x.getBoundingClientRect().height > 0)
+    if (!b) return null
+    const r = b.getBoundingClientRect()
+    return { texto: b.innerText.trim().slice(0, 30), y: Math.round(r.top + window.scrollY), fijo: getComputedStyle(b.closest('div') || b).position === 'fixed' }
+  })
+  anotar(perfil, 'draft · empezar', {
+    ms: 0,
+    boton: comenzar?.texto ?? null,
+    botonY: comenzar?.y ?? null,
+    problema: !comenzar ? 'no está el botón de comenzar'
+      : comenzar.fijo || comenzar.y <= alto ? null
+      : `hay que scrollear ${comenzar.y - alto} px para empezar`,
+  })
+  if (comenzar) {
+    await page.evaluate(() => [...document.querySelectorAll('button')].find((x) => /comenzar/i.test(x.innerText))?.click())
+    await page.waitForTimeout(1200)
+  }
+
   // El botón de girar es lo único que importa en esta pantalla.
   const girar = await page.evaluate(() => {
     const b = [...document.querySelectorAll('button')].find((x) => /girar|tirar|ruleta|jugar/i.test(x.innerText) && x.getBoundingClientRect().height > 0)
     if (!b) return null
     const r = b.getBoundingClientRect()
-    return { texto: b.innerText.trim().slice(0, 30), y: Math.round(r.top + window.scrollY), h: Math.round(r.height) }
+    // Un botón pegado abajo (sticky o fixed) se ve siempre, aunque su lugar en el documento esté
+    // más abajo del pliegue: para el que juega está a la vista, que es lo que se está midiendo.
+    const pegado = ['sticky', 'fixed'].some((p) => [b, b.parentElement, b.parentElement?.parentElement]
+      .some((el) => el && getComputedStyle(el).position === p))
+    return { texto: b.innerText.trim().slice(0, 30), y: Math.round(r.top + window.scrollY), h: Math.round(r.height), pegado }
   })
   anotar(perfil, 'draft', {
     ms: msDraft,
     girar: girar?.texto,
     girarY: girar?.y,
-    problema: !girar ? 'no encontré el botón de girar' : girar.y > alto ? `el botón de girar arranca ${girar.y - alto} px por debajo del pliegue` : null,
+    problema: !girar ? 'no encontré el botón de girar'
+      : girar.pegado || girar.y <= alto ? null
+      : `el botón de girar arranca ${girar.y - alto} px por debajo del pliegue`,
   })
 
   const chicosDraft = await objetivosChicos(page)
   if (chicosDraft.length) anotar(perfil, 'draft · toques chicos', { ms: 0, cuantos: chicosDraft.length, ejemplos: chicosDraft.slice(0, 5), problema: `${chicosDraft.length} toques de menos de 44 px` })
 
   // --- Paso 3: ¿existe el atajo que completa el equipo?
+  // Aparece recién con un jugador fichado: es la salida rápida del que no quiere dar 22 toques.
+  // Así que hay que girar y fichar uno antes de buscarlo, si no siempre iba a decir que no está.
+  if (girar) {
+    await page.evaluate(() => [...document.querySelectorAll('button')].find((x) => /girar/i.test(x.innerText))?.click())
+    await page.waitForTimeout(9000)
+    await page.evaluate(() => [...document.querySelectorAll('button')].find((x) => /elegir jugador/i.test(x.innerText))?.click())
+    await page.waitForTimeout(2500)
+    // Las cartas del bombo arrancan con la valoración: "70POR..." o "88ARQ...".
+    await page.evaluate(() => [...document.querySelectorAll('button')].find((x) => /^\d\d\s*[A-Z]/.test(x.innerText.trim()))?.click())
+    await page.waitForTimeout(2500)
+  }
   const express = await page.evaluate(() => {
     const b = [...document.querySelectorAll('button')].find((x) => /completar|autom|express/i.test(x.innerText) && x.getBoundingClientRect().height > 0)
     if (!b) return null

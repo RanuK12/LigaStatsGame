@@ -2,165 +2,219 @@
   {
     "perfil": "teléfono",
     "paso": "home",
-    "ms": 2964,
-    "alto": 886,
+    "ms": 3814,
+    "alto": 876,
     "primerCta": "DRAFT CLÁSICO 11",
-    "ctaY": 551,
+    "ctaY": 580,
     "problema": null
   },
   {
     "perfil": "teléfono",
     "paso": "home · toques chicos",
-    "ms": 0,
-    "cuantos": 1,
-    "ejemplos": [
-      {
-        "texto": "GAMBETA",
-        "w": 160,
-        "h": 40
-      }
-    ],
-    "problema": "1 toques de menos de 44 px"
-  },
-  {
-    "perfil": "teléfono",
-    "paso": "draft",
-    "ms": 960,
-    "problema": "no encontré el botón de girar"
-  },
-  {
-    "perfil": "teléfono",
-    "paso": "draft · toques chicos",
-    "ms": 0,
-    "cuantos": 5,
-    "ejemplos": [
-      {
-        "texto": "GAMBETA",
-        "w": 160,
-        "h": 40
-      },
-      {
-        "texto": "4-3-3",
-        "w": 79,
-        "h": 38
-      },
-      {
-        "texto": "4-4-2",
-        "w": 81,
-        "h": 38
-      },
-      {
-        "texto": "4-2-3-1",
-        "w": 96,
-        "h": 38
-      },
-      {
-        "texto": "3-5-2",
-        "w": 80,
-        "h": 38
-      }
-    ],
-    "problema": "5 toques de menos de 44 px"
-  },
-  {
-    "perfil": "teléfono",
-    "paso": "draft · atajo",
-    "ms": 0,
-    "express": null,
-    "expressY": null,
-    "problema": "no está el botón de completar equipo"
-  },
-  {
-    "perfil": "teléfono",
-    "paso": "peso",
-    "ms": 0,
-    "kb": 97,
-    "problema": null
-  },
-  {
-    "perfil": "escritorio",
-    "paso": "home",
-    "ms": 2160,
-    "alto": 900,
-    "primerCta": "DRAFT",
-    "ctaY": 20,
-    "problema": null
-  },
-  {
-    "perfil": "escritorio",
-    "paso": "home · toques chicos",
-    "ms": 0,
-    "cuantos": 9,
-    "ejemplos": [
-      {
-        "texto": "DRAFT",
-        "w": 59,
-        "h": 33
-      },
-      {
-        "texto": "CARRERA",
-        "w": 76,
-        "h": 33
-      },
-      {
-        "texto": "RETO",
-        "w": 51,
-        "h": 33
-      },
-      {
-        "texto": "RANKING",
-        "w": 73,
-        "h": 33
-      },
-      {
-        "texto": "¿SABÍAS QUE?",
-        "w": 107,
-        "h": 33
-      }
-    ],
-    "problema": "9 toques de menos de 44 px"
-  },
-  {
-    "perfil": "escritorio",
-    "paso": "draft",
-    "ms": 784,
-    "problema": "no encontré el botón de girar"
-  },
-  {
-    "perfil": "escritorio",
-    "paso": "draft · toques chicos",
     "ms": 0,
     "cuantos": 13,
     "ejemplos": [
       {
-        "texto": "DRAFT",
-        "w": 59,
+        "texto": "▸\n⚽ Modo DT: dirigí un club ",
+        "w": 348,
         "h": 33
       },
       {
-        "texto": "CARRERA",
-        "w": 76,
+        "texto": "▸\n🔑 Seeds Secretos de Plant",
+        "w": 282,
         "h": 33
       },
       {
-        "texto": "RETO",
-        "w": 51,
+        "texto": "▸\n🔥 Reto Diario en la Porta",
+        "w": 360,
         "h": 33
       },
       {
-        "texto": "RANKING",
-        "w": 73,
+        "texto": "▸\n🌎 Expansión Latinoamerica",
+        "w": 326,
         "h": 33
       },
       {
-        "texto": "¿SABÍAS QUE?",
-        "w": 107,
+        "texto": "▸\n📲 Fichas Compartibles de ",
+        "w": 322,
         "h": 33
       }
     ],
     "problema": "13 toques de menos de 44 px"
   },
   {
+    "perfil": "teléfono",
+    "paso": "draft · empezar",
+    "ms": 0,
+    "boton": "COMENZAR DRAFT",
+    "botonY": 600,
+    "problema": null
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "draft",
+    "ms": 1252,
+    "girar": "GIRAR RULETA",
+    "girarY": 974,
+    "problema": "el botón de girar arranca 98 px por debajo del pliegue"
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "draft · toques chicos",
+    "ms": 0,
+    "cuantos": 13,
+    "ejemplos": [
+      {
+        "texto": "▸\n⚽ Modo DT: dirigí un club ",
+        "w": 348,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🔑 Seeds Secretos de Plant",
+        "w": 282,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🔥 Reto Diario en la Porta",
+        "w": 360,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🌎 Expansión Latinoamerica",
+        "w": 326,
+        "h": 33
+      },
+      {
+        "texto": "▸\n📲 Fichas Compartibles de ",
+        "w": 322,
+        "h": 33
+      }
+    ],
+    "problema": "13 toques de menos de 44 px"
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "draft · atajo",
+    "ms": 0,
+    "express": null,
+    "expressY": null,
+    "problema": "no está el botón de completar equipo"
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "peso",
+    "ms": 0,
+    "kb": 745,
+    "problema": null
+  },
+  {
+    "perfil": "teléfono",
+    "paso": "consola",
+    "ms": 0,
+    "errores": [
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions/scoreboard?dates=20260817' from ",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.1/scoreboard?dates=20260817' from origin 'h",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.europa/scoreboard?dates=20260817' from ori",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.libertadores/scoreboard?dates=20260817",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/fra.1/scoreboard?dates=20260817' from origin 'h"
+    ],
+    "problema": "30 errores"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "home",
+    "ms": 2208,
+    "alto": 900,
+    "primerCta": "DRAFT",
+    "ctaY": 49,
+    "problema": null
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "home · toques chicos",
+    "ms": 0,
+    "cuantos": 21,
+    "ejemplos": [
+      {
+        "texto": "▸\n⚽ Modo DT: dirigí un club ",
+        "w": 348,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🔑 Seeds Secretos de Plant",
+        "w": 282,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🔥 Reto Diario en la Porta",
+        "w": 360,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🌎 Expansión Latinoamerica",
+        "w": 326,
+        "h": 33
+      },
+      {
+        "texto": "▸\n📲 Fichas Compartibles de ",
+        "w": 322,
+        "h": 33
+      }
+    ],
+    "problema": "21 toques de menos de 44 px"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "draft · empezar",
+    "ms": 0,
+    "boton": "COMENZAR DRAFT",
+    "botonY": 1666,
+    "problema": "hay que scrollear 766 px para empezar"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "draft",
+    "ms": 1193,
+    "girar": "GIRAR RULETA",
+    "girarY": 953,
+    "problema": "el botón de girar arranca 53 px por debajo del pliegue"
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "draft · toques chicos",
+    "ms": 0,
+    "cuantos": 21,
+    "ejemplos": [
+      {
+        "texto": "▸\n⚽ Modo DT: dirigí un club ",
+        "w": 348,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🔑 Seeds Secretos de Plant",
+        "w": 282,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🔥 Reto Diario en la Porta",
+        "w": 360,
+        "h": 33
+      },
+      {
+        "texto": "▸\n🌎 Expansión Latinoamerica",
+        "w": 326,
+        "h": 33
+      },
+      {
+        "texto": "▸\n📲 Fichas Compartibles de ",
+        "w": 322,
+        "h": 33
+      }
+    ],
+    "problema": "21 toques de menos de 44 px"
+  },
+  {
     "perfil": "escritorio",
     "paso": "draft · atajo",
     "ms": 0,
@@ -172,7 +226,21 @@
     "perfil": "escritorio",
     "paso": "peso",
     "ms": 0,
-    "kb": 116,
+    "kb": 810,
     "problema": null
+  },
+  {
+    "perfil": "escritorio",
+    "paso": "consola",
+    "ms": 0,
+    "errores": [
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.copa_lpf/scoreboard?dates=20260817' from or",
+      "Failed to load resource: net::ERR_FAILED",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260817' from orig",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.2/scoreboard?dates=20260817' from origin 'h",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/arg.copa/scoreboard?dates=20260817' from origin",
+      "Access to fetch at 'https://site.api.espn.com/apis/site/v2/sports/soccer/conmebol.sudamericana/scoreboard?dates=20260817"
+    ],
+    "problema": "30 errores"
   }
 ]
