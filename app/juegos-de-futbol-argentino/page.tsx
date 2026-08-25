@@ -3,6 +3,7 @@ import playersData from '@/data/players.json'
 import squadsData from '@/data/squads.json'
 import ligasData from '@/data/derived/ligas.json'
 import equiposData from '@/data/derived/equipos.json'
+import AdSlot from '@/components/AdSlot'
 
 /**
  * Los números salen del dataset en tiempo de build, no escritos a mano: si mañana entran veinte
@@ -137,7 +138,7 @@ export default function JuegosDeFutbolArgentino() {
           <div>
             <dt className="font-display text-base font-black text-white">¿Es gratis?</dt>
             <dd className="mt-1 font-sans text-[14px] leading-relaxed text-slate-300">
-              Sí, entero y sin anuncios. Se banca con donaciones.
+              Sí, entero y gratis. Se banca con publicidad y donaciones, sin nada pago adentro del juego.
             </dd>
           </div>
           <div>
@@ -165,6 +166,8 @@ export default function JuegosDeFutbolArgentino() {
           </Link>
         </p>
       </div>
+
+      <AdSlot />
     </div>
   )
 }

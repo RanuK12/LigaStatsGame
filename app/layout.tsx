@@ -7,6 +7,7 @@ import TickerNovedades from '@/components/TickerNovedades'
 import AuthModal from '@/components/AuthModal'
 import UserProfileModal from '@/components/UserProfileModal'
 import Analytics from '@/components/Analytics'
+import Ads from '@/components/Ads'
 
 // Sora: tipografía moderna, geométrica y premium para títulos y displays
 const sora = Sora({
@@ -157,6 +158,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthModal />
         <UserProfileModal />
         <Analytics />
+        <Ads />
       </body>
     </html>
   )

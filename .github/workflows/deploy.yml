@@ -45,6 +45,10 @@ jobs:
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_SPORTSDB_KEY: ${{ secrets.NEXT_PUBLIC_SPORTSDB_KEY }}
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
+          # Publicidad. Sin estos dos, el sitio se despliega exactamente como hasta hoy: sin
+          # un byte de AdSense. Cargarlos recién cuando la cuenta esté aprobada.
+          NEXT_PUBLIC_ADSENSE_CLIENT: ${{ secrets.NEXT_PUBLIC_ADSENSE_CLIENT }}
+          NEXT_PUBLIC_ADSENSE_SLOT_CONTENIDO: ${{ secrets.NEXT_PUBLIC_ADSENSE_SLOT_CONTENIDO }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

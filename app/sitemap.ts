@@ -38,6 +38,7 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   ['/versus/', 0.5, 'monthly'],
   ['/ruleta/', 0.5, 'monthly'],
   ['/legal/', 0.3, 'yearly'],
+  ['/privacidad/', 0.3, 'yearly'],
 ]
 
 // Los idiomas que tienen páginas propias, y cuáles están traducidas. El español vive en la raíz

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import equipos from '@/data/derived/equipos.json'
 import CompartirEquipo from '@/components/CompartirEquipo'
+import AdSlot from '@/components/AdSlot'
 
 type Equipo = (typeof equipos)[number]
 
@@ -198,6 +199,8 @@ export default async function EquipoPage({ params }: { params: Promise<{ slug: s
           ))}
         </nav>
       </article>
+
+      <AdSlot />
     </div>
   )
 }

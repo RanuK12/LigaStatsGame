@@ -744,6 +744,10 @@ export default function HomePage() {
                   © 2026 Ranuk IT Solutions · El Draft del Fútbol Argentino ·{" "}
                   <Link href="/legal" className="underline underline-offset-2 hover:text-slate-400">
                     Legal
+                  </Link>{" "}
+                  ·{" "}
+                  <Link href="/privacidad" className="underline underline-offset-2 hover:text-slate-400">
+                    Privacidad
                   </Link>
                 </span>
               </div>

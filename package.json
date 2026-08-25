@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build:data": "node scripts/data/build-public-data.mjs",
     "build:curiosidades": "node scripts/data/build-curiosidades.mjs",
-    "prebuild": "npm run build:data && npm run build:curiosidades && npm run build:equipos && npm run build:once && npm run build:ligas && npm run build:ligas-banner",
+    "prebuild": "npm run build:data && npm run build:curiosidades && npm run build:equipos && npm run build:once && npm run build:ligas && npm run build:ligas-banner && npm run build:ads-txt",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -23,7 +23,8 @@
     "build:once": "node scripts/data/build-once-ideal.mjs",
     "build:ligas": "node scripts/data/build-ligas.mjs",
     "fetch:ligas": "node scripts/data/fetch-ligas.mjs",
-    "build:ligas-banner": "node scripts/data/build-ligas-banner.mjs"
+    "build:ligas-banner": "node scripts/data/build-ligas-banner.mjs",
+    "build:ads-txt": "node scripts/build-ads-txt.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",

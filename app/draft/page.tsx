@@ -30,6 +30,7 @@ import {
 } from "@/lib/game-engine"
 import { loadLifetimeStats, saveLifetimeStats, applyDraftCompleted, applyTournament, saveLastResult } from "@/lib/storage"
 import { trackEvent, EVENTOS } from "@/components/Analytics"
+import { adsHabilitados, verAvisoRecompensado, verIntersticial } from "@/lib/ads"
 import { tocar } from "@/lib/sonido"
 import { challengeForDate, challengeNumber, localYmd, CHALLENGES } from "@/lib/daily-challenge"
 import { claimDailyBonus, completadoHoy } from "@/lib/daily-progress"
@@ -238,6 +239,19 @@ function DraftInner() {
   const [burst, setBurst] = useState<{ label: string; tone: BurstTone } | null>(null)
   const [retoGanado, setRetoGanado] = useState<{ elo: number; streak: number } | null>(null)
   const [spinNotice, setSpinNotice] = useState<string | null>(null)
+  /**
+   * El comodín que se gana mirando un aviso.
+   *
+   * `avisosOk` se resuelve después del montaje porque depende de si estamos adentro del
+   * reproductor de un portal, cosa que solo sabe el navegador. `pidiendoAviso` apaga el botón
+   * mientras AdSense contesta: sin eso se puede tocar cinco veces y pedir cinco avisos.
+   *
+   * `draftsDeLaSesion` es lo que decide si corresponde un intersticial entre una partida y la
+   * siguiente: los dos primeros drafts nunca lo tienen. El que recién llega juega tranquilo.
+   */
+  const [avisosOk, setAvisosOk] = useState(false)
+  const [pidiendoAviso, setPidiendoAviso] = useState(false)
+  const draftsDeLaSesion = useRef(0)
   const [showPosSelector, setShowPosSelector] = useState(false)
   const [pity, setPity] = useState<PityState>({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
   // Clubes que ya salieron en este draft: el bombo no los repite mientras queden otros.
@@ -271,6 +285,37 @@ function DraftInner() {
     return idx < totalSlots ? idx : -1
   }, [totalSlots])
 
+  useEffect(() => setAvisosOk(adsHabilitados()), [])
+
+  /**
+   * Un comodín a cambio de mirar un aviso.
+   *
+   * Solo aparece cuando el jugador se quedó sin comodines y quiere otro giro: no interrumpe
+   * nada, lo pide él. **En el reto diario no se ofrece nunca**: ahí todos juegan el mismo bombo
+   * y el resultado suma ELO, así que un re-sorteo comprado con un aviso sería comprar puesto en
+   * la tabla.
+   *
+   * El premio se da únicamente con el aviso mirado entero. Si no había aviso —bloqueador, sin
+   * inventario, sin conexión— se avisa y no pasa nada más: el juego nunca queda esperando.
+   */
+  const comodinPorAviso = useCallback(async () => {
+    if (pidiendoAviso) return
+    setPidiendoAviso(true)
+    const resultado = await verAvisoRecompensado("comodin-draft")
+    setPidiendoAviso(false)
+    trackEvent(EVENTOS.avisoRecompensado, { resultado, donde: "draft_comodin" })
+    if (resultado === "visto") {
+      setWildcards((w: number) => w + 1)
+      setSpinNotice(null)
+      return
+    }
+    setSpinNotice(
+      resultado === "descartado"
+        ? "El aviso quedó a la mitad, así que no hay comodín. Podés intentarlo de nuevo."
+        : "Ahora no hay ningún aviso para mostrar. Probá en un rato."
+    )
+  }, [pidiendoAviso])
+
   // ── START ──
   const startGame = useCallback(() => {
     const empty = new Array(totalSlots).fill(null)
@@ -287,7 +332,13 @@ function DraftInner() {
     setPity({ consecutiveLow: 0, lastRatings: [], pityActive: false, spinsSinEstrella: 0 })
     setPhase("ready")
     trackEvent(EVENTOS.draftIniciado, { modo: mode.id, formacion: f.id })
-  }, [totalSlots, mode, f.id])
+
+    // El corte entre partidas, que es el único lugar del juego donde un aviso no interrumpe
+    // nada. Del tercer draft en adelante y fuera del reto diario; el tope de tiempo entre
+    // avisos lo pone `verIntersticial`.
+    draftsDeLaSesion.current += 1
+    if (!retoId && draftsDeLaSesion.current >= 3) verIntersticial("entre-drafts")
+  }, [totalSlots, mode, f.id, retoId])
 
   // ── SPIN WHEEL ──
   const spinWheel = useCallback((forcedPos?: string) => {
@@ -912,6 +963,13 @@ function DraftInner() {
                   className="btn-secondary px-3 py-1.5 text-xs disabled:opacity-30 disabled:cursor-not-allowed uppercase font-bold tracking-wider">
                   RE-SORTEAR ({wildcards})
                 </button>
+                {/* Se ofrece solo cuando ya no quedan comodines, y nunca en el reto diario. */}
+                {avisosOk && wildcards <= 0 && !retoId && (
+                  <button onClick={comodinPorAviso} disabled={pidiendoAviso}
+                    className="btn-secondary px-3 py-1.5 text-xs uppercase font-bold tracking-wider text-yellow-300 disabled:opacity-40">
+                    {pidiendoAviso ? "BUSCANDO..." : "+1 CON UN AVISO"}
+                  </button>
+                )}
               </div>
             </div>
             <div className="mb-4"><Pitch f={f} draft={drafted} activeSlot={activeSlotIdx} onSlotClick={handleSlotClick} phase={phase} chemistry={chemBreakdown} /></div>
