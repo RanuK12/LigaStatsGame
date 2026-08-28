@@ -30,6 +30,12 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   // posiciones de sus propias consultas. Contra Wikipedia esa pelea no se gana; quedan porque
   // ya están escritas, no porque estén trayendo gente.
   ['/equipos/', 0.9, 'monthly'],
+  // Las dos páginas de intención, verificadas en el autocompletado de Google el 29/8: "juegos
+  // como copero" (y sus variantes con Potrero y El Ídolo) y "simulador de carrera de futbolista
+  // online". Son consultas de gente que quiere jugar a esto exactamente, y no las contesta
+  // ningún juego: lo que rankea son notas de portales.
+  ['/juegos-como-copero/', 0.9, 'monthly'],
+  ['/simulador-carrera-futbolista/', 0.9, 'monthly'],
   ['/daily/', 0.8, 'daily'],
   ['/como-jugar/', 0.7, 'monthly'],
   ['/datos/', 0.7, 'weekly'],

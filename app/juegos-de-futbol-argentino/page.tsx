@@ -164,6 +164,14 @@ export default function JuegosDeFutbolArgentino() {
         <p className="mt-3 font-sport text-[11px] uppercase tracking-wider text-slate-500">
           <Link href="/como-jugar/" className="transition-colors hover:text-[#74ACDF]">
             Cómo se juega
+          </Link>{' '}
+          ·{' '}
+          <Link href="/juegos-como-copero/" className="transition-colors hover:text-[#74ACDF]">
+            Juegos como Copero
+          </Link>{' '}
+          ·{' '}
+          <Link href="/simulador-carrera-futbolista/" className="transition-colors hover:text-[#74ACDF]">
+            Simulador de carrera
           </Link>
         </p>
       </div>
