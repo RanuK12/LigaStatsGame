@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import equipos from '@/data/derived/equipos.json'
 import AdSlot from '@/components/AdSlot'
+import AdAncla from '@/components/AdAncla'
 
 export const metadata: Metadata = {
   title: 'Los mejores equipos del fútbol argentino, de 1994 a hoy | Gambeta',
@@ -98,6 +99,7 @@ export default function EquiposPage() {
       </section>
 
       <AdSlot />
+      <AdAncla />
     </div>
   )
 }

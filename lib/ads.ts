@@ -31,6 +31,14 @@ import { estaEmbebido } from './embebido'
 export const AD_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || ''
 /** Bloque de display para las páginas de contenido (equipos, datos, cómo jugar, ranking). */
 export const AD_SLOT_CONTENIDO = process.env.NEXT_PUBLIC_ADSENSE_SLOT_CONTENIDO || ''
+/**
+ * El cartelito pegado abajo de la pantalla, el que se ve en media internet.
+ *
+ * Va aparte porque en AdSense es otro tipo de bloque —"anclado"— y porque tiene su propia regla:
+ * solo en las páginas que se leen, nunca encima de una pantalla de juego, y con una cruz para
+ * sacarlo. Sin este ID no se dibuja nada: queda el bloque de contenido y listo.
+ */
+export const AD_SLOT_ANCLA = process.env.NEXT_PUBLIC_ADSENSE_SLOT_ANCLA || ''
 
 /** Cada cuánto, como mucho, puede aparecer un intersticial. La pauta de AdSense es 120 s. */
 const FRECUENCIA_HINT = '180s'

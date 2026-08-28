@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import AdSlot from '@/components/AdSlot'
 
 export const metadata: Metadata = {
   title: "Legal y propiedad intelectual | Gambeta",
@@ -113,6 +114,8 @@ export default function LegalPage() {
         >
           ← Volver al inicio
         </Link>
+
+      <AdSlot />
       </main>
     </div>
   )

@@ -15,6 +15,8 @@ import { useEmbebido } from '@/lib/embebido'
 import CertificadoPlatinadoModal from "@/components/retos/CertificadoPlatinadoModal"
 import { tocar } from "@/lib/sonido"
 import { useT } from "@/lib/i18n"
+import AdAncla from '@/components/AdAncla'
+import AdSlot from '@/components/AdSlot'
 
 export default function RetosPage() {
   const t = useT()
@@ -218,6 +220,9 @@ export default function RetosPage() {
           pct={pct}
           completados={completados.length}
         />
+
+      <AdSlot />
+      <AdAncla />
       </main>
     </div>
   )

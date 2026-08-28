@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import recordsData from '@/data/derived/records.json'
 import LifetimeStatsPanel from '@/components/LifetimeStatsPanel'
+import AdAncla from '@/components/AdAncla'
+import AdSlot from '@/components/AdSlot'
 
 const { topRated, topScorers } = recordsData
 
@@ -100,6 +102,9 @@ export default function RecordsPage() {
         <Link href="/draft?mode=clasico" className="btn-primary">
           ARMAR MI ONCE
         </Link>
+
+      <AdSlot />
+      <AdAncla />
       </div>
     </div>
   )

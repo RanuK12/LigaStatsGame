@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import equipos from '@/data/derived/equipos.json'
 import CompartirEquipo from '@/components/CompartirEquipo'
 import AdSlot from '@/components/AdSlot'
+import AdAncla from '@/components/AdAncla'
 
 type Equipo = (typeof equipos)[number]
 
@@ -201,6 +202,7 @@ export default async function EquipoPage({ params }: { params: Promise<{ slug: s
       </article>
 
       <AdSlot />
+      <AdAncla />
     </div>
   )
 }

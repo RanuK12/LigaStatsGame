@@ -4,6 +4,7 @@ import squadsData from '@/data/squads.json'
 import ligasData from '@/data/derived/ligas.json'
 import equiposData from '@/data/derived/equipos.json'
 import AdSlot from '@/components/AdSlot'
+import AdAncla from '@/components/AdAncla'
 
 /**
  * Los números salen del dataset en tiempo de build, no escritos a mano: si mañana entran veinte
@@ -168,6 +169,7 @@ export default function JuegosDeFutbolArgentino() {
       </div>
 
       <AdSlot />
+      <AdAncla />
     </div>
   )
 }

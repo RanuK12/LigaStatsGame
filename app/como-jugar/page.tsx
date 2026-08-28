@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useT } from "@/lib/i18n"
+import AdAncla from '@/components/AdAncla'
+import AdSlot from '@/components/AdSlot'
 
 const STEPS = [
   {
@@ -121,6 +123,9 @@ export default function ComoJugarPage() {
             {t('comojugar.copaArgentina', 'Copa Argentina')}
           </Link>
         </div>
+
+      <AdSlot />
+      <AdAncla />
       </section>
     </div>
   )

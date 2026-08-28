@@ -49,6 +49,7 @@ jobs:
           # un byte de AdSense. Cargarlos recién cuando la cuenta esté aprobada.
           NEXT_PUBLIC_ADSENSE_CLIENT: ${{ secrets.NEXT_PUBLIC_ADSENSE_CLIENT }}
           NEXT_PUBLIC_ADSENSE_SLOT_CONTENIDO: ${{ secrets.NEXT_PUBLIC_ADSENSE_SLOT_CONTENIDO }}
+          NEXT_PUBLIC_ADSENSE_SLOT_ANCLA: ${{ secrets.NEXT_PUBLIC_ADSENSE_SLOT_ANCLA }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

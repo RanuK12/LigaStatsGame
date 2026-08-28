@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import AdSlot from '@/components/AdSlot'
 
 export const metadata: Metadata = {
   title: "Privacidad y cookies | Gambeta",
@@ -72,9 +73,10 @@ export default function PrivacidadPage() {
         <Bloque titulo="Publicidad">
           <p>
             El juego muestra publicidad de <strong className="text-white">Google AdSense</strong>{" "}
-            en tres lugares y en ninguno más: un bloque al final de las páginas que se leen, un
-            aviso entre una partida y otra, y un video que <em>vos elegís</em> mirar a cambio de
-            un comodín. Ni el reto diario ni la carrera se interrumpen.
+            en cuatro lugares y en ninguno más: un bloque al final de las páginas que se leen, un
+            cartel anclado abajo en esas mismas páginas —que se cierra con una cruz—, un aviso
+            entre una partida y otra, y un video que <em>vos elegís</em> mirar a cambio de un
+            comodín. Ni el reto diario ni la carrera se interrumpen.
           </p>
           <p className="mt-3">
             Google y sus socios usan cookies para mostrar avisos según tus visitas a este y a
@@ -128,6 +130,8 @@ export default function PrivacidadPage() {
         >
           ← Volver al inicio
         </Link>
+
+      <AdSlot />
       </main>
     </div>
   )

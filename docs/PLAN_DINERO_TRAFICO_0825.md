@@ -16,7 +16,8 @@ Tres formatos, elegidos por lo que pagan y por lo que molestan, no por costumbre
 |---|---|---|---|
 | Sin comodines en el draft | **Video recompensado** | Solo si el jugador toca "+1 con un aviso" | Es el único aviso que el jugador elige. Es también el que más paga: en Argentina 1-3 USD cada mil vistas, contra la mitad un intersticial y una fracción un banner |
 | Entre un draft y el siguiente, del tercero en adelante | **Intersticial** | Pantalla completa, corte natural | Los que completan hacen 5,4 drafts por visita. Entre partida y partida no interrumpe nada |
-| Al final de equipos y de la landing | **Display** | Bloque rotulado, después del contenido | Son páginas que se leen y tienen scroll |
+| Al final de toda página que se lee | **Display** | Bloque rotulado, después del contenido | Equipos, cada equipo histórico, la landing, cómo jugar, datos, ranking, récords, retos, legal y privacidad |
+| Pegado abajo en esas mismas páginas | **Cartel anclado** | Barra fija con una cruz para cerrarla | Es el formato que más rinde por visita en una página de lectura: se ve todo el rato sin comerle lugar al texto. Cerrado no vuelve en toda la sesión |
 
 Y dónde **no** hay nada, a propósito:
 
@@ -39,10 +40,18 @@ igual que ayer, sin un byte de AdSense.
    del home), aviso legal y datos de titularidad.
 2. **Pedir el alta en H5 Games Ads**: `adsense.google.com/start/h5-beta` — es el permiso para
    los dos formatos que pagan (recompensado e intersticial). Necesita la cuenta ya aprobada.
-3. **Crear un bloque de display** ("Anuncios > Por unidad de anuncio") y guardar su ID numérico.
-4. **Cargar los dos secretos del repo** (Settings > Secrets and variables > Actions):
-   `NEXT_PUBLIC_ADSENSE_CLIENT` = `ca-pub-…` y `NEXT_PUBLIC_ADSENSE_SLOT_CONTENIDO` = el número
-   del bloque. Con el primer despliegue posterior queda todo prendido, incluido `ads.txt`.
+3. **Crear dos bloques de display** ("Anuncios > Por unidad de anuncio") y guardar los dos IDs
+   numéricos: uno para el bloque de contenido y otro para el cartel anclado. Van separados para
+   poder medir cuál rinde y apagar uno sin tocar el otro.
+4. **Cargar los secretos del repo** (Settings > Secrets and variables > Actions):
+   `NEXT_PUBLIC_ADSENSE_CLIENT` = `ca-pub-…`, `NEXT_PUBLIC_ADSENSE_SLOT_CONTENIDO` y
+   `NEXT_PUBLIC_ADSENSE_SLOT_ANCLA` = los números de los bloques. Con el primer despliegue
+   posterior queda todo prendido, incluido `ads.txt`.
+
+   **Los avisos por país no se configuran**: Google elige qué mostrarle a cada visitante según
+   desde dónde entra y qué anunciantes pujan por él. Lo que cambia por país es el precio, no el
+   trabajo: la misma pantalla paga 1-3 USD cada mil vistas en Argentina y 15-28 en Estados
+   Unidos. Por eso el inglés y el portugués del sitio valen plata, no solo alcance.
 5. **Activar el mensaje de consentimiento de la UE** en AdSense (Privacidad y mensajes). Es un
    requisito de Google para el tráfico europeo y se resuelve con dos clics en el panel: no hace
    falta tocar código.
