@@ -3,6 +3,8 @@ import playersData from '@/data/players.json'
 import squadsData from '@/data/squads.json'
 import ligasData from '@/data/derived/ligas.json'
 import equiposData from '@/data/derived/equipos.json'
+import AdSlot from '@/components/AdSlot'
+import AdAncla from '@/components/AdAncla'
 
 /**
  * Los números salen del dataset en tiempo de build, no escritos a mano: si mañana entran veinte
@@ -137,7 +139,7 @@ export default function JuegosDeFutbolArgentino() {
           <div>
             <dt className="font-display text-base font-black text-white">¿Es gratis?</dt>
             <dd className="mt-1 font-sans text-[14px] leading-relaxed text-slate-300">
-              Sí, entero y sin anuncios. Se banca con donaciones.
+              Sí, entero y gratis. Se banca con publicidad y donaciones, sin nada pago adentro del juego.
             </dd>
           </div>
           <div>
@@ -162,9 +164,20 @@ export default function JuegosDeFutbolArgentino() {
         <p className="mt-3 font-sport text-[11px] uppercase tracking-wider text-slate-500">
           <Link href="/como-jugar/" className="transition-colors hover:text-[#74ACDF]">
             Cómo se juega
+          </Link>{' '}
+          ·{' '}
+          <Link href="/juegos-como-copero/" className="transition-colors hover:text-[#74ACDF]">
+            Juegos como Copero
+          </Link>{' '}
+          ·{' '}
+          <Link href="/simulador-carrera-futbolista/" className="transition-colors hover:text-[#74ACDF]">
+            Simulador de carrera
           </Link>
         </p>
       </div>
+
+      <AdSlot />
+      <AdAncla />
     </div>
   )
 }

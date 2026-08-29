@@ -158,4 +158,12 @@ export const EVENTOS = {
   rankingVisto: "ranking_visto",
   sugerenciaEnviada: "sugerencia_enviada",
   donacionClick: "donacion_click",
+  /**
+   * Publicidad. Va con `resultado` (visto · descartado · sin-aviso) y `donde`.
+   *
+   * Lo que se mide no es la plata —esa la cuenta AdSense— sino si el trato le sirve al jugador:
+   * cuántos aceptan mirar un aviso por un comodín y cuántos lo cortan a la mitad. Si la mayoría
+   * lo descarta, el premio no vale lo que pedimos y hay que cambiar el premio, no insistir.
+   */
+  avisoRecompensado: "aviso_recompensado",
 } as const

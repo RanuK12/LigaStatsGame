@@ -11,6 +11,8 @@ import EloExplainer from '@/components/EloExplainer'
 import Podio from '@/components/leaderboard/Podio'
 import { trackEvent, EVENTOS } from '@/components/Analytics'
 import { useT } from "@/lib/i18n"
+import AdAncla from '@/components/AdAncla'
+import AdSlot from '@/components/AdSlot'
 
 function LeaderboardRow({ rank, s, esVos, historial }: {
   rank: number
@@ -226,6 +228,8 @@ export default function LeaderboardPage() {
           <EloExplainer />
         </div>
       </main>
+      <AdSlot />
+      <AdAncla />
       <div className="text-center pb-8"><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm py-2.5 px-4 inline-block">{t('comun.volverAlInicio', '← Volver al inicio')}</Link></div>
     </div>
   )

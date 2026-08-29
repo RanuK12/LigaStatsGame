@@ -17,7 +17,17 @@ export const metadata: Metadata = {
   title: 'Juegos de fútbol argentino gratis, sin descargar | Gambeta',
   description:
     'Cinco juegos de fútbol argentino en el navegador: armá tu 11 con planteles reales, viví tu carrera desde el Federal A, simulá torneos y competí en el ranking. Gratis, sin registro y sin descargar nada.',
-  alternates: { canonical: '/juegos-de-futbol-argentino/' },
+  // Las tres puertas de entrada, una por idioma. No son traducciones literales entre sí —cada
+  // una va a las consultas que se tipean en su mercado, medidas en el autocompletado de Google—
+  // pero cumplen la misma función, así que se declaran como equivalentes.
+  alternates: {
+    canonical: '/juegos-de-futbol-argentino/',
+    languages: {
+      es: '/juegos-de-futbol-argentino/',
+      en: '/en/football-draft-game/',
+      'pt-BR': '/pt/monte-seu-time/',
+    },
+  },
   openGraph: {
     title: 'Juegos de fútbol argentino gratis, sin descargar',
     description:

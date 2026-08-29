@@ -54,3 +54,6 @@ data/reports/placas-x/*.png
 # Cache incremental de TypeScript: se regenera en cada `tsc` y cambia en cada commit.
 # Estaba versionado y chocaba en TODOS los merges, sin aportar nada.
 tsconfig.tsbuildinfo
+
+# Lo escribe scripts/build-ads-txt.mjs con el pub id de la variable de entorno.
+public/ads.txt

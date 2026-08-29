@@ -38,7 +38,7 @@ export default function DonationSection({ compacta = false }: { compacta?: boole
         <div className="text-center relative">
           <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#FFD700] uppercase tracking-widest font-sport mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            Hecho por hinchas, sin publicidad
+            Hecho por hinchas, sin nada pago adentro
           </span>
           <h3 className="font-display text-2xl sm:text-3xl font-black text-white mb-2.5 uppercase tracking-tight">
             Bancá el proyecto ⚽

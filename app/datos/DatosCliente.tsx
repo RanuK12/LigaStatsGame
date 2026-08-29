@@ -11,6 +11,8 @@ import { trackEvent } from "@/components/Analytics"
 
 import { useUserStore } from "@/lib/user-store"
 import InteractiveDice from "@/components/dice/InteractiveDice"
+import AdAncla from '@/components/AdAncla'
+import AdSlot from '@/components/AdSlot'
 
 /**
  * ¿Sabías que? — el dato no se lee de una lista: se tira y sale.
@@ -204,6 +206,9 @@ export default function DatosCliente() {
         >
           ← Volver al inicio
         </Link>
+
+      <AdSlot />
+      <AdAncla />
       </main>
     </div>
   )

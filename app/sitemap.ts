@@ -30,6 +30,19 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   // posiciones de sus propias consultas. Contra Wikipedia esa pelea no se gana; quedan porque
   // ya están escritas, no porque estén trayendo gente.
   ['/equipos/', 0.9, 'monthly'],
+  // Las dos páginas de intención, verificadas en el autocompletado de Google el 29/8: "juegos
+  // como copero" (y sus variantes con Potrero y El Ídolo) y "simulador de carrera de futbolista
+  // online". Son consultas de gente que quiere jugar a esto exactamente, y no las contesta
+  // ningún juego: lo que rankea son notas de portales.
+  ['/juegos-como-copero/', 0.9, 'monthly'],
+  ['/simulador-carrera-futbolista/', 0.9, 'monthly'],
+  // Las puertas en inglés y en portugués. Van con la misma prioridad que la castellana y no con
+  // la 0.5 del resto de /en/ y /pt/, que son espejos del juego: estas son páginas propias,
+  // escritas para lo que se busca en cada mercado ("football draft game", "monte seu time de
+  // futebol"). Y el visitante de afuera vale más: en Estados Unidos un aviso paga entre 15 y 28
+  // dólares cada mil vistas, contra 1 a 3 en Argentina.
+  ['/en/football-draft-game/', 0.9, 'monthly'],
+  ['/pt/monte-seu-time/', 0.9, 'monthly'],
   ['/daily/', 0.8, 'daily'],
   ['/como-jugar/', 0.7, 'monthly'],
   ['/datos/', 0.7, 'weekly'],
@@ -38,6 +51,7 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   ['/versus/', 0.5, 'monthly'],
   ['/ruleta/', 0.5, 'monthly'],
   ['/legal/', 0.3, 'yearly'],
+  ['/privacidad/', 0.3, 'yearly'],
 ]
 
 // Los idiomas que tienen páginas propias, y cuáles están traducidas. El español vive en la raíz

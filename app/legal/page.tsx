@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import AdSlot from '@/components/AdSlot'
 
 export const metadata: Metadata = {
   title: "Legal y propiedad intelectual | Gambeta",
@@ -72,8 +73,12 @@ export default function LegalPage() {
         <Bloque titulo="Uso del juego">
           <p>
             Jugar es gratis y no requiere pago. El acceso es personal y no transfiere ningún derecho sobre la obra.
-            No hay publicidad ni venta de datos. Las donaciones son voluntarias y se destinan a servidores y a
-            seguir desarrollando el juego.
+            El juego se banca con publicidad y con donaciones voluntarias, que se destinan a servidores y a seguir
+            desarrollándolo. No se venden datos a nadie: qué se guarda y qué se mide está en{" "}
+            <Link href="/privacidad/" className="text-[#74ACDF] underline underline-offset-2 hover:text-white">
+              privacidad y cookies
+            </Link>
+            .
           </p>
         </Bloque>
 
@@ -109,6 +114,8 @@ export default function LegalPage() {
         >
           ← Volver al inicio
         </Link>
+
+      <AdSlot />
       </main>
     </div>
   )
