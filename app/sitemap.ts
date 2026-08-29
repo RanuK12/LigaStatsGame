@@ -36,6 +36,13 @@ const RUTAS: Array<[string, number, MetadataRoute.Sitemap[number]['changeFrequen
   // ningún juego: lo que rankea son notas de portales.
   ['/juegos-como-copero/', 0.9, 'monthly'],
   ['/simulador-carrera-futbolista/', 0.9, 'monthly'],
+  // Las puertas en inglés y en portugués. Van con la misma prioridad que la castellana y no con
+  // la 0.5 del resto de /en/ y /pt/, que son espejos del juego: estas son páginas propias,
+  // escritas para lo que se busca en cada mercado ("football draft game", "monte seu time de
+  // futebol"). Y el visitante de afuera vale más: en Estados Unidos un aviso paga entre 15 y 28
+  // dólares cada mil vistas, contra 1 a 3 en Argentina.
+  ['/en/football-draft-game/', 0.9, 'monthly'],
+  ['/pt/monte-seu-time/', 0.9, 'monthly'],
   ['/daily/', 0.8, 'daily'],
   ['/como-jugar/', 0.7, 'monthly'],
   ['/datos/', 0.7, 'weekly'],

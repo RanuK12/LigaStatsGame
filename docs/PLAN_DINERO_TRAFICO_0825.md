@@ -143,7 +143,26 @@ impresiones y 0 clics en las 36 páginas de equipos).
    del descubrimiento pasa por respuestas de IA: bloquearlas es elegir no existir ahí. Se puede
    seguir prohibiendo el entrenamiento y permitir la búsqueda. Se cambia en el panel de
    Cloudflare, no en el repo.
-2. **Páginas de comparación con la competencia**: "juegos como Copero", "alternativas a El
+2. **Una puerta por idioma, con las consultas de cada mercado.** `/en/` y `/pt/` existían como
+   espejos del juego, pero ninguna de sus URLs le decía al buscador de qué se trata: cero
+   páginas escritas para una consulta en inglés o en portugués. Medido en el autocompletado de
+   Google el 29/8 (solo sugiere lo que la gente tipea de verdad):
+
+   | Mercado | Lo que se busca | Página |
+   |---|---|---|
+   | en-US | "football draft game" (+ online, free, simulator), "soccer draft game unblocked", "build your xi" | `/en/football-draft-game/` |
+   | pt-BR | "monte seu time de futebol", "monte seu time dos sonhos", "jogo de montar time de futebol online", "jogos como 7a0" | `/pt/monte-seu-time/` |
+
+   Y no es solo alcance: **un visitante de Estados Unidos vale diez veces uno argentino** (15-28
+   USD cada mil vistas de aviso contra 1-3). Las tres puertas se declaran entre sí con hreflang.
+
+   **Ojo con la carrera afuera**: los dilemas y las crónicas del modo carrera siguen escritos en
+   castellano dentro de `lib/`, así que las páginas en inglés y portugués empujan el draft, el
+   reto diario y el ranking, que sí están traducidos, y NO la carrera. Traducir esa narrativa es
+   la tanda que desbloquea la consulta más grande de las dos ("football career simulator online",
+   "simulador de carreira de jogador de futebol").
+
+3. **Páginas de comparación con la competencia**: "juegos como Copero", "alternativas a El
    Ídolo". Es otra cosa que las páginas de equipos: el que busca eso quiere exactamente lo que
    tenemos. Volumen real, competencia nula, y se mide en Search Console a los 30 días.
 
